@@ -11,9 +11,18 @@ export function random(seed = 701) {
     return seed / 4294967296;
   };
 }
-/** @typedef {{dx:number,dy:number,progress:number,done:boolean,rod:boolean,rotation:number}} Digestion */
-export function createLife() {
+/** @typedef {{dx:number,dy:number,progress:number,done:boolean,rod:boolean,rotation:number,value:number,kind:string,r:number,final:boolean}} Digestion */
+export function createLife(options = {}) {
   return {
+    goalMass: options.goalMass ?? EVOLUTION_MASS,
+    maxMass: options.maxMass ?? MAX_MASS,
+    speedFactor: options.speedFactor ?? 1,
+    cooldownFactor: options.cooldownFactor ?? 1,
+    damageFactor: options.damageFactor ?? 1,
+    digestFactor: options.digestFactor ?? 1,
+    attraction: options.attraction ?? 0,
+    finalRequired: options.finalRequired ?? false,
+    finalEaten: false,
     x: 700,
     y: 970,
     vx: 0,
@@ -51,7 +60,7 @@ export function integrate(life, dt, input) {
   life.radius +=
     (radiusForMass(life.biomass) - life.radius) *
     (1 - Math.exp(-dt * (life.hurt > 0 ? 7 : 2.8)));
-  const mature = life.biomass >= EVOLUTION_MASS;
+  const mature = life.biomass >= life.goalMass;
   life.evolved = mature;
   life.evolution = clamp(
     life.evolution + (mature ? dt * 0.6 : -dt * 1.4),
@@ -64,7 +73,8 @@ export function integrate(life, dt, input) {
   life.boost = Math.max(0, life.boost - dt);
   life.invulnerable = Math.max(0, life.invulnerable - dt);
   const length = Math.hypot(input.x, input.y);
-  const speed = (life.evolved ? 145 : 125) * (life.boost > 0 ? 2.8 : 1);
+  const speed =
+    (life.evolved ? 145 : 125) * life.speedFactor * (life.boost > 0 ? 2.8 : 1);
   const blend = 1 - Math.exp(-dt * 4.4);
   life.vx +=
     ((length > 0 ? (input.x / Math.max(1, length)) * speed : 0) - life.vx) *
@@ -84,25 +94,31 @@ export function integrate(life, dt, input) {
 export function impulse(life) {
   if (life.cooldown > 0 || life.complete || life.dead) return false;
   life.boost = 0.42;
-  life.cooldown = 3.5;
+  life.cooldown = 3.5 * life.cooldownFactor;
   return true;
 }
 export function digest(life, dt) {
   if (life.dead) return 0;
   let count = 0;
   for (const f of life.digestion) {
-    f.progress += dt / DIGEST_SECONDS;
+    f.progress += (dt * life.digestFactor) / DIGEST_SECONDS;
     if (f.progress >= 1 && !f.done) {
       f.done = true;
       life.eaten++;
-      life.biomass = Math.min(MAX_MASS, life.biomass + 1);
+      life.biomass = Math.min(life.maxMass, life.biomass + f.value);
+      if (f.final) life.finalEaten = true;
       life.feedPulse = 1;
       count++;
     }
   }
   life.digestion = life.digestion.filter((f) => !f.done);
-  life.evolved = life.biomass >= EVOLUTION_MASS;
-  if (life.evolved && life.evolution >= 1 && !life.discovered) {
+  life.evolved = life.biomass >= life.goalMass;
+  if (
+    life.evolved &&
+    life.evolution >= 1 &&
+    !life.discovered &&
+    (!life.finalRequired || life.finalEaten)
+  ) {
     life.discovered = true;
     if (!life.free) life.complete = true;
   }
@@ -112,6 +128,8 @@ export function beginAbsorb(life, food) {
   if (
     life.dead ||
     food.eaten ||
+    life.complete ||
+    life.biomass < (food.requiredMass || 0) ||
     life.digestion.length >= 5 ||
     Math.hypot(food.x - life.x, food.y - life.y) > life.radius * 1.12
   )
@@ -124,6 +142,10 @@ export function beginAbsorb(life, food) {
     done: false,
     rod: !!food.rod,
     rotation: food.seed || 0,
+    value: food.value || 1,
+    kind: food.kind || 'nutrient',
+    r: food.r || (food.rod ? 7 : 4.5),
+    final: !!food.final,
   });
   return true;
 }
@@ -132,10 +154,10 @@ export function takeDamage(life, source, fraction = 0.25) {
   if (life.dead || life.complete || life.invulnerable > 0) return 0;
   const lost = Math.min(
     life.biomass,
-    Math.max(2, life.biomass * clamp(fraction, 0, 1)),
+    Math.max(2, life.biomass * clamp(fraction, 0, 1)) * life.damageFactor,
   );
   life.biomass = Math.max(0, life.biomass - lost);
-  life.evolved = life.biomass >= EVOLUTION_MASS;
+  life.evolved = life.biomass >= life.goalMass;
   life.invulnerable = 2;
   life.hurt = 1;
   life.hitAngle = Math.atan2(source.y - life.y, source.x - life.x);

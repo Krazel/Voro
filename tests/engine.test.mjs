@@ -20,7 +20,11 @@ function makeEngine() {
   let snapshot;
   let draws = 0;
   const gradient = { addColorStop() {} };
-  const base = { globalAlpha: 1, createRadialGradient: () => gradient };
+  const base = {
+    globalAlpha: 1,
+    createRadialGradient: () => gradient,
+    createLinearGradient: () => gradient,
+  };
   const ctx = new Proxy(base, {
     get(obj, key) {
       if (key in obj) return obj[key];
@@ -127,5 +131,93 @@ test('Mobile drag drives the same motion state and pause freezes the membrane si
   g.action('pause');
   assert.equal(g.pointer, null);
   assert.equal(g.keys.size, 0);
+  g.destroy();
+});
+
+test('A player can travel, feed and evolve through all six seeded worlds and consume Gaia without teleporting', (t) => {
+  const { game: g } = makeEngine();
+  g.action('start');
+  const results = [];
+  for (let stage = 0; stage < 6; stage++) {
+    let frames = 0;
+    g.input = () => {
+      const p = g.life;
+      const dangers =
+        stage === 0 && p.biomass < 24
+          ? [g.predator]
+          : g.hunters.filter(
+              (h) => !h.eaten && p.biomass < (h.requiredMass || 0),
+            );
+      const foods = g.food.filter(
+        (f) => !f.eaten && p.biomass >= (f.requiredMass || 0),
+      );
+      let target,
+        score = Infinity;
+      for (const f of foods) {
+        let d = Math.hypot(f.x - p.x, f.y - p.y);
+        if (f.final) d = -1;
+        else
+          for (const h of dangers)
+            if (Math.hypot(f.x - h.x, f.y - h.y) < p.radius + h.r + 100)
+              d += 1500;
+        if (d < score) {
+          score = d;
+          target = f;
+        }
+      }
+      if (!target) return { x: 0, y: 0 };
+      const len = Math.max(1, Math.hypot(target.x - p.x, target.y - p.y));
+      let x = (target.x - p.x) / len,
+        y = (target.y - p.y) / len;
+      for (const h of dangers) {
+        const d = Math.hypot(p.x - h.x, p.y - h.y),
+          safe = p.radius + h.r + 65;
+        if (d < safe) {
+          const repel = ((safe - d) / safe) * 4;
+          x += ((p.x - h.x) / Math.max(1, d)) * repel;
+          y += ((p.y - h.y) / Math.max(1, d)) * repel;
+        }
+      }
+      return { x, y };
+    };
+    while (!g.life.complete && !g.life.dead && frames < 18000) {
+      g.time += 1 / 30;
+      g.update(1 / 30);
+      if (frames % 90 === 0) g.render();
+      frames++;
+    }
+    assert.equal(g.life.dead, false, 'Survive stage ' + stage);
+    assert.ok(
+      g.life.complete,
+      'Reach stage ' +
+        stage +
+        ' goal with real seeded food; mass ' +
+        g.life.biomass,
+    );
+    results.push(Math.round(frames / 30));
+    if (stage < 5) g.evolve(['flow', 'shell', 'hunger'][stage % 3]);
+  }
+  assert.ok(g.campaign.won && g.life.finalEaten);
+  assert.equal(g.campaign.mutations.length, 5);
+  t.diagnostic('Simulated traversal seconds by stage: ' + results.join(', '));
+  g.destroy();
+});
+
+test('Death retry preserves unlocked stages and mutations, while rebirth clears the campaign', () => {
+  const { game: g } = makeEngine();
+  g.action('start');
+  g.life.complete = true;
+  g.evolve('shell');
+  g.life.biomass = 0;
+  g.life.dead = true;
+  g.action('retry');
+  assert.equal(g.campaign.stage, 1);
+  assert.deepEqual(g.campaign.mutations, ['shell']);
+  assert.equal(g.life.biomass, 8);
+  assert.equal(g.campaign.deaths, 1);
+  assert.ok(g.life.damageFactor < 1);
+  g.action('restart');
+  assert.equal(g.campaign.stage, 0);
+  assert.deepEqual(g.campaign.mutations, []);
   g.destroy();
 });

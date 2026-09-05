@@ -555,3 +555,293 @@ button {
     top: 167px;
   }
 }
+
+/* Campaign interface keeps the playfield open; progression lives at its edges. */
+.game-header {
+  top: max(22px, env(safe-area-inset-top));
+  z-index: 8;
+}
+.biomass-hud {
+  top: max(109px, calc(env(safe-area-inset-top) + 77px));
+}
+.chapter-hud {
+  position: absolute;
+  top: max(157px, calc(env(safe-area-inset-top) + 125px));
+  left: 28px;
+  right: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #799ea9;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  pointer-events: none;
+}
+.chapter-dots {
+  display: flex;
+  gap: 5px;
+}
+.chapter-dots i {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #5d798655;
+}
+.chapter-dots .lit {
+  background: #d3b379;
+  box-shadow: 0 0 5px #e8bd6b55;
+}
+.hint {
+  top: max(187px, calc(env(safe-area-inset-top) + 155px));
+}
+.evolution-panel {
+  max-height: calc(100dvh - max(220px, env(safe-area-inset-top) + 170px));
+  overflow-y: auto;
+  bottom: max(45px, env(safe-area-inset-bottom));
+  padding: 24px 20px;
+}
+.evolution-panel h2 {
+  font-size: 29px;
+}
+.evolution-panel > p:not(.eyebrow) {
+  font-size: 13px;
+  line-height: 1.6;
+}
+.evolution-panel .eyebrow {
+  margin-bottom: 12px;
+}
+.next-world {
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: #d6bd8c;
+  margin: 17px 0;
+}
+.mutation-choices {
+  display: grid;
+  gap: 8px;
+}
+.mutation-choices button {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  border: 1px solid #75939c44;
+  border-radius: 6px;
+  padding: 13px 12px;
+  text-align: left;
+  background: #22404d60;
+  color: #bfe2e2;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+.mutation-choices button:hover,
+.mutation-choices button:focus-visible {
+  background: #3d616875;
+  border-color: #d6be8d;
+}
+.mutation-choices button > span {
+  flex: 1;
+}
+.mutation-choices strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+}
+.mutation-choices small {
+  display: block;
+  font-size: 10px;
+  color: #8caeb7;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+.pause-copy {
+  color: #91adb8;
+  margin: 0 0 24px;
+  font-size: 13px;
+}
+.stage-transition {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 25px;
+  background: #031420b8;
+  backdrop-filter: blur(9px);
+  animation: new-world 3s both;
+  pointer-events: none;
+}
+.stage-transition > span {
+  color: #d2b782;
+  font-size: 11px;
+  letter-spacing: 4px;
+}
+.stage-transition h2 {
+  font:
+    400 38px/1.15 Georgia,
+    serif;
+  color: #e3eeea;
+  max-width: 300px;
+  margin: 18px 0;
+}
+.stage-transition p {
+  color: #9bb7be;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+@keyframes new-world {
+  0% {
+    opacity: 0;
+  }
+  15%,
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.final-objective {
+  position: absolute;
+  bottom: max(130px, calc(env(safe-area-inset-bottom) + 98px));
+  left: 28px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 9px;
+  letter-spacing: 1.1px;
+  color: #d8c391;
+  pointer-events: none;
+}
+.ending-panel {
+  padding: 30px 20px;
+}
+.ending-panel h2 {
+  font-size: 40px;
+  line-height: 1.1;
+}
+.ending-icon {
+  margin: 0 auto 20px;
+  color: #dcc390;
+}
+.ending-seal {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  color: #c2d4b1;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+.voro-settings {
+  max-height: calc(100dvh - 50px);
+  overflow-y: auto;
+  gap: 10px;
+  overscroll-behavior: contain;
+}
+.voro-settings .eyebrow {
+  margin-bottom: 2px;
+}
+.voro-settings .primary-button {
+  width: 100%;
+  margin-top: 8px;
+  gap: 16px;
+}
+.journey-list {
+  display: grid;
+  gap: 11px;
+  padding: 8px 0;
+}
+.journey-list > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #617d89;
+  font-size: 12px;
+}
+.journey-list > .unlocked {
+  color: #bfd3d6;
+}
+.journey-list > div > span {
+  font-size: 10px;
+  color: #78949f;
+}
+.journey-list svg,
+.journey-list i {
+  margin-left: auto;
+  color: #c8b78e;
+}
+.journey-list i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #e6c683;
+}
+.save-note {
+  font-size: 10px;
+  color: #8ca9b1;
+  line-height: 1.5;
+}
+.mutation-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.mutation-summary span {
+  padding: 5px 7px;
+  border-radius: 3px;
+  color: #c7d5c6;
+  background: #6a897b22;
+  font-size: 9px;
+}
+.scale-marker {
+  bottom: max(12px, env(safe-area-inset-bottom));
+}
+@media (max-height: 740px) {
+  .evolution-panel {
+    bottom: 28px;
+    padding: 18px 16px;
+  }
+  .evolution-panel h2 {
+    font-size: 25px;
+  }
+  .mutation-choices button {
+    padding: 10px;
+  }
+  .evolution-panel .short-note {
+    margin-top: 10px;
+  }
+  .intro {
+    bottom: max(45px, env(safe-area-inset-bottom));
+  }
+}
+@media (max-width: 360px) {
+  .size strong {
+    font-size: 22px;
+  }
+  .biomass-hud {
+    gap: 12px;
+    left: 20px;
+    right: 20px;
+  }
+  .growth-label {
+    font-size: 8px;
+  }
+  .header-actions {
+    gap: 5px;
+  }
+  .movement-guide {
+    font-size: 8px;
+    letter-spacing: 0.6px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stage-transition {
+    animation: none;
+    backdrop-filter: none;
+  }
+}

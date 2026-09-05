@@ -18,15 +18,17 @@ jobs:
       - name: Build for iPhone
         run: |
           xcodebuild -version
-          xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Release -sdk iphoneos -destination 'generic/platform=iOS' -derivedDataPath build/ios CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" MARKETING_VERSION=0.1.0 CURRENT_PROJECT_VERSION=${{ github.run_number }} build
+          xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Release -sdk iphoneos -destination 'generic/platform=iOS' -derivedDataPath build/ios CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" MARKETING_VERSION=0.2.0 CURRENT_PROJECT_VERSION=${{ github.run_number }} build
       - name: Package IPA
         run: |
           test -f build/ios/Build/Products/Release-iphoneos/App.app/public/index.html
           test -f build/ios/Build/Products/Release-iphoneos/App.app/public/abyssal-background.png
+          test -f build/ios/Build/Products/Release-iphoneos/App.app/public/near-atlas.png
+          test -f build/ios/Build/Products/Release-iphoneos/App.app/public/space-atlas.png
           mkdir -p artifact/Payload
           cp -R build/ios/Build/Products/Release-iphoneos/App.app artifact/Payload/
           cd artifact
-          zip -qr Voro-iPhone-v0.1.0-build-${{ github.run_number }}.ipa Payload
+          zip -qr Voro-iPhone-v0.2.0-build-${{ github.run_number }}.ipa Payload
       - uses: actions/upload-artifact@v4
         with:
           name: Voro-iPhone-IPA

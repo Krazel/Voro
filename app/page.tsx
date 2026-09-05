@@ -9,6 +9,11 @@ import {
   ArrowUpRight,
   ChevronsRight,
   Settings,
+  Shield,
+  Waves,
+  Sparkles,
+  Check,
+  Orbit,
 } from 'lucide-react';
 import {
   Dialog,
@@ -18,6 +23,8 @@ import {
   DialogClose,
 } from '@/components/ui/dialog';
 import { VoroEngine, type Snapshot } from './engine';
+import { STAGES, MUTATIONS } from './campaign.mjs';
+const mutationIcons = [Waves, Shield, Sparkles];
 export default function Home() {
   const canvas = useRef<HTMLCanvasElement>(null);
   const engine = useRef<VoroEngine | null>(null);
@@ -25,6 +32,13 @@ export default function Home() {
   const [confirmReset, setConfirmReset] = useState(false);
   const resumeAfterSettings = useRef(false);
   const [state, setState] = useState<Snapshot>({
+    stage: 0,
+    mutations: [],
+    won: false,
+    saved: false,
+    storageAvailable: true,
+    transition: 0,
+    deaths: 0,
     biomass: 8,
     target: 26,
     hurt: 0,
@@ -50,9 +64,17 @@ export default function Home() {
     };
   }, []);
   const action = (
-    name: 'start' | 'pause' | 'restart' | 'dash' | 'sound' | 'continue',
+    name:
+      | 'start'
+      | 'pause'
+      | 'restart'
+      | 'retry'
+      | 'dash'
+      | 'sound'
+      | 'continue',
   ) => engine.current?.action(name);
   const changeSettings = (open: boolean) => {
+    if (engine.current) engine.current.settingsOpen = open;
     if (open) {
       resumeAfterSettings.current =
         state.started && !state.paused && !state.complete && !state.dead;
@@ -64,16 +86,21 @@ export default function Home() {
     setConfirmReset(false);
     setSettings(open);
   };
+  const stage = STAGES[state.stage];
+  const number = String(state.stage + 1).padStart(2, '0');
+  const active = state.started && !state.complete && !state.dead;
+  const minutes = Math.floor(state.elapsed / 60),
+    seconds = String(Math.floor(state.elapsed % 60)).padStart(2, '0');
   return (
     <main className="voro-shell">
       <aside className="outside-caption">
         <span className="side-line" />
         UN UNIVERSO POR DENTRO
       </aside>
-      <section className="viewport" aria-label="VORO: inicio de Abisal">
+      <section className="viewport" aria-label={'VORO: ' + stage.name}>
         <canvas
           ref={canvas}
-          aria-label="Escenario de juego. Usa WASD o flechas, o arrastra para nadar. Espacio para impulsarte."
+          aria-label="Arrastra para moverte. También puedes usar WASD, flechas o mando. Espacio para impulsarte."
           tabIndex={0}
         />
         <div className="shade" />
@@ -96,7 +123,7 @@ export default function Home() {
             >
               {state.sound ? <Volume2 size={19} /> : <VolumeX size={19} />}
             </button>
-            {state.started && (
+            {active && (
               <button
                 className="icon-button"
                 onClick={() => action('pause')}
@@ -108,72 +135,118 @@ export default function Home() {
           </div>
         </header>
         <div
-          className={`biomass-hud ${state.hurt > 0 ? 'damaged' : ''} ${state.biomass <= 4 ? 'critical' : ''}`}
+          className={
+            'biomass-hud ' +
+            (state.hurt > 0 ? 'damaged ' : '') +
+            (state.biomass <= 4 ? 'critical' : '')
+          }
         >
           <div className="size">
-            <strong>{state.size}</strong>
-            <span>µm</span>
+            <strong>{state.size.toLocaleString('es-ES')}</strong>
+            <span>{stage.unit}</span>
           </div>
           <div className="growth">
             <div className="growth-label">
+              <span>{stage.form.toUpperCase()}</span>
               <span>
-                {state.evolved ? 'MEMBRANA EXPANDIDA' : 'ORGANISMO UNICELULAR'}
+                {Math.min(
+                  100,
+                  Math.round((state.biomass / state.target) * 100),
+                )}
+                %
               </span>
-              <span>{Math.round((state.biomass / state.target) * 100)}%</span>
             </div>
-            <div
-              className="growth-track"
-              role="progressbar"
-              aria-label="Biomasa"
-              aria-valuemin={0}
-              aria-valuemax={state.target}
-              aria-valuenow={state.biomass}
-            >
+            <progress
+              className="sr-only"
+              aria-label="Biomasa para evolucionar"
+              max={state.target}
+              value={Math.min(state.target, state.biomass)}
+            />
+            <div className="growth-track" aria-hidden="true">
               <i
                 className="growth-trail"
                 style={{
-                  width: `${Math.min(state.biomass / state.target, 1) * 100}%`,
+                  width: Math.min(state.biomass / state.target, 1) * 100 + '%',
                 }}
               />
               <span
                 style={{
-                  width: `${Math.min(state.biomass / state.target, 1) * 100}%`,
+                  width: Math.min(state.biomass / state.target, 1) * 100 + '%',
                 }}
               />
             </div>
           </div>
         </div>
+        <div className="chapter-hud">
+          <span>
+            {number} / {stage.world.toUpperCase()}
+          </span>
+          <div
+            className="chapter-dots"
+            aria-label={'Etapa ' + (state.stage + 1) + ' de 6'}
+          >
+            {STAGES.map((s, i) => (
+              <i key={s.name} className={i <= state.stage ? 'lit' : ''} />
+            ))}
+          </div>
+        </div>
         {!state.started && (
           <div className="intro">
-            <p className="eyebrow">01 / EL DESPERTAR</p>
+            <p className="eyebrow">
+              {state.saved
+                ? number + ' / ' + stage.name.toUpperCase()
+                : 'DE UNA CÉLULA AL UNIVERSO'}
+            </p>
             <h1>
-              Todo empieza
-              <br />
-              con hambre.
+              {state.saved ? (
+                <>
+                  Tu hambre
+                  <br />
+                  te espera.
+                </>
+              ) : (
+                <>
+                  Todo empieza
+                  <br />
+                  con hambre.
+                </>
+              )}
             </h1>
             <p className="intro-instruction">
-              Nada hacia los nutrientes dorados.
-              <br />
-              Tu membrana hará el resto.
+              {state.saved ? (
+                'Tu evolución continúa donde la dejaste.'
+              ) : (
+                <>
+                  Absorbe. Crece. Evoluciona.
+                  <br />
+                  Un día, te comerás los planetas.
+                </>
+              )}
             </p>
             <button className="primary-button" onClick={() => action('start')}>
-              Despertar <ArrowUpRight size={20} />
+              {state.saved ? 'Continuar partida' : 'Despertar'}
+              <ArrowUpRight size={20} />
             </button>
-            <span className="short-note">Absorbe · crece · sobrevive</span>
+            <span className="short-note">
+              6 mundos ·{' '}
+              {state.storageAvailable
+                ? 'guardado automático'
+                : 'partida sin guardado'}
+            </span>
           </div>
         )}
-        {state.started && !state.complete && !state.dead && (
+        {active && (
           <>
-            <div className={`hint ${state.hint ? 'show' : ''}`} role="status">
+            <output className={'hint ' + (state.hint ? 'show' : '')}>
               {state.hint}
-            </div>
+            </output>
             <div className="bottom-controls">
               <div className="movement-guide">
                 <span className="guide-dot" />
-                <span>ARRASTRA PARA NADAR</span>
+                <span>ARRASTRA PARA MOVERTE</span>
               </div>
               <button
-                className={`dash-button ${state.dash > 0 ? 'cooldown' : ''}`}
+                className={'dash-button ' + (state.dash > 0 ? 'cooldown' : '')}
                 onPointerDown={(e) => {
                   e.preventDefault();
                   action('dash');
@@ -181,82 +254,155 @@ export default function Home() {
                 onClick={(e) => {
                   if (e.detail === 0) action('dash');
                 }}
-                disabled={state.dash > 0 || state.paused}
-                aria-label="Impulso, también con la barra espaciadora"
+                disabled={
+                  state.dash > 0 || state.paused || state.transition > 0
+                }
+                aria-label="Impulso, también con espacio o botón A"
               >
                 <ChevronsRight size={31} />
                 <span>
-                  {state.dash > 0 ? `${state.dash.toFixed(1)} s` : 'IMPULSO'}
+                  {state.dash > 0 ? state.dash.toFixed(1) + ' s' : 'IMPULSO'}
                 </span>
               </button>
             </div>
+            {state.stage === 5 && (
+              <div className="final-objective">
+                <Orbit size={13} />
+                {state.biomass < 56
+                  ? 'GAIA · ' + state.biomass.toFixed(0) + ' / 56 BIOMASA'
+                  : 'GAIA ESTÁ A TU ALCANCE'}
+              </div>
+            )}
           </>
         )}
-        {state.complete && (
-          <div className="finish-panel" role="status">
-            <p className="eyebrow">PRIMERA EVOLUCIÓN</p>
-            <h2>Has despertado.</h2>
-            <p>
-              De 40 a {state.size} µm. Tu membrana se expande.
-              <br />
-              El océano todavía no sabe que existes.
-            </p>
-            <div className="finish-stats">
-              <span>
-                <b>{state.eaten}</b>nutrientes
-              </span>
-              <span>
-                <b>{Math.floor(state.elapsed)} s</b>de vida
-              </span>
+        {state.started && state.complete && !state.won && (
+          <div
+            className="finish-panel evolution-panel"
+            aria-label="Elige una mutación"
+          >
+            <p className="eyebrow">EVOLUCIÓN {number} / 05</p>
+            <h2>La vida se abre paso.</h2>
+            <p>{stage.transition}</p>
+            <div className="next-world">
+              SIGUIENTE ·{' '}
+              {STAGES[Math.min(state.stage + 1, 5)].name.toUpperCase()}
             </div>
-            <button
-              className="primary-button"
-              onClick={() => action('continue')}
-            >
-              Seguir nadando <ArrowUpRight size={20} />
-            </button>
+            <div className="mutation-choices">
+              {MUTATIONS.map((m, i) => {
+                const Icon = mutationIcons[i];
+                return (
+                  <button
+                    key={m.id}
+                    onClick={() => engine.current?.evolve(m.id)}
+                  >
+                    <Icon size={21} />
+                    <span>
+                      <strong>{m.name}</strong>
+                      <small>{m.detail}</small>
+                    </span>
+                    <ArrowUpRight size={16} />
+                  </button>
+                );
+              })}
+            </div>
+            <span className="short-note">
+              Elige una mutación. Su efecto se acumula.
+            </span>
           </div>
         )}
-        {state.paused && !state.complete && !state.dead && (
+        {active && state.paused && !settings && (
           <div className="pause-panel">
             <p className="eyebrow">EN SUSPENSIÓN</p>
             <h2>Respira.</h2>
+            <p className="pause-copy">
+              {stage.name} · {minutes}:{seconds}
+            </p>
             <button className="primary-button" onClick={() => action('pause')}>
-              Seguir nadando <Play size={18} />
+              Continuar
+              <Play size={18} />
             </button>
           </div>
         )}
-        {state.dead && (
-          <div className="finish-panel death-panel" role="status">
+        {state.started && state.dead && (
+          <div className="finish-panel death-panel" aria-live="polite">
             <p className="eyebrow">BIOMASA AGOTADA</p>
             <h2>La vida insiste.</h2>
             <p>
               Tu membrana no ha resistido.
               <br />
-              Come para crecer y evita las espinas.
+              Conservas las mutaciones y las etapas anteriores.
             </p>
             <div className="finish-stats">
               <span>
-                <b>{state.eaten}</b>nutrientes
+                <b>{number}</b>etapa
               </span>
               <span>
-                <b>{Math.floor(state.elapsed)} s</b>de vida
+                <b>{state.mutations.length}</b>mutaciones
               </span>
             </div>
-            <button
-              className="primary-button"
-              onClick={() => action('restart')}
-            >
-              Reintentar etapa <RotateCcw size={18} />
+            <button className="primary-button" onClick={() => action('retry')}>
+              Reintentar etapa
+              <RotateCcw size={18} />
             </button>
           </div>
         )}
-        {state.protected && !state.dead && !state.complete && (
+        {state.started && state.won && (
+          <div className="finish-panel ending-panel" aria-live="polite">
+            <Orbit size={30} className="ending-icon" />
+            <p className="eyebrow">EL ÚLTIMO MUNDO</p>
+            <h2>
+              Todo vive
+              <br />
+              dentro de ti.
+            </h2>
+            <p>
+              Empezaste en una gota de agua.
+              <br />
+              Ahora, un planeta late en tu núcleo.
+            </p>
+            <div className="finish-stats">
+              <span>
+                <b>{state.eaten}</b>absorciones
+              </span>
+              <span>
+                <b>
+                  {minutes}:{seconds}
+                </b>
+                de evolución
+              </span>
+            </div>
+            <div className="ending-seal">
+              <Check size={14} />
+              CAMPAÑA COMPLETADA
+            </div>
+            <button
+              className="text-button"
+              onClick={() => changeSettings(true)}
+            >
+              Tu evolución
+              <Settings size={14} />
+            </button>
+          </div>
+        )}
+        {state.transition > 0 && (
+          <div
+            className="stage-transition"
+            key={state.stage}
+            aria-live="polite"
+          >
+            <span>{number} / 06</span>
+            <h2>{stage.name}</h2>
+            <p>{stage.world} · una nueva escala</p>
+          </div>
+        )}
+        {state.protected && active && !state.paused && (
           <div className="protection-badge">MEMBRANA PROTEGIDA · ESCAPA</div>
         )}
         <div className="scale-marker">
           <i />
-          <span>20 µm</span>
+          <span>
+            {stage.baseSize / 2} {stage.unit}
+          </span>
         </div>
       </section>
       <Dialog open={settings} onOpenChange={changeSettings}>
@@ -269,11 +415,43 @@ export default function Home() {
             onClick={() => action('sound')}
             aria-pressed={state.sound}
           >
-            Sonido <span>{state.sound ? 'Activado' : 'Desactivado'}</span>
+            Sonido<span>{state.sound ? 'Activado' : 'Desactivado'}</span>
           </button>
+          <div className="journey-list" aria-label="Etapas de la evolución">
+            {STAGES.map((s, i) => (
+              <div key={s.name} className={i <= state.stage ? 'unlocked' : ''}>
+                <span>{String(i + 1).padStart(2, '0')}</span>
+                {s.name}
+                {i < state.stage || state.won ? (
+                  <Check size={13} />
+                ) : i === state.stage ? (
+                  <i />
+                ) : null}
+              </div>
+            ))}
+          </div>
+          <p className="save-note">
+            {state.storageAvailable
+              ? 'La partida se guarda en este dispositivo.'
+              : 'No se puede guardar en este navegador. La partida durará mientras siga abierta.'}
+          </p>
+          {state.mutations.length > 0 && (
+            <div className="mutation-summary">
+              {MUTATIONS.map((m) => {
+                const n = state.mutations.filter((x) => x === m.id).length;
+                return n ? (
+                  <span key={m.id}>
+                    {m.name} ×{n}
+                  </span>
+                ) : null;
+              })}
+            </div>
+          )}
           {confirmReset ? (
             <div className="reset-confirm">
-              <p>Empezarás de nuevo desde el primer organismo.</p>
+              <p>
+                Se borrará esta evolución. Empezarás desde el primer organismo.
+              </p>
               <button
                 className="primary-button"
                 onClick={() => {
@@ -282,7 +460,8 @@ export default function Home() {
                   changeSettings(false);
                 }}
               >
-                Sí, volver a nacer <RotateCcw size={16} />
+                Sí, volver a nacer
+                <RotateCcw size={16} />
               </button>
               <button
                 className="text-button"
@@ -296,22 +475,28 @@ export default function Home() {
               className="settings-row"
               onClick={() => setConfirmReset(true)}
             >
-              Volver a nacer <RotateCcw size={16} />
+              Volver a nacer
+              <RotateCcw size={16} />
             </button>
           )}
           <DialogClose className="primary-button">
-            Volver al juego <Play size={18} />
+            Volver al juego
+            <Play size={18} />
           </DialogClose>
         </DialogContent>
       </Dialog>
       <aside className="desktop-note">
-        <span>01 — EL DESPERTAR</span>
+        <span>
+          {number} — {stage.name.toUpperCase()}
+        </span>
         <p>
-          Arrastra para nadar
+          Arrastra para moverte
           <br />
           WASD / flechas · espacio para impulso
+          <br />
+          Mando · stick izquierdo + A
         </p>
-        <small>Prototipo jugable · 2D</small>
+        <small>VORO · 6 etapas de evolución</small>
       </aside>
     </main>
   );
