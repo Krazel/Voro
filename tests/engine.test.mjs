@@ -1,15 +1,20 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { makeEngine } from './engine-fixture.mjs';
-import { MicroWorld, makeEntity, SPECIES_BY_ID } from '../app/micro-world.mjs';
-import { newMicro, microLife, refreshOffer } from '../app/micro-progress.mjs';
+import { makeEntity, SPECIES_BY_ID } from '../app/micro-world.mjs';
+import {
+  newJourney as newMicro,
+  journeyLife as microLife,
+  refreshOffer,
+} from '../app/journey-progress.mjs';
+import { JourneyWorld } from '../app/journey-world.mjs';
 
 function fresh(seed = 123) {
   const f = makeEngine(),
     g = f.game;
   g.progress = newMicro(seed);
   g.life = microLife(g.progress);
-  g.world = new MicroWorld(seed);
+  g.world = new JourneyWorld(seed);
   g.seed();
   g.action('start');
   return f;

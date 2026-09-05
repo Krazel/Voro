@@ -1,0 +1,9 @@
+Use case: stylized-concept
+Asset type: production TRANSPARENT PNG RGBA sprite atlas for a 2D game.
+Primary request: exactly 12 distinct cosmic illustrations, exactly four columns and three rows on a 1536 x 1024 canvas. One isolated sprite per equal 384 x 341 cell, no overlap. Each complete illustration including its wisps and glow fits inside the central 70% of its cell. Huge truly empty gutters and margins. No backdrop.
+Row 1 left to right: compact star cluster; compact nebula knot; stellar nursery with delicate gaseous pillars; circular supernova remnant.
+Row 2 left to right: black hole with an accretion disk; brilliant quasar with short jets; interacting galaxy pair treated as one sprite; galaxy cluster treated as one sprite.
+Row 3 left to right: large cosmic supercluster; luminous branching cosmic filament; void rim luminous cloud with dark hollow; final entire universe represented as one luminous cosmic web sphere.
+Style/medium: naturalistic fine hand-painted 2D celestial illustrations, subtle textured brushwork, delicate feathered edges. Refined painterly craftsmanship matching the previously viewed naturalistic VORO land/city illustrations and abyssal background. No plastic 3D, no vector, no cartoon outlines, no pixel art. Muted blue and teal with amber light, natural cosmic colors.
+Transparency is CRITICAL: generate actual transparent alpha. Every pixel outside the twelve isolated objects must have alpha zero. No gray/colored/black background wash, no backdrop glow, no checkerboard, no scene filling the canvas. Keep luminous glows inside the isolated silhouettes and feather them to transparent alpha.
+Constraints: exactly 12 items in the exact order, no extra stars scattered outside their cells, no text, labels, separators, frames, grid lines, watermark or UI. Preserve large transparent gaps around every sprite.

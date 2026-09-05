@@ -977,3 +977,144 @@ button {
     margin-top: 0;
   }
 }
+
+.journey-size {
+  font-size: clamp(15px, 3vw, 21px) !important;
+  line-height: 1.2;
+  max-width: 135px;
+  overflow-wrap: anywhere;
+}
+.journey-transition {
+  background: transparent;
+  backdrop-filter: none;
+  animation: new-world 7.2s both;
+  justify-content: flex-end;
+  padding-bottom: 26%;
+  text-shadow: 0 2px 18px #000;
+}
+.journey-transition h2 {
+  font-size: clamp(25px, 5vw, 36px);
+  max-width: 360px;
+}
+.journey-transition p {
+  font-size: 15px;
+}
+.journey-route {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+}
+.journey-route li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 9px 8px;
+  border: 1px solid #35556455;
+  border-radius: 9px;
+  color: #607d88;
+}
+.journey-route li > span {
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+.journey-route b {
+  font-size: 13px;
+  font-weight: 500;
+}
+.journey-route small {
+  font-size: 10px;
+}
+.journey-route .done {
+  color: #b2c6a4;
+  border-color: #5e786153;
+}
+.journey-route .current {
+  color: #f1d59c;
+  border-color: #b18c505c;
+  background: #91764713;
+}
+.voro-settings {
+  max-height: 90dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.journey-finish {
+  background: #02060cf5;
+  z-index: 7;
+  top: 18%;
+  bottom: 8%;
+  justify-content: center;
+}
+.journey-finish h2 {
+  font:
+    400 clamp(38px, 8vw, 52px)/1.12 Georgia,
+    serif;
+}
+.journey-finish .finish-stats {
+  gap: 25px;
+  margin-top: 28px;
+}
+.journey-finish .short-note {
+  margin-top: 24px;
+}
+.ending-caption {
+  position: absolute;
+  z-index: 7;
+  bottom: 22%;
+  left: 20px;
+  right: 20px;
+  text-align: center;
+  color: #ddccaa;
+  pointer-events: none;
+}
+.ending-caption span {
+  font-size: 11px;
+  letter-spacing: 3px;
+}
+.ending-caption p {
+  font:
+    400 24px/1.4 Georgia,
+    serif;
+}
+.journey-loading {
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  background: #041422ed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  text-align: center;
+  padding: 30px;
+}
+@media (max-height: 700px) {
+  .journey-route {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+  }
+  .journey-route li {
+    padding: 6px;
+  }
+  .journey-finish {
+    top: 16%;
+  }
+  .journey-finish h2 {
+    font-size: 34px;
+  }
+  .journey-finish .finish-stats {
+    margin-top: 12px;
+  }
+  .journey-transition {
+    padding-bottom: 19%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .journey-transition {
+    animation: none;
+  }
+}

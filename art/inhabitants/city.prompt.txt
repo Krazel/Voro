@@ -1,0 +1,19 @@
+Use case: stylized-concept.
+Asset type: VORO mobile 2D top-down eat-and-evolve game production bitmap sprite atlas.
+Style/medium: soft, finely hand-illustrated naturalistic 2D game art, delicate watercolor-like painted texture with fine coherent outlines, organic forms, muted teal and blue tones and restrained amber highlights, designed to read over a dark navy game world. NOT photographs, NOT glossy 3D, NOT vector icons. Soft consistent light from upper left, clear silhouettes.
+Backdrop: actual fully transparent RGBA background with zero background pixels; no checkerboard baked into image.
+Composition: exact evenly spaced invisible grid; every sprite centered in its equal-size cell; leave 20 percent padding on every edge of every cell. Fully contained full-body sprites, single pose, no cropped appendages, no shared elements. Top-down orthographic viewpoint, faces or travels RIGHT where meaningful. Same relative visual scale within cells, so individual species are recognizable. No scene, no floor, no ground shadows. No text, labels, captions, border, grid lines, watermarks, or shadows crossing cells.
+
+Generate ONE atlas image. Grid: exactly 4 columns by 3 rows, 12 sprites total, a landscape canvas proportional to grid shape, ideally 2048x1536 pixels. Exact row-major content (left to right, then next row):
+Row 1, column 1: walking civilian.
+Row 1, column 2: rifle soldier.
+Row 1, column 3: shield melee soldier.
+Row 1, column 4: heavy weapons soldier.
+Row 2, column 1: motorcycle.
+Row 2, column 2: car.
+Row 2, column 3: van.
+Row 2, column 4: armored vehicle.
+Row 3, column 1: tank.
+Row 3, column 2: attack helicopter with visible distinct crisp rotor suitable for rotation.
+Row 3, column 3: low building rooftop.
+Row 3, column 4: tall tower rooftop.

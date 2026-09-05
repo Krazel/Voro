@@ -164,11 +164,11 @@ export function beginAbsorb(life, food) {
   return true;
 }
 /** Contact damage removes current mass, interrupts digestion and gives an escape window. */
-export function takeDamage(life, source, fraction = 0.25) {
+export function takeDamage(life, source, fraction = 0.25, minimum = 2) {
   if (life.dead || life.complete || life.invulnerable > 0) return 0;
   const lost = Math.min(
     life.biomass,
-    Math.max(2, life.biomass * clamp(fraction, 0, 1)) * life.damageFactor,
+    Math.max(minimum, life.biomass * clamp(fraction, 0, 1)) * life.damageFactor,
   );
   life.biomass = Math.max(0, life.biomass - lost);
   life.evolved = life.biomass >= life.goalMass;

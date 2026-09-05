@@ -1,0 +1,12 @@
+Use case: stylized-concept
+Asset type: production transparent PNG sprite atlas for VORO 2D browser game, 1536 x 1024 canvas.
+Primary request: exactly 24 distinct cosmic object sprites arranged in exactly 6 equal columns and 4 equal rows. Each cell is 256 x 256 pixels. Centers at x=128,384,640,896,1152,1408 and y=128,384,640,896. Each complete sprite including all glow must stay within its own cell with at least 28 transparent pixels padding on all sides. Generous empty transparent gutters; no overlap; nothing cut off.
+Row 1 left to right: irregular rocky asteroid; single bent metal debris fragment; artificial satellite with solar panels; orbital space station; armed spacecraft; small cratered moon.
+Row 2 left to right: brown rocky planet; oceanic Earthlike planet; dark volcanic lava planet; icy pale blue planet; striped gas giant; ringed gas giant with complete rings.
+Row 3 left to right: brown dwarf; glowing red dwarf; warm yellow sun; blue star; red giant; neutron star with short delicate polar beams.
+Row 4 left to right: dwarf galaxy; face-on spiral galaxy; elliptical galaxy; barred spiral galaxy; irregular galaxy; lenticular galaxy.
+Style/medium: fine naturalistic hand-painted 2D illustration with delicate irregular edges, subtle rich surface textures and softly luminous detail. Match the fine painterly craftsmanship of the previously viewed land and city sprite references and soft organic abyssal background. Planets are painted astronomical spheres; ships are top-down. Crisp enough to read as small game sprites but never vector, pixel art, cartoon, heavy outlines, glossy plastic or 3D render.
+Color palette: muted organic blue/teal, warm amber and believable cosmic colors, restrained glows contained to the sprite.
+Scene/backdrop: genuinely transparent RGBA alpha, entirely empty between objects. No colored background, no shadow rectangle, no checkerboard drawn into the image.
+Text: none.
+Constraints: exactly this row/column order, 24 separate complete sprites, regular grid, every cell occupied once. No labels, text, decorative frames, grid lines, UI, starfield background, border or watermark.

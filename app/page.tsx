@@ -22,6 +22,7 @@ import {
 } from '@/components/ui/dialog';
 import { VoroEngine, type Snapshot } from './engine';
 import { UPGRADES, levelOf } from './mutations.mjs';
+import { STAGES, STAGE_SPECIES } from './journey-data.mjs';
 export default function Home() {
   const canvas = useRef<HTMLCanvasElement>(null),
     engine = useRef<VoroEngine | null>(null);
@@ -29,6 +30,13 @@ export default function Home() {
     [confirmReset, setConfirmReset] = useState(false);
   const resume = useRef(false);
   const [state, setState] = useState<Snapshot>({
+    stage: 0,
+    stageName: STAGES[0].name,
+    scale: '40 µm',
+    evolutionFrom: 0,
+    ending: 0,
+    finalReady: false,
+    assetError: false,
     mutations: [],
     offer: [],
     level: 0,
@@ -82,7 +90,8 @@ export default function Home() {
     setConfirmReset(false);
     setSettings(open);
   };
-  const active = state.started && !state.dead;
+  const active =
+    state.started && !state.dead && !state.complete && state.ending === 0;
   const xp = Math.min(
     1,
     Math.max(
@@ -97,7 +106,7 @@ export default function Home() {
         <span className="side-line" />
         UN UNIVERSO POR DENTRO
       </aside>
-      <section className="viewport" aria-label="VORO: la vida en una gota">
+      <section className="viewport" aria-label="VORO: del origen al universo">
         <canvas
           ref={canvas}
           tabIndex={0}
@@ -142,8 +151,8 @@ export default function Home() {
           }
         >
           <div className="size">
-            <strong>{state.size}</strong>
-            <span>µm</span>
+            <strong className="journey-size">{state.scale}</strong>
+            <span>{STAGES[state.stage].short}</span>
           </div>
           <div className="growth">
             <div className="growth-label">
@@ -175,7 +184,11 @@ export default function Home() {
         </div>
         <div className="micro-adaptation">
           <div>
-            <span>ADAPTACIÓN {state.level + 1}</span>
+            <span>
+              {state.level >= 43
+                ? 'ADAPTACIONES COMPLETAS'
+                : 'ADAPTACIÓN ' + (state.level + 1)}
+            </span>
             <span>{state.level} mejoras</span>
           </div>
           <progress
@@ -190,7 +203,10 @@ export default function Home() {
         </div>
         {!state.started && (
           <div className="intro">
-            <p className="eyebrow">01 / LA VIDA EN UNA GOTA</p>
+            <p className="eyebrow">
+              {String(state.stage + 1).padStart(2, '0')} /{' '}
+              {state.stageName.toUpperCase()}
+            </p>
             <h1>
               {state.saved ? (
                 <>
@@ -207,9 +223,11 @@ export default function Home() {
               )}
             </h1>
             <p className="intro-instruction">
-              Come lo pequeño. Evita a los cazadores.
+              {STAGES[state.stage].intro}
               <br />
-              Esta vez, la gota no tiene paredes.
+              {state.saved
+                ? 'Tu evolución continúa.'
+                : 'Todo un universo espera fuera de la gota.'}
             </p>
             <button
               className="primary-button"
@@ -217,15 +235,23 @@ export default function Home() {
               onClick={() => action('start')}
             >
               {!state.assetsReady
-                ? 'Preparando la gota…'
+                ? 'Preparando tu mundo…'
                 : state.saved
                   ? 'Continuar partida'
                   : 'Despertar'}
               <ArrowUpRight size={20} />
             </button>
             <span className="short-note">
-              Etapa unicelular · guardado automático
+              Del origen al universo · guardado automático
             </span>
+            {state.assetError && !state.assetsReady && (
+              <button
+                className="text-button"
+                onClick={() => window.location.reload()}
+              >
+                Reintentar carga
+              </button>
+            )}
           </div>
         )}
         {active && (
@@ -297,7 +323,7 @@ export default function Home() {
             <p>
               Vuelves a ser pequeño.
               <br />
-              Conservas tus adaptaciones.
+              Conservas tu escala y tus adaptaciones.
             </p>
             <div className="finish-stats">
               <span>
@@ -314,26 +340,80 @@ export default function Home() {
           </div>
         )}
         {state.transition > 0 && (
-          <div className="stage-transition micro-transition" aria-live="polite">
-            <span>EVOLUCIÓN CELULAR</span>
-            <h2>
-              La membrana
-              <br />
-              se expande.
-            </h2>
+          <div
+            className="stage-transition journey-transition"
+            aria-live="polite"
+          >
+            <span>
+              EVOLUCIÓN · {STAGES[state.evolutionFrom].short.toUpperCase()}
+            </span>
+            <h2>{STAGES[state.evolutionFrom].evolution}</h2>
+            <p>{STAGES[Math.min(8, state.evolutionFrom + 1)].name}</p>
+          </div>
+        )}
+        {state.started && !state.assetsReady && (
+          <div className="journey-loading">
+            <p>El siguiente mundo está despertando…</p>
+            {state.assetError && (
+              <button
+                className="primary-button"
+                onClick={() => window.location.reload()}
+              >
+                Reintentar carga
+              </button>
+            )}
+          </div>
+        )}
+        {state.ending > 0 && (
+          <div className="ending-caption" aria-live="polite">
+            <span>EL ÚLTIMO HORIZONTE</span>
             <p>
-              Has dominado esta escala.
-              <br />
-              Puedes seguir explorando la gota.
+              {state.ending > 7
+                ? 'Toda la materia converge.'
+                : state.ending > 3
+                  ? 'Toda la luz vuelve a casa.'
+                  : 'Ya no queda nada fuera de ti.'}
             </p>
+          </div>
+        )}
+        {state.started && state.complete && (
+          <div className="finish-panel journey-finish" aria-live="polite">
+            <p className="eyebrow">UNIVERSO ABSORBIDO</p>
+            <h2>
+              Todo estaba
+              <br />
+              dentro de ti.
+            </h2>
+            <p>De una única célula al último punto de luz.</p>
+            <div className="finish-stats">
+              <span>
+                <b>{state.eaten}</b>absorciones
+              </span>
+              <span>
+                <b>{Math.floor(state.elapsed / 60)}</b>minutos
+              </span>
+              <span>
+                <b>{state.level}</b>adaptaciones
+              </span>
+            </div>
+            <button
+              className="primary-button"
+              onClick={() => changeSettings(true)}
+            >
+              Ver tu recorrido
+              <Sparkles size={18} />
+            </button>
+            <span className="short-note">FIN · VORO</span>
           </div>
         )}
         {state.protected && active && !state.paused && !state.offer.length && (
           <div className="protection-badge">MEMBRANA PROTEGIDA · ESCAPA</div>
         )}
         <div className="scale-marker">
-          <i />
-          <span>20 µm</span>
+          <span>
+            {String(state.stage + 1).padStart(2, '0')} / 09 ·{' '}
+            {STAGES[state.stage].short.toUpperCase()}
+          </span>
         </div>
       </section>
       <Dialog
@@ -348,7 +428,7 @@ export default function Home() {
             otra forma.
           </DialogTitle>
           <DialogDescription>
-            Elige una mejora. Seguirás en esta misma gota.
+            Elige una mejora. Tu evolución continúa en esta escala.
           </DialogDescription>
           <div className="mutation-choices">
             {state.offer.map((id) => {
@@ -384,7 +464,7 @@ export default function Home() {
         <DialogContent className="voro-settings" showCloseButton={false}>
           <p className="eyebrow">VORO · ABISAL</p>
           <DialogTitle>Configuración</DialogTitle>
-          <DialogDescription>La vida en una gota.</DialogDescription>
+          <DialogDescription>{state.stageName}</DialogDescription>
           <button
             className="settings-row"
             onClick={() => action('sound')}
@@ -401,6 +481,30 @@ export default function Home() {
               ? 'La partida se guarda en este dispositivo.'
               : 'El guardado no está disponible en este navegador.'}
           </p>
+          <ol className="journey-route" aria-label="Tu recorrido">
+            {STAGES.map((s, i) => (
+              <li
+                key={s.id}
+                className={
+                  state.complete || i < state.stage
+                    ? 'done'
+                    : i === state.stage
+                      ? 'current'
+                      : 'locked'
+                }
+              >
+                <span>{String(i + 1).padStart(2, '0')}</span>
+                <b>{s.short}</b>
+                <small>
+                  {state.complete || i < state.stage
+                    ? 'Superado'
+                    : i === state.stage
+                      ? 'Aquí estás'
+                      : 'Por descubrir'}
+                </small>
+              </li>
+            ))}
+          </ol>
           {state.level > 0 && (
             <div className="micro-upgrade-list">
               {UPGRADES.map((u) => {
@@ -453,7 +557,10 @@ export default function Home() {
         </DialogContent>
       </Dialog>
       <aside className="desktop-note">
-        <span>01 — LA VIDA EN UNA GOTA</span>
+        <span>
+          {String(state.stage + 1).padStart(2, '0')} —{' '}
+          {state.stageName.toUpperCase()}
+        </span>
         <p>
           Arrastra para moverte
           <br />
@@ -461,7 +568,11 @@ export default function Home() {
           <br />
           Mando · stick izquierdo + A
         </p>
-        <small>12 organismos · 15 adaptaciones · mundo abierto</small>
+        <small>
+          {STAGE_SPECIES[state.stage].length} habitantes en esta escala
+          <br />
+          15 adaptaciones · mundo infinito
+        </small>
       </aside>
     </main>
   );

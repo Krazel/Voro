@@ -3,7 +3,7 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'VORO · Abisal',
   description:
-    'La vida en una gota: explora un mundo microscópico infinito, absorbe organismos y adapta tu membrana.',
+    'De una única célula al universo entero. Explora, absorbe y evoluciona a través de nueve escalas en VORO.',
 };
 export const viewport: Viewport = {
   width: 'device-width',

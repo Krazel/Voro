@@ -1,0 +1,199 @@
+{
+  "mode": "Built-in image_gen; no raster manipulation. water-transparent.png is byte-preserving copy of existing water.png; no generation prompt needed.",
+  "files": {
+    "cosmos": {
+      "path": "C:/Users/dmkra/Documents/Codex Apps/Voro-inhabitants-assets/cosmos.png",
+      "width": 1536,
+      "height": 1024,
+      "columns": 6,
+      "rows": 4,
+      "alpha": "RGBA; sampled 9757/24576 fully transparent, subject interiors chiefly alpha 249–252. Background RGB in preview is hidden by alpha.",
+      "catalog": [
+        [
+          "asteroid",
+          "metal debris",
+          "satellite",
+          "space station",
+          "armed spacecraft",
+          "small moon"
+        ],
+        [
+          "rocky planet",
+          "oceanic Earthlike planet",
+          "volcanic planet",
+          "ice planet",
+          "gas giant",
+          "ringed giant"
+        ],
+        [
+          "brown dwarf",
+          "red dwarf",
+          "yellow sun",
+          "blue star",
+          "red giant",
+          "neutron star"
+        ],
+        [
+          "dwarf galaxy",
+          "face-on spiral galaxy",
+          "elliptical galaxy",
+          "barred spiral galaxy",
+          "irregular galaxy",
+          "lenticular galaxy"
+        ]
+      ],
+      "inspection": "All 24 intended objects present in exact grid order. Main bodies remain in cells. A few thin extremities/glows touch cell edges; use recommended custom rects for debris, station, planets and neutron star. Galaxy row has faint outer dust touching upper cell boundary; regular cells crop only wisps.",
+      "customRects": {
+        "r1c2": [
+          280,
+          25,
+          221,
+          240
+        ],
+        "r1c4": [
+          769,
+          0,
+          255,
+          265
+        ],
+        "r2c1": [
+          0,
+          268,
+          256,
+          238
+        ],
+        "r2c2": [
+          256,
+          269,
+          256,
+          237
+        ],
+        "r2c3": [
+          512,
+          265,
+          256,
+          241
+        ],
+        "r2c4": [
+          768,
+          268,
+          256,
+          238
+        ],
+        "r2c5": [
+          1024,
+          265,
+          256,
+          241
+        ],
+        "r2c6": [
+          1267,
+          271,
+          269,
+          219
+        ],
+        "r3c6": [
+          1290,
+          493,
+          229,
+          272
+        ]
+      }
+    },
+    "universe": {
+      "path": "C:/Users/dmkra/Documents/Codex Apps/Voro-inhabitants-assets/universe.png",
+      "width": 1536,
+      "height": 1024,
+      "columns": 4,
+      "rows": 3,
+      "alpha": "RGBA; sampled 10342/24576 fully transparent, subject interiors chiefly alpha 249–252.",
+      "catalog": [
+        [
+          "star cluster",
+          "nebula knot",
+          "stellar nursery",
+          "supernova remnant"
+        ],
+        [
+          "black hole with accretion disk",
+          "quasar",
+          "galaxy pair",
+          "galaxy cluster"
+        ],
+        [
+          "supercluster",
+          "cosmic filament",
+          "void rim luminous cloud",
+          "entire-universe luminous web sphere"
+        ]
+      ],
+      "inspection": "All 12 intended objects present. Equal grid cells are usable. Peripheral wisps at row boundaries may be clipped a few pixels; quasar top jet starts around y333, eight pixels above its nominal cell; optional custom rect includes it.",
+      "customRects": {
+        "r2c2": [
+          399,
+          326,
+          355,
+          337
+        ]
+      }
+    },
+    "environments": {
+      "path": "C:/Users/dmkra/Documents/Codex Apps/Voro-inhabitants-assets/environments.png",
+      "width": 1774,
+      "height": 887,
+      "columns": 4,
+      "rows": 2,
+      "alpha": "RGB opaque, sampled all alpha=255",
+      "catalog": [
+        [
+          "pond water",
+          "damp forest moss",
+          "coastal city grid",
+          "low Earth orbit"
+        ],
+        [
+          "interplanetary space",
+          "warm stellar nebula",
+          "deep galactic field",
+          "cosmic web void"
+        ]
+      ],
+      "inspection": "Exact 4x2 layout; panel edges at normalized quarters/halves. Use fractional source dimensions 443.5x443.5. Clean open centers in all panels. Fine painted low contrast blue/teal palette with amber dust. No characters or UI. Requested 2048x1024 but built-in tool returned 1774x887; preserve output resolution."
+    },
+    "waterTransparent": {
+      "path": "C:/Users/dmkra/Documents/Codex Apps/Voro-inhabitants-assets/water-transparent.png",
+      "width": 1536,
+      "height": 1024,
+      "columns": 4,
+      "rows": 4,
+      "alpha": "RGBA; sampled 15847/24576 fully transparent, subject interiors chiefly alpha 250–253. Byte-identical to water.png, which already had alpha.",
+      "catalog": [
+        [
+          "shrimp",
+          "sardine",
+          "herring",
+          "clownfish"
+        ],
+        [
+          "blue tang",
+          "pufferfish",
+          "seahorse",
+          "moon jellyfish"
+        ],
+        [
+          "orange jellyfish",
+          "squid",
+          "octopus",
+          "moray eel"
+        ],
+        [
+          "great white shark",
+          "hammerhead shark",
+          "swimmer",
+          "manta ray"
+        ]
+      ],
+      "inspection": "Original grid remains. Some sprites have extremities outside nominal cells; squid right tentacles extend to x810, shark right nose x416. Owner already handling water custom crops."
+    }
+  }
+}
