@@ -38,7 +38,7 @@ test('Every new stage starts half-size, only the smallest species are edible, an
         assert.ok(s.r <= 21, `${s.name} is too large for a newborn`);
       } else locked++;
     }
-    assert.ok(edible >= 1 && edible <= 5);
+    assert.ok(edible >= 1);
     assert.ok(locked > edible);
     const w = new JourneyWorld(p.seed, [], stage);
     w.stream(l.x, l.y, 0);

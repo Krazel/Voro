@@ -11,6 +11,9 @@ import { STAGE_SPECIES } from '../app/journey-data.mjs';
 import { newJourney, journeyLife } from '../app/journey-progress.mjs';
 import { HuntingTentacles } from '../app/hunting-tentacles.mjs';
 const sizes = {
+  naturalMatter: [1448, 1086],
+  objectMatter: [1536, 1024],
+  cosmicMatter: [1536, 1024],
   swimmer: [425, 160],
   femaleSwimmer: [1774, 887],
   micro: [1448, 1086],
@@ -20,8 +23,8 @@ const sizes = {
   cosmos: [1536, 1024],
   universe: [1536, 1024],
 };
-test('All 107 inhabitants have an explicit anatomical rig and valid art bounds', () => {
-  assert.equal(Object.keys(ANIMATIONS).length, 107);
+test('All 152 edible elements have an explicit animation profile and valid art bounds', () => {
+  assert.equal(Object.keys(ANIMATIONS).length, 152);
   for (const s of STAGE_SPECIES.flat()) {
     const p = ANIMATIONS[s.id];
     assert.ok(p.family && p.description && p.period > 0);

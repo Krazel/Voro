@@ -44,6 +44,9 @@ function isolate(g) {
 }
 test('Every stage generates stable inhabitants, recoverable food, bounded chunks and valid bitmap crops', () => {
   const dimensions = {
+    naturalMatter: [1448, 1086],
+    objectMatter: [1536, 1024],
+    cosmicMatter: [1536, 1024],
     swimmer: [425, 160],
     femaleSwimmer: [1774, 887],
     micro: [1448, 1086],

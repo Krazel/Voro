@@ -128,7 +128,7 @@ export default function SizeComparison({
           >
             <table className="size-table" style={{ width: 200 + 680 * zoom }}>
               <caption>
-                Tamaños de {species.length} habitantes de {STAGES[stage].short}
+                Tamaños de {species.length} elementos de {STAGES[stage].short}
               </caption>
               <colgroup>
                 <col style={{ width: 200 }} />

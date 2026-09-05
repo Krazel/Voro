@@ -1,3 +1,4 @@
+import { matterAnimation } from './edible-matter.mjs';
 import { ANATOMICAL_RIGS } from './anatomical-rigs.mjs';
 import { STAGE_SPECIES } from './journey-data.mjs';
 // Individual art-directed rigs. Shared families describe anatomy, not a universal wobble.
@@ -565,10 +566,13 @@ export const ANIMATIONS = Object.fromEntries(
       s.atlas === 'micro'
         ? STAGE_SPECIES[0].findIndex((e) => e.id === (s.animationId || s.id))
         : s.index;
+    const profile = s.edibleMatter
+      ? matterAnimation(s)
+      : atlases[s.atlas][index];
     return [
       s.id,
       {
-        ...atlases[s.atlas][index],
+        ...profile,
         ...(s.id === 'water-16'
           ? {
               crop: s.crop,
@@ -581,7 +585,7 @@ export const ANIMATIONS = Object.fromEntries(
         id: s.id,
         rigId: s.animationId || s.id,
         revised:
-          !!atlases[s.atlas][index].revision ||
+          !!profile.revision ||
           !!ANATOMICAL_RIGS[s.id] ||
           ['water-3', 'water-4', 'water-12', 'water-13'].includes(s.id),
         assetKey: `${s.imageAtlas || s.atlas}:${index}`,

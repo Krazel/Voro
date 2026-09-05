@@ -47,14 +47,14 @@ function Thumbnail({ id, images }: { id: string; images: Images }) {
 }
 export default function AnimationStudio() {
   const [stage, setStage] = useState(STAGES.findIndex((s) => s.id === 'water')),
-    [selected, setSelected] = useState('water-16');
+    [selected, setSelected] = useState('water-matter-kelp');
   const [images, setImages] = useState<Images>({}),
     [error, setError] = useState(false),
     [playing, setPlaying] = useState(true),
     [slow, setSlow] = useState(false),
     [mode, setMode] = useState('move');
   const [view, setView] = useState('animation');
-  const [seen, setSeen] = useState<Set<string>>(new Set(['water-16']));
+  const [seen, setSeen] = useState<Set<string>>(new Set(['water-matter-kelp']));
   const canvas = useRef<HTMLCanvasElement>(null),
     time = useRef(0);
   const species = STAGE_SPECIES[stage],
@@ -195,7 +195,7 @@ export default function AnimationStudio() {
           <h1>Todo tiene su movimiento.</h1>
         </div>
         <span>
-          {TOTAL} habitantes · {STAGES.length} escalas
+          {TOTAL} elementos · {STAGES.length} escalas
         </span>
       </div>
       <Tabs value={stage} onValueChange={changeStage}>
@@ -297,16 +297,10 @@ export default function AnimationStudio() {
                 <p>{profile.description}</p>
               </div>
               <div className="studio-next">
-                <button
-                  aria-label="Habitante anterior"
-                  onClick={() => next(-1)}
-                >
+                <button aria-label="Elemento anterior" onClick={() => next(-1)}>
                   <ChevronLeft />
                 </button>
-                <button
-                  aria-label="Siguiente habitante"
-                  onClick={() => next(1)}
-                >
+                <button aria-label="Siguiente elemento" onClick={() => next(1)}>
                   <ChevronRight />
                 </button>
               </div>
@@ -314,7 +308,7 @@ export default function AnimationStudio() {
           </section>
           <aside
             className="studio-catalog"
-            aria-label={`Habitantes de ${STAGES[stage].short}`}
+            aria-label={`Elementos de ${STAGES[stage].short}`}
           >
             {species.map((e) => (
               <button
@@ -326,13 +320,15 @@ export default function AnimationStudio() {
                 <span>
                   {e.name}
                   <small>
-                    {ANIMATIONS[e.id].revision === 2
-                      ? 'Nueva revisión'
-                      : ANIMATIONS[e.id].revised
-                        ? 'Animación revisada'
-                        : seen.has(e.id)
-                          ? 'Visto'
-                          : 'Ver animación'}
+                    {'edibleMatter' in e && e.edibleMatter
+                      ? 'Materia comestible'
+                      : ANIMATIONS[e.id].revision === 2
+                        ? 'Nueva revisión'
+                        : ANIMATIONS[e.id].revised
+                          ? 'Animación revisada'
+                          : seen.has(e.id)
+                            ? 'Visto'
+                            : 'Ver animación'}
                   </small>
                 </span>
               </button>
@@ -342,7 +338,8 @@ export default function AnimationStudio() {
       )}
       <p className="studio-note">
         La misma animación se usa en el juego. Las ilustraciones conservan su
-        estilo; cada cuerpo tiene sus articulaciones y movimientos.
+        estilo: animales articulados, plantas que se balancean y objetos sólidos
+        que conservan su forma.
       </p>
     </main>
   );

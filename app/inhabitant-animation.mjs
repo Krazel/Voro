@@ -114,6 +114,13 @@ export function poseMesh(
         } else {
           p.x += Math.sin(phase + v * 2) * amount * weight;
         }
+      } else if (f === 'plant') {
+        // Anchored stems: only the free end and foliage follow the current.
+        p.x += Math.sin(phase + v * 2) * k * a * (1 - v) ** 2;
+      } else if (f === 'matterCloud') {
+        const envelope = Math.sin(u * Math.PI) * Math.sin(v * Math.PI);
+        p.x += Math.sin(phase + v * 3) * k * envelope;
+        p.y += Math.cos(phase + u * 3) * k * 0.45 * envelope;
       } else if (profile.rigid) {
         // Metal panels and hulls preserve every point of their silhouette.
       } else if (bones) {

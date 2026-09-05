@@ -23,7 +23,28 @@ export class JourneyWorld extends MicroWorld {
     this.finalEntity = null;
   }
   generate(cx, cy, time) {
-    if (this.stage === 0) return super.generate(cx, cy, time);
+    if (this.stage === 0) {
+      const chunk = super.generate(cx, cy, time);
+      const matter = STAGE_SPECIES[0].filter((s) => s.edibleMatter);
+      chunk.entities = chunk.entities.map((e) => {
+        // Keep nutrients and predators, and replace only existing food slots.
+        if (e.kind === 'nutrient' || isDanger(SPECIES_BY_ID[e.kind])) return e;
+        const rng = random(Math.floor(e.seed * 100000) ^ this.seed ^ 91827);
+        if (rng() >= 0.35) return e;
+        const pool =
+          e.requiredMass <= stageStartMass(0)
+            ? matter.filter((s) => s.r <= 15)
+            : matter;
+        return journeyEntity(
+          pool[Math.floor(rng() * pool.length)],
+          e.x,
+          e.y,
+          e.seed,
+          e.id,
+        );
+      });
+      return chunk;
+    }
     const list = STAGE_SPECIES[this.stage].filter(
       (s) => s.kind !== 'final' && !s.variantOf,
     );
@@ -44,6 +65,10 @@ export class JourneyWorld extends MicroWorld {
       entities = [],
       motes = [];
     const pick = (arr) => {
+      const matter = arr.filter((s) => s.edibleMatter),
+        animals = arr.filter((s) => !s.edibleMatter);
+      if (matter.length && animals.length)
+        arr = rng() < 0.35 ? matter : animals;
       let roll = rng() * arr.reduce((n, s) => n + (s.spawnWeight ?? 1), 0);
       return arr.find((s) => (roll -= s.spawnWeight ?? 1) < 0) || arr.at(-1);
     };
@@ -95,12 +120,20 @@ export class JourneyWorld extends MicroWorld {
   move(dt, time, p, stats, trail) {
     if (this.stage === 0) {
       super.move(dt, time, p, stats, trail);
+      for (const e of this.entities) {
+        const s = SPECIES_BY_ID[e.kind];
+        if (s?.edibleMatter && !e.eaten) this.moveMatter(e, s, dt, time);
+      }
       return;
     }
     for (const e of this.entities) {
       if (e.eaten) continue;
       const s = SPECIES_BY_ID[e.kind];
       if (!s) continue;
+      if (s.edibleMatter) {
+        this.moveMatter(e, s, dt, time);
+        continue;
+      }
       e.escape = Math.max(0, (e.escape || 0) - dt);
       e.flash = Math.max(0, e.flash - dt * 2);
       e.attack = Math.max(0, (e.attack || 0) - dt * 2);
@@ -163,6 +196,19 @@ export class JourneyWorld extends MicroWorld {
         }
       }
     }
+  }
+  moveMatter(e, s, dt, time) {
+    e.escape = Math.max(0, (e.escape || 0) - dt);
+    e.flash = Math.max(0, e.flash - dt * 2);
+    if (!s.speed || e.wound >= 1) return;
+    const tx = e.homeX + Math.sin(time * 0.1 + e.seed) * 35,
+      ty = e.homeY + Math.cos(time * 0.09 + e.seed) * 35,
+      distance = Math.max(1, Math.hypot(tx - e.x, ty - e.y)),
+      step = Math.min(distance, s.speed * dt);
+    e.x += ((tx - e.x) / distance) * step;
+    e.y += ((ty - e.y) / distance) * step;
+    // No animal steering or escape behaviour for loose matter.
+    if (s.matterMotion === 'drift') e.heading += dt * 0.025;
   }
   stream(x, y, time, force = false, radius = this.radius) {
     super.stream(x, y, time, force, radius);

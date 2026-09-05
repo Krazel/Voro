@@ -1,3 +1,4 @@
+import { EDIBLE_MATTER } from './edible-matter.mjs';
 import { SPECIES as MICRO_SPECIES } from './micro-world.mjs';
 export const STAGE_START_MASS = 2;
 export const stageStartMass = (stage) =>
@@ -526,3 +527,20 @@ export const physicalDiameter = (stage, mass) =>
   STAGES[stage].base *
   metersPerUnit(STAGES[stage].unit) *
   Math.sqrt(Math.max(0, mass) / 8);
+
+// Stable ids preserve saved meals and the atlas links as the food catalogue grows.
+Object.assign(ATLAS_URLS, {
+  naturalMatter: './inhabitants/natural-matter-v1.png',
+  objectMatter: './inhabitants/objects-matter-v1.png',
+  cosmicMatter: './inhabitants/cosmic-matter-v1.png',
+});
+for (const source of EDIBLE_MATTER) {
+  const stage = STAGES.findIndex((s) => s.id === source.stageId);
+  if (stage < 0) throw new Error(`Unknown matter stage: ${source.stageId}`);
+  const s = { ...source, stage };
+  STAGE_SPECIES[stage].push(s);
+  SPECIES_BY_ID[s.id] = s;
+}
+STAGES[1].intro = 'Entre algas, larvas y fragmentos, empieza por lo pequeño.';
+STAGES[2].intro =
+  'Insectos, conchas y plantas: toda la orilla puede alimentarte.';
