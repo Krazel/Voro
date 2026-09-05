@@ -1,0 +1,13 @@
+{
+  "version": "0.3",
+  "build": "1",
+  "bundleId": "com.dmkr.voro",
+  "minIOS": "15.0",
+  "bytes": 38234243,
+  "sha256": "a26268040a3de8f2d680caf11a798feae391d44634edd8931cd09e51ab216de8",
+  "zipIntegrity": "passed",
+  "nativeExecutable": "present",
+  "requiredAssets": "present",
+  "deviceTested": false,
+  "signed": false
+}
