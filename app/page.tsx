@@ -8,11 +8,22 @@ import {
   VolumeX,
   ArrowUpRight,
   ChevronsRight,
+  Settings,
 } from 'lucide-react';
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+  DialogClose,
+} from '@/components/ui/dialog';
 import { VoroEngine, type Snapshot } from './engine';
 export default function Home() {
   const canvas = useRef<HTMLCanvasElement>(null);
   const engine = useRef<VoroEngine | null>(null);
+  const [settings, setSettings] = useState(false);
+  const [confirmReset, setConfirmReset] = useState(false);
+  const resumeAfterSettings = useRef(false);
   const [state, setState] = useState<Snapshot>({
     biomass: 8,
     target: 26,
@@ -41,6 +52,18 @@ export default function Home() {
   const action = (
     name: 'start' | 'pause' | 'restart' | 'dash' | 'sound' | 'continue',
   ) => engine.current?.action(name);
+  const changeSettings = (open: boolean) => {
+    if (open) {
+      resumeAfterSettings.current =
+        state.started && !state.paused && !state.complete && !state.dead;
+      if (resumeAfterSettings.current) action('pause');
+    } else if (resumeAfterSettings.current) {
+      if (engine.current?.paused) action('pause');
+      resumeAfterSettings.current = false;
+    }
+    setConfirmReset(false);
+    setSettings(open);
+  };
   return (
     <main className="voro-shell">
       <aside className="outside-caption">
@@ -59,6 +82,13 @@ export default function Home() {
             VORO<span>ABISAL</span>
           </div>
           <div className="header-actions">
+            <button
+              className="icon-button"
+              onClick={() => changeSettings(true)}
+              aria-label="Configuración"
+            >
+              <Settings size={19} />
+            </button>
             <button
               className="icon-button"
               onClick={() => action('sound')}
@@ -185,9 +215,6 @@ export default function Home() {
             >
               Seguir nadando <ArrowUpRight size={20} />
             </button>
-            <button className="text-button" onClick={() => action('restart')}>
-              <RotateCcw size={14} /> Volver a nacer
-            </button>
           </div>
         )}
         {state.paused && !state.complete && !state.dead && (
@@ -196,9 +223,6 @@ export default function Home() {
             <h2>Respira.</h2>
             <button className="primary-button" onClick={() => action('pause')}>
               Seguir nadando <Play size={18} />
-            </button>
-            <button className="text-button" onClick={() => action('restart')}>
-              <RotateCcw size={14} /> Volver a nacer
             </button>
           </div>
         )}
@@ -223,7 +247,7 @@ export default function Home() {
               className="primary-button"
               onClick={() => action('restart')}
             >
-              Volver a nacer <RotateCcw size={18} />
+              Reintentar etapa <RotateCcw size={18} />
             </button>
           </div>
         )}
@@ -235,6 +259,51 @@ export default function Home() {
           <span>20 µm</span>
         </div>
       </section>
+      <Dialog open={settings} onOpenChange={changeSettings}>
+        <DialogContent className="voro-settings" showCloseButton={false}>
+          <p className="eyebrow">VORO · ABISAL</p>
+          <DialogTitle>Configuración</DialogTitle>
+          <DialogDescription>Una pausa en tu evolución.</DialogDescription>
+          <button
+            className="settings-row"
+            onClick={() => action('sound')}
+            aria-pressed={state.sound}
+          >
+            Sonido <span>{state.sound ? 'Activado' : 'Desactivado'}</span>
+          </button>
+          {confirmReset ? (
+            <div className="reset-confirm">
+              <p>Empezarás de nuevo desde el primer organismo.</p>
+              <button
+                className="primary-button"
+                onClick={() => {
+                  resumeAfterSettings.current = false;
+                  action('restart');
+                  changeSettings(false);
+                }}
+              >
+                Sí, volver a nacer <RotateCcw size={16} />
+              </button>
+              <button
+                className="text-button"
+                onClick={() => setConfirmReset(false)}
+              >
+                Cancelar
+              </button>
+            </div>
+          ) : (
+            <button
+              className="settings-row"
+              onClick={() => setConfirmReset(true)}
+            >
+              Volver a nacer <RotateCcw size={16} />
+            </button>
+          )}
+          <DialogClose className="primary-button">
+            Volver al juego <Play size={18} />
+          </DialogClose>
+        </DialogContent>
+      </Dialog>
       <aside className="desktop-note">
         <span>01 — EL DESPERTAR</span>
         <p>

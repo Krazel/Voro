@@ -9,6 +9,42 @@
   --font-sans: Arial, Helvetica, sans-serif;
   color-scheme: dark;
 }
+.voro-settings {
+  background: #091e29;
+  color: #d9f2ee;
+  padding: 28px;
+  border: 1px solid #54777866;
+  border-radius: 24px;
+  box-shadow: 0 30px 100px #000b;
+}
+.voro-settings [data-slot='dialog-title'] {
+  font-size: 27px;
+  font-weight: 400;
+}
+.voro-settings [data-slot='dialog-description'] {
+  color: #91b4b5;
+}
+.settings-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  padding: 18px 0;
+  border: 0;
+  border-bottom: 1px solid #40606c70;
+  background: transparent;
+  text-align: left;
+}
+.settings-row span {
+  color: #a5c49f;
+  font-size: 12px;
+}
+.reset-confirm p {
+  color: #b4ced0;
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
 * {
   box-sizing: border-box;
 }
