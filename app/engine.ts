@@ -20,6 +20,7 @@ import {
 } from './journey-data.mjs';
 import { drawJourneySprite } from './journey-sprites.mjs';
 import { HuntingTentacles } from './hunting-tentacles.mjs';
+import { growthZoom } from './camera.mjs';
 import {
   upgradeStats,
   journeyAdaptation as nextAdaptation,
@@ -151,7 +152,7 @@ export class VoroEngine {
   height = 850;
   pixelRatio = 1;
   scale = 1;
-  zoom = 1;
+  zoom = 0.9;
   camera = { x: 700, y: 970 };
   heading = -Math.PI / 2;
   food: Food[] = [];
@@ -237,6 +238,7 @@ export class VoroEngine {
     this.stats = upgradeStats(this.progress.mutations);
     this.seed();
     this.camera = { x: this.life.x, y: this.life.y };
+    this.zoom = growthZoom(this.life.radius);
     this.resize();
     this.observer = new ResizeObserver(() => this.resize());
     this.observer.observe(canvas);
@@ -551,6 +553,7 @@ export class VoroEngine {
       this.stats = upgradeStats(this.progress.mutations);
       this.seed();
       this.camera = { x: 700, y: 970 };
+      this.zoom = growthZoom(this.life.radius);
       this.started = true;
       this.paused = false;
       this.keys.clear();
@@ -932,7 +935,7 @@ export class VoroEngine {
     this.camera.y += (cameraY - this.camera.y) * (1 - Math.exp(-dt * 3));
     this.animateMembrane(dt);
     const targetZoom =
-      Math.min(1, 96 / Math.max(48, p.radius)) *
+      growthZoom(p.radius) *
       (this.transition > 3.6
         ? 1 + 0.5 * Math.sin(((7.2 - this.transition) / 3.6) * Math.PI)
         : 1);
