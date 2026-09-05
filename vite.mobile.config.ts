@@ -6,7 +6,10 @@ export default defineConfig({
   root: fileURLToPath(new URL('./mobile', import.meta.url)),
   base: './',
   publicDir: fileURLToPath(new URL('./public', import.meta.url)),
-  resolve: { alias: { '@': fileURLToPath(new URL('.', import.meta.url)) } },
+  resolve: { alias: {
+    '@': fileURLToPath(new URL('.', import.meta.url)),
+    'next/link': fileURLToPath(new URL('./mobile/link.tsx', import.meta.url)),
+  } },
   css: { postcss: { plugins: [tailwindcss()] } },
   plugins: [react()],
   build: {
