@@ -1,6 +1,7 @@
 import { createLife, radiusForMass, clamp } from './simulation.mjs';
 import {
   UPGRADES,
+  MAX_UPGRADE_CHOICES,
   upgradeStats,
   offerUpgrades,
   validChoice,
@@ -8,6 +9,7 @@ import {
   levelOf,
 } from './mutations.mjs';
 import { SPECIES_BY_ID } from './micro-world.mjs';
+import { restoreShieldTimers } from './shields.mjs';
 export const MICRO_SAVE = 'voro-micro-v1';
 export const MATURITY = 150;
 export function newMicro(seed = Math.floor(Math.random() * 0x7fffffff)) {
@@ -22,6 +24,7 @@ export function newMicro(seed = Math.floor(Math.random() * 0x7fffffff)) {
     totalEaten: 0,
     totalTime: 0,
     shieldRecharge: 0,
+    shieldTimers: /** @type {number[]} */ ([]),
   };
 }
 export function microLife(progress) {
@@ -96,7 +99,7 @@ export function loadMicro(raw) {
       return null;
     if (
       !Array.isArray(p.mutations) ||
-      p.mutations.length > 43 ||
+      p.mutations.length > MAX_UPGRADE_CHOICES ||
       p.level !== p.mutations.length ||
       p.mutations.some((id) => !UPGRADES.some((u) => u.id === id)) ||
       UPGRADES.some((u) => levelOf(p.mutations, u.id) > u.max)
@@ -112,6 +115,10 @@ export function loadMicro(raw) {
       totalEaten: p.totalEaten,
       totalTime: p.totalTime,
       shieldRecharge: Math.min(30, p.shieldRecharge),
+      shieldTimers: restoreShieldTimers(
+        p,
+        upgradeStats(p.mutations).shieldCapacity,
+      ),
     };
     refreshOffer(progress);
     const life = microLife(progress);

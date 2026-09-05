@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import {
   Pause,
   Play,
@@ -65,6 +66,7 @@ export default function Home() {
     sound: true,
     hint: '',
     shield: -1,
+    shieldReady: 0,
     combo: false,
     assetsReady: false,
   });
@@ -295,7 +297,9 @@ export default function Home() {
                   <Shield size={12} />
                   {state.shield > 0
                     ? 'Escudo · ' + Math.ceil(state.shield) + ' s'
-                    : 'Escudo listo'}
+                    : state.shieldReady === 1
+                      ? '1 escudo listo'
+                      : state.shieldReady + ' escudos listos'}
                 </span>
               )}
               {state.combo && (
@@ -448,10 +452,7 @@ export default function Home() {
                   <span>
                     <strong>{u.name}</strong>
                     <small>{u.detail}</small>
-                    <em>
-                      {u.group} · nivel {levelOf(state.mutations, id) + 1}/
-                      {u.max}
-                    </em>
+                    <em>{u.group}</em>
                   </span>
                   <ArrowUpRight size={17} />
                 </button>
@@ -522,10 +523,10 @@ export default function Home() {
               </li>
             ))}
           </ol>
-          <a className="settings-row" href="/animaciones">
+          <Link className="settings-row" href="/animaciones">
             Galería de animaciones
             <ArrowUpRight size={17} />
-          </a>
+          </Link>
           {state.level > 0 && (
             <div className="micro-upgrade-list">
               {UPGRADES.map((u) => {
@@ -534,7 +535,7 @@ export default function Home() {
                   <div key={u.id}>
                     <span>{u.name}</span>
                     <b>
-                      {n}/{u.max}
+                      Elegida {n} {n === 1 ? 'vez' : 'veces'}
                     </b>
                   </div>
                 ) : null;

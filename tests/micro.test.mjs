@@ -14,7 +14,12 @@ import {
   refreshOffer,
   chooseUpgrade,
 } from '../app/micro-progress.mjs';
-import { UPGRADES, offerUpgrades, upgradeStats } from '../app/mutations.mjs';
+import {
+  UPGRADES,
+  MAX_UPGRADE_CHOICES,
+  offerUpgrades,
+  upgradeStats,
+} from '../app/mutations.mjs';
 import { beginAbsorb, digest } from '../app/simulation.mjs';
 import { drawMicroSprite } from '../app/micro-sprites.mjs';
 test('Chunks regenerate deterministically at negative coordinates and retain consumed slots', () => {
@@ -72,24 +77,24 @@ test('Saved negative position, pending meals, cooldown and adaptation survive re
   bad.progress.mutations = ['photophagy'];
   assert.equal(loadMicro(JSON.stringify(bad)), null);
 });
-test('15 upgrades have bounded stats; choices never repeat within a hand or exceed rank', () => {
+test('15 upgrades have bounded stats; choices never repeat within a hand or exceed safe selection limits', () => {
   assert.equal(UPGRADES.length, 15);
   const chosen = [];
-  for (let level = 0; level < 43; level++) {
+  for (let level = 0; level < MAX_UPGRADE_CHOICES; level++) {
     const offer = offerUpgrades(chosen, 17, level);
     assert.ok(offer.length > 0);
     assert.equal(new Set(offer).size, offer.length);
     assert.deepEqual(offer, offerUpgrades(chosen, 17, level));
     chosen.push(offer[0]);
   }
-  assert.deepEqual(offerUpgrades(chosen, 17, 43), []);
+  assert.deepEqual(offerUpgrades(chosen, 17, MAX_UPGRADE_CHOICES), []);
   const s = upgradeStats(chosen, true);
-  assert.ok(s.speedFactor <= 1.65);
+  assert.ok(s.speedFactor <= 2.051);
   assert.ok(s.damageFactor >= 0.64);
-  assert.ok(s.digestFactor <= 1.951);
+  assert.ok(s.digestFactor <= 2.351);
   assert.equal(s.absorptionSlots, 6);
-  assert.equal(s.shieldCooldown, 12);
-  assert.ok(s.recycleFraction <= 0.551);
+  assert.equal(s.shieldCooldown, 20);
+  assert.ok(s.recycleFraction <= 0.751);
 });
 test('Recycled mass grants no XP; tiny nutrients allow recovery below initial mass', () => {
   const l = microLife(newMicro());

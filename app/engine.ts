@@ -20,6 +20,7 @@ import {
 } from './journey-data.mjs';
 import { drawJourneySprite } from './journey-sprites.mjs';
 import { HuntingTentacles } from './hunting-tentacles.mjs';
+import { syncShields, consumeShield } from './shields.mjs';
 import {
   upgradeStats,
   journeyAdaptation as nextAdaptation,
@@ -39,6 +40,7 @@ import {
   loadJourney,
   migrateMicro,
   advanceJourney,
+  loseAdaptationProgress,
 } from './journey-progress.mjs';
 
 export type Snapshot = {
@@ -77,6 +79,7 @@ export type Snapshot = {
   sound: boolean;
   hint: string;
   shield: number;
+  shieldReady: number;
   combo: boolean;
   assetsReady: boolean;
 };
@@ -562,6 +565,7 @@ export class VoroEngine {
       this.comboClock = 0;
       this.comboMeals = 0;
       this.progress.shieldRecharge = 0;
+      this.progress.shieldTimers = [];
       this.progress.pendingEvolution = false;
       this.progress.finalReady = false;
       this.ending = 0;
@@ -650,6 +654,9 @@ export class VoroEngine {
       sound: this.sound,
       hint: this.hint,
       shield: this.stats.shieldCooldown ? this.progress.shieldRecharge : -1,
+      shieldReady: this.progress.shieldTimers.length
+        ? this.progress.shieldTimers.filter((t) => t === 0).length
+        : this.stats.shieldCapacity,
       combo: this.comboClock > 0,
       assetsReady: this.assetsReady,
     });
@@ -770,10 +777,7 @@ export class VoroEngine {
       this.comboClock = Math.max(0, this.comboClock - dt);
       this.stats = upgradeStats(this.progress.mutations, this.comboClock > 0);
       Object.assign(p, this.stats);
-      this.progress.shieldRecharge = Math.max(
-        0,
-        this.progress.shieldRecharge - dt,
-      );
+      syncShields(this.progress, this.stats, dt);
       integrate(p, dt, this.input());
       const speed = Math.hypot(p.vx, p.vy);
       if (speed > 8) {
@@ -994,8 +998,7 @@ export class VoroEngine {
   ) {
     const p = this.life;
     if (p.dead || p.invulnerable > 0 || this.progress.completed) return 0;
-    if (this.stats.shieldCooldown && this.progress.shieldRecharge === 0) {
-      this.progress.shieldRecharge = this.stats.shieldCooldown;
+    if (consumeShield(this.progress, this.stats)) {
       p.invulnerable = 0.8;
       this.flash = 0.3;
       this.toast('Tu escudo ha absorbido el golpe.', 2);
@@ -1003,8 +1006,10 @@ export class VoroEngine {
       this.publish();
       return 0;
     }
+    const massBeforeHit = p.biomass;
     const lost = takeDamage(p, source, fraction, minimum);
     if (!lost) return 0;
+    loseAdaptationProgress(this.progress, lost / massBeforeHit);
     this.huntingTentacles.clear();
     this.hitFlash = 0.65;
     this.wobbleVelocity -= 2.7;
@@ -1022,7 +1027,7 @@ export class VoroEngine {
     this.toast(
       p.dead
         ? 'Tu membrana se ha deshecho.'
-        : 'Has perdido biomasa. Come para recuperarla.',
+        : 'Has perdido biomasa y progreso de adaptación. Come para recuperarte.',
       3,
     );
     if (this.stats.recycleFraction && !p.dead)

@@ -3,6 +3,7 @@ import { newMicro, loadMicro, MICRO_SAVE } from './micro-progress.mjs';
 import {
   upgradeStats,
   UPGRADES,
+  MAX_UPGRADE_CHOICES,
   levelOf,
   offerUpgrades,
   validChoice,
@@ -11,6 +12,7 @@ import {
   previousJourneyAdaptation,
 } from './mutations.mjs';
 import { STAGES, SPECIES_BY_ID, stageStartMass } from './journey-data.mjs';
+import { restoreShieldTimers } from './shields.mjs';
 export { MICRO_SAVE };
 export const JOURNEY_SAVE = 'voro-journey-v1';
 export function newJourney(seed) {
@@ -46,6 +48,7 @@ export function advanceJourney(p, life) {
   p.pendingEvolution = false;
   p.finalReady = false;
   p.shieldRecharge = 0;
+  p.shieldTimers = [];
   const next = journeyLife(p);
   next.invulnerable = 3;
   return next;
@@ -109,7 +112,7 @@ export function loadJourney(raw) {
       return null;
     if (
       !Array.isArray(p.mutations) ||
-      p.mutations.length > 43 ||
+      p.mutations.length > MAX_UPGRADE_CHOICES ||
       p.level !== p.mutations.length ||
       p.mutations.some((id) => !UPGRADES.some((u) => u.id === id)) ||
       UPGRADES.some((u) => levelOf(p.mutations, u.id) > u.max)
@@ -129,6 +132,10 @@ export function loadJourney(raw) {
       totalEaten: p.totalEaten,
       totalTime: p.totalTime,
       shieldRecharge: clamp(p.shieldRecharge, 0, 30),
+      shieldTimers: restoreShieldTimers(
+        p,
+        upgradeStats(p.mutations).shieldCapacity,
+      ),
       maturitySeen: p.maturitySeen === true,
       pendingEvolution: p.pendingEvolution === true && p.stage < 8,
       completed: p.completed === true && p.stage === 8,
@@ -231,9 +238,27 @@ export function rerollAdaptation(p) {
 export function chooseUpgrade(p, id) {
   if (!validChoice(p.mutations, id, p.offer)) return false;
   p.mutations.push(id);
+  if (id === 'shield') {
+    p.shieldTimers = restoreShieldTimers(
+      p,
+      upgradeStats(p.mutations).shieldCapacity - 1,
+    );
+    p.shieldTimers.push(0);
+    p.shieldRecharge = 0;
+  }
   p.level++;
   p.offer = [];
   p.rerollUsed = false;
   refreshOffer(p);
   return true;
+}
+
+// Only unspent progress is at risk. Earned adaptations and their thresholds
+// remain intact, including when a hit is fatal.
+export function loseAdaptationProgress(p, fraction) {
+  const start = p.level ? journeyAdaptation(p.level - 1) : 0;
+  const lost = Math.max(0, p.xp - start) * clamp(fraction, 0, 1);
+  p.xp -= lost;
+  if (p.xp < journeyAdaptation(p.level)) p.offer = [];
+  return lost;
 }
