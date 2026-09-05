@@ -10,8 +10,16 @@ import {
   journeyAdaptation,
   nextAdaptation,
   previousJourneyAdaptation,
+  v3JourneyAdaptation,
+  eligibleUpgrade,
 } from './mutations.mjs';
-import { STAGES, SPECIES_BY_ID, stageStartMass } from './journey-data.mjs';
+import {
+  STAGES,
+  SPECIES_BY_ID,
+  stageStartMass,
+  physicalDiameter,
+  metersPerUnit,
+} from './journey-data.mjs';
 import { restoreShieldTimers } from './shields.mjs';
 export { MICRO_SAVE };
 export const JOURNEY_SAVE = 'voro-journey-v1';
@@ -19,7 +27,8 @@ export function newJourney(seed) {
   return {
     ...newMicro(seed),
     stage: 0,
-    adaptationVersion: 3,
+    adaptationVersion: 4,
+    journeyVersion: 2,
     rerollUsed: false,
     completed: false,
     pendingEvolution: false,
@@ -42,6 +51,7 @@ export function journeyLife(p) {
 }
 export function advanceJourney(p, life) {
   if (p.stage >= STAGES.length - 1) return life;
+  const previousDiameter = physicalDiameter(p.stage, life.biomass);
   p.totalTime += life.elapsed;
   p.totalEaten += life.eaten;
   p.stage++;
@@ -50,14 +60,18 @@ export function advanceJourney(p, life) {
   p.shieldRecharge = 0;
   p.shieldTimers = [];
   const next = journeyLife(p);
+  const scale = STAGES[p.stage].base * metersPerUnit(STAGES[p.stage].unit);
+  next.biomass = Math.max(next.biomass, 8 * (previousDiameter / scale) ** 2);
+  next.radius = radiusForMass(next.biomass);
   next.invulnerable = 3;
   return next;
 }
-export function saveJourney(p, l, w, sound) {
+export function saveJourney(p, l, w, sound, fragments = []) {
   return JSON.stringify({
     version: 1,
     progress: p,
     sound,
+    fragments: fragments.filter((f) => !f.eaten).slice(-24),
     journal: [...w.journal],
     life: {
       biomass: l.biomass,
@@ -75,12 +89,15 @@ export function migrateMicro(raw) {
   if (!d) return null;
   const p = { ...newJourney(d.progress.seed), ...d.progress, stage: 0 };
   p.xp = migrateAdaptationXp(p.xp, p.level);
+  p.mutations = p.mutations.filter((id) => !['armor', 'trail'].includes(id));
+  p.level = p.mutations.length;
+  p.adaptationVersion = 4;
   p.offer = [];
   refreshOffer(p);
   const l = journeyLife(p);
   Object.assign(l, d.life);
   l.maxMass = STAGES[0].goal * 1.5;
-  return { ...d, progress: p, life: l };
+  return { ...d, progress: p, life: l, fragments: [] };
 }
 export function loadJourney(raw) {
   try {
@@ -88,7 +105,9 @@ export function loadJourney(raw) {
     if (d.version !== 1 || !d.progress || !d.life) return null;
     const p = d.progress,
       l = d.life;
-    if (!Number.isInteger(p.stage) || p.stage < 0 || p.stage >= STAGES.length)
+    const stage =
+      p.journeyVersion === 2 ? p.stage : [0, 3, 2, 4, 5, 6, 7, 8, 9][p.stage];
+    if (!Number.isInteger(stage) || stage < 0 || stage >= STAGES.length)
       return null;
     for (const n of [
       p.seed,
@@ -112,22 +131,29 @@ export function loadJourney(raw) {
       return null;
     if (
       !Array.isArray(p.mutations) ||
-      p.mutations.length > MAX_UPGRADE_CHOICES ||
+      p.mutations.length > Math.max(45, MAX_UPGRADE_CHOICES) ||
       p.level !== p.mutations.length ||
-      p.mutations.some((id) => !UPGRADES.some((u) => u.id === id)) ||
+      p.mutations.some(
+        (id) =>
+          !UPGRADES.some((u) => u.id === id) &&
+          !['armor', 'trail'].includes(id),
+      ) ||
+      ['armor', 'trail'].some((id) => levelOf(p.mutations, id) > 3) ||
       UPGRADES.some((u) => levelOf(p.mutations, u.id) > u.max)
     )
       return null;
     const progress = {
       ...newJourney(p.seed),
-      stage: p.stage,
+      stage,
       xp:
-        p.adaptationVersion === 3
+        p.adaptationVersion === 4
           ? p.xp
           : migrateAdaptationXp(p.xp, p.level, p.adaptationVersion),
       rerollUsed: p.rerollUsed === true,
-      level: p.level,
-      mutations: p.mutations,
+      // Refund retired choices as ready adaptations, retaining the earned XP floor.
+      level: p.mutations.filter((id) => !['armor', 'trail'].includes(id))
+        .length,
+      mutations: p.mutations.filter((id) => !['armor', 'trail'].includes(id)),
       deaths: p.deaths,
       totalEaten: p.totalEaten,
       totalTime: p.totalTime,
@@ -137,9 +163,10 @@ export function loadJourney(raw) {
         upgradeStats(p.mutations).shieldCapacity,
       ),
       maturitySeen: p.maturitySeen === true,
-      pendingEvolution: p.pendingEvolution === true && p.stage < 8,
-      completed: p.completed === true && p.stage === 8,
-      finalReady: p.finalReady === true && p.stage === 8,
+      pendingEvolution:
+        p.pendingEvolution === true && stage < STAGES.length - 1,
+      completed: p.completed === true && stage === STAGES.length - 1,
+      finalReady: p.finalReady === true && stage === STAGES.length - 1,
     };
     if (!progress.completed) refreshOffer(progress);
     const life = journeyLife(progress);
@@ -192,7 +219,40 @@ export function loadJourney(raw) {
               e[1] <= life.elapsed + 160,
           )
       : [];
-    return { progress, life, sound: d.sound !== false, journal };
+    const fragments =
+      !life.dead && Array.isArray(d.fragments)
+        ? d.fragments
+            .slice(-24)
+            .filter(
+              (f) =>
+                f &&
+                f.recycled === true &&
+                !f.eaten &&
+                SPECIES_BY_ID[f.kind] &&
+                [
+                  f.x,
+                  f.y,
+                  f.vx,
+                  f.vy,
+                  f.age,
+                  f.collectDelay,
+                  f.heading,
+                  f.seed,
+                  f.r,
+                  f.value,
+                ].every(Number.isFinite) &&
+                f.r > 0 &&
+                f.r < 160 &&
+                f.value > 0 &&
+                f.value <= 50 &&
+                f.age >= 0 &&
+                f.collectDelay >= 0 &&
+                f.collectDelay <= 0.85 &&
+                Math.hypot(f.x - life.x, f.y - life.y) < 1300,
+            )
+            .map((f) => ({ ...f, requiredMass: 0, final: false }))
+        : [];
+    return { progress, life, sound: d.sound !== false, journal, fragments };
   } catch {
     return null;
   }
@@ -201,7 +261,11 @@ export function loadJourney(raw) {
 // Preserve progress within the current adaptation when loading the previous cadence.
 export function migrateAdaptationXp(xp, level, version = 1) {
   const oldThreshold =
-    version === 2 ? previousJourneyAdaptation : nextAdaptation;
+    version === 3
+      ? v3JourneyAdaptation
+      : version === 2
+        ? previousJourneyAdaptation
+        : nextAdaptation;
   const oldStart = level ? oldThreshold(level - 1) : 0,
     newStart = level ? journeyAdaptation(level - 1) : 0;
   const fraction = Math.max(
@@ -225,7 +289,7 @@ export function canReroll(p) {
     !p.rerollUsed &&
     p.offer.length > 0 &&
     UPGRADES.some(
-      (u) => levelOf(p.mutations, u.id) < u.max && !p.offer.includes(u.id),
+      (u) => eligibleUpgrade(p.mutations, u) && !p.offer.includes(u.id),
     )
   );
 }

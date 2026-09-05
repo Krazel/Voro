@@ -95,7 +95,7 @@ test('Every stage generates stable inhabitants, recoverable food, bounded chunks
       draws++;
     },
   };
-  for (let stage = 0; stage < 9; stage++) {
+  for (let stage = 0; stage < STAGES.length; stage++) {
     const w = new JourneyWorld(24, [], stage);
     w.stream(-1400, 2300, 0);
     const original = w.entities.map((e) => [e.id, e.x, e.y]);
@@ -118,7 +118,7 @@ test('Every stage generates stable inhabitants, recoverable food, bounded chunks
   assert.ok(draws > 1000);
 });
 test('Ranged attackers fire; small bodies take damage and large ones absorb bullets for tiny growth without XP', () => {
-  const { game: g } = fresh(3);
+  const { game: g } = fresh(4);
   isolate(g);
   const p = g.life;
   const shot = () => ({
@@ -143,7 +143,7 @@ test('Ranged attackers fire; small bodies take damage and large ones absorb bull
   step(g);
   assert.equal(p.biomass, 40.025);
   assert.equal(g.progress.xp, xp);
-  const w = new JourneyWorld(1, [], 3);
+  const w = new JourneyWorld(1, [], 4);
   w.entities = [
     journeyEntity(SPECIES_BY_ID['city-1'], p.x + 300, p.y, 0, 'soldier'),
   ];
@@ -153,7 +153,7 @@ test('Ranged attackers fire; small bodies take damage and large ones absorb bull
 });
 test('Evolution advances once at the midpoint, preserves adaptations and survives reload', () => {
   const { game: g } = fresh();
-  g.progress.mutations = ['armor'];
+  g.progress.mutations = ['reach'];
   g.progress.level = 1;
   g.life.biomass = 150;
   step(g);
@@ -163,7 +163,7 @@ test('Evolution advances once at the midpoint, preserves adaptations and survive
   assert.equal(saved.progress.pendingEvolution, true);
   step(g, 110, true);
   assert.equal(g.progress.stage, 1);
-  assert.deepEqual(g.progress.mutations, ['armor']);
+  assert.deepEqual(g.progress.mutations, ['reach']);
   assert.equal(g.progress.pendingEvolution, false);
   assert.ok(g.life.biomass < 10);
   step(g, 110, true);
@@ -181,8 +181,8 @@ test('Existing microscopic saves migrate, and each later stage preserves wounded
   const migrated = migrateMicro(saveMicro(p, l, w, false));
   assert.equal(migrated.life.x, -6000);
   assert.equal(migrated.progress.stage, 0);
-  assert.equal(migrated.progress.xp, 90);
-  for (let stage = 0; stage < 9; stage++) {
+  assert.equal(migrated.progress.xp, 60);
+  for (let stage = 0; stage < STAGES.length; stage++) {
     const p = newJourney(22);
     p.stage = stage;
     p.shieldRecharge = 13;
@@ -215,8 +215,8 @@ test('Existing microscopic saves migrate, and each later stage preserves wounded
   }
 });
 test('Final universe remains findable after streaming and can be retried after interrupted digestion', () => {
-  const w = new JourneyWorld(14, [], 8),
-    p = journeyLife({ ...newJourney(14), stage: 8 });
+  const w = new JourneyWorld(14, [], 9),
+    p = journeyLife({ ...newJourney(14), stage: 9 });
   w.stream(p.x, p.y, 0);
   w.spawnFinal(p);
   const final = w.finalEntity;
@@ -271,7 +271,7 @@ test('A complete run eats planets, stars, galaxies and the universe in order, wi
         'slots',
         'shield',
         'pull',
-        'armor',
+        'tentacleReach',
         'tentacles',
         'combo',
         'reach',
@@ -279,7 +279,6 @@ test('A complete run eats planets, stars, galaxies and the universe in order, wi
         'turn',
         'recycle',
         'spikes',
-        'trail',
       ];
       g.choose(
         order.find((id) => g.progress.offer.includes(id)) ||
@@ -354,7 +353,7 @@ test('A complete run eats planets, stars, galaxies and the universe in order, wi
     if (frame % 600 === 0) g.render();
   }
   assert.equal(g.progress.completed, true, 'full campaign finished');
-  assert.equal(g.progress.stage, 8);
+  assert.equal(g.progress.stage, 9);
   assert.equal(g.life.finalEaten, true);
   assert.deepEqual(
     timings.map((t) => t.stage),

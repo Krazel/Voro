@@ -354,7 +354,12 @@ export default function Home() {
               EVOLUCIÓN · {STAGES[state.evolutionFrom].short.toUpperCase()}
             </span>
             <h2>{STAGES[state.evolutionFrom].evolution}</h2>
-            <p>{STAGES[Math.min(8, state.evolutionFrom + 1)].name}</p>
+            <p>
+              {
+                STAGES[Math.min(STAGES.length - 1, state.evolutionFrom + 1)]
+                  .name
+              }
+            </p>
           </div>
         )}
         {state.started && !state.assetsReady && (
@@ -417,7 +422,8 @@ export default function Home() {
         )}
         <div className="scale-marker">
           <span>
-            {String(state.stage + 1).padStart(2, '0')} / 09 ·{' '}
+            {String(state.stage + 1).padStart(2, '0')} /{' '}
+            {String(STAGES.length).padStart(2, '0')} ·{' '}
             {STAGES[state.stage].short.toUpperCase()}
           </span>
         </div>
@@ -439,7 +445,7 @@ export default function Home() {
           <div className="mutation-choices">
             {state.offer.map((id) => {
               const u = UPGRADES.find((u) => u.id === id)!;
-              const art = UPGRADES.indexOf(u);
+              const art = u.artIndex;
               return (
                 <button key={id} onClick={() => engine.current?.choose(id)}>
                   <span

@@ -45,7 +45,7 @@ function Thumbnail({ id, images }: { id: string; images: Images }) {
   return <canvas ref={ref} width={100} height={100} aria-hidden="true" />;
 }
 export default function AnimationStudio() {
-  const [stage, setStage] = useState(1),
+  const [stage, setStage] = useState(STAGES.findIndex((s) => s.id === 'water')),
     [selected, setSelected] = useState('water-16');
   const [images, setImages] = useState<Images>({}),
     [error, setError] = useState(false),
@@ -192,7 +192,9 @@ export default function AnimationStudio() {
           <p>EL ATLAS VIVO</p>
           <h1>Todo tiene su movimiento.</h1>
         </div>
-        <span>{TOTAL} habitantes · 9 escalas</span>
+        <span>
+          {TOTAL} habitantes · {STAGES.length} escalas
+        </span>
       </div>
       <Tabs value={stage} onValueChange={changeStage}>
         <TabsList className="studio-stages">

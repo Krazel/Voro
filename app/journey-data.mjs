@@ -1,6 +1,7 @@
 import { SPECIES as MICRO_SPECIES } from './micro-world.mjs';
 export const STAGE_START_MASS = 2;
-export const stageStartMass = (stage) => (stage === 1 ? 0.8 : STAGE_START_MASS);
+export const stageStartMass = (stage) =>
+  STAGES[stage].startMass ?? STAGE_START_MASS;
 export const STAGES = [
   {
     id: 'micro',
@@ -131,42 +132,42 @@ const micro = MICRO_SPECIES.map((s) => ({
 // [name, behavior, animation, radius, energy, speed, optional mass required].
 const rows = [
   [
-    ['Krill', 'flee', 'fish', 8, 0.8, 28],
-    ['Anchoa', 'flee', 'fish', 14, 1.2, 38],
-    ['Sardina', 'flee', 'fish', 24, 2, 34],
-    ['Pez payaso', 'drift', 'fish', 22, 1.8, 18],
-    ['Pez cirujano', 'flee', 'fish', 29, 2.5, 43],
-    ['Pez globo', 'hazard', 'puffer', 62, 6, 12],
-    ['Caballito de mar', 'drift', 'float', 24, 2, 10],
-    ['Medusa luna', 'drift', 'jelly', 36, 3.5, 14],
-    ['Medusa de filamentos', 'hazard', 'jelly', 80, 9, 15],
-    ['Calamar', 'flee', 'squid', 44, 4.5, 48],
-    ['Pulpo', 'hunter', 'octopus', 67, 7, 35],
-    ['Morena', 'hunter', 'worm', 92, 11, 54],
-    ['Tiburón de arrecife', 'hunter', 'fish', 104, 14, 58],
-    ['Tiburón martillo', 'hunter', 'fish', 133, 20, 50],
-    ['Nadador', 'flee', 'swimmer', 61, 6, 29],
-    ['Mantarraya', 'drift', 'wing', 115, 16, 22],
+    ['Krill', 'flee', 'fish', 5, 0.8, 28],
+    ['Anchoa', 'flee', 'fish', 12, 1.2, 38],
+    ['Sardina', 'flee', 'fish', 17, 2, 34],
+    ['Pez payaso', 'drift', 'fish', 14, 1.8, 18],
+    ['Pez cirujano', 'flee', 'fish', 25, 2.5, 43],
+    ['Pez globo', 'hazard', 'puffer', 30, 6, 12],
+    ['Caballito de mar', 'drift', 'float', 13, 2, 10],
+    ['Medusa luna', 'drift', 'jelly', 24, 3.5, 14],
+    ['Medusa de filamentos', 'hazard', 'jelly', 40, 9, 15],
+    ['Calamar', 'flee', 'squid', 38, 4.5, 48],
+    ['Pulpo', 'hunter', 'octopus', 42, 7, 35],
+    ['Morena', 'hunter', 'worm', 65, 11, 54],
+    ['Tiburón de arrecife', 'hunter', 'fish', 105, 14, 58],
+    ['Tiburón martillo', 'hunter', 'fish', 140, 20, 50],
+    ['Nadador', 'flee', 'swimmer', 90, 6, 29],
+    ['Mantarraya', 'drift', 'wing', 125, 16, 22],
   ],
   [
-    ['Hormiga', 'flee', 'insect', 9, 0.8, 30],
-    ['Larva', 'drift', 'worm', 13, 1, 10],
-    ['Cochinilla', 'drift', 'insect', 19, 1.5, 12],
-    ['Escarabajo', 'flee', 'insect', 27, 2.5, 34],
-    ['Caracol', 'drift', 'float', 31, 3, 7],
-    ['Mariposa', 'flee', 'wing', 34, 3, 43],
-    ['Araña', 'hunter', 'insect', 59, 6, 60],
-    ['Escorpión', 'hunter', 'insect', 73, 8, 40],
-    ['Rana', 'hunter', 'hop', 93, 12, 56],
-    ['Lagartija', 'hunter', 'walker', 112, 16, 68],
-    ['Ratón', 'flee', 'walker', 90, 12, 62],
+    ['Hormiga', 'flee', 'insect', 4, 0.8, 30],
+    ['Larva', 'drift', 'worm', 9, 1, 10],
+    ['Cochinilla', 'drift', 'insect', 11, 1.5, 12],
+    ['Escarabajo', 'flee', 'insect', 14, 2.5, 34],
+    ['Caracol', 'drift', 'float', 25, 3, 7],
+    ['Mariposa', 'flee', 'wing', 25, 3, 43],
+    ['Araña', 'hunter', 'insect', 22, 6, 60],
+    ['Escorpión', 'hunter', 'insect', 28, 8, 40],
+    ['Rana', 'hunter', 'hop', 42, 12, 56],
+    ['Lagartija', 'hunter', 'walker', 65, 16, 68],
+    ['Ratón', 'flee', 'walker', 60, 12, 62],
     ['Conejo', 'flee', 'hop', 135, 21, 59],
   ],
   [
     ['Civil', 'flee', 'walker', 13, 1.3, 34],
-    ['Soldado', 'ranged', 'walker', 25, 2.5, 26, 9],
-    ['Unidad con escudo', 'hunter', 'walker', 54, 5, 52, 20],
-    ['Soldado pesado', 'ranged', 'walker', 40, 4, 20, 18],
+    ['Soldado', 'ranged', 'walker', 14, 2.5, 26, 9],
+    ['Unidad con escudo', 'hunter', 'walker', 15, 5, 52, 20],
+    ['Soldado pesado', 'ranged', 'walker', 15, 4, 20, 18],
     ['Motocicleta', 'flee', 'vehicle', 30, 3, 65],
     ['Automóvil', 'flee', 'vehicle', 50, 5, 53],
     ['Furgoneta', 'flee', 'vehicle', 62, 6, 42],
@@ -341,10 +342,22 @@ STAGE_SPECIES[1].push({
   crop: [0, 0, 1774, 887],
   variantOf: 'water-14',
 });
+// Every habitat retains one tiny food source, even after severe damage.
+for (const list of STAGE_SPECIES) {
+  const smallest = list
+    .filter(
+      (s) =>
+        !['hunter', 'hazard', 'ranged', 'gravity', 'final'].includes(s.kind),
+    )
+    .sort((a, b) => a.r - b.r)[0];
+  smallest.requiredMass = 0;
+}
 export const SPECIES_BY_ID = Object.fromEntries(
   STAGE_SPECIES.flat().map((s) => [s.id, s]),
 );
 SPECIES_BY_ID['water-14'].imageAtlas = 'swimmer';
+SPECIES_BY_ID['water-12'].spawnWeight = 0.2;
+SPECIES_BY_ID['water-13'].spawnWeight = 0.1;
 export const ATLAS_URLS = {
   femaleSwimmer: './inhabitants/female-swimmer-v1.png',
   swimmer: './inhabitants/swimmer-v2.png',
@@ -357,15 +370,23 @@ export const ATLAS_URLS = {
 };
 export const stageOf = (p) => STAGES[p.stage || 0];
 export const formatSize = (stage, mass) => {
-  const s = STAGES[stage],
-    n = s.base * Math.sqrt(Math.max(0, mass) / 8);
+  const s = STAGES[stage];
+  let n = s.base * Math.sqrt(Math.max(0, mass) / 8),
+    unit = s.unit;
+  if (unit === 'm' && n < 0.01) {
+    n *= 1000;
+    unit = 'mm';
+  } else if (unit === 'm' && n < 1) {
+    n *= 100;
+    unit = 'cm';
+  }
   return (
     new Intl.NumberFormat('es', {
       maximumFractionDigits: n < 10 ? 2 : 0,
       notation: n >= 1e7 ? 'compact' : 'standard',
     }).format(n) +
     ' ' +
-    s.unit
+    unit
   );
 };
 export const isDanger = (s) =>
@@ -399,3 +420,109 @@ STAGE_SPECIES[8].find((s) => s.kind === 'ranged').shot = {
   damage: 0.08,
   edibleAt: 75,
 };
+
+// The atlas layout above remains stable; journey order is independent of artwork order.
+const sea = STAGES[1],
+  shore = STAGES[2];
+const pond = {
+  ...sea,
+  id: 'pond',
+  name: 'Una charca litoral',
+  short: 'Charca',
+  intro: 'Entre algas y larvas, busca la vida más pequeña.',
+  evolution: 'Ya puedes explorar la orilla.',
+  goal: 150,
+  growth: 0.4,
+  base: 0.002,
+  startMass: 0.45,
+};
+Object.assign(shore, {
+  name: 'La orilla',
+  short: 'Orilla',
+  base: 0.042,
+  startMass: 0.45,
+  intro: 'De insectos diminutos a animales pequeños.',
+  evolution: 'El mar se abre ante ti.',
+});
+Object.assign(sea, {
+  name: 'El mar abierto',
+  short: 'Mar',
+  base: 1.2,
+  startMass: 0.45,
+  intro: 'Busca peces pequeños. Los grandes depredadores aún te superan.',
+  evolution: 'Tu sombra alcanza las calles.',
+});
+STAGES[3].base = 14;
+const pondInhabitant = (source, id, name, r, value, kind = source.kind) => ({
+  ...source,
+  id: 'pond-' + id,
+  animationId: source.id,
+  name,
+  r,
+  value,
+  kind,
+  requiredMass: undefined,
+  shot: null,
+  stage: 1,
+  speed: Math.min(32, source.speed),
+  variantOf: undefined,
+});
+const pondSpecies = [
+  pondInhabitant(micro[3], 0, 'Fragmento de alga', 6, 0.6, 'drift'),
+  pondInhabitant(STAGE_SPECIES[1][0], 1, 'Microcrustáceo', 8, 0.8),
+  pondInhabitant(STAGE_SPECIES[2][1], 2, 'Larva acuática', 13, 1.3),
+  pondInhabitant(STAGE_SPECIES[1][7], 3, 'Hidromedusa', 30, 3),
+  pondInhabitant(
+    STAGE_SPECIES[1][8],
+    4,
+    'Hidromedusa urticante',
+    48,
+    5,
+    'hazard',
+  ),
+  pondInhabitant(STAGE_SPECIES[1][9], 5, 'Larva de cefalópodo', 55, 6),
+  pondInhabitant(STAGE_SPECIES[1][1], 6, 'Alevín', 70, 9),
+  pondInhabitant(STAGE_SPECIES[1][1], 7, 'Alevín cazador', 95, 14, 'hunter'),
+];
+pondSpecies[0].requiredMass = 0;
+STAGES.splice(1, 2, pond, shore, sea);
+const seaSpecies = STAGE_SPECIES[1],
+  shoreSpecies = STAGE_SPECIES[2];
+STAGE_SPECIES.splice(1, 2, pondSpecies, shoreSpecies, seaSpecies);
+for (const [stage, list] of STAGE_SPECIES.entries())
+  for (const s of list) {
+    s.stage = stage;
+    SPECIES_BY_ID[s.id] = s;
+  }
+// Marine lengths share a common scale: small fish, then cephalopods, people and sharks.
+for (const [id, r] of Object.entries({
+  'water-0': 3,
+  'water-1': 6,
+  'water-2': 10,
+  'water-3': 5,
+  'water-4': 12,
+  'water-5': 16,
+  'water-6': 6,
+  'water-7': 12,
+  'water-9': 20,
+  'city-0': 7,
+  'city-1': 7.5,
+  'city-2': 8,
+  'city-3': 8,
+  'city-4': 9,
+  'city-5': 15,
+  'city-6': 20,
+  'city-7': 26,
+  'city-8': 30,
+  'city-9': 48,
+  'city-10': 70,
+  'city-11': 105,
+}))
+  SPECIES_BY_ID[id].r = r;
+
+export const metersPerUnit = (unit) =>
+  ({ µm: 1e-6, m: 1, km: 1000, 'años luz': 9.4607e15 })[unit];
+export const physicalDiameter = (stage, mass) =>
+  STAGES[stage].base *
+  metersPerUnit(STAGES[stage].unit) *
+  Math.sqrt(Math.max(0, mass) / 8);

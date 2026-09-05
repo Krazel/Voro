@@ -19,7 +19,7 @@ import { makeEngine } from './engine-fixture.mjs';
 test('Tentacles extend before grabbing, haul edible prey and retract when it is eaten', () => {
   const p = journeyLife(newJourney(1)),
     arms = new HuntingTentacles();
-  const food = { x: p.x + 68, y: p.y, r: 8, requiredMass: 0, eaten: false };
+  const food = { x: p.x + 42, y: p.y, r: 8, requiredMass: 0, eaten: false };
   const large = {
     x: p.x + 55,
     y: p.y + 10,
@@ -28,7 +28,7 @@ test('Tentacles extend before grabbing, haul edible prey and retract when it is 
     eaten: false,
   };
   arms.update(1 / 60, p, [food, large], 3);
-  assert.equal(food.x, p.x + 68, 'No pull before contact');
+  assert.equal(food.x, p.x + 42, 'No pull before contact');
   assert.equal(arms.arms.filter((a) => a.target).length, 1);
   assert.equal(arms.arms[0].grip, 0);
   let touched = false;
@@ -51,7 +51,7 @@ test('All three arms choose distinct targets; shrinking releases prey that is no
   const p = journeyLife(newJourney(2)),
     arms = new HuntingTentacles();
   const foods = Array.from({ length: 4 }, (_, i) => ({
-    x: p.x + 50,
+    x: p.x + 38,
     y: p.y + i * 6,
     r: 10,
     requiredMass: 1.5,
@@ -63,7 +63,7 @@ test('All three arms choose distinct targets; shrinking releases prey that is no
   arms.update(1 / 60, p, foods, 3);
   assert.ok(arms.arms.every((a) => a.target === null));
 });
-test('Starting impulse is mild and infrequent; every rank increases travel and reduces cooldown', () => {
+test('Original-strength impulse has a seven-second cooldown; every choice increases travel and reduces cooldown', () => {
   let previous = 0,
     previousCooldown = 10;
   for (let rank = 0; rank <= 3; rank++) {
@@ -76,15 +76,15 @@ test('Starting impulse is mild and infrequent; every rank increases travel and r
     assert.ok(p.cooldown < previousCooldown);
     previousCooldown = p.cooldown;
     if (rank === 0) {
-      assert.equal(p.boostStrength, 1.45);
-      assert.equal(p.cooldown, 9);
-      assert.equal(p.boost, 0.28);
+      assert.equal(p.boostStrength, 2.8);
+      assert.equal(p.cooldown, 7);
+      assert.equal(p.boost, 0.42);
     }
     for (let i = 0; i < 60; i++) integrate(p, 1 / 60, { x: 1, y: 0 });
     assert.ok(p.x - start > previous);
     previous = p.x - start;
   }
-  assert.equal(upgradeStats(['dash', 'dash', 'dash']).cooldownFactor * 9, 3);
+  assert.equal(upgradeStats(['dash', 'dash', 'dash']).cooldownFactor * 7, 1);
 });
 test('Current saved cadence migrates once preserving fraction and existing pending reroll', () => {
   const p = newJourney(7);
@@ -99,7 +99,7 @@ test('Current saved cadence migrates once preserving fraction and existing pendi
     loaded.progress.xp,
     (journeyAdaptation(0) + journeyAdaptation(1)) / 2,
   );
-  assert.equal(loaded.progress.adaptationVersion, 3);
+  assert.equal(loaded.progress.adaptationVersion, 4);
   assert.deepEqual(loaded.progress.mutations, ['reach']);
   const again = loadJourney(saveJourney(loaded.progress, loaded.life, w, true));
   assert.equal(again.progress.xp, loaded.progress.xp);

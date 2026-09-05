@@ -77,8 +77,8 @@ test('Saved negative position, pending meals, cooldown and adaptation survive re
   bad.progress.mutations = ['photophagy'];
   assert.equal(loadMicro(JSON.stringify(bad)), null);
 });
-test('15 upgrades have bounded stats; choices never repeat within a hand or exceed safe selection limits', () => {
-  assert.equal(UPGRADES.length, 15);
+test('14 upgrades have bounded stats; choices never repeat within a hand or exceed safe selection limits', () => {
+  assert.equal(UPGRADES.length, 14);
   const chosen = [];
   for (let level = 0; level < MAX_UPGRADE_CHOICES; level++) {
     const offer = offerUpgrades(chosen, 17, level);

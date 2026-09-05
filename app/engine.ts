@@ -12,6 +12,7 @@ import {
 import { JourneyWorld } from './journey-world.mjs';
 import {
   STAGE_SPECIES,
+  STAGES,
   ATLAS_URLS,
   SPECIES_BY_ID,
   stageOf,
@@ -19,6 +20,12 @@ import {
   isDanger,
 } from './journey-data.mjs';
 import { drawJourneySprite } from './journey-sprites.mjs';
+import { gameplayZoom } from './camera.mjs';
+import {
+  shedBiomass,
+  moveFragments,
+  drawBiomassFragment,
+} from './biomass-fragments.mjs';
 import { HuntingTentacles } from './hunting-tentacles.mjs';
 import { syncShields, consumeShield } from './shields.mjs';
 import {
@@ -98,6 +105,10 @@ type Food = {
   heading?: number;
   flash?: number;
   recycled?: boolean;
+  collectDelay?: number;
+  vx?: number;
+  vy?: number;
+  age?: number;
   shotClock?: number;
   escape?: number;
   attack?: number;
@@ -154,7 +165,7 @@ export class VoroEngine {
   height = 850;
   pixelRatio = 1;
   scale = 1;
-  zoom = 1;
+  zoom = 0.85;
   camera = { x: 700, y: 970 };
   heading = -Math.PI / 2;
   food: Food[] = [];
@@ -219,11 +230,13 @@ export class VoroEngine {
       this.publish();
     };
     this.environments.src = './inhabitants/environments.png';
+    let restoredFragments: Food[] = [];
     try {
       const loaded =
         loadJourney(localStorage.getItem(JOURNEY_SAVE)) ||
         migrateMicro(localStorage.getItem(MICRO_SAVE));
       if (loaded) {
+        restoredFragments = loaded.fragments;
         this.progress = loaded.progress;
         this.life = loaded.life;
         this.sound = loaded.sound;
@@ -239,8 +252,10 @@ export class VoroEngine {
     }
     this.stats = upgradeStats(this.progress.mutations);
     this.seed();
+    this.fragments = restoredFragments;
+    this.food = [...this.world.entities, ...this.fragments];
     this.camera = { x: this.life.x, y: this.life.y };
-    this.zoom = 1;
+    this.zoom = gameplayZoom(this.life.radius);
     this.resize();
     this.observer = new ResizeObserver(() => this.resize());
     this.observer.observe(canvas);
@@ -472,7 +487,13 @@ export class VoroEngine {
     try {
       localStorage.setItem(
         JOURNEY_SAVE,
-        saveJourney(this.progress, this.life, this.world, this.sound),
+        saveJourney(
+          this.progress,
+          this.life,
+          this.world,
+          this.sound,
+          this.fragments,
+        ),
       );
       this.saved = true;
       this.storageAvailable = true;
@@ -555,7 +576,7 @@ export class VoroEngine {
       this.stats = upgradeStats(this.progress.mutations);
       this.seed();
       this.camera = { x: 700, y: 970 };
-      this.zoom = 1;
+      this.zoom = gameplayZoom(this.life.radius);
       this.started = true;
       this.paused = false;
       this.keys.clear();
@@ -795,12 +816,24 @@ export class VoroEngine {
         false,
         Math.ceil(((this.height * 0.55) / this.zoom + 300) / 600),
       );
+      moveFragments(this.fragments, dt);
       this.food = [...this.world.entities, ...this.fragments];
       this.motes = this.world.motes;
       this.world.move(dt, p.elapsed, p, this.stats, this.trail);
-      this.huntingTentacles.update(dt, p, this.food, this.stats.tentacles);
+      this.huntingTentacles.update(
+        dt,
+        p,
+        this.food,
+        this.stats.tentacles,
+        this.stats.tentacleReach,
+      );
       for (const f of this.food) {
-        if (f.eaten || p.biomass < (f.requiredMass || 0)) continue;
+        if (
+          f.eaten ||
+          (f.collectDelay || 0) > 0 ||
+          p.biomass < (f.requiredMass || 0)
+        )
+          continue;
         const d = Math.hypot(f.x - p.x, f.y - p.y),
           reach = p.radius * p.reachFactor + 22 + p.attraction;
         if (d < reach) {
@@ -894,21 +927,7 @@ export class VoroEngine {
           .filter((f) => !f.eaten && Math.hypot(f.x - p.x, f.y - p.y) < 1300)
           .slice(-24);
       }
-      this.trailClock += dt;
-      if (this.trailClock > 0.14 && speed > 25) {
-        this.trailClock = 0;
-        this.trail.push({ x: p.x, y: p.y, r: p.radius * 0.55, life: 3 });
-        this.particles.push({
-          x: p.x - Math.cos(this.heading) * p.radius * 0.65,
-          y: p.y - Math.sin(this.heading) * p.radius * 0.65,
-          vx: -p.vx * 0.12,
-          vy: -p.vy * 0.12,
-          life: 1.4,
-          max: 1.4,
-          gold: false,
-        });
-      }
-      if (p.finalEaten && this.progress.stage === 8) {
+      if (p.finalEaten && this.progress.stage === STAGES.length - 1) {
         this.progress.completed = true;
         this.progress.offer = [];
         this.ending = 12;
@@ -918,7 +937,7 @@ export class VoroEngine {
         this.save();
         this.publish();
       } else if (p.biomass >= stageOf(this.progress).goal) {
-        if (this.progress.stage < 8) {
+        if (this.progress.stage < STAGES.length - 1) {
           this.beginEvolution();
         } else {
           if (!this.progress.finalReady)
@@ -937,12 +956,11 @@ export class VoroEngine {
     this.camera.x += (p.x - this.camera.x) * (1 - Math.exp(-dt * 3));
     this.camera.y += (cameraY - this.camera.y) * (1 - Math.exp(-dt * 3));
     this.animateMembrane(dt);
-    // Original prototype (70c10fa): 480 world units across the viewport,
-    // independent of body size. Only the existing stage cinematic varies it.
+    // Pull back smoothly as the body grows; leave room to see approaching prey.
     const targetZoom =
       this.transition > 3.6
         ? 1 + 0.5 * Math.sin(((7.2 - this.transition) / 3.6) * Math.PI)
-        : 1;
+        : gameplayZoom(p.radius);
     this.zoom += (targetZoom - this.zoom) * (1 - Math.exp(-dt * 1.7));
     this.flash = Math.max(0, this.flash - dt * 0.6);
     this.hitFlash = Math.max(0, this.hitFlash - dt);
@@ -971,7 +989,7 @@ export class VoroEngine {
     }
   }
   beginEvolution() {
-    if (this.transition > 0 || this.progress.stage >= 8) return;
+    if (this.transition > 0 || this.progress.stage >= STAGES.length - 1) return;
     this.progress.pendingEvolution = true;
     this.progress.maturitySeen = true;
     this.transitionFrom = this.progress.stage;
@@ -1030,22 +1048,20 @@ export class VoroEngine {
         : 'Has perdido biomasa y progreso de adaptación. Come para recuperarte.',
       3,
     );
-    if (this.stats.recycleFraction && !p.dead)
-      for (let i = 0; i < 3; i++) {
-        const a = p.hitAngle + Math.PI + (i - 1) * 0.8;
-        this.fragments.push({
-          x: p.x + Math.cos(a) * (p.radius + 35),
-          y: p.y + Math.sin(a) * (p.radius + 35),
-          seed: i,
-          eaten: false,
-          rod: false,
-          kind: STAGE_SPECIES[this.progress.stage][0].id,
-          r: 8,
-          value: (lost * this.stats.recycleFraction) / 3,
-          requiredMass: 0,
-          recycled: true,
-        });
-      }
+    if (this.stats.recycleFraction && !p.dead) {
+      this.fragments.push(
+        ...shedBiomass(
+          p,
+          lost * this.stats.recycleFraction,
+          STAGE_SPECIES[this.progress.stage][0].id,
+        ),
+      );
+      this.food = [...this.world.entities, ...this.fragments];
+      this.toast(
+        'Partes de tu membrana se han desprendido. Cómetelas para recuperar biomasa.',
+        5,
+      );
+    }
     this.save();
     this.publish();
     return lost;
@@ -1151,7 +1167,12 @@ export class VoroEngine {
     let target: Food | null = null,
       dist = Infinity;
     for (const f of this.food) {
-      if (f.eaten || p.biomass < (f.requiredMass || 0)) continue;
+      if (
+        f.eaten ||
+        (f.collectDelay || 0) > 0 ||
+        p.biomass < (f.requiredMass || 0)
+      )
+        continue;
       const d = Math.hypot(f.x - p.x, f.y - p.y);
       if (d < dist) {
         target = f;
@@ -1299,14 +1320,6 @@ export class VoroEngine {
           m.r,
           '#9bd3dc35',
         );
-    if (this.stats.trailSlow)
-      for (const q of this.trail)
-        this.halo(
-          q.x,
-          q.y,
-          q.r,
-          'rgba(110,198,176,' + (q.life / 3) * 0.07 + ')',
-        );
     for (const f of this.food) {
       if (f.eaten || !visible(f.x, f.y, (f.r || 8) * 1.3)) continue;
       const edible = p.biomass >= (f.requiredMass || 0),
@@ -1317,16 +1330,19 @@ export class VoroEngine {
       c.save();
       c.translate(f.x, f.y);
       c.rotate(f.heading ?? f.seed);
-      drawJourneySprite(
-        c,
-        this.atlasImages,
-        f.kind || 'nutrient',
-        r,
-        f.seed,
-        this.reduced ? 0 : this.time,
-        (f.escape || 0) > 0 || (f.attack || 0) > 0 ? 1.5 : 1,
-        f.flash || 0,
-      );
+      if (f.recycled)
+        drawBiomassFragment(c, r, f.seed, this.reduced ? 0 : this.time);
+      else
+        drawJourneySprite(
+          c,
+          this.atlasImages,
+          f.kind || 'nutrient',
+          r,
+          f.seed,
+          this.reduced ? 0 : this.time,
+          (f.escape || 0) > 0 || (f.attack || 0) > 0 ? 1.5 : 1,
+          f.flash || 0,
+        );
       c.restore();
       const spec = SPECIES_BY_ID[f.kind || 'nutrient'];
       if (spec?.shot && (f.shotClock ?? 10) < 0.55 && d < 410) {
@@ -1741,14 +1757,22 @@ export class VoroEngine {
       if (broken < 0.95) {
         c.rotate(f.rotation + travel * 1.6);
         c.globalAlpha *= 1 - broken;
-        drawJourneySprite(
-          c,
-          this.atlasImages,
-          f.kind,
-          f.r * (1 - broken * 0.7),
-          f.rotation,
-          this.time,
-        );
+        if (f.recycled)
+          drawBiomassFragment(
+            c,
+            f.r * (1 - broken * 0.7),
+            f.rotation,
+            this.time,
+          );
+        else
+          drawJourneySprite(
+            c,
+            this.atlasImages,
+            f.kind,
+            f.r * (1 - broken * 0.7),
+            f.rotation,
+            this.time,
+          );
       }
       c.restore();
       if (broken > 0) {

@@ -4,6 +4,7 @@ export const SPECIES = [
   {
     id: 'nutrient',
     name: 'Nutrientes',
+    requiredMass: 0,
     r: 7,
     value: 0.6,
     speed: 0,
@@ -114,6 +115,11 @@ export const SPECIES_BY_ID = Object.fromEntries(SPECIES.map((s) => [s.id, s]));
 const hash = (seed, x, y) =>
   (seed ^ Math.imul(x | 0, 73856093) ^ Math.imul(y | 0, 19349663)) >>> 0;
 export function makeEntity(species, x, y, seed, id) {
+  const sizeFactor =
+    species.kind === 'final'
+      ? 1
+      : 0.88 + random(Math.floor(seed * 100000) ^ 78493)() * 0.24;
+  const r = species.r * sizeFactor;
   return {
     id,
     x,
@@ -124,9 +130,12 @@ export function makeEntity(species, x, y, seed, id) {
     eaten: false,
     rod: false,
     kind: species.id,
-    r: species.r,
-    value: species.value,
-    requiredMass: species.r <= 15 ? 0 : 8 * ((species.r * 1.17) / 48) ** 2,
+    r,
+    sizeFactor,
+    value: species.value * sizeFactor ** 2,
+    requiredMass:
+      (species.requiredMass ?? 8 * ((species.r * 1.17) / 48) ** 2) *
+      sizeFactor ** 2,
     heading: seed,
     escape: 0,
     wound: 0,

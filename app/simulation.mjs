@@ -145,6 +145,7 @@ export function beginAbsorb(life, food) {
   if (
     life.dead ||
     food.eaten ||
+    (food.collectDelay || 0) > 0 ||
     life.complete ||
     life.biomass < (food.requiredMass || 0) ||
     life.digestion.length >= life.absorptionSlots ||

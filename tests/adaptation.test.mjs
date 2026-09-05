@@ -11,16 +11,17 @@ import {
   loadJourney,
 } from '../app/journey-progress.mjs';
 import { JourneyWorld, journeyEntity } from '../app/journey-world.mjs';
-import { STAGE_SPECIES, stageStartMass } from '../app/journey-data.mjs';
+import { STAGES, STAGE_SPECIES, stageStartMass } from '../app/journey-data.mjs';
 import {
   journeyAdaptation,
   nextAdaptation,
+  v3JourneyAdaptation,
   UPGRADES,
 } from '../app/mutations.mjs';
 import { beginAbsorb, radiusForMass } from '../app/simulation.mjs';
 import { makeEngine } from './engine-fixture.mjs';
 test('Every new stage starts half-size, only the smallest species are edible, and starter food is nearby', () => {
-  for (let stage = 0; stage < 9; stage++) {
+  for (let stage = 0; stage < STAGES.length; stage++) {
     const p = newJourney(51);
     p.stage = stage;
     const l = journeyLife(p);
@@ -37,7 +38,7 @@ test('Every new stage starts half-size, only the smallest species are edible, an
         assert.ok(s.r <= 21, `${s.name} is too large for a newborn`);
       } else locked++;
     }
-    assert.ok(edible >= 1 && edible <= 3);
+    assert.ok(edible >= 1 && edible <= 5);
     assert.ok(locked > edible);
     const w = new JourneyWorld(p.seed, [], stage);
     w.stream(l.x, l.y, 0);
@@ -93,9 +94,12 @@ test('Reroll remains well-defined when fewer than six upgrade types remain', () 
   refreshOffer(p);
   assert.equal(canReroll(p), false);
 });
-test('Adaptations require more feeding; old saves retain their upgrades, body and fractional progress', () => {
+test('Adaptations arrive one third sooner; old saves retain their upgrades, body and fractional progress', () => {
   for (let level = 0; level < 43; level++)
-    assert.ok(journeyAdaptation(level) > nextAdaptation(level) * 2);
+    assert.ok(
+      Math.abs(journeyAdaptation(level) / v3JourneyAdaptation(level) - 2 / 3) <
+        1e-9,
+    );
   const p = newJourney(14);
   p.mutations = ['speed'];
   p.level = 1;
@@ -123,7 +127,7 @@ test('Reroll leaves world time frozen and a newborn survives a first contact hit
   g.world = new JourneyWorld(27);
   g.seed();
   g.action('start');
-  g.progress.xp = 24;
+  g.progress.xp = journeyAdaptation(0);
   refreshOffer(g.progress);
   const elapsed = g.life.elapsed;
   g.reroll();
@@ -131,7 +135,7 @@ test('Reroll leaves world time frozen and a newborn survives a first contact hit
   g.frame(200);
   assert.equal(g.life.elapsed, elapsed);
   assert.ok(g.progress.rerollUsed);
-  g.choose(g.progress.offer[0]);
+  g.choose(g.progress.offer.find((id) => id !== 'shield'));
   g.receiveHit({ x: g.life.x + 40, y: g.life.y }, 0.22);
   assert.ok(g.life.biomass > 0 && g.life.biomass < 2);
   g.destroy();

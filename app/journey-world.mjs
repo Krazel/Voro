@@ -2,13 +2,13 @@ import { MicroWorld, makeEntity, TILE } from './micro-world.mjs';
 import { random, clamp } from './simulation.mjs';
 import {
   STAGE_SPECIES,
+  STAGES,
   SPECIES_BY_ID,
   isDanger,
   stageStartMass,
 } from './journey-data.mjs';
 export function journeyEntity(s, x, y, seed, id) {
   const e = makeEntity(s, x, y, seed, id);
-  e.requiredMass = s.requiredMass ?? e.requiredMass;
   e.final = s.kind === 'final';
   e.shotClock = 1.2 + (seed % 1) * 2;
   e.attack = 0;
@@ -43,12 +43,20 @@ export class JourneyWorld extends MicroWorld {
       ),
       entities = [],
       motes = [];
-    const pick = (arr) => arr[Math.floor(rng() * arr.length)];
-    const water = this.stage === 1;
-    for (let i = 0; i < (water ? 14 : 22); i++) {
+    const pick = (arr) => {
+      let roll = rng() * arr.reduce((n, s) => n + (s.spawnWeight ?? 1), 0);
+      return arr.find((s) => (roll -= s.spawnWeight ?? 1) < 0) || arr.at(-1);
+    };
+    const water = ['water', 'pond'].includes(STAGES[this.stage].id);
+    let sharks = 0;
+    for (let i = 0; i < (water ? 12 : 22); i++) {
       const pool =
         i < (water ? 6 : 9) ? small : i < (water ? 11 : 18) ? medium : danger;
       const s = pick(pool.length ? pool : list);
+      if (s.id === 'water-12' || s.id === 'water-13') {
+        if (sharks >= 1) continue;
+        sharks++;
+      }
       const x = cx * TILE + 40 + rng() * (TILE - 80),
         y = cy * TILE + 40 + rng() * (TILE - 80),
         seed = rng() * 6.28,
@@ -149,8 +157,8 @@ export class JourneyWorld extends MicroWorld {
             life: 4.5,
             damage: s.shot.damage,
             edibleAt: s.shot.edibleAt,
-            r: this.stage === 3 ? 3 : 6,
-            plasma: this.stage !== 3,
+            r: STAGES[this.stage].id === 'city' ? 3 : 6,
+            plasma: STAGES[this.stage].id !== 'city',
           });
         }
       }
@@ -162,14 +170,14 @@ export class JourneyWorld extends MicroWorld {
       this.entities.push(this.finalEntity);
   }
   spawnFinal(p) {
-    if (this.stage !== 8 || p.finalEaten) return;
+    if (this.stage !== STAGES.length - 1 || p.finalEaten) return;
     if (p.digestion.some((f) => f.final)) {
       this.finalSpawned = true;
       return;
     }
     if (this.finalSpawned && this.finalEntity && !this.finalEntity.eaten)
       return;
-    const s = STAGE_SPECIES[8].find((s) => s.kind === 'final');
+    const s = STAGE_SPECIES.at(-1).find((s) => s.kind === 'final');
     this.finalEntity = journeyEntity(
       s,
       p.x + 540,

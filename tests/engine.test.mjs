@@ -41,7 +41,12 @@ test('Bitmap organisms digest, membrane animates, and damage lowers HUD mass and
   step(g, 120, true);
   g.publish();
   assert.equal(f.snapshot.eaten, 1);
-  assert.equal(f.snapshot.biomass, 2.495);
+  assert.ok(
+    Math.abs(
+      f.snapshot.biomass -
+        (2 + makeEntity(SPECIES_BY_ID.bacillus, 0, 0, 1, 'meal').value * 0.55),
+    ) < 1e-9,
+  );
   assert.ok(f.draws > 1000);
   const before = g.life.radius;
   g.world.entities = [
@@ -72,7 +77,7 @@ test('A shield blocks one hit, then damage and recycling apply during recharge',
   g.life.invulnerable = 0;
   step(g);
   assert.equal(g.life.biomass, 1.4);
-  assert.equal(g.fragments.length, 3);
+  assert.equal(g.fragments.length, 5);
   assert.ok(g.progress.shieldRecharge < 20);
   assert.ok(
     Math.abs(g.fragments.reduce((s, e) => s + e.value, 0) - 0.15) < 1e-8,
@@ -183,7 +188,7 @@ test('Unassisted world population supports growth to cellular maturity without c
     assert.ok(g.progress.maturitySeen, 'maturity seed ' + seed);
     assert.ok(g.progress.level >= 3);
     assert.equal(g.life.complete, false);
-    assert.ok(g.world.chunks.size <= 49);
+    assert.ok(g.world.chunks.size <= 169);
     results.push({
       seed,
       seconds: Math.round(g.life.elapsed),

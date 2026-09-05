@@ -4,12 +4,12 @@ export class HuntingTentacles {
   clear() {
     this.arms = [];
   }
-  update(dt, p, food, count) {
+  update(dt, p, food, count, extraReach = 0) {
     if (p.dead || count === 0) {
       this.clear();
       return;
     }
-    const reach = p.radius * 2.15 + 24;
+    const reach = p.radius * (1.5 + extraReach) + 10;
     while (this.arms.length < count)
       this.arms.push({
         target: null,
@@ -41,6 +41,7 @@ export class HuntingTentacles {
           .filter(
             (e) =>
               !e.eaten &&
+              !(e.collectDelay > 0) &&
               !occupied.has(e) &&
               p.biomass >= (e.requiredMass || 0) &&
               Math.hypot(e.x - p.x, e.y - p.y) > p.radius * 0.85 &&

@@ -24,11 +24,10 @@ test('Every repeated choice adds the same concrete bonus', () => {
     turn: ['steeringFactor', 0.3],
     dash: ['boostStrength', 0.35],
     pull: ['attraction', 28],
-    armor: ['damageFactor', -0.12],
     shield: ['shieldCapacity', 1],
     recycle: ['recycleFraction', 0.25],
     spikes: ['spikeFraction', 0.12],
-    trail: ['trailSlow', 0.2],
+    tentacleReach: ['tentacleReach', 0.3],
     tentacles: ['tentacles', 1],
     combo: ['digestFactor', 0.2],
   };

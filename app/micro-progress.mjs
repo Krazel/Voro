@@ -99,9 +99,14 @@ export function loadMicro(raw) {
       return null;
     if (
       !Array.isArray(p.mutations) ||
-      p.mutations.length > MAX_UPGRADE_CHOICES ||
+      p.mutations.length > Math.max(45, MAX_UPGRADE_CHOICES) ||
       p.level !== p.mutations.length ||
-      p.mutations.some((id) => !UPGRADES.some((u) => u.id === id)) ||
+      p.mutations.some(
+        (id) =>
+          !UPGRADES.some((u) => u.id === id) &&
+          !['armor', 'trail'].includes(id),
+      ) ||
+      ['armor', 'trail'].some((id) => levelOf(p.mutations, id) > 3) ||
       UPGRADES.some((u) => levelOf(p.mutations, u.id) > u.max)
     )
       return null;

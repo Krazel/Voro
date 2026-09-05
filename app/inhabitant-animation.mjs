@@ -74,7 +74,7 @@ export function poseMesh(
     ? spine(phase, head, k * a, aspect)
     : null;
   const verts = [];
-  const anatomy = anatomicalPose(profile.id, phase, a, aspect);
+  const anatomy = anatomicalPose(profile.rigId || profile.id, phase, a, aspect);
   for (let j = 0; j <= rows; j++)
     for (let i = 0; i <= cols; i++) {
       const u = i / cols,
@@ -643,8 +643,20 @@ export function drawPose(
         profile,
         phase,
         activity,
-        ANATOMICAL_RIGS[s.id] ? (detail ? 48 : 28) : detail ? 32 : 14,
-        ANATOMICAL_RIGS[s.id] ? (detail ? 32 : 18) : detail ? 16 : 8,
+        ANATOMICAL_RIGS[s.animationId || s.id]
+          ? detail
+            ? 48
+            : 28
+          : detail
+            ? 32
+            : 14,
+        ANATOMICAL_RIGS[s.animationId || s.id]
+          ? detail
+            ? 32
+            : 18
+          : detail
+            ? 16
+            : 8,
         h / w,
       ),
       { verts: v, cols, rows } = mesh;

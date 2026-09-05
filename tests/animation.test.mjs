@@ -20,8 +20,8 @@ const sizes = {
   cosmos: [1536, 1024],
   universe: [1536, 1024],
 };
-test('All 99 inhabitants have an explicit anatomical rig and valid art bounds', () => {
-  assert.equal(Object.keys(ANIMATIONS).length, 99);
+test('All 107 inhabitants have an explicit anatomical rig and valid art bounds', () => {
+  assert.equal(Object.keys(ANIMATIONS).length, 107);
   for (const s of STAGE_SPECIES.flat()) {
     const p = ANIMATIONS[s.id];
     assert.ok(p.family && p.description && p.period > 0);
@@ -150,7 +150,7 @@ test('Lazy animation cache stays within 24 MiB and is reusable across instances'
         assert.ok(animationCacheStats().bytes <= animationCacheStats().limit);
       }
     const before = animationCacheStats().bytes;
-    const s = STAGE_SPECIES[8].at(-1),
+    const s = STAGE_SPECIES.at(-1).at(-1),
       image = { complete: true, naturalWidth: 1536, naturalHeight: 1024 };
     drawInhabitant(context, image, s, 70, 0, (ANIMATIONS[s.id].period * 5) / 6);
     assert.equal(animationCacheStats().bytes, before);
@@ -217,12 +217,12 @@ import { JourneyWorld } from '../app/journey-world.mjs';
 import { SPECIES_BY_ID } from '../app/journey-data.mjs';
 
 test('Swimmer variants coexist deterministically without adding encounter slots or changing edible size', () => {
-  const world = new JourneyWorld(1834, [], 1),
+  const world = new JourneyWorld(1834, [], 3),
     seen = new Set();
   for (let x = 20; x < 50; x++) {
     const chunk = world.generate(x, 20, 0),
       again = world.generate(x, 20, 0);
-    assert.equal(chunk.entities.length, 14);
+    assert.ok(chunk.entities.length >= 11 && chunk.entities.length <= 12);
     assert.deepEqual(
       chunk.entities.map((e) => [e.kind, e.x, e.y]),
       again.entities.map((e) => [e.kind, e.x, e.y]),

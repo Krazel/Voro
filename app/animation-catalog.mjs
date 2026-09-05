@@ -563,7 +563,7 @@ export const ANIMATIONS = Object.fromEntries(
   STAGE_SPECIES.flat().map((s) => {
     const index =
       s.atlas === 'micro'
-        ? STAGE_SPECIES[0].findIndex((e) => e.id === s.id)
+        ? STAGE_SPECIES[0].findIndex((e) => e.id === (s.animationId || s.id))
         : s.index;
     return [
       s.id,
@@ -579,6 +579,7 @@ export const ANIMATIONS = Object.fromEntries(
             }
           : {}),
         id: s.id,
+        rigId: s.animationId || s.id,
         revised:
           !!atlases[s.atlas][index].revision ||
           !!ANATOMICAL_RIGS[s.id] ||
