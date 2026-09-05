@@ -23,6 +23,7 @@ import {
 } from '@/components/ui/dialog';
 import { VoroEngine, type Snapshot } from './engine';
 import { UPGRADES, levelOf } from './mutations.mjs';
+import { adaptationCaption } from './journey-captions.mjs';
 import {
   STAGES,
   STAGE_SPECIES,
@@ -452,10 +453,8 @@ export default function Home() {
       >
         <DialogContent className="micro-upgrade-dialog" showCloseButton={false}>
           <p className="eyebrow">ADAPTACIÓN {state.level + 1}</p>
-          <DialogTitle>
-            La vida encuentra
-            <br />
-            otra forma.
+          <DialogTitle style={{ whiteSpace: 'pre-line' }}>
+            {adaptationCaption(STAGES[state.stage].id, state.level)}
           </DialogTitle>
           <DialogDescription>
             Elige una mejora. Tu evolución continúa en esta escala.
