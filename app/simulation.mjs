@@ -1,30 +1,162 @@
 export const WORLD = { width: 1400, height: 1700 };
 export const GOAL = 18;
+export const INITIAL_MASS = 8;
+export const EVOLUTION_MASS = INITIAL_MASS + GOAL;
+export const MAX_MASS = 48;
+export const DIGEST_SECONDS = 1.65;
 export const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
-export function random(seed = 701) { return () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296; }; }
-/** @typedef {{dx:number,dy:number,progress:number,done:boolean}} Digestion */
-export function createLife() { return { x:700, y:970, vx:0, vy:0, eaten:0, elapsed:0, cooldown:0, boost:0, digestion:/** @type {Digestion[]} */ ([]), evolved:false, evolution:0, complete:false, free:false, radius:48, invulnerable:0 }; }
-export function integrate(life, dt, input) {
-  dt = clamp(dt,0,.04); life.elapsed += dt;
-  life.cooldown = Math.max(0,life.cooldown-dt); life.boost = Math.max(0,life.boost-dt); life.invulnerable=Math.max(0,life.invulnerable-dt);
-  const length = Math.hypot(input.x,input.y); const speed=(life.evolved?145:125)*(life.boost>0?2.8:1);
-  const blend=1-Math.exp(-dt*4.4);
-  life.vx += ((length>0? input.x/Math.max(1,length)*speed:0)-life.vx)*blend;
-  life.vy += ((length>0? input.y/Math.max(1,length)*speed:0)-life.vy)*blend;
-  life.x=clamp(life.x+life.vx*dt,110,WORLD.width-110);life.y=clamp(life.y+life.vy*dt,140,WORLD.height-130);
-  life.radius += (48+Math.min(life.eaten,GOAL)*1.25+(life.evolved?8:0)-life.radius)*(1-Math.exp(-dt*2));
-  if(life.evolved)life.evolution=Math.min(1,life.evolution+dt*.5);
+export function random(seed = 701) {
+  return () => {
+    seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+    return seed / 4294967296;
+  };
 }
-export function impulse(life) { if(life.cooldown>0 || life.complete)return false;life.boost=.42;life.cooldown=3.5;return true; }
-export function digest(life,dt) {
-  let count=0;
-  for(const f of life.digestion){f.progress+=dt/.95;if(f.progress>=1&&!f.done){f.done=true;life.eaten++;count++;}}
-  life.digestion=life.digestion.filter(f=>!f.done);
-  if(life.eaten>=GOAL&&!life.evolved){life.evolved=true;life.evolution=0;}
-  if(life.evolved&&life.evolution>=1&&!life.free)life.complete=true;
+/** @typedef {{dx:number,dy:number,progress:number,done:boolean,rod:boolean,rotation:number}} Digestion */
+export function createLife() {
+  return {
+    x: 700,
+    y: 970,
+    vx: 0,
+    vy: 0,
+    eaten: 0,
+    biomass: INITIAL_MASS,
+    elapsed: 0,
+    cooldown: 0,
+    boost: 0,
+    digestion: /** @type {Digestion[]} */ ([]),
+    evolved: false,
+    evolution: 0,
+    complete: false,
+    free: false,
+    dead: false,
+    discovered: false,
+    radius: 48,
+    invulnerable: 0,
+    hurt: 0,
+    hitAngle: 0,
+    feedPulse: 0,
+    knockX: 0,
+    knockY: 0,
+  };
+}
+// Area, HUD diameter and collision size all derive from the same biomass.
+export const radiusForMass = (mass) =>
+  48 * Math.sqrt(Math.max(0, mass) / INITIAL_MASS);
+export const sizeForMass = (mass) =>
+  40 * Math.sqrt(Math.max(0, mass) / INITIAL_MASS);
+export function integrate(life, dt, input) {
+  dt = clamp(dt, 0, 0.04);
+  life.hurt = Math.max(0, life.hurt - dt * 1.7);
+  life.feedPulse = Math.max(0, life.feedPulse - dt * 1.4);
+  life.radius +=
+    (radiusForMass(life.biomass) - life.radius) *
+    (1 - Math.exp(-dt * (life.hurt > 0 ? 7 : 2.8)));
+  const mature = life.biomass >= EVOLUTION_MASS;
+  life.evolved = mature;
+  life.evolution = clamp(
+    life.evolution + (mature ? dt * 0.6 : -dt * 1.4),
+    0,
+    1,
+  );
+  if (life.dead) return;
+  life.elapsed += dt;
+  life.cooldown = Math.max(0, life.cooldown - dt);
+  life.boost = Math.max(0, life.boost - dt);
+  life.invulnerable = Math.max(0, life.invulnerable - dt);
+  const length = Math.hypot(input.x, input.y);
+  const speed = (life.evolved ? 145 : 125) * (life.boost > 0 ? 2.8 : 1);
+  const blend = 1 - Math.exp(-dt * 4.4);
+  life.vx +=
+    ((length > 0 ? (input.x / Math.max(1, length)) * speed : 0) - life.vx) *
+    blend;
+  life.vy +=
+    ((length > 0 ? (input.y / Math.max(1, length)) * speed : 0) - life.vy) *
+    blend;
+  life.x = clamp(life.x + (life.vx + life.knockX) * dt, 100, WORLD.width - 100);
+  life.y = clamp(
+    life.y + (life.vy + life.knockY) * dt,
+    130,
+    WORLD.height - 130,
+  );
+  life.knockX *= Math.exp(-dt * 5);
+  life.knockY *= Math.exp(-dt * 5);
+}
+export function impulse(life) {
+  if (life.cooldown > 0 || life.complete || life.dead) return false;
+  life.boost = 0.42;
+  life.cooldown = 3.5;
+  return true;
+}
+export function digest(life, dt) {
+  if (life.dead) return 0;
+  let count = 0;
+  for (const f of life.digestion) {
+    f.progress += dt / DIGEST_SECONDS;
+    if (f.progress >= 1 && !f.done) {
+      f.done = true;
+      life.eaten++;
+      life.biomass = Math.min(MAX_MASS, life.biomass + 1);
+      life.feedPulse = 1;
+      count++;
+    }
+  }
+  life.digestion = life.digestion.filter((f) => !f.done);
+  life.evolved = life.biomass >= EVOLUTION_MASS;
+  if (life.evolved && life.evolution >= 1 && !life.discovered) {
+    life.discovered = true;
+    if (!life.free) life.complete = true;
+  }
   return count;
 }
-export function beginAbsorb(life,food) {
-  if(food.eaten || Math.hypot(food.x-life.x,food.y-life.y)>life.radius*1.28)return false;
-  food.eaten=true;life.digestion.push({dx:food.x-life.x,dy:food.y-life.y,progress:0,done:false});return true;
+export function beginAbsorb(life, food) {
+  if (
+    life.dead ||
+    food.eaten ||
+    life.digestion.length >= 5 ||
+    Math.hypot(food.x - life.x, food.y - life.y) > life.radius * 1.12
+  )
+    return false;
+  food.eaten = true;
+  life.digestion.push({
+    dx: food.x - life.x,
+    dy: food.y - life.y,
+    progress: 0,
+    done: false,
+    rod: !!food.rod,
+    rotation: food.seed || 0,
+  });
+  return true;
+}
+/** Contact damage removes current mass, interrupts digestion and gives an escape window. */
+export function takeDamage(life, source, fraction = 0.25) {
+  if (life.dead || life.complete || life.invulnerable > 0) return 0;
+  const lost = Math.min(
+    life.biomass,
+    Math.max(2, life.biomass * clamp(fraction, 0, 1)),
+  );
+  life.biomass = Math.max(0, life.biomass - lost);
+  life.evolved = life.biomass >= EVOLUTION_MASS;
+  life.invulnerable = 2;
+  life.hurt = 1;
+  life.hitAngle = Math.atan2(source.y - life.y, source.x - life.x);
+  life.knockX = -Math.cos(life.hitAngle) * 360;
+  life.knockY = -Math.sin(life.hitAngle) * 360;
+  life.boost = 0;
+  life.digestion = [];
+  life.feedPulse = 0;
+  if (life.biomass === 0) {
+    life.dead = true;
+    life.vx = 0;
+    life.vy = 0;
+    life.knockX = 0;
+    life.knockY = 0;
+  }
+  return lost;
+}
+// A damped membrane node. Render never mutates these values.
+export function springNode(value, velocity, target, dt) {
+  const acceleration = (target - value) * 100 - velocity * 13;
+  velocity += acceleration * dt;
+  value += velocity * dt;
+  return { value: clamp(value, 0.28, 1.95), velocity };
 }
