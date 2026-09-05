@@ -11,7 +11,7 @@ import {
   loadJourney,
 } from '../app/journey-progress.mjs';
 import { JourneyWorld, journeyEntity } from '../app/journey-world.mjs';
-import { STAGE_SPECIES, STAGE_START_MASS } from '../app/journey-data.mjs';
+import { STAGE_SPECIES, stageStartMass } from '../app/journey-data.mjs';
 import {
   journeyAdaptation,
   nextAdaptation,
@@ -24,8 +24,8 @@ test('Every new stage starts half-size, only the smallest species are edible, an
     const p = newJourney(51);
     p.stage = stage;
     const l = journeyLife(p);
-    assert.equal(l.biomass, 2);
-    assert.equal(l.radius, radiusForMass(8) / 2);
+    assert.equal(l.biomass, stageStartMass(stage));
+    assert.equal(l.radius, radiusForMass(stageStartMass(stage)));
     let edible = 0,
       locked = 0;
     for (const s of STAGE_SPECIES[stage]) {
@@ -44,7 +44,7 @@ test('Every new stage starts half-size, only the smallest species are edible, an
     assert.ok(
       w.entities.filter(
         (e) =>
-          e.requiredMass <= STAGE_START_MASS &&
+          e.requiredMass <= stageStartMass(stage) &&
           Math.hypot(e.x - l.x, e.y - l.y) < 240,
       ).length >= 3,
     );

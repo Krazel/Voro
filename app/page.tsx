@@ -12,7 +12,6 @@ import {
   Settings,
   Shield,
   Sparkles,
-  Waves,
 } from 'lucide-react';
 import {
   Dialog,
@@ -45,7 +44,7 @@ export default function Home() {
     level: 0,
     adaptation: 0,
     adaptationStart: 0,
-    adaptationTarget: 24,
+    adaptationTarget: 18,
     saved: false,
     storageAvailable: true,
     transition: 0,
@@ -436,15 +435,16 @@ export default function Home() {
           <div className="mutation-choices">
             {state.offer.map((id) => {
               const u = UPGRADES.find((u) => u.id === id)!;
-              const Icon =
-                u.group === 'Defenderse'
-                  ? Shield
-                  : u.group === 'Moverse'
-                    ? Waves
-                    : Sparkles;
+              const art = UPGRADES.indexOf(u);
               return (
                 <button key={id} onClick={() => engine.current?.choose(id)}>
-                  <Icon size={23} />
+                  <span
+                    className="mutation-art"
+                    aria-hidden="true"
+                    style={{
+                      backgroundPosition: `${(art % 5) * 25}% ${Math.floor(art / 5) * 50}%`,
+                    }}
+                  />
                   <span>
                     <strong>{u.name}</strong>
                     <small>{u.detail}</small>

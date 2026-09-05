@@ -19,6 +19,7 @@ import {
   isDanger,
 } from './journey-data.mjs';
 import { drawJourneySprite } from './journey-sprites.mjs';
+import { HuntingTentacles } from './hunting-tentacles.mjs';
 import {
   upgradeStats,
   journeyAdaptation as nextAdaptation,
@@ -116,6 +117,7 @@ export class VoroEngine {
   life = journeyLife(this.progress);
   world = new JourneyWorld(this.progress.seed, [], this.progress.stage);
   stats = upgradeStats([]);
+  huntingTentacles = new HuntingTentacles();
   spriteAtlas = new Image();
   atlasImages: Record<string, HTMLImageElement> = {};
   environments = new Image();
@@ -347,6 +349,7 @@ export class VoroEngine {
     this.raf = requestAnimationFrame(this.frame);
   }
   seed() {
+    this.huntingTentacles.clear();
     this.world.stream(this.life.x, this.life.y, this.life.elapsed, true);
     this.food = this.world.entities;
     this.motes = this.world.motes;
@@ -787,6 +790,7 @@ export class VoroEngine {
       this.food = [...this.world.entities, ...this.fragments];
       this.motes = this.world.motes;
       this.world.move(dt, p.elapsed, p, this.stats, this.trail);
+      this.huntingTentacles.update(dt, p, this.food, this.stats.tentacles);
       for (const f of this.food) {
         if (f.eaten || p.biomass < (f.requiredMass || 0)) continue;
         const d = Math.hypot(f.x - p.x, f.y - p.y),
@@ -996,6 +1000,7 @@ export class VoroEngine {
     }
     const lost = takeDamage(p, source, fraction, minimum);
     if (!lost) return 0;
+    this.huntingTentacles.clear();
     this.hitFlash = 0.65;
     this.wobbleVelocity -= 2.7;
     this.comboClock = 0;
@@ -1292,26 +1297,12 @@ export class VoroEngine {
           q.r,
           'rgba(110,198,176,' + (q.life / 3) * 0.07 + ')',
         );
-    let held = 0;
+    this.huntingTentacles.draw(c, p, this.time, this.reduced);
     for (const f of this.food) {
       if (f.eaten || !visible(f.x, f.y, (f.r || 8) * 1.3)) continue;
       const edible = p.biomass >= (f.requiredMass || 0),
         r = f.r || 8,
         d = Math.hypot(f.x - p.x, f.y - p.y);
-      if (edible && held < this.stats.tentacles && d < p.radius * 1.5) {
-        held++;
-        c.strokeStyle = '#abdee877';
-        c.lineWidth = 1.2;
-        c.beginPath();
-        c.moveTo(p.x, p.y);
-        c.quadraticCurveTo(
-          (p.x + f.x) / 2 + Math.sin(this.time * 3) * 15,
-          (p.y + f.y) / 2,
-          f.x,
-          f.y,
-        );
-        c.stroke();
-      }
       const danger = !edible && isDanger(SPECIES_BY_ID[f.kind || 'nutrient']);
       if (danger) this.halo(f.x, f.y, r * 1.25, 'rgba(166,77,86,.065)');
       c.save();

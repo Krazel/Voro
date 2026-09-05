@@ -84,12 +84,12 @@ test('15 upgrades have bounded stats; choices never repeat within a hand or exce
   }
   assert.deepEqual(offerUpgrades(chosen, 17, 43), []);
   const s = upgradeStats(chosen, true);
-  assert.ok(s.speedFactor <= 1.3);
-  assert.ok(s.damageFactor >= 0.82);
-  assert.ok(s.digestFactor <= 1.461);
+  assert.ok(s.speedFactor <= 1.65);
+  assert.ok(s.damageFactor >= 0.64);
+  assert.ok(s.digestFactor <= 1.951);
   assert.equal(s.absorptionSlots, 6);
-  assert.equal(s.shieldCooldown, 16);
-  assert.ok(s.recycleFraction <= 0.401);
+  assert.equal(s.shieldCooldown, 12);
+  assert.ok(s.recycleFraction <= 0.551);
 });
 test('Recycled mass grants no XP; tiny nutrients allow recovery below initial mass', () => {
   const l = microLife(newMicro());

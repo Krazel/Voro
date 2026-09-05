@@ -245,7 +245,6 @@ export class MicroWorld {
     this.stream(x, y, time, true);
   }
   move(dt, time, player, stats, trail) {
-    let held = 0;
     for (const e of this.entities) {
       if (e.eaten) continue;
       const s = SPECIES_BY_ID[e.kind];
@@ -264,10 +263,6 @@ export class MicroWorld {
       }
       const len = Math.max(1, Math.hypot(tx - e.x, ty - e.y));
       let speed = e.wound >= 1 ? 0 : s.speed;
-      if (edible && stats.tentacles > held && d < player.radius * 1.5) {
-        speed *= 0.18;
-        held++;
-      }
       if (
         stats.trailSlow &&
         trail.some((q) => Math.hypot(q.x - e.x, q.y - e.y) < q.r)

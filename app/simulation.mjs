@@ -18,6 +18,9 @@ export function createLife(options = {}) {
     maxMass: options.maxMass ?? MAX_MASS,
     speedFactor: options.speedFactor ?? 1,
     cooldownFactor: options.cooldownFactor ?? 1,
+    cooldownSeconds: options.cooldownSeconds ?? 3.5,
+    boostStrength: options.boostStrength ?? 2.8,
+    boostDuration: options.boostDuration ?? 0.42,
     damageFactor: options.damageFactor ?? 1,
     digestFactor: options.digestFactor ?? 1,
     attraction: options.attraction ?? 0,
@@ -81,7 +84,9 @@ export function integrate(life, dt, input) {
   life.invulnerable = Math.max(0, life.invulnerable - dt);
   const length = Math.hypot(input.x, input.y);
   const speed =
-    (life.evolved ? 145 : 125) * life.speedFactor * (life.boost > 0 ? 2.8 : 1);
+    (life.evolved ? 145 : 125) *
+    life.speedFactor *
+    (life.boost > 0 ? life.boostStrength : 1);
   const blend = 1 - Math.exp(-dt * 4.4 * life.steeringFactor);
   life.vx +=
     ((length > 0 ? (input.x / Math.max(1, length)) * speed : 0) - life.vx) *
@@ -100,8 +105,8 @@ export function integrate(life, dt, input) {
 }
 export function impulse(life) {
   if (life.cooldown > 0 || life.complete || life.dead) return false;
-  life.boost = 0.42;
-  life.cooldown = 3.5 * life.cooldownFactor;
+  life.boost = life.boostDuration;
+  life.cooldown = life.cooldownSeconds * life.cooldownFactor;
   return true;
 }
 export function digest(life, dt) {

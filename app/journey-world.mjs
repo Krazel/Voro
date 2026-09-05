@@ -4,7 +4,7 @@ import {
   STAGE_SPECIES,
   SPECIES_BY_ID,
   isDanger,
-  STAGE_START_MASS,
+  stageStartMass,
 } from './journey-data.mjs';
 export function journeyEntity(s, x, y, seed, id) {
   const e = makeEntity(s, x, y, seed, id);
@@ -28,7 +28,7 @@ export class JourneyWorld extends MicroWorld {
     const small = list.filter(
         (s) =>
           journeyEntity(s, 0, 0, 0, 'starter').requiredMass <=
-            STAGE_START_MASS && !isDanger(s),
+            stageStartMass(this.stage) && !isDanger(s),
       ),
       medium = list.filter((s) => !small.includes(s) && !isDanger(s)),
       danger = list.filter(isDanger);
@@ -42,8 +42,10 @@ export class JourneyWorld extends MicroWorld {
       entities = [],
       motes = [];
     const pick = (arr) => arr[Math.floor(rng() * arr.length)];
-    for (let i = 0; i < 22; i++) {
-      const pool = i < 9 ? small : i < 18 ? medium : danger;
+    const water = this.stage === 1;
+    for (let i = 0; i < (water ? 14 : 22); i++) {
+      const pool =
+        i < (water ? 6 : 9) ? small : i < (water ? 11 : 18) ? medium : danger;
       const s = pick(pool.length ? pool : list);
       const x = cx * TILE + 40 + rng() * (TILE - 80),
         y = cy * TILE + 40 + rng() * (TILE - 80),
@@ -83,7 +85,6 @@ export class JourneyWorld extends MicroWorld {
       super.move(dt, time, p, stats, trail);
       return;
     }
-    let held = 0;
     for (const e of this.entities) {
       if (e.eaten) continue;
       const s = SPECIES_BY_ID[e.kind];
@@ -108,10 +109,6 @@ export class JourneyWorld extends MicroWorld {
       const step = Math.sin(time * (s.motion === 'insect' ? 16 : 8) + e.seed);
       if (s.motion === 'hop') speed *= 0.2 + 1.8 * Math.max(0, step);
       if (s.motion === 'squid') speed *= 0.5 + Math.max(0, step);
-      if (edible && stats.tentacles > held && d < p.radius * 1.5) {
-        speed *= 0.18;
-        held++;
-      }
       if (
         stats.trailSlow &&
         trail.some((q) => Math.hypot(q.x - e.x, q.y - e.y) < q.r)

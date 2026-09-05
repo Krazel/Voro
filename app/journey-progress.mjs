@@ -8,15 +8,16 @@ import {
   validChoice,
   journeyAdaptation,
   nextAdaptation,
+  previousJourneyAdaptation,
 } from './mutations.mjs';
-import { STAGES, SPECIES_BY_ID, STAGE_START_MASS } from './journey-data.mjs';
+import { STAGES, SPECIES_BY_ID, stageStartMass } from './journey-data.mjs';
 export { MICRO_SAVE };
 export const JOURNEY_SAVE = 'voro-journey-v1';
 export function newJourney(seed) {
   return {
     ...newMicro(seed),
     stage: 0,
-    adaptationVersion: 2,
+    adaptationVersion: 3,
     rerollUsed: false,
     completed: false,
     pendingEvolution: false,
@@ -32,8 +33,8 @@ export function journeyLife(p) {
     growthFactor: s.growth,
     ...upgradeStats(p.mutations),
   });
-  life.biomass = STAGE_START_MASS;
-  life.radius = radiusForMass(STAGE_START_MASS);
+  life.biomass = stageStartMass(p.stage || 0);
+  life.radius = radiusForMass(life.biomass);
   life.free = true;
   return life;
 }
@@ -61,6 +62,7 @@ export function saveJourney(p, l, w, sound) {
       y: l.y,
       eaten: l.eaten,
       elapsed: l.elapsed,
+      cooldown: l.cooldown,
       digestion: l.digestion,
     },
   });
@@ -116,7 +118,10 @@ export function loadJourney(raw) {
     const progress = {
       ...newJourney(p.seed),
       stage: p.stage,
-      xp: p.adaptationVersion === 2 ? p.xp : migrateAdaptationXp(p.xp, p.level),
+      xp:
+        p.adaptationVersion === 3
+          ? p.xp
+          : migrateAdaptationXp(p.xp, p.level, p.adaptationVersion),
       rerollUsed: p.rerollUsed === true,
       level: p.level,
       mutations: p.mutations,
@@ -137,6 +142,9 @@ export function loadJourney(raw) {
       y: l.y,
       eaten: l.eaten,
       elapsed: l.elapsed,
+      cooldown: Number.isFinite(l.cooldown)
+        ? clamp(l.cooldown, 0, life.cooldownSeconds)
+        : 0,
       invulnerable: 2,
     });
     life.radius = radiusForMass(life.biomass);
@@ -184,12 +192,14 @@ export function loadJourney(raw) {
 }
 
 // Preserve progress within the current adaptation when loading the previous cadence.
-export function migrateAdaptationXp(xp, level) {
-  const oldStart = level ? nextAdaptation(level - 1) : 0,
+export function migrateAdaptationXp(xp, level, version = 1) {
+  const oldThreshold =
+    version === 2 ? previousJourneyAdaptation : nextAdaptation;
+  const oldStart = level ? oldThreshold(level - 1) : 0,
     newStart = level ? journeyAdaptation(level - 1) : 0;
   const fraction = Math.max(
     0,
-    (xp - oldStart) / (nextAdaptation(level) - oldStart),
+    (xp - oldStart) / (oldThreshold(level) - oldStart),
   );
   return newStart + fraction * (journeyAdaptation(level) - newStart);
 }

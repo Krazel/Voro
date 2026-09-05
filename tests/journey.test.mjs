@@ -173,13 +173,14 @@ test('Existing microscopic saves migrate, and each later stage preserves wounded
   const migrated = migrateMicro(saveMicro(p, l, w, false));
   assert.equal(migrated.life.x, -6000);
   assert.equal(migrated.progress.stage, 0);
-  assert.equal(migrated.progress.xp, 120);
+  assert.equal(migrated.progress.xp, 90);
   for (let stage = 0; stage < 9; stage++) {
     const p = newJourney(22);
     p.stage = stage;
     p.shieldRecharge = 13;
     const l = journeyLife(p);
     l.biomass = 4;
+    l.cooldown = 6;
     l.x = -1234;
     l.y = 9000;
     const w = new JourneyWorld(p.seed, [], stage);
@@ -200,6 +201,7 @@ test('Existing microscopic saves migrate, and each later stage preserves wounded
     const loaded = loadJourney(saveJourney(p, l, w, true));
     assert.equal(loaded.progress.stage, stage);
     assert.equal(loaded.life.biomass, 4);
+    assert.equal(loaded.life.cooldown, 6);
     assert.equal(loaded.progress.shieldRecharge, 13);
     assert.equal(loaded.life.digestion[0].kind, s.id);
   }

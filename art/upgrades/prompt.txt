@@ -1,0 +1,24 @@
+Use case: stylized-concept.
+Asset type: one game upgrade illustration atlas, exactly 5 equal columns and 3 equal rows (15 images total), landscape about 1536 x 922 pixels.
+Primary request: Fifteen distinct, beautiful hand-painted biological macro illustrations in one coherent atlas. Each cell has its own isolated central microorganism demonstrating a specific biological upgrade. Soft naturalistic painterly art, translucent cerulean blue and teal amoeboid microorganisms with luminous amber nuclei. Deep uniform navy background. Fine organic surface detail and subtle subsurface light, exquisite biological forms.
+Composition: exact evenly spaced 5-column by 3-row layout, each tile occupies an equal square area with generous navy margins; all important shapes confined within the central 75% of each tile, nothing crosses tile boundaries. No visible borders or separators. Flat overhead macro perspective. Each illustration must read clearly as a small game illustration.
+Exact row-major contents:
+TOP ROW left to right:
+1. A translucent amoeba extending long thick pseudopods toward little amber food particles.
+2. A blue cell with several clearly visible round translucent vacuoles, each containing multiple tiny golden food particles.
+3. A blue amoeba whose glowing amber digestive enzyme droplets visibly dissolve a food particle.
+4. A translucent cell centered on one intensely radiant, efficient amber nucleus with fine internal folds.
+5. A swimming blue microorganism with powerful flowing flagella trailing behind it.
+MIDDLE ROW left to right:
+6. A blue cell with an obviously flexible bending membrane, its whole body curving and folding naturally.
+7. An elastic blue cell expelling a small visible water jet that propels its body forward.
+8. A blue amoeba inside a clear spiral current drawing little amber particles inward toward it.
+9. A blue microorganism with a visibly thick triple-layered protective cell membrane.
+10. A blue microorganism inside a luminous gelatinous teal protective shield, soft biological halo.
+BOTTOM ROW left to right:
+11. A blue amoeba reabsorbing several little detached cellular fragments toward and into its body.
+12. A blue amoeba with substantial retractile organic spikes projecting around its membrane.
+13. A moving blue amoeba leaving a thick viscous blue slime wake.
+14. A blue hunting amoeba with thick fleshy organic tentacles curling firmly around one smaller cell, tentacles are broad and muscular rather than thin threads.
+15. A blue amoeba containing a distinct chain of exactly three swallowed glowing golden food orbs.
+Constraints: all fifteen isolated compositions must be present in the specified exact order. Unified palette and medium, distinct identifiable silhouettes and mechanisms. Deep navy negative space throughout. No text, no labels, no numbers, no UI, no letters, no logos, no watermarks, no frames, no grid lines. Not vector icons; actual rich detailed painted illustrations.
