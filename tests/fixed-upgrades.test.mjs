@@ -66,7 +66,7 @@ test('Real damage removes the same fraction of unspent adaptation progress and p
 
 test('Each shield selection grants one equal charge; timers and old saves survive reload', () => {
   const p = newJourney(12);
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 2; i++) {
     p.offer = ['shield'];
     assert.ok(chooseUpgrade(p, 'shield'));
     const stats = upgradeStats(p.mutations);
@@ -77,8 +77,7 @@ test('Each shield selection grants one equal charge; timers and old saves surviv
   assert.ok(consumeShield(p, stats));
   syncShields(p, stats, 5);
   assert.ok(consumeShield(p, stats));
-  assert.deepEqual(p.shieldTimers, [15, 20, 0]);
-  assert.ok(consumeShield(p, stats));
+  assert.deepEqual(p.shieldTimers, [15, 20]);
   assert.equal(consumeShield(p, stats), false);
   syncShields(p, stats, 15);
   assert.ok(consumeShield(p, stats));
@@ -92,7 +91,7 @@ test('Each shield selection grants one equal charge; timers and old saves surviv
   legacy.progress.shieldRecharge = 13;
   assert.deepEqual(
     loadJourney(JSON.stringify(legacy)).progress.shieldTimers,
-    [13, 13, 13],
+    [13, 13],
   );
   g.destroy();
 });

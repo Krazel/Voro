@@ -12,6 +12,7 @@ import {
   previousJourneyAdaptation,
   v3JourneyAdaptation,
   eligibleUpgrade,
+  boundedUpgrades,
 } from './mutations.mjs';
 import {
   STAGES,
@@ -28,6 +29,7 @@ export function newJourney(seed) {
     ...newMicro(seed),
     stage: 0,
     adaptationVersion: 4,
+    upgradeLimitsVersion: 1,
     journeyVersion: 2,
     rerollUsed: false,
     completed: false,
@@ -89,7 +91,7 @@ export function migrateMicro(raw) {
   if (!d) return null;
   const p = { ...newJourney(d.progress.seed), ...d.progress, stage: 0 };
   p.xp = migrateAdaptationXp(p.xp, p.level);
-  p.mutations = p.mutations.filter((id) => !['armor', 'trail'].includes(id));
+  p.mutations = boundedUpgrades(p.mutations);
   p.level = p.mutations.length;
   p.adaptationVersion = 4;
   p.offer = [];
@@ -139,9 +141,14 @@ export function loadJourney(raw) {
           !['armor', 'trail'].includes(id),
       ) ||
       ['armor', 'trail'].some((id) => levelOf(p.mutations, id) > 3) ||
-      UPGRADES.some((u) => levelOf(p.mutations, u.id) > u.max)
+      UPGRADES.some(
+        (u) =>
+          levelOf(p.mutations, u.id) >
+          (p.upgradeLimitsVersion === 1 ? u.max : Math.max(3, u.max)),
+      )
     )
       return null;
+    const mutations = boundedUpgrades(p.mutations);
     const progress = {
       ...newJourney(p.seed),
       stage,
@@ -151,16 +158,15 @@ export function loadJourney(raw) {
           : migrateAdaptationXp(p.xp, p.level, p.adaptationVersion),
       rerollUsed: p.rerollUsed === true,
       // Refund retired choices as ready adaptations, retaining the earned XP floor.
-      level: p.mutations.filter((id) => !['armor', 'trail'].includes(id))
-        .length,
-      mutations: p.mutations.filter((id) => !['armor', 'trail'].includes(id)),
+      level: mutations.length,
+      mutations,
       deaths: p.deaths,
       totalEaten: p.totalEaten,
       totalTime: p.totalTime,
       shieldRecharge: clamp(p.shieldRecharge, 0, 30),
       shieldTimers: restoreShieldTimers(
         p,
-        upgradeStats(p.mutations).shieldCapacity,
+        upgradeStats(mutations).shieldCapacity,
       ),
       maturitySeen: p.maturitySeen === true,
       pendingEvolution:
@@ -168,6 +174,11 @@ export function loadJourney(raw) {
       completed: p.completed === true && stage === STAGES.length - 1,
       finalReady: p.finalReady === true && stage === STAGES.length - 1,
     };
+    if (progress.level < p.level) {
+      // The earned XP floor leaves removed repetitions available as new choices.
+      progress.xp = Math.max(progress.xp, journeyAdaptation(p.level - 1));
+      progress.rerollUsed = false;
+    }
     if (!progress.completed) refreshOffer(progress);
     const life = journeyLife(progress);
     Object.assign(life, {

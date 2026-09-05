@@ -107,7 +107,7 @@ export function loadMicro(raw) {
           !['armor', 'trail'].includes(id),
       ) ||
       ['armor', 'trail'].some((id) => levelOf(p.mutations, id) > 3) ||
-      UPGRADES.some((u) => levelOf(p.mutations, u.id) > u.max)
+      UPGRADES.some((u) => levelOf(p.mutations, u.id) > Math.max(3, u.max))
     )
       return null;
     const progress = {

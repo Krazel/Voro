@@ -34,14 +34,14 @@ export const UPGRADES = [
     id: 'digest',
     name: 'Enzimas rápidas',
     detail: '+25 % de velocidad de digestión',
-    max: 3,
+    max: 4,
     group: 'Comer',
   },
   {
     id: 'yield',
     name: 'Núcleo eficiente',
     detail: '+12 % de biomasa por alimento',
-    max: 3,
+    max: 4,
     group: 'Comer',
   },
   {
@@ -55,14 +55,14 @@ export const UPGRADES = [
     id: 'turn',
     name: 'Cuerpo flexible',
     detail: '+30 % de agilidad',
-    max: 3,
+    max: 2,
     group: 'Moverse',
   },
   {
     id: 'dash',
     name: 'Impulso elástico',
     detail: '+0,35 de potencia · +0,1 s de impulso · −2 s de recarga',
-    max: 3,
+    max: 2,
     group: 'Moverse',
   },
   {
@@ -76,7 +76,7 @@ export const UPGRADES = [
     id: 'shield',
     name: 'Escudo gelatinoso',
     detail: '+1 escudo que bloquea un golpe y se recarga en 20 s',
-    max: 3,
+    max: 2,
     group: 'Defenderse',
   },
   {
@@ -105,14 +105,14 @@ export const UPGRADES = [
     name: 'Tentáculos extensibles',
     detail: '+30 % del radio corporal de alcance para tus tentáculos',
     requires: 'tentacles',
-    max: 3,
+    max: 2,
     group: 'Cazar',
   },
   {
     id: 'combo',
     name: 'Hambre encadenada',
     detail: '3 comidas seguidas: +20 % de movimiento y digestión durante 4 s',
-    max: 3,
+    max: 2,
     group: 'Rara',
   },
 ].map((u) => ({ ...u, artIndex: CARD_ART[u.id] }));
@@ -123,7 +123,8 @@ export const eligibleUpgrade = (chosen, u) =>
 export const MAX_UPGRADE_CHOICES = UPGRADES.reduce((sum, u) => sum + u.max, 0);
 export const levelOf = (chosen, id) => chosen.filter((x) => x === id).length;
 export function upgradeStats(chosen, combo = false) {
-  const n = (id) => Math.min(3, levelOf(chosen, id));
+  const n = (id) =>
+    Math.min(UPGRADES.find((u) => u.id === id)?.max ?? 0, levelOf(chosen, id));
   return {
     reachFactor: 1 + n('reach') * 0.15,
     absorptionSlots: 3 + n('slots'),
@@ -170,4 +171,14 @@ export function offerUpgrades(chosen, seed, level, excluded = []) {
 export function validChoice(chosen, id, offer) {
   const u = UPGRADES.find((u) => u.id === id);
   return !!u && offer.includes(id) && eligibleUpgrade(chosen, u);
+}
+
+// Preserve choice order when older saves contain selections above a revised cap.
+export function boundedUpgrades(chosen) {
+  const kept = [];
+  for (const id of chosen) {
+    const upgrade = UPGRADES.find((u) => u.id === id);
+    if (upgrade && levelOf(kept, id) < upgrade.max) kept.push(id);
+  }
+  return kept;
 }

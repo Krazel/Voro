@@ -91,7 +91,7 @@ test('14 upgrades have bounded stats; choices never repeat within a hand or exce
   const s = upgradeStats(chosen, true);
   assert.ok(s.speedFactor <= 2.051);
   assert.ok(s.damageFactor >= 0.64);
-  assert.ok(s.digestFactor <= 2.351);
+  assert.ok(s.digestFactor <= 2.401);
   assert.equal(s.absorptionSlots, 6);
   assert.equal(s.shieldCooldown, 20);
   assert.ok(s.recycleFraction <= 0.751);

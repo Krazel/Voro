@@ -66,7 +66,7 @@ test('All three arms choose distinct targets; shrinking releases prey that is no
 test('Moderated impulse has a seven-second cooldown; every choice increases travel and reduces cooldown', () => {
   let previous = 0,
     previousCooldown = 10;
-  for (let rank = 0; rank <= 3; rank++) {
+  for (let rank = 0; rank <= 2; rank++) {
     const progress = newJourney(1);
     progress.mutations = Array(rank).fill('dash');
     const p = journeyLife(progress);
@@ -84,7 +84,7 @@ test('Moderated impulse has a seven-second cooldown; every choice increases trav
     assert.ok(p.x - start > previous);
     previous = p.x - start;
   }
-  assert.equal(upgradeStats(['dash', 'dash', 'dash']).cooldownFactor * 7, 1);
+  assert.equal(upgradeStats(['dash', 'dash', 'dash']).cooldownFactor * 7, 3);
 });
 test('Current saved cadence migrates once preserving fraction and existing pending reroll', () => {
   const p = newJourney(7);

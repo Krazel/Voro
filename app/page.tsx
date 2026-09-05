@@ -22,7 +22,7 @@ import {
   DialogClose,
 } from '@/components/ui/dialog';
 import { VoroEngine, type Snapshot } from './engine';
-import { UPGRADES, levelOf } from './mutations.mjs';
+import { UPGRADES, levelOf, MAX_UPGRADE_CHOICES } from './mutations.mjs';
 import { adaptationCaption } from './journey-captions.mjs';
 import {
   STAGES,
@@ -112,14 +112,17 @@ export default function Home() {
   };
   const active =
     state.started && !state.dead && !state.complete && state.ending === 0;
-  const xp = Math.min(
-    1,
-    Math.max(
-      0,
-      (state.adaptation - state.adaptationStart) /
-        (state.adaptationTarget - state.adaptationStart),
-    ),
-  );
+  const xp =
+    state.level >= MAX_UPGRADE_CHOICES
+      ? 1
+      : Math.min(
+          1,
+          Math.max(
+            0,
+            (state.adaptation - state.adaptationStart) /
+              (state.adaptationTarget - state.adaptationStart),
+          ),
+        );
   return (
     <main className="voro-shell">
       <aside className="outside-caption">
@@ -208,7 +211,7 @@ export default function Home() {
         <div className="micro-adaptation">
           <div>
             <span>
-              {state.level >= 43
+              {state.level >= MAX_UPGRADE_CHOICES
                 ? 'ADAPTACIONES COMPLETAS'
                 : 'ADAPTACIÓN ' + (state.level + 1)}
             </span>
@@ -475,7 +478,10 @@ export default function Home() {
                   <span>
                     <strong>{u.name}</strong>
                     <small>{u.detail}</small>
-                    <em>{u.group}</em>
+                    <em>
+                      {u.group} · {levelOf(state.mutations, u.id)} / {u.max}{' '}
+                      adquiridas
+                    </em>
                   </span>
                   <ArrowUpRight size={17} />
                 </button>
@@ -672,7 +678,8 @@ export default function Home() {
                   <div key={u.id}>
                     <span>{u.name}</span>
                     <b>
-                      Elegida {n} {n === 1 ? 'vez' : 'veces'}
+                      {n} / {u.max}
+                      {n === u.max ? ' · Completa' : ' adquiridas'}
                     </b>
                   </div>
                 ) : null;
