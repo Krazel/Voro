@@ -16,20 +16,20 @@ import { makeEngine } from './engine-fixture.mjs';
 
 test('Every repeated choice adds the same concrete bonus', () => {
   const effect = {
-    reach: ['reachFactor', 0.15],
+    reach: ['reachFactor', 0.075],
     slots: ['absorptionSlots', 1],
-    digest: ['digestFactor', 0.25],
-    yield: ['yieldFactor', 0.12],
-    speed: ['speedFactor', 0.15],
-    turn: ['steeringFactor', 0.3],
-    dash: ['boostStrength', 0.35],
-    pull: ['attraction', 28],
+    digest: ['digestFactor', 0.125],
+    yield: ['yieldFactor', 0.06],
+    speed: ['speedFactor', 0.075],
+    turn: ['steeringFactor', 0.15],
+    dash: ['boostStrength', 0.18],
+    pull: ['attraction', 14],
     shield: ['shieldCapacity', 1],
-    recycle: ['recycleFraction', 0.25],
-    spikes: ['spikeFraction', 0.12],
-    tentacleReach: ['tentacleReach', 0.3],
+    recycle: ['recycleFraction', 0.125],
+    spikes: ['spikeFraction', 0.06],
+    tentacleReach: ['tentacleReach', 0.15],
     tentacles: ['tentacles', 1],
-    combo: ['digestFactor', 0.2],
+    combo: ['digestFactor', 0.1],
   };
   for (const u of UPGRADES)
     for (let i = 1; i <= u.max; i++) {
@@ -70,16 +70,16 @@ test('Each shield selection grants one equal charge; timers and old saves surviv
     p.offer = ['shield'];
     assert.ok(chooseUpgrade(p, 'shield'));
     const stats = upgradeStats(p.mutations);
-    assert.equal(stats.shieldCooldown, 20);
+    assert.equal(stats.shieldCooldown, 40);
     assert.equal(p.shieldTimers.length, i + 1);
   }
   const stats = upgradeStats(p.mutations);
   assert.ok(consumeShield(p, stats));
   syncShields(p, stats, 5);
   assert.ok(consumeShield(p, stats));
-  assert.deepEqual(p.shieldTimers, [15, 20]);
+  assert.deepEqual(p.shieldTimers, [35, 40]);
   assert.equal(consumeShield(p, stats), false);
-  syncShields(p, stats, 15);
+  syncShields(p, stats, 35);
   assert.ok(consumeShield(p, stats));
   const { game: g } = makeEngine();
   g.progress = p;

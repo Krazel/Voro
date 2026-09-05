@@ -1,3 +1,4 @@
+export const SHIELD_RECHARGE = 40;
 // Each selected shield contributes one identical, independently recharging hit.
 export function syncShields(p, stats, dt = 0) {
   const capacity = stats.shieldCapacity || 0;
@@ -21,6 +22,6 @@ export function restoreShieldTimers(p, capacity) {
   return Array.from({ length: capacity }, (_, i) => {
     const saved = Array.isArray(p.shieldTimers) ? p.shieldTimers[i] : undefined;
     const t = Number.isFinite(saved) ? saved : p.shieldRecharge;
-    return Number.isFinite(t) ? Math.max(0, Math.min(20, t)) : 0;
+    return Number.isFinite(t) ? Math.max(0, Math.min(SHIELD_RECHARGE, t)) : 0;
   });
 }

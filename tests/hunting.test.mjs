@@ -47,22 +47,24 @@ test('Tentacles extend before grabbing, haul edible prey and retract when it is 
   arms.update(1 / 60, p, [large], 3);
   assert.equal(arms.arms.length, 0);
 });
-test('All three arms choose distinct targets; shrinking releases prey that is now too large', () => {
+test('Six arms select distinct prey; shrinking releases every oversized target', () => {
   const p = journeyLife(newJourney(2)),
     arms = new HuntingTentacles();
-  const foods = Array.from({ length: 4 }, (_, i) => ({
-    x: p.x + 38,
-    y: p.y + i * 6,
-    r: 10,
+  const foods = Array.from({ length: 6 }, (_, i) => ({
+    x: p.x + Math.cos((i * Math.PI) / 3) * 38,
+    y: p.y + Math.sin((i * Math.PI) / 3) * 38,
+    r: 6,
     requiredMass: 1.5,
     eaten: false,
   }));
-  arms.update(1 / 60, p, foods, 3);
-  assert.equal(new Set(arms.arms.map((a) => a.target)).size, 3);
+  arms.update(1 / 60, p, foods, 6);
+  assert.ok(arms.arms.every((a) => a.target));
+  assert.equal(new Set(arms.arms.map((a) => a.target)).size, 6);
   p.biomass = 1;
-  arms.update(1 / 60, p, foods, 3);
+  arms.update(1 / 60, p, foods, 6);
   assert.ok(arms.arms.every((a) => a.target === null));
 });
+
 test('Moderated impulse has a seven-second cooldown; every choice increases travel and reduces cooldown', () => {
   let previous = 0,
     previousCooldown = 10;
@@ -84,7 +86,10 @@ test('Moderated impulse has a seven-second cooldown; every choice increases trav
     assert.ok(p.x - start > previous);
     previous = p.x - start;
   }
-  assert.equal(upgradeStats(['dash', 'dash', 'dash']).cooldownFactor * 7, 3);
+  assert.equal(
+    upgradeStats(['dash', 'dash', 'dash', 'dash']).cooldownFactor * 7,
+    3,
+  );
 });
 test('Current saved cadence migrates once preserving fraction and existing pending reroll', () => {
   const p = newJourney(7);

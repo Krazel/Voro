@@ -21,7 +21,7 @@ import {
   physicalDiameter,
   metersPerUnit,
 } from './journey-data.mjs';
-import { restoreShieldTimers } from './shields.mjs';
+import { restoreShieldTimers, SHIELD_RECHARGE } from './shields.mjs';
 export { MICRO_SAVE };
 export const JOURNEY_SAVE = 'voro-journey-v1';
 export function newJourney(seed) {
@@ -163,7 +163,7 @@ export function loadJourney(raw) {
       deaths: p.deaths,
       totalEaten: p.totalEaten,
       totalTime: p.totalTime,
-      shieldRecharge: clamp(p.shieldRecharge, 0, 30),
+      shieldRecharge: clamp(p.shieldRecharge, 0, SHIELD_RECHARGE),
       shieldTimers: restoreShieldTimers(
         p,
         upgradeStats(mutations).shieldCapacity,

@@ -9,7 +9,7 @@ import {
   levelOf,
 } from './mutations.mjs';
 import { SPECIES_BY_ID } from './micro-world.mjs';
-import { restoreShieldTimers } from './shields.mjs';
+import { restoreShieldTimers, SHIELD_RECHARGE } from './shields.mjs';
 export const MICRO_SAVE = 'voro-micro-v1';
 export const MATURITY = 150;
 export function newMicro(seed = Math.floor(Math.random() * 0x7fffffff)) {
@@ -119,7 +119,7 @@ export function loadMicro(raw) {
       deaths: p.deaths,
       totalEaten: p.totalEaten,
       totalTime: p.totalTime,
-      shieldRecharge: Math.min(30, p.shieldRecharge),
+      shieldRecharge: Math.min(SHIELD_RECHARGE, p.shieldRecharge),
       shieldTimers: restoreShieldTimers(
         p,
         upgradeStats(p.mutations).shieldCapacity,

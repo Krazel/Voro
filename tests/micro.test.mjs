@@ -92,8 +92,8 @@ test('14 upgrades have bounded stats; choices never repeat within a hand or exce
   assert.ok(s.speedFactor <= 2.051);
   assert.ok(s.damageFactor >= 0.64);
   assert.ok(s.digestFactor <= 2.401);
-  assert.equal(s.absorptionSlots, 6);
-  assert.equal(s.shieldCooldown, 20);
+  assert.equal(s.absorptionSlots, 9);
+  assert.equal(s.shieldCooldown, 40);
   assert.ok(s.recycleFraction <= 0.751);
 });
 test('Recycled mass grants no XP; tiny nutrients allow recovery below initial mass', () => {

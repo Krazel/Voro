@@ -20,7 +20,7 @@ import { JourneyWorld } from '../app/journey-world.mjs';
 test('Individual caps govern effects, offers and choices, including rerolls', () => {
   assert.deepEqual(
     [...new Set(UPGRADES.map((u) => u.max))].sort((a, b) => a - b),
-    [2, 3, 4],
+    [4, 6, 8],
   );
   for (const u of UPGRADES) {
     const chosen = Array(u.max).fill(u.id);
@@ -42,13 +42,14 @@ test('Individual caps govern effects, offers and choices, including rerolls', ()
   assert.equal(all.length, MAX_UPGRADE_CHOICES);
   assert.deepEqual(offerUpgrades(all, 1, all.length), []);
 });
-test('Old capped repetitions become available choices without resetting size, XP or stage', () => {
+test('Previously capped saves keep their progress and can acquire more of the same upgrades', () => {
   const p = newJourney(40);
-  delete p.upgradeLimitsVersion;
   p.stage = 3;
-  p.mutations = ['shield', 'shield', 'shield', 'dash', 'dash', 'dash'];
-  p.level = 6;
-  p.xp = journeyAdaptation(5) + 10;
+  p.mutations = ['shield', 'shield', 'dash', 'dash'];
+  p.level = 4;
+  p.xp = journeyAdaptation(4) + 10;
+  p.shieldTimers = [36, 0];
+  p.shieldRecharge = 0;
   p.rerollUsed = true;
   const l = journeyLife(p);
   l.biomass = 45;
@@ -59,15 +60,19 @@ test('Old capped repetitions become available choices without resetting size, XP
   assert.equal(loaded.progress.stage, 3);
   assert.equal(loaded.progress.xp, p.xp);
   assert.equal(loaded.progress.level, 4);
-  assert.equal(loaded.progress.rerollUsed, false);
-  for (let i = 0; i < 2; i++)
-    assert.ok(chooseUpgrade(loaded.progress, loaded.progress.offer[0]));
-  assert.equal(loaded.progress.level, 6);
-  assert.equal(loaded.progress.offer.length, 0);
+  assert.equal(loaded.progress.rerollUsed, true);
+  assert.deepEqual(loaded.progress.mutations, p.mutations);
+  assert.deepEqual(loaded.progress.shieldTimers, [36, 0]);
+  assert.ok(validChoice(loaded.progress.mutations, 'dash', ['dash']));
+  loaded.progress.offer = ['dash'];
+  assert.ok(chooseUpgrade(loaded.progress, 'dash'));
   const again = loadJourney(saveJourney(loaded.progress, loaded.life, w, true));
+  assert.equal(again.progress.level, 5);
   assert.deepEqual(again.progress.mutations, loaded.progress.mutations);
-  assert.equal(again.progress.xp, p.xp);
-  const invalid = JSON.parse(saveJourney(p, l, w, true));
-  invalid.progress.upgradeLimitsVersion = 1;
-  assert.equal(loadJourney(JSON.stringify(invalid)), null);
+  for (const u of UPGRADES) {
+    const invalid = JSON.parse(saveJourney(p, l, w, true));
+    invalid.progress.mutations = Array(u.max + 1).fill(u.id);
+    invalid.progress.level = u.max + 1;
+    assert.equal(loadJourney(JSON.stringify(invalid)), null, u.id);
+  }
 });

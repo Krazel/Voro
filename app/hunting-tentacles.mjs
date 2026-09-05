@@ -79,7 +79,7 @@ export class HuntingTentacles {
             const d = Math.hypot(f.x - p.x, f.y - p.y),
               step = Math.min(
                 Math.max(0, d - p.radius * 0.8),
-                (110 + p.radius * 0.5) * dt * a.grip,
+                (55 + p.radius * 0.25) * dt * a.grip,
               );
             f.x += ((p.x - f.x) / Math.max(1, d)) * step;
             f.y += ((p.y - f.y) / Math.max(1, d)) * step;

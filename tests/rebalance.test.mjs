@@ -75,7 +75,8 @@ test('Long reach is offered only after hunting tentacles, and each choice extend
     p,
     [food],
     1,
-    upgradeStats(['tentacles', 'tentacleReach', 'tentacleReach']).tentacleReach,
+    upgradeStats(['tentacles', ...Array(4).fill('tentacleReach')])
+      .tentacleReach,
   );
   assert.equal(h.arms[0].target, food);
 });
