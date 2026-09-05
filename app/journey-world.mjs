@@ -24,7 +24,9 @@ export class JourneyWorld extends MicroWorld {
   }
   generate(cx, cy, time) {
     if (this.stage === 0) return super.generate(cx, cy, time);
-    const list = STAGE_SPECIES[this.stage].filter((s) => s.kind !== 'final');
+    const list = STAGE_SPECIES[this.stage].filter(
+      (s) => s.kind !== 'final' && !s.variantOf,
+    );
     const small = list.filter(
         (s) =>
           journeyEntity(s, 0, 0, 0, 'starter').requiredMass <=
@@ -53,7 +55,9 @@ export class JourneyWorld extends MicroWorld {
         id = `${cx}:${cy}:${i}`;
       if (isDanger(s) && Math.hypot(x - 700, y - 970) < 310) continue;
       if ((this.journal.get(id) || 0) > time) continue;
-      entities.push(journeyEntity(s, x, y, seed, id));
+      const inhabitant =
+        s.id === 'water-14' && seed >= Math.PI ? SPECIES_BY_ID['water-16'] : s;
+      entities.push(journeyEntity(inhabitant, x, y, seed, id));
     }
     if (cx === 1 && cy === 1)
       for (let i = 0; i < 7; i++) {

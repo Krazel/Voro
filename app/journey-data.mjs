@@ -332,11 +332,21 @@ STAGE_SPECIES[7].push(
   cousin(7, STAGE_SPECIES[8][6], 'Colisión galáctica', 136, 24, 'hazard'),
   cousin(7, STAGE_SPECIES[8][7], 'Grupo galáctico', 145, 28),
 );
+// Alternate swimmer artwork shares the same encounter slot and balance.
+STAGE_SPECIES[1].push({
+  ...STAGE_SPECIES[1][14],
+  id: 'water-16',
+  name: 'Nadadora',
+  imageAtlas: 'femaleSwimmer',
+  crop: [0, 0, 1774, 887],
+  variantOf: 'water-14',
+});
 export const SPECIES_BY_ID = Object.fromEntries(
   STAGE_SPECIES.flat().map((s) => [s.id, s]),
 );
 SPECIES_BY_ID['water-14'].imageAtlas = 'swimmer';
 export const ATLAS_URLS = {
+  femaleSwimmer: './inhabitants/female-swimmer-v1.png',
   swimmer: './inhabitants/swimmer-v2.png',
   micro: './inhabitants/micro.png',
   water: './inhabitants/water.png',

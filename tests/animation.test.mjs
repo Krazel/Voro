@@ -12,6 +12,7 @@ import { newJourney, journeyLife } from '../app/journey-progress.mjs';
 import { HuntingTentacles } from '../app/hunting-tentacles.mjs';
 const sizes = {
   swimmer: [425, 160],
+  femaleSwimmer: [1774, 887],
   micro: [1448, 1086],
   water: [1536, 1024],
   land: [1448, 1086],
@@ -19,8 +20,8 @@ const sizes = {
   cosmos: [1536, 1024],
   universe: [1536, 1024],
 };
-test('All 98 inhabitants have an explicit anatomical rig and valid art bounds', () => {
-  assert.equal(Object.keys(ANIMATIONS).length, 98);
+test('All 99 inhabitants have an explicit anatomical rig and valid art bounds', () => {
+  assert.equal(Object.keys(ANIMATIONS).length, 99);
   for (const s of STAGE_SPECIES.flat()) {
     const p = ANIMATIONS[s.id];
     assert.ok(p.family && p.description && p.period > 0);
@@ -210,5 +211,45 @@ test('Butterfly folding stays monotonic across the thorax instead of turning win
         ])
           assert.ok((b.x - a.x) * (d.y - a.y) - (d.x - a.x) * (b.y - a.y) > 0);
       }
+  }
+});
+import { JourneyWorld } from '../app/journey-world.mjs';
+import { SPECIES_BY_ID } from '../app/journey-data.mjs';
+
+test('Swimmer variants coexist deterministically without adding encounter slots or changing edible size', () => {
+  const world = new JourneyWorld(1834, [], 1),
+    seen = new Set();
+  for (let x = 20; x < 50; x++) {
+    const chunk = world.generate(x, 20, 0),
+      again = world.generate(x, 20, 0);
+    assert.equal(chunk.entities.length, 14);
+    assert.deepEqual(
+      chunk.entities.map((e) => [e.kind, e.x, e.y]),
+      again.entities.map((e) => [e.kind, e.x, e.y]),
+    );
+    for (const e of chunk.entities) seen.add(e.kind);
+  }
+  assert.ok(seen.has('water-14') && seen.has('water-16'));
+  for (const key of ['r', 'value', 'speed', 'kind', 'requiredMass'])
+    assert.equal(
+      SPECIES_BY_ID['water-14'][key],
+      SPECIES_BY_ID['water-16'][key],
+    );
+  assert.notEqual(
+    ANIMATIONS['water-14'].assetKey,
+    ANIMATIONS['water-16'].assetKey,
+  );
+});
+
+test('Space structures retain rigid geometry and surface flows keep their outer boundary fixed', () => {
+  for (const p of Object.values(ANIMATIONS).filter(
+    (p) => p.rigid || p.surface,
+  )) {
+    for (const phase of [0.4, 2, 4.7]) {
+      const mesh = poseMesh(p, phase, 1.5, 20, 10, 0.8);
+      for (const v of mesh.verts)
+        if (p.rigid || v.u === 0 || v.u === 1 || v.v === 0 || v.v === 1)
+          assert.ok(Math.hypot(v.x - v.u, v.y - v.v) < 1e-8, p.id);
+    }
   }
 });

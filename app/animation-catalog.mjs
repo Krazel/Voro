@@ -490,6 +490,75 @@ land[8].description =
   'Patas traseras que se recogen y extienden desde caderas y rodillas.';
 land[11].description =
   'Pequeños saltos con patas articuladas y orejas de movimiento suave.';
+for (const p of city.slice(0, 4)) p.revision = 2;
+city[9].revision = 2;
+city[0].description =
+  'Pasos alternos desde caderas y rodillas; brazos que acompañan la carrera.';
+city[1].description =
+  'Rodillas articuladas y pasos cortos, con torso y fusil estables.';
+city[2].description =
+  'Avance con el escudo firme, pasos contenidos y movimiento de la porra.';
+city[3].description =
+  'Pasos pesados desde las caderas, manteniendo firme el arma.';
+Object.assign(cosmos[2], {
+  rigid: true,
+  precession: 0.07,
+  revision: 2,
+  description: 'Orientación suave del satélite, con paneles solares rígidos.',
+});
+Object.assign(cosmos[3], {
+  rigid: true,
+  precession: 0.045,
+  revision: 2,
+  description: 'Orientación lenta de la estación, sin doblar sus módulos.',
+});
+Object.assign(cosmos[4], {
+  rigid: true,
+  revision: 2,
+  description: 'Casco firme y pulsos de luz concentrados en los motores.',
+});
+for (const i of [5, 6, 7, 9, 11])
+  Object.assign(cosmos[i], {
+    surface: {
+      amount: i === 7 ? 0.024 : 0.016,
+      rx: i === 11 ? 0.29 : 0.43,
+      ry: i === 11 ? 0.34 : 0.43,
+    },
+    precession: 0,
+    revision: 2,
+    description:
+      i === 11
+        ? 'Movimiento suave de la superficie, con los anillos estables.'
+        : 'Movimiento suave de la superficie, conservando el contorno y la iluminación.',
+  });
+for (const i of [18, 19, 20, 21, 23])
+  Object.assign(cosmos[i], {
+    surface: {
+      disc: true,
+      amount: 0.1,
+      rx: 0.43,
+      ry: i === 23 ? 0.14 : i === 20 ? 0.29 : 0.35,
+      angle: i === 23 ? -0.38 : 0,
+    },
+    precession: 0,
+    revision: 2,
+    description:
+      'Circulación lenta de la materia, conservando la inclinación del disco.',
+  });
+Object.assign(universe[4], {
+  surface: {
+    disc: true,
+    amount: 0.18,
+    rx: 0.45,
+    ry: 0.21,
+    angle: -0.58,
+    hole: 0.12,
+  },
+  precession: 0,
+  revision: 2,
+  description:
+    'El disco de acreción circula alrededor de un horizonte estable.',
+});
 export const ANIMATIONS = Object.fromEntries(
   STAGE_SPECIES.flat().map((s) => {
     const index =
@@ -500,11 +569,21 @@ export const ANIMATIONS = Object.fromEntries(
       s.id,
       {
         ...atlases[s.atlas][index],
+        ...(s.id === 'water-16'
+          ? {
+              crop: s.crop,
+              period: 1.65,
+              revision: 2,
+              description:
+                'Brazos y piernas articulados, con brazada y patada alternas.',
+            }
+          : {}),
         id: s.id,
         revised:
+          !!atlases[s.atlas][index].revision ||
           !!ANATOMICAL_RIGS[s.id] ||
           ['water-3', 'water-4', 'water-12', 'water-13'].includes(s.id),
-        assetKey: `${s.atlas}:${index}`,
+        assetKey: `${s.imageAtlas || s.atlas}:${index}`,
       },
     ];
   }),

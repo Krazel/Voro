@@ -82,6 +82,40 @@ export function poseMesh(
       let p = { x: u, y: v };
       if (anatomy) {
         p = anatomy(u, v);
+      } else if (profile.surface) {
+        // Flow stays inside the painted sphere/disc. Its rim and lighting axis
+        // remain fixed instead of spinning the entire cutout like a wheel.
+        const {
+          cx = 0.5,
+          cy = 0.5,
+          rx = 0.43,
+          ry = 0.43,
+          angle = 0,
+          amount = 0.035,
+        } = profile.surface;
+        const ca = Math.cos(angle),
+          sa = Math.sin(angle),
+          dx = u - cx,
+          dy = (v - cy) * aspect;
+        const x = (dx * ca + dy * sa) / rx,
+          y = (-dx * sa + dy * ca) / (ry * aspect);
+        const radius = Math.hypot(x, y),
+          weight = 1 - smooth((radius - 0.3) / 0.65);
+        if (profile.surface.disc) {
+          const holeWeight = profile.surface.hole
+            ? smooth((Math.hypot(dx, dy) - profile.surface.hole) / 0.06)
+            : 1;
+          const turn = Math.sin(phase) * amount * weight * holeWeight,
+            q = rotate(x, y, 0, 0, turn);
+          p = {
+            x: cx + q.x * rx * ca - q.y * ry * aspect * sa,
+            y: cy + (q.x * rx * sa + q.y * ry * aspect * ca) / aspect,
+          };
+        } else {
+          p.x += Math.sin(phase + v * 2) * amount * weight;
+        }
+      } else if (profile.rigid) {
+        // Metal panels and hulls preserve every point of their silhouette.
       } else if (bones) {
         let px = u,
           py = axis,
@@ -407,7 +441,7 @@ export function poseMesh(
   return { verts, cols, rows };
 }
 
-function texturedTriangle(c, image, crop, a, b, d, w, h, mask) {
+function texturedTriangle(c, image, crop, a, b, d, w, h, mask, overlap = 0.3) {
   const den = (b.u - a.u) * (d.v - a.v) - (d.u - a.u) * (b.v - a.v);
   const xx =
     (((b.x - a.x) * (d.v - a.v) - (d.x - a.x) * (b.v - a.v)) / den) * w;
@@ -424,7 +458,7 @@ function texturedTriangle(c, image, crop, a, b, d, w, h, mask) {
   [a, b, d].forEach((p, i) => {
     const dx = p.x * w - cx,
       dy = p.y * h - cy,
-      k = 0.3 / Math.max(1, Math.hypot(dx, dy));
+      k = overlap / Math.max(1, Math.hypot(dx, dy));
     const x = p.x * w + dx * k - w / 2,
       y = p.y * h + dy * k - h / 2;
     if (i) c.lineTo(x, y);
@@ -495,7 +529,9 @@ export function drawPose(
       1 + 0.009 * Math.sin(phase) + Math.max(0, activity - 1) * 0.12;
     c.scale(inflation, inflation);
   }
-  if (
+  if (profile.precession != null)
+    c.rotate(Math.sin(phase) * profile.precession);
+  else if (
     [
       'tumble',
       'planet',
@@ -509,7 +545,11 @@ export function drawPose(
     ].includes(f)
   )
     c.rotate(phase);
-  if (['drift', 'ringed', 'lenticular'].includes(f))
+  if (
+    !profile.surface &&
+    profile.precession == null &&
+    ['drift', 'ringed', 'lenticular'].includes(f)
+  )
     c.rotate(Math.sin(phase) * (profile.turn || 0.12));
   if (['frog', 'rabbit'].includes(f))
     c.translate(0, -Math.max(0, Math.sin(phase)) * r * 0.1 * activity);
@@ -525,16 +565,24 @@ export function drawPose(
     c.save();
     c.beginPath();
     const poly = [
-      [0.01, 0.34],
-      [0.4, 0.32],
-      [0.53, 0.24],
-      [0.7, 0.28],
+      [0.01, 0.43],
+      [0.12, 0.43],
+      [0.12, 0.35],
+      [0.21, 0.35],
+      [0.21, 0.42],
+      [0.4, 0.4],
+      [0.51, 0.36],
+      [0.68, 0.38],
       [0.98, 0.4],
-      [0.98, 0.57],
-      [0.66, 0.61],
-      [0.55, 0.56],
-      [0.43, 0.56],
-      [0.06, 0.52],
+      [0.98, 0.55],
+      [0.66, 0.58],
+      [0.5, 0.56],
+      [0.41, 0.53],
+      [0.21, 0.52],
+      [0.21, 0.62],
+      [0.12, 0.62],
+      [0.12, 0.52],
+      [0.07, 0.52],
     ];
     poly.forEach(([x, y], i) =>
       i
@@ -588,7 +636,7 @@ export function drawPose(
     c.drawImage(image, ...crop, -0.56 * w, -0.455 * h, w, h);
     c.restore();
     part(c, image, crop, w, h, 0.56, 0.455, 0.04, 0);
-  } else if (rigidFamilies.has(f)) {
+  } else if (profile.rigid || (rigidFamilies.has(f) && !profile.surface)) {
     c.drawImage(image, ...crop, -w / 2, -h / 2, w, h);
   } else {
     const mesh = poseMesh(
@@ -613,6 +661,7 @@ export function drawPose(
           w,
           h,
           profile.mask,
+          profile.surface ? 1.3 : 0.3,
         );
         texturedTriangle(
           c,
@@ -624,6 +673,7 @@ export function drawPose(
           w,
           h,
           profile.mask,
+          profile.surface ? 1.3 : 0.3,
         );
       }
   }
@@ -696,6 +746,12 @@ export function drawPose(
     c.globalCompositeOperation = 'screen';
     c.globalAlpha =
       (0.035 + 0.065 * (0.5 + 0.5 * Math.sin(phase * 2))) * activity;
+    if (f === 'spaceship') {
+      // Engine light belongs at the exhausts, not over the entire metal hull.
+      c.beginPath();
+      c.rect(-w / 2, h * 0.28, w, h * 0.22);
+      c.clip();
+    }
     c.drawImage(image, ...crop, -w / 2, -h / 2, w, h);
     c.restore();
   }

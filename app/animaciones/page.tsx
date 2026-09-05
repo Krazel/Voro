@@ -46,13 +46,13 @@ function Thumbnail({ id, images }: { id: string; images: Images }) {
 }
 export default function AnimationStudio() {
   const [stage, setStage] = useState(1),
-    [selected, setSelected] = useState('water-0');
+    [selected, setSelected] = useState('water-16');
   const [images, setImages] = useState<Images>({}),
     [error, setError] = useState(false),
     [playing, setPlaying] = useState(true),
     [slow, setSlow] = useState(false),
     [mode, setMode] = useState('move');
-  const [seen, setSeen] = useState<Set<string>>(new Set(['water-0']));
+  const [seen, setSeen] = useState<Set<string>>(new Set(['water-16']));
   const canvas = useRef<HTMLCanvasElement>(null),
     time = useRef(0);
   const species = STAGE_SPECIES[stage],
@@ -288,11 +288,13 @@ export default function AnimationStudio() {
               <span>
                 {e.name}
                 <small>
-                  {ANIMATIONS[e.id].revised
-                    ? 'Animación revisada'
-                    : seen.has(e.id)
-                      ? 'Visto'
-                      : 'Ver animación'}
+                  {ANIMATIONS[e.id].revision === 2
+                    ? 'Nueva revisión'
+                    : ANIMATIONS[e.id].revised
+                      ? 'Animación revisada'
+                      : seen.has(e.id)
+                        ? 'Visto'
+                        : 'Ver animación'}
                 </small>
               </span>
             </button>
