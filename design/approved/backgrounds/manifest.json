@@ -1,0 +1,92 @@
+[
+  {
+    "biome": "pond",
+    "source": "design/approved/backgrounds/pond-variants.png",
+    "asset": "public/backgrounds/pond-variants.webp",
+    "sha256": "5a9af28139abec6e5697ba7849e095ee30018edc06b87f9c461ae58935066f21",
+    "date": "2026-09-05",
+    "generator": "ChatGPT image_gen",
+    "panels": "2x2, each 768x512",
+    "status": "Implemented under user-delegated art direction; play review pending"
+  },
+  {
+    "biome": "shore",
+    "source": "design/approved/backgrounds/shore-variants.png",
+    "asset": "public/backgrounds/shore-variants.webp",
+    "sha256": "b7ba89e7140aba11ffa235c6e4cb61504c6a1fe51f2877c710bb0dd4b8e3812a",
+    "date": "2026-09-05",
+    "generator": "ChatGPT image_gen",
+    "panels": "2x2, each 768x512",
+    "status": "Implemented under user-delegated art direction; play review pending"
+  },
+  {
+    "biome": "sea",
+    "source": "design/approved/backgrounds/sea-variants.png",
+    "asset": "public/backgrounds/sea-variants.webp",
+    "sha256": "f46e7702d164971b8a18c03c95b4f3af8206f24e701b1f27f8af74c68ab121e4",
+    "date": "2026-09-05",
+    "generator": "ChatGPT image_gen",
+    "panels": "2x2, each 768x512",
+    "status": "Implemented under user-delegated art direction; play review pending"
+  },
+  {
+    "biome": "city",
+    "source": "design/approved/backgrounds/city-variants.png",
+    "asset": "public/backgrounds/city-variants.webp",
+    "sha256": "ca2cd57d7a970df6b7029c5a4f3955dddd4a817323b58405e91f8fa07835f508",
+    "date": "2026-09-05",
+    "generator": "ChatGPT image_gen",
+    "panels": "2x2, each 768x512",
+    "status": "Implemented under user-delegated art direction; play review pending"
+  },
+  {
+    "biome": "orbit",
+    "source": "design/approved/backgrounds/orbit-variants.png",
+    "asset": "public/backgrounds/orbit-variants.webp",
+    "sha256": "73c9293bf19fa46f466413fa90234fd6a9eb7a4a212b26d77ca9cb5fced3604a",
+    "date": "2026-09-05",
+    "generator": "ChatGPT image_gen",
+    "panels": "2x2, each 768x512",
+    "status": "Implemented under user-delegated art direction; play review pending"
+  },
+  {
+    "biome": "planets",
+    "source": "design/approved/backgrounds/planets-variants.png",
+    "asset": "public/backgrounds/planets-variants.webp",
+    "sha256": "65da39ee5559e5dc6a02a7a745befb1235a036e4a2e6bf68f2d1ae1af405b7a7",
+    "date": "2026-09-05",
+    "generator": "ChatGPT image_gen",
+    "panels": "2x2, each 768x512",
+    "status": "Implemented under user-delegated art direction; play review pending"
+  },
+  {
+    "biome": "stars",
+    "source": "design/approved/backgrounds/stars-variants.png",
+    "asset": "public/backgrounds/stars-variants.webp",
+    "sha256": "46738ec4d0fc81106cc65ce56487a21393c386f481de4190ebe170275a7bcb99",
+    "date": "2026-09-05",
+    "generator": "ChatGPT image_gen",
+    "panels": "2x2, each 768x512",
+    "status": "Implemented under user-delegated art direction; play review pending"
+  },
+  {
+    "biome": "galaxies",
+    "source": "design/approved/backgrounds/galaxies-variants.png",
+    "asset": "public/backgrounds/galaxies-variants.webp",
+    "sha256": "6073877a528b097445a7cdc1f59969383aa8624316a1af9de96de8633a3f5b1d",
+    "date": "2026-09-05",
+    "generator": "ChatGPT image_gen",
+    "panels": "2x2, each 768x512",
+    "status": "Implemented under user-delegated art direction; play review pending"
+  },
+  {
+    "biome": "universe",
+    "source": "design/approved/backgrounds/universe-variants.png",
+    "asset": "public/backgrounds/universe-variants.webp",
+    "sha256": "b3929bbc1669c917760b14d8eb920ee8446de665377a2ff168e0d774bd3ec5bd",
+    "date": "2026-09-05",
+    "generator": "ChatGPT image_gen",
+    "panels": "2x2, each 768x512",
+    "status": "Implemented under user-delegated art direction; play review pending"
+  }
+]

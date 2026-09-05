@@ -498,12 +498,12 @@ for (const [stage, list] of STAGE_SPECIES.entries())
 // Marine lengths share a common scale: small fish, then cephalopods, people and sharks.
 for (const [id, r] of Object.entries({
   'water-0': 3,
-  'water-1': 6,
-  'water-2': 10,
-  'water-3': 5,
-  'water-4': 12,
+  'water-1': 8,
+  'water-2': 12,
+  'water-3': 7,
+  'water-4': 14,
   'water-5': 16,
-  'water-6': 6,
+  'water-6': 8,
   'water-7': 12,
   'water-9': 20,
   'city-0': 7,

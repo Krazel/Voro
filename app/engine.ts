@@ -1,4 +1,5 @@
 import { drawCoastalGround } from './coastal-ground.mjs';
+import { WorldGround, GROUND_PROFILES } from './world-ground.mjs';
 import { transitionScene } from './journey-transitions.mjs';
 // Canvas2D rendering and input. The simulation stays independent of frame rendering.
 import {
@@ -195,6 +196,8 @@ export class VoroEngine {
   background = new Image();
   shoreBackground = new Image();
   seaBackground = new Image();
+  worldGround = new WorldGround();
+  groundImages: Record<string, HTMLImageElement> = {};
   transitionStartZoom = 1;
   keys = new Set<string>();
   pointer: {
@@ -1413,8 +1416,30 @@ export class VoroEngine {
   }
   drawBackground(index: number) {
     const c = this.ctx;
-    const stage = STAGES[index],
-      custom =
+    const stage = STAGES[index];
+    if (stage.id !== 'micro') {
+      let image = this.groundImages[stage.id];
+      if (!image) {
+        image = this.groundImages[stage.id] = new Image();
+        image.src =
+          './backgrounds/' +
+          GROUND_PROFILES[stage.id as keyof typeof GROUND_PROFILES].file +
+          '-variants.webp';
+      }
+      if (
+        this.worldGround.draw(
+          c,
+          image,
+          stage.id,
+          this.camera,
+          this.zoom,
+          this.height,
+          this.progress.seed,
+        )
+      )
+        return;
+    }
+    const custom =
         stage.id === 'land'
           ? this.shoreBackground
           : ['water', 'pond'].includes(stage.id)

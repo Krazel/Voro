@@ -53,6 +53,11 @@ export function makeEngine() {
     height: 0,
   });
   const game = new VoroEngine(canvas, (value) => (snapshot = value));
+  game.worldGround.createCanvas = () => ({
+    width: 0,
+    height: 0,
+    getContext: () => ctx,
+  });
   return {
     game,
     get snapshot() {
