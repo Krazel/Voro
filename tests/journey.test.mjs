@@ -126,7 +126,7 @@ test('Ranged attackers fire; small bodies take damage and large ones absorb bull
   });
   g.world.projectiles = [shot()];
   step(g);
-  assert.ok(p.biomass < 8);
+  assert.ok(p.biomass < 2);
   assert.equal(g.world.projectiles.length, 0);
   p.biomass = 40;
   p.invulnerable = 0;
@@ -173,7 +173,7 @@ test('Existing microscopic saves migrate, and each later stage preserves wounded
   const migrated = migrateMicro(saveMicro(p, l, w, false));
   assert.equal(migrated.life.x, -6000);
   assert.equal(migrated.progress.stage, 0);
-  assert.equal(migrated.progress.xp, 30);
+  assert.equal(migrated.progress.xp, 120);
   for (let stage = 0; stage < 9; stage++) {
     const p = newJourney(22);
     p.stage = stage;

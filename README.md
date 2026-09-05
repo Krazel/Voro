@@ -9,8 +9,9 @@ Microscopio → agua → tierra → ciudad → órbita → planetas → estrella
 - Móvil: arrastra desde cualquier punto y pulsa Impulso, sin joystick visible.
 - PC: ratón, WASD/flechas y espacio.
 - Mando: stick izquierdo, A para impulso, Start para pausa. Los menús usan teclado, ratón o táctil.
+- Inicio de etapa: 2 de biomasa y radio 24, frente a 8 y radio 48 antes. Solo pueden comerse las especies menores; cada zona y el área inicial incluyen alimento adecuado. Se aplica también al reintentar. Las partidas en curso conservan su biomasa.
 - Daño: resta biomasa real y reduce el área corporal en la misma proporción. Después hay un intervalo de protección para escapar.
-- Mejoras: una barra independiente permite elegir entre tres adaptaciones aleatorias mientras el tiempo se detiene. Hay 15 tipos y 43 niveles totales, con límites de acumulación. Evolucionar de escala conserva todas las mejoras.
+- Mejoras: una barra independiente permite elegir entre tres adaptaciones aleatorias mientras el tiempo se detiene. Hay 15 tipos y 43 niveles totales, con límites de acumulación. Evolucionar de escala conserva todas las mejoras. La primera adaptación requiere 24 de experiencia y las siguientes usan una curva más espaciada (24 + 24 × nivel + 4 × nivel²). Cada elección permite un cambio gratuito de opciones; si quedan suficientes tipos, las tres opciones son nuevas. Si quedan menos, se priorizan las alternativas disponibles. El cambio usado se conserva al recargar.
 - Evolución: al alcanzar el objetivo de biomasa se anima el crecimiento y el alejamiento de cámara durante 7,2 segundos. La escena anterior se transforma y se desvanece sobre la siguiente. Las magnitudes se normalizan al entrar en la nueva escala; el tamaño mostrado representa la nueva escala del organismo.
 - Ciudad: civiles y vehículos huyen, unidades con escudo persiguen y soldados, blindados, tanques y helicópteros disparan. Las líneas de aviso anticipan los disparos. Al superar su umbral de tamaño, los proyectiles aportan solo 0,025 de biomasa y ninguna experiencia.
 - Espacio: naves, estrellas activas, cuásares y singularidades añaden disparos, contacto peligroso y atracción gravitatoria que se puede contrarrestar nadando.
@@ -30,7 +31,7 @@ Zonas de 600 unidades generadas mediante semilla estable. Se mantienen 25 zonas 
 
 La comida vuelve después de 150 segundos de juego, fuera de la proximidad inmediata. El registro conserva hasta 2048 entradas. El último universo mantiene una referencia independiente para que no desaparezca al alejarse, y reaparece si un golpe interrumpe su absorción.
 
-El guardado local conserva escala, posición, biomasa, digestión pendiente, mejoras, recarga del escudo, estadísticas y final. Guarda cada cinco segundos y al pausar, ocultar o cerrar. La nueva clave es `voro-journey-v1`; migra automáticamente `voro-micro-v1` cuando aún no existe una campaña nueva. El guardado microscópico anterior no se borra. No hay sincronización entre dispositivos.
+El guardado local conserva escala, posición, biomasa, digestión pendiente, mejoras, recarga del escudo, estadísticas y final. Guarda cada cinco segundos y al pausar, ocultar o cerrar. La nueva clave es `voro-journey-v1`; migra automáticamente `voro-micro-v1` cuando aún no existe una campaña nueva. El guardado microscópico anterior no se borra. Las partidas con la cadencia anterior mantienen sus mejoras y la fracción de progreso hacia su próxima adaptación; esta conversión se realiza una sola vez. No hay sincronización entre dispositivos.
 
 ## Desarrollo y validación
 

@@ -1,19 +1,23 @@
 import { createLife, radiusForMass, clamp } from './simulation.mjs';
+import { newMicro, loadMicro, MICRO_SAVE } from './micro-progress.mjs';
 import {
-  newMicro,
-  loadMicro,
-  MICRO_SAVE,
-  refreshOffer,
-  chooseUpgrade,
-} from './micro-progress.mjs';
-import { upgradeStats, UPGRADES, levelOf } from './mutations.mjs';
-import { STAGES, SPECIES_BY_ID } from './journey-data.mjs';
-export { refreshOffer, chooseUpgrade, MICRO_SAVE };
+  upgradeStats,
+  UPGRADES,
+  levelOf,
+  offerUpgrades,
+  validChoice,
+  journeyAdaptation,
+  nextAdaptation,
+} from './mutations.mjs';
+import { STAGES, SPECIES_BY_ID, STAGE_START_MASS } from './journey-data.mjs';
+export { MICRO_SAVE };
 export const JOURNEY_SAVE = 'voro-journey-v1';
 export function newJourney(seed) {
   return {
     ...newMicro(seed),
     stage: 0,
+    adaptationVersion: 2,
+    rerollUsed: false,
     completed: false,
     pendingEvolution: false,
     finalReady: false,
@@ -28,6 +32,8 @@ export function journeyLife(p) {
     growthFactor: s.growth,
     ...upgradeStats(p.mutations),
   });
+  life.biomass = STAGE_START_MASS;
+  life.radius = radiusForMass(STAGE_START_MASS);
   life.free = true;
   return life;
 }
@@ -63,6 +69,9 @@ export function migrateMicro(raw) {
   const d = loadMicro(raw);
   if (!d) return null;
   const p = { ...newJourney(d.progress.seed), ...d.progress, stage: 0 };
+  p.xp = migrateAdaptationXp(p.xp, p.level);
+  p.offer = [];
+  refreshOffer(p);
   const l = journeyLife(p);
   Object.assign(l, d.life);
   l.maxMass = STAGES[0].goal * 1.5;
@@ -107,7 +116,8 @@ export function loadJourney(raw) {
     const progress = {
       ...newJourney(p.seed),
       stage: p.stage,
-      xp: p.xp,
+      xp: p.adaptationVersion === 2 ? p.xp : migrateAdaptationXp(p.xp, p.level),
+      rerollUsed: p.rerollUsed === true,
       level: p.level,
       mutations: p.mutations,
       deaths: p.deaths,
@@ -171,4 +181,49 @@ export function loadJourney(raw) {
   } catch {
     return null;
   }
+}
+
+// Preserve progress within the current adaptation when loading the previous cadence.
+export function migrateAdaptationXp(xp, level) {
+  const oldStart = level ? nextAdaptation(level - 1) : 0,
+    newStart = level ? journeyAdaptation(level - 1) : 0;
+  const fraction = Math.max(
+    0,
+    (xp - oldStart) / (nextAdaptation(level) - oldStart),
+  );
+  return newStart + fraction * (journeyAdaptation(level) - newStart);
+}
+export function refreshOffer(p) {
+  if (!p.offer.length && !p.completed && p.xp >= journeyAdaptation(p.level)) {
+    const original = offerUpgrades(p.mutations, p.seed, p.level);
+    p.offer = p.rerollUsed
+      ? offerUpgrades(p.mutations, p.seed, p.level, original)
+      : original;
+  }
+  return p.offer;
+}
+export function canReroll(p) {
+  return (
+    !p.completed &&
+    !p.rerollUsed &&
+    p.offer.length > 0 &&
+    UPGRADES.some(
+      (u) => levelOf(p.mutations, u.id) < u.max && !p.offer.includes(u.id),
+    )
+  );
+}
+export function rerollAdaptation(p) {
+  if (!canReroll(p)) return false;
+  p.offer = offerUpgrades(p.mutations, p.seed, p.level, p.offer);
+  p.rerollUsed = true;
+  return true;
+}
+export function chooseUpgrade(p, id) {
+  if (!validChoice(p.mutations, id, p.offer)) return false;
+  p.mutations.push(id);
+  p.level++;
+  p.offer = [];
+  p.rerollUsed = false;
+  refreshOffer(p);
+  return true;
 }

@@ -41,7 +41,7 @@ test('Bitmap organisms digest, membrane animates, and damage lowers HUD mass and
   step(g, 120, true);
   g.publish();
   assert.equal(f.snapshot.eaten, 1);
-  assert.equal(f.snapshot.biomass, 8.495);
+  assert.equal(f.snapshot.biomass, 2.495);
   assert.ok(f.draws > 1000);
   const before = g.life.radius;
   g.world.entities = [
@@ -49,7 +49,7 @@ test('Bitmap organisms digest, membrane animates, and damage lowers HUD mass and
   ];
   step(g);
   g.publish();
-  assert.ok(f.snapshot.biomass < 8.495);
+  assert.ok(f.snapshot.biomass < 2.495);
   assert.ok(f.snapshot.hurt > 0);
   assert.ok(f.snapshot.protected);
   isolate(g);
@@ -66,16 +66,16 @@ test('A shield blocks one hit, then damage and recycling apply during recharge',
     makeEntity(SPECIES_BY_ID.giant, g.life.x + 30, g.life.y, 2, 'enemy'),
   ]);
   step(g);
-  assert.equal(g.life.biomass, 8);
+  assert.equal(g.life.biomass, 2);
   assert.equal(g.progress.shieldRecharge, 24);
   assert.ok(g.world.entities[0].escape > 0);
   g.life.invulnerable = 0;
   step(g);
-  assert.equal(g.life.biomass, 6);
+  assert.equal(g.life.biomass, 1.4);
   assert.equal(g.fragments.length, 3);
   assert.ok(g.progress.shieldRecharge < 24);
   assert.ok(
-    Math.abs(g.fragments.reduce((s, e) => s + e.value, 0) - 0.4) < 1e-8,
+    Math.abs(g.fragments.reduce((s, e) => s + e.value, 0) - 0.12) < 1e-8,
   );
   isolate(g);
   step(g, 1441);
@@ -84,7 +84,7 @@ test('A shield blocks one hit, then damage and recycling apply during recharge',
 });
 test('Adaptation choices, pause and settings stop world time; retry retains choices, reset clears them', () => {
   const { game: g } = fresh();
-  g.progress.xp = 7;
+  g.progress.xp = 25;
   refreshOffer(g.progress);
   const start = g.life.elapsed;
   g.frame(100);
@@ -107,7 +107,7 @@ test('Adaptation choices, pause and settings stop world time; retry retains choi
   g.life.biomass = 0;
   g.action('retry');
   assert.deepEqual(g.progress.mutations, [selected]);
-  assert.equal(g.life.biomass, 8);
+  assert.equal(g.life.biomass, 2);
   g.action('restart');
   assert.equal(g.progress.level, 0);
   g.destroy();
@@ -181,7 +181,7 @@ test('Unassisted world population supports growth to cellular maturity without c
     }
     assert.equal(g.life.dead, false, 'survival seed ' + seed);
     assert.ok(g.progress.maturitySeen, 'maturity seed ' + seed);
-    assert.ok(g.progress.level >= 5);
+    assert.ok(g.progress.level >= 3);
     assert.equal(g.life.complete, false);
     assert.ok(g.world.chunks.size <= 49);
     results.push({

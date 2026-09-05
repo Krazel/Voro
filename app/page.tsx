@@ -4,6 +4,7 @@ import {
   Pause,
   Play,
   RotateCcw,
+  Shuffle,
   Volume2,
   VolumeX,
   ArrowUpRight,
@@ -32,28 +33,30 @@ export default function Home() {
   const [state, setState] = useState<Snapshot>({
     stage: 0,
     stageName: STAGES[0].name,
-    scale: '40 µm',
+    scale: '20 µm',
     evolutionFrom: 0,
     ending: 0,
     finalReady: false,
     assetError: false,
     mutations: [],
     offer: [],
+    canReroll: false,
+    rerollUsed: false,
     level: 0,
     adaptation: 0,
     adaptationStart: 0,
-    adaptationTarget: 6,
+    adaptationTarget: 24,
     saved: false,
     storageAvailable: true,
     transition: 0,
     deaths: 0,
-    biomass: 8,
+    biomass: 2,
     target: 150,
     hurt: 0,
     dead: false,
     protected: false,
     eaten: 0,
-    size: 40,
+    size: 20,
     elapsed: 0,
     dash: 0,
     evolved: false,
@@ -455,6 +458,20 @@ export default function Home() {
               );
             })}
           </div>
+          <button
+            className="adaptation-reroll"
+            disabled={!state.canReroll}
+            onClick={() => engine.current?.reroll()}
+          >
+            <Shuffle size={17} />
+            <span>
+              {state.rerollUsed
+                ? 'Cambio utilizado'
+                : state.canReroll
+                  ? 'Cambiar opciones · 1 gratis'
+                  : 'No quedan otras opciones'}
+            </span>
+          </button>
           <span className="short-note">
             El tiempo se detiene mientras eliges.
           </span>

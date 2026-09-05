@@ -1,4 +1,5 @@
 import { SPECIES as MICRO_SPECIES } from './micro-world.mjs';
+export const STAGE_START_MASS = 2;
 export const STAGES = [
   {
     id: 'micro',

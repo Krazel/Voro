@@ -1118,3 +1118,31 @@ button {
     animation: none;
   }
 }
+
+.adaptation-reroll {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
+  padding: 12px 15px;
+  margin-top: 16px;
+  background: #15333b;
+  border: 1px solid #577e8266;
+  border-radius: 12px;
+  color: #c9e6e3;
+  font-size: 14px;
+  transition: background 0.18s;
+}
+.adaptation-reroll:hover:not(:disabled) {
+  background: #21464f;
+}
+.adaptation-reroll:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.micro-upgrade-dialog {
+  max-height: 92dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}

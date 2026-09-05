@@ -1,6 +1,11 @@
 import { MicroWorld, makeEntity, TILE } from './micro-world.mjs';
 import { random, clamp } from './simulation.mjs';
-import { STAGE_SPECIES, SPECIES_BY_ID, isDanger } from './journey-data.mjs';
+import {
+  STAGE_SPECIES,
+  SPECIES_BY_ID,
+  isDanger,
+  STAGE_START_MASS,
+} from './journey-data.mjs';
 export function journeyEntity(s, x, y, seed, id) {
   const e = makeEntity(s, x, y, seed, id);
   e.requiredMass = s.requiredMass ?? e.requiredMass;
@@ -20,8 +25,12 @@ export class JourneyWorld extends MicroWorld {
   generate(cx, cy, time) {
     if (this.stage === 0) return super.generate(cx, cy, time);
     const list = STAGE_SPECIES[this.stage].filter((s) => s.kind !== 'final');
-    const small = list.filter((s) => s.r <= 30 && !isDanger(s)),
-      medium = list.filter((s) => s.r > 30 && !isDanger(s)),
+    const small = list.filter(
+        (s) =>
+          journeyEntity(s, 0, 0, 0, 'starter').requiredMass <=
+            STAGE_START_MASS && !isDanger(s),
+      ),
+      medium = list.filter((s) => !small.includes(s) && !isDanger(s)),
       danger = list.filter(isDanger);
     const rng = random(
         (this.seed ^

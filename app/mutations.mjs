@@ -127,12 +127,21 @@ export function upgradeStats(chosen, combo = false) {
   };
 }
 export const nextAdaptation = (level) => 6 + level * 6 + level * level * 1.5;
-export function offerUpgrades(chosen, seed, level) {
-  const rng = random((seed + Math.imul(level + 1, 104729)) >>> 0);
+export const journeyAdaptation = (level) => 24 + level * 24 + level * level * 4;
+export function offerUpgrades(chosen, seed, level, excluded = []) {
+  const rng = random(
+    (seed + Math.imul(level + 1, 104729) + (excluded.length ? 32452843 : 0)) >>>
+      0,
+  );
   const pool = UPGRADES.filter((u) => levelOf(chosen, u.id) < u.max)
     .map((u) => ({ ...u, key: rng() ** (u.group === 'Rara' ? 1.7 : 1) }))
     .sort((a, b) => b.key - a.key);
-  return pool.slice(0, 3).map((u) => u.id);
+  return [
+    ...pool.filter((u) => !excluded.includes(u.id)),
+    ...pool.filter((u) => excluded.includes(u.id)),
+  ]
+    .slice(0, 3)
+    .map((u) => u.id);
 }
 export function validChoice(chosen, id, offer) {
   const u = UPGRADES.find((u) => u.id === id);

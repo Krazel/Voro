@@ -21,7 +21,7 @@ import {
 import { drawJourneySprite } from './journey-sprites.mjs';
 import {
   upgradeStats,
-  nextAdaptation,
+  journeyAdaptation as nextAdaptation,
   levelOf,
   UPGRADES,
 } from './mutations.mjs';
@@ -32,6 +32,8 @@ import {
   journeyLife,
   refreshOffer,
   chooseUpgrade,
+  rerollAdaptation,
+  canReroll,
   saveJourney,
   loadJourney,
   migrateMicro,
@@ -48,6 +50,8 @@ export type Snapshot = {
   assetError: boolean;
   mutations: string[];
   offer: string[];
+  canReroll: boolean;
+  rerollUsed: boolean;
   level: number;
   adaptation: number;
   adaptationStart: number;
@@ -478,6 +482,19 @@ export class VoroEngine {
         (this.environments.complete && this.environments.naturalWidth > 0))
     );
   }
+  reroll() {
+    if (
+      !this.started ||
+      this.life.dead ||
+      this.settingsOpen ||
+      !rerollAdaptation(this.progress)
+    )
+      return;
+    this.keys.clear();
+    this.pointer = null;
+    this.save();
+    this.publish();
+  }
   choose(id: string) {
     if (this.life.dead || !chooseUpgrade(this.progress, id)) return;
     this.stats = upgradeStats(this.progress.mutations, this.comboClock > 0);
@@ -598,6 +615,8 @@ export class VoroEngine {
       assetError: this.assetError,
       mutations: [...this.progress.mutations],
       offer: [...this.progress.offer],
+      canReroll: canReroll(this.progress),
+      rerollUsed: this.progress.rerollUsed,
       level: this.progress.level,
       adaptation: this.progress.xp,
       adaptationStart: this.progress.level
@@ -959,7 +978,11 @@ export class VoroEngine {
     this.save();
     this.publish();
   }
-  receiveHit(source: { x: number; y: number }, fraction: number, minimum = 2) {
+  receiveHit(
+    source: { x: number; y: number },
+    fraction: number,
+    minimum = 0.6,
+  ) {
     const p = this.life;
     if (p.dead || p.invulnerable > 0 || this.progress.completed) return 0;
     if (this.stats.shieldCooldown && this.progress.shieldRecharge === 0) {
