@@ -186,6 +186,9 @@ export default function AnimationStudio() {
           <ArrowLeft size={17} />
           Volver al juego
         </Link>
+        <Link href="/interfaz" className="studio-back">
+          Probar interfaces <ChevronRight size={17} />
+        </Link>
         <span>
           {seen.size} / {TOTAL} explorados
         </span>

@@ -662,6 +662,10 @@ export default function Home() {
               </li>
             ))}
           </ol>
+          <Link className="settings-row" href="/interfaz">
+            Probar diseños de interfaz
+            <ArrowUpRight size={17} />
+          </Link>
           <Link className="settings-row" href="/animaciones">
             Galería de animaciones
             <ArrowUpRight size={17} />
