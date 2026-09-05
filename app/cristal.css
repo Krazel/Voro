@@ -1,0 +1,509 @@
+/* Membrana A1 · Cristal. Functional text remains HTML; the generated rim is a transparent image. */
+:root {
+  --cristal-ink: #eef3ed;
+  --cristal-muted: #b7cdd1;
+  --cristal-serif: Georgia, 'Times New Roman', serif;
+}
+.voro-shell[data-ui='cristal'] .brand {
+  font-family: var(--cristal-serif);
+  font-size: 30px;
+  letter-spacing: 0.18em;
+  color: #c6dce0;
+}
+.voro-shell[data-ui='cristal'] .brand span {
+  font:
+    10px Arial,
+    sans-serif;
+  letter-spacing: 0.38em;
+}
+.membrane-control {
+  position: relative;
+  isolation: isolate;
+  border: 1px solid #b0dee12e;
+  border-radius: 44px 36px 42px 38px / 40px 44px 36px 42px;
+  background: linear-gradient(145deg, #c1ecf009, #071e2880 48%, #6cbed110);
+  color: var(--cristal-ink);
+}
+.membrane-control::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  pointer-events: none;
+  border: 28px solid transparent;
+  border-image: url('/ui/cristal/membrane-frame.png') 200 / 28px / 0 stretch;
+  opacity: 0.58;
+  z-index: -1;
+  animation: cristal-breathe 7s ease-in-out infinite;
+}
+.membrane-control::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    transparent 32%,
+    #c4f3ff0a 46%,
+    #f3fbff12 49%,
+    transparent 60%
+  );
+  background-size: 300% 100%;
+  animation: cristal-sheen 11s ease-in-out infinite;
+  opacity: 0.7;
+}
+button.membrane-control {
+  transition:
+    background 0.25s,
+    box-shadow 0.25s,
+    transform 0.18s;
+}
+button.membrane-control:hover:not(:disabled) {
+  background-color: #59879625;
+  box-shadow:
+    inset 0 0 28px #b2f0ff12,
+    0 0 22px #93cddb12;
+}
+button.membrane-control:active:not(:disabled) {
+  transform: scale(0.975);
+}
+.membrane-control:focus-visible {
+  outline: 2px solid #d9f2f2;
+  outline-offset: 6px;
+}
+.cristal-dialog[data-slot='dialog-content'] {
+  --tw-ring-shadow: 0 0 #0000;
+  width: min(480px, calc(100vw - 28px));
+  max-width: 480px;
+  max-height: calc(
+    100dvh - max(32px, env(safe-area-inset-top) + env(safe-area-inset-bottom))
+  );
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 30px 24px 24px;
+  gap: 14px;
+  border-radius: 32px;
+  border: 1px solid #b9e2e333;
+  background: linear-gradient(155deg, #123645d9, #041822e8 60%, #0b2631df);
+  box-shadow:
+    0 24px 90px #0008,
+    inset 0 1px 0 #d8f6f416;
+  color: var(--cristal-ink);
+  scrollbar-width: thin;
+  scrollbar-color: #7698a6 #061a23;
+}
+body:has(.cristal-dialog) [data-slot='dialog-overlay'] {
+  background: #00111c75;
+  backdrop-filter: blur(3px);
+}
+.cristal-wordmark {
+  margin: 0;
+  text-align: center;
+  font: 400 36px/1.15 var(--cristal-serif);
+  letter-spacing: 0.14em;
+  color: #c0d9df;
+}
+.cristal-dialog.micro-upgrade-dialog > .eyebrow {
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: #9ebfc6;
+  margin: -3px 0 0;
+}
+.cristal-dialog.micro-upgrade-dialog [data-slot='dialog-title'] {
+  font: 400 clamp(25px, 6vw, 32px)/1.2 var(--cristal-serif);
+  text-align: center;
+  color: var(--cristal-ink);
+}
+.cristal-dialog.micro-upgrade-dialog [data-slot='dialog-description'] {
+  font: 400 17px/1.4 var(--cristal-serif);
+  color: var(--cristal-muted);
+  text-align: center;
+  margin: -3px 0 8px;
+}
+.cristal-choices.mutation-choices {
+  gap: 15px;
+}
+.cristal-choices.mutation-choices > button {
+  min-height: 126px;
+  width: 100%;
+  gap: 15px;
+  padding: 17px 19px 17px 10px;
+  border-radius: 44px 36px 42px 38px / 40px 44px 36px 42px;
+  border-color: #b0dee12e;
+  background: linear-gradient(145deg, #c1ecf009, #071e2866 48%, #6cbed110);
+  animation: cristal-arrive 0.6s both;
+}
+.cristal-choices > button:nth-child(2) {
+  animation-delay: 0.08s;
+}
+.cristal-choices > button:nth-child(3) {
+  animation-delay: 0.16s;
+}
+.cristal-choices > button:nth-child(2)::before {
+  animation-delay: -2s;
+}
+.cristal-choices > button:nth-child(3)::before {
+  animation-delay: -4s;
+}
+.cristal-choices.mutation-choices > button > .mutation-art {
+  flex: 0 0 96px;
+  width: 96px;
+  height: 96px;
+  border: 0;
+  border-radius: 50%;
+  mix-blend-mode: screen;
+  mask-image: radial-gradient(ellipse, #000 49%, #000b 66%, transparent 76%);
+}
+.cristal-choice-copy {
+  min-width: 0;
+}
+.cristal-choices.mutation-choices strong {
+  font: 400 20px/1.15 var(--cristal-serif);
+  color: #f0f2e9;
+}
+.cristal-choices.mutation-choices small {
+  font: 400 14px/1.45 var(--cristal-serif);
+  color: #c0d3d5;
+  margin-top: 8px;
+}
+.cristal-choices.mutation-choices em {
+  display: block;
+  font: 400 14px/1.3 var(--cristal-serif);
+  color: #b9d4d9;
+  margin-top: 11px;
+  letter-spacing: 0.06em;
+}
+.cristal-dialog .adaptation-reroll {
+  min-height: 56px;
+  margin: 7px 0 0;
+  padding: 13px 18px;
+  border-radius: 38px;
+  font: 400 18px/1.25 var(--cristal-serif);
+  color: #dbe6df;
+  background: #0b26324d;
+}
+.cristal-dialog .adaptation-reroll:disabled::after {
+  animation: none;
+}
+.cristal-dialog .short-note {
+  font-size: 12px;
+  color: #9cbbc1;
+  margin: 0;
+  text-align: center;
+}
+.voro-shell[data-ui='cristal'] .pause-panel {
+  inset: 35% 30px auto;
+  z-index: 9;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  padding: 24px 16px;
+}
+.voro-shell[data-ui='cristal'] .pause-panel h2 {
+  font-size: 44px;
+  margin: 0 0 32px;
+  color: var(--cristal-ink);
+}
+.voro-shell[data-ui='cristal'] .pause-panel .eyebrow,
+.voro-shell[data-ui='cristal'] .pause-panel .pause-copy {
+  display: none;
+}
+.voro-shell[data-ui='cristal'] .pause-panel .primary-button,
+.cristal-demo-pause .primary-button {
+  width: min(100%, 300px);
+  min-height: 64px;
+  margin: 20px auto;
+  background-color: #061b2877;
+  border-color: #b0dee12e;
+  border-radius: 38px;
+  color: var(--cristal-ink);
+  font: 400 24px/1.2 var(--cristal-serif);
+  box-shadow: none;
+}
+.voro-shell[data-ui='cristal'] .viewport[data-event='pause'] .shade {
+  background: #00101b77;
+  transition: background 0.6s;
+}
+.voro-shell[data-ui='cristal']
+  .viewport:not([data-event='play'])
+  :is(
+    .biomass-hud,
+    .micro-adaptation,
+    .bottom-controls,
+    .scale-marker,
+    .micro-buffs
+  ) {
+  opacity: 0.2;
+  transition: opacity 0.45s;
+}
+.voro-shell[data-ui='cristal'] .cristal-toast {
+  left: 50%;
+  right: auto;
+  width: max-content;
+  max-width: calc(100% - 56px);
+  padding: 12px 22px;
+  min-height: 44px;
+  border-radius: 35px;
+  background-color: #05202bdd;
+  color: #dce9e3;
+  font: 400 15px/1.4 var(--cristal-serif);
+  transform: translate(-50%, -5px);
+}
+.voro-shell[data-ui='cristal'] .cristal-toast.show {
+  transform: translate(-50%, 0);
+}
+.voro-shell[data-ui='cristal'] .journey-transition {
+  padding-bottom: 16%;
+}
+.voro-shell[data-ui='cristal'] .journey-transition > span {
+  color: #b6d8df;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+}
+.voro-shell[data-ui='cristal'] .journey-transition h2 {
+  font: 400 clamp(30px, 6vw, 40px)/1.2 var(--cristal-serif);
+  max-width: 390px;
+}
+.voro-shell[data-ui='cristal'] .journey-transition p {
+  max-width: 350px;
+  font: 400 14px/1.5 var(--cristal-serif);
+  color: #b9d2d6;
+}
+.cristal-stage-route {
+  font: 400 18px/1.4 var(--cristal-serif);
+  color: #bed6dd;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  margin: 6px 0 15px;
+}
+.cristal-stage-route > span {
+  padding: 0 10px;
+}
+.cristal-evolution-halo {
+  position: absolute;
+  top: 24%;
+  left: 50%;
+  width: 66%;
+  height: 37%;
+  transform: translateX(-50%);
+  border: 1px solid #c0edeb38;
+  border-radius: 48% 52% 46% 54%;
+  box-shadow:
+    0 0 44px #b4e9ed0a,
+    inset 0 0 40px #b4e9ed08;
+  animation: cristal-evolve 7.2s ease-in-out both;
+}
+.cristal-dialog.voro-settings {
+  background: linear-gradient(145deg, #143644f5, #061923f5);
+}
+.cristal-dialog.voro-settings [data-slot='dialog-title'] {
+  font: 400 32px/1.2 var(--cristal-serif);
+}
+.cristal-dialog.voro-settings .settings-row {
+  color: #dce9e7;
+  font-size: 16px;
+  border-color: #a3ced526;
+}
+.cristal-dialog.voro-settings .settings-row span {
+  color: #b8d1d3;
+  font-size: 14px;
+}
+.cristal-dialog.voro-settings .primary-button {
+  border-radius: 30px;
+  background: #123643;
+  border-color: #b3d7d35c;
+  color: #e3f1ec;
+}
+.cristal-dialog.cristal-preview {
+  padding: 18px 22px 26px;
+  background:
+    linear-gradient(#04172299, #031721ca),
+    url('/ui-previews/sea.webp') center / cover;
+}
+.cristal-preview-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.cristal-preview-top [data-slot='dialog-title'] {
+  font: 400 19px/1.3 var(--cristal-serif);
+}
+.cristal-preview .cristal-preview-note {
+  font-size: 13px;
+  color: #bdd1d7;
+  margin-top: -8px;
+}
+.cristal-preview .cristal-preview-tabs {
+  width: 100%;
+  min-height: 44px;
+  background: #00131d80;
+  border: 1px solid #bddce22e;
+  border-radius: 25px;
+}
+.cristal-preview-tabs [data-slot='tabs-trigger'] {
+  min-height: 36px;
+  border-radius: 22px;
+  font-size: 14px;
+  color: #bcd4d8;
+}
+.cristal-preview-tabs [data-active] {
+  background: #37566399;
+  color: #fff8e9;
+}
+.cristal-preview [data-slot='tabs-content'] {
+  padding-top: 18px;
+}
+.cristal-preview h2 {
+  font: 400 28px/1.2 var(--cristal-serif);
+  text-align: center;
+  margin: 14px 0;
+}
+.cristal-subtitle {
+  text-align: center;
+  font: 17px/1.4 var(--cristal-serif);
+  color: #bbd0d4;
+  margin: 0 0 24px;
+}
+.cristal-demo-evolution {
+  text-align: center;
+  min-height: 530px;
+}
+.cristal-demo-organism {
+  position: relative;
+  width: 220px;
+  height: 260px;
+  margin: 28px auto;
+  border: 1px solid #d2f4ef48;
+  border-radius: 49% 51% 45% 55%;
+  box-shadow: 0 0 32px #b4eef216;
+  animation: cristal-breathe 7s ease-in-out infinite;
+}
+.cristal-demo-organism > span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: url('/upgrades/biological-adaptations.png') 75% 0 / 500% 300%;
+  mix-blend-mode: screen;
+  mask-image: radial-gradient(ellipse, black 30%, transparent 70%);
+}
+.cristal-demo-pause {
+  min-height: 530px;
+  text-align: center;
+}
+.cristal-demo-pause h2 {
+  margin-top: 90px;
+  font-size: 44px;
+  margin-bottom: 40px;
+}
+.cristal-demo-toast {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  padding: 12px 22px;
+  margin: 24px auto 0;
+  text-align: center;
+  font: 15px/1.4 var(--cristal-serif);
+  animation: cristal-arrive 0.5s both;
+}
+@keyframes cristal-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.32;
+  }
+  50% {
+    transform: scale(1.009, 1.02);
+    opacity: 0.52;
+  }
+}
+@keyframes cristal-sheen {
+  0%,
+  20% {
+    background-position: 100% 0;
+  }
+  65%,
+  100% {
+    background-position: -80% 0;
+  }
+}
+@keyframes cristal-arrive {
+  from {
+    opacity: 0;
+    translate: 0 10px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@keyframes cristal-evolve {
+  0%,
+  100% {
+    opacity: 0;
+    scale: 0.9;
+  }
+  25% {
+    opacity: 0.6;
+    scale: 1;
+  }
+  60% {
+    opacity: 0.8;
+    scale: 1.14;
+  }
+}
+@media (max-width: 390px), (max-height: 730px) {
+  .cristal-dialog[data-slot='dialog-content'] {
+    padding: 22px 18px;
+    gap: 11px;
+  }
+  .cristal-choices.mutation-choices > button {
+    padding: 13px 16px 13px 7px;
+    gap: 9px;
+    min-height: 110px;
+  }
+  .cristal-choices.mutation-choices > button > .mutation-art {
+    flex-basis: 72px;
+    width: 72px;
+    height: 72px;
+  }
+  .cristal-choices.mutation-choices strong {
+    font-size: 18px;
+  }
+  .cristal-choices.mutation-choices em {
+    margin-top: 7px;
+  }
+  .cristal-wordmark {
+    font-size: 29px;
+  }
+  .cristal-dialog .adaptation-reroll {
+    font-size: 17px;
+    min-height: 50px;
+  }
+  .voro-shell[data-ui='cristal'] .pause-panel {
+    inset: 31% 18px auto;
+  }
+  .cristal-demo-evolution,
+  .cristal-demo-pause {
+    min-height: 420px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .membrane-control::before,
+  .membrane-control::after,
+  .cristal-choices.mutation-choices > button,
+  .cristal-evolution-halo,
+  .cristal-demo-organism,
+  .cristal-demo-toast {
+    animation: none;
+  }
+  button.membrane-control,
+  .voro-shell[data-ui='cristal'] .cristal-toast {
+    transition: none;
+  }
+  button.membrane-control:active:not(:disabled) {
+    transform: none;
+  }
+}

@@ -2,6 +2,8 @@
 import { TRANSITION_ROUTES } from './journey-transitions.mjs';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { AdaptationChoices, CristalPreview } from './cristal-ui';
+import './cristal.css';
 import {
   Pause,
   Play,
@@ -37,6 +39,7 @@ export default function Home() {
   const [settings, setSettings] = useState(false),
     [confirmReset, setConfirmReset] = useState(false);
   const [testPanel, setTestPanel] = useState(false);
+  const [uiPreview, setUiPreview] = useState(false);
   const [testStage, setTestStage] = useState(0);
   const [testSize, setTestSize] = useState(0);
   const [keepUpgrades, setKeepUpgrades] = useState(true);
@@ -125,12 +128,24 @@ export default function Home() {
           ),
         );
   return (
-    <main className="voro-shell">
+    <main className="voro-shell" data-ui="cristal">
       <aside className="outside-caption">
         <span className="side-line" />
         UN UNIVERSO POR DENTRO
       </aside>
-      <section className="viewport" aria-label="VORO: del origen al universo">
+      <section
+        className="viewport"
+        data-event={
+          state.offer.length
+            ? 'adaptation'
+            : state.transition > 0
+              ? 'evolution'
+              : state.paused
+                ? 'pause'
+                : 'play'
+        }
+        aria-label="VORO: del origen al universo"
+      >
         <canvas
           ref={canvas}
           tabIndex={0}
@@ -283,7 +298,12 @@ export default function Home() {
         )}
         {active && (
           <>
-            <output className={'hint micro-hint ' + (state.hint ? 'show' : '')}>
+            <output
+              className={
+                'hint micro-hint cristal-toast membrane-control ' +
+                (state.hint ? 'show' : '')
+              }
+            >
               {state.hint}
             </output>
             <div className="bottom-controls">
@@ -339,9 +359,17 @@ export default function Home() {
             <p className="eyebrow">EN SUSPENSIÓN</p>
             <h2>Respira.</h2>
             <p className="pause-copy">Tu progreso queda guardado.</p>
-            <button className="primary-button" onClick={() => action('pause')}>
+            <button
+              className="primary-button membrane-control"
+              onClick={() => action('pause')}
+            >
               Continuar
-              <Play size={18} />
+            </button>
+            <button
+              className="primary-button membrane-control"
+              onClick={() => changeSettings(true)}
+            >
+              Configuración
             </button>
           </div>
         )}
@@ -376,7 +404,16 @@ export default function Home() {
             <span>
               EVOLUCIÓN · {STAGES[state.evolutionFrom].short.toUpperCase()}
             </span>
+            <div className="cristal-evolution-halo" aria-hidden="true" />
             <h2>{STAGES[state.evolutionFrom].evolution}</h2>
+            <div className="cristal-stage-route">
+              {STAGES[state.evolutionFrom].short}{' '}
+              <span aria-hidden="true">→</span>{' '}
+              {
+                STAGES[Math.min(state.evolutionFrom + 1, STAGES.length - 1)]
+                  .short
+              }
+            </div>
             <p>{TRANSITION_ROUTES[STAGES[state.evolutionFrom].id]}</p>
           </div>
         )}
@@ -450,42 +487,23 @@ export default function Home() {
         open={active && state.offer.length > 0 && !settings}
         onOpenChange={() => {}}
       >
-        <DialogContent className="micro-upgrade-dialog" showCloseButton={false}>
+        <DialogContent
+          className="micro-upgrade-dialog cristal-dialog"
+          showCloseButton={false}
+        >
+          <p className="cristal-wordmark">VORO</p>
           <p className="eyebrow">ADAPTACIÓN {state.level + 1}</p>
           <DialogTitle style={{ whiteSpace: 'pre-line' }}>
             {adaptationCaption(STAGES[state.stage].id, state.level)}
           </DialogTitle>
-          <DialogDescription>
-            Elige una mejora. Tu evolución continúa en esta escala.
-          </DialogDescription>
-          <div className="mutation-choices">
-            {state.offer.map((id) => {
-              const u = UPGRADES.find((u) => u.id === id)!;
-              const art = u.artIndex;
-              return (
-                <button key={id} onClick={() => engine.current?.choose(id)}>
-                  <span
-                    className="mutation-art"
-                    aria-hidden="true"
-                    style={{
-                      backgroundPosition: `${(art % 5) * 25}% ${Math.floor(art / 5) * 50}%`,
-                    }}
-                  />
-                  <span>
-                    <strong>{u.name}</strong>
-                    <small>{u.detail}</small>
-                    <em>
-                      {u.group} · {levelOf(state.mutations, u.id)} / {u.max}{' '}
-                      adquiridas
-                    </em>
-                  </span>
-                  <ArrowUpRight size={17} />
-                </button>
-              );
-            })}
-          </div>
+          <DialogDescription>Elige una adaptación</DialogDescription>
+          <AdaptationChoices
+            offer={state.offer}
+            mutations={state.mutations}
+            onChoose={(id) => engine.current?.choose(id)}
+          />
           <button
-            className="adaptation-reroll"
+            className="adaptation-reroll membrane-control"
             disabled={!state.canReroll}
             onClick={() => engine.current?.reroll()}
           >
@@ -494,7 +512,7 @@ export default function Home() {
               {state.rerollUsed
                 ? 'Cambio utilizado'
                 : state.canReroll
-                  ? 'Cambiar opciones · 1 gratis'
+                  ? 'Otras opciones · 1 gratis'
                   : 'No quedan otras opciones'}
             </span>
           </button>
@@ -503,8 +521,16 @@ export default function Home() {
           </span>
         </DialogContent>
       </Dialog>
-      <Dialog open={settings} onOpenChange={changeSettings}>
-        <DialogContent className="voro-settings" showCloseButton={false}>
+      <CristalPreview
+        key={uiPreview ? 'open' : 'closed'}
+        open={uiPreview}
+        onClose={() => setUiPreview(false)}
+      />
+      <Dialog open={settings && !uiPreview} onOpenChange={changeSettings}>
+        <DialogContent
+          className="voro-settings cristal-dialog"
+          showCloseButton={false}
+        >
           <p className="eyebrow">VORO · ABISAL</p>
           <DialogTitle>Configuración</DialogTitle>
           <DialogDescription>{state.stageName}</DialogDescription>
@@ -662,6 +688,9 @@ export default function Home() {
               </li>
             ))}
           </ol>
+          <button className="settings-row" onClick={() => setUiPreview(true)}>
+            Probar interfaz Cristal <Sparkles size={17} />
+          </button>
           <Link className="settings-row" href="/interfaz">
             Probar diseños de interfaz
             <ArrowUpRight size={17} />
