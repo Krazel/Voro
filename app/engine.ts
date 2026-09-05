@@ -20,7 +20,6 @@ import {
 } from './journey-data.mjs';
 import { drawJourneySprite } from './journey-sprites.mjs';
 import { HuntingTentacles } from './hunting-tentacles.mjs';
-import { growthZoom } from './camera.mjs';
 import {
   upgradeStats,
   journeyAdaptation as nextAdaptation,
@@ -152,7 +151,7 @@ export class VoroEngine {
   height = 850;
   pixelRatio = 1;
   scale = 1;
-  zoom = 0.9;
+  zoom = 1;
   camera = { x: 700, y: 970 };
   heading = -Math.PI / 2;
   food: Food[] = [];
@@ -238,7 +237,7 @@ export class VoroEngine {
     this.stats = upgradeStats(this.progress.mutations);
     this.seed();
     this.camera = { x: this.life.x, y: this.life.y };
-    this.zoom = growthZoom(this.life.radius);
+    this.zoom = 1;
     this.resize();
     this.observer = new ResizeObserver(() => this.resize());
     this.observer.observe(canvas);
@@ -553,7 +552,7 @@ export class VoroEngine {
       this.stats = upgradeStats(this.progress.mutations);
       this.seed();
       this.camera = { x: 700, y: 970 };
-      this.zoom = growthZoom(this.life.radius);
+      this.zoom = 1;
       this.started = true;
       this.paused = false;
       this.keys.clear();
@@ -934,11 +933,12 @@ export class VoroEngine {
     this.camera.x += (p.x - this.camera.x) * (1 - Math.exp(-dt * 3));
     this.camera.y += (cameraY - this.camera.y) * (1 - Math.exp(-dt * 3));
     this.animateMembrane(dt);
+    // Original prototype (70c10fa): 480 world units across the viewport,
+    // independent of body size. Only the existing stage cinematic varies it.
     const targetZoom =
-      growthZoom(p.radius) *
-      (this.transition > 3.6
+      this.transition > 3.6
         ? 1 + 0.5 * Math.sin(((7.2 - this.transition) / 3.6) * Math.PI)
-        : 1);
+        : 1;
     this.zoom += (targetZoom - this.zoom) * (1 - Math.exp(-dt * 1.7));
     this.flash = Math.max(0, this.flash - dt * 0.6);
     this.hitFlash = Math.max(0, this.hitFlash - dt);
