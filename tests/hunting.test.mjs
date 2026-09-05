@@ -63,7 +63,7 @@ test('All three arms choose distinct targets; shrinking releases prey that is no
   arms.update(1 / 60, p, foods, 3);
   assert.ok(arms.arms.every((a) => a.target === null));
 });
-test('Original-strength impulse has a seven-second cooldown; every choice increases travel and reduces cooldown', () => {
+test('Moderated impulse has a seven-second cooldown; every choice increases travel and reduces cooldown', () => {
   let previous = 0,
     previousCooldown = 10;
   for (let rank = 0; rank <= 3; rank++) {
@@ -76,7 +76,7 @@ test('Original-strength impulse has a seven-second cooldown; every choice increa
     assert.ok(p.cooldown < previousCooldown);
     previousCooldown = p.cooldown;
     if (rank === 0) {
-      assert.equal(p.boostStrength, 2.8);
+      assert.equal(p.boostStrength, 2.5);
       assert.equal(p.cooldown, 7);
       assert.equal(p.boost, 0.42);
     }

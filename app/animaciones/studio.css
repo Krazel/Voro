@@ -254,3 +254,116 @@
     scroll-behavior: auto;
   }
 }
+
+.studio-controls.studio-view-switch {
+  max-width: 1440px;
+  margin: 0 auto 24px;
+}
+.size-comparison {
+  max-width: 1440px;
+  margin: auto;
+}
+.size-intro {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.size-intro h2 {
+  font:
+    400 26px Georgia,
+    serif;
+  margin: 0 0 10px;
+}
+.size-intro p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #93b6bb;
+  max-width: 740px;
+  margin: 0;
+}
+.size-intro label {
+  display: grid;
+  gap: 12px;
+  font-size: 14px;
+  min-width: 200px;
+}
+.size-intro input {
+  accent-color: #bad6ca;
+  min-height: 32px;
+}
+.size-scroll-hint {
+  font-size: 14px;
+  color: #93b6bb;
+}
+.size-scroll {
+  overflow: auto;
+  max-height: 76dvh;
+  border: 1px solid #355763;
+  border-radius: 12px;
+}
+.size-table {
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.size-table caption {
+  text-align: left;
+  padding: 16px;
+  font-size: 14px;
+  color: #93b6bb;
+}
+.size-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #102936;
+  border-bottom: 1px solid #446674;
+  padding: 15px;
+  font-size: 16px;
+}
+.size-table tbody th {
+  text-align: left;
+  vertical-align: middle;
+  padding: 16px;
+  border-bottom: 1px solid #27444f;
+  background: #0a1c28;
+}
+.size-table th button {
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.45;
+  min-height: 44px;
+}
+.size-table th button span {
+  display: block;
+  font-size: 14px;
+  color: #8cbbb8;
+  margin-top: 8px;
+}
+.size-table td.size-art {
+  padding: 0;
+  background: #081a28;
+}
+.size-art canvas {
+  display: block;
+  max-width: none;
+}
+.size-values td {
+  text-align: center;
+  font-size: 14px;
+  padding: 8px 12px 16px;
+  border-bottom: 1px solid #27444f;
+  color: #c1d9d3;
+}
+.size-loading {
+  padding: 30px;
+  color: #b9d4d0;
+}
+.size-scroll:focus-visible,
+.size-intro input:focus-visible {
+  outline: 2px solid #c4dcb7;
+  outline-offset: 3px;
+}

@@ -133,7 +133,7 @@ export function upgradeStats(chosen, combo = false) {
     steeringFactor: 1 + n('turn') * 0.3,
     cooldownSeconds: 7,
     cooldownFactor: (7 - n('dash') * 2) / 7,
-    boostStrength: 2.8 + n('dash') * 0.35,
+    boostStrength: 2.5 + n('dash') * 0.35,
     boostDuration: 0.42 + n('dash') * 0.1,
     damageFactor: 1,
     attraction: n('pull') * 28,

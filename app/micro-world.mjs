@@ -1,3 +1,4 @@
+import { MIN_SIZE_FACTOR, MAX_SIZE_FACTOR } from './entity-sizes.mjs';
 import { random, clamp } from './simulation.mjs';
 export const TILE = 600;
 export const SPECIES = [
@@ -118,7 +119,9 @@ export function makeEntity(species, x, y, seed, id) {
   const sizeFactor =
     species.kind === 'final'
       ? 1
-      : 0.88 + random(Math.floor(seed * 100000) ^ 78493)() * 0.24;
+      : MIN_SIZE_FACTOR +
+        random(Math.floor(seed * 100000) ^ 78493)() *
+          (MAX_SIZE_FACTOR - MIN_SIZE_FACTOR);
   const r = species.r * sizeFactor;
   return {
     id,

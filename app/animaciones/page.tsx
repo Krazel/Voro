@@ -14,6 +14,7 @@ import { STAGES, STAGE_SPECIES, ATLAS_URLS } from '../journey-data.mjs';
 import { ANIMATIONS } from '../animation-catalog.mjs';
 import { drawInhabitant } from '../inhabitant-animation.mjs';
 import './studio.css';
+import SizeComparison from './size-comparison';
 
 type Images = Record<string, HTMLImageElement>;
 const TOTAL = STAGE_SPECIES.flat().length;
@@ -52,6 +53,7 @@ export default function AnimationStudio() {
     [playing, setPlaying] = useState(true),
     [slow, setSlow] = useState(false),
     [mode, setMode] = useState('move');
+  const [view, setView] = useState('animation');
   const [seen, setSeen] = useState<Set<string>>(new Set(['water-16']));
   const canvas = useRef<HTMLCanvasElement>(null),
     time = useRef(0);
@@ -84,7 +86,7 @@ export default function AnimationStudio() {
   }, []);
   useEffect(() => {
     const c = canvas.current?.getContext('2d');
-    if (!c || !images[s.imageAtlas || s.atlas]) return;
+    if (view !== 'animation' || !c || !images[s.imageAtlas || s.atlas]) return;
     let frame = 0,
       last = performance.now();
     function draw(now: number) {
@@ -130,7 +132,7 @@ export default function AnimationStudio() {
       c!.stroke();
       c!.fillStyle = '#97b9b9';
       c!.font = '14px Arial';
-      c!.fillText('A tamaño de juego', 32, 500);
+      c!.fillText('Vista en miniatura', 32, 500);
       c!.save();
       c!.translate(337, 508);
       drawInhabitant(
@@ -158,7 +160,7 @@ export default function AnimationStudio() {
     }
     frame = requestAnimationFrame(draw);
     return () => cancelAnimationFrame(frame);
-  }, [images, s, profile, stage, playing, slow, mode]);
+  }, [images, s, profile, stage, playing, slow, mode, view]);
   function choose(id: string) {
     setSelected(id);
     time.current = 0;
@@ -205,104 +207,139 @@ export default function AnimationStudio() {
           ))}
         </TabsList>
       </Tabs>
-      <div className="studio-layout">
-        <section className="studio-view" aria-label="Animación seleccionada">
-          <div className="studio-canvas-wrap">
-            <canvas
-              ref={canvas}
-              width={960}
-              height={570}
-              aria-label={`Animación de ${s.name}`}
-            />
-            {!images[s.imageAtlas || s.atlas] && (
-              <div className="studio-loading">
-                {error ? (
-                  <>
-                    <p>No se han podido cargar las ilustraciones.</p>
-                    <button onClick={() => location.reload()}>
-                      Reintentar
-                    </button>
-                  </>
-                ) : (
-                  'Cargando las ilustraciones…'
-                )}
-              </div>
-            )}
-          </div>
-          <div className="studio-controls">
-            <button onClick={() => setPlaying(!playing)}>
-              {playing ? <Pause size={17} /> : <Play size={17} />}{' '}
-              {playing ? 'Pausar' : 'Reanudar'}
-            </button>
-            <button aria-pressed={slow} onClick={() => setSlow(!slow)}>
-              Cámara lenta
-            </button>
-            <button
-              aria-label="Reiniciar ciclo"
-              onClick={() => {
-                time.current = 0;
-              }}
-            >
-              <RotateCcw size={17} />
-            </button>
-            <div className="studio-modes" aria-label="Intensidad">
-              {[
-                ['idle', 'Reposo'],
-                ['move', 'Movimiento'],
-                ['react', 'Reacción'],
-              ].map(([id, name]) => (
-                <button
-                  key={id}
-                  aria-pressed={mode === id}
-                  onClick={() => setMode(id)}
-                >
-                  {name}
-                </button>
-              ))}
-            </div>
-          </div>
-          <div className="studio-caption">
-            <div>
-              <h2>{s.name}</h2>
-              <p>{profile.description}</p>
-            </div>
-            <div className="studio-next">
-              <button aria-label="Habitante anterior" onClick={() => next(-1)}>
-                <ChevronLeft />
-              </button>
-              <button aria-label="Siguiente habitante" onClick={() => next(1)}>
-                <ChevronRight />
-              </button>
-            </div>
-          </div>
-        </section>
-        <aside
-          className="studio-catalog"
-          aria-label={`Habitantes de ${STAGES[stage].short}`}
+      <div
+        className="studio-controls studio-view-switch"
+        aria-label="Vista del atlas"
+      >
+        <button
+          aria-pressed={view === 'animation'}
+          onClick={() => setView('animation')}
         >
-          {species.map((e) => (
-            <button
-              key={e.id}
-              aria-pressed={e.id === s.id}
-              onClick={() => choose(e.id)}
-            >
-              <Thumbnail id={e.id} images={images} />
-              <span>
-                {e.name}
-                <small>
-                  {ANIMATIONS[e.id].revision === 2
-                    ? 'Nueva revisión'
-                    : ANIMATIONS[e.id].revised
-                      ? 'Animación revisada'
-                      : seen.has(e.id)
-                        ? 'Visto'
-                        : 'Ver animación'}
-                </small>
-              </span>
-            </button>
-          ))}
-        </aside>
+          Animaciones
+        </button>
+        <button
+          aria-pressed={view === 'sizes'}
+          onClick={() => setView('sizes')}
+        >
+          Comparar tamaños · mín. / máx.
+        </button>
       </div>
+      {view === 'sizes' ? (
+        <SizeComparison
+          stage={stage}
+          images={images}
+          error={error}
+          onSelect={(id) => {
+            choose(id);
+            setView('animation');
+          }}
+        />
+      ) : (
+        <div className="studio-layout">
+          <section className="studio-view" aria-label="Animación seleccionada">
+            <div className="studio-canvas-wrap">
+              <canvas
+                ref={canvas}
+                width={960}
+                height={570}
+                aria-label={`Animación de ${s.name}`}
+              />
+              {!images[s.imageAtlas || s.atlas] && (
+                <div className="studio-loading">
+                  {error ? (
+                    <>
+                      <p>No se han podido cargar las ilustraciones.</p>
+                      <button onClick={() => location.reload()}>
+                        Reintentar
+                      </button>
+                    </>
+                  ) : (
+                    'Cargando las ilustraciones…'
+                  )}
+                </div>
+              )}
+            </div>
+            <div className="studio-controls">
+              <button onClick={() => setPlaying(!playing)}>
+                {playing ? <Pause size={17} /> : <Play size={17} />}{' '}
+                {playing ? 'Pausar' : 'Reanudar'}
+              </button>
+              <button aria-pressed={slow} onClick={() => setSlow(!slow)}>
+                Cámara lenta
+              </button>
+              <button
+                aria-label="Reiniciar ciclo"
+                onClick={() => {
+                  time.current = 0;
+                }}
+              >
+                <RotateCcw size={17} />
+              </button>
+              <div className="studio-modes" aria-label="Intensidad">
+                {[
+                  ['idle', 'Reposo'],
+                  ['move', 'Movimiento'],
+                  ['react', 'Reacción'],
+                ].map(([id, name]) => (
+                  <button
+                    key={id}
+                    aria-pressed={mode === id}
+                    onClick={() => setMode(id)}
+                  >
+                    {name}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="studio-caption">
+              <div>
+                <h2>{s.name}</h2>
+                <p>{profile.description}</p>
+              </div>
+              <div className="studio-next">
+                <button
+                  aria-label="Habitante anterior"
+                  onClick={() => next(-1)}
+                >
+                  <ChevronLeft />
+                </button>
+                <button
+                  aria-label="Siguiente habitante"
+                  onClick={() => next(1)}
+                >
+                  <ChevronRight />
+                </button>
+              </div>
+            </div>
+          </section>
+          <aside
+            className="studio-catalog"
+            aria-label={`Habitantes de ${STAGES[stage].short}`}
+          >
+            {species.map((e) => (
+              <button
+                key={e.id}
+                aria-pressed={e.id === s.id}
+                onClick={() => choose(e.id)}
+              >
+                <Thumbnail id={e.id} images={images} />
+                <span>
+                  {e.name}
+                  <small>
+                    {ANIMATIONS[e.id].revision === 2
+                      ? 'Nueva revisión'
+                      : ANIMATIONS[e.id].revised
+                        ? 'Animación revisada'
+                        : seen.has(e.id)
+                          ? 'Visto'
+                          : 'Ver animación'}
+                  </small>
+                </span>
+              </button>
+            ))}
+          </aside>
+        </div>
+      )}
       <p className="studio-note">
         La misma animación se usa en el juego. Las ilustraciones conservan su
         estilo; cada cuerpo tiene sus articulaciones y movimientos.
