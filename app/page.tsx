@@ -10,10 +10,8 @@ import {
   ChevronsRight,
   Settings,
   Shield,
-  Waves,
   Sparkles,
-  Check,
-  Orbit,
+  Waves,
 } from 'lucide-react';
 import {
   Dialog,
@@ -23,24 +21,26 @@ import {
   DialogClose,
 } from '@/components/ui/dialog';
 import { VoroEngine, type Snapshot } from './engine';
-import { STAGES, MUTATIONS } from './campaign.mjs';
-const mutationIcons = [Waves, Shield, Sparkles];
+import { UPGRADES, levelOf } from './mutations.mjs';
 export default function Home() {
-  const canvas = useRef<HTMLCanvasElement>(null);
-  const engine = useRef<VoroEngine | null>(null);
-  const [settings, setSettings] = useState(false);
-  const [confirmReset, setConfirmReset] = useState(false);
-  const resumeAfterSettings = useRef(false);
+  const canvas = useRef<HTMLCanvasElement>(null),
+    engine = useRef<VoroEngine | null>(null);
+  const [settings, setSettings] = useState(false),
+    [confirmReset, setConfirmReset] = useState(false);
+  const resume = useRef(false);
   const [state, setState] = useState<Snapshot>({
-    stage: 0,
     mutations: [],
-    won: false,
+    offer: [],
+    level: 0,
+    adaptation: 0,
+    adaptationStart: 0,
+    adaptationTarget: 6,
     saved: false,
     storageAvailable: true,
     transition: 0,
     deaths: 0,
     biomass: 8,
-    target: 26,
+    target: 150,
     hurt: 0,
     dead: false,
     protected: false,
@@ -54,6 +54,9 @@ export default function Home() {
     started: false,
     sound: true,
     hint: '',
+    shield: -1,
+    combo: false,
+    assetsReady: false,
   });
   useEffect(() => {
     const game = new VoroEngine(canvas.current!, setState);
@@ -64,44 +67,41 @@ export default function Home() {
     };
   }, []);
   const action = (
-    name:
-      | 'start'
-      | 'pause'
-      | 'restart'
-      | 'retry'
-      | 'dash'
-      | 'sound'
-      | 'continue',
+    name: 'start' | 'pause' | 'restart' | 'retry' | 'dash' | 'sound',
   ) => engine.current?.action(name);
   const changeSettings = (open: boolean) => {
     if (engine.current) engine.current.settingsOpen = open;
     if (open) {
-      resumeAfterSettings.current =
-        state.started && !state.paused && !state.complete && !state.dead;
-      if (resumeAfterSettings.current) action('pause');
-    } else if (resumeAfterSettings.current) {
+      resume.current =
+        state.started && !state.paused && !state.offer.length && !state.dead;
+      if (resume.current) action('pause');
+    } else if (resume.current) {
       if (engine.current?.paused) action('pause');
-      resumeAfterSettings.current = false;
+      resume.current = false;
     }
     setConfirmReset(false);
     setSettings(open);
   };
-  const stage = STAGES[state.stage];
-  const number = String(state.stage + 1).padStart(2, '0');
-  const active = state.started && !state.complete && !state.dead;
-  const minutes = Math.floor(state.elapsed / 60),
-    seconds = String(Math.floor(state.elapsed % 60)).padStart(2, '0');
+  const active = state.started && !state.dead;
+  const xp = Math.min(
+    1,
+    Math.max(
+      0,
+      (state.adaptation - state.adaptationStart) /
+        (state.adaptationTarget - state.adaptationStart),
+    ),
+  );
   return (
     <main className="voro-shell">
       <aside className="outside-caption">
         <span className="side-line" />
         UN UNIVERSO POR DENTRO
       </aside>
-      <section className="viewport" aria-label={'VORO: ' + stage.name}>
+      <section className="viewport" aria-label="VORO: la vida en una gota">
         <canvas
           ref={canvas}
-          aria-label="Arrastra para moverte. También puedes usar WASD, flechas o mando. Espacio para impulsarte."
           tabIndex={0}
+          aria-label="Arrastra para moverte. También puedes usar WASD, flechas o un mando. Espacio para impulsarte."
         />
         <div className="shade" />
         <header className="game-header">
@@ -123,7 +123,7 @@ export default function Home() {
             >
               {state.sound ? <Volume2 size={19} /> : <VolumeX size={19} />}
             </button>
-            {active && (
+            {active && !state.offer.length && (
               <button
                 className="icon-button"
                 onClick={() => action('pause')}
@@ -142,25 +142,21 @@ export default function Home() {
           }
         >
           <div className="size">
-            <strong>{state.size.toLocaleString('es-ES')}</strong>
-            <span>{stage.unit}</span>
+            <strong>{state.size}</strong>
+            <span>µm</span>
           </div>
           <div className="growth">
             <div className="growth-label">
-              <span>{stage.form.toUpperCase()}</span>
+              <span>BIOMASA</span>
               <span>
-                {Math.min(
-                  100,
-                  Math.round((state.biomass / state.target) * 100),
-                )}
-                %
+                {state.biomass.toFixed(1)} / {state.target}
               </span>
             </div>
             <progress
               className="sr-only"
-              aria-label="Biomasa para evolucionar"
+              aria-label="Biomasa"
+              value={Math.min(state.biomass, state.target)}
               max={state.target}
-              value={Math.min(state.target, state.biomass)}
             />
             <div className="growth-track" aria-hidden="true">
               <i
@@ -177,30 +173,28 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="chapter-hud">
-          <span>
-            {number} / {stage.world.toUpperCase()}
-          </span>
-          <div
-            className="chapter-dots"
-            aria-label={'Etapa ' + (state.stage + 1) + ' de 6'}
-          >
-            {STAGES.map((s, i) => (
-              <i key={s.name} className={i <= state.stage ? 'lit' : ''} />
-            ))}
+        <div className="micro-adaptation">
+          <div>
+            <span>ADAPTACIÓN {state.level + 1}</span>
+            <span>{state.level} mejoras</span>
           </div>
+          <progress
+            className="sr-only"
+            aria-label="Experiencia para la siguiente adaptación"
+            value={xp}
+            max={1}
+          />
+          <i aria-hidden="true">
+            <b style={{ width: xp * 100 + '%' }} />
+          </i>
         </div>
         {!state.started && (
           <div className="intro">
-            <p className="eyebrow">
-              {state.saved
-                ? number + ' / ' + stage.name.toUpperCase()
-                : 'DE UNA CÉLULA AL UNIVERSO'}
-            </p>
+            <p className="eyebrow">01 / LA VIDA EN UNA GOTA</p>
             <h1>
               {state.saved ? (
                 <>
-                  Tu hambre
+                  La vida
                   <br />
                   te espera.
                 </>
@@ -213,31 +207,30 @@ export default function Home() {
               )}
             </h1>
             <p className="intro-instruction">
-              {state.saved ? (
-                'Tu evolución continúa donde la dejaste.'
-              ) : (
-                <>
-                  Absorbe. Crece. Evoluciona.
-                  <br />
-                  Un día, te comerás los planetas.
-                </>
-              )}
+              Come lo pequeño. Evita a los cazadores.
+              <br />
+              Esta vez, la gota no tiene paredes.
             </p>
-            <button className="primary-button" onClick={() => action('start')}>
-              {state.saved ? 'Continuar partida' : 'Despertar'}
+            <button
+              className="primary-button"
+              disabled={!state.assetsReady}
+              onClick={() => action('start')}
+            >
+              {!state.assetsReady
+                ? 'Preparando la gota…'
+                : state.saved
+                  ? 'Continuar partida'
+                  : 'Despertar'}
               <ArrowUpRight size={20} />
             </button>
             <span className="short-note">
-              6 mundos ·{' '}
-              {state.storageAvailable
-                ? 'guardado automático'
-                : 'partida sin guardado'}
+              Etapa unicelular · guardado automático
             </span>
           </div>
         )}
         {active && (
           <>
-            <output className={'hint ' + (state.hint ? 'show' : '')}>
+            <output className={'hint micro-hint ' + (state.hint ? 'show' : '')}>
               {state.hint}
             </output>
             <div className="bottom-controls">
@@ -247,6 +240,12 @@ export default function Home() {
               </div>
               <button
                 className={'dash-button ' + (state.dash > 0 ? 'cooldown' : '')}
+                disabled={
+                  state.dash > 0 ||
+                  state.paused ||
+                  state.offer.length > 0 ||
+                  state.transition > 0
+                }
                 onPointerDown={(e) => {
                   e.preventDefault();
                   action('dash');
@@ -254,10 +253,7 @@ export default function Home() {
                 onClick={(e) => {
                   if (e.detail === 0) action('dash');
                 }}
-                disabled={
-                  state.dash > 0 || state.paused || state.transition > 0
-                }
-                aria-label="Impulso, también con espacio o botón A"
+                aria-label="Impulso"
               >
                 <ChevronsRight size={31} />
                 <span>
@@ -265,58 +261,29 @@ export default function Home() {
                 </span>
               </button>
             </div>
-            {state.stage === 5 && (
-              <div className="final-objective">
-                <Orbit size={13} />
-                {state.biomass < 56
-                  ? 'GAIA · ' + state.biomass.toFixed(0) + ' / 56 BIOMASA'
-                  : 'GAIA ESTÁ A TU ALCANCE'}
-              </div>
-            )}
+            <div className="micro-buffs">
+              {state.shield >= 0 && (
+                <span>
+                  <Shield size={12} />
+                  {state.shield > 0
+                    ? 'Escudo · ' + Math.ceil(state.shield) + ' s'
+                    : 'Escudo listo'}
+                </span>
+              )}
+              {state.combo && (
+                <span>
+                  <Sparkles size={12} />
+                  Hambre encadenada
+                </span>
+              )}
+            </div>
           </>
-        )}
-        {state.started && state.complete && !state.won && (
-          <div
-            className="finish-panel evolution-panel"
-            aria-label="Elige una mutación"
-          >
-            <p className="eyebrow">EVOLUCIÓN {number} / 05</p>
-            <h2>La vida se abre paso.</h2>
-            <p>{stage.transition}</p>
-            <div className="next-world">
-              SIGUIENTE ·{' '}
-              {STAGES[Math.min(state.stage + 1, 5)].name.toUpperCase()}
-            </div>
-            <div className="mutation-choices">
-              {MUTATIONS.map((m, i) => {
-                const Icon = mutationIcons[i];
-                return (
-                  <button
-                    key={m.id}
-                    onClick={() => engine.current?.evolve(m.id)}
-                  >
-                    <Icon size={21} />
-                    <span>
-                      <strong>{m.name}</strong>
-                      <small>{m.detail}</small>
-                    </span>
-                    <ArrowUpRight size={16} />
-                  </button>
-                );
-              })}
-            </div>
-            <span className="short-note">
-              Elige una mutación. Su efecto se acumula.
-            </span>
-          </div>
         )}
         {active && state.paused && !settings && (
           <div className="pause-panel">
             <p className="eyebrow">EN SUSPENSIÓN</p>
             <h2>Respira.</h2>
-            <p className="pause-copy">
-              {stage.name} · {minutes}:{seconds}
-            </p>
+            <p className="pause-copy">Tu progreso queda guardado.</p>
             <button className="primary-button" onClick={() => action('pause')}>
               Continuar
               <Play size={18} />
@@ -328,88 +295,96 @@ export default function Home() {
             <p className="eyebrow">BIOMASA AGOTADA</p>
             <h2>La vida insiste.</h2>
             <p>
-              Tu membrana no ha resistido.
+              Vuelves a ser pequeño.
               <br />
-              Conservas las mutaciones y las etapas anteriores.
-            </p>
-            <div className="finish-stats">
-              <span>
-                <b>{number}</b>etapa
-              </span>
-              <span>
-                <b>{state.mutations.length}</b>mutaciones
-              </span>
-            </div>
-            <button className="primary-button" onClick={() => action('retry')}>
-              Reintentar etapa
-              <RotateCcw size={18} />
-            </button>
-          </div>
-        )}
-        {state.started && state.won && (
-          <div className="finish-panel ending-panel" aria-live="polite">
-            <Orbit size={30} className="ending-icon" />
-            <p className="eyebrow">EL ÚLTIMO MUNDO</p>
-            <h2>
-              Todo vive
-              <br />
-              dentro de ti.
-            </h2>
-            <p>
-              Empezaste en una gota de agua.
-              <br />
-              Ahora, un planeta late en tu núcleo.
+              Conservas tus adaptaciones.
             </p>
             <div className="finish-stats">
               <span>
                 <b>{state.eaten}</b>absorciones
               </span>
               <span>
-                <b>
-                  {minutes}:{seconds}
-                </b>
-                de evolución
+                <b>{state.level}</b>mejoras
               </span>
             </div>
-            <div className="ending-seal">
-              <Check size={14} />
-              CAMPAÑA COMPLETADA
-            </div>
-            <button
-              className="text-button"
-              onClick={() => changeSettings(true)}
-            >
-              Tu evolución
-              <Settings size={14} />
+            <button className="primary-button" onClick={() => action('retry')}>
+              Reintentar
+              <RotateCcw size={18} />
             </button>
           </div>
         )}
         {state.transition > 0 && (
-          <div
-            className="stage-transition"
-            key={state.stage}
-            aria-live="polite"
-          >
-            <span>{number} / 06</span>
-            <h2>{stage.name}</h2>
-            <p>{stage.world} · una nueva escala</p>
+          <div className="stage-transition micro-transition" aria-live="polite">
+            <span>EVOLUCIÓN CELULAR</span>
+            <h2>
+              La membrana
+              <br />
+              se expande.
+            </h2>
+            <p>
+              Has dominado esta escala.
+              <br />
+              Puedes seguir explorando la gota.
+            </p>
           </div>
         )}
-        {state.protected && active && !state.paused && (
+        {state.protected && active && !state.paused && !state.offer.length && (
           <div className="protection-badge">MEMBRANA PROTEGIDA · ESCAPA</div>
         )}
         <div className="scale-marker">
           <i />
-          <span>
-            {stage.baseSize / 2} {stage.unit}
-          </span>
+          <span>20 µm</span>
         </div>
       </section>
+      <Dialog
+        open={active && state.offer.length > 0 && !settings}
+        onOpenChange={() => {}}
+      >
+        <DialogContent className="micro-upgrade-dialog" showCloseButton={false}>
+          <p className="eyebrow">ADAPTACIÓN {state.level + 1}</p>
+          <DialogTitle>
+            La vida encuentra
+            <br />
+            otra forma.
+          </DialogTitle>
+          <DialogDescription>
+            Elige una mejora. Seguirás en esta misma gota.
+          </DialogDescription>
+          <div className="mutation-choices">
+            {state.offer.map((id) => {
+              const u = UPGRADES.find((u) => u.id === id)!;
+              const Icon =
+                u.group === 'Defenderse'
+                  ? Shield
+                  : u.group === 'Moverse'
+                    ? Waves
+                    : Sparkles;
+              return (
+                <button key={id} onClick={() => engine.current?.choose(id)}>
+                  <Icon size={23} />
+                  <span>
+                    <strong>{u.name}</strong>
+                    <small>{u.detail}</small>
+                    <em>
+                      {u.group} · nivel {levelOf(state.mutations, id) + 1}/
+                      {u.max}
+                    </em>
+                  </span>
+                  <ArrowUpRight size={17} />
+                </button>
+              );
+            })}
+          </div>
+          <span className="short-note">
+            El tiempo se detiene mientras eliges.
+          </span>
+        </DialogContent>
+      </Dialog>
       <Dialog open={settings} onOpenChange={changeSettings}>
         <DialogContent className="voro-settings" showCloseButton={false}>
           <p className="eyebrow">VORO · ABISAL</p>
           <DialogTitle>Configuración</DialogTitle>
-          <DialogDescription>Una pausa en tu evolución.</DialogDescription>
+          <DialogDescription>La vida en una gota.</DialogDescription>
           <button
             className="settings-row"
             onClick={() => action('sound')}
@@ -417,45 +392,37 @@ export default function Home() {
           >
             Sonido<span>{state.sound ? 'Activado' : 'Desactivado'}</span>
           </button>
-          <div className="journey-list" aria-label="Etapas de la evolución">
-            {STAGES.map((s, i) => (
-              <div key={s.name} className={i <= state.stage ? 'unlocked' : ''}>
-                <span>{String(i + 1).padStart(2, '0')}</span>
-                {s.name}
-                {i < state.stage || state.won ? (
-                  <Check size={13} />
-                ) : i === state.stage ? (
-                  <i />
-                ) : null}
-              </div>
-            ))}
+          <div className="micro-stat-row">
+            <span>{state.eaten} absorciones</span>
+            <span>{Math.floor(state.elapsed / 60)} min de vida</span>
           </div>
           <p className="save-note">
             {state.storageAvailable
               ? 'La partida se guarda en este dispositivo.'
-              : 'No se puede guardar en este navegador. La partida durará mientras siga abierta.'}
+              : 'El guardado no está disponible en este navegador.'}
           </p>
-          {state.mutations.length > 0 && (
-            <div className="mutation-summary">
-              {MUTATIONS.map((m) => {
-                const n = state.mutations.filter((x) => x === m.id).length;
+          {state.level > 0 && (
+            <div className="micro-upgrade-list">
+              {UPGRADES.map((u) => {
+                const n = levelOf(state.mutations, u.id);
                 return n ? (
-                  <span key={m.id}>
-                    {m.name} ×{n}
-                  </span>
+                  <div key={u.id}>
+                    <span>{u.name}</span>
+                    <b>
+                      {n}/{u.max}
+                    </b>
+                  </div>
                 ) : null;
               })}
             </div>
           )}
           {confirmReset ? (
             <div className="reset-confirm">
-              <p>
-                Se borrará esta evolución. Empezarás desde el primer organismo.
-              </p>
+              <p>Se borrará esta partida y sus adaptaciones.</p>
               <button
                 className="primary-button"
                 onClick={() => {
-                  resumeAfterSettings.current = false;
+                  resume.current = false;
                   action('restart');
                   changeSettings(false);
                 }}
@@ -486,9 +453,7 @@ export default function Home() {
         </DialogContent>
       </Dialog>
       <aside className="desktop-note">
-        <span>
-          {number} — {stage.name.toUpperCase()}
-        </span>
+        <span>01 — LA VIDA EN UNA GOTA</span>
         <p>
           Arrastra para moverte
           <br />
@@ -496,7 +461,7 @@ export default function Home() {
           <br />
           Mando · stick izquierdo + A
         </p>
-        <small>VORO · 6 etapas de evolución</small>
+        <small>12 organismos · 15 adaptaciones · mundo abierto</small>
       </aside>
     </main>
   );

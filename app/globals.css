@@ -845,3 +845,135 @@ button {
     backdrop-filter: none;
   }
 }
+
+.micro-adaptation {
+  position: absolute;
+  top: max(156px, calc(env(safe-area-inset-top) + 124px));
+  left: 28px;
+  right: 28px;
+  pointer-events: none;
+}
+.micro-adaptation > div {
+  display: flex;
+  justify-content: space-between;
+  color: #91b7c1;
+  font-size: 10px;
+  letter-spacing: 1px;
+  margin-bottom: 7px;
+}
+.micro-adaptation > i {
+  display: block;
+  height: 2px;
+  background: #416c763d;
+  overflow: hidden;
+}
+.micro-adaptation b {
+  display: block;
+  height: 100%;
+  background: #97cecc;
+  transition: width 0.35s;
+}
+.micro-hint {
+  top: max(199px, calc(env(safe-area-inset-top) + 167px));
+}
+.micro-buffs {
+  position: absolute;
+  left: 28px;
+  bottom: max(128px, calc(env(safe-area-inset-bottom) + 99px));
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  pointer-events: none;
+}
+.micro-buffs span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #b6d4cd;
+  font-size: 11px;
+}
+.micro-upgrade-dialog {
+  max-width: 420px;
+  background: #061b27f5;
+  color: #dcece7;
+  border: 1px solid #688e9670;
+  border-radius: 12px;
+  padding: 30px;
+  gap: 16px;
+  box-shadow: 0 30px 120px #0009;
+  max-height: calc(100dvh - 40px);
+  overflow-y: auto;
+}
+.micro-upgrade-dialog [data-slot='dialog-title'] {
+  font:
+    400 34px/1.1 Georgia,
+    serif;
+}
+.micro-upgrade-dialog [data-slot='dialog-description'] {
+  color: #9eb8c0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.micro-upgrade-dialog .eyebrow {
+  margin-bottom: 0;
+}
+.micro-upgrade-dialog .mutation-choices button {
+  min-height: 84px;
+}
+.micro-upgrade-dialog .mutation-choices strong {
+  font-size: 15px;
+}
+.micro-upgrade-dialog .mutation-choices small {
+  font-size: 12px;
+}
+.micro-upgrade-dialog .mutation-choices em {
+  display: block;
+  font-size: 11px;
+  font-style: normal;
+  letter-spacing: 0.5px;
+  color: #d0b785;
+  margin-top: 5px;
+}
+.micro-upgrade-list {
+  display: grid;
+  gap: 10px;
+  max-height: 34dvh;
+  overflow: auto;
+  padding: 8px 0;
+}
+.micro-upgrade-list > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 13px;
+  color: #aec8cd;
+}
+.micro-upgrade-list b {
+  font-weight: 400;
+  color: #dfc493;
+}
+.micro-stat-row {
+  display: flex;
+  gap: 18px;
+  font-size: 12px;
+  color: #a6bfc5;
+}
+.micro-transition {
+  animation-duration: 4s;
+}
+@media (max-height: 700px) {
+  .micro-upgrade-dialog {
+    padding: 22px;
+    gap: 12px;
+  }
+  .micro-upgrade-dialog [data-slot='dialog-title'] {
+    font-size: 28px;
+  }
+  .micro-upgrade-dialog .mutation-choices button {
+    min-height: 76px;
+    padding: 10px;
+  }
+  .micro-upgrade-dialog .short-note {
+    margin-top: 0;
+  }
+}

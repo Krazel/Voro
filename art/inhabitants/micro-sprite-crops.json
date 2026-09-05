@@ -1,0 +1,200 @@
+{
+  "image": "micro.png",
+  "width": 1448,
+  "height": 1086,
+  "method": "Custom source rectangles. Significant content alpha >=16 with 8px transparent padding. Preserve the PNG alpha; low-alpha generation noise outside rectangles is excluded. Giant amoeba crosses nominal grid into flagellate and colonial cells, so do not use uniform grid cuts.",
+  "sprites": [
+    {
+      "index": 0,
+      "name": "amber nutrient cluster",
+      "alpha16Bounds": {
+        "x": 46,
+        "y": 58,
+        "width": 279,
+        "height": 251
+      },
+      "crop": {
+        "x": 38,
+        "y": 50,
+        "width": 295,
+        "height": 267
+      }
+    },
+    {
+      "index": 1,
+      "name": "green bacterial rod",
+      "alpha16Bounds": {
+        "x": 376,
+        "y": 114,
+        "width": 320,
+        "height": 145
+      },
+      "crop": {
+        "x": 368,
+        "y": 106,
+        "width": 336,
+        "height": 161
+      }
+    },
+    {
+      "index": 2,
+      "name": "paired cocci",
+      "alpha16Bounds": {
+        "x": 791,
+        "y": 101,
+        "width": 250,
+        "height": 181
+      },
+      "crop": {
+        "x": 783,
+        "y": 93,
+        "width": 266,
+        "height": 197
+      }
+    },
+    {
+      "index": 3,
+      "name": "blue diatom",
+      "alpha16Bounds": {
+        "x": 1131,
+        "y": 108,
+        "width": 270,
+        "height": 165
+      },
+      "crop": {
+        "x": 1123,
+        "y": 100,
+        "width": 286,
+        "height": 181
+      }
+    },
+    {
+      "index": 4,
+      "name": "oval paramecium",
+      "alpha16Bounds": {
+        "x": 25,
+        "y": 437,
+        "width": 315,
+        "height": 205
+      },
+      "crop": {
+        "x": 17,
+        "y": 429,
+        "width": 331,
+        "height": 221
+      }
+    },
+    {
+      "index": 5,
+      "name": "small harmless amoeba",
+      "alpha16Bounds": {
+        "x": 418,
+        "y": 408,
+        "width": 269,
+        "height": 239
+      },
+      "crop": {
+        "x": 410,
+        "y": 400,
+        "width": 285,
+        "height": 255
+      }
+    },
+    {
+      "index": 6,
+      "name": "long flagellate",
+      "alpha16Bounds": {
+        "x": 738,
+        "y": 476,
+        "width": 334,
+        "height": 130
+      },
+      "crop": {
+        "x": 730,
+        "y": 468,
+        "width": 350,
+        "height": 146
+      }
+    },
+    {
+      "index": 7,
+      "name": "spiral bacterium",
+      "alpha16Bounds": {
+        "x": 1130,
+        "y": 451,
+        "width": 284,
+        "height": 159
+      },
+      "crop": {
+        "x": 1122,
+        "y": 443,
+        "width": 300,
+        "height": 175
+      }
+    },
+    {
+      "index": 8,
+      "name": "predatory dark-core ciliate",
+      "alpha16Bounds": {
+        "x": 27,
+        "y": 765,
+        "width": 321,
+        "height": 237
+      },
+      "crop": {
+        "x": 19,
+        "y": 757,
+        "width": 337,
+        "height": 253
+      }
+    },
+    {
+      "index": 9,
+      "name": "silver spiny protist",
+      "alpha16Bounds": {
+        "x": 372,
+        "y": 754,
+        "width": 338,
+        "height": 259
+      },
+      "crop": {
+        "x": 364,
+        "y": 746,
+        "width": 354,
+        "height": 275
+      }
+    },
+    {
+      "index": 10,
+      "name": "thick-membrane giant amoeba",
+      "alpha16Bounds": {
+        "x": 753,
+        "y": 700,
+        "width": 339,
+        "height": 335
+      },
+      "crop": {
+        "x": 745,
+        "y": 692,
+        "width": 355,
+        "height": 351
+      }
+    },
+    {
+      "index": 11,
+      "name": "colonial chain of cells",
+      "alpha16Bounds": {
+        "x": 1127,
+        "y": 788,
+        "width": 291,
+        "height": 209
+      },
+      "crop": {
+        "x": 1119,
+        "y": 780,
+        "width": 307,
+        "height": 225
+      }
+    }
+  ]
+}

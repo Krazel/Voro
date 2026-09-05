@@ -11,7 +11,7 @@ export function random(seed = 701) {
     return seed / 4294967296;
   };
 }
-/** @typedef {{dx:number,dy:number,progress:number,done:boolean,rod:boolean,rotation:number,value:number,kind:string,r:number,final:boolean}} Digestion */
+/** @typedef {{dx:number,dy:number,progress:number,done:boolean,rod:boolean,rotation:number,value:number,kind:string,r:number,final:boolean,recycled:boolean}} Digestion */
 export function createLife(options = {}) {
   return {
     goalMass: options.goalMass ?? EVOLUTION_MASS,
@@ -21,6 +21,13 @@ export function createLife(options = {}) {
     damageFactor: options.damageFactor ?? 1,
     digestFactor: options.digestFactor ?? 1,
     attraction: options.attraction ?? 0,
+    unbounded: options.unbounded ?? false,
+    reachFactor: options.reachFactor ?? 1,
+    absorptionSlots: options.absorptionSlots ?? 5,
+    yieldFactor: options.yieldFactor ?? 1,
+    growthFactor: options.growthFactor ?? 1,
+    steeringFactor: options.steeringFactor ?? 1,
+    adaptationGained: 0,
     finalRequired: options.finalRequired ?? false,
     finalEaten: false,
     x: 700,
@@ -75,19 +82,19 @@ export function integrate(life, dt, input) {
   const length = Math.hypot(input.x, input.y);
   const speed =
     (life.evolved ? 145 : 125) * life.speedFactor * (life.boost > 0 ? 2.8 : 1);
-  const blend = 1 - Math.exp(-dt * 4.4);
+  const blend = 1 - Math.exp(-dt * 4.4 * life.steeringFactor);
   life.vx +=
     ((length > 0 ? (input.x / Math.max(1, length)) * speed : 0) - life.vx) *
     blend;
   life.vy +=
     ((length > 0 ? (input.y / Math.max(1, length)) * speed : 0) - life.vy) *
     blend;
-  life.x = clamp(life.x + (life.vx + life.knockX) * dt, 100, WORLD.width - 100);
-  life.y = clamp(
-    life.y + (life.vy + life.knockY) * dt,
-    130,
-    WORLD.height - 130,
-  );
+  life.x += (life.vx + life.knockX) * dt;
+  life.y += (life.vy + life.knockY) * dt;
+  if (!life.unbounded) {
+    life.x = clamp(life.x, 100, WORLD.width - 100);
+    life.y = clamp(life.y, 130, WORLD.height - 130);
+  }
   life.knockX *= Math.exp(-dt * 5);
   life.knockY *= Math.exp(-dt * 5);
 }
@@ -105,7 +112,12 @@ export function digest(life, dt) {
     if (f.progress >= 1 && !f.done) {
       f.done = true;
       life.eaten++;
-      life.biomass = Math.min(life.maxMass, life.biomass + f.value);
+      life.biomass = Math.min(
+        life.maxMass,
+        life.biomass +
+          f.value * (f.recycled ? 1 : life.yieldFactor * life.growthFactor),
+      );
+      if (!f.recycled) life.adaptationGained += f.value;
       if (f.final) life.finalEaten = true;
       life.feedPulse = 1;
       count++;
@@ -130,8 +142,9 @@ export function beginAbsorb(life, food) {
     food.eaten ||
     life.complete ||
     life.biomass < (food.requiredMass || 0) ||
-    life.digestion.length >= 5 ||
-    Math.hypot(food.x - life.x, food.y - life.y) > life.radius * 1.12
+    life.digestion.length >= life.absorptionSlots ||
+    Math.hypot(food.x - life.x, food.y - life.y) >
+      life.radius * 1.12 * life.reachFactor
   )
     return false;
   food.eaten = true;
@@ -146,6 +159,7 @@ export function beginAbsorb(life, food) {
     kind: food.kind || 'nutrient',
     r: food.r || (food.rod ? 7 : 4.5),
     final: !!food.final,
+    recycled: !!food.recycled,
   });
   return true;
 }

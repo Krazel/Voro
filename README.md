@@ -1,37 +1,41 @@
-# VORO · Abisal
+# VORO · Abisal — la vida en una gota
 
-Primera campaña completa de un juego 2D: empieza como organismo unicelular, absorbe comida, crece y acaba devorando Gaia. Se comparte el mismo motor entre la web y la aplicación iOS, con recursos incluidos y sin servidor de juego.
+Primera etapa jugable del nuevo diseño, solo navegador. Organismo unicelular en un mundo microscópico sin paredes. Conserva la membrana azul translúcida y el núcleo ámbar del inicio aprobado. El agua, la tierra y la progresión cósmica quedan fuera de esta entrega.
 
-## Campaña y controles
+## Jugar
 
-Seis entornos: gota de agua, estanque, bosque húmedo, ciudad costera, órbita y sistema planetario. Cada entorno ofrece alimento de tres tamaños y aspecto propio; los cazadores persiguen a organismos pequeños y huyen de quienes pueden absorberlos. La última etapa exige digerir Gaia, además de alcanzar suficiente biomasa.
+- Móvil: arrastra desde cualquier punto para dirigir al organismo y pulsa Impulso. No aparece un joystick dibujado.
+- PC: arrastra el ratón o usa WASD/flechas y espacio.
+- Mando: stick izquierdo, A para impulso y Start para pausa. Los menús usan teclado, ratón o táctil.
+- Come criaturas más pequeñas. Los cazadores y organismos espinosos más grandes dañan tu membrana.
+- El daño reduce la biomasa y el área corporal en la misma proporción. La recuperación vuelve a aumentar ambas; tras el golpe hay dos segundos de protección.
+- La adaptación tiene su propia barra: al llenarse, el tiempo se detiene y eliges entre tres mejoras aleatorias sin cambiar de entorno.
+- Hay 15 mejoras, con un máximo de tres niveles por mejora salvo Hambre encadenada, de un nivel. Los efectos suman y tienen límites para evitar multiplicaciones descontroladas.
+- Al alcanzar 150 de biomasa se celebra la madurez celular con membrana y cámara animadas. Puedes seguir explorando; el crecimiento de esta prueba tiene un tope de 240.
+- Volver a nacer está solo en Configuración y requiere confirmación dentro del juego. Reintentar tras morir conserva las adaptaciones.
 
-Al superar una etapa eliges velocidad, resistencia o digestión. Las mutaciones se acumulan. El daño resta biomasa real, encoge al organismo y le da dos segundos para escapar. El área corporal es proporcional a la biomasa; la cámara se aleja suavemente al crecer. Las transiciones entre escalas representan generaciones de evolución.
+## Arte y animación
 
-- Táctil: arrastra para mover el joystick flotante y pulsa Impulso.
-- PC: arrastra el ratón, o usa WASD/flechas y espacio.
-- Mando: stick izquierdo para moverte, A para impulso, Start para pausa. La navegación por menús aún usa ratón/táctil/teclado.
-- Configuración: sonido, recorrido, mutaciones y Volver a nacer. El reinicio completo exige confirmación dentro del juego.
-- Al morir: reintenta la etapa conservando etapas y mutaciones anteriores.
+12 clases de alimento/habitantes ilustrados en un atlas PNG con transparencia: nutrientes, bacilos, cocos, diatomeas, paramecios, amebas pequeñas, flagelados, bacterias espirales, ciliados cazadores, protistas espinosos, amebas gigantes y cadenas celulares. Los rectángulos de cada ilustración evitan mezclar especies contiguas.
 
-El guardado local conserva etapa, posición, biomasa, tiempo, absorciones, mutaciones y final. Se guarda cada cinco segundos, al pausar y al ocultar la página. Al cargar se regenera el alimento del entorno y se conceden dos segundos de protección. No hay sincronización entre dispositivos ni analítica. Si el almacenamiento no está disponible, Configuración lo indica.
+Los cuerpos blandos pulsan o se ondulan; las formas rígidas conservan su silueta. Los cazadores persiguen o huyen según tu tamaño. La digestión conserva la misma ilustración: envoltura de la membrana, arrastre al interior y disolución. El jugador mantiene 100 nodos elásticos, núcleo con inercia, orgánulos y flagelos. El escudo, espinas, estela y tentáculos tienen señales visuales propias. El sonido se sintetiza tras una interacción.
 
-## Animación y recursos
+## Mundo y guardado
 
-Canvas2D dibuja la membrana con 100 nodos elásticos, núcleo con inercia, orgánulos, flagelos y digestión por fases. Los alimentos conservan su forma durante la absorción y aportan biomasa al terminar. Los atlas pintados incluyen seis fondos, seleccionados mediante rectángulos de origen; la nebulosa aparece al completar la campaña. Los prompts se conservan en art/. El sonido se sintetiza después de una interacción.
+Zonas de 600 unidades generadas con una semilla estable. Se cargan 25 zonas alrededor del jugador y se amplía el margen según el zoom y la altura de pantalla. Las zonas lejanas se descargan. La semilla conserva la distribución de lugares; no se simula permanentemente a cada habitante que queda lejos. No hay límite de mapa jugable, aunque las coordenadas usan números finitos del motor.
 
-## Compilación
+La comida vuelve a generarse después de 150 segundos de juego y fuera de la proximidad inmediata del jugador. El registro de comida consumida conserva hasta 2048 entradas. La posición, biomasa, digestión pendiente, adaptaciones y recarga del escudo se guardan localmente cada cinco segundos y al pausar, ocultar o cerrar. La partida microscópica usa una clave independiente de la campaña anterior. No hay sincronización entre dispositivos.
+
+La ganancia de biomasa es más lenta que la adaptación. Reciclar tu propia biomasa no da experiencia ni recibe bonificaciones de rendimiento. La distribución, dificultad y ritmo siguen sujetos a las pruebas del jugador; no se presentan como balance comercial terminado.
+
+## Desarrollo y validación
 
 - `npm ci`
 - `npm run dev`: vista local de Sites.
-- `npm run build`: Worker y recursos de la web.
-- `npm run build:mobile`: aplicación estática independiente en mobile-dist.
-- `npm run ios:sync`: compila y copia los recursos al proyecto Capacitor de iOS.
-- `node --test tests/*.test.mjs`: simulación, recorrido completo del motor, daño, alimentación, guardado y reintento.
+- `npm run build`: web.
+- `node --test tests/*.test.mjs`: simulación, mundo, guardado y motor con Canvas simulado.
 - `npx tsc --noEmit`: tipos.
 
-El workflow privado de GitHub Actions Build iPhone IPA compila en macOS y entrega una IPA **sin firmar**. La instalación necesita firma; no es una publicación en TestFlight ni App Store. La IPA v0.1.0 contiene el inicio aprobado; v0.2.0 incorpora la campaña. iOS mínimo 15. El lanzamiento de iPhone usa orientación vertical; iPad también permite horizontal.
+Las pruebas actuales comprueban absorción y daño, escudo/reciclaje, pausas, elecciones, límites de mejoras, movimiento sin paredes, regeneración determinista, guardado, recortes y animación de sprites. Un controlador automático recorre tres semillas desde el inicio hasta la madurez sin teletransportar al jugador. No sustituye pruebas visuales ni de rendimiento en dispositivos físicos.
 
-## Estado y siguientes publicaciones
-
-Hay una campaña corta con principio y final, no una versión comercial validada. Las pruebas del motor usan un contexto Canvas simulado y un controlador automático, sin teletransportar al jugador; no sustituyen pruebas visuales ni pruebas de rendimiento en dispositivos físicos. No se ha probado en un iPhone real. El empaquetado y la integración de Steam (logros, guardado en la nube y navegación completa con mando) y Android siguen pendientes. El motor, las entradas y el build estático se mantienen separados de Sites para permitir esos empaquetados sin rehacer el juego.
+Los módulos y pruebas de la campaña anterior se conservan como referencia, pero no forman parte de la pantalla actual. Los proyectos Capacitor y el workflow de iPhone también se conservan; esta entrega no genera una IPA. Steam y el resto de biomas quedan pendientes.

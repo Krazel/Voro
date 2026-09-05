@@ -1,223 +1,190 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { VoroEngine } from '../app/engine.ts';
-globalThis.matchMedia = () => ({ matches: false });
-globalThis.devicePixelRatio = 1;
-globalThis.Image = class {
-  complete = false;
-  naturalWidth = 0;
-  src = '';
-};
-globalThis.ResizeObserver = class {
-  observe() {}
-  disconnect() {}
-};
-globalThis.requestAnimationFrame = () => 1;
-globalThis.cancelAnimationFrame = () => {};
-globalThis.window = new EventTarget();
-globalThis.document = Object.assign(new EventTarget(), { hidden: false });
-function makeEngine() {
-  let snapshot;
-  let draws = 0;
-  const gradient = { addColorStop() {} };
-  const base = {
-    globalAlpha: 1,
-    createRadialGradient: () => gradient,
-    createLinearGradient: () => gradient,
-  };
-  const ctx = new Proxy(base, {
-    get(obj, key) {
-      if (key in obj) return obj[key];
-      return (...args) => {
-        draws++;
-        for (const arg of args)
-          if (typeof arg === 'number')
-            assert.ok(
-              Number.isFinite(arg),
-              'Non-finite drawing argument in ' + String(key),
-            );
-      };
-    },
-    set(obj, key, value) {
-      obj[key] = value;
-      return true;
-    },
-  });
-  const canvas = Object.assign(new EventTarget(), {
-    getContext: () => ctx,
-    getBoundingClientRect: () => ({ width: 390, height: 844, left: 0, top: 0 }),
-    focus() {},
-    setPointerCapture() {},
-    width: 0,
-    height: 0,
-  });
-  const game = new VoroEngine(canvas, (value) => (snapshot = value));
-  return {
-    game,
-    get snapshot() {
-      return snapshot;
-    },
-    get draws() {
-      return draws;
-    },
-  };
-}
-test('Engine renders real animation frames, absorbs a meal, and applies damage to the displayed biomass', () => {
-  const fixture = makeEngine(),
-    g = fixture.game;
+import { makeEngine } from './engine-fixture.mjs';
+import { MicroWorld, makeEntity, SPECIES_BY_ID } from '../app/micro-world.mjs';
+import { newMicro, microLife, refreshOffer } from '../app/micro-progress.mjs';
+
+function fresh(seed = 123) {
+  const f = makeEngine(),
+    g = f.game;
+  g.progress = newMicro(seed);
+  g.life = microLife(g.progress);
+  g.world = new MicroWorld(seed);
+  g.seed();
   g.action('start');
-  g.food = [
-    { x: g.life.x + 28, y: g.life.y, seed: 1, rod: true, eaten: false },
-  ];
-  for (let i = 0; i < 120; i++) {
+  return f;
+}
+function step(g, n = 1, render = false) {
+  for (let i = 0; i < n; i++) {
     g.time += 1 / 60;
     g.update(1 / 60);
-    g.render();
+    if (render) g.render();
   }
+}
+function isolate(g, entities = []) {
+  g.world.entities = entities;
+  g.world.move = () => {};
+  g.world.stream = () => {};
+  g.world.replenish = () => {};
+}
+test('Bitmap organisms digest, membrane animates, and damage lowers HUD mass and body area', () => {
+  const f = fresh(),
+    g = f.game;
+  isolate(g, [
+    makeEntity(SPECIES_BY_ID.bacillus, g.life.x + 20, g.life.y, 1, 'meal'),
+  ]);
+  step(g, 120, true);
   g.publish();
-  assert.equal(fixture.snapshot.biomass, 9);
-  assert.equal(fixture.snapshot.eaten, 1);
-  assert.ok(fixture.draws > 1000);
+  assert.equal(f.snapshot.eaten, 1);
+  assert.equal(f.snapshot.biomass, 8.495);
+  assert.ok(f.draws > 1000);
   const before = g.life.radius;
-  g.life.x = g.predator.x - 95;
-  g.life.y = g.predator.y;
-  g.update(1 / 60);
+  g.world.entities = [
+    makeEntity(SPECIES_BY_ID.giant, g.life.x + 30, g.life.y, 2, 'enemy'),
+  ];
+  step(g);
   g.publish();
-  assert.ok(fixture.snapshot.biomass < 9);
-  assert.ok(fixture.snapshot.hurt > 0);
-  assert.equal(fixture.snapshot.protected, true);
-  g.life.x = 700;
-  g.life.y = 970;
-  g.food = [];
-  for (let i = 0; i < 60; i++) {
-    g.time += 1 / 60;
-    g.update(1 / 60);
-    g.render();
-  }
+  assert.ok(f.snapshot.biomass < 8.495);
+  assert.ok(f.snapshot.hurt > 0);
+  assert.ok(f.snapshot.protected);
+  isolate(g);
+  step(g, 60, true);
   assert.ok(g.life.radius < before);
   assert.ok(g.membrane.every(Number.isFinite));
-  g.action('restart');
-  assert.equal(fixture.snapshot.biomass, 8);
-  assert.equal(fixture.snapshot.hurt, 0);
-  assert.equal(fixture.snapshot.dead, false);
   g.destroy();
 });
-test('Mobile drag drives the same motion state and pause freezes the membrane simulation', () => {
-  const { game: g } = makeEngine();
-  g.action('start');
-  g.food = [];
-  function pointer(type, x, y) {
-    const event = new Event(type);
-    Object.assign(event, {
-      pointerId: 1,
-      pointerType: 'touch',
-      clientX: x,
-      clientY: y,
-    });
-    g.canvas.dispatchEvent(event);
-  }
-  pointer('pointerdown', 90, 550);
-  pointer('pointermove', 130, 510);
-  const x = g.life.x,
-    y = g.life.y;
-  for (let i = 0; i < 30; i++) g.frame(1000 + i * 16.67);
-  assert.ok(g.life.x > x && g.life.y < y);
-  g.action('pause');
-  const pausedX = g.life.x,
-    profile = [...g.membrane];
-  for (let i = 0; i < 20; i++) g.frame(1600 + i * 16.67);
-  assert.equal(g.life.x, pausedX);
-  assert.deepEqual(g.membrane, profile);
-  g.action('pause');
-  assert.equal(g.pointer, null);
-  assert.equal(g.keys.size, 0);
-  g.destroy();
-});
-
-test('A player can travel, feed and evolve through all six seeded worlds and consume Gaia without teleporting', (t) => {
-  const { game: g } = makeEngine();
-  g.action('start');
-  const results = [];
-  for (let stage = 0; stage < 6; stage++) {
-    let frames = 0;
-    g.input = () => {
-      const p = g.life;
-      const dangers =
-        stage === 0 && p.biomass < 24
-          ? [g.predator]
-          : g.hunters.filter(
-              (h) => !h.eaten && p.biomass < (h.requiredMass || 0),
-            );
-      const foods = g.food.filter(
-        (f) => !f.eaten && p.biomass >= (f.requiredMass || 0),
-      );
-      let target,
-        score = Infinity;
-      for (const f of foods) {
-        let d = Math.hypot(f.x - p.x, f.y - p.y);
-        if (f.final) d = -1;
-        else
-          for (const h of dangers)
-            if (Math.hypot(f.x - h.x, f.y - h.y) < p.radius + h.r + 100)
-              d += 1500;
-        if (d < score) {
-          score = d;
-          target = f;
-        }
-      }
-      if (!target) return { x: 0, y: 0 };
-      const len = Math.max(1, Math.hypot(target.x - p.x, target.y - p.y));
-      let x = (target.x - p.x) / len,
-        y = (target.y - p.y) / len;
-      for (const h of dangers) {
-        const d = Math.hypot(p.x - h.x, p.y - h.y),
-          safe = p.radius + h.r + 65;
-        if (d < safe) {
-          const repel = ((safe - d) / safe) * 4;
-          x += ((p.x - h.x) / Math.max(1, d)) * repel;
-          y += ((p.y - h.y) / Math.max(1, d)) * repel;
-        }
-      }
-      return { x, y };
-    };
-    while (!g.life.complete && !g.life.dead && frames < 18000) {
-      g.time += 1 / 30;
-      g.update(1 / 30);
-      if (frames % 90 === 0) g.render();
-      frames++;
-    }
-    assert.equal(g.life.dead, false, 'Survive stage ' + stage);
-    assert.ok(
-      g.life.complete,
-      'Reach stage ' +
-        stage +
-        ' goal with real seeded food; mass ' +
-        g.life.biomass,
-    );
-    results.push(Math.round(frames / 30));
-    if (stage < 5) g.evolve(['flow', 'shell', 'hunger'][stage % 3]);
-  }
-  assert.ok(g.campaign.won && g.life.finalEaten);
-  assert.equal(g.campaign.mutations.length, 5);
-  t.diagnostic('Simulated traversal seconds by stage: ' + results.join(', '));
-  g.destroy();
-});
-
-test('Death retry preserves unlocked stages and mutations, while rebirth clears the campaign', () => {
-  const { game: g } = makeEngine();
-  g.action('start');
-  g.life.complete = true;
-  g.evolve('shell');
-  g.life.biomass = 0;
-  g.life.dead = true;
-  g.action('retry');
-  assert.equal(g.campaign.stage, 1);
-  assert.deepEqual(g.campaign.mutations, ['shell']);
+test('A shield blocks one hit, then damage and recycling apply during recharge', () => {
+  const { game: g } = fresh();
+  g.progress.mutations = ['shield', 'recycle', 'spikes'];
+  g.progress.level = 3;
+  isolate(g, [
+    makeEntity(SPECIES_BY_ID.giant, g.life.x + 30, g.life.y, 2, 'enemy'),
+  ]);
+  step(g);
   assert.equal(g.life.biomass, 8);
-  assert.equal(g.campaign.deaths, 1);
-  assert.ok(g.life.damageFactor < 1);
-  g.action('restart');
-  assert.equal(g.campaign.stage, 0);
-  assert.deepEqual(g.campaign.mutations, []);
+  assert.equal(g.progress.shieldRecharge, 24);
+  assert.ok(g.world.entities[0].escape > 0);
+  g.life.invulnerable = 0;
+  step(g);
+  assert.equal(g.life.biomass, 6);
+  assert.equal(g.fragments.length, 3);
+  assert.ok(g.progress.shieldRecharge < 24);
+  assert.ok(
+    Math.abs(g.fragments.reduce((s, e) => s + e.value, 0) - 0.4) < 1e-8,
+  );
+  isolate(g);
+  step(g, 1441);
+  assert.equal(g.progress.shieldRecharge, 0);
   g.destroy();
+});
+test('Adaptation choices, pause and settings stop world time; retry retains choices, reset clears them', () => {
+  const { game: g } = fresh();
+  g.progress.xp = 7;
+  refreshOffer(g.progress);
+  const start = g.life.elapsed;
+  g.frame(100);
+  g.frame(200);
+  assert.equal(g.life.elapsed, start);
+  const selected = g.progress.offer[0];
+  g.choose(selected);
+  assert.equal(g.progress.level, 1);
+  g.choose('nonsense');
+  assert.equal(g.progress.level, 1);
+  g.action('pause');
+  g.frame(300);
+  assert.equal(g.life.elapsed, start);
+  g.action('pause');
+  g.settingsOpen = true;
+  g.frame(400);
+  assert.equal(g.life.elapsed, start);
+  g.settingsOpen = false;
+  g.life.dead = true;
+  g.life.biomass = 0;
+  g.action('retry');
+  assert.deepEqual(g.progress.mutations, [selected]);
+  assert.equal(g.life.biomass, 8);
+  g.action('restart');
+  assert.equal(g.progress.level, 0);
+  g.destroy();
+});
+test('Movement crosses old boundaries in both directions; touch movement has no effect after releasing', () => {
+  const { game: g } = fresh();
+  isolate(g);
+  g.life.x = -9000;
+  g.life.y = 9500;
+  g.pointer = { id: 1, x: 100, y: 100, sx: 40, sy: 100, touch: true };
+  step(g, 600);
+  assert.ok(g.life.x > -9000);
+  assert.ok(g.life.y > 1700);
+  g.pointer = null;
+  step(g, 120);
+  assert.ok(Math.abs(g.life.vx) < 1);
+  g.destroy();
+});
+test('Unassisted world population supports growth to cellular maturity without changing biomes', () => {
+  const results = [];
+  for (const seed of [41, 127, 930]) {
+    const { game: g } = fresh(seed);
+    let target = null;
+    for (
+      let frame = 0;
+      frame < 60 * 600 && !g.life.dead && !g.progress.maturitySeen;
+      frame++
+    ) {
+      if (g.progress.offer.length)
+        g.choose(
+          g.progress.offer.find((id) =>
+            ['reach', 'speed', 'yield', 'digest', 'shield'].includes(id),
+          ) || g.progress.offer[0],
+        );
+      if (!target || target.eaten || frame % 60 === 0) {
+        target = g.world.entities
+          .filter((e) => !e.eaten && e.requiredMass <= g.life.biomass)
+          .sort(
+            (a, b) =>
+              Math.hypot(a.x - g.life.x, a.y - g.life.y) -
+              Math.hypot(b.x - g.life.x, b.y - g.life.y),
+          )[0];
+      }
+      if (target) {
+        const dx = target.x - g.life.x,
+          dy = target.y - g.life.y,
+          len = Math.max(1, Math.hypot(dx, dy));
+        let x = dx / len,
+          y = dy / len;
+        for (const enemy of g.world.entities) {
+          if (
+            enemy.eaten ||
+            enemy.requiredMass <= g.life.biomass ||
+            !['hunter', 'spiny', 'giant'].includes(enemy.kind)
+          )
+            continue;
+          const ex = g.life.x - enemy.x,
+            ey = g.life.y - enemy.y,
+            d = Math.max(1, Math.hypot(ex, ey)),
+            safe = g.life.radius + enemy.r + 120;
+          if (d < safe) {
+            const avoid = 3 * (1 - d / safe);
+            x += (ex / d) * avoid;
+            y += (ey / d) * avoid;
+            if (d < safe - 65) g.action('dash');
+          }
+        }
+        g.padInput = { x, y };
+      }
+      step(g);
+    }
+    assert.equal(g.life.dead, false, 'survival seed ' + seed);
+    assert.ok(g.progress.maturitySeen, 'maturity seed ' + seed);
+    assert.ok(g.progress.level >= 5);
+    assert.equal(g.life.complete, false);
+    assert.ok(g.world.chunks.size <= 49);
+    results.push({
+      seed,
+      seconds: Math.round(g.life.elapsed),
+      upgrades: g.progress.level,
+    });
+    g.destroy();
+  }
+  console.log('Micro-stage progression:', JSON.stringify(results));
 });

@@ -1,9 +1,7 @@
 // Canvas2D rendering and input. The simulation stays independent of frame rendering.
 import {
-  WORLD,
   clamp,
   random,
-  createLife,
   integrate,
   impulse,
   digest,
@@ -11,22 +9,32 @@ import {
   takeDamage,
   springNode,
 } from './simulation.mjs';
+import { MicroWorld, SPECIES_BY_ID } from './micro-world.mjs';
+import { drawMicroSprite } from './micro-sprites.mjs';
 import {
-  STAGES,
-  SAVE_KEY,
-  newCampaign,
-  stageLife,
-  advanceCampaign,
-  physicalSize,
-  encodeSave,
-  decodeSave,
-} from './campaign.mjs';
-import { drawEntity } from './world-art.mjs';
+  upgradeStats,
+  nextAdaptation,
+  levelOf,
+  UPGRADES,
+} from './mutations.mjs';
+import {
+  MICRO_SAVE,
+  MATURITY,
+  newMicro,
+  microLife,
+  refreshOffer,
+  chooseUpgrade,
+  saveMicro,
+  loadMicro,
+} from './micro-progress.mjs';
 
 export type Snapshot = {
-  stage: number;
   mutations: string[];
-  won: boolean;
+  offer: string[];
+  level: number;
+  adaptation: number;
+  adaptationStart: number;
+  adaptationTarget: number;
   saved: boolean;
   storageAvailable: boolean;
   transition: number;
@@ -46,6 +54,9 @@ export type Snapshot = {
   started: boolean;
   sound: boolean;
   hint: string;
+  shield: number;
+  combo: boolean;
+  assetsReady: boolean;
 };
 type Food = {
   x: number;
@@ -58,8 +69,11 @@ type Food = {
   value?: number;
   requiredMass?: number;
   final?: boolean;
+  id?: string;
+  heading?: number;
+  flash?: number;
+  recycled?: boolean;
 };
-type Hunter = Food & { r: number; homeX: number; homeY: number; speed: number };
 type Mote = { x: number; y: number; r: number; phase: number };
 type Particle = {
   x: number;
@@ -76,8 +90,16 @@ export class VoroEngine {
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
   emit: (s: Snapshot) => void;
-  life = createLife();
-  campaign = newCampaign();
+  progress = newMicro();
+  life = microLife(this.progress);
+  world = new MicroWorld(this.progress.seed);
+  stats = upgradeStats([]);
+  spriteAtlas = new Image();
+  comboClock = 0;
+  comboMeals = 0;
+  lastMeal = -100;
+  trail: { x: number; y: number; r: number; life: number }[] = [];
+  fragments: Food[] = [];
   saved = false;
   storageAvailable = true;
   settingsOpen = false;
@@ -85,9 +107,6 @@ export class VoroEngine {
   saveClock = 0;
   gamepadButtons = [false, false];
   padInput = { x: 0, y: 0 };
-  apexEaten = false;
-  atlases = new Map<string, HTMLImageElement>();
-  hunters: Hunter[] = [];
   started = false;
   paused = false;
   sound = true;
@@ -141,7 +160,6 @@ export class VoroEngine {
     damage: boolean;
   }[] = [];
   rng = random(834);
-  predator = { x: 970, y: 620, r: 82 };
   audioStarted = false;
   reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   constructor(canvas: HTMLCanvasElement, emit: (s: Snapshot) => void) {
@@ -149,22 +167,21 @@ export class VoroEngine {
     this.ctx = canvas.getContext('2d', { alpha: false })!;
     this.emit = emit;
     this.background.src = './abyssal-background.png';
-    for (const file of ['near-atlas.png', 'space-atlas.png']) {
-      const image = new Image();
-      image.src = './' + file;
-      this.atlases.set(file, image);
-    }
+    this.spriteAtlas.src = './inhabitants/micro.png';
+    this.spriteAtlas.onload = () => this.publish();
     try {
-      const loaded = decodeSave(localStorage.getItem(SAVE_KEY));
+      const loaded = loadMicro(localStorage.getItem(MICRO_SAVE));
       if (loaded) {
-        this.campaign = loaded.campaign;
+        this.progress = loaded.progress;
         this.life = loaded.life;
         this.sound = loaded.sound;
         this.saved = true;
+        this.world = new MicroWorld(this.progress.seed, loaded.journal);
       }
     } catch {
       this.storageAvailable = false;
     }
+    this.stats = upgradeStats(this.progress.mutations);
     this.seed();
     this.camera = { x: this.life.x, y: this.life.y };
     this.resize();
@@ -178,6 +195,7 @@ export class VoroEngine {
           !this.started ||
           this.paused ||
           this.life.complete ||
+          this.progress.offer.length > 0 ||
           this.life.dead
         )
           return;
@@ -218,7 +236,7 @@ export class VoroEngine {
     window.addEventListener(
       'keydown',
       (e) => {
-        if (this.settingsOpen) return;
+        if (this.settingsOpen || this.progress.offer.length) return;
         if (
           (e.target as HTMLElement)?.tagName === 'BUTTON' &&
           ['Space', 'Enter'].includes(e.code)
@@ -280,109 +298,11 @@ export class VoroEngine {
     this.raf = requestAnimationFrame(this.frame);
   }
   seed() {
-    const rand = random(288 + this.campaign.stage * 714);
-    this.food = [];
-    this.motes = [];
+    this.world.stream(this.life.x, this.life.y, this.life.elapsed, true);
+    this.food = this.world.entities;
+    this.motes = this.world.motes;
     this.organs = [];
-    this.particles = [];
-    this.floating = [];
-    this.membrane.fill(1);
-    this.membraneVelocity.fill(0);
-    this.wobble = 0;
-    this.wobbleVelocity = 0;
-    this.nucleus = { x: 0, y: 0 };
-    this.foodClock = 0;
-    this.hitFlash = 0;
-    this.apexEaten = false;
-    this.heading = -Math.PI / 2;
-    // A nearby spiral makes the first meal discoverable, followed by a wider living field.
-    const nearCount = this.campaign.stage === 0 ? 42 : 16;
-    for (let i = 0; i < nearCount; i++) {
-      const a = i * 2.399;
-      const d =
-        this.campaign.stage === 0
-          ? 95 + Math.sqrt(i) * 43
-          : 150 + Math.sqrt(i) * 88;
-      this.food.push({
-        x: 700 + Math.cos(a) * d,
-        y: 970 + Math.sin(a) * d,
-        seed: rand() * TAU,
-        eaten: false,
-        rod: i % 3 === 0,
-      });
-    }
-    for (let i = 0; i < 65; i++)
-      this.food.push({
-        x: 140 + rand() * 1120,
-        y: 160 + rand() * 1380,
-        seed: rand() * TAU,
-        eaten: false,
-        rod: i % 4 === 0,
-      });
-    const stage = STAGES[this.campaign.stage];
-    this.food = this.food.map((food, i) => {
-      if (this.campaign.stage === 0)
-        return {
-          ...food,
-          kind: food.rod ? 'bacteria' : 'nutrient',
-          r: food.rod ? 6 : 4.5,
-          value: 1,
-          requiredMass: 0,
-        };
-      const tier = i < 5 ? 0 : i % 5 === 0 ? 2 : i % 3 === 0 ? 1 : 0;
-      return {
-        ...food,
-        kind: stage.kinds[tier],
-        r: [10, 50, 70][tier],
-        value: [1, 2.5, 5][tier],
-        requiredMass: [0, 12, 22][tier],
-      };
-    });
-    if (this.campaign.stage === 5 && !this.life.finalEaten)
-      this.food.push({
-        x: 700,
-        y: 330,
-        seed: 1.2,
-        rod: false,
-        eaten: false,
-        kind: 'gaia',
-        r: 104,
-        value: 12,
-        requiredMass: 56,
-        final: true,
-      });
-    this.predator = { x: 970, y: 620, r: this.campaign.stage ? 57 : 82 };
-    this.hunters = [];
-    if (this.campaign.stage > 0) {
-      const kind = ['bacteria', 'fish', 'beetle', 'drone', 'storm', 'storm'][
-        this.campaign.stage
-      ];
-      for (let i = 0; i < 2 + (this.campaign.stage > 2 ? 1 : 0); i++) {
-        const x = [1060, 340, 1070][i],
-          y = [510, 480, 1320][i];
-        this.hunters.push({
-          x,
-          y,
-          homeX: x,
-          homeY: y,
-          r: 48 + i * 6,
-          seed: i * 2,
-          rod: false,
-          eaten: false,
-          kind,
-          value: 7,
-          requiredMass: 25 + i * 5,
-          speed: 36 + this.campaign.stage * 5,
-        });
-      }
-    }
-    for (let i = 0; i < 270; i++)
-      this.motes.push({
-        x: rand() * WORLD.width,
-        y: rand() * WORLD.height,
-        r: 0.5 + rand() * 1.3,
-        phase: rand() * TAU,
-      });
+    const rand = random(288);
     for (let i = 0; i < 58; i++)
       this.organs.push({
         a: rand() * TAU,
@@ -390,6 +310,18 @@ export class VoroEngine {
         r: 1 + rand() * 4,
         phase: rand() * TAU,
       });
+    this.particles = [];
+    this.floating = [];
+    this.trail = [];
+    this.fragments = [];
+    this.membrane.fill(1);
+    this.membraneVelocity.fill(0);
+    this.wobble = 0;
+    this.wobbleVelocity = 0;
+    this.nucleus = { x: 0, y: 0 };
+    this.foodClock = 0;
+    this.hitFlash = 0;
+    this.heading = -Math.PI / 2;
   }
   resize() {
     const b = this.canvas.getBoundingClientRect();
@@ -438,7 +370,7 @@ export class VoroEngine {
       this.audio.resume().catch(() => {});
     if (this.audio && this.master)
       this.master.gain.setTargetAtTime(
-        this.sound && !this.paused ? 0.055 : 0,
+        this.sound && !this.paused && !this.progress.offer.length ? 0.055 : 0,
         this.audio.currentTime,
         0.12,
       );
@@ -476,8 +408,8 @@ export class VoroEngine {
     if (!this.started && !this.saved) return;
     try {
       localStorage.setItem(
-        SAVE_KEY,
-        encodeSave(this.campaign, this.life, this.sound),
+        MICRO_SAVE,
+        saveMicro(this.progress, this.life, this.world, this.sound),
       );
       this.saved = true;
       this.storageAvailable = true;
@@ -485,19 +417,20 @@ export class VoroEngine {
       this.storageAvailable = false;
     }
   }
-  evolve(mutation: string) {
-    if (!advanceCampaign(this.campaign, this.life, mutation)) return;
-    this.life = stageLife(this.campaign);
-    this.seed();
-    this.camera = { x: this.life.x, y: this.life.y };
+  choose(id: string) {
+    if (this.life.dead || !chooseUpgrade(this.progress, id)) return;
+    this.stats = upgradeStats(this.progress.mutations, this.comboClock > 0);
+    Object.assign(this.life, this.stats);
     this.keys.clear();
     this.pointer = null;
-    this.transition = 3;
-    this.flash = 1;
-    this.paused = false;
-    this.toast(STAGES[this.campaign.stage].message, 9);
+    this.flash = 0.35;
     this.chime(true);
+    this.toast(
+      UPGRADES.find((u) => u.id === id)!.name + ' · adaptación adquirida',
+      4,
+    );
     this.save();
+    this.setAudio();
     this.publish();
     this.canvas.focus({ preventScroll: true });
   }
@@ -511,34 +444,36 @@ export class VoroEngine {
       | 'sound'
       | 'continue',
   ) {
-    if (name === 'retry' && !this.life.dead) return;
     if (name === 'start') {
       this.started = true;
       this.paused = false;
       this.initAudio();
-      this.toast(STAGES[this.campaign.stage].message, 6);
+      this.toast('Come lo pequeño. La gota no tiene paredes.', 6);
       this.canvas.focus({ preventScroll: true });
     }
-    if (name === 'restart' || name === 'retry') {
-      if (name === 'restart') this.campaign = newCampaign();
+    if (name === 'restart' || (name === 'retry' && this.life.dead)) {
+      if (name === 'restart') this.progress = newMicro();
       else {
-        this.campaign.deaths++;
-        this.campaign.totalEaten += this.life.eaten;
-        this.campaign.totalTime += this.life.elapsed;
+        this.progress.deaths++;
+        this.progress.totalEaten += this.life.eaten;
+        this.progress.totalTime += this.life.elapsed;
       }
-      this.life = stageLife(this.campaign);
-      this.camera = { x: 700, y: 970 };
+      this.life = microLife(this.progress);
+      this.world = new MicroWorld(this.progress.seed);
+      this.stats = upgradeStats(this.progress.mutations);
       this.seed();
+      this.camera = { x: 700, y: 970 };
       this.started = true;
       this.paused = false;
       this.keys.clear();
       this.pointer = null;
       this.flash = 0;
       this.transition = 0;
+      this.comboClock = 0;
+      this.comboMeals = 0;
+      this.progress.shieldRecharge = 0;
       this.toast(
-        name === 'restart'
-          ? 'Una nueva vida.'
-          : 'La etapa vuelve a comenzar. Conservas tus mutaciones.',
+        name === 'restart' ? 'Una nueva vida.' : 'Conservas tus adaptaciones.',
         4,
       );
       this.initAudio();
@@ -547,7 +482,7 @@ export class VoroEngine {
       name === 'pause' &&
       this.started &&
       !this.life.dead &&
-      !this.life.complete
+      !this.progress.offer.length
     ) {
       this.paused = !this.paused;
       this.keys.clear();
@@ -557,15 +492,20 @@ export class VoroEngine {
       this.sound = !this.sound;
       if (this.started) this.initAudio();
     }
-    if (name === 'dash' && this.started && !this.paused && impulse(this.life)) {
+    if (
+      name === 'dash' &&
+      this.started &&
+      !this.paused &&
+      !this.settingsOpen &&
+      !this.progress.offer.length &&
+      this.transition === 0 &&
+      impulse(this.life)
+    ) {
       if (Math.hypot(this.life.vx, this.life.vy) < 10) {
         this.life.vx = Math.cos(this.heading) * 180;
         this.life.vy = Math.sin(this.heading) * 180;
       }
       this.burst(this.life.x, this.life.y, 12, false);
-    }
-    if (name === 'continue' && !this.life.dead) {
-      if (this.campaign.stage < STAGES.length - 1) this.evolve('flow');
     }
     this.save();
     this.setAudio();
@@ -577,28 +517,37 @@ export class VoroEngine {
   }
   publish() {
     this.emit({
-      stage: this.campaign.stage,
-      mutations: [...this.campaign.mutations],
-      won: this.campaign.won,
+      mutations: [...this.progress.mutations],
+      offer: [...this.progress.offer],
+      level: this.progress.level,
+      adaptation: this.progress.xp,
+      adaptationStart: this.progress.level
+        ? nextAdaptation(this.progress.level - 1)
+        : 0,
+      adaptationTarget: nextAdaptation(this.progress.level),
       saved: this.saved,
       storageAvailable: this.storageAvailable,
       transition: this.transition,
-      deaths: this.campaign.deaths,
-      eaten: this.campaign.totalEaten + this.life.eaten,
+      deaths: this.progress.deaths,
       biomass: this.life.biomass,
-      target: this.life.goalMass,
+      target: MATURITY,
       hurt: this.life.hurt,
       dead: this.life.dead,
       protected: this.life.invulnerable > 0,
-      size: physicalSize(this.campaign.stage, this.life.biomass),
-      elapsed: this.campaign.totalTime + this.life.elapsed,
+      eaten: this.progress.totalEaten + this.life.eaten,
+      size: Math.round(40 * Math.sqrt(this.life.biomass / 8)),
+      elapsed: this.progress.totalTime + this.life.elapsed,
       dash: this.life.cooldown,
-      evolved: this.life.evolved,
-      complete: this.life.complete,
+      evolved: this.progress.maturitySeen,
+      complete: false,
       paused: this.paused,
       started: this.started,
       sound: this.sound,
       hint: this.hint,
+      shield: this.stats.shieldCooldown ? this.progress.shieldRecharge : -1,
+      combo: this.comboClock > 0,
+      assetsReady:
+        this.spriteAtlas.complete && this.spriteAtlas.naturalWidth > 0,
     });
   }
   input() {
@@ -657,7 +606,7 @@ export class VoroEngine {
       } else this.gamepadButtons = [false, false];
     }
     if (!document.hidden) {
-      if (!this.paused) {
+      if (!this.paused && !this.settingsOpen && !this.progress.offer.length) {
         this.time += dt;
         this.update(dt);
       }
@@ -668,9 +617,17 @@ export class VoroEngine {
   update(dt: number) {
     const p = this.life;
     this.transition = Math.max(0, this.transition - dt);
-    if (this.started && !p.complete && !p.dead && this.transition === 0) {
+    if (this.started && !p.dead && this.transition === 0) {
+      this.comboClock = Math.max(0, this.comboClock - dt);
+      this.stats = upgradeStats(this.progress.mutations, this.comboClock > 0);
+      Object.assign(p, this.stats);
+      this.progress.shieldRecharge = Math.max(
+        0,
+        this.progress.shieldRecharge - dt,
+      );
       integrate(p, dt, this.input());
-      if (Math.hypot(p.vx, p.vy) > 8) {
+      const speed = Math.hypot(p.vx, p.vy);
+      if (speed > 8) {
         const target = Math.atan2(p.vy, p.vx);
         this.heading +=
           Math.atan2(
@@ -678,238 +635,199 @@ export class VoroEngine {
             Math.cos(target - this.heading),
           ) * Math.min(1, dt * 3);
       }
+      this.world.stream(
+        p.x,
+        p.y,
+        p.elapsed,
+        false,
+        Math.ceil(((this.height * 0.55) / this.zoom + 300) / 600),
+      );
+      this.food = [...this.world.entities, ...this.fragments];
+      this.motes = this.world.motes;
+      this.world.move(dt, p.elapsed, p, this.stats, this.trail);
       for (const f of this.food) {
-        if (f.eaten) continue;
-        const edible = p.biomass >= (f.requiredMass || 0);
-        const d = Math.hypot(f.x - p.x, f.y - p.y);
-        const reach = p.radius + 34 + p.attraction;
-        if (edible && d < reach && !f.final) {
-          const pull = (1 - d / reach) * 62 * dt;
+        if (f.eaten || p.biomass < (f.requiredMass || 0)) continue;
+        const d = Math.hypot(f.x - p.x, f.y - p.y),
+          reach = p.radius * p.reachFactor + 22 + p.attraction;
+        if (d < reach) {
+          const pull = (1 - d / reach) * 70 * dt;
           f.x += ((p.x - f.x) / Math.max(d, 1)) * pull;
           f.y += ((p.y - f.y) / Math.max(d, 1)) * pull;
         }
         if (beginAbsorb(p, f)) {
-          this.wobbleVelocity += 0.42;
+          if (f.id) this.world.eat(f, p.elapsed);
+          this.wobbleVelocity += 0.4;
           this.slurp();
         }
       }
-      const before = p.evolved;
-      const massBefore = p.biomass;
-      const finished = digest(p, dt);
-      if (
-        p.complete &&
-        this.campaign.stage === STAGES.length - 1 &&
-        !this.campaign.won
-      ) {
-        this.campaign.won = true;
-        this.flash = 1;
-        this.chime(true);
-        this.save();
-      }
+      const massBefore = p.biomass,
+        xpBefore = p.adaptationGained,
+        finished = digest(p, dt);
       if (finished) {
+        this.progress.xp += p.adaptationGained - xpBefore;
+        this.comboMeals =
+          p.elapsed - this.lastMeal < 4 ? this.comboMeals + finished : finished;
+        this.lastMeal = p.elapsed;
+        if (levelOf(this.progress.mutations, 'combo') && this.comboMeals >= 3)
+          this.comboClock = 4;
         this.burst(p.x, p.y, 7, true);
         this.chime();
         this.wobbleVelocity += 0.7;
         this.floating.push({
           x: p.x,
           y: p.y - p.radius * 0.6,
-          text:
-            '+' +
-            (p.biomass - massBefore).toFixed(1).replace('.0', '') +
-            ' biomasa',
+          text: '+' + (p.biomass - massBefore).toFixed(1),
           life: 1.3,
           damage: false,
         });
         if (p.eaten === 1)
-          this.toast('La comida alimenta tu núcleo y te hace crecer.', 4);
-        if (p.eaten === 6 && this.campaign.stage === 0)
           this.toast(
-            'Cuidado con las espinas: pierdes biomasa al golpearte.',
-            4,
+            'La biomasa te hace crecer. La adaptación desbloquea mejoras.',
+            5,
           );
-        if (p.eaten === 12 && !p.evolved && this.campaign.stage === 0)
-          this.toast('Sigue alimentándote para expandir tu membrana.', 4);
-      }
-      if (!before && p.evolved) {
-        this.flash = 1;
-        this.burst(p.x, p.y, 65, true);
-        this.chime(true);
-        this.toast(
-          this.campaign.stage === 5
-            ? 'Ya puedes devorar Gaia. Sigue la señal.'
-            : 'EVOLUCIÓN · Tu organismo está listo',
-          4,
-        );
-      }
-      const pred = this.predator,
-        dist = Math.hypot(p.x - pred.x, p.y - pred.y);
-      let danger: { x: number; y: number } | null = null;
-      if (
-        this.campaign.stage === 0 &&
-        !this.apexEaten &&
-        !p.complete &&
-        dist < p.radius + pred.r * 0.99
-      ) {
-        if (p.biomass >= 24) {
-          const food = {
-            ...pred,
-            seed: 1,
-            eaten: false,
-            kind: 'bacteria',
-            value: 7,
-            requiredMass: 24,
-          };
-          if (beginAbsorb(p, food)) {
-            this.apexEaten = true;
-            this.slurp();
-            this.toast('El depredador ahora te alimenta.', 4);
-          }
-        } else danger = pred;
-      }
-      for (const hunter of this.hunters) {
-        if (hunter.eaten) continue;
-        const d = Math.hypot(p.x - hunter.x, p.y - hunter.y),
-          edible = p.biomass >= (hunter.requiredMass || 0);
-        const chase = d < 350;
-        const tx = chase
-          ? p.x
-          : hunter.homeX + Math.sin(this.time * 0.3 + hunter.seed) * 70;
-        const ty = chase
-          ? p.y
-          : hunter.homeY + Math.cos(this.time * 0.25 + hunter.seed) * 70;
-        const len = Math.max(1, Math.hypot(tx - hunter.x, ty - hunter.y));
-        const direction = chase && edible ? -1 : 1;
-        hunter.x = clamp(
-          hunter.x + ((tx - hunter.x) / len) * hunter.speed * dt * direction,
-          120,
-          1280,
-        );
-        hunter.y = clamp(
-          hunter.y + ((ty - hunter.y) / len) * hunter.speed * dt * direction,
-          150,
-          1550,
-        );
-        if (edible) {
-          if (beginAbsorb(p, hunter)) {
-            this.slurp();
-            this.wobbleVelocity += 1;
-            this.toast('Has devorado a un cazador.', 3);
-          }
-        } else if (d < p.radius + hunter.r * 0.8) danger = hunter;
-      }
-      if (!p.complete && danger) {
-        const lost = takeDamage(p, danger);
-        if (lost > 0) {
-          this.hitFlash = 0.65;
-          this.wobbleVelocity -= 2.7;
-          this.floating.push({
-            x: p.x,
-            y: p.y - p.radius * 0.8,
-            text: '−' + lost.toFixed(1) + ' biomasa',
-            life: 1.8,
-            damage: true,
-          });
-          this.toast(
-            p.dead
-              ? 'Tu membrana se ha deshecho.'
-              : 'Has perdido biomasa. Aléjate y vuelve a comer.',
-            3.2,
-          );
-          this.burst(
-            p.x + Math.cos(p.hitAngle) * p.radius * 0.6,
-            p.y + Math.sin(p.hitAngle) * p.radius * 0.6,
-            26,
-            true,
-          );
-          this.impact();
+        refreshOffer(this.progress);
+        if (this.progress.offer.length) {
+          this.keys.clear();
+          this.pointer = null;
+          this.save();
+          this.setAudio();
           this.publish();
-          if (p.dead) this.save();
+          return;
         }
       }
+      for (const e of this.world.entities) {
+        if (e.eaten || p.biomass >= e.requiredMass || p.invulnerable > 0)
+          continue;
+        const spec = SPECIES_BY_ID[e.kind];
+        if (!['hunter', 'hazard'].includes(spec.kind)) continue;
+        if (Math.hypot(p.x - e.x, p.y - e.y) > p.radius * 0.85 + e.r * 0.76)
+          continue;
+        if (this.stats.shieldCooldown && this.progress.shieldRecharge === 0) {
+          this.progress.shieldRecharge = this.stats.shieldCooldown;
+          p.invulnerable = 0.8;
+          this.flash = 0.3;
+          this.toast('Tu escudo ha absorbido el golpe.', 2);
+          this.impact();
+        } else {
+          const lost = takeDamage(p, e, 0.22);
+          if (lost > 0) {
+            this.hitFlash = 0.65;
+            this.wobbleVelocity -= 2.7;
+            this.comboClock = 0;
+            this.comboMeals = 0;
+            this.floating.push({
+              x: p.x,
+              y: p.y - p.radius * 0.8,
+              text: '−' + lost.toFixed(1),
+              life: 1.8,
+              damage: true,
+            });
+            this.burst(p.x, p.y, 24, true);
+            this.impact();
+            this.toast(
+              p.dead
+                ? 'Tu membrana se ha deshecho.'
+                : 'Has perdido biomasa. Come para recuperarla.',
+              3,
+            );
+            if (this.stats.recycleFraction && !p.dead)
+              for (let i = 0; i < 3; i++) {
+                const a = p.hitAngle + Math.PI + (i - 1) * 0.8;
+                this.fragments.push({
+                  x: p.x + Math.cos(a) * (p.radius + 35),
+                  y: p.y + Math.sin(a) * (p.radius + 35),
+                  seed: i,
+                  eaten: false,
+                  rod: false,
+                  kind: 'nutrient',
+                  r: 8,
+                  value: (lost * this.stats.recycleFraction) / 3,
+                  requiredMass: 0,
+                  recycled: true,
+                });
+              }
+          }
+        }
+        if (this.stats.spikeFraction) {
+          e.wound += this.stats.spikeFraction;
+          e.escape = 3;
+          e.flash = 1;
+          if (e.wound >= 1) {
+            e.requiredMass = 0;
+            e.value *= 0.5;
+            e.escape = 999;
+          }
+        }
+        this.save();
+        this.publish();
+      }
+      this.foodClock += dt;
+      if (this.foodClock > 8) {
+        this.foodClock = 0;
+        this.world.replenish(p.x, p.y, p.elapsed);
+        this.fragments = this.fragments
+          .filter((f) => !f.eaten && Math.hypot(f.x - p.x, f.y - p.y) < 1300)
+          .slice(-24);
+      }
       this.trailClock += dt;
-      if (this.trailClock > 0.045 && Math.hypot(p.vx, p.vy) > 25) {
+      if (this.trailClock > 0.14 && speed > 25) {
         this.trailClock = 0;
+        this.trail.push({ x: p.x, y: p.y, r: p.radius * 0.55, life: 3 });
         this.particles.push({
           x: p.x - Math.cos(this.heading) * p.radius * 0.65,
           y: p.y - Math.sin(this.heading) * p.radius * 0.65,
           vx: -p.vx * 0.12,
           vy: -p.vy * 0.12,
-          life: 1.5,
-          max: 1.5,
+          life: 1.4,
+          max: 1.4,
           gold: false,
         });
       }
-      this.foodClock += dt;
-      if (this.foodClock > 2.5) {
-        this.foodClock = 0;
-        this.food = this.food.filter((f) => !f.eaten);
-        let attempts = 0;
-        while (this.food.length < 85 && attempts++ < 140) {
-          const x = 135 + this.rng() * 1130,
-            y = 165 + this.rng() * 1370;
-          if (
-            Math.hypot(x - p.x, y - p.y) < 245 ||
-            Math.hypot(x - pred.x, y - pred.y) < 170
-          )
-            continue;
-          const tier =
-            this.campaign.stage === 0
-              ? 0
-              : attempts % 4 === 0
-                ? 2
-                : attempts % 3 === 0
-                  ? 1
-                  : 0;
-          this.food.push({
-            x,
-            y,
-            seed: this.rng() * TAU,
-            eaten: false,
-            rod: this.rng() > 0.7,
-            kind: STAGES[this.campaign.stage].kinds[tier],
-            r: this.campaign.stage ? [10, 50, 70][tier] : 5,
-            value: [1, 2.5, 5][tier],
-            requiredMass: [0, 12, 22][tier],
-          });
-        }
+      if (p.biomass >= MATURITY && !this.progress.maturitySeen) {
+        this.progress.maturitySeen = true;
+        this.transition = 4;
+        this.flash = 1;
+        this.chime(true);
+        this.toast('Has dominado esta escala. La gota sigue abierta.', 7);
+        this.save();
+        this.publish();
       }
     }
     if (p.dead) integrate(p, dt, { x: 0, y: 0 });
-    if (!this.started) {
-      if (!this.saved) {
-        p.x = 700 + Math.sin(this.time * 0.3) * 12;
-        p.y = 970 + Math.cos(this.time * 0.35) * 9;
-      }
-      this.camera.y = p.y + this.height * 0.11;
-    } else {
-      this.camera.x += (p.x - this.camera.x) * (1 - Math.exp(-dt * 3));
-      const targetY = p.complete ? p.y + this.height * 0.12 : p.y;
-      this.camera.y += (targetY - this.camera.y) * (1 - Math.exp(-dt * 3));
+    if (!this.started && !this.saved) {
+      p.x = 700 + Math.sin(this.time * 0.3) * 12;
+      p.y = 970 + Math.cos(this.time * 0.35) * 9;
     }
+    const cameraY = !this.started ? p.y + this.height * 0.11 : p.y;
+    this.camera.x += (p.x - this.camera.x) * (1 - Math.exp(-dt * 3));
+    this.camera.y += (cameraY - this.camera.y) * (1 - Math.exp(-dt * 3));
     this.animateMembrane(dt);
-    this.zoom +=
-      (Math.min(1, 100 / Math.max(48, p.radius)) - this.zoom) *
-      (1 - Math.exp(-dt * 1.7));
-    this.predator.x = 990 + Math.sin(this.time * 0.21) * 80;
-    this.predator.y = 585 + Math.cos(this.time * 0.16) * 70;
-    this.flash = Math.max(0, this.flash - dt * 0.38);
+    const targetZoom =
+      Math.min(1, 96 / Math.max(48, p.radius)) *
+      (this.transition > 0
+        ? 1 - 0.16 * Math.sin((this.transition / 4) * Math.PI)
+        : 1);
+    this.zoom += (targetZoom - this.zoom) * (1 - Math.exp(-dt * 1.7));
+    this.flash = Math.max(0, this.flash - dt * 0.6);
     this.hitFlash = Math.max(0, this.hitFlash - dt);
-    this.saveClock += dt;
-    if (this.saveClock > 5) {
-      this.saveClock = 0;
-      this.save();
-    }
     for (const q of this.particles) {
       q.x += q.vx * dt;
       q.y += q.vy * dt;
       q.life -= dt;
     }
-    this.particles = this.particles.filter((q) => q.life > 0).slice(-160);
+    this.particles = this.particles.filter((q) => q.life > 0).slice(-120);
+    for (const q of this.trail) q.life -= dt;
+    this.trail = this.trail.filter((q) => q.life > 0).slice(-24);
     for (const f of this.floating) {
       f.y -= dt * 22;
       f.life -= dt;
     }
     this.floating = this.floating.filter((f) => f.life > 0).slice(-8);
+    this.saveClock += dt;
+    if (this.saveClock > 5) {
+      this.saveClock = 0;
+      this.save();
+    }
     if (this.hint && this.time > this.hintUntil) this.hint = '';
     if (this.time - this.lastEmit > 0.12) {
       this.lastEmit = this.time;
@@ -968,9 +886,7 @@ export class VoroEngine {
         0.17 * Math.cos(a * 5 + 0.15 * Math.sin(t * 0.45)) +
         0.07 * Math.sin(a * 3 - t * 0.8) +
         0.022 * Math.sin(a * 11 + t * 1.8);
-      rr +=
-        (p.evolution * 0.095 + this.campaign.stage * 0.016) *
-        Math.cos(a * 7 - t * 0.25);
+      rr += p.evolution * 0.095 * Math.cos(a * 7 - t * 0.25);
       rr +=
         speed * 0.14 * movement +
         Math.sin(t * (2.4 + speed * 2) - a * 2) * speed * 0.04;
@@ -1051,39 +967,22 @@ export class VoroEngine {
   }
   render() {
     const c = this.ctx,
-      k = this.pixelRatio * this.scale;
+      k = this.pixelRatio * this.scale,
+      p = this.life;
     c.setTransform(k, 0, 0, k, 0, 0);
-    const stage = STAGES[this.campaign.stage];
-    c.fillStyle = stage.tint;
+    c.fillStyle = '#041423';
     c.fillRect(0, 0, 480, this.height);
-    const im =
-      this.campaign.stage === 0
-        ? this.background
-        : this.atlases.get(stage.atlas);
-    if (im?.complete && im.naturalWidth) {
-      const panel = this.campaign.won ? 2 : stage.panel;
-      const sw = this.campaign.stage === 0 ? im.width : im.width / 3 - 8;
-      const sx = this.campaign.stage === 0 ? 0 : (im.width / 3) * panel + 4;
-      const factor = Math.max(530 / sw, (this.height + 65) / im.height);
-      const w = sw * factor,
+    const im = this.background;
+    if (im.complete && im.naturalWidth) {
+      const factor = Math.max(540 / im.width, (this.height + 80) / im.height),
+        w = im.width * factor,
         h = im.height * factor;
-      const px = (this.camera.x - 700) * 0.035,
-        py = (this.camera.y - 970) * 0.035;
-      c.drawImage(
-        im,
-        sx,
-        0,
-        sw,
-        im.height,
-        (480 - w) / 2 - px,
-        (this.height - h) / 2 - py,
-        w,
-        h,
-      );
+      const px = Math.sin(this.camera.x / 1600) * 22,
+        py = Math.sin(this.camera.y / 1800) * 25;
+      c.drawImage(im, (480 - w) / 2 - px, (this.height - h) / 2 - py, w, h);
     }
-    const shake = this.reduced ? 0 : this.hitFlash * 3;
-    const ox =
-        240 / this.zoom - this.camera.x + Math.sin(this.time * 55) * shake,
+    const shake = this.reduced ? 0 : this.hitFlash * 3,
+      ox = 240 / this.zoom - this.camera.x + Math.sin(this.time * 55) * shake,
       oy =
         (this.height * 0.48) / this.zoom -
         this.camera.y +
@@ -1091,93 +990,72 @@ export class VoroEngine {
     c.save();
     c.scale(this.zoom, this.zoom);
     c.translate(ox, oy);
-    for (const m of this.motes) {
-      const x = m.x + Math.sin(this.time * 0.12 + m.phase) * 10,
-        y = m.y + Math.sin(this.time * 0.16 + m.phase) * 14;
-      if (
-        x + ox < -10 ||
-        x + ox > 490 / this.zoom ||
-        y + oy < -10 ||
-        y + oy > this.height / this.zoom + 10
-      )
-        continue;
-      this.circle(
-        x,
-        y,
-        m.r,
-        `rgba(133,209,223,${0.08 + 0.13 * (0.5 + 0.5 * Math.sin(this.time * 0.7 + m.phase))})`,
-      );
-    }
-    if (this.campaign.stage === 0 && !this.apexEaten) this.drawPredator();
-    for (const hunter of this.hunters) {
-      if (
-        hunter.eaten ||
-        hunter.x + ox < -100 ||
-        hunter.x + ox > 480 / this.zoom + 100 ||
-        hunter.y + oy < -100 ||
-        hunter.y + oy > this.height / this.zoom + 100
-      )
-        continue;
-      const edible = this.life.biomass >= (hunter.requiredMass || 0);
-      this.halo(
-        hunter.x,
-        hunter.y,
-        hunter.r * 1.5,
-        edible ? 'rgba(222,181,91,.12)' : 'rgba(225,112,89,.12)',
-      );
-      c.save();
-      c.translate(hunter.x, hunter.y);
-      c.rotate(Math.atan2(this.life.y - hunter.y, this.life.x - hunter.x));
-      drawEntity(c, hunter.kind, hunter.r, hunter.seed, this.time);
-      c.restore();
-    }
-    for (const f of this.food) {
-      if (
-        f.eaten ||
-        f.x + ox < -(f.r || 20) * 1.6 ||
-        f.x + ox > 480 / this.zoom + (f.r || 20) * 1.6 ||
-        f.y + oy < -(f.r || 20) * 1.6 ||
-        f.y + oy > this.height / this.zoom + (f.r || 20) * 1.6
-      )
-        continue;
-      const yy = f.y + Math.sin(this.time * 1.2 + f.seed) * 2;
-      const pulse = 1 + Math.sin(this.time * 2 + f.seed) * 0.1;
-      const edible = this.life.biomass >= (f.requiredMass || 0);
-      this.halo(
-        f.x,
-        yy,
-        Math.max(17, (f.r || 5) * 1.7) * pulse,
-        edible ? 'rgba(255,177,48,.16)' : 'rgba(151,172,198,.06)',
-      );
-      c.save();
-      c.translate(f.x, yy);
-      c.rotate(
-        f.final ? 0 : f.seed + Math.sin(this.time * 0.4 + f.seed) * 0.12,
-      );
-      drawEntity(
-        c,
-        f.kind || (f.rod ? 'bacteria' : 'nutrient'),
-        f.r || 5,
-        f.seed,
-        this.time,
-      );
-      c.restore();
-      if (
-        (!edible && Math.hypot(f.x - this.life.x, f.y - this.life.y) < 170) ||
-        f.final
-      ) {
-        c.font = '10px Arial';
-        c.textAlign = 'center';
-        c.fillStyle = edible ? '#f3d99d' : '#bdd0d6';
-        c.fillText(
-          f.final
-            ? edible
-              ? 'GAIA · DEVÓRALA'
-              : 'GAIA · 56 BIOMASA'
-            : f.requiredMass + ' BIOMASA',
-          f.x,
-          yy + (f.r || 5) + 20,
+    const visible = (x: number, y: number, r: number) =>
+      x + ox > -r &&
+      x + ox < 480 / this.zoom + r &&
+      y + oy > -r &&
+      y + oy < this.height / this.zoom + r;
+    for (const m of this.motes)
+      if (visible(m.x, m.y, 10))
+        this.circle(
+          m.x + Math.sin(this.time * 0.12 + m.phase) * 10,
+          m.y + Math.cos(this.time * 0.16 + m.phase) * 12,
+          m.r,
+          '#9bd3dc35',
         );
+    if (this.stats.trailSlow)
+      for (const q of this.trail)
+        this.halo(
+          q.x,
+          q.y,
+          q.r,
+          'rgba(110,198,176,' + (q.life / 3) * 0.07 + ')',
+        );
+    let held = 0;
+    for (const f of this.food) {
+      if (f.eaten || !visible(f.x, f.y, (f.r || 8) * 1.3)) continue;
+      const edible = p.biomass >= (f.requiredMass || 0),
+        r = f.r || 8,
+        d = Math.hypot(f.x - p.x, f.y - p.y);
+      if (edible && held < this.stats.tentacles && d < p.radius * 1.5) {
+        held++;
+        c.strokeStyle = '#abdee877';
+        c.lineWidth = 1.2;
+        c.beginPath();
+        c.moveTo(p.x, p.y);
+        c.quadraticCurveTo(
+          (p.x + f.x) / 2 + Math.sin(this.time * 3) * 15,
+          (p.y + f.y) / 2,
+          f.x,
+          f.y,
+        );
+        c.stroke();
+      }
+      const danger =
+        !edible &&
+        ['hunter', 'hazard'].includes(
+          SPECIES_BY_ID[f.kind || 'nutrient']?.kind,
+        );
+      if (danger) this.halo(f.x, f.y, r * 1.25, 'rgba(166,77,86,.065)');
+      c.save();
+      c.translate(f.x, f.y);
+      c.rotate(f.heading ?? f.seed);
+      drawMicroSprite(
+        c,
+        this.spriteAtlas,
+        f.kind || 'nutrient',
+        r,
+        f.seed,
+        this.reduced ? 0 : this.time,
+        1,
+        f.flash || 0,
+      );
+      c.restore();
+      if (danger && d < 220) {
+        c.fillStyle = '#d7aab2';
+        c.font = 10 / this.zoom + 'px Arial';
+        c.textAlign = 'center';
+        c.fillText('DEMASIADO GRANDE', f.x, f.y + r + 14 / this.zoom);
       }
     }
     for (const q of this.particles) {
@@ -1185,50 +1063,35 @@ export class VoroEngine {
       this.circle(
         q.x,
         q.y,
-        (q.gold ? 2.1 : 1.8) * a,
+        2 * a,
         q.gold
-          ? `rgba(248,195,100,${a * 0.7})`
-          : `rgba(139,225,233,${a * 0.4})`,
+          ? 'rgba(245,193,98,' + a * 0.7 + ')'
+          : 'rgba(140,220,230,' + a * 0.35 + ')',
       );
     }
     this.drawCell();
     for (const f of this.floating) {
       c.save();
       c.globalAlpha = Math.min(1, f.life * 1.8);
-      c.font = '12px Arial';
+      c.font = 12 / this.zoom + 'px Arial';
       c.textAlign = 'center';
       c.fillStyle = f.damage ? '#ffb29b' : '#f6d793';
-      c.shadowColor = '#00121c';
-      c.shadowBlur = 8;
       c.fillText(f.text, f.x, f.y);
       c.restore();
     }
     c.restore();
-    if (this.pointer?.touch) {
-      const p = this.pointer;
-      const dx = p.x - p.sx,
-        dy = p.y - p.sy,
-        d = Math.hypot(dx, dy),
-        s = Math.min(1, 40 / Math.max(d, 1));
-      c.strokeStyle = '#b0e0e544';
-      c.lineWidth = 1;
-      c.beginPath();
-      c.arc(p.sx, p.sy, 47, 0, TAU);
-      c.stroke();
-      this.circle(p.sx, p.sy, 47, '#5e9ead0d');
-      this.circle(p.sx + dx * s, p.sy + dy * s, 19, '#afd8dc44');
-    }
     if (this.flash > 0) {
-      c.fillStyle = `rgba(144,226,241,${this.flash * 0.14})`;
+      c.fillStyle = 'rgba(144,226,241,' + this.flash * 0.14 + ')';
       c.fillRect(0, 0, 480, this.height);
     }
     if (this.hitFlash > 0) {
-      c.fillStyle = `rgba(197,85,84,${this.hitFlash * 0.18})`;
+      c.fillStyle = 'rgba(197,85,84,' + this.hitFlash * 0.18 + ')';
       c.fillRect(0, 0, 480, this.height);
     }
-    if (this.started && !this.life.complete && !this.life.dead)
+    if (this.started && !p.dead && !this.progress.offer.length)
       this.drawFoodGuide(ox, oy);
   }
+
   drawFoodGuide(ox: number, oy: number) {
     let nearest: Food | null = null,
       d = Infinity;
@@ -1308,6 +1171,32 @@ export class VoroEngine {
     c.translate(p.x, p.y);
     if (p.dead) c.globalAlpha = Math.min(1, p.radius / 35);
     this.halo(0, 0, r * 1.75, 'rgba(39,173,213,.095)');
+    if (
+      !p.dead &&
+      this.stats.shieldCooldown &&
+      this.progress.shieldRecharge === 0
+    ) {
+      c.beginPath();
+      c.arc(0, 0, r * (1.16 + Math.sin(t * 1.7) * 0.02), 0, TAU);
+      c.strokeStyle = 'rgba(142,219,231,.3)';
+      c.lineWidth = 1.3;
+      c.stroke();
+    }
+    if (this.stats.spikeFraction && p.hurt > 0) {
+      c.strokeStyle = 'rgba(220,206,153,.65)';
+      c.lineWidth = 1;
+      for (let i = 0; i < 12; i++) {
+        const a = (i * TAU) / 12;
+        const node = pts[Math.floor((i * pts.length) / 12)];
+        c.beginPath();
+        c.moveTo(node.x, node.y);
+        c.lineTo(
+          node.x + Math.cos(a) * r * 0.22 * p.hurt,
+          node.y + Math.sin(a) * r * 0.22 * p.hurt,
+        );
+        c.stroke();
+      }
+    }
     // Transparent double membrane with an independently moving cytoplasm.
     this.trace(pts);
     const fill = c.createRadialGradient(-r * 0.28, -r * 0.3, 2, 0, 0, r * 1.4);
@@ -1426,11 +1315,11 @@ export class VoroEngine {
     }
     // Flagella bend behind the direction of travel, growing with the first evolution.
     for (let i = 0; i < 5; i++) {
-      if (i > 1 && p.evolution < 0.02 && this.campaign.stage === 0) continue;
+      if (i > 1 && p.evolution < 0.02) continue;
       const a = this.heading + Math.PI + (i - 2) * 0.34;
       const sx = Math.cos(a) * r * 0.72,
         sy = Math.sin(a) * r * 0.72;
-      const morph = Math.min(1, p.evolution + this.campaign.stage * 0.18);
+      const morph = Math.min(1, p.evolution);
       const len = r * (0.8 + morph * 0.65) * (i > 1 ? morph : 1);
       c.beginPath();
       c.moveTo(sx, sy);
@@ -1542,7 +1431,14 @@ export class VoroEngine {
       if (broken < 0.95) {
         c.rotate(f.rotation + travel * 1.6);
         c.globalAlpha *= 1 - broken;
-        drawEntity(c, f.kind, f.r * (1 - broken * 0.7), f.rotation, this.time);
+        drawMicroSprite(
+          c,
+          this.spriteAtlas,
+          f.kind,
+          f.r * (1 - broken * 0.7),
+          f.rotation,
+          this.time,
+        );
       }
       c.restore();
       if (broken > 0) {
@@ -1559,45 +1455,7 @@ export class VoroEngine {
       }
     }
   }
-  drawPredator() {
-    const c = this.ctx,
-      p = this.predator,
-      t = this.time;
-    c.save();
-    c.translate(p.x, p.y);
-    c.rotate(t * 0.045);
-    this.halo(0, 0, 115, 'rgba(30,87,134,.15)');
-    for (let i = 0; i < 24; i++) {
-      const a = (i / 24) * TAU,
-        r = p.r * 0.85;
-      const x = Math.cos(a) * r,
-        y = Math.sin(a) * r;
-      c.strokeStyle = 'rgba(117,169,202,.45)';
-      c.lineWidth = 3;
-      c.beginPath();
-      c.moveTo(x * 0.8, y * 0.8);
-      c.quadraticCurveTo(
-        x * 1.1 - 5 * Math.sin(a),
-        y * 1.1 + 5 * Math.cos(a),
-        x * 1.28,
-        y * 1.28,
-      );
-      c.stroke();
-      this.circle(x * 1.28, y * 1.28, 2.5, '#6e9ab7');
-    }
-    const g = c.createRadialGradient(-22, -24, 3, 0, 0, p.r);
-    g.addColorStop(0, '#28546d');
-    g.addColorStop(0.65, '#113146');
-    g.addColorStop(1, '#41687c');
-    this.circle(0, 0, p.r * 0.85, g as unknown as string);
-    for (let i = 0; i < 55; i++) {
-      const a = i * 2.399,
-        d = Math.sqrt((i * 0.618) % 1) * p.r * 0.77;
-      this.circle(Math.cos(a) * d, Math.sin(a) * d, 2 + (i % 4), '#7bafbe25');
-    }
-    this.circle(-12, -8, 17, '#081c29');
-    c.restore();
-  }
+
   registerTools() {
     const context = (
       document as unknown as {
