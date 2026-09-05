@@ -222,10 +222,10 @@ import { SPECIES_BY_ID } from '../app/journey-data.mjs';
 test('Swimmer variants coexist deterministically without adding encounter slots or changing edible size', () => {
   const world = new JourneyWorld(1834, [], 3),
     seen = new Set();
-  for (let x = 20; x < 50; x++) {
+  for (let x = 20; x < 1020; x++) {
     const chunk = world.generate(x, 20, 0),
       again = world.generate(x, 20, 0);
-    assert.ok(chunk.entities.length >= 11 && chunk.entities.length <= 12);
+    assert.ok(chunk.entities.length >= 5 && chunk.entities.length <= 12);
     assert.deepEqual(
       chunk.entities.map((e) => [e.kind, e.x, e.y]),
       again.entities.map((e) => [e.kind, e.x, e.y]),

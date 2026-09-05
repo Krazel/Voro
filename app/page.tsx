@@ -1,4 +1,5 @@
 'use client';
+import { TRANSITION_ROUTES } from './journey-transitions.mjs';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import {
@@ -376,12 +377,7 @@ export default function Home() {
               EVOLUCIÓN · {STAGES[state.evolutionFrom].short.toUpperCase()}
             </span>
             <h2>{STAGES[state.evolutionFrom].evolution}</h2>
-            <p>
-              {
-                STAGES[Math.min(STAGES.length - 1, state.evolutionFrom + 1)]
-                  .name
-              }
-            </p>
+            <p>{TRANSITION_ROUTES[STAGES[state.evolutionFrom].id]}</p>
           </div>
         )}
         {state.started && !state.assetsReady && (

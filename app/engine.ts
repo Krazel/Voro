@@ -1,3 +1,5 @@
+import { drawCoastalGround } from './coastal-ground.mjs';
+import { transitionScene } from './journey-transitions.mjs';
 // Canvas2D rendering and input. The simulation stays independent of frame rendering.
 import {
   clamp,
@@ -21,7 +23,7 @@ import {
   isDanger,
 } from './journey-data.mjs';
 import { drawJourneySprite } from './journey-sprites.mjs';
-import { gameplayZoom } from './camera.mjs';
+import { gameplayZoom, followGameplayZoom } from './camera.mjs';
 import {
   shedBiomass,
   moveFragments,
@@ -180,6 +182,7 @@ export class VoroEngine {
     transition: number;
     transitionAdvanced: boolean;
     transitionFrom: number;
+    transitionStartZoom: number;
     transitionFrame: VoroEngine['transitionFrame'];
     ending: number;
   } | null = null;
@@ -190,6 +193,9 @@ export class VoroEngine {
   particles: Particle[] = [];
   organs: { a: number; d: number; r: number; phase: number }[] = [];
   background = new Image();
+  shoreBackground = new Image();
+  seaBackground = new Image();
+  transitionStartZoom = 1;
   keys = new Set<string>();
   pointer: {
     id: number;
@@ -231,6 +237,8 @@ export class VoroEngine {
     this.ctx = canvas.getContext('2d', { alpha: false })!;
     this.emit = emit;
     this.background.src = './abyssal-background.png';
+    this.shoreBackground.src = './shore-v2.png';
+    this.seaBackground.src = './sea-v2.png';
     for (const [key, url] of Object.entries(ATLAS_URLS)) {
       const img = key === 'micro' ? this.spriteAtlas : new Image();
       this.atlasImages[key] = img;
@@ -272,7 +280,7 @@ export class VoroEngine {
     this.fragments = restoredFragments;
     this.food = [...this.world.entities, ...this.fragments];
     this.camera = { x: this.life.x, y: this.life.y };
-    this.zoom = gameplayZoom();
+    this.zoom = gameplayZoom(this.life.radius);
     this.resize();
     this.observer = new ResizeObserver(() => this.resize());
     this.observer.observe(canvas);
@@ -543,6 +551,7 @@ export class VoroEngine {
         transition: this.transition,
         transitionAdvanced: this.transitionAdvanced,
         transitionFrom: this.transitionFrom,
+        transitionStartZoom: this.transitionStartZoom,
         transitionFrame: this.transitionFrame,
         ending: this.ending,
       };
@@ -572,7 +581,7 @@ export class VoroEngine {
     this.comboMeals = 0;
     this.lastMeal = -100;
     this.camera = { x: this.life.x, y: this.life.y };
-    this.zoom = gameplayZoom();
+    this.zoom = gameplayZoom(this.life.radius);
     this.started = true;
     this.paused = false;
     this.keys.clear();
@@ -606,7 +615,7 @@ export class VoroEngine {
     this.comboMeals = 0;
     this.lastMeal = -100;
     this.camera = { x: this.life.x, y: this.life.y };
-    this.zoom = gameplayZoom();
+    this.zoom = gameplayZoom(this.life.radius);
     this.keys.clear();
     this.pointer = null;
     this.padInput = { x: 0, y: 0 };
@@ -691,7 +700,7 @@ export class VoroEngine {
       this.stats = upgradeStats(this.progress.mutations);
       this.seed();
       this.camera = { x: 700, y: 970 };
-      this.zoom = gameplayZoom();
+      this.zoom = gameplayZoom(this.life.radius);
       this.started = true;
       this.paused = false;
       this.keys.clear();
@@ -880,7 +889,7 @@ export class VoroEngine {
         );
         this.seed();
         this.camera = { x: this.life.x, y: this.life.y };
-        this.zoom = 0.22;
+        // Keep the camera continuous while the next local scale is revealed.
         this.comboClock = 0;
         this.comboMeals = 0;
         this.lastMeal = -100;
@@ -1076,15 +1085,18 @@ export class VoroEngine {
     this.camera.x += (p.x - this.camera.x) * (1 - Math.exp(-dt * 3));
     this.camera.y += (cameraY - this.camera.y) * (1 - Math.exp(-dt * 3));
     this.animateMembrane(dt);
-    // Preserve the first prototype framing. Only the stage cinematic changes zoom.
-    const targetZoom =
-      this.transition > 3.6
-        ? 1 + 0.5 * Math.sin(((7.2 - this.transition) / 3.6) * Math.PI)
-        : gameplayZoom();
-    this.zoom =
-      this.transition > 0
-        ? this.zoom + (targetZoom - this.zoom) * (1 - Math.exp(-dt * 1.7))
-        : gameplayZoom();
+    if (this.transition > 0) {
+      const scene = transitionScene(
+        STAGES[this.transitionFrom].id,
+        (7.2 - this.transition) / 7.2,
+        this.reduced,
+      );
+      const target =
+        this.transition > 3.6
+          ? this.transitionStartZoom * (scene.coastal ? 1 : 0.8)
+          : gameplayZoom(p.radius);
+      this.zoom += (target - this.zoom) * (1 - Math.exp(-dt * 1.2));
+    } else this.zoom = followGameplayZoom(this.zoom, p.radius, dt);
     this.flash = Math.max(0, this.flash - dt * 0.6);
     this.hitFlash = Math.max(0, this.hitFlash - dt);
     for (const q of this.particles) {
@@ -1121,6 +1133,7 @@ export class VoroEngine {
     this.progress.pendingEvolution = true;
     this.progress.maturitySeen = true;
     this.transitionFrom = this.progress.stage;
+    this.transitionStartZoom = this.zoom;
     this.transitionAdvanced = false;
     if ('createElement' in document) {
       this.render();
@@ -1199,23 +1212,26 @@ export class VoroEngine {
     const c = this.ctx;
     if (this.transition > 0) {
       const u = (7.2 - this.transition) / 7.2;
+      const scene = transitionScene(
+        STAGES[this.transitionFrom].id,
+        u,
+        this.reduced,
+      );
       if (this.transitionFrame) {
-        const scale =
-          u < 0.23 ? 1 + u * 3 : Math.max(0.03, 1.69 * (1 - (u - 0.23) / 0.45));
         c.save();
-        c.globalAlpha = Math.max(0, 1 - u * 1.5);
+        c.globalAlpha = scene.outgoing;
         c.drawImage(
           this.transitionFrame,
-          (480 - 480 * scale) / 2,
-          (this.height - this.height * scale) / 2,
-          480 * scale,
-          this.height * scale,
+          (480 - 480 * scene.scale) / 2 + scene.panX,
+          (this.height - this.height * scene.scale) / 2 + scene.panY,
+          480 * scene.scale,
+          this.height * scene.scale,
         );
         c.restore();
       }
-      c.fillStyle = 'rgba(8,24,36,' + Math.sin(u * Math.PI) * 0.65 + ')';
+      c.fillStyle = 'rgba(8,38,48,' + scene.wash + ')';
       c.fillRect(0, 0, 480, this.height);
-      if (!this.reduced) {
+      if (!this.reduced && !scene.coastal) {
         c.save();
         c.translate(240, this.height * 0.48);
         c.strokeStyle = 'rgba(181,222,228,' + Math.sin(u * Math.PI) * 0.3 + ')';
@@ -1395,19 +1411,28 @@ export class VoroEngine {
     g.addColorStop(1, 'transparent');
     this.circle(x, y, r, g as unknown as string);
   }
-  render() {
-    const c = this.ctx,
-      k = this.pixelRatio * this.scale,
-      p = this.life;
-    c.setTransform(k, 0, 0, k, 0, 0);
-    c.fillStyle = '#041423';
-    c.fillRect(0, 0, 480, this.height);
-    const stage = stageOf(this.progress),
-      im = this.progress.stage === 0 ? this.background : this.environments;
+  drawBackground(index: number) {
+    const c = this.ctx;
+    const stage = STAGES[index],
+      custom =
+        stage.id === 'land'
+          ? this.shoreBackground
+          : ['water', 'pond'].includes(stage.id)
+            ? this.seaBackground
+            : null,
+      im = index === 0 ? this.background : this.environments;
+    if (custom?.complete && custom.naturalWidth) {
+      drawCoastalGround(c, custom, this.camera, this.zoom, this.height);
+      if (stage.id === 'pond') {
+        c.fillStyle = 'rgba(78,121,74,.16)';
+        c.fillRect(0, 0, 480, this.height);
+      }
+      return;
+    }
     if (im.complete && im.naturalWidth) {
       const cell = stage.background,
-        sw = this.progress.stage === 0 ? im.width : im.width / 4,
-        sh = this.progress.stage === 0 ? im.height : im.height / 2;
+        sw = index === 0 ? im.width : im.width / 4,
+        sh = index === 0 ? im.height : im.height / 2;
       const sx = cell < 0 ? 0 : (cell % 4) * sw,
         sy = cell < 0 ? 0 : Math.floor(cell / 4) * sh;
       const factor = Math.max(540 / sw, (this.height + 80) / sh),
@@ -1426,6 +1451,30 @@ export class VoroEngine {
         w,
         h,
       );
+    }
+  }
+  render() {
+    const c = this.ctx,
+      k = this.pixelRatio * this.scale,
+      p = this.life;
+    c.setTransform(k, 0, 0, k, 0, 0);
+    c.fillStyle = '#041423';
+    c.fillRect(0, 0, 480, this.height);
+    if (this.transition > 0) {
+      const scene = transitionScene(
+        STAGES[this.transitionFrom].id,
+        (7.2 - this.transition) / 7.2,
+        this.reduced,
+      );
+      this.drawBackground(this.transitionFrom);
+      c.save();
+      c.globalAlpha = scene.incoming;
+      this.drawBackground(Math.min(STAGES.length - 1, this.transitionFrom + 1));
+      c.restore();
+    } else this.drawBackground(this.progress.stage);
+    if (this.transition > 3.6 && this.transitionFrame) {
+      this.drawEvolution();
+      return;
     }
     const shake = this.reduced ? 0 : this.hitFlash * 3,
       ox = 240 / this.zoom - this.camera.x + Math.sin(this.time * 55) * shake,

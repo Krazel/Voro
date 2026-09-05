@@ -15,6 +15,7 @@ import { ANIMATIONS } from '../animation-catalog.mjs';
 import { drawInhabitant } from '../inhabitant-animation.mjs';
 import './studio.css';
 import SizeComparison from './size-comparison';
+import Population from './population';
 
 type Images = Record<string, HTMLImageElement>;
 const TOTAL = STAGE_SPECIES.flat().length;
@@ -223,8 +224,22 @@ export default function AnimationStudio() {
         >
           Comparar tamaños · mín. / máx.
         </button>
+        <button
+          aria-pressed={view === 'population'}
+          onClick={() => setView('population')}
+        >
+          Población · cantidades
+        </button>
       </div>
-      {view === 'sizes' ? (
+      {view === 'population' ? (
+        <Population
+          stage={stage}
+          onSelect={(id) => {
+            choose(id);
+            setView('animation');
+          }}
+        />
+      ) : view === 'sizes' ? (
         <SizeComparison
           stage={stage}
           images={images}

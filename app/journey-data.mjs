@@ -544,3 +544,15 @@ for (const source of EDIBLE_MATTER) {
 STAGES[1].intro = 'Entre algas, larvas y fragmentos, empieza por lo pequeño.';
 STAGES[2].intro =
   'Insectos, conchas y plantas: toda la orilla puede alimentarte.';
+
+STAGES[2].name = 'La franja de la marea';
+STAGES[2].evolution = 'La marea te abre el camino.';
+STAGES[3].evolution = 'Tu sombra alcanza el puerto.';
+
+// Every scale includes a tiny recovery food after a severe hit.
+for (const list of STAGE_SPECIES) {
+  const tiniest = list
+    .filter((s) => !isDanger(s) && s.kind !== 'final')
+    .sort((a, b) => a.r - b.r)[0];
+  tiniest.requiredMass = 0;
+}

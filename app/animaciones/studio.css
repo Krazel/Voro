@@ -367,3 +367,71 @@
   outline: 2px solid #c4dcb7;
   outline-offset: 3px;
 }
+
+.population-view {
+  padding: 24px 0;
+  color: #bfd9d5;
+}
+.population-view h2 {
+  font-size: 24px;
+  margin: 0 0 16px;
+}
+.population-view p {
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 820px;
+  margin: 12px 0;
+}
+.population-table-wrap {
+  overflow-x: auto;
+  margin-top: 24px;
+  border: 1px solid #355763;
+  border-radius: 12px;
+}
+.population-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+}
+.population-table caption {
+  text-align: left;
+  padding: 16px;
+  color: #9cbdbe;
+  font-size: 14px;
+}
+.population-table th,
+.population-table td {
+  padding: 14px 16px;
+  border-top: 1px solid #27444f;
+  text-align: left;
+}
+.population-table thead {
+  background: #102936;
+}
+.population-table tbody th {
+  font-weight: 400;
+}
+.population-table small {
+  display: block;
+  color: #8cbbb8;
+  font-size: 14px;
+  margin-top: 4px;
+}
+.population-table button {
+  text-align: left;
+  min-height: 44px;
+  color: #e0eee5;
+}
+.population-table td {
+  font-variant-numeric: tabular-nums;
+}
+.population-table button:hover {
+  text-decoration: underline;
+}
+@media (max-width: 600px) {
+  .population-table th,
+  .population-table td {
+    padding: 10px;
+    font-size: 14px;
+  }
+}

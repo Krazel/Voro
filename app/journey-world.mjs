@@ -1,3 +1,9 @@
+import {
+  POPULATION_PLANS,
+  populationWeight,
+  shoreAllows,
+  constrainToShore,
+} from './population.mjs';
 import { MicroWorld, makeEntity, TILE } from './micro-world.mjs';
 import { random, clamp } from './simulation.mjs';
 import {
@@ -63,29 +69,46 @@ export class JourneyWorld extends MicroWorld {
           0,
       ),
       entities = [],
+      occupied = [],
       motes = [];
+    const stageId = STAGES[this.stage].id,
+      plan = POPULATION_PLANS[stageId];
+    const weight = (s) => populationWeight(s, stageId, list);
     const pick = (arr) => {
-      const matter = arr.filter((s) => s.edibleMatter),
-        animals = arr.filter((s) => !s.edibleMatter);
-      if (matter.length && animals.length)
-        arr = rng() < 0.35 ? matter : animals;
-      let roll = rng() * arr.reduce((n, s) => n + (s.spawnWeight ?? 1), 0);
-      return arr.find((s) => (roll -= s.spawnWeight ?? 1) < 0) || arr.at(-1);
+      let roll = rng() * arr.reduce((n, s) => n + weight(s), 0);
+      return arr.find((s) => (roll -= weight(s)) < 0) || arr.at(-1);
     };
-    const water = ['water', 'pond'].includes(STAGES[this.stage].id);
-    let sharks = 0;
-    for (let i = 0; i < (water ? 12 : 22); i++) {
+    const [starters, forage, threats] = plan.slots;
+    const recovery = [...small].sort((a, b) => a.r - b.r)[0];
+    for (let i = 0; i < starters + forage + threats; i++) {
       const pool =
-        i < (water ? 6 : 9) ? small : i < (water ? 11 : 18) ? medium : danger;
-      const s = pick(pool.length ? pool : list);
-      if (s.id === 'water-12' || s.id === 'water-13') {
-        if (sharks >= 1) continue;
-        sharks++;
-      }
-      const x = cx * TILE + 40 + rng() * (TILE - 80),
-        y = cy * TILE + 40 + rng() * (TILE - 80),
-        seed = rng() * 6.28,
+        i < starters ? small : i < starters + forage ? medium : danger;
+      const s = i === 0 ? recovery : pick(pool.length ? pool : list);
+      const seed = rng() * 6.28,
         id = `${cx}:${cy}:${i}`;
+      const candidate = journeyEntity(s, 0, 0, seed, id);
+      const margin = Math.max(40, Math.min(220, candidate.r * 1.1 + 8));
+      let x = 0,
+        y = 0,
+        placed = false;
+      for (let attempt = 0; attempt < 10; attempt++) {
+        x = cx * TILE + margin + rng() * (TILE - 2 * margin);
+        y = cy * TILE + margin + rng() * (TILE - 2 * margin);
+        if (stageId === 'land' && !shoreAllows(s, x)) continue;
+        if (
+          occupied.some(
+            (e) =>
+              Math.hypot(e.x - x, e.y - y) < 0.9 * (e.r + candidate.r) + 12,
+          )
+        )
+          continue;
+        placed = true;
+        break;
+      }
+      if (!placed) continue;
+      // Consumed slots also reserve their geometry until regeneration, so eating
+      // one object never moves or rerolls neighbouring objects on chunk reload.
+      occupied.push({ x, y, r: candidate.r });
       if (isDanger(s) && Math.hypot(x - 700, y - 970) < 310) continue;
       if ((this.journal.get(id) || 0) > time) continue;
       const inhabitant =
@@ -108,6 +131,8 @@ export class JourneyWorld extends MicroWorld {
           ),
         );
       }
+    if (stageId === 'land')
+      for (const e of entities) constrainToShore(e, SPECIES_BY_ID[e.kind]);
     for (let i = 0; i < 25; i++)
       motes.push({
         x: cx * TILE + rng() * TILE,
@@ -171,6 +196,7 @@ export class JourneyWorld extends MicroWorld {
           Math.min(1, dt * 3);
       } else if (['spin', 'galaxy', 'cosmic'].includes(s.motion))
         e.heading += dt * (s.motion === 'spin' ? 0.06 : 0.025);
+      if (STAGES[this.stage].id === 'land') constrainToShore(e, s);
       if (s.kind === 'gravity' && !edible && d < 320 && d > 1) {
         p.x -= (dx / d) * (1 - d / 320) * 28 * dt;
         p.y -= (dy / d) * (1 - d / 320) * 28 * dt;
@@ -209,6 +235,7 @@ export class JourneyWorld extends MicroWorld {
     e.y += ((ty - e.y) / distance) * step;
     // No animal steering or escape behaviour for loose matter.
     if (s.matterMotion === 'drift') e.heading += dt * 0.025;
+    if (STAGES[this.stage].id === 'land') constrainToShore(e, s);
   }
   stream(x, y, time, force = false, radius = this.radius) {
     super.stream(x, y, time, force, radius);

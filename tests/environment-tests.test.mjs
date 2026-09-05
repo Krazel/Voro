@@ -1,3 +1,4 @@
+import { gameplayZoom } from '../app/camera.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { makeEngine } from './engine-fixture.mjs';
@@ -36,7 +37,7 @@ test('Every environment and size can be tested without altering or overwriting t
       assert.ok(game.startTest(stage, mass));
       assert.equal(game.progress.stage, stage);
       assert.equal(game.life.radius, radiusForMass(mass));
-      assert.equal(game.zoom, 1);
+      assert.equal(game.zoom, gameplayZoom(game.life.radius));
       assert.deepEqual(game.progress.mutations, ['tentacles', 'dash']);
       game.update(1 / 60);
       game.save();
@@ -52,7 +53,7 @@ test('Every environment and size can be tested without altering or overwriting t
   assert.equal(game.life.biomass, 19);
   assert.equal(game.life.elapsed, 50);
   assert.equal(game.testMode, false);
-  assert.equal(game.zoom, 1);
+  assert.equal(game.zoom, gameplayZoom(game.life.radius));
   game.destroy();
   delete globalThis.localStorage;
 });

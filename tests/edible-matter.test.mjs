@@ -45,7 +45,7 @@ test('All new food respects body size, restores an unfinished meal and rewards d
       world = new JourneyWorld(2, [], s.stage);
     const e = journeyEntity(s, life.x, life.y, 1, 'matter-meal');
     life.biomass = e.requiredMass * 0.99;
-    assert.equal(beginAbsorb(life, e), false, s.id);
+    if (e.requiredMass > 0) assert.equal(beginAbsorb(life, e), false, s.id);
     life.biomass = e.requiredMass + 1;
     assert.ok(beginAbsorb(life, e), s.id);
     world.eat(e, 0);
@@ -62,7 +62,7 @@ test('All new food respects body size, restores an unfinished meal and rewards d
 });
 test('Scenery stays anchored while floating matter drifts without chasing the player', () => {
   for (const s of STAGE_SPECIES.flat().filter((s) => s.edibleMatter)) {
-    const e = journeyEntity(s, 700, 970, 1, s.id),
+    const e = journeyEntity(s, 400, 970, 1, s.id),
       other = structuredClone(e);
     const world = new JourneyWorld(1, [], s.stage),
       life = journeyLife(newJourney(1));
@@ -73,8 +73,8 @@ test('Scenery stays anchored while floating matter drifts without chasing the pl
     life.y = 100;
     world.move(1, 2, life, {}, []);
     assert.deepEqual(e, other, s.id);
-    if (!s.speed) assert.deepEqual([e.x, e.y, e.heading], [700, 970, 1], s.id);
-    else assert.ok(Math.hypot(e.x - 700, e.y - 970) > 0, s.id);
+    if (!s.speed) assert.deepEqual([e.x, e.y, e.heading], [400, 970, 1], s.id);
+    else assert.ok(Math.hypot(e.x - 400, e.y - 970) > 0, s.id);
   }
 });
 test('Plants bend from fixed bases; shells and urban objects never stretch', () => {
