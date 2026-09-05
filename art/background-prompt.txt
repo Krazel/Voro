@@ -1,0 +1,7 @@
+Use case: stylized-concept
+Asset type: one final raster background for a portrait mobile 2D game, VORO Abisal.
+Primary request: Create exactly ONE high-resolution portrait image, 9:16 composition, a top-down microscopic aquatic environment.
+Scene/backdrop: rich abyssal dark navy and teal water with a very subtle diffused light source from the upper left. Delicate submerged algae and minute cellular colonies appear softly blurred only along the extreme outer edges. The central 75 percent of the image must remain clear, open, dark water with smooth low-contrast tonal variation for unobstructed gameplay.
+Style/medium: realistic-looking painted 2D game environment, polished natural textures with baked lighting, immersive microscopic depth, restrained and sophisticated.
+Materials/textures: exceedingly fine restrained microscopic grain and faint organic matter; all environmental detail stays dim and peripheral.
+Constraints: background only. A separately rendered translucent blue cell with an amber nucleus will be composited later; do not include that cell. Preserve generous empty playable area. No creatures, no player, no large bacteria, no bright dots or beads that resemble food, no stars, no sparkles, no UI, no text, no logo, no watermark, no phone, no frame. No perspective horizon. Deliver a single finished background, not a collage or variants.
