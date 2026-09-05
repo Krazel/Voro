@@ -10,7 +10,7 @@ test('Newborn framing is unchanged; growth opens smoothly without hiding body gr
     screenRadius = 0;
   for (const radius of [24, 42, 60, 96, 150, 240, 320]) {
     const z = gameplayZoom(radius);
-    assert.ok(z >= 0.5 && z <= previous);
+    assert.ok(z >= 0.65 && z <= previous);
     assert.ok(radius * z > screenRadius);
     previous = z;
     screenRadius = radius * z;
@@ -22,6 +22,10 @@ test('Newborn framing is unchanged; growth opens smoothly without hiding body gr
   assert.ok(Math.abs(a - b) < 1e-10);
   assert.ok(a > gameplayZoom(150) && a < 1);
   assert.ok(followGameplayZoom(a, 24, 1 / 60) > a);
+  // Doubling body radius should visibly increase screen size by at least 65%,
+  // while still opening the view a little to reveal more surroundings.
+  const doubledScreenSize = (84 * gameplayZoom(84)) / 42;
+  assert.ok(doubledScreenSize >= 1.65 && doubledScreenSize < 2);
 });
 test('Engine eases camera after growth, damage and the end of cinematics', () => {
   const { game } = makeEngine();

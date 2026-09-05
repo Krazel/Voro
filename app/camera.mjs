@@ -1,8 +1,8 @@
 // Preserve the original 480-unit framing while small; open up gently as the
-// membrane grows. Even a mature body keeps at least half the original zoom.
+// membrane grows. Mild compensation keeps growth clearly visible on screen.
 export function gameplayZoom(radius = 0) {
   if (!Number.isFinite(radius) || radius <= 42) return 1;
-  return Math.max(0.5, (42 / radius) ** 0.45);
+  return Math.max(0.65, (42 / radius) ** 0.25);
 }
 export function followGameplayZoom(current, radius, dt) {
   const target = gameplayZoom(radius);
