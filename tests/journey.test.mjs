@@ -72,6 +72,11 @@ test('Every stage generates stable inhabitants, recoverable food, bounded chunks
     rotate() {},
     translate() {},
     beginPath() {},
+    moveTo() {},
+    lineTo() {},
+    closePath() {},
+    clip() {},
+    transform() {},
     arc() {},
     stroke() {},
     drawImage(image, x, y, w, h, ...rest) {

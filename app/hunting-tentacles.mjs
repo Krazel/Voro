@@ -103,85 +103,42 @@ export class HuntingTentacles {
       a.phase = index * 2.4;
     }
   }
-  draw(c, p, time, reduced = false) {
-    for (const a of this.arms) {
-      const root = {
-        x: p.x + Math.cos(a.angle) * p.radius * 0.72,
-        y: p.y + Math.sin(a.angle) * p.radius * 0.72,
-      };
-      const dx = a.x - root.x,
-        dy = a.y - root.y,
-        len = Math.hypot(dx, dy);
-      if (len < 2) continue;
-      const nx = -dy / len,
-        ny = dx / len,
-        bend =
-          Math.sin((reduced ? 0 : time * 5) + (a.phase || 0)) *
-          Math.min(22, len * 0.23);
-      const points = [];
-      for (let i = 0; i <= 24; i++) {
-        const u = i / 24,
-          wave = Math.sin(u * Math.PI) * bend;
-        let x = root.x + dx * u + nx * wave,
-          y = root.y + dy * u + ny * wave;
-        if (a.grip > 0 && u > 0.68) {
-          const v = (u - 0.68) / 0.32,
-            rad = Math.min(p.radius * 0.32, (a.target?.r || 6) * 0.8) * a.grip;
-          x += Math.cos(a.angle + v * Math.PI * 1.4) * rad * v;
-          y += Math.sin(a.angle + v * Math.PI * 1.4) * rad * v;
-        }
-        points.push({
-          x,
-          y,
-          width: Math.max(0.8, p.radius * 0.17 * (1 - u) ** 1.1),
-        });
+  // Pseudopods are a continuous part of the existing cell outline. Every
+  // membrane fill, rim, cytoplasm clip and internal fibre follows this shape.
+  deform(points, p, time) {
+    if (!this.arms.length || p.dead) return points;
+    return points.map((point) => {
+      let x = point.x,
+        y = point.y;
+      const theta = Math.atan2(y, x);
+      for (const arm of this.arms) {
+        const dx = arm.x - p.x,
+          dy = arm.y - p.y,
+          d = Math.hypot(dx, dy);
+        const extension = Math.max(0, d - p.radius * 0.92);
+        if (extension < 0.5) continue;
+        const angle = Math.atan2(dy, dx);
+        const delta = Math.atan2(
+          Math.sin(theta - angle),
+          Math.cos(theta - angle),
+        );
+        const spread = 0.22,
+          weight = Math.exp((-delta * delta) / (spread * spread));
+        const sweep =
+          Math.sin(time * 4 + (arm.phase || 0)) *
+          extension *
+          0.1 *
+          weight *
+          (1 - weight);
+        const preyRadius = arm.target?.r || 5;
+        const cup = arm.grip * Math.min(preyRadius * 0.9, p.radius * 0.25);
+        // A pair of soft lips closes around the food as the lobe reaches it.
+        const notch = cup * Math.exp((-delta * delta) / 0.005);
+        const stretch = extension * weight - notch;
+        x += Math.cos(angle) * stretch - Math.sin(angle) * sweep;
+        y += Math.sin(angle) * stretch + Math.cos(angle) * sweep;
       }
-      const gradient = c.createLinearGradient(root.x, root.y, a.x, a.y);
-      gradient.addColorStop(0, '#6cbbcce6');
-      gradient.addColorStop(0.6, '#599fbadf');
-      gradient.addColorStop(1, '#aad6c6ee');
-      c.save();
-      c.beginPath();
-      for (let side = 0; side < 2; side++)
-        for (let j = 0; j < points.length; j++) {
-          const i = side ? points.length - 1 - j : j,
-            q = points[i],
-            before = points[Math.max(0, i - 1)],
-            after = points[Math.min(24, i + 1)];
-          const d = Math.max(
-              1,
-              Math.hypot(after.x - before.x, after.y - before.y),
-            ),
-            sign = side ? -1 : 1;
-          const x = q.x - ((after.y - before.y) / d) * q.width * sign,
-            y = q.y + ((after.x - before.x) / d) * q.width * sign;
-          if (!side && !j) c.moveTo(x, y);
-          else c.lineTo(x, y);
-        }
-      c.closePath();
-      c.fillStyle = gradient;
-      c.fill();
-      c.strokeStyle = '#c1eef075';
-      c.lineWidth = 0.7;
-      c.stroke();
-      c.beginPath();
-      points.forEach((q, i) =>
-        i
-          ? c.lineTo(q.x - nx * q.width * 0.3, q.y - ny * q.width * 0.3)
-          : c.moveTo(q.x, q.y),
-      );
-      c.strokeStyle = '#d5f8ee62';
-      c.lineWidth = Math.max(0.8, p.radius * 0.022);
-      c.stroke();
-      // Organic nodules run along the inner surface and curl with the grip.
-      for (let i = 5; i < 22; i += 3) {
-        const q = points[i];
-        c.beginPath();
-        c.arc(q.x, q.y, Math.max(0.7, q.width * 0.3), 0, Math.PI * 2);
-        c.fillStyle = '#d4eacb88';
-        c.fill();
-      }
-      c.restore();
-    }
+      return { x, y };
+    });
   }
 }

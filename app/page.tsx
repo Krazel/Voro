@@ -522,6 +522,10 @@ export default function Home() {
               </li>
             ))}
           </ol>
+          <a className="settings-row" href="/animaciones">
+            Galería de animaciones
+            <ArrowUpRight size={17} />
+          </a>
           {state.level > 0 && (
             <div className="micro-upgrade-list">
               {UPGRADES.map((u) => {

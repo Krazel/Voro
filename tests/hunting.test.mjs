@@ -76,9 +76,9 @@ test('Starting impulse is mild and infrequent; every rank increases travel and r
     assert.ok(p.cooldown < previousCooldown);
     previousCooldown = p.cooldown;
     if (rank === 0) {
-      assert.equal(p.boostStrength, 1.3);
+      assert.equal(p.boostStrength, 1.45);
       assert.equal(p.cooldown, 9);
-      assert.equal(p.boost, 0.24);
+      assert.equal(p.boost, 0.28);
     }
     for (let i = 0; i < 60; i++) integrate(p, 1 / 60, { x: 1, y: 0 });
     assert.ok(p.x - start > previous);

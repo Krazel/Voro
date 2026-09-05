@@ -96,6 +96,8 @@ type Food = {
   flash?: number;
   recycled?: boolean;
   shotClock?: number;
+  escape?: number;
+  attack?: number;
 };
 type Mote = { x: number; y: number; r: number; phase: number };
 type Particle = {
@@ -1297,7 +1299,6 @@ export class VoroEngine {
           q.r,
           'rgba(110,198,176,' + (q.life / 3) * 0.07 + ')',
         );
-    this.huntingTentacles.draw(c, p, this.time, this.reduced);
     for (const f of this.food) {
       if (f.eaten || !visible(f.x, f.y, (f.r || 8) * 1.3)) continue;
       const edible = p.biomass >= (f.requiredMass || 0),
@@ -1315,7 +1316,7 @@ export class VoroEngine {
         r,
         f.seed,
         this.reduced ? 0 : this.time,
-        1,
+        (f.escape || 0) > 0 || (f.attack || 0) > 0 ? 1.5 : 1,
         f.flash || 0,
       );
       c.restore();
@@ -1427,13 +1428,18 @@ export class VoroEngine {
   shape(r: number) {
     const p = this.life,
       speed = Math.min(1, Math.hypot(p.vx, p.vy) / 180);
-    return this.membrane.map((rr, i) => {
+    const points = this.membrane.map((rr, i) => {
       const a = (i / 100) * TAU;
       return {
         x: Math.cos(a) * r * rr + Math.cos(this.heading) * speed * 4,
         y: Math.sin(a) * r * rr + Math.sin(this.heading) * speed * 4,
       };
     });
+    return this.huntingTentacles.deform(
+      points,
+      p,
+      this.reduced ? 0 : this.time,
+    );
   }
   trace(points: { x: number; y: number }[], factor = 1) {
     const c = this.ctx,
