@@ -23,14 +23,29 @@ import {
 } from '@/components/ui/dialog';
 import { VoroEngine, type Snapshot } from './engine';
 import { UPGRADES, levelOf } from './mutations.mjs';
-import { STAGES, STAGE_SPECIES } from './journey-data.mjs';
+import {
+  STAGES,
+  STAGE_SPECIES,
+  stageStartMass,
+  formatSize,
+} from './journey-data.mjs';
 export default function Home() {
   const canvas = useRef<HTMLCanvasElement>(null),
     engine = useRef<VoroEngine | null>(null);
   const [settings, setSettings] = useState(false),
     [confirmReset, setConfirmReset] = useState(false);
+  const [testPanel, setTestPanel] = useState(false);
+  const [testStage, setTestStage] = useState(0);
+  const [testSize, setTestSize] = useState(0);
+  const [keepUpgrades, setKeepUpgrades] = useState(true);
+  const [testSafe, setTestSafe] = useState(false);
+  const testMass =
+    stageStartMass(testStage) *
+    ((STAGES[testStage].goal * 1.5) / stageStartMass(testStage)) **
+      (testSize / 100);
   const resume = useRef(false);
   const [state, setState] = useState<Snapshot>({
+    testMode: false,
     stage: 0,
     stageName: STAGES[0].name,
     scale: '20 µm',
@@ -156,7 +171,10 @@ export default function Home() {
         >
           <div className="size">
             <strong className="journey-size">{state.scale}</strong>
-            <span>{STAGES[state.stage].short}</span>
+            <span>
+              {state.testMode ? 'PRUEBA · ' : ''}
+              {STAGES[state.stage].short}
+            </span>
           </div>
           <div className="growth">
             <div className="growth-label">
@@ -501,10 +519,124 @@ export default function Home() {
             <span>{Math.floor(state.elapsed / 60)} min de vida</span>
           </div>
           <p className="save-note">
-            {state.storageAvailable
-              ? 'La partida se guarda en este dispositivo.'
-              : 'El guardado no está disponible en este navegador.'}
+            {state.testMode
+              ? 'Modo de pruebas. Tu partida está a salvo.'
+              : state.storageAvailable
+                ? 'La partida se guarda en este dispositivo.'
+                : 'El guardado no está disponible en este navegador.'}
           </p>
+          <button
+            className="settings-row"
+            aria-expanded={testPanel}
+            aria-controls="environment-tests"
+            onClick={() => {
+              setTestPanel(!testPanel);
+              if (!testPanel) {
+                setTestStage(state.stage);
+                setTestSize(0);
+              }
+            }}
+          >
+            Probar entornos y tamaños <ChevronsRight size={17} />
+          </button>
+          {testPanel && (
+            <div id="environment-tests" className="environment-tests">
+              <label htmlFor="test-environment">Entorno</label>
+              <select
+                id="test-environment"
+                value={testStage}
+                onChange={(e) => setTestStage(Number(e.target.value))}
+              >
+                {STAGES.map((s, i) => (
+                  <option key={s.id} value={i}>
+                    {String(i + 1).padStart(2, '0')} · {s.short}
+                  </option>
+                ))}
+              </select>
+              <label htmlFor="test-size">
+                Tamaño{' '}
+                <output htmlFor="test-size">
+                  {formatSize(testStage, testMass)}
+                </output>
+              </label>
+              <input
+                id="test-size"
+                type="range"
+                min="0"
+                max="100"
+                step="1"
+                value={testSize}
+                aria-valuetext={formatSize(testStage, testMass)}
+                onChange={(e) => setTestSize(Number(e.target.value))}
+              />
+              <div className="test-presets">
+                {[
+                  ['Pequeño', 0],
+                  ['Mediano', 40],
+                  ['Grande', 75],
+                  ['Gigante', 100],
+                ].map(([label, size]) => (
+                  <button
+                    key={label}
+                    aria-pressed={testSize === size}
+                    onClick={() => setTestSize(Number(size))}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+              <label className="test-check">
+                <input
+                  type="checkbox"
+                  checked={keepUpgrades}
+                  onChange={(e) => setKeepUpgrades(e.target.checked)}
+                />
+                Usar mis adaptaciones
+              </label>
+              <label className="test-check">
+                <input
+                  type="checkbox"
+                  checked={testSafe}
+                  onChange={(e) => setTestSafe(e.target.checked)}
+                />
+                Invulnerabilidad
+              </label>
+              <p className="save-note">
+                Puedes comer, moverte y probar el daño. La prueba permanece en
+                el entorno elegido y no cambia tu partida.
+              </p>
+              <button
+                className="primary-button"
+                onClick={() => {
+                  if (
+                    engine.current?.startTest(
+                      testStage,
+                      testMass,
+                      keepUpgrades,
+                      testSafe,
+                    )
+                  ) {
+                    resume.current = false;
+                    changeSettings(false);
+                  }
+                }}
+              >
+                Entrar en la prueba <Play size={18} />
+              </button>
+            </div>
+          )}
+          {state.testMode && (
+            <button
+              className="settings-row"
+              onClick={() => {
+                engine.current?.exitTest();
+                resume.current = false;
+                changeSettings(false);
+              }}
+            >
+              Salir de pruebas y volver a mi partida <ArrowUpRight size={17} />
+            </button>
+          )}
           <ol className="journey-route" aria-label="Tu recorrido">
             {STAGES.map((s, i) => (
               <li
@@ -548,36 +680,37 @@ export default function Home() {
               })}
             </div>
           )}
-          {confirmReset ? (
-            <div className="reset-confirm">
-              <p>Se borrará esta partida y sus adaptaciones.</p>
+          {!state.testMode &&
+            (confirmReset ? (
+              <div className="reset-confirm">
+                <p>Se borrará esta partida y sus adaptaciones.</p>
+                <button
+                  className="primary-button"
+                  onClick={() => {
+                    resume.current = false;
+                    action('restart');
+                    changeSettings(false);
+                  }}
+                >
+                  Sí, volver a nacer
+                  <RotateCcw size={16} />
+                </button>
+                <button
+                  className="text-button"
+                  onClick={() => setConfirmReset(false)}
+                >
+                  Cancelar
+                </button>
+              </div>
+            ) : (
               <button
-                className="primary-button"
-                onClick={() => {
-                  resume.current = false;
-                  action('restart');
-                  changeSettings(false);
-                }}
+                className="settings-row"
+                onClick={() => setConfirmReset(true)}
               >
-                Sí, volver a nacer
+                Volver a nacer
                 <RotateCcw size={16} />
               </button>
-              <button
-                className="text-button"
-                onClick={() => setConfirmReset(false)}
-              >
-                Cancelar
-              </button>
-            </div>
-          ) : (
-            <button
-              className="settings-row"
-              onClick={() => setConfirmReset(true)}
-            >
-              Volver a nacer
-              <RotateCcw size={16} />
-            </button>
-          )}
+            ))}
           <DialogClose className="primary-button">
             Volver al juego
             <Play size={18} />
@@ -599,7 +732,7 @@ export default function Home() {
         <small>
           {STAGE_SPECIES[state.stage].length} habitantes en esta escala
           <br />
-          15 adaptaciones · mundo infinito
+          {UPGRADES.length} adaptaciones · mundo infinito
         </small>
       </aside>
     </main>

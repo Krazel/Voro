@@ -1,7 +1,5 @@
-// Keep the newborn small, then reveal more world as its body grows.
-export function gameplayZoom(radius) {
-  return Math.min(
-    0.85 / Math.sqrt(Math.max(1, radius / 32)),
-    78 / Math.max(1, radius),
-  );
+// First prototype (70c10fa): exactly 480 world units across the viewport.
+// Body size never changes ordinary gameplay zoom.
+export function gameplayZoom() {
+  return 1;
 }

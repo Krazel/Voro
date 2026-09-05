@@ -1163,3 +1163,64 @@ button {
   overflow-y: auto;
   overscroll-behavior: contain;
 }
+
+.environment-tests {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid #81bdc23d;
+  border-radius: 12px;
+  background: #08212bd9;
+}
+.environment-tests > label {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14px;
+  color: #d4e7e6;
+}
+.environment-tests select {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid #8eb9be66;
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: #102c37;
+  color: #edf6f4;
+  font-size: 16px;
+}
+.environment-tests input[type='range'] {
+  width: 100%;
+  min-height: 36px;
+  accent-color: #95ced3;
+}
+.test-presets {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+.test-presets button {
+  min-height: 44px;
+  border: 1px solid #789ba455;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #d7e8e6;
+}
+.test-presets button[aria-pressed='true'] {
+  background: #78b7c02e;
+  border-color: #97d2d6;
+}
+.environment-tests > .test-check {
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 36px;
+}
+.test-check input {
+  width: 18px;
+  height: 18px;
+  accent-color: #95ced3;
+}
+.environment-tests :focus-visible {
+  outline: 2px solid #cfede7;
+  outline-offset: 3px;
+}

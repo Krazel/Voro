@@ -1,6 +1,7 @@
 // Canvas2D rendering and input. The simulation stays independent of frame rendering.
 import {
   clamp,
+  radiusForMass,
   random,
   integrate,
   impulse,
@@ -51,6 +52,7 @@ import {
 } from './journey-progress.mjs';
 
 export type Snapshot = {
+  testMode: boolean;
   stage: number;
   stageName: string;
   scale: string;
@@ -165,7 +167,22 @@ export class VoroEngine {
   height = 850;
   pixelRatio = 1;
   scale = 1;
-  zoom = 0.85;
+  zoom = 1;
+  testMode = false;
+  testInvulnerable = false;
+  testBackup: {
+    progress: VoroEngine['progress'];
+    life: VoroEngine['life'];
+    world: JourneyWorld;
+    fragments: Food[];
+    started: boolean;
+    saved: boolean;
+    transition: number;
+    transitionAdvanced: boolean;
+    transitionFrom: number;
+    transitionFrame: VoroEngine['transitionFrame'];
+    ending: number;
+  } | null = null;
   camera = { x: 700, y: 970 };
   heading = -Math.PI / 2;
   food: Food[] = [];
@@ -255,7 +272,7 @@ export class VoroEngine {
     this.fragments = restoredFragments;
     this.food = [...this.world.entities, ...this.fragments];
     this.camera = { x: this.life.x, y: this.life.y };
-    this.zoom = gameplayZoom(this.life.radius);
+    this.zoom = gameplayZoom();
     this.resize();
     this.observer = new ResizeObserver(() => this.resize());
     this.observer.observe(canvas);
@@ -483,7 +500,7 @@ export class VoroEngine {
     }
   }
   save() {
-    if (!this.started && !this.saved) return;
+    if (this.testMode || (!this.started && !this.saved)) return;
     try {
       localStorage.setItem(
         JOURNEY_SAVE,
@@ -500,6 +517,104 @@ export class VoroEngine {
     } catch {
       this.storageAvailable = false;
     }
+  }
+  startTest(
+    stage: number,
+    biomass: number,
+    keepUpgrades = true,
+    invulnerable = false,
+  ) {
+    if (
+      !Number.isInteger(stage) ||
+      !STAGES[stage] ||
+      !Number.isFinite(biomass) ||
+      biomass <= 0
+    )
+      return false;
+    if (!this.testBackup) {
+      this.save();
+      this.testBackup = {
+        progress: this.progress,
+        life: this.life,
+        world: this.world,
+        fragments: this.fragments,
+        started: this.started,
+        saved: this.saved,
+        transition: this.transition,
+        transitionAdvanced: this.transitionAdvanced,
+        transitionFrom: this.transitionFrom,
+        transitionFrame: this.transitionFrame,
+        ending: this.ending,
+      };
+    }
+    this.testMode = true;
+    this.testInvulnerable = invulnerable;
+    this.progress = newJourney(this.testBackup.progress.seed);
+    this.progress.stage = stage;
+    this.progress.mutations = keepUpgrades
+      ? [...this.testBackup.progress.mutations]
+      : [];
+    this.progress.level = this.progress.mutations.length;
+    this.progress.xp = this.progress.level
+      ? nextAdaptation(this.progress.level - 1)
+      : 0;
+    this.life = journeyLife(this.progress);
+    this.life.biomass = clamp(biomass, 0.01, this.life.maxMass);
+    this.life.radius = radiusForMass(this.life.biomass);
+    this.stats = upgradeStats(this.progress.mutations);
+    this.world = new JourneyWorld(this.progress.seed, [], stage);
+    this.seed();
+    this.transition = 0;
+    this.transitionFrame = null;
+    this.transitionAdvanced = false;
+    this.ending = 0;
+    this.comboClock = 0;
+    this.comboMeals = 0;
+    this.lastMeal = -100;
+    this.camera = { x: this.life.x, y: this.life.y };
+    this.zoom = gameplayZoom();
+    this.started = true;
+    this.paused = false;
+    this.keys.clear();
+    this.pointer = null;
+    this.padInput = { x: 0, y: 0 };
+    if (stage === STAGES.length - 1 && this.life.biomass >= STAGES[stage].goal)
+      this.world.spawnFinal(this.life);
+    this.toast(
+      'Prueba de entorno. Vuelve a tu partida desde Configuración.',
+      6,
+    );
+    this.initAudio();
+    this.setAudio();
+    this.publish();
+    return true;
+  }
+  exitTest() {
+    if (!this.testBackup) return false;
+    const backup = this.testBackup;
+    Object.assign(this, backup);
+    this.testBackup = null;
+    this.testMode = false;
+    this.testInvulnerable = false;
+    this.stats = upgradeStats(this.progress.mutations);
+    this.food = [...this.world.entities, ...this.fragments];
+    this.motes = this.world.motes;
+    this.huntingTentacles.clear();
+    this.particles = [];
+    this.floating = [];
+    this.comboClock = 0;
+    this.comboMeals = 0;
+    this.lastMeal = -100;
+    this.camera = { x: this.life.x, y: this.life.y };
+    this.zoom = gameplayZoom();
+    this.keys.clear();
+    this.pointer = null;
+    this.padInput = { x: 0, y: 0 };
+    this.paused = false;
+    this.toast('Has vuelto a tu partida.', 4);
+    this.setAudio();
+    this.publish();
+    return true;
   }
   get assetsReady() {
     return (
@@ -576,7 +691,7 @@ export class VoroEngine {
       this.stats = upgradeStats(this.progress.mutations);
       this.seed();
       this.camera = { x: 700, y: 970 };
-      this.zoom = gameplayZoom(this.life.radius);
+      this.zoom = gameplayZoom();
       this.started = true;
       this.paused = false;
       this.keys.clear();
@@ -638,6 +753,7 @@ export class VoroEngine {
   }
   publish() {
     this.emit({
+      testMode: this.testMode,
       stage: this.progress.stage,
       stageName: stageOf(this.progress).name,
       scale: formatSize(this.progress.stage, this.life.biomass),
@@ -872,7 +988,7 @@ export class VoroEngine {
             'La biomasa te hace crecer. La adaptación desbloquea mejoras.',
             5,
           );
-        refreshOffer(this.progress);
+        if (!this.testMode) refreshOffer(this.progress);
         if (this.progress.offer.length && !p.finalEaten) {
           this.keys.clear();
           this.pointer = null;
@@ -927,7 +1043,11 @@ export class VoroEngine {
           .filter((f) => !f.eaten && Math.hypot(f.x - p.x, f.y - p.y) < 1300)
           .slice(-24);
       }
-      if (p.finalEaten && this.progress.stage === STAGES.length - 1) {
+      if (
+        !this.testMode &&
+        p.finalEaten &&
+        this.progress.stage === STAGES.length - 1
+      ) {
         this.progress.completed = true;
         this.progress.offer = [];
         this.ending = 12;
@@ -936,7 +1056,7 @@ export class VoroEngine {
         this.chime(true);
         this.save();
         this.publish();
-      } else if (p.biomass >= stageOf(this.progress).goal) {
+      } else if (!this.testMode && p.biomass >= stageOf(this.progress).goal) {
         if (this.progress.stage < STAGES.length - 1) {
           this.beginEvolution();
         } else {
@@ -956,12 +1076,15 @@ export class VoroEngine {
     this.camera.x += (p.x - this.camera.x) * (1 - Math.exp(-dt * 3));
     this.camera.y += (cameraY - this.camera.y) * (1 - Math.exp(-dt * 3));
     this.animateMembrane(dt);
-    // Pull back smoothly as the body grows; leave room to see approaching prey.
+    // Preserve the first prototype framing. Only the stage cinematic changes zoom.
     const targetZoom =
       this.transition > 3.6
         ? 1 + 0.5 * Math.sin(((7.2 - this.transition) / 3.6) * Math.PI)
-        : gameplayZoom(p.radius);
-    this.zoom += (targetZoom - this.zoom) * (1 - Math.exp(-dt * 1.7));
+        : gameplayZoom();
+    this.zoom =
+      this.transition > 0
+        ? this.zoom + (targetZoom - this.zoom) * (1 - Math.exp(-dt * 1.7))
+        : gameplayZoom();
     this.flash = Math.max(0, this.flash - dt * 0.6);
     this.hitFlash = Math.max(0, this.hitFlash - dt);
     for (const q of this.particles) {
@@ -989,7 +1112,12 @@ export class VoroEngine {
     }
   }
   beginEvolution() {
-    if (this.transition > 0 || this.progress.stage >= STAGES.length - 1) return;
+    if (
+      this.testMode ||
+      this.transition > 0 ||
+      this.progress.stage >= STAGES.length - 1
+    )
+      return;
     this.progress.pendingEvolution = true;
     this.progress.maturitySeen = true;
     this.transitionFrom = this.progress.stage;
@@ -1015,6 +1143,7 @@ export class VoroEngine {
     minimum = 0.6,
   ) {
     const p = this.life;
+    if (this.testMode && this.testInvulnerable) return 0;
     if (p.dead || p.invulnerable > 0 || this.progress.completed) return 0;
     if (consumeShield(this.progress, this.stats)) {
       p.invulnerable = 0.8;
