@@ -13,7 +13,7 @@ export function drawJourneySprite(
 ) {
   const s = SPECIES_BY_ID[id];
   if (!s) return;
-  drawInhabitant(c, images[s.atlas], s, r, seed, time, {
+  drawInhabitant(c, images[s.imageAtlas || s.atlas], s, r, seed, time, {
     activity: motion,
     hurt,
   });

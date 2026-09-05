@@ -123,6 +123,7 @@ export const STAGES = [
 const micro = MICRO_SPECIES.map((s) => ({
   ...s,
   atlas: 'micro',
+  imageAtlas: 'micro',
   shot: null,
   motion: 'micro',
   stage: 0,
@@ -269,6 +270,7 @@ export const STAGE_SPECIES = [
         requiredMass,
         stage,
         atlas,
+        imageAtlas: atlas,
         index: stage >= 4 && stage <= 7 ? (stage - 4) * 6 + i : i,
         cols: stage === 1 ? 4 : stage >= 4 && stage <= 7 ? 6 : 4,
         rows: stage === 1 || atlas === 'cosmos' ? 4 : 3,
@@ -333,7 +335,9 @@ STAGE_SPECIES[7].push(
 export const SPECIES_BY_ID = Object.fromEntries(
   STAGE_SPECIES.flat().map((s) => [s.id, s]),
 );
+SPECIES_BY_ID['water-14'].imageAtlas = 'swimmer';
 export const ATLAS_URLS = {
+  swimmer: './inhabitants/swimmer-v2.png',
   micro: './inhabitants/micro.png',
   water: './inhabitants/water.png',
   land: './inhabitants/land.png',

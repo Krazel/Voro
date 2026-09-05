@@ -11,6 +11,7 @@ import { STAGE_SPECIES } from '../app/journey-data.mjs';
 import { newJourney, journeyLife } from '../app/journey-progress.mjs';
 import { HuntingTentacles } from '../app/hunting-tentacles.mjs';
 const sizes = {
+  swimmer: [425, 160],
   micro: [1448, 1086],
   water: [1536, 1024],
   land: [1448, 1086],
@@ -23,7 +24,7 @@ test('All 98 inhabitants have an explicit anatomical rig and valid art bounds', 
   for (const s of STAGE_SPECIES.flat()) {
     const p = ANIMATIONS[s.id];
     assert.ok(p.family && p.description && p.period > 0);
-    const [w, h] = sizes[s.atlas],
+    const [w, h] = sizes[s.imageAtlas || s.atlas],
       crop = animationCrop(s, { naturalWidth: w, naturalHeight: h });
     assert.ok(
       crop[0] >= 0 &&
@@ -131,7 +132,7 @@ test('Lazy animation cache stays within 24 MiB and is reusable across instances'
     clearAnimationCache();
     for (const s of STAGE_SPECIES.flat())
       for (let phase = 0; phase < 6; phase++) {
-        const [width, height] = sizes[s.atlas],
+        const [width, height] = sizes[s.imageAtlas || s.atlas],
           image = {
             complete: true,
             naturalWidth: width,
@@ -155,5 +156,59 @@ test('Lazy animation cache stays within 24 MiB and is reusable across instances'
   } finally {
     globalThis.OffscreenCanvas = previous;
     clearAnimationCache();
+  }
+});
+import {
+  ANATOMICAL_RIGS,
+  poseChain,
+  anatomicalPose,
+} from '../app/anatomical-rigs.mjs';
+
+test('Authored limbs keep bone lengths and shells stay rigid throughout the cycle', () => {
+  for (const [id, rig] of Object.entries(ANATOMICAL_RIGS)) {
+    for (const phase of [0, 0.8, 2, 3.5, 5]) {
+      for (const ch of rig.spine ? [rig.spine] : rig.chains || []) {
+        const pose = poseChain(ch, phase, 1.35, 0.6);
+        for (let i = 1; i < pose.rest.length; i++) {
+          const length = (points) =>
+            Math.hypot(
+              points[i].x - points[i - 1].x,
+              points[i].y - points[i - 1].y,
+            );
+          assert.ok(
+            Math.abs(length(pose.rest) - length(pose.posed)) < 1e-9,
+            id,
+          );
+        }
+      }
+      if (['land-2', 'land-3', 'land-6', 'land-7'].includes(id)) {
+        const [x, y] = rig.body[0],
+          p = anatomicalPose(id, phase, 1.35, 0.6)(x, y);
+        assert.deepEqual(p, { x, y }, id);
+      }
+    }
+  }
+});
+
+test('Butterfly folding stays monotonic across the thorax instead of turning wings inside out', () => {
+  for (let f = 0; f < 24; f++) {
+    const mesh = poseMesh(
+      ANIMATIONS['land-5'],
+      (f / 24) * Math.PI * 2,
+      1.5,
+      48,
+      32,
+      355 / 338,
+    );
+    const { verts: v, cols: c, rows: r } = mesh;
+    for (let j = 0; j < r; j++)
+      for (let i = 0; i < c; i++) {
+        const k = j * (c + 1) + i;
+        for (const [a, b, d] of [
+          [v[k], v[k + 1], v[k + c + 2]],
+          [v[k], v[k + c + 2], v[k + c + 1]],
+        ])
+          assert.ok((b.x - a.x) * (d.y - a.y) - (d.x - a.x) * (b.y - a.y) > 0);
+      }
   }
 });

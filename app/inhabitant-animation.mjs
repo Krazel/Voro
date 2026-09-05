@@ -1,4 +1,5 @@
 import { ANIMATIONS, animationCrop } from './animation-catalog.mjs';
+import { anatomicalPose, ANATOMICAL_RIGS } from './anatomical-rigs.mjs';
 const TAU = Math.PI * 2;
 const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
 const smooth = (v) => {
@@ -73,12 +74,15 @@ export function poseMesh(
     ? spine(phase, head, k * a, aspect)
     : null;
   const verts = [];
+  const anatomy = anatomicalPose(profile.id, phase, a, aspect);
   for (let j = 0; j <= rows; j++)
     for (let i = 0; i <= cols; i++) {
       const u = i / cols,
         v = j / rows;
       let p = { x: u, y: v };
-      if (bones) {
+      if (anatomy) {
+        p = anatomy(u, v);
+      } else if (bones) {
         let px = u,
           py = axis,
           ang = 0;
@@ -94,13 +98,14 @@ export function poseMesh(
         off *=
           1 -
           (1 - smooth((u - 0.08) / 0.13)) *
-            0.24 *
+            (profile.tailFan ?? 0.24) *
             (0.5 + 0.5 * Math.cos(phase - 4.9));
         const fin =
           smooth((Math.abs(off) - 0.13) / 0.18) *
           smooth((u - 0.22) / 0.1) *
           (1 - smooth((u - 0.69) / 0.11));
-        off *= 1 + fin * 0.09 * Math.sin(phase * 2 - u * 7);
+        off *=
+          1 + fin * (profile.finFlutter ?? 0.09) * Math.sin(phase * 2 - u * 7);
         p = {
           x: px - Math.sin(ang) * off * aspect,
           y: py + Math.cos(ang) * off,
@@ -485,6 +490,11 @@ export function drawPose(
     w = r * 2,
     h = (w * crop[3]) / crop[2];
   c.save();
+  if (f === 'puffer') {
+    const inflation =
+      1 + 0.009 * Math.sin(phase) + Math.max(0, activity - 1) * 0.12;
+    c.scale(inflation, inflation);
+  }
   if (
     [
       'tumble',
@@ -585,8 +595,8 @@ export function drawPose(
         profile,
         phase,
         activity,
-        detail ? 32 : 14,
-        detail ? 16 : 8,
+        ANATOMICAL_RIGS[s.id] ? (detail ? 48 : 28) : detail ? 32 : 14,
+        ANATOMICAL_RIGS[s.id] ? (detail ? 32 : 18) : detail ? 16 : 8,
         h / w,
       ),
       { verts: v, cols, rows } = mesh;

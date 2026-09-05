@@ -1,3 +1,4 @@
+import { ANATOMICAL_RIGS } from './anatomical-rigs.mjs';
 import { STAGE_SPECIES } from './journey-data.mjs';
 // Individual art-directed rigs. Shared families describe anatomy, not a universal wobble.
 const rig = (family, description, period, options = {}) => ({
@@ -381,6 +382,12 @@ const waterCrops = [
 water.forEach((p, i) => {
   p.crop = waterCrops[i];
 });
+water[11].mask = [
+  [0.05, 0],
+  [1, 0],
+  [1, 1],
+  [0.05, 1],
+];
 water[12].mask = [
   [0, 0],
   [0.75, 0],
@@ -444,6 +451,45 @@ universe[1].crop = [394, 5, 365, 319];
 universe[7].crop = [1155, 344, 378, 318];
 universe[9].crop = [386, 662, 381, 362];
 universe[11].crop = [1154, 676, 382, 348];
+// Corrections reviewed per silhouette: less flexion in broad fish and sharks.
+Object.assign(water[3], {
+  head: 0.45,
+  amount: 0.1,
+  tailFan: 0.12,
+  finFlutter: 0.025,
+});
+Object.assign(water[4], {
+  head: 0.42,
+  amount: 0.12,
+  tailFan: 0.12,
+  finFlutter: 0.02,
+  description: 'Cuerpo firme, barrido corto de la cola y aletas de ajuste.',
+});
+Object.assign(water[12], {
+  amount: 0.065,
+  tailFan: 0.055,
+  finFlutter: 0,
+  period: 1.25,
+});
+Object.assign(water[13], {
+  amount: 0.07,
+  tailFan: 0.05,
+  finFlutter: 0,
+  period: 1.4,
+});
+Object.assign(water[14], {
+  crop: [0, 0, 425, 160],
+  description:
+    'Nadador aislado: hombros, codos, caderas y rodillas articulados.',
+});
+delete water[14].mask;
+water[6].description =
+  'Cuerpo y cola estables; batido de la pequeña aleta dorsal.';
+land[2].pairs = 7;
+land[8].description =
+  'Patas traseras que se recogen y extienden desde caderas y rodillas.';
+land[11].description =
+  'Pequeños saltos con patas articuladas y orejas de movimiento suave.';
 export const ANIMATIONS = Object.fromEntries(
   STAGE_SPECIES.flat().map((s) => {
     const index =
@@ -452,7 +498,14 @@ export const ANIMATIONS = Object.fromEntries(
         : s.index;
     return [
       s.id,
-      { ...atlases[s.atlas][index], id: s.id, assetKey: `${s.atlas}:${index}` },
+      {
+        ...atlases[s.atlas][index],
+        id: s.id,
+        revised:
+          !!ANATOMICAL_RIGS[s.id] ||
+          ['water-3', 'water-4', 'water-12', 'water-13'].includes(s.id),
+        assetKey: `${s.atlas}:${index}`,
+      },
     ];
   }),
 );

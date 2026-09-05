@@ -44,6 +44,7 @@ function isolate(g) {
 }
 test('Every stage generates stable inhabitants, recoverable food, bounded chunks and valid bitmap crops', () => {
   const dimensions = {
+    swimmer: [425, 160],
     micro: [1448, 1086],
     water: [1536, 1024],
     land: [1448, 1086],

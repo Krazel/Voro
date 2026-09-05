@@ -22,29 +22,37 @@ function Thumbnail({ id, images }: { id: string; images: Images }) {
   useEffect(() => {
     const s = STAGE_SPECIES.flat().find((s) => s.id === id),
       canvas = ref.current;
-    if (!s || !canvas || !images[s.atlas]) return;
+    if (!s || !canvas || !images[s.imageAtlas || s.atlas]) return;
     const c = canvas.getContext('2d')!;
     c.clearRect(0, 0, 100, 100);
     c.save();
     c.translate(50, 50);
-    const crop = s.crop,
+    const crop = ANIMATIONS[s.id].crop || s.crop,
       aspect = crop ? crop[3] / crop[2] : 1;
-    drawInhabitant(c, images[s.atlas], s, 34 / Math.max(1, aspect), 0, 0.2, {
-      cache: false,
-    });
+    drawInhabitant(
+      c,
+      images[s.imageAtlas || s.atlas],
+      s,
+      34 / Math.max(1, aspect),
+      0,
+      0.2,
+      {
+        cache: false,
+      },
+    );
     c.restore();
   }, [id, images]);
   return <canvas ref={ref} width={100} height={100} aria-hidden="true" />;
 }
 export default function AnimationStudio() {
   const [stage, setStage] = useState(1),
-    [selected, setSelected] = useState('water-2');
+    [selected, setSelected] = useState('water-0');
   const [images, setImages] = useState<Images>({}),
     [error, setError] = useState(false),
     [playing, setPlaying] = useState(true),
     [slow, setSlow] = useState(false),
     [mode, setMode] = useState('move');
-  const [seen, setSeen] = useState<Set<string>>(new Set(['water-2']));
+  const [seen, setSeen] = useState<Set<string>>(new Set(['water-0']));
   const canvas = useRef<HTMLCanvasElement>(null),
     time = useRef(0);
   const species = STAGE_SPECIES[stage],
@@ -76,7 +84,7 @@ export default function AnimationStudio() {
   }, []);
   useEffect(() => {
     const c = canvas.current?.getContext('2d');
-    if (!c || !images[s.atlas]) return;
+    if (!c || !images[s.imageAtlas || s.atlas]) return;
     let frame = 0,
       last = performance.now();
     function draw(now: number) {
@@ -109,7 +117,7 @@ export default function AnimationStudio() {
         activity = mode === 'idle' ? 0.35 : mode === 'react' ? 1.5 : 1;
       c!.save();
       c!.translate(480, 270);
-      drawInhabitant(c!, images[s.atlas], s, radius, 0, t, {
+      drawInhabitant(c!, images[s.imageAtlas || s.atlas], s, radius, 0, t, {
         detail: true,
         cache: false,
         activity,
@@ -127,7 +135,7 @@ export default function AnimationStudio() {
       c!.translate(337, 508);
       drawInhabitant(
         c!,
-        images[s.atlas],
+        images[s.imageAtlas || s.atlas],
         s,
         Math.min(35, 30 / Math.max(0.6, aspect)),
         0,
@@ -204,7 +212,7 @@ export default function AnimationStudio() {
               height={570}
               aria-label={`Animación de ${s.name}`}
             />
-            {!images[s.atlas] && (
+            {!images[s.imageAtlas || s.atlas] && (
               <div className="studio-loading">
                 {error ? (
                   <>
@@ -279,7 +287,13 @@ export default function AnimationStudio() {
               <Thumbnail id={e.id} images={images} />
               <span>
                 {e.name}
-                <small>{seen.has(e.id) ? 'Visto' : 'Ver animación'}</small>
+                <small>
+                  {ANIMATIONS[e.id].revised
+                    ? 'Animación revisada'
+                    : seen.has(e.id)
+                      ? 'Visto'
+                      : 'Ver animación'}
+                </small>
               </span>
             </button>
           ))}
