@@ -1,5 +1,10 @@
 # Rendimiento y TestFlight — 6 septiembre 2026
 
+**Actualización posterior:** firma resuelta y build 0.4 (1) disponible en pruebas
+internas, con cuenta propietaria invitada. Estado final y evidencia en
+[testflight-0.4-build-1.md](testflight-0.4-build-1.md). El resto de esta nota conserva
+el estado de la investigación y preparación iniciales.
+
 El usuario reporta lentitud tanto en la IPA 0.3 instalada como en la web fuera
 del navegador de Codex. Autorizó crear la ficha y subir a TestFlight. No autorizó
 publicar el juego en la tienda. La IPA anterior precede a la interfaz Cristal.
