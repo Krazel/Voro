@@ -1,4 +1,4 @@
-# Auditoría de carga y tirones — candidata 0.4.2 (1)
+# Auditoría de carga y tirones — entrega 0.4.2 (1)
 
 El usuario describe pocos FPS al iniciar, recuperación y nuevos tirones al moverse.
 Confirma que usa VORO 0.4.1 en iPhone X con iOS 16.7.16. Esta es la referencia
@@ -69,3 +69,18 @@ en el dispositivo antes de esa comprobación.
 Distribución candidata: TestFlight interno únicamente. Ficha App Store creada,
 sin publicación pública. Anuncios por confirmar. Añadir evidencia de entrega y
 actualizar la ficha PR-009 existente tras verificar Apple y Sites.
+
+## Entrega verificada
+
+- Fuente compilada: `2205780effb5b586e844e1c0cdf5b3c36e8f9863`.
+- Web privada v28, despliegue `appgdep_6a9ddc36202881919310e4646f587219`,
+  succeeded el 2026-09-06 21:33:56 UTC. URL habitual sin cambiar acceso.
+- [Build firmada y subida](https://github.com/Krazel/Voro/actions/runs/34061323705): success.
+- Apple build `2b7ef7b6-8e88-48ed-8036-ecd222a466fe`: VALID e IN_BETA_TESTING,
+  verificado 2026-09-06 21:38:32 UTC. Asignado a VORO Interno, mismo tester.
+- IPA 39.192.252 bytes; SHA256
+  `95b99281cc36f5b2f1b5ef055e65aa6c4963c5a6fc6bb6cbd26e066aff5366a7`.
+  Artefacto y manifiesto conservados fuera de Git en `artifact/testflight-0.4.2-build-1`.
+- Biblioteca D1 PR-009 actualizada y releída: revisión 15, 0.4.2 (1), TestFlight
+  Interno, App Store «Creada en App Store Connect», anuncios «Por confirmar».
+- Pendiente exclusivamente prueba física del usuario en iPhone X/iOS 16.7.16.
