@@ -1,0 +1,69 @@
+{
+  "environment": "Windows CPU Skia canvas; synthetic workload, not iPhone FPS",
+  "samples": [
+    {
+      "label": "before",
+      "fallback": false,
+      "ms": 3121,
+      "draws": 2880,
+      "cache": {
+        "entries": 128,
+        "bytes": 18874368,
+        "limit": 25165824
+      }
+    },
+    {
+      "label": "after",
+      "fallback": false,
+      "ms": 934,
+      "draws": 2880,
+      "cache": {
+        "entries": 192,
+        "bytes": 20447232,
+        "limit": 25165824,
+        "hits": 2688,
+        "misses": 192,
+        "direct": 0
+      }
+    },
+    {
+      "label": "before",
+      "fallback": true,
+      "ms": 4920,
+      "draws": 2880,
+      "cache": {
+        "entries": 0,
+        "bytes": 0,
+        "limit": 25165824
+      }
+    },
+    {
+      "label": "after",
+      "fallback": true,
+      "ms": 893,
+      "draws": 2880,
+      "cache": {
+        "entries": 192,
+        "bytes": 20447232,
+        "limit": 25165824,
+        "hits": 2688,
+        "misses": 192,
+        "direct": 0
+      }
+    },
+    {
+      "label": "before",
+      "ground": true,
+      "ms": 3693,
+      "frames": 600,
+      "redraws": 600
+    },
+    {
+      "label": "after",
+      "ground": true,
+      "ms": 543,
+      "frames": 600,
+      "redraws": 2
+    }
+  ]
+}

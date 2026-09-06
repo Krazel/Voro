@@ -164,6 +164,7 @@ export class VoroEngine {
   sound = true;
   time = 0;
   last = 0;
+  renderDirty = true;
   raf = 0;
   destroyed = false;
   width = 480;
@@ -425,11 +426,16 @@ export class VoroEngine {
     this.heading = -Math.PI / 2;
   }
   resize() {
+    this.renderDirty = true;
     const b = this.canvas.getBoundingClientRect();
     this.scale = b.width / 480;
     this.width = 480;
     this.height = b.height / this.scale;
-    this.pixelRatio = Math.min(devicePixelRatio || 1, 2);
+    // Raster resolution is independent of the world camera and edible sizes.
+    this.pixelRatio = Math.min(
+      devicePixelRatio || 1,
+      matchMedia('(pointer: coarse)').matches ? 1.5 : 2,
+    );
     this.canvas.width = Math.round(b.width * this.pixelRatio);
     this.canvas.height = Math.round(b.height * this.pixelRatio);
   }
@@ -764,6 +770,7 @@ export class VoroEngine {
     this.hintUntil = this.time + seconds;
   }
   publish() {
+    this.renderDirty = true;
     this.emit({
       testMode: this.testMode,
       stage: this.progress.stage,
@@ -874,8 +881,12 @@ export class VoroEngine {
       ) {
         this.time += dt;
         this.update(dt);
+        this.renderDirty = true;
       }
-      this.render();
+      if (this.renderDirty) {
+        this.render();
+        this.renderDirty = false;
+      }
     }
     this.raf = requestAnimationFrame(this.frame);
   };

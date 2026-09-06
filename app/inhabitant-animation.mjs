@@ -781,12 +781,34 @@ export function drawPose(
 // of a species. Large gallery previews bypass this cache for smooth inspection.
 const frames = new Map();
 let bytes = 0;
+let hits = 0,
+  misses = 0,
+  direct = 0;
+const POSE_COUNT = 24;
+function poseCanvas(size) {
+  const canvas =
+    typeof OffscreenCanvas !== 'undefined'
+      ? new OffscreenCanvas(size, size)
+      : typeof document !== 'undefined' && 'createElement' in document
+        ? document.createElement('canvas')
+        : null;
+  if (canvas) canvas.width = canvas.height = size;
+  return canvas;
+}
 export function animationCacheStats() {
-  return { entries: frames.size, bytes, limit: 24 * 1024 * 1024 };
+  return {
+    entries: frames.size,
+    bytes,
+    limit: 24 * 1024 * 1024,
+    hits,
+    misses,
+    direct,
+  };
 }
 export function clearAnimationCache() {
   frames.clear();
   bytes = 0;
+  hits = misses = direct = 0;
 }
 export function drawInhabitant(
   c,
@@ -810,23 +832,26 @@ export function drawInhabitant(
   if (
     !detail &&
     cache &&
-    typeof OffscreenCanvas !== 'undefined' &&
-    screenR < 100
+    (typeof OffscreenCanvas !== 'undefined' ||
+      (typeof document !== 'undefined' && 'createElement' in document))
   ) {
     const size =
-      screenR < 16 ? 48 : screenR < 29 ? 80 : screenR < 48 ? 128 : 192;
-    const pose = Math.floor((phase / TAU) * 32),
+      screenR < 24 ? 64 : screenR < 65 ? 128 : screenR < 160 ? 192 : 256;
+    const pose = Math.floor((phase / TAU) * POSE_COUNT),
       energy = activity < 0.65 ? 0.35 : activity > 1.25 ? 1.5 : 1;
     const key = `${profile.assetKey}:${size}:${pose}:${energy}`;
     let entry = frames.get(key);
     if (!entry) {
-      const canvas = new OffscreenCanvas(size, size),
+      misses++;
+      const canvas = poseCanvas(size),
         ctx = canvas.getContext('2d');
       ctx.translate(size / 2, size / 2);
       const crop = animationCrop(s, image),
         aspect = crop[3] / crop[2],
         radius = size / (3 * Math.max(1, aspect));
-      drawPose(ctx, image, s, radius, (pose / 32) * TAU, { activity: energy });
+      drawPose(ctx, image, s, radius, (pose / POSE_COUNT) * TAU, {
+        activity: energy,
+      });
       entry = {
         canvas,
         bytes: size * size * 4,
@@ -840,11 +865,15 @@ export function drawInhabitant(
       frames.set(key, entry);
       bytes += entry.bytes;
     } else {
+      hits++;
       frames.delete(key);
       frames.set(key, entry);
     }
     const extent = r * entry.extent;
     c.drawImage(entry.canvas, -extent / 2, -extent / 2, extent, extent);
-  } else drawPose(c, image, s, r, phase, { activity, detail });
+  } else {
+    direct++;
+    drawPose(c, image, s, r, phase, { activity, detail });
+  }
   c.restore();
 }

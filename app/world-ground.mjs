@@ -35,6 +35,8 @@ export class WorldGround {
     this.createCanvas = createCanvas;
     this.cache = new Map();
     this.surface = null;
+    this.view = null;
+    this.redraws = 0;
   }
   prepare(image, shore) {
     const key = image;
@@ -93,24 +95,61 @@ export class WorldGround {
       patches = this.prepare(image, shore);
     if (!this.surface) this.surface = this.createCanvas();
     const surface = this.surface;
-    if (surface.width !== 480 || surface.height !== Math.ceil(height)) {
-      surface.width = 480;
-      surface.height = Math.ceil(height);
+    const pad = 128;
+    const px = camera.x * profile.depth,
+      py = camera.y * profile.depth;
+    const view = this.view;
+    if (
+      view &&
+      view.image === image &&
+      view.stage === stage &&
+      view.seed === seed &&
+      view.height === height
+    ) {
+      const ratio = zoom / view.zoom;
+      const dx = 240 * (1 - ratio) - pad * ratio + (view.px - px) * zoom;
+      const dy =
+        height * 0.48 * (1 - ratio) - pad * ratio + (view.py - py) * zoom;
+      if (
+        ratio >= 0.85 &&
+        ratio <= 1.18 &&
+        dx <= 0 &&
+        dy <= 0 &&
+        dx + surface.width * ratio >= 480 &&
+        dy + surface.height * ratio >= height
+      ) {
+        c.drawImage(
+          surface,
+          dx,
+          dy,
+          surface.width * ratio,
+          surface.height * ratio,
+        );
+        return true;
+      }
     }
+    if (
+      surface.width !== 480 + pad * 2 ||
+      surface.height !== Math.ceil(height) + pad * 2
+    ) {
+      surface.width = 480 + pad * 2;
+      surface.height = Math.ceil(height) + pad * 2;
+    }
+    this.view = { image, stage, seed, height, zoom, px, py };
+    this.redraws++;
     const layer = surface.getContext('2d');
-    layer.clearRect(0, 0, 480, height);
+    layer.clearRect(0, 0, surface.width, surface.height);
+    layer.save();
+    layer.translate(pad, pad);
     layer.globalCompositeOperation = 'lighter';
-    const depth = profile.depth;
-    const px = camera.x * depth,
-      py = camera.y * depth;
     const sx = shore ? COAST_TILE : profile.step,
       sy = profile.step;
     const width = shore ? sx : (sx * 4) / 3,
       h = (sy * 4) / 3;
-    const x0 = Math.floor((px - 240 / zoom) / sx) - 1;
-    const x1 = Math.floor((px + 240 / zoom) / sx) + 1;
-    const y0 = Math.floor((py - (height * 0.48) / zoom) / sy) - 1;
-    const y1 = Math.floor((py + (height * 0.52) / zoom) / sy) + 1;
+    const x0 = Math.floor((px - (240 + pad) / zoom) / sx) - 1;
+    const x1 = Math.floor((px + (240 + pad) / zoom) / sx) + 1;
+    const y0 = Math.floor((py - (height * 0.48 + pad) / zoom) / sy) - 1;
+    const y1 = Math.floor((py + (height * 0.52 + pad) / zoom) / sy) + 1;
     for (let y = y0; y <= y1; y++)
       for (let x = x0; x <= x1; x++) {
         const patch = groundPatch(stage, x, y, seed);
@@ -138,9 +177,10 @@ export class WorldGround {
       }
     layer.globalCompositeOperation = 'destination-over';
     layer.fillStyle = profile.tint;
-    layer.fillRect(0, 0, 480, height);
+    layer.fillRect(-pad, -pad, surface.width, surface.height);
+    layer.restore();
     // Composite once so evolution crossfades retain their intended opacity.
-    c.drawImage(surface, 0, 0);
+    c.drawImage(surface, -pad, -pad);
     return true;
   }
 }

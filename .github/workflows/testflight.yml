@@ -1,0 +1,127 @@
+name: VORO TestFlight
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: voro-testflight
+  cancel-in-progress: false
+jobs:
+  testflight:
+    if: github.ref == 'refs/heads/main'
+    runs-on: macos-latest
+    timeout-minutes: 30
+    environment: app-store-production
+    env:
+      TEAM_ID: B2X6D3A9J9
+      BUNDLE_ID: com.dmkr.voro
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require signing and upload credentials
+        env:
+          CERT: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          CERT_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          PROFILE: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
+          API_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          API_ISSUER: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+          API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_BASE64 }}
+        run: |
+          for name in CERT CERT_PASSWORD PROFILE API_ID API_ISSUER API_KEY; do
+            if [ -z "${!name}" ]; then echo "::error::Missing protected credential: $name"; exit 1; fi
+          done
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: node --test tests/*.test.mjs
+      - run: npm run ios:sync
+      - name: Install distribution signing identity
+        env:
+          CERT: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          CERT_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          PROFILE: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
+        run: |
+          set -euo pipefail
+          SIGNING="$RUNNER_TEMP/voro-signing"
+          mkdir -p "$SIGNING"
+          chmod 700 "$SIGNING"
+          printf '%s' "$CERT" | base64 --decode > "$SIGNING/cert.p12"
+          printf '%s' "$PROFILE" | base64 --decode > "$SIGNING/profile.mobileprovision"
+          security cms -D -i "$SIGNING/profile.mobileprovision" > "$SIGNING/profile.plist"
+          python3 - <<'PY'
+          import plistlib, os, datetime, pathlib
+          root=pathlib.Path(os.environ['RUNNER_TEMP'])/'voro-signing'
+          p=plistlib.loads((root/'profile.plist').read_bytes())
+          team=os.environ['TEAM_ID']; bundle=os.environ['BUNDLE_ID']
+          assert p['TeamIdentifier']==[team], 'Wrong signing team'
+          assert p['Entitlements']['application-identifier']==team+'.'+bundle, 'Wrong bundle ID'
+          assert not p['Entitlements'].get('get-task-allow'), 'Development profile is not distributable'
+          assert 'ProvisionedDevices' not in p and not p.get('ProvisionsAllDevices'), 'Use App Store distribution profile'
+          assert p['ExpirationDate']>datetime.datetime.now(datetime.timezone.utc).replace(tzinfo=None), 'Expired profile'
+          with open(os.environ['GITHUB_ENV'],'a') as f: f.write('PROFILE_UUID='+p['UUID']+'\n')
+          options={'method':'app-store-connect','teamID':team,'signingStyle':'manual',
+                   'signingCertificate':'Apple Distribution','provisioningProfiles':{bundle:p['UUID']},
+                   'manageAppVersionAndBuildNumber':False,'uploadSymbols':True}
+          (root/'ExportOptions.plist').write_bytes(plistlib.dumps(options))
+          target=pathlib.Path.home()/'Library/MobileDevice/Provisioning Profiles'
+          target.mkdir(parents=True,exist_ok=True)
+          (target/(p['UUID']+'.mobileprovision')).write_bytes((root/'profile.mobileprovision').read_bytes())
+          PY
+          KEYCHAIN="$SIGNING/signing.keychain-db"
+          PASSWORD=$(openssl rand -hex 24)
+          security create-keychain -p "$PASSWORD" "$KEYCHAIN"
+          security set-keychain-settings -lut 21600 "$KEYCHAIN"
+          security unlock-keychain -p "$PASSWORD" "$KEYCHAIN"
+          security import "$SIGNING/cert.p12" -P "$CERT_PASSWORD" -A -t cert -f pkcs12 -k "$KEYCHAIN"
+          security set-key-partition-list -S apple-tool:,apple: -s -k "$PASSWORD" "$KEYCHAIN" >/dev/null
+          security list-keychains -d user -s "$KEYCHAIN" "$HOME/Library/Keychains/login.keychain-db"
+      - name: Archive and export signed iPhone app
+        run: |
+          set -euo pipefail
+          xcodebuild -version
+          xcodebuild archive -project ios/App/App.xcodeproj -scheme App -configuration Release \
+            -destination 'generic/platform=iOS' -archivePath "$RUNNER_TEMP/Voro.xcarchive" \
+            CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM="$TEAM_ID" \
+            CODE_SIGN_IDENTITY='Apple Distribution' PROVISIONING_PROFILE_SPECIFIER="$PROFILE_UUID"
+          xcodebuild -exportArchive -archivePath "$RUNNER_TEMP/Voro.xcarchive" \
+            -exportOptionsPlist "$RUNNER_TEMP/voro-signing/ExportOptions.plist" -exportPath "$RUNNER_TEMP/voro-export"
+          codesign --verify --deep --strict "$RUNNER_TEMP/Voro.xcarchive/Products/Applications/App.app"
+          mkdir -p artifact/testflight
+          cp "$RUNNER_TEMP/voro-export/"*.ipa artifact/testflight/
+          python3 - <<'PY'
+          import plistlib, os, pathlib, json
+          p=plistlib.loads((pathlib.Path(os.environ['RUNNER_TEMP'])/'Voro.xcarchive/Products/Applications/App.app/Info.plist').read_bytes())
+          assert p['CFBundleIdentifier']==os.environ['BUNDLE_ID']
+          manifest={'version':p['CFBundleShortVersionString'],'build':p['CFBundleVersion'],
+                    'bundle':p['CFBundleIdentifier'],'commit':os.environ['GITHUB_SHA'],
+                    'run':os.environ['GITHUB_RUN_ID'],'signed':True,'purpose':'TestFlight'}
+          pathlib.Path('artifact/testflight/build-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+          PY
+          shasum -a 256 artifact/testflight/*.ipa > artifact/testflight/SHA256SUMS.txt
+      - name: Upload authorized build to App Store Connect
+        env:
+          API_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          API_ISSUER: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+          API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_BASE64 }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$HOME/private_keys"
+          printf '%s' "$API_KEY" | base64 --decode > "$HOME/private_keys/AuthKey_${API_ID}.p8"
+          chmod 600 "$HOME/private_keys/AuthKey_${API_ID}.p8"
+          xcrun altool --upload-app --type ios --file "$RUNNER_TEMP/voro-export/"*.ipa --apiKey "$API_ID" --apiIssuer "$API_ISSUER"
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: Voro-TestFlight-${{ github.run_number }}
+          path: artifact/testflight/
+          retention-days: 14
+      - name: Remove temporary signing material
+        if: always()
+        env:
+          API_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+        run: |
+          security delete-keychain "$RUNNER_TEMP/voro-signing/signing.keychain-db" || true
+          rm -rf "$RUNNER_TEMP/voro-signing"
+          if [ -n "${PROFILE_UUID:-}" ]; then rm -f "$HOME/Library/MobileDevice/Provisioning Profiles/$PROFILE_UUID.mobileprovision"; fi
+          if [ -n "${API_ID:-}" ]; then rm -f "$HOME/private_keys/AuthKey_${API_ID}.p8"; fi
