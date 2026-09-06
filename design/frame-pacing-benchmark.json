@@ -1,0 +1,304 @@
+{
+  "before": {
+    "kind": "CPU Skia on Windows, no browser compositor or React; not iPhone FPS",
+    "seed": 834,
+    "mode": "unpaced",
+    "samples": [
+      {
+        "stage": "micro",
+        "size": "start",
+        "msPerFrame": {
+          "update": 0.37,
+          "drawBackground": 0.01,
+          "drawCell": 2.19,
+          "render": 7.34
+        },
+        "p95": 19.63370000000009,
+        "max": 107.71039999999994,
+        "entities": 506,
+        "cache": {
+          "entries": 352,
+          "bytes": 23068672,
+          "limit": 25165824,
+          "hits": 13287,
+          "misses": 352,
+          "direct": 0,
+          "pending": 0,
+          "generatedThisFrame": 0,
+          "approximations": 0
+        }
+      },
+      {
+        "stage": "micro",
+        "size": "large",
+        "msPerFrame": {
+          "update": 0.36,
+          "drawBackground": 0.01,
+          "drawCell": 2.72,
+          "render": 9.94
+        },
+        "p95": 25.443699999999808,
+        "max": 157.73709999999983,
+        "entities": 506,
+        "cache": {
+          "entries": 418,
+          "bytes": 20955136,
+          "limit": 25165824,
+          "hits": 28054,
+          "misses": 418,
+          "direct": 0,
+          "pending": 0,
+          "generatedThisFrame": 0,
+          "approximations": 0
+        }
+      },
+      {
+        "stage": "land",
+        "size": "start",
+        "msPerFrame": {
+          "update": 0.18,
+          "drawBackground": 1.02,
+          "drawCell": 2.39,
+          "render": 5.27
+        },
+        "p95": 15.039800000000469,
+        "max": 84.59230000000025,
+        "entities": 267,
+        "cache": {
+          "entries": 111,
+          "bytes": 6307840,
+          "limit": 25165824,
+          "hits": 2364,
+          "misses": 111,
+          "direct": 0,
+          "pending": 0,
+          "generatedThisFrame": 0,
+          "approximations": 0
+        }
+      },
+      {
+        "stage": "land",
+        "size": "large",
+        "msPerFrame": {
+          "update": 0.17,
+          "drawBackground": 0.88,
+          "drawCell": 2.21,
+          "render": 9.44
+        },
+        "p95": 46.93869999999879,
+        "max": 175.1882000000005,
+        "entities": 267,
+        "cache": {
+          "entries": 239,
+          "bytes": 9125888,
+          "limit": 25165824,
+          "hits": 5666,
+          "misses": 239,
+          "direct": 0,
+          "pending": 0,
+          "generatedThisFrame": 0,
+          "approximations": 0
+        }
+      },
+      {
+        "stage": "water",
+        "size": "start",
+        "msPerFrame": {
+          "update": 0.16,
+          "drawBackground": 0.94,
+          "drawCell": 2,
+          "render": 9.35
+        },
+        "p95": 26.936499999999796,
+        "max": 111.72569999999905,
+        "entities": 294,
+        "cache": {
+          "entries": 301,
+          "bytes": 17842176,
+          "limit": 25165824,
+          "hits": 7306,
+          "misses": 301,
+          "direct": 0,
+          "pending": 0,
+          "generatedThisFrame": 0,
+          "approximations": 0
+        }
+      },
+      {
+        "stage": "water",
+        "size": "large",
+        "msPerFrame": {
+          "update": 0.21,
+          "drawBackground": 0.92,
+          "drawCell": 2.75,
+          "render": 11
+        },
+        "p95": 36.97030000000086,
+        "max": 254.45930000000044,
+        "entities": 294,
+        "cache": {
+          "entries": 372,
+          "bytes": 18137088,
+          "limit": 25165824,
+          "hits": 14829,
+          "misses": 372,
+          "direct": 0,
+          "pending": 0,
+          "generatedThisFrame": 0,
+          "approximations": 0
+        }
+      }
+    ]
+  },
+  "after": {
+    "kind": "CPU Skia on Windows, no browser compositor or React; not iPhone FPS",
+    "seed": 834,
+    "mode": "paced",
+    "samples": [
+      {
+        "stage": "micro",
+        "size": "start",
+        "msPerFrame": {
+          "update": 0.34,
+          "drawBackground": 0.01,
+          "drawCell": 2.07,
+          "render": 6.89
+        },
+        "p95": 12.32490000000007,
+        "max": 17.97739999999999,
+        "entities": 506,
+        "cache": {
+          "entries": 347,
+          "bytes": 22790144,
+          "limit": 25165824,
+          "hits": 9537,
+          "misses": 4102,
+          "direct": 0,
+          "pending": 0,
+          "generatedThisFrame": 0,
+          "approximations": 4102
+        }
+      },
+      {
+        "stage": "micro",
+        "size": "large",
+        "msPerFrame": {
+          "update": 0.31,
+          "drawBackground": 0.01,
+          "drawCell": 2.31,
+          "render": 8.55
+        },
+        "p95": 14.220900000000256,
+        "max": 20.17529999999988,
+        "entities": 506,
+        "cache": {
+          "entries": 414,
+          "bytes": 20791296,
+          "limit": 25165824,
+          "hits": 20822,
+          "misses": 7650,
+          "direct": 0,
+          "pending": 0,
+          "generatedThisFrame": 0,
+          "approximations": 7650
+        }
+      },
+      {
+        "stage": "land",
+        "size": "start",
+        "msPerFrame": {
+          "update": 0.15,
+          "drawBackground": 0.91,
+          "drawCell": 2.01,
+          "render": 4.5
+        },
+        "p95": 11.737499999999272,
+        "max": 26.95850000000064,
+        "entities": 267,
+        "cache": {
+          "entries": 111,
+          "bytes": 6307840,
+          "limit": 25165824,
+          "hits": 1948,
+          "misses": 527,
+          "direct": 0,
+          "pending": 0,
+          "generatedThisFrame": 0,
+          "approximations": 527
+        }
+      },
+      {
+        "stage": "land",
+        "size": "large",
+        "msPerFrame": {
+          "update": 0.17,
+          "drawBackground": 0.86,
+          "drawCell": 2.11,
+          "render": 7.17
+        },
+        "p95": 18.9461999999985,
+        "max": 30.718400000001566,
+        "entities": 267,
+        "cache": {
+          "entries": 225,
+          "bytes": 8847360,
+          "limit": 25165824,
+          "hits": 3931,
+          "misses": 1974,
+          "direct": 0,
+          "pending": 1,
+          "generatedThisFrame": 0,
+          "approximations": 1974
+        }
+      },
+      {
+        "stage": "water",
+        "size": "start",
+        "msPerFrame": {
+          "update": 0.16,
+          "drawBackground": 0.95,
+          "drawCell": 2.04,
+          "render": 9.37
+        },
+        "p95": 20.31919999999991,
+        "max": 29.80539999999928,
+        "entities": 294,
+        "cache": {
+          "entries": 301,
+          "bytes": 17842176,
+          "limit": 25165824,
+          "hits": 6188,
+          "misses": 1419,
+          "direct": 0,
+          "pending": 0,
+          "generatedThisFrame": 1,
+          "approximations": 1419
+        }
+      },
+      {
+        "stage": "water",
+        "size": "large",
+        "msPerFrame": {
+          "update": 0.19,
+          "drawBackground": 0.91,
+          "drawCell": 2.27,
+          "render": 10.34
+        },
+        "p95": 21.750700000000506,
+        "max": 27.838599999999133,
+        "entities": 294,
+        "cache": {
+          "entries": 351,
+          "bytes": 15892480,
+          "limit": 25165824,
+          "hits": 11457,
+          "misses": 3744,
+          "direct": 0,
+          "pending": 0,
+          "generatedThisFrame": 0,
+          "approximations": 3744
+        }
+      }
+    ]
+  }
+}

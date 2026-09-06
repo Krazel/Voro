@@ -780,11 +780,93 @@ export function drawPose(
 // Bounded lazy cache: only encountered poses are baked, shared by every instance
 // of a species. Large gallery previews bypass this cache for smooth inspection.
 const frames = new Map();
+const poseGroups = new Map();
+const latestByAsset = new Map();
+const pending = new Map();
+let paced = false;
+let generatedThisFrame = 0;
+let approximations = 0;
+const CACHE_LIMIT = 24 * 1024 * 1024;
+const QUEUE_LIMIT = 64;
 let bytes = 0;
 let hits = 0,
   misses = 0,
   direct = 0;
 const POSE_COUNT = 24;
+// New poses can involve a thousand textured triangles. Keep that work out of
+// the visible draw loop and amortize it over frames, including cold encounters.
+export function beginAnimationFrame() {
+  paced = true;
+  generatedThisFrame = 0;
+  const start = performance.now();
+  while (
+    pending.size &&
+    generatedThisFrame < 2 &&
+    performance.now() - start < 2
+  ) {
+    const [key, job] = pending.entries().next().value;
+    pending.delete(key);
+    if (!frames.has(key)) {
+      bakePose(job);
+      generatedThisFrame++;
+    }
+  }
+}
+export function endAnimationFrame() {
+  paced = false;
+}
+function bakePose({ key, group, asset, size, pose, energy, image, s }) {
+  const canvas = poseCanvas(size),
+    ctx = canvas.getContext('2d');
+  ctx.translate(size / 2, size / 2);
+  const crop = animationCrop(s, image),
+    aspect = crop[3] / crop[2];
+  drawPose(
+    ctx,
+    image,
+    s,
+    size / (3 * Math.max(1, aspect)),
+    (pose / POSE_COUNT) * TAU,
+    { activity: energy },
+  );
+  const entry = {
+    key,
+    group,
+    asset,
+    pose,
+    canvas,
+    bytes: size * size * 4,
+    extent: 3 * Math.max(1, aspect),
+  };
+  while (bytes + entry.bytes > CACHE_LIMIT && frames.size) {
+    const oldest = frames.keys().next().value,
+      evicted = frames.get(oldest);
+    bytes -= evicted.bytes;
+    frames.delete(oldest);
+    const poses = poseGroups.get(evicted.group);
+    poses[evicted.pose] = undefined;
+    if (!poses.some(Boolean)) poseGroups.delete(evicted.group);
+    if (latestByAsset.get(evicted.asset) === evicted)
+      latestByAsset.delete(evicted.asset);
+  }
+  frames.set(key, entry);
+  bytes += entry.bytes;
+  if (!poseGroups.has(group)) poseGroups.set(group, Array(POSE_COUNT));
+  poseGroups.get(group)[pose] = entry;
+  latestByAsset.set(asset, entry);
+  return entry;
+}
+function nearestPose(group, pose, asset) {
+  const poses = poseGroups.get(group);
+  if (poses)
+    for (let d = 1; d <= POSE_COUNT / 2; d++) {
+      const entry =
+        poses[(pose + d) % POSE_COUNT] ||
+        poses[(pose - d + POSE_COUNT) % POSE_COUNT];
+      if (entry) return entry;
+    }
+  return latestByAsset.get(asset);
+}
 function poseCanvas(size) {
   const canvas =
     typeof OffscreenCanvas !== 'undefined'
@@ -799,14 +881,22 @@ export function animationCacheStats() {
   return {
     entries: frames.size,
     bytes,
-    limit: 24 * 1024 * 1024,
+    limit: CACHE_LIMIT,
     hits,
     misses,
     direct,
+    pending: pending.size,
+    generatedThisFrame,
+    approximations,
   };
 }
 export function clearAnimationCache() {
   frames.clear();
+  poseGroups.clear();
+  latestByAsset.clear();
+  pending.clear();
+  paced = false;
+  generatedThisFrame = approximations = 0;
   bytes = 0;
   hits = misses = direct = 0;
 }
@@ -839,38 +929,41 @@ export function drawInhabitant(
       screenR < 24 ? 64 : screenR < 65 ? 128 : screenR < 160 ? 192 : 256;
     const pose = Math.floor((phase / TAU) * POSE_COUNT),
       energy = activity < 0.65 ? 0.35 : activity > 1.25 ? 1.5 : 1;
-    const key = `${profile.assetKey}:${size}:${pose}:${energy}`;
+    const group = `${profile.assetKey}:${size}:${energy}`;
+    const key = `${group}:${pose}`;
     let entry = frames.get(key);
     if (!entry) {
       misses++;
-      const canvas = poseCanvas(size),
-        ctx = canvas.getContext('2d');
-      ctx.translate(size / 2, size / 2);
-      const crop = animationCrop(s, image),
-        aspect = crop[3] / crop[2],
-        radius = size / (3 * Math.max(1, aspect));
-      drawPose(ctx, image, s, radius, (pose / POSE_COUNT) * TAU, {
-        activity: energy,
-      });
-      entry = {
-        canvas,
-        bytes: size * size * 4,
-        extent: 3 * Math.max(1, aspect),
+      const job = {
+        key,
+        group,
+        asset: profile.assetKey,
+        size,
+        pose,
+        energy,
+        image,
+        s,
       };
-      while (bytes + entry.bytes > 24 * 1024 * 1024 && frames.size) {
-        const oldest = frames.keys().next().value;
-        bytes -= frames.get(oldest).bytes;
-        frames.delete(oldest);
-      }
-      frames.set(key, entry);
-      bytes += entry.bytes;
+      if (paced) {
+        if (!pending.has(key) && pending.size < QUEUE_LIMIT)
+          pending.set(key, job);
+        entry = nearestPose(group, pose, profile.assetKey);
+        approximations++;
+      } else entry = bakePose(job);
     } else {
       hits++;
       frames.delete(key);
       frames.set(key, entry);
     }
-    const extent = r * entry.extent;
-    c.drawImage(entry.canvas, -extent / 2, -extent / 2, extent, extent);
+    if (entry) {
+      const extent = r * entry.extent;
+      c.drawImage(entry.canvas, -extent / 2, -extent / 2, extent, extent);
+    } else {
+      // Keep a newly encountered animal visible while its first pose is queued.
+      const crop = animationCrop(s, image),
+        h = (r * 2 * crop[3]) / crop[2];
+      c.drawImage(image, ...crop, -r, -h / 2, r * 2, h);
+    }
   } else {
     direct++;
     drawPose(c, image, s, r, phase, { activity, detail });

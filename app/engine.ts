@@ -24,6 +24,10 @@ import {
   isDanger,
 } from './journey-data.mjs';
 import { drawJourneySprite } from './journey-sprites.mjs';
+import {
+  beginAnimationFrame,
+  endAnimationFrame,
+} from './inhabitant-animation.mjs';
 import { gameplayZoom, followGameplayZoom } from './camera.mjs';
 import {
   shedBiomass,
@@ -1490,6 +1494,14 @@ export class VoroEngine {
     }
   }
   render() {
+    beginAnimationFrame();
+    try {
+      this.renderScene();
+    } finally {
+      endAnimationFrame();
+    }
+  }
+  renderScene() {
     const c = this.ctx,
       k = this.pixelRatio * this.scale,
       p = this.life;

@@ -6,6 +6,8 @@ import {
   drawInhabitant,
   animationCacheStats,
   clearAnimationCache,
+  beginAnimationFrame,
+  endAnimationFrame,
 } from '../app/inhabitant-animation.mjs';
 import { SPECIES_BY_ID } from '../app/journey-data.mjs';
 
@@ -118,4 +120,67 @@ test('Ground cache scrolls and scales continuously, invalidating on travel, biom
   assert.equal(ground.redraws, 3);
   ground.draw(c, image, 'water', { x: 500, y: 20 }, 1.01, 850, 23);
   assert.equal(ground.redraws, 4);
+});
+
+test('Cold encounters stay visible without baking inline; queued work is bounded and drains', () => {
+  const oldCanvas = globalThis.OffscreenCanvas;
+  let visible = 0;
+  const c = new Proxy(
+    {
+      globalAlpha: 1,
+      getTransform: () => ({ a: 1, b: 0 }),
+      drawImage: () => visible++,
+    },
+    {
+      get: (o, k) => (k in o ? o[k] : () => {}),
+      set: (o, k, v) => {
+        o[k] = v;
+        return true;
+      },
+    },
+  );
+  globalThis.OffscreenCanvas = class {
+    getContext() {
+      return c;
+    }
+  };
+  try {
+    clearAnimationCache();
+    const image = { complete: true, naturalWidth: 1536, naturalHeight: 1024 };
+    beginAnimationFrame();
+    for (let i = 0; i < 100; i++)
+      drawInhabitant(
+        c,
+        image,
+        SPECIES_BY_ID['water-' + (1 + (i % 10))],
+        40,
+        0,
+        i * 0.23,
+      );
+    assert.equal(animationCacheStats().entries, 0);
+    assert.equal(animationCacheStats().direct, 0);
+    assert.equal(visible, 100);
+    assert.ok(
+      animationCacheStats().pending > 0 && animationCacheStats().pending <= 64,
+    );
+    endAnimationFrame();
+    for (let i = 0; i < 80; i++) {
+      beginAnimationFrame();
+      assert.ok(animationCacheStats().generatedThisFrame <= 2);
+      assert.ok(animationCacheStats().bytes <= animationCacheStats().limit);
+      endAnimationFrame();
+    }
+    assert.equal(animationCacheStats().pending, 0);
+    const before = animationCacheStats().entries;
+    beginAnimationFrame();
+    drawInhabitant(c, image, SPECIES_BY_ID['water-2'], 40, 0, 0.231);
+    assert.equal(animationCacheStats().entries, before);
+    endAnimationFrame();
+    clearAnimationCache();
+    assert.equal(animationCacheStats().pending, 0);
+  } finally {
+    endAnimationFrame();
+    clearAnimationCache();
+    globalThis.OffscreenCanvas = oldCanvas;
+  }
 });
