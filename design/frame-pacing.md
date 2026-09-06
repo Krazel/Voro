@@ -38,3 +38,20 @@ En micro inicial el peor pasa de 107.7 a 18.0 ms. Los resultados varían con el
 equipo; el usuario debe confirmar los tirones en la actualización de TestFlight.
 
 Versión de corrección 0.4.1, build 1. Se conserva 0.4 (1) para comparación.
+
+## Entrega verificada — 6 septiembre 2026
+
+- Fuente: `66204e69932a417715dbfcc582748317066168d4`.
+- Web privada Sites v27, despliegue `appgdep_6a9dc8455a908191ad2aef7f18051f50`
+  succeeded en https://voro-abisal.krazel.chatgpt.site/.
+- Build iPhone firmada 0.4.1 (1):
+  https://github.com/Krazel/Voro/actions/runs/34057003296 — success.
+- Apple build `d5facd10-a844-4e7d-8b14-671c9c0ef19a`: VALID y
+  IN_BETA_TESTING, comprobado a las 20:14 UTC.
+- Asignada al grupo VORO Interno `05db8744-bcf3-4c2d-a465-2635012bfeeb`,
+  que conserva un único tester. Sin cambios de audiencia ni beta externa.
+- IPA de 39 190 619 bytes; SHA-256
+  `2b2f7d532b653f7abb57c913195d00e0ad67c958f16c2ca7683cc9209e5de5ed`.
+  Manifest, IPA y comprobación de Apple en `artifact/testflight-0.4.1-build-1/`,
+  excluidos de Git. No se guardan credenciales en la entrega.
+- Pendiente: confirmación del usuario tras actualizar en su iPhone.
