@@ -11,6 +11,37 @@ import {
 } from '../app/inhabitant-animation.mjs';
 import { SPECIES_BY_ID } from '../app/journey-data.mjs';
 
+test('A slow device can yield inside one pose instead of painting a whole animal in one frame', () => {
+  const originalCanvas = globalThis.OffscreenCanvas;
+  const originalClock = globalThis.performance;
+  let clock = 0, triangles = 0;
+  const c = new Proxy({ globalAlpha: 1, getTransform: () => ({a: 1, b: 0}) }, {
+    get: (o, k) => k in o ? o[k] : k === 'clip' ? () => triangles++ : () => {},
+    set: (o, k, v) => {o[k] = v; return true;},
+  });
+  try {
+    globalThis.performance = { now: () => clock++ };
+    globalThis.OffscreenCanvas = class { getContext() { return c; } };
+    clearAnimationCache();
+    beginAnimationFrame();
+    drawInhabitant(c, {complete: true, naturalWidth: 1536, naturalHeight: 1024}, SPECIES_BY_ID['water-2'], 40, 0, 0);
+    endAnimationFrame();
+    let loops = 0;
+    while ((animationCacheStats().pending || animationCacheStats().active) && loops++ < 200) {
+      const before = triangles;
+      beginAnimationFrame();
+      assert.ok(triangles - before <= 8, 'At most eight triangles per slow-device slice');
+      endAnimationFrame();
+    }
+    assert.ok(loops > 2 && loops < 200);
+    assert.equal(animationCacheStats().entries, 1);
+  } finally {
+    clearAnimationCache();
+    globalThis.performance = originalClock;
+    globalThis.OffscreenCanvas = originalCanvas;
+  }
+});
+
 test('Paused scene sleeps but redraws after resize, asset arrival and resume', () => {
   const fixture = makeEngine(),
     { game } = fixture;

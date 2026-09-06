@@ -157,6 +157,7 @@ export class MicroWorld {
     this.motes = [];
   }
   generate(cx, cy, time) {
+    let depleted = false;
     const rng = random(hash(this.seed, cx, cy)),
       entities = [],
       motes = [];
@@ -182,13 +183,13 @@ export class MicroWorld {
       if (index >= 8 && index <= 10 && Math.hypot(x - 700, y - 970) < 310)
         continue;
       const id = `${cx}:${cy}:${i}`;
-      if ((this.journal.get(id) || 0) > time) continue;
+      if ((this.journal.get(id) || 0) > time) { depleted = true; continue; }
       entities.push(makeEntity(SPECIES[index], x, y, heading, id));
     }
     if (cx === 1 && cy === 1)
       for (let i = 0; i < 7; i++) {
         const id = `first:${i}`;
-        if ((this.journal.get(id) || 0) > time) continue;
+        if ((this.journal.get(id) || 0) > time) { depleted = true; continue; }
         const a = i * 2.399,
           d = 105 + i * 17;
         entities.push(
@@ -208,7 +209,7 @@ export class MicroWorld {
         r: 0.4 + rng() * 1.4,
         phase: rng() * 6.28,
       });
-    return { entities, motes };
+    return { entities, motes, depleted };
   }
   stream(x, y, time, force = false, radius = this.radius) {
     this.radius = clamp(Math.ceil(radius), 2, 6);
@@ -242,6 +243,10 @@ export class MicroWorld {
   replenish(x, y, time) {
     // Rebuild only consumed slots whose regrowth time has elapsed; never erase live movement.
     for (const [key, chunk] of this.chunks) {
+      // Untouched chunks already contain all their original slots. Rebuilding
+      // them every eight seconds only allocates identical discarded entities.
+      if (!chunk.depleted && !chunk.entities.some(e => e.eaten)) continue;
+      chunk.depleted = true;
       const [cx, cy] = key.split(':').map(Number);
       const alive = new Set(
         chunk.entities.filter((e) => !e.eaten).map((e) => e.id),

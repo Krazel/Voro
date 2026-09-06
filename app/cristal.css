@@ -1,4 +1,16 @@
 /* Membrana A1 · Cristal. Functional text remains HTML; the generated rim is a transparent image. */
+.performance-readout {
+  position: absolute;
+  left: 12px;
+  bottom: calc(105px + env(safe-area-inset-bottom));
+  z-index: 5;
+  pointer-events: none;
+  padding: 7px 9px;
+  border-radius: 8px;
+  background: #03131be6;
+  color: #e6f2ef;
+  font: 12px/1.5 monospace;
+}
 :root {
   --cristal-ink: #eef3ed;
   --cristal-muted: #b7cdd1;

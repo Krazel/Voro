@@ -482,6 +482,12 @@ export default function Home() {
             {STAGES[state.stage].short.toUpperCase()}
           </span>
         </div>
+        {state.performance && (
+          <output className="performance-readout">
+            {state.performance.fps || '—'} FPS · CPU {state.performance.cpu} ms · pico {state.performance.peak} ms
+            <br />Cargas {state.performance.loading} · poses pendientes {state.performance.pending} · caché {state.performance.cacheMB} MB
+          </output>
+        )}
       </section>
       <Dialog
         open={active && state.offer.length > 0 && !settings}
@@ -534,6 +540,11 @@ export default function Home() {
           <p className="eyebrow">VORO · ABISAL</p>
           <DialogTitle>Configuración</DialogTitle>
           <DialogDescription>{state.stageName}</DialogDescription>
+          <button className="settings-row"
+            onClick={() => engine.current?.setDiagnostics(!state.performance)}
+            aria-pressed={!!state.performance}>
+            Mostrar rendimiento<span>{state.performance ? 'Activado' : 'Desactivado'}</span>
+          </button>
           <button
             className="settings-row"
             onClick={() => action('sound')}

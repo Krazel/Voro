@@ -517,7 +517,12 @@ const rigidFamilies = new Set([
   'elliptical',
   'lenticular',
 ]);
-export function drawPose(
+// Gameplay can advance the same painter in small batches. The gallery drains
+// it immediately, so both paths keep precisely the same rig and triangles.
+export function drawPose(...args) {
+  for (const _ of paintPose(...args)) { /* drain */ }
+}
+function* paintPose(
   c,
   image,
   s,
@@ -694,6 +699,7 @@ export function drawPose(
           profile.mask,
           profile.surface ? 1.3 : 0.3,
         );
+        if ((j * cols + i) % 4 === 3) yield;
       }
   }
   if (f === 'building' || f === 'tower')
@@ -786,6 +792,9 @@ const pending = new Map();
 let paced = false;
 let generatedThisFrame = 0;
 let approximations = 0;
+let activeBake = null;
+let bakeSteps = 0;
+let evictions = 0;
 const CACHE_LIMIT = 24 * 1024 * 1024;
 const QUEUE_LIMIT = 64;
 let bytes = 0;
@@ -800,14 +809,19 @@ export function beginAnimationFrame() {
   generatedThisFrame = 0;
   const start = performance.now();
   while (
-    pending.size &&
+    (activeBake || pending.size) &&
     generatedThisFrame < 2 &&
     performance.now() - start < 2
   ) {
-    const [key, job] = pending.entries().next().value;
-    pending.delete(key);
-    if (!frames.has(key)) {
-      bakePose(job);
+    if (!activeBake) {
+      const [key, job] = pending.entries().next().value;
+      pending.delete(key);
+      if (frames.has(key)) continue;
+      activeBake = bakePoseSteps(job);
+    }
+    bakeSteps++;
+    if (activeBake.next().done) {
+      activeBake = null;
       generatedThisFrame++;
     }
   }
@@ -816,12 +830,20 @@ export function endAnimationFrame() {
   paced = false;
 }
 function bakePose({ key, group, asset, size, pose, energy, image, s }) {
+  const work = bakePoseSteps({ key, group, asset, size, pose, energy, image, s });
+  let step = work.next();
+  while (!step.done) step = work.next();
+  return step.value;
+}
+function* bakePoseSteps({ key, group, asset, size, pose, energy, image, s }) {
   const canvas = poseCanvas(size),
     ctx = canvas.getContext('2d');
   ctx.translate(size / 2, size / 2);
   const crop = animationCrop(s, image),
     aspect = crop[3] / crop[2];
-  drawPose(
+  // The first yield also splits allocation/setup from mesh preparation.
+  yield;
+  yield* paintPose(
     ctx,
     image,
     s,
@@ -843,6 +865,9 @@ function bakePose({ key, group, asset, size, pose, energy, image, s }) {
       evicted = frames.get(oldest);
     bytes -= evicted.bytes;
     frames.delete(oldest);
+    // Release the backing surface now instead of waiting for browser GC.
+    evicted.canvas.width = evicted.canvas.height = 1;
+    evictions++;
     const poses = poseGroups.get(evicted.group);
     poses[evicted.pose] = undefined;
     if (!poses.some(Boolean)) poseGroups.delete(evicted.group);
@@ -888,13 +913,19 @@ export function animationCacheStats() {
     pending: pending.size,
     generatedThisFrame,
     approximations,
+    bakeSteps,
+    evictions,
+    active: !!activeBake,
   };
 }
 export function clearAnimationCache() {
+  for (const entry of frames.values()) entry.canvas.width = entry.canvas.height = 1;
   frames.clear();
   poseGroups.clear();
   latestByAsset.clear();
   pending.clear();
+  activeBake = null;
+  bakeSteps = evictions = 0;
   paced = false;
   generatedThisFrame = approximations = 0;
   bytes = 0;

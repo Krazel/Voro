@@ -1,0 +1,14 @@
+{
+  "rasterChecks": 456,
+  "identical": true,
+  "startupBefore": {
+    "files": 15,
+    "bytes": 29205638,
+    "rgbaBytes": 88354352
+  },
+  "startupAfter": {
+    "files": 3,
+    "bytes": 4829497,
+    "rgbaBytes": 18873632
+  }
+}

@@ -1,0 +1,323 @@
+{
+  "before": {
+    "kind": "CPU Skia on Windows, no browser compositor or React; not iPhone FPS",
+    "seed": 834,
+    "mode": "audit-baseline",
+    "samples": [
+      {
+        "stage": "micro",
+        "size": "start",
+        "msPerFrame": {
+          "update": 0.44,
+          "drawBackground": 0.01,
+          "drawCell": 2.55,
+          "render": 8.27
+        },
+        "p95": 14.984400000000278,
+        "max": 28.239100000000008,
+        "entities": 506,
+        "cache": {
+          "entries": 346,
+          "bytes": 22773760,
+          "limit": 25165824,
+          "hits": 9036,
+          "misses": 4603,
+          "direct": 0,
+          "pending": 0,
+          "generatedThisFrame": 0,
+          "approximations": 4603
+        }
+      },
+      {
+        "stage": "micro",
+        "size": "large",
+        "msPerFrame": {
+          "update": 0.46,
+          "drawBackground": 0.02,
+          "drawCell": 3.72,
+          "render": 13.04
+        },
+        "p95": 23.321200000000317,
+        "max": 40.062299999999595,
+        "entities": 506,
+        "cache": {
+          "entries": 409,
+          "bytes": 20709376,
+          "limit": 25165824,
+          "hits": 19084,
+          "misses": 9388,
+          "direct": 0,
+          "pending": 0,
+          "generatedThisFrame": 0,
+          "approximations": 9388
+        }
+      },
+      {
+        "stage": "land",
+        "size": "start",
+        "msPerFrame": {
+          "update": 0.19,
+          "drawBackground": 1.04,
+          "drawCell": 2.59,
+          "render": 5.61
+        },
+        "p95": 14.17450000000099,
+        "max": 38.130199999999604,
+        "entities": 267,
+        "cache": {
+          "entries": 111,
+          "bytes": 6307840,
+          "limit": 25165824,
+          "hits": 1780,
+          "misses": 695,
+          "direct": 0,
+          "pending": 0,
+          "generatedThisFrame": 0,
+          "approximations": 695
+        }
+      },
+      {
+        "stage": "land",
+        "size": "large",
+        "msPerFrame": {
+          "update": 0.24,
+          "drawBackground": 1.05,
+          "drawCell": 3.27,
+          "render": 10.26
+        },
+        "p95": 28.533800000001065,
+        "max": 45.30949999999939,
+        "entities": 267,
+        "cache": {
+          "entries": 219,
+          "bytes": 8552448,
+          "limit": 25165824,
+          "hits": 3805,
+          "misses": 2100,
+          "direct": 0,
+          "pending": 1,
+          "generatedThisFrame": 0,
+          "approximations": 2100
+        }
+      },
+      {
+        "stage": "water",
+        "size": "start",
+        "msPerFrame": {
+          "update": 0.22,
+          "drawBackground": 1.21,
+          "drawCell": 2.89,
+          "render": 12.78
+        },
+        "p95": 29.481299999999464,
+        "max": 48.01429999999891,
+        "entities": 294,
+        "cache": {
+          "entries": 301,
+          "bytes": 17842176,
+          "limit": 25165824,
+          "hits": 5877,
+          "misses": 1730,
+          "direct": 0,
+          "pending": 0,
+          "generatedThisFrame": 1,
+          "approximations": 1730
+        }
+      },
+      {
+        "stage": "water",
+        "size": "large",
+        "msPerFrame": {
+          "update": 0.24,
+          "drawBackground": 1.22,
+          "drawCell": 2.94,
+          "render": 13.13
+        },
+        "p95": 26.886600000001636,
+        "max": 35.856400000000576,
+        "entities": 294,
+        "cache": {
+          "entries": 349,
+          "bytes": 15761408,
+          "limit": 25165824,
+          "hits": 10763,
+          "misses": 4438,
+          "direct": 0,
+          "pending": 0,
+          "generatedThisFrame": 0,
+          "approximations": 4438
+        }
+      }
+    ]
+  },
+  "after": {
+    "kind": "CPU Skia on Windows, no browser compositor or React; not iPhone FPS",
+    "seed": 834,
+    "mode": "sliced",
+    "samples": [
+      {
+        "stage": "micro",
+        "size": "start",
+        "msPerFrame": {
+          "update": 0.38,
+          "drawBackground": 0.01,
+          "drawCell": 2.21,
+          "render": 7.23
+        },
+        "p95": 12.354800000000068,
+        "max": 17.508200000000215,
+        "entities": 506,
+        "cache": {
+          "entries": 340,
+          "bytes": 22478848,
+          "limit": 25165824,
+          "hits": 7723,
+          "misses": 5916,
+          "direct": 0,
+          "pending": 0,
+          "generatedThisFrame": 0,
+          "approximations": 5916,
+          "bakeSteps": 7288,
+          "evictions": 0,
+          "active": false
+        }
+      },
+      {
+        "stage": "micro",
+        "size": "large",
+        "msPerFrame": {
+          "update": 0.35,
+          "drawBackground": 0.01,
+          "drawCell": 2.64,
+          "render": 9.35
+        },
+        "p95": 14.04150000000027,
+        "max": 21.798899999999776,
+        "entities": 506,
+        "cache": {
+          "entries": 393,
+          "bytes": 19955712,
+          "limit": 25165824,
+          "hits": 17084,
+          "misses": 11388,
+          "direct": 0,
+          "pending": 0,
+          "generatedThisFrame": 0,
+          "approximations": 11388,
+          "bakeSteps": 8682,
+          "evictions": 0,
+          "active": false
+        }
+      },
+      {
+        "stage": "land",
+        "size": "start",
+        "msPerFrame": {
+          "update": 0.17,
+          "drawBackground": 0.94,
+          "drawCell": 2.24,
+          "render": 4.67
+        },
+        "p95": 9.17489999999998,
+        "max": 19.559400000000096,
+        "entities": 267,
+        "cache": {
+          "entries": 111,
+          "bytes": 6307840,
+          "limit": 25165824,
+          "hits": 1394,
+          "misses": 1081,
+          "direct": 0,
+          "pending": 0,
+          "generatedThisFrame": 0,
+          "approximations": 1081,
+          "bakeSteps": 3078,
+          "evictions": 0,
+          "active": false
+        }
+      },
+      {
+        "stage": "land",
+        "size": "large",
+        "msPerFrame": {
+          "update": 0.21,
+          "drawBackground": 1.01,
+          "drawCell": 2.85,
+          "render": 7.18
+        },
+        "p95": 12.825399999999718,
+        "max": 18.546699999998964,
+        "entities": 267,
+        "cache": {
+          "entries": 162,
+          "bytes": 6586368,
+          "limit": 25165824,
+          "hits": 2135,
+          "misses": 3770,
+          "direct": 0,
+          "pending": 1,
+          "generatedThisFrame": 0,
+          "approximations": 3770,
+          "bakeSteps": 6106,
+          "evictions": 0,
+          "active": false
+        }
+      },
+      {
+        "stage": "water",
+        "size": "start",
+        "msPerFrame": {
+          "update": 0.19,
+          "drawBackground": 1.25,
+          "drawCell": 2.82,
+          "render": 8.57
+        },
+        "p95": 16.06580000000031,
+        "max": 29.337400000000343,
+        "entities": 294,
+        "cache": {
+          "entries": 144,
+          "bytes": 8011776,
+          "limit": 25165824,
+          "hits": 3029,
+          "misses": 4578,
+          "direct": 0,
+          "pending": 64,
+          "generatedThisFrame": 0,
+          "approximations": 4578,
+          "bakeSteps": 7857,
+          "evictions": 0,
+          "active": true
+        }
+      },
+      {
+        "stage": "water",
+        "size": "large",
+        "msPerFrame": {
+          "update": 0.25,
+          "drawBackground": 1.36,
+          "drawCell": 3.28,
+          "render": 10.13
+        },
+        "p95": 18.431300000000192,
+        "max": 34.689800000000105,
+        "entities": 294,
+        "cache": {
+          "entries": 128,
+          "bytes": 4259840,
+          "limit": 25165824,
+          "hits": 5097,
+          "misses": 10104,
+          "direct": 0,
+          "pending": 64,
+          "generatedThisFrame": 2,
+          "approximations": 10104,
+          "bakeSteps": 7816,
+          "evictions": 0,
+          "active": false
+        }
+      }
+    ]
+  },
+  "caution": "Independent CPU Skia runs on Windows. No physical iPhone, browser compositor, image network/decode or React. Not a device FPS claim."
+}

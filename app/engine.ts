@@ -1,5 +1,7 @@
 import { drawCoastalGround } from './coastal-ground.mjs';
-import { WorldGround, GROUND_PROFILES } from './world-ground.mjs';
+import { WorldGround } from './world-ground.mjs';
+import { StageAssets } from './stage-assets.mjs';
+import { FrameMonitor } from './frame-monitor.mjs';
 import { transitionScene } from './journey-transitions.mjs';
 // Canvas2D rendering and input. The simulation stays independent of frame rendering.
 import {
@@ -17,7 +19,6 @@ import { JourneyWorld } from './journey-world.mjs';
 import {
   STAGE_SPECIES,
   STAGES,
-  ATLAS_URLS,
   SPECIES_BY_ID,
   stageOf,
   formatSize,
@@ -27,6 +28,8 @@ import { drawJourneySprite } from './journey-sprites.mjs';
 import {
   beginAnimationFrame,
   endAnimationFrame,
+  clearAnimationCache,
+  animationCacheStats,
 } from './inhabitant-animation.mjs';
 import { gameplayZoom, followGameplayZoom } from './camera.mjs';
 import {
@@ -59,6 +62,7 @@ import {
 } from './journey-progress.mjs';
 
 export type Snapshot = {
+  performance?: { fps: number; cpu: number; peak: number; loading: number; pending: number; cacheMB: number };
   testMode: boolean;
   stage: number;
   stageName: string;
@@ -203,6 +207,33 @@ export class VoroEngine {
   seaBackground = new Image();
   worldGround = new WorldGround();
   groundImages: Record<string, HTMLImageElement> = {};
+  assets = new StageAssets(this.atlasImages, this.groundImages, () => {
+    if (this.atlasImages.micro) this.spriteAtlas = this.atlasImages.micro;
+    if (this.groundImages.micro) this.background = this.groundImages.micro;
+    if (!this.destroyed) this.publish();
+  });
+  assetStages = '';
+  diagnosticsEnabled = false;
+  frameMonitor = new FrameMonitor();
+  measuredLastFrame = false;
+  setDiagnostics(enabled: boolean) {
+    this.diagnosticsEnabled = enabled;
+    this.frameMonitor.reset();
+    this.measuredLastFrame = false;
+    this.publish();
+  }
+  syncStageAssets() {
+    const stages = this.transition > 0
+      ? [this.transitionFrom, Math.min(STAGES.length - 1, this.transitionFrom + 1)]
+      : [this.progress.stage];
+    const key = stages.join(':');
+    if (key === this.assetStages) return;
+    this.assetStages = key;
+    clearAnimationCache();
+    this.assets.setStages(stages);
+    if (this.atlasImages.micro) this.spriteAtlas = this.atlasImages.micro;
+    if (this.groundImages.micro) this.background = this.groundImages.micro;
+  }
   transitionStartZoom = 1;
   keys = new Set<string>();
   pointer: {
@@ -244,25 +275,6 @@ export class VoroEngine {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d', { alpha: false })!;
     this.emit = emit;
-    this.background.src = './abyssal-background.png';
-    this.shoreBackground.src = './shore-v2.png';
-    this.seaBackground.src = './sea-v2.png';
-    for (const [key, url] of Object.entries(ATLAS_URLS)) {
-      const img = key === 'micro' ? this.spriteAtlas : new Image();
-      this.atlasImages[key] = img;
-      img.onload = () => this.publish();
-      img.onerror = () => {
-        this.assetError = true;
-        this.publish();
-      };
-      img.src = url;
-    }
-    this.environments.onload = () => this.publish();
-    this.environments.onerror = () => {
-      this.assetError = true;
-      this.publish();
-    };
-    this.environments.src = './inhabitants/environments.png';
     let restoredFragments: Food[] = [];
     try {
       const loaded =
@@ -399,6 +411,7 @@ export class VoroEngine {
       opt,
     );
     this.registerTools();
+    this.syncStageAssets();
     this.publish();
     this.raf = requestAnimationFrame(this.frame);
   }
@@ -639,15 +652,8 @@ export class VoroEngine {
     return true;
   }
   get assetsReady() {
-    return (
-      STAGE_SPECIES[this.progress.stage].every(
-        (s) =>
-          this.atlasImages[s.atlas]?.complete &&
-          this.atlasImages[s.atlas]?.naturalWidth > 0,
-      ) &&
-      (this.progress.stage === 0 ||
-        (this.environments.complete && this.environments.naturalWidth > 0))
-    );
+    this.syncStageAssets();
+    return this.assets.ready(this.progress.stage);
   }
   reroll() {
     if (
@@ -774,8 +780,15 @@ export class VoroEngine {
     this.hintUntil = this.time + seconds;
   }
   publish() {
+    this.syncStageAssets();
     this.renderDirty = true;
     this.emit({
+      performance: this.diagnosticsEnabled ? {
+        ...this.frameMonitor.report(),
+        loading: this.assets.stats().loading,
+        pending: animationCacheStats().pending + Number(animationCacheStats().active),
+        cacheMB: Math.round(animationCacheStats().bytes / 1048576),
+      } : undefined,
       testMode: this.testMode,
       stage: this.progress.stage,
       stageName: stageOf(this.progress).name,
@@ -783,7 +796,7 @@ export class VoroEngine {
       evolutionFrom: this.transitionFrom,
       ending: this.ending,
       finalReady: this.progress.finalReady,
-      assetError: this.assetError,
+      assetError: this.assets.failed(this.progress.stage),
       mutations: [...this.progress.mutations],
       offer: [...this.progress.offer],
       canReroll: canReroll(this.progress),
@@ -855,6 +868,10 @@ export class VoroEngine {
   }
   frame = (stamp: number) => {
     if (this.destroyed) return;
+    const frameStart = this.diagnosticsEnabled ? performance.now() : 0;
+    const interval = this.last ? stamp - this.last : 0;
+    let measured = false;
+    this.syncStageAssets();
     const dt = this.last ? Math.min((stamp - this.last) / 1000, 0.035) : 0.016;
     this.last = stamp;
     this.padInput = { x: 0, y: 0 };
@@ -886,12 +903,16 @@ export class VoroEngine {
         this.time += dt;
         this.update(dt);
         this.renderDirty = true;
+        measured = this.started && this.diagnosticsEnabled;
       }
       if (this.renderDirty) {
         this.render();
         this.renderDirty = false;
       }
     }
+    if (measured && this.measuredLastFrame)
+      this.frameMonitor.add(interval, performance.now() - frameStart);
+    this.measuredLastFrame = measured;
     this.raf = requestAnimationFrame(this.frame);
   };
   update(dt: number) {
@@ -1433,14 +1454,7 @@ export class VoroEngine {
     const c = this.ctx;
     const stage = STAGES[index];
     if (stage.id !== 'micro') {
-      let image = this.groundImages[stage.id];
-      if (!image) {
-        image = this.groundImages[stage.id] = new Image();
-        image.src =
-          './backgrounds/' +
-          GROUND_PROFILES[stage.id as keyof typeof GROUND_PROFILES].file +
-          '-variants.webp';
-      }
+      const image = this.groundImages[stage.id];
       if (
         this.worldGround.draw(
           c,
@@ -2064,6 +2078,8 @@ export class VoroEngine {
   destroy() {
     this.save();
     this.destroyed = true;
+    this.assets.destroy();
+    clearAnimationCache();
     cancelAnimationFrame(this.raf);
     this.lifecycle.abort();
     this.observer.disconnect();

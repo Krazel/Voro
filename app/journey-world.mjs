@@ -51,6 +51,7 @@ export class JourneyWorld extends MicroWorld {
       });
       return chunk;
     }
+    let depleted = false;
     const list = STAGE_SPECIES[this.stage].filter(
       (s) => s.kind !== 'final' && !s.variantOf,
     );
@@ -110,7 +111,7 @@ export class JourneyWorld extends MicroWorld {
       // one object never moves or rerolls neighbouring objects on chunk reload.
       occupied.push({ x, y, r: candidate.r });
       if (isDanger(s) && Math.hypot(x - 700, y - 970) < 310) continue;
-      if ((this.journal.get(id) || 0) > time) continue;
+      if ((this.journal.get(id) || 0) > time) { depleted = true; continue; }
       const inhabitant =
         s.id === 'water-14' && seed >= Math.PI ? SPECIES_BY_ID['water-16'] : s;
       entities.push(journeyEntity(inhabitant, x, y, seed, id));
@@ -118,7 +119,7 @@ export class JourneyWorld extends MicroWorld {
     if (cx === 1 && cy === 1)
       for (let i = 0; i < 7; i++) {
         const id = `first:${i}`;
-        if ((this.journal.get(id) || 0) > time) continue;
+        if ((this.journal.get(id) || 0) > time) { depleted = true; continue; }
         const a = i * 2.399,
           d = 105 + i * 20;
         entities.push(
@@ -140,7 +141,7 @@ export class JourneyWorld extends MicroWorld {
         r: 0.4 + rng() * 1.4,
         phase: rng() * 6.28,
       });
-    return { entities, motes };
+    return { entities, motes, depleted };
   }
   move(dt, time, p, stats, trail) {
     if (this.stage === 0) {
