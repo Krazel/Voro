@@ -220,6 +220,7 @@ export class VoroEngine {
   frameMonitor = new FrameMonitor();
   animationSheets = new AnimationSheets({ changed: () => { this.renderDirty = true; },
     event: (name, ms, detail) => { if (this.diagnosticsEnabled) this.frameMonitor.event(name, ms, detail); } });
+  lastPerformanceReport: ReturnType<FrameMonitor['export']> | null = null;
   diagnosticCompleted = false;
   benchmarkSeconds = 0;
   saveJob: { id: number; idle: boolean } | null = null;
@@ -228,17 +229,20 @@ export class VoroEngine {
     this.diagnosticsEnabled = enabled;
     this.diagnosticCompleted = false;
     this.benchmarkSeconds = 0;
-    if (enabled) this.frameMonitor.reset();
+    // Showing the overlay must not erase an existing capture.
     this.measuredLastFrame = false;
     this.publish();
   }
   startBenchmark() {
+    this.lastPerformanceReport = null;
+    this.frameMonitor.reset();
     this.setDiagnostics(true);
     this.benchmarkSeconds = 30;
     this.publish();
   }
   performanceReport() {
-    return this.frameMonitor.export({ version: '0.4.3', build: 1,
+    if (this.lastPerformanceReport) return this.lastPerformanceReport;
+    return this.frameMonitor.export({ version: '0.4.4', build: 1,
       date: new Date().toISOString(), userAgent: typeof navigator === 'undefined' ? '' : navigator.userAgent,
       viewport: { width: this.canvas.width, height: this.canvas.height, pixelRatio: this.pixelRatio },
       animationSheets: this.animationSheets.stats(), animationCache: animationCacheStats(),
@@ -967,6 +971,7 @@ export class VoroEngine {
         queuedPoses: animationCacheStats().pending, groundRebuilds: this.worldGround.redraws,
       });
       if (this.benchmarkSeconds && this.frameMonitor.elapsed >= this.benchmarkSeconds * 1000) {
+        this.lastPerformanceReport = this.performanceReport();
         this.diagnosticsEnabled = false; this.diagnosticCompleted = true;
         this.publish();
       }
@@ -1074,7 +1079,7 @@ export class VoroEngine {
         xpBefore = p.adaptationGained,
         finished = digest(p, dt);
       if (finished) {
-        this.progress.xp += p.adaptationGained - xpBefore;
+        this.progress.xp += (p.adaptationGained - xpBefore) * 0.85 * this.stats.adaptationFactor;
         this.comboMeals =
           p.elapsed - this.lastMeal < 4 ? this.comboMeals + finished : finished;
         this.lastMeal = p.elapsed;
@@ -1191,7 +1196,7 @@ export class VoroEngine {
       );
       const target =
         this.transition > 3.6
-          ? this.transitionStartZoom * (scene.coastal ? 1 : 0.8)
+          ? Math.max(gameplayZoom(p.radius) * 0.96, this.transitionStartZoom * (scene.coastal ? 1 : 0.96))
           : gameplayZoom(p.radius);
       this.zoom += (target - this.zoom) * (1 - Math.exp(-dt * 1.2));
     } else this.zoom = followGameplayZoom(this.zoom, p.radius, dt);

@@ -19,7 +19,7 @@ test('Every repeated choice adds the same concrete bonus', () => {
     reach: ['reachFactor', 0.075],
     slots: ['absorptionSlots', 1],
     digest: ['digestFactor', 0.125],
-    yield: ['yieldFactor', 0.06],
+    yield: ['adaptationFactor', 0.1],
     speed: ['speedFactor', 0.075],
     turn: ['steeringFactor', 0.15],
     dash: ['boostStrength', 0.18],

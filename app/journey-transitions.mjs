@@ -24,8 +24,8 @@ export function transitionScene(stageId, progress, reduced = false) {
     scale: reduced
       ? 1
       : coastal
-        ? 1 + 0.1 * smooth(0, 1, t)
-        : 1 - 0.85 * smooth(0.08, 0.82, t),
+        ? 1 + 0.035 * smooth(0, 1, t)
+        : 1 - 0.3 * smooth(0.08, 0.82, t),
     panX: reduced
       ? 0
       : stageId === 'land'

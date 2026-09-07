@@ -1,4 +1,6 @@
 'use client';
+import { sharePerformanceFile } from './share-performance';
+import { performanceSummaryText } from './performance-report.mjs';
 import { TRANSITION_ROUTES } from './journey-transitions.mjs';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
@@ -41,6 +43,8 @@ export default function Home() {
   const [testPanel, setTestPanel] = useState(false);
   const [reportText, setReportText] = useState('');
   const [reportCopied, setReportCopied] = useState(false);
+  const [sharingReport, setSharingReport] = useState(false);
+  const [shareMessage, setShareMessage] = useState('');
   const [uiPreview, setUiPreview] = useState(false);
   const [testStage, setTestStage] = useState(0);
   const [testSize, setTestSize] = useState(0);
@@ -550,17 +554,31 @@ export default function Home() {
             Mostrar rendimiento<span>{state.performance ? 'Activado' : 'Desactivado'}</span>
           </button>
           <button className="settings-row" onClick={() => {
-            setReportText(''); setReportCopied(false);
+            setReportText(''); setReportCopied(false); setShareMessage('');
             engine.current?.startBenchmark(); changeSettings(false);
           }}>Medir una partida de 30 s<span>Iniciar</span></button>
           <button className="settings-row" onClick={async () => {
             const report = engine.current?.performanceReport();
             if (!report) return;
-            const text = JSON.stringify(report, null, 2);
+            if (!report.summary.frames) { setShareMessage('Primero mide una partida de 30 s.'); return; }
+            const text = performanceSummaryText(report);
             setReportText(text); setReportCopied(false);
             try { await navigator.clipboard.writeText(text); setReportCopied(true); } catch { /* selectable fallback below */ }
-          }}>Copiar informe de rendimiento<span>{reportCopied ? 'Copiado' : 'Copiar'}</span></button>
-          <p className="save-note">La prueba cuenta solo mientras juegas. Incluye FPS, fotogramas lentos, cargas y tiempos por sistema. El informe se queda en tu dispositivo hasta que lo compartas.</p>
+          }}>Copiar resumen de rendimiento<span>{reportCopied ? 'Copiado' : 'Copiar'}</span></button>
+          <button className="settings-row" disabled={sharingReport} onClick={async () => {
+            const report=engine.current?.performanceReport();
+            if (!report?.summary.frames) { setShareMessage('Primero mide una partida de 30 s.'); return; }
+            setSharingReport(true);setShareMessage('');
+            try {
+              const result=await sharePerformanceFile(report);
+              setShareMessage(result==='downloaded' ? 'Archivo descargado. Puedes adjuntarlo en WhatsApp.' : 'Archivo preparado. Puedes volver a compartirlo cuando quieras.');
+            } catch (error) {
+              const message=error instanceof Error ? error.message : String(error);
+              setShareMessage(/cancel|abort/i.test(message) ? 'No se ha compartido el archivo.' : 'No se pudo compartir. Puedes copiar el resumen y volver a intentarlo.');
+            } finally { setSharingReport(false); }
+          }}>Compartir informe como archivo<span>{sharingReport ? 'Preparando…' : 'Compartir'}</span></button>
+          {shareMessage && <output className="save-note">{shareMessage}</output>}
+          <p className="save-note">Elige WhatsApp en el menú de compartir. El archivo incluye el resumen y los peores tirones. La prueba cuenta solo mientras juegas. Incluye FPS, fotogramas lentos, cargas y tiempos por sistema. El informe se queda en tu dispositivo hasta que lo compartas.</p>
           {reportText && <label className="performance-report-label">Informe de rendimiento
             <textarea className="performance-report" readOnly rows={5} value={reportText}
               onFocus={event => event.currentTarget.select()} />

@@ -2,7 +2,7 @@
 
 Juego 2D para web e iOS con Capacitor, con diez escalas y un final. Mantiene el organismo azul translúcido con núcleo ámbar del inicio aprobado. Steam sigue pendiente.
 
-Estado vigente y optimización 0.4.3: [rendimiento, pruebas y entrega](design/streaming-performance.md). La última entrega anterior verificada es [0.4.2 (1)](design/loading-audit.md). Los apartados siguientes conservan decisiones históricas de la campaña; los documentos de entrega y el código prevalecen para valores y distribución actuales.
+Estado vigente 0.4.4: [transiciones, adaptación e informes compartibles](design/report-sharing-0.4.4.md). Entrega anterior: [optimización 0.4.3 (1)](design/streaming-performance.md). Los apartados siguientes conservan decisiones históricas de la campaña; los documentos de entrega y el código prevalecen para valores y distribución actuales.
 
 ## Recorrido y controles
 
