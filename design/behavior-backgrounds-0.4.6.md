@@ -41,6 +41,18 @@ Pendiente confirmación visual en TestFlight de la build nueva.
 Pruebas de bordes de rango, miedo, distancia de tiro, retorno al territorio,
 densidad marina, catálogo completo y selección del fondo. TypeScript, lint y
 build web correctos. HTTP local y recurso WebP con revisión responden 200.
-Registrar resultados finales de CI/Apple y biblioteca al completar entrega.
+113 pruebas en la fuente entregada; CI completo correcto.
+Fuente `2b73c34c9a1c7ce84141c23c9d530255895b7961`.
+Web privada v33, `appgdep_6a9ee226ee40819189afe5566b968162`, succeeded
+2026-09-07T16:11:37.973689Z.
+CI https://github.com/Krazel/Voro/actions/runs/34141857682, success.
+IPA 113.462.379 bytes, SHA256
+`33893b56ac4cb40cfc4590bf39e342adaa6f95bc5f9c256ea360ac428eceb03d`.
+Manifiesto y checksum cotejados; diez fondos comparados byte a byte mediante
+SHA256; JS de conducta/catálogo y CSS de selección presentes en el binario.
+Apple build `9b19d27d-cef5-4e74-9552-efb1693c2661`, VALID e IN_BETA_TESTING,
+asignación a VORO Interno con un tester y notas releídas por API
+2026-09-07T16:14:46.549Z. Sin beta externa ni publicación App Store.
+Biblioteca D1: PR-009 revisión 22 guardada y releída, tracking conservado.
 Sin cambios de velocidad/zoom del protagonista ni su arte; el ajuste sugerido
 en una pregunta anterior no fue autorizado y no forma parte de esta entrega.
