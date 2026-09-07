@@ -197,7 +197,7 @@ button {
   height: 100%;
   background: linear-gradient(90deg, #a86420, #ffcb6b);
   box-shadow: 0 0 10px #eab956;
-  transition: width 0.5s ease;
+  transition: transform 0.5s ease;
 }
 .intro {
   position: absolute;
@@ -510,14 +510,14 @@ button {
 .growth-track > span {
   position: relative;
   z-index: 1;
-  transition: width 0.35s ease;
+  transition: transform 0.35s ease;
 }
 .growth-trail {
   position: absolute;
   inset: 0 auto 0 0;
   display: block;
   background: #df8162;
-  transition: width 1s ease 0.25s;
+  transition: transform 1s ease 0.25s;
 }
 .biomass-hud.damaged .size {
   color: #ffb79f;
@@ -891,7 +891,11 @@ button {
   display: block;
   height: 100%;
   background: #97cecc;
-  transition: width 0.35s;
+  transition: transform 0.35s;
+}
+.growth-track > span, .growth-trail, .micro-adaptation b {
+  width: 100%;
+  transform-origin: left center;
 }
 .micro-hint {
   top: max(199px, calc(env(safe-area-inset-top) + 167px));

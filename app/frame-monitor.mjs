@@ -76,11 +76,41 @@ export class FrameMonitor {
       parts: Object.fromEntries(Object.entries(s.parts).map(([k,v])=>[k,+v.toFixed(2)])) }));
     const intervals = samples.map(s=>s.interval).sort((a,b)=>a-b);
     const p = f => intervals.length ? intervals[Math.ceil(intervals.length * f)-1] : 0;
+    const correlations = {};
+    for (let i = 1; i < samples.length; i++) {
+      const s = samples[i], previous = samples[i-1];
+      // Non-exclusive correlations with the PREVIOUS frame, never diagnoses.
+      const groups = ['all', ...(previous.groundRebuilt ? ['afterGroundRebuild'] : []),
+        ...(previous.uiPublished ? ['afterUiPublish'] : []),
+        ...(previous.loading > 0 ? ['whileLoading'] : []),
+        ...(!previous.groundRebuilt && !previous.uiPublished && !previous.loading ? ['other'] : [])];
+      for (const key of groups) {
+        const g = correlations[key] ||= { frames: 0, totalMs: 0, slowFrames: 0, peakMs: 0 };
+        g.frames++; g.totalMs += s.interval;
+        if (s.interval > 33.34) g.slowFrames++;
+        g.peakMs = Math.max(g.peakMs, s.interval);
+      }
+    }
+    const timing = key => {
+      const values = samples.map(s=>s[key]).filter(Number.isFinite).sort((a,b)=>a-b);
+      return { count: values.length, p95: values.length ? +values[Math.ceil(values.length*.95)-1].toFixed(2) : null,
+        max: values.length ? +values.at(-1).toFixed(2) : null };
+    };
     return { format: 'voro-performance-v1', ...metadata, summary: this.summary(true),
+      diagnostics: {
+        correlations: Object.fromEntries(Object.entries(correlations).map(([key,g])=>[key,
+          {frames:g.frames,meanMs:+(g.totalMs/g.frames).toFixed(2),slowFrames:g.slowFrames,peakMs:g.peakMs}])),
+        rafCallbackDelay: timing('rafDelay'), uiDeliveryDelay: timing('uiCommitDelay'),
+        over20ms: samples.filter(s=>s.interval>20).length,
+        groundRebuildFrames: samples.filter(s=>s.groundRebuilt).length,
+        uiPublishFrames: samples.filter(s=>s.uiPublished).length,
+      },
       session: { p50: p(.5), p95: p(.95), p99: p(.99), retainedFrames: samples.length,
         fps: samples.length ? +(samples.length * 1000 / samples.reduce((n,s)=>n+s.interval,0)).toFixed(1) : 0 },
       worstFrames: samples.map((s,i) => ({...s, previousFrame: i ? {
         at: samples[i-1].at, cpu: samples[i-1].cpu, parts: samples[i-1].parts,
+        groundRebuilt: samples[i-1].groundRebuilt, uiPublished: samples[i-1].uiPublished,
+        loading: samples[i-1].loading, rafDelay: samples[i-1].rafDelay,
       } : null})).sort((a,b)=>b.interval-a.interval).slice(0,30),
       events: [...this.events], samples,
       notes: ['Intervals are requestAnimationFrame cadence, not GPU timings.',

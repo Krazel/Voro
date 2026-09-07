@@ -101,7 +101,7 @@ export class WorldGround {
     this.view = saved?.view || null;
     if (!this.surface) this.surface = this.createCanvas();
     const surface = this.surface;
-    const pad = 128;
+    const pad = 192;
     const px = camera.x * profile.depth,
       py = camera.y * profile.depth;
     const view = this.view;
@@ -124,13 +124,9 @@ export class WorldGround {
         dx + surface.width * ratio >= 480 &&
         dy + surface.height * ratio >= height
       ) {
-        c.drawImage(
-          surface,
-          dx,
-          dy,
-          surface.width * ratio,
-          surface.height * ratio,
-        );
+        // Submit only the visible source rectangle, not the overscan buffer.
+        c.drawImage(surface, -dx / ratio, -dy / ratio, 480 / ratio,
+          height / ratio, 0, 0, 480, height);
         return true;
       }
     }
@@ -194,7 +190,7 @@ export class WorldGround {
     layer.fillRect(-pad, -pad, surface.width, surface.height);
     layer.restore();
     // Composite once so evolution crossfades retain their intended opacity.
-    c.drawImage(surface, -pad, -pad);
+    c.drawImage(surface, pad, pad, 480, height, 0, 0, 480, height);
     return true;
   }
 }

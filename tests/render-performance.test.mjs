@@ -142,8 +142,9 @@ test('Ground cache scrolls and scales continuously, invalidating on travel, biom
   ground.draw(c, image, 'land', { x: 0, y: 0 }, 1, 850);
   ground.draw(c, image, 'land', { x: 10, y: 20 }, 1, 850);
   assert.equal(ground.redraws, 1);
-  assert.equal(draws.at(-1)[1], -138);
-  assert.equal(draws.at(-1)[2], -148);
+  assert.equal(draws.at(-1)[1], 202);
+  assert.equal(draws.at(-1)[2], 212);
+  assert.deepEqual(draws.at(-1).slice(5), [0, 0, 480, 850]);
   ground.draw(c, image, 'land', { x: 10, y: 20 }, 1.01, 850);
   assert.equal(ground.redraws, 1);
   ground.draw(c, image, 'land', { x: 500, y: 20 }, 1.01, 850);

@@ -2,7 +2,7 @@
 import { sharePerformanceFile } from './share-performance';
 import { performanceSummaryText } from './performance-report.mjs';
 import { TRANSITION_ROUTES } from './journey-transitions.mjs';
-import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { readLeftHanded, writeLeftHanded, subscribeControls, serverLeftHanded } from './control-preferences';
 import Link from 'next/link';
 import { AdaptationChoices, CristalPreview } from './cristal-ui';
@@ -110,6 +110,7 @@ export default function Home() {
   const action = (
     name: 'start' | 'pause' | 'restart' | 'retry' | 'dash' | 'sound',
   ) => engine.current?.action(name);
+  useLayoutEffect(() => { engine.current?.recordUiCommit(); }, [state]);
   const changeSettings = (open: boolean) => {
     if (engine.current) engine.current.settingsOpen = open;
     if (open) {
@@ -222,12 +223,12 @@ export default function Home() {
               <i
                 className="growth-trail"
                 style={{
-                  width: Math.min(state.biomass / state.target, 1) * 100 + '%',
+                  transform: `scaleX(${Math.min(state.biomass / state.target, 1)})`,
                 }}
               />
               <span
                 style={{
-                  width: Math.min(state.biomass / state.target, 1) * 100 + '%',
+                  transform: `scaleX(${Math.min(state.biomass / state.target, 1)})`,
                 }}
               />
             </div>
@@ -249,7 +250,7 @@ export default function Home() {
             max={1}
           />
           <i aria-hidden="true">
-            <b style={{ width: xp * 100 + '%' }} />
+            <b style={{ transform: `scaleX(${xp})` }} />
           </i>
         </div>
         {!state.started && (
@@ -500,7 +501,7 @@ export default function Home() {
           </output>
         )}
       </section>
-      <Dialog
+      {active && state.offer.length > 0 && <Dialog
         open={active && state.offer.length > 0 && !settings}
         onOpenChange={() => {}}
       >
@@ -537,13 +538,13 @@ export default function Home() {
             El tiempo se detiene mientras eliges.
           </span>
         </DialogContent>
-      </Dialog>
-      <CristalPreview
+      </Dialog>}
+      {uiPreview && <CristalPreview
         key={uiPreview ? 'open' : 'closed'}
         open={uiPreview}
         onClose={() => setUiPreview(false)}
-      />
-      <Dialog open={settings && !uiPreview} onOpenChange={changeSettings}>
+      />}
+      {settings && <Dialog open={!uiPreview} onOpenChange={changeSettings}>
         <DialogContent
           className="voro-settings cristal-dialog"
           showCloseButton={false}
@@ -811,7 +812,7 @@ export default function Home() {
             <Play size={18} />
           </DialogClose>
         </DialogContent>
-      </Dialog>
+      </Dialog>}
       <aside className="desktop-note">
         <span>
           {String(state.stage + 1).padStart(2, '0')} —{' '}

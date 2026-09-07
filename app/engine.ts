@@ -225,28 +225,42 @@ export class VoroEngine {
   benchmarkSeconds = 0;
   saveJob: { id: number; idle: boolean } | null = null;
   measuredLastFrame = false;
+  uiPublishCount = 0;
+  uiQueuedAt: number | null = null;
+  uiCommitDelay = 0;
+  groundAtCapture = 0;
+  diagnosticSnapshot: ReturnType<FrameMonitor['summary']> | null = null;
+  diagnosticSnapshotAt = 0;
+  recordUiCommit() {
+    if (this.diagnosticsEnabled && this.uiQueuedAt !== null)
+      this.uiCommitDelay = Math.max(this.uiCommitDelay, performance.now() - this.uiQueuedAt);
+    this.uiQueuedAt = null;
+  }
   setDiagnostics(enabled: boolean) {
     this.diagnosticsEnabled = enabled;
     this.diagnosticCompleted = false;
     this.benchmarkSeconds = 0;
     // Showing the overlay must not erase an existing capture.
     this.measuredLastFrame = false;
+    this.diagnosticSnapshot = null;
     this.publish();
   }
   startBenchmark() {
     this.lastPerformanceReport = null;
     this.frameMonitor.reset();
+    this.groundAtCapture = this.worldGround.redraws;
     this.setDiagnostics(true);
     this.benchmarkSeconds = 30;
     this.publish();
   }
   performanceReport() {
     if (this.lastPerformanceReport) return this.lastPerformanceReport;
-    return this.frameMonitor.export({ version: '0.4.4', build: 2,
+    return this.frameMonitor.export({ version: '0.4.5', build: 1,
       date: new Date().toISOString(), userAgent: typeof navigator === 'undefined' ? '' : navigator.userAgent,
       viewport: { width: this.canvas.width, height: this.canvas.height, pixelRatio: this.pixelRatio },
       animationSheets: this.animationSheets.stats(), animationCache: animationCacheStats(),
-      backgroundRebuilds: this.worldGround.redraws });
+      backgroundRebuilds: this.worldGround.redraws,
+      backgroundRebuildsDuringCapture: this.worldGround.redraws - this.groundAtCapture });
   }
   measured<T>(name: string, run: () => T): T {
     return this.diagnosticsEnabled ? this.frameMonitor.measure(name, run) : run();
@@ -484,8 +498,12 @@ export class VoroEngine {
       devicePixelRatio || 1,
       matchMedia('(pointer: coarse)').matches ? 1.5 : 2,
     );
-    this.canvas.width = Math.round(b.width * this.pixelRatio);
-    this.canvas.height = Math.round(b.height * this.pixelRatio);
+    const width = Math.round(b.width * this.pixelRatio), height = Math.round(b.height * this.pixelRatio);
+    if (this.canvas.width !== width || this.canvas.height !== height) {
+      this.canvas.width = width;
+      this.canvas.height = height;
+      if (this.diagnosticsEnabled) this.frameMonitor.event('canvas-resize', 0, { width, height });
+    }
   }
   point(e: PointerEvent) {
     const b = this.canvas.getBoundingClientRect();
@@ -831,9 +849,20 @@ export class VoroEngine {
   publish() {
     this.syncStageAssets();
     this.renderDirty = true;
+    if (this.diagnosticsEnabled) {
+      this.uiPublishCount++;
+      this.uiQueuedAt ??= performance.now();
+    }
+    // Avoid re-sorting a completed 30-second capture every HUD update.
+    if (this.diagnosticCompleted && this.lastPerformanceReport)
+      this.diagnosticSnapshot = this.lastPerformanceReport.summary;
+    else if (this.diagnosticsEnabled && (!this.diagnosticSnapshot || this.time - this.diagnosticSnapshotAt >= 0.5)) {
+      this.diagnosticSnapshot = this.frameMonitor.summary();
+      this.diagnosticSnapshotAt = this.time;
+    }
     this.emit({
       performance: this.diagnosticsEnabled || this.diagnosticCompleted ? {
-        ...this.frameMonitor.summary(this.diagnosticCompleted),
+        ...(this.diagnosticSnapshot || this.frameMonitor.summary(this.diagnosticCompleted)),
         loading: this.assets.stats().loading + this.animationSheets.stats().pending,
         pending: animationCacheStats().pending + Number(animationCacheStats().active),
         cacheMB: Math.round((animationCacheStats().bytes + this.animationSheets.stats().bytes) / 1048576),
@@ -921,6 +950,7 @@ export class VoroEngine {
   frame = (stamp: number) => {
     if (this.destroyed) return;
     const frameStart = this.diagnosticsEnabled ? performance.now() : 0;
+    const groundBefore = this.worldGround.redraws, uiBefore = this.uiPublishCount;
     const interval = this.last ? stamp - this.last : 0;
     let measured = false;
     if (this.diagnosticsEnabled) this.frameMonitor.beginFrame();
@@ -969,6 +999,9 @@ export class VoroEngine {
         entities: this.food.length, transition: this.transition > 0,
         loading: this.assets.stats().loading + this.animationSheets.stats().pending,
         queuedPoses: animationCacheStats().pending, groundRebuilds: this.worldGround.redraws,
+        groundRebuilt: this.worldGround.redraws > groundBefore,
+        uiPublished: this.uiPublishCount > uiBefore,
+        rafDelay: +Math.max(0, frameStart - stamp).toFixed(2), uiCommitDelay: +this.uiCommitDelay.toFixed(2),
       });
       if (this.benchmarkSeconds && this.frameMonitor.elapsed >= this.benchmarkSeconds * 1000) {
         this.lastPerformanceReport = this.performanceReport();
@@ -977,6 +1010,7 @@ export class VoroEngine {
       }
     }
     this.measuredLastFrame = measured;
+    this.uiCommitDelay = 0;
     this.raf = requestAnimationFrame(this.frame);
   };
   update(dt: number) {

@@ -7,16 +7,20 @@ export function compactPerformanceReport(report) {
     group.count++; group.maxMs=Math.max(group.maxMs,e.ms);if(e.ok===false)group.failed++;
   }
   return {
-    format:'voro-performance-v2-compact',version:report.version,build:report.build,date:report.date,
+    format:'voro-performance-v3-compact',version:report.version,build:report.build,date:report.date,
     userAgent:report.userAgent,viewport:report.viewport,summary:report.summary,session:report.session,
     animationSheets:report.animationSheets,animationCache:report.animationCache,
     backgroundRebuilds:report.backgroundRebuilds,
+    backgroundRebuildsDuringCapture:report.backgroundRebuildsDuringCapture,
+    diagnostics:report.diagnostics,
     worstFrames:report.worstFrames.slice(0,5),events,
     coverage:{retainedFrames:report.session.retainedFrames,exportedWorstFrames:Math.min(5,report.worstFrames.length),rawSamplesOmitted:true},
     notes:['Cadencia rAF, no tiempo de GPU. CPU del motor; no incluye todo WebKit.',
       'Secciones de CPU anidadas. El intervalo puede reflejar trabajo del fotograma anterior.',
       'Cargas: tiempo transcurrido, no CPU. Memoria: buffers propios, no memoria total de la app.',
-      'Pausas y espera de assets base excluidas. Se omiten muestras crudas; se conservan resumen y peores cuadros.'],
+      'Pausas y espera de assets base excluidas. Se omiten muestras crudas; se conservan resumen y peores cuadros.',
+      'Correlaciones no excluyentes con el fotograma anterior, no causas demostradas. Retraso rAF no equivale a GPU.',
+      'uiDeliveryDelay mide espera y entrega a React, no CPU de React aislada. Cero si no hubo entrega en ese cuadro.'],
   };
 }
 export function performanceSummaryText(report) {

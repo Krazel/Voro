@@ -269,6 +269,14 @@ body:has(.cristal-dialog) [data-slot='dialog-overlay'] {
 .voro-shell[data-ui='cristal'] .cristal-toast.show {
   transform: translate(-50%, 0);
 }
+.cristal-toast:not(.show)::before,
+.cristal-toast:not(.show)::after {
+  animation: none;
+}
+/* The moving glint repaints its gradient. Keep the breathing rim in play. */
+.viewport[data-event='play'] .cristal-toast::after {
+  animation: none;
+}
 .voro-shell[data-ui='cristal'] .journey-transition {
   padding-bottom: 16%;
 }
