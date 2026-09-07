@@ -22,4 +22,9 @@ No se ha reproducido la ausencia del fondo en un iPhone físico. No atribuirla t
 
 Pendiente heredado de 0.4.7: el disco protoplanetario usa una ilustración que parece una galaxia; reemplazarla por un disco sin brazos espirales. Inclinación y rendimiento requieren comprobación física.
 
-Entrega y registro de biblioteca pendientes hasta verificar CI y Apple.
+## Entrega verificada
+
+- Web actualizada y compilación iOS completada.
+- CI [34147782581](https://github.com/Krazel/Voro/actions/runs/34147782581) correcta.
+- Diez fondos, Tierra, marco Cristal y precedencia CSS comprobados en el paquete iOS generado.
+- Queda pendiente confirmación física de la UI y del fondo informado. Los detalles de distribución se conservan en el registro privado del producto.
