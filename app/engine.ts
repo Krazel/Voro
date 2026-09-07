@@ -242,7 +242,7 @@ export class VoroEngine {
   }
   performanceReport() {
     if (this.lastPerformanceReport) return this.lastPerformanceReport;
-    return this.frameMonitor.export({ version: '0.4.4', build: 1,
+    return this.frameMonitor.export({ version: '0.4.4', build: 2,
       date: new Date().toISOString(), userAgent: typeof navigator === 'undefined' ? '' : navigator.userAgent,
       viewport: { width: this.canvas.width, height: this.canvas.height, pixelRatio: this.pixelRatio },
       animationSheets: this.animationSheets.stats(), animationCache: animationCacheStats(),

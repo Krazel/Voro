@@ -276,6 +276,9 @@ button {
   letter-spacing: 1.4px;
   color: #90b7c1;
 }
+.bottom-controls[data-dash-side='left'] {
+  flex-direction: row-reverse;
+}
 .guide-dot {
   width: 8px;
   height: 8px;

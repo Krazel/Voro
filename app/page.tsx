@@ -2,7 +2,8 @@
 import { sharePerformanceFile } from './share-performance';
 import { performanceSummaryText } from './performance-report.mjs';
 import { TRANSITION_ROUTES } from './journey-transitions.mjs';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
+import { readLeftHanded, writeLeftHanded, subscribeControls, serverLeftHanded } from './control-preferences';
 import Link from 'next/link';
 import { AdaptationChoices, CristalPreview } from './cristal-ui';
 import './cristal.css';
@@ -41,6 +42,8 @@ export default function Home() {
   const [settings, setSettings] = useState(false),
     [confirmReset, setConfirmReset] = useState(false);
   const [testPanel, setTestPanel] = useState(false);
+  const leftHanded = useSyncExternalStore(subscribeControls, readLeftHanded, serverLeftHanded);
+  const [controlsSaveError, setControlsSaveError] = useState(false);
   const [reportText, setReportText] = useState('');
   const [reportCopied, setReportCopied] = useState(false);
   const [sharingReport, setSharingReport] = useState(false);
@@ -312,7 +315,7 @@ export default function Home() {
             >
               {state.hint}
             </output>
-            <div className="bottom-controls">
+            <div className="bottom-controls" data-dash-side={leftHanded ? 'left' : 'right'}>
               <div className="movement-guide">
                 <span className="guide-dot" />
                 <span>ARRASTRA PARA MOVERTE</span>
@@ -548,6 +551,14 @@ export default function Home() {
           <p className="eyebrow">VORO · ABISAL</p>
           <DialogTitle>Configuración</DialogTitle>
           <DialogDescription>{state.stageName}</DialogDescription>
+          <button className="settings-row"
+            aria-pressed={leftHanded}
+            onClick={() => {
+              setControlsSaveError(!writeLeftHanded(!leftHanded));
+            }}>
+            Impulso a la izquierda<span>{leftHanded ? 'Activado' : 'Desactivado'}</span>
+          </button>
+          {controlsSaveError && <output className="save-note">El cambio funciona ahora, pero no se ha podido guardar para la próxima sesión.</output>}
           <button className="settings-row"
             onClick={() => engine.current?.setDiagnostics(!state.performance)}
             aria-pressed={!!state.performance}>
