@@ -23,6 +23,9 @@ test('Reports refuse empty data, preserve statistics and produce a small shareab
  for(let i=0;i<3600;i++) {game.frameMonitor.beginFrame();game.frameMonitor.frameParts.render=2;game.frameMonitor.add(i%50?16:70,2,{stage:1,entities:300});}
  const full=game.performanceReport(),compact=compactPerformanceReport(full),text=JSON.stringify(compact,null,2);
  assert.deepEqual(compact.summary,full.summary);assert.deepEqual(compact.session,full.session);
+ assert.deepEqual(compact.background,full.background);
+ assert.equal(compact.background.stage,'micro');
+ assert.equal(typeof compact.background.prepared,'boolean');
  assert.equal(compact.worstFrames.length,5);assert.equal(compact.samples,undefined);
  assert.ok(Buffer.byteLength(text)<12000);assert.ok(performanceSummaryText(full).length<1200);
  game.destroy();

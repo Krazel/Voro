@@ -1,4 +1,5 @@
 import { WorldGround } from './world-ground.mjs';
+import { RELEASE } from './release.mjs';
 import { TiltControl } from './tilt-control.ts';
 import { drawOrbitalEarth } from './earth-landmark.mjs';
 import { StageAssets } from './stage-assets.mjs';
@@ -256,15 +257,26 @@ export class VoroEngine {
   }
   performanceReport() {
     if (this.lastPerformanceReport) return this.lastPerformanceReport;
-    return this.frameMonitor.export({ version: '0.4.7', build: 1,
+    return this.frameMonitor.export({ ...RELEASE,
       date: new Date().toISOString(), userAgent: typeof navigator === 'undefined' ? '' : navigator.userAgent,
       viewport: { width: this.canvas.width, height: this.canvas.height, pixelRatio: this.pixelRatio },
       animationSheets: this.animationSheets.stats(), animationCache: animationCacheStats(),
       backgroundRebuilds: this.worldGround.redraws,
+      background: this.backgroundStatus(),
       backgroundRebuildsDuringCapture: this.worldGround.redraws - this.groundAtCapture });
   }
   measured<T>(name: string, run: () => T): T {
     return this.diagnosticsEnabled ? this.frameMonitor.measure(name, run) : run();
+  }
+  backgroundStatus() {
+    const stage = STAGES[this.progress.stage].id;
+    const image = this.groundImages[stage];
+    const entry = this.assets.entries.get(`ground:${stage}`);
+    const view = this.worldGround.views.get(stage);
+    return { stage, loaded: !!entry?.ready, error: !!entry?.error,
+      width: image?.naturalWidth || 0, height: image?.naturalHeight || 0,
+      prepared: stage === 'micro' ? !!entry?.ready : !!view && view.view.image === image,
+      surfaceWidth: view?.surface.width || 0, surfaceHeight: view?.surface.height || 0 };
   }
   syncStageAssets() {
     const stages = this.transition > 0

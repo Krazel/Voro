@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "vinext dev",
     "build": "vinext build",
-    "build:mobile": "vite build --config vite.mobile.config.ts",
+    "build:mobile": "vite build --config vite.mobile.config.ts && node scripts/verify-mobile-assets.mjs",
     "ios:sync": "npm run build:mobile && cap sync ios",
     "start": "wrangler dev --config dist/server/wrangler.json",
     "lint": "oxlint",

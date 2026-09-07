@@ -10,7 +10,7 @@ export function compactPerformanceReport(report) {
     format:'voro-performance-v3-compact',version:report.version,build:report.build,date:report.date,
     userAgent:report.userAgent,viewport:report.viewport,summary:report.summary,session:report.session,
     animationSheets:report.animationSheets,animationCache:report.animationCache,
-    backgroundRebuilds:report.backgroundRebuilds,
+    background:report.background,backgroundRebuilds:report.backgroundRebuilds,
     backgroundRebuildsDuringCapture:report.backgroundRebuildsDuringCapture,
     diagnostics:report.diagnostics,
     worstFrames:report.worstFrames.slice(0,5),events,

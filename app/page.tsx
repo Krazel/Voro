@@ -1,5 +1,6 @@
 'use client';
 import { sharePerformanceFile } from './share-performance';
+import { RELEASE } from './release.mjs';
 import { performanceSummaryText } from './performance-report.mjs';
 import { TRANSITION_ROUTES } from './journey-transitions.mjs';
 import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
@@ -575,7 +576,7 @@ export default function Home() {
         >
           <p className="eyebrow">VORO · ABISAL</p>
           <DialogTitle>Configuración</DialogTitle>
-          <DialogDescription>{state.stageName}</DialogDescription>
+          <DialogDescription>{state.stageName} · VORO {RELEASE.version} ({RELEASE.build})</DialogDescription>
           {movementChoice}
           {tilt && <button className="settings-row" onClick={() => { engine.current?.tilt.calibrate(); setTiltMessage('Posición centrada. Mantén el móvil cómodo al continuar.'); }}>Centrar inclinación<span>Recalibrar</span></button>}
           <button className="settings-row"

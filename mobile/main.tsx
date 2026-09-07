@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import Home from '../app/page';
 import '../app/globals.css';
+import Home from '../app/page';
 const AnimationStudio = lazy(() => import('../app/animaciones/page'));
 const InterfaceStudio = lazy(() => import('../app/interfaz/page'));
 
