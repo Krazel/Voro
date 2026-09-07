@@ -64,6 +64,23 @@ no sustituyen abrir WhatsApp en un iPhone/iPad físico. Pendiente esa confirmaci
 
 ## Distribución
 
-Candidata 0.4.4 (1), web y TestFlight interno existente. Añadir a continuación la
-verificación de entrega. App Store sigue sin publicación pública; no hay beta
-externa ni cambios en anuncios. Actualizar misma ficha PR-009 y releer.
+Entrega verificada 2026-09-07: 0.4.4 (1), web y TestFlight interno existente.
+App Store sigue sin publicación pública; no hay beta externa ni cambios en anuncios.
+
+- Fuente compilada: `853990cf4eb7abd23877af21b644c3727e45c9d7`.
+- Web privada v30: `appgdep_6a9ebbb15c10819188ff00b8f0d03724`, succeeded
+  2026-09-07T13:27:29.106117Z, https://voro-abisal.krazel.chatgpt.site/.
+- CI: https://github.com/Krazel/Voro/actions/runs/34127310059, success.
+- Apple build `f48260f4-cf04-40ee-ab17-8953ef92f47e`: VALID e IN_BETA_TESTING,
+  asignada a VORO Interno con un tester; notas españolas y asignación releídas
+  por API 2026-09-07T13:37:48.466Z. No se ha enviado a beta externa.
+- IPA: 113.460.650 bytes; SHA256
+  `34a088f2f5d755293c5832bf889ab4990c0d180117f58d515d3234330dd8517c`.
+  Checksum de CI cotejado. ZIP incluye PrivacyInfo.xcprivacy y plugins Share y
+  Filesystem, sin server.url remoto.
+- Biblioteca D1: misma ficha PR-009, revisión 19, versión 0.4.4 (1) guardada
+  y releída; tracking anterior conservado. Siguiente paso: prueba física de
+  compartir/cancelar en WhatsApp, transición y ritmo de adaptación.
+
+La disponibilidad en TestFlight no sustituye esa prueba física. No se afirma
+una mejora de FPS de 0.4.4 sin una captura del mismo dispositivo y escenario.
