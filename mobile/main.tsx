@@ -4,6 +4,7 @@ import '../app/globals.css';
 import Home from '../app/page';
 const AnimationStudio = lazy(() => import('../app/animaciones/page'));
 const InterfaceStudio = lazy(() => import('../app/interfaz/page'));
+const ShorePreview = lazy(() => import('../app/orilla/page'));
 
 function MobileApp() {
   const [path, setPath] = useState(location.hash.slice(1) || '/');
@@ -13,7 +14,7 @@ function MobileApp() {
     return () => window.removeEventListener('hashchange', navigate);
   }, []);
   return <Suspense fallback={<output>Cargando…</output>}>
-    {path === '/animaciones' ? <AnimationStudio /> : path === '/interfaz' ? <InterfaceStudio /> : <Home />}
+    {path === '/animaciones' ? <AnimationStudio /> : path === '/interfaz' ? <InterfaceStudio /> : path === '/orilla' ? <ShorePreview /> : <Home />}
   </Suspense>;
 }
 

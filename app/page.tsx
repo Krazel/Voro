@@ -787,6 +787,10 @@ export default function Home() {
             Galería de animaciones
             <ArrowUpRight size={17} />
           </Link>
+          <Link className="settings-row" href="/orilla">
+            Probar la nueva orilla
+            <ArrowUpRight size={17} />
+          </Link>
           {state.level > 0 && (
             <div className="micro-upgrade-list">
               {UPGRADES.map((u) => {
