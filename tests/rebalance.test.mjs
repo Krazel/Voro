@@ -1,4 +1,5 @@
 import test from 'node:test';
+import { sizeRange } from '../app/entity-sizes.mjs';
 import assert from 'node:assert/strict';
 import {
   UPGRADES,
@@ -87,7 +88,7 @@ test('Individual sizes vary deterministically, preserve area-based food requirem
     for (let i = 0; i < 30; i++) {
       const e = journeyEntity(s, 0, 0, i * 0.211, 'same');
       assert.deepEqual(e, journeyEntity(s, 0, 0, i * 0.211, 'same'));
-      assert.ok(e.r >= s.r * 0.88 && e.r <= s.r * 1.12);
+      assert.ok(e.r >= sizeRange(s).min && e.r <= sizeRange(s).max);
       assert.ok(Math.abs(e.value / s.value - (e.r / s.r) ** 2) < 1e-9);
       if (s.requiredMass !== undefined)
         assert.ok(
@@ -95,7 +96,7 @@ test('Individual sizes vary deterministically, preserve area-based food requirem
         );
       sizes.add(e.r);
     }
-    assert.ok(s.kind === 'final' ? sizes.size === 1 : sizes.size > 20);
+    assert.ok(s.kind === 'final' || s.unique ? sizes.size === 1 : sizes.size > 20);
   }
   assert.ok(
     SPECIES_BY_ID['water-10'].r * 1.12 < SPECIES_BY_ID['water-14'].r * 0.88,

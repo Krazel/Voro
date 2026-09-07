@@ -1,4 +1,4 @@
-import { MIN_SIZE_FACTOR, MAX_SIZE_FACTOR } from './entity-sizes.mjs';
+import { sizeFactors } from './entity-sizes.mjs';
 import { animalTarget } from './animal-steering.mjs';
 import { random, clamp } from './simulation.mjs';
 export const TILE = 600;
@@ -117,12 +117,8 @@ export const SPECIES_BY_ID = Object.fromEntries(SPECIES.map((s) => [s.id, s]));
 const hash = (seed, x, y) =>
   (seed ^ Math.imul(x | 0, 73856093) ^ Math.imul(y | 0, 19349663)) >>> 0;
 export function makeEntity(species, x, y, seed, id) {
-  const sizeFactor =
-    species.kind === 'final'
-      ? 1
-      : MIN_SIZE_FACTOR +
-        random(Math.floor(seed * 100000) ^ 78493)() *
-          (MAX_SIZE_FACTOR - MIN_SIZE_FACTOR);
+  const [min, max] = sizeFactors(species);
+  const sizeFactor = min + random(Math.floor(seed * 100000) ^ 78493)() * (max - min);
   const r = species.r * sizeFactor;
   return {
     id,
@@ -237,9 +233,12 @@ export class MicroWorld {
   eat(entity, time) {
     entity.eaten = true;
     this.journal.delete(entity.id);
-    this.journal.set(entity.id, time + 150);
-    while (this.journal.size > 2048)
-      this.journal.delete(this.journal.keys().next().value);
+    this.journal.set(entity.id, entity.id.startsWith('landmark:') ? Number.MAX_SAFE_INTEGER : time + 150);
+    while (this.journal.size > 2048) {
+      const oldest = [...this.journal.keys()].find(id => !id.startsWith('landmark:'));
+      if (!oldest) break;
+      this.journal.delete(oldest);
+    }
   }
   replenish(x, y, time) {
     // Rebuild only consumed slots whose regrowth time has elapsed; never erase live movement.

@@ -566,7 +566,9 @@ export const ANIMATIONS = Object.fromEntries(
       s.atlas === 'micro'
         ? STAGE_SPECIES[0].findIndex((e) => e.id === (s.animationId || s.id))
         : s.index;
-    const profile = s.edibleMatter
+    const profile = s.id === 'earth'
+      ? rig('prop', 'El globo conserva su forma, con un giro lento.', 60, { rigid: true, precession: 0.015 })
+      : s.edibleMatter
       ? matterAnimation(s)
       : atlases[s.atlas][index];
     return [

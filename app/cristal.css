@@ -530,3 +530,9 @@ body:has(.cristal-dialog) [data-slot='dialog-overlay'] {
     transform: none;
   }
 }
+.movement-choice { margin: 16px 0; color: #c2d7dd; font-size: 14px; }
+.movement-choice > div { display: flex; gap: 8px; margin-top: 8px; }
+.movement-choice button { flex: 1; padding: 10px 8px; min-height: 44px; border: 1px solid #69858b66; border-radius: 12px; background: #091922d9; color: #d4e7eb; }
+.movement-choice button[aria-pressed="true"] { border-color: #a4d5d7; background: #244348e0; }
+.movement-choice output { display: block; max-width: 340px; margin: 8px auto; line-height: 1.4; }
+.intro { max-height: calc(100% - 155px); overflow-y: auto; overscroll-behavior: contain; }

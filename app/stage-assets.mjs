@@ -8,6 +8,7 @@ const RESOURCE_LISTS = STAGES.map((_, stage) => {
   const resources = [...new Set(STAGE_SPECIES[stage].map(s => s.imageAtlas || s.atlas))]
     .map(key => ({ key, url: ATLAS_URLS[key], kind: 'atlas' }));
   const id = STAGES[stage].id;
+  if (id === 'orbit') resources.push({ key: 'earth', kind: 'atlas', url: ATLAS_URLS.earth });
   resources.push({ key: id, kind: 'ground', url: BACKGROUND_ASSETS[id] });
   return resources;
 });

@@ -1,4 +1,5 @@
 import { EDIBLE_MATTER } from './edible-matter.mjs';
+import { applyScaleAudit } from './scale-audit.mjs';
 import { SPECIES as MICRO_SPECIES } from './micro-world.mjs';
 export const STAGE_START_MASS = 2;
 export const stageStartMass = (stage) =>
@@ -360,6 +361,7 @@ SPECIES_BY_ID['water-14'].imageAtlas = 'swimmer';
 SPECIES_BY_ID['water-12'].spawnWeight = 0.2;
 SPECIES_BY_ID['water-13'].spawnWeight = 0.1;
 export const ATLAS_URLS = {
+  earth: './inhabitants/earth-orbital-hires.webp',
   femaleSwimmer: './inhabitants/female-swimmer-v1.png',
   swimmer: './inhabitants/swimmer-v2.png',
   micro: './inhabitants/micro.png',
@@ -549,6 +551,7 @@ STAGES[2].name = 'La franja de la marea';
 STAGES[2].evolution = 'La marea te abre el camino.';
 STAGES[3].evolution = 'Tu sombra alcanza el puerto.';
 
+applyScaleAudit(STAGES, STAGE_SPECIES, SPECIES_BY_ID);
 // Every scale includes a tiny recovery food after a severe hit.
 for (const list of STAGE_SPECIES) {
   const tiniest = list

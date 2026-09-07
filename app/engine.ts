@@ -1,4 +1,6 @@
 import { WorldGround } from './world-ground.mjs';
+import { TiltControl } from './tilt-control.ts';
+import { drawOrbitalEarth } from './earth-landmark.mjs';
 import { StageAssets } from './stage-assets.mjs';
 import { FrameMonitor } from './frame-monitor.mjs';
 import { AnimationSheets } from './animation-sheets.mjs';
@@ -254,7 +256,7 @@ export class VoroEngine {
   }
   performanceReport() {
     if (this.lastPerformanceReport) return this.lastPerformanceReport;
-    return this.frameMonitor.export({ version: '0.4.6', build: 1,
+    return this.frameMonitor.export({ version: '0.4.7', build: 1,
       date: new Date().toISOString(), userAgent: typeof navigator === 'undefined' ? '' : navigator.userAgent,
       viewport: { width: this.canvas.width, height: this.canvas.height, pixelRatio: this.pixelRatio },
       animationSheets: this.animationSheets.stats(), animationCache: animationCacheStats(),
@@ -430,6 +432,7 @@ export class VoroEngine {
     window.addEventListener(
       'blur',
       () => {
+        this.tilt.read(false);
         this.save();
         this.keys.clear();
         this.pointer = null;
@@ -444,6 +447,7 @@ export class VoroEngine {
     document.addEventListener(
       'visibilitychange',
       () => {
+        this.tilt.read(false);
         if (document.hidden && this.started) {
           this.save();
           this.paused = true;
@@ -916,6 +920,7 @@ export class VoroEngine {
       assetsReady: this.assetsReady,
     });
   }
+  tilt = new TiltControl();
   input() {
     let x =
         (this.keys.has('KeyD') || this.keys.has('ArrowRight') ? 1 : 0) -
@@ -927,7 +932,11 @@ export class VoroEngine {
       x = this.padInput.x;
       y = this.padInput.y;
     }
-    if (this.pointer) {
+    if (this.tilt.enabled && !x && !y) {
+      const tilt = this.tilt.read(true);
+      x = tilt.x; y = tilt.y;
+    }
+    if (this.pointer && !this.tilt.enabled) {
       if (this.pointer.touch) {
         x = (this.pointer.x - this.pointer.sx) / 48;
         y = (this.pointer.y - this.pointer.sy) / 48;
@@ -950,6 +959,8 @@ export class VoroEngine {
   }
   frame = (stamp: number) => {
     if (this.destroyed) return;
+    if (this.paused || !this.started || this.settingsOpen || this.progress.offer.length || this.transition || this.life.dead || document.hidden)
+      this.tilt.read(false);
     const frameStart = this.diagnosticsEnabled ? performance.now() : 0;
     const groundBefore = this.worldGround.redraws, uiBefore = this.uiPublishCount;
     const interval = this.last ? stamp - this.last : 0;
@@ -1631,6 +1642,12 @@ export class VoroEngine {
       this.drawEvolution();
       return;
     }
+    if (STAGES[this.progress.stage].id === 'orbit') {
+      c.save();
+      c.globalAlpha = this.transition > 0 ? clamp((3.6 - this.transition) / 1.1, 0, 1) : 1;
+      drawOrbitalEarth(c, this.atlasImages.earth, this.camera, this.height);
+      c.restore();
+    }
     const shake = this.reduced ? 0 : this.hitFlash * 3,
       ox = 240 / this.zoom - this.camera.x + Math.sin(this.time * 55) * shake,
       oy =
@@ -2176,6 +2193,7 @@ export class VoroEngine {
     }
   }
   destroy() {
+    this.tilt.stop();
     this.save();
     this.destroyed = true;
     this.assets.destroy();

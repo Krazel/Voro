@@ -35,7 +35,7 @@ test('Every new stage starts half-size, only the smallest species are edible, an
       const result = beginAbsorb(l, e);
       if (result) {
         edible++;
-        assert.ok(s.r <= 21, `${s.name} is too large for a newborn`);
+        assert.ok(e.r <= l.radius / 1.17 + 1e-9, `${s.name} is too large for a newborn`);
       } else locked++;
     }
     assert.ok(edible >= 1);

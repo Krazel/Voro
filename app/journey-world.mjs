@@ -54,7 +54,7 @@ export class JourneyWorld extends MicroWorld {
     }
     let depleted = false;
     const list = STAGE_SPECIES[this.stage].filter(
-      (s) => s.kind !== 'final' && !s.variantOf,
+      (s) => s.kind !== 'final' && !s.variantOf && !s.unique,
     );
     const small = list.filter(
         (s) =>
@@ -73,7 +73,8 @@ export class JourneyWorld extends MicroWorld {
           0,
       ),
       entities = [],
-      occupied = [],
+      occupied = STAGES[this.stage].id === 'planets' && cx === 1 && cy === 2
+        ? [{ x: 700, y: 1270, r: SPECIES_BY_ID.earth.r }] : [],
       motes = [];
     const stageId = STAGES[this.stage].id,
       plan = POPULATION_PLANS[stageId];
@@ -139,6 +140,11 @@ export class JourneyWorld extends MicroWorld {
       }
     if (stageId === 'land')
       for (const e of entities) constrainToShore(e, SPECIES_BY_ID[e.kind]);
+    // One Earth at the arrival point. A consumed landmark remains consumed,
+    // unlike renewable forage, including after chunk eviction and save/load.
+    if (stageId === 'planets' && cx === 1 && cy === 2 && !this.journal.has('landmark:earth')) {
+      entities.push(journeyEntity(SPECIES_BY_ID.earth, 700, 1270, 0, 'landmark:earth'));
+    }
     for (let i = 0; i < 25; i++)
       motes.push({
         x: cx * TILE + rng() * TILE,

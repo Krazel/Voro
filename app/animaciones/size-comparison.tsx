@@ -87,9 +87,15 @@ export default function SizeComparison({
           <h2>{STAGES[stage].short}: del más pequeño al más grande</h2>
           <p>
             Los mínimos y máximos del juego, todos a la misma escala dentro de
-            este entorno. Variación de ±12 %; el universo final tiene tamaño
-            fijo.
+            este entorno. Cada especie tiene su propio rango; la Tierra y el
+            universo final son únicos y tienen tamaño fijo.
           </p>
+          <p>Referencia de este entorno: {formatSize(stage, 8)}. Al cambiar de entorno
+            cambia la escala de la cámara, no el tamaño físico de los objetos.
+            Las medidas cósmicas son aproximaciones de juego.</p>
+          {stage >= 5 && <p>Planetas: kilómetros. Estrellas: cientos de miles de kilómetros.
+            Galaxias: miles de años luz. Sus ilustraciones se amplían por separado
+            para poder verlas; no representan el mismo tamaño.</p>}
         </div>
         <label htmlFor="comparison-zoom">
           Ampliación · {Math.round(zoom * 100)} %
@@ -150,6 +156,7 @@ export default function SizeComparison({
                       <th scope="rowgroup" rowSpan={2}>
                         <button onClick={() => onSelect(s.id)}>
                           {s.name}
+                          {'sizeMeaning' in s && <span>{String(s.sizeMeaning)}</span>}
                           <span>Ver animación →</span>
                         </button>
                       </th>

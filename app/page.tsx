@@ -44,6 +44,29 @@ export default function Home() {
   const [testPanel, setTestPanel] = useState(false);
   const leftHanded = useSyncExternalStore(subscribeControls, readLeftHanded, serverLeftHanded);
   const [controlsSaveError, setControlsSaveError] = useState(false);
+  const [tilt, setTilt] = useState(false);
+  const [tiltPending, setTiltPending] = useState(false);
+  const [tiltMessage, setTiltMessage] = useState('');
+  const selectMovement = async (useTilt: boolean) => {
+    const game = engine.current;
+    if (!game) return;
+    if (!useTilt) { game.tilt.stop(); setTilt(false); setTiltMessage(''); }
+    else {
+      setTiltPending(true);
+      setTiltMessage('Sujeta el móvil en una posición cómoda…');
+      const ok = await game.tilt.enable();
+      setTilt(ok); setTiltPending(false);
+      setTiltMessage(ok ? 'Inclina suavemente. Puedes recalibrar en Configuración.' : 'No se reciben datos de inclinación. Puedes seguir jugando con el dedo.');
+    }
+  };
+  const movementChoice = <div className="movement-choice">
+    <span>Cómo quieres moverte</span>
+    <div>
+      <button aria-pressed={!tilt && !tiltPending} onClick={() => selectMovement(false)}>Con el dedo</button>
+      <button aria-pressed={tilt} disabled={tiltPending} onClick={() => selectMovement(true)}>{tiltPending ? 'Conectando…' : 'Inclinando el móvil'}</button>
+    </div>
+    {tiltMessage && <output>{tiltMessage}</output>}
+  </div>;
   const [reportText, setReportText] = useState('');
   const [reportCopied, setReportCopied] = useState(false);
   const [sharingReport, setSharingReport] = useState(false);
@@ -281,10 +304,11 @@ export default function Home() {
                 ? 'Tu evolución continúa.'
                 : 'Todo un universo espera fuera de la gota.'}
             </p>
+            {movementChoice}
             <button
               className="primary-button"
               disabled={!state.assetsReady}
-              onClick={() => action('start')}
+              onClick={() => { engine.current?.tilt.calibrate(); action('start'); }}
             >
               {!state.assetsReady
                 ? 'Preparando tu mundo…'
@@ -319,7 +343,7 @@ export default function Home() {
             <div className="bottom-controls" data-dash-side={leftHanded ? 'left' : 'right'}>
               <div className="movement-guide">
                 <span className="guide-dot" />
-                <span>ARRASTRA PARA MOVERTE</span>
+                <span>{tilt ? 'INCLINA PARA MOVERTE' : 'ARRASTRA PARA MOVERTE'}</span>
               </div>
               <button
                 className={'dash-button ' + (state.dash > 0 ? 'cooldown' : '')}
@@ -552,6 +576,8 @@ export default function Home() {
           <p className="eyebrow">VORO · ABISAL</p>
           <DialogTitle>Configuración</DialogTitle>
           <DialogDescription>{state.stageName}</DialogDescription>
+          {movementChoice}
+          {tilt && <button className="settings-row" onClick={() => { engine.current?.tilt.calibrate(); setTiltMessage('Posición centrada. Mantén el móvil cómodo al continuar.'); }}>Centrar inclinación<span>Recalibrar</span></button>}
           <button className="settings-row"
             aria-pressed={leftHanded}
             onClick={() => {

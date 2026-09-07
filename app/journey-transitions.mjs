@@ -9,7 +9,7 @@ export const TRANSITION_ROUTES = {
   land: 'La marea cubre la arena. Sigues creciendo bajo el agua.',
   water: 'Sigues la costa hasta el puerto y sus calles.',
   city: 'Las calles se alejan. La curvatura del mundo aparece.',
-  orbit: 'Dejas atrás la órbita y alcanzas los mundos vecinos.',
+  orbit: 'La Tierra sigue cerca. Pronto podrás absorber tu mundo de origen.',
   planets: 'Más allá de los planetas están los soles que los iluminan.',
   stars: 'Al alejarte, los soles dibujan los brazos de una galaxia.',
   galaxies: 'Las galaxias se unen en filamentos de una misma red.',

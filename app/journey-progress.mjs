@@ -227,7 +227,7 @@ export function loadJourney(raw) {
               e[0].length < 80 &&
               Number.isFinite(e[1]) &&
               e[1] > life.elapsed &&
-              e[1] <= life.elapsed + 160,
+              (e[1] <= life.elapsed + 160 || (e[0] === 'landmark:earth' && e[1] === Number.MAX_SAFE_INTEGER)),
           )
       : [];
     const fragments =
