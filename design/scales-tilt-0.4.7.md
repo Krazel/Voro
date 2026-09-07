@@ -171,3 +171,16 @@ Se conserva el renderizado del protagonista, cámara normal, impulso y las optim
 ## Verificación
 
 118 pruebas correctas; TypeScript, lint y build web correctos. Rutas / y /animaciones responden 200 en local. Tierra renderizada fuera del navegador e inspeccionada. Pendiente entrega y prueba física de inclinación en iPhone/iPad.
+
+## Entrega comprobada
+
+Fuente 10145542b79f1ab5bfd53043bb01e48a8ae4bafa. Sites v34, despliegue appgdep_6a9eea2644b081919a701d781c588974 succeeded 2026-09-07T16:45:49.238757Z.
+CI https://github.com/Krazel/Voro/actions/runs/34144545587 success. IPA 114107691 bytes, SHA256 f08e2bfdea4635da1f28f89cfe491e20b832330898ff3f0efb644057901b6fac. Manifiesto, versión y once imágenes cotejados con la fuente; código de inclinación y Tierra incluido.
+Apple f23bdc15-45d7-4bce-a4f8-92f330ef6ff7 VALID/IN_BETA_TESTING, asignación interna y notas verificadas por API 2026-09-07T16:49:29.519Z. Sin beta externa ni publicación App Store.
+Biblioteca PR-009 actualizada y releída con versión 0.4.7 (1), tracking conservado.
+
+## Comprobación de fondos y pausa del usuario
+
+Tras publicar, el usuario informó de fondos que no se veían y pidió comprobarlos. Se inspeccionaron de verdad por UI y capturas los modos de prueba web de Charca, Orilla, Mar, Ciudad, Órbita y Planetas: todos dibujan un fondo después de cargar. Ciudad es una textura de pavimento tenue; Planetas un campo estelar oscuro. Esto no valida el resultado en su iPhone. Microscopio/resto cósmico no se verificaron visualmente en esta pasada.
+El usuario pidió esperar porque quizá no tenía la última versión. Se detuvo la revisión y se restauró su partida original (microscopio, masa 9.49), sin guardar cambios de la prueba.
+Hallazgo real pendiente del encargo de escalas: el asset cosmicMatter índice 5, usado como Disco protoplanetario en Planetas, se parece demasiado a una galaxia. El cambio de unidades y nombres no corrige esa ambigüedad visual; debe sustituirse por un disco de gas sin brazos galácticos al continuar. No declarar acabado ese punto. No hay todavía una causa reproducida para fondos ausentes en TestFlight.
