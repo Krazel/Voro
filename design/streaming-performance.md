@@ -75,10 +75,25 @@ hojas; cero poses generadas en ejecución en los recorridos con hojas. Son
 comparaciones sintéticas dentro de este motor revisado, no FPS físicos ni una
 promesa sobre el iPad.
 
-## Pendiente de entrega y prueba física
+## Entrega verificada
 
-Verificar compilaciones web y móvil, firma/subida y disponibilidad del grupo
-TestFlight interno existente; actualizar PR-009 sin cambiar los otros estados.
+- Fuente compilada: `37806a3095e8f179d5a66f36f7460d70faaa156c`.
+- Web privada v29, despliegue `appgdep_6a9e8a2fe39881919509715e293aff0a`,
+  succeeded el 2026-09-07T09:56:27Z, URL habitual y mismo acceso.
+- [Workflow firmado y subido](https://github.com/Krazel/Voro/actions/runs/34108593473): success.
+- Apple build `764e3ed4-24c2-44fd-89d2-857ad3cf728c`: VALID,
+  IN_BETA_TESTING, asignación al mismo grupo VORO Interno con 1 tester,
+  verificado por API el 2026-09-07T10:01:57Z. Versión 0.4.3, build 1.
+- IPA 113.327.519 bytes; SHA256
+  `4e52829925c0cf27956d8cdc9b93bf066afaf9e6b9e2cb4d227f36e1c7ac4ab1`.
+  Coincide con manifiesto y checksum de CI. Se comprueban las 140 hojas
+  dentro de la IPA y ausencia de server.url remoto: webview local.
+- Biblioteca D1 PR-009 actualizada y releída, revisión 17: misma ficha,
+  0.4.3 (1), TestFlight Interno, App Store Creada en App Store Connect,
+  anuncios Por confirmar. Enlace de demo y repositorio registrados.
+
+## Pendiente de prueba física
+
 Confirmar la fluidez física con el informe de 30 s del iPad Pro y, si es posible,
 del iPhone X. No declarar resuelto el rendimiento por pruebas de escritorio.
 La ficha App Store está creada, no publicada; no activar pruebas externas ni
