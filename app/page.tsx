@@ -100,6 +100,7 @@ export default function Home() {
     adaptationStart: 0,
     adaptationTarget: 18,
     saved: false,
+    birth: 0,
     storageAvailable: true,
     transition: 0,
     deaths: 0,
@@ -163,14 +164,10 @@ export default function Home() {
         );
   return (
     <main className="voro-shell" data-ui="cristal">
-      <aside className="outside-caption">
-        <span className="side-line" />
-        UN UNIVERSO POR DENTRO
-      </aside>
       <section
         className="viewport"
         data-event={
-          state.offer.length
+          state.birth > 0 ? 'birth' : !state.started ? 'intro' : state.offer.length
             ? 'adaptation'
             : state.transition > 0
               ? 'evolution'
@@ -279,10 +276,7 @@ export default function Home() {
         </div>
         {!state.started && (
           <div className="intro">
-            <p className="eyebrow">
-              {String(state.stage + 1).padStart(2, '0')} /{' '}
-              {state.stageName.toUpperCase()}
-            </p>
+            <p className="eyebrow">{state.saved ? 'TU EVOLUCIÓN' : 'EL ORIGEN'}</p>
             <h1>
               {state.saved ? (
                 <>
@@ -292,18 +286,16 @@ export default function Home() {
                 </>
               ) : (
                 <>
-                  Todo empieza
+                  Antes de todo,
                   <br />
-                  con hambre.
+                  una vida.
                 </>
               )}
             </h1>
             <p className="intro-instruction">
-              {STAGES[state.stage].intro}
-              <br />
               {state.saved
                 ? 'Tu evolución continúa.'
-                : 'Todo un universo espera fuera de la gota.'}
+                : 'De una célula a todo lo que existe.'}
             </p>
             {movementChoice}
             <button
@@ -318,9 +310,6 @@ export default function Home() {
                   : 'Despertar'}
               <ArrowUpRight size={20} />
             </button>
-            <span className="short-note">
-              Del origen al universo · guardado automático
-            </span>
             {state.assetError && !state.assetsReady && (
               <button
                 className="text-button"
@@ -331,8 +320,10 @@ export default function Home() {
             )}
           </div>
         )}
-        {active && (
+        {state.birth > 0 && <div className="birth-reveal" aria-live="polite"><p>{state.birth > 1.4 ? 'Un latido.' : 'La vida despierta.'}</p></div>}
+        {active && state.birth === 0 && (
           <>
+            <div className="notice-region">
             <output
               className={
                 'hint micro-hint cristal-toast membrane-control ' +
@@ -341,11 +332,9 @@ export default function Home() {
             >
               {state.hint}
             </output>
+            {state.protected && !state.paused && !state.offer.length && <div className="protection-badge">MEMBRANA PROTEGIDA · ESCAPA</div>}
+            </div>
             <div className="bottom-controls" data-dash-side={leftHanded ? 'left' : 'right'}>
-              <div className="movement-guide">
-                <span className="guide-dot" />
-                <span>{tilt ? 'INCLINA PARA MOVERTE' : 'ARRASTRA PARA MOVERTE'}</span>
-              </div>
               <button
                 className={'dash-button ' + (state.dash > 0 ? 'cooldown' : '')}
                 disabled={
@@ -507,16 +496,6 @@ export default function Home() {
             <span className="short-note">FIN · VORO</span>
           </div>
         )}
-        {state.protected && active && !state.paused && !state.offer.length && (
-          <div className="protection-badge">MEMBRANA PROTEGIDA · ESCAPA</div>
-        )}
-        <div className="scale-marker">
-          <span>
-            {String(state.stage + 1).padStart(2, '0')} /{' '}
-            {String(STAGES.length).padStart(2, '0')} ·{' '}
-            {STAGES[state.stage].short.toUpperCase()}
-          </span>
-        </div>
         {state.performance && (
           <output className="performance-readout">
             {state.performance.recording ? state.performance.remaining ? `Midiendo · ${state.performance.remaining} s` : 'Rendimiento' : 'Medición terminada'}

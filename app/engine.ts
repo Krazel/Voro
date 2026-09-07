@@ -85,6 +85,7 @@ export type Snapshot = {
   adaptationStart: number;
   adaptationTarget: number;
   saved: boolean;
+  birth: number;
   storageAvailable: boolean;
   transition: number;
   deaths: number;
@@ -173,6 +174,7 @@ export class VoroEngine {
   gamepadButtons = [false, false];
   padInput = { x: 0, y: 0 };
   started = false;
+  birth = 0;
   paused = false;
   sound = true;
   time = 0;
@@ -649,6 +651,7 @@ export class VoroEngine {
       biomass <= 0
     )
       return false;
+    this.birth = 0;
     if (!this.testBackup) {
       this.save();
       this.testBackup = {
@@ -781,10 +784,11 @@ export class VoroEngine {
   ) {
     if (name === 'start') {
       if (!this.assetsReady) return;
+      if (!this.started && !this.saved) this.beginBirth();
       this.started = true;
       this.paused = false;
       this.initAudio();
-      this.toast(stageOf(this.progress).intro, 6);
+      if (!this.birth) this.toast(stageOf(this.progress).intro, 6);
       this.canvas.focus({ preventScroll: true });
     }
     if (name === 'restart' || (name === 'retry' && this.life.dead)) {
@@ -818,6 +822,7 @@ export class VoroEngine {
       this.progress.finalReady = false;
       this.ending = 0;
       this.transitionFrame = null;
+      if (name === 'restart') this.beginBirth();
       this.toast(
         name === 'restart' ? 'Una nueva vida.' : 'Conservas tus adaptaciones.',
         4,
@@ -846,6 +851,7 @@ export class VoroEngine {
       !this.paused &&
       !this.settingsOpen &&
       !this.progress.offer.length &&
+      this.birth === 0 &&
       this.transition === 0 &&
       impulse(this.life)
     ) {
@@ -862,6 +868,11 @@ export class VoroEngine {
   toast(text: string, seconds = 3) {
     this.hint = text;
     this.hintUntil = this.time + seconds;
+  }
+  beginBirth() {
+    this.birth = this.reduced ? .8 : 2.8;
+    this.keys.clear(); this.pointer = null;
+    this.hint = ''; this.hintUntil = 0;
   }
   publish() {
     this.syncStageAssets();
@@ -888,6 +899,7 @@ export class VoroEngine {
         sheetErrors: this.animationSheets.stats().errors,
       } : undefined,
       testMode: this.testMode,
+      birth: this.birth,
       stage: this.progress.stage,
       stageName: stageOf(this.progress).name,
       scale: formatSize(this.progress.stage, this.life.biomass),
@@ -1038,6 +1050,16 @@ export class VoroEngine {
     this.raf = requestAnimationFrame(this.frame);
   };
   update(dt: number) {
+    if (this.birth > 0) {
+      this.birth = Math.max(0, this.birth - dt);
+      this.camera.x += (this.life.x - this.camera.x) * (1 - Math.exp(-dt * 3));
+      this.camera.y += (this.life.y - this.camera.y) * (1 - Math.exp(-dt * 3));
+      this.animateMembrane(dt);
+      // No movement, consumption, damage or progression during the reveal.
+      if (!this.birth) { this.keys.clear(); this.pointer = null; this.hint = ''; }
+      if (!this.birth || this.time - this.lastEmit > .12) { this.lastEmit = this.time; this.publish(); }
+      return;
+    }
     if (this.transition > 0) {
       this.transition = Math.max(0, this.transition - dt);
       if (this.transition < 3.6 && !this.transitionAdvanced) {
@@ -1749,7 +1771,15 @@ export class VoroEngine {
           : 'rgba(140,220,230,' + a * 0.35 + ')',
       );
     }
+    c.save();
+    if (!this.reduced && (this.birth > 0 || (!this.started && !this.saved))) {
+      const t = this.started ? Math.max(0, Math.min(1, (2.8 - this.birth) / 2.2)) : 0;
+      const size = .06 + .94 * (1 - (1 - t) ** 3) + Math.sin(t * Math.PI * 4) * .06 * Math.sin(t * Math.PI);
+      c.translate(p.x, p.y); c.scale(size, size); c.translate(-p.x, -p.y);
+      c.globalAlpha = .25 + .75 * t;
+    }
     this.measured('protagonist', () => this.drawCell());
+    c.restore();
     for (const f of this.floating) {
       c.save();
       c.globalAlpha = Math.min(1, f.life * 1.8);
@@ -1774,6 +1804,7 @@ export class VoroEngine {
       !this.progress.offer.length &&
       !this.progress.completed &&
       !this.transition
+      && !this.birth
     )
       this.drawFoodGuide(ox, oy);
     this.drawEvolution();

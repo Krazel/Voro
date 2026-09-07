@@ -27,6 +27,8 @@ function fresh(stage = 0, seed = 41) {
   g.world = new JourneyWorld(seed, [], stage);
   g.seed();
   g.action('start');
+  // Gameplay fixtures begin once the non-interactive birth has finished.
+  while (g.birth > 0) { const dt = Math.min(g.birth, 1 / 60); g.time += dt; g.update(dt); }
   return f;
 }
 function step(g, n = 1, render = false) {
