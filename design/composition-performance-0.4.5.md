@@ -60,4 +60,14 @@ Pendiente nueva captura física para medir la mejora real y revisar interfaz tá
 
 ## Distribución
 
-Registrar aquí fuente compilada, web, CI, Apple y revisión D1 al verificar entrega.
+Fuente compilada: `99807f7e2eec26410fde97dea79affb5e8bd0cf0`.
+Web privada v32, despliegue `appgdep_6a9edb4976908191b49cbe97e1d676f6`,
+succeeded 2026-09-07T15:42:22.996686Z.
+CI https://github.com/Krazel/Voro/actions/runs/34139416631, success.
+IPA firmada: 113.461.942 bytes; SHA256
+`85d584304a8b7f55fdbb979a6766d4b46e2b1913d3cac5fa4d23aa2e12473436`.
+Checksum, versión/build y fuente cotejados; diagnóstico v3 presente en la IPA.
+Apple build `17227a87-a473-417c-b35a-6f89389370f2`, VALID e IN_BETA_TESTING,
+grupo VORO Interno con un tester; notas y asignación verificadas por API
+2026-09-07T15:46:34.241Z. Sin envío a beta externa ni publicación App Store.
+Biblioteca D1: misma ficha PR-009, revisión 21 guardada y releída, tracking conservado.
