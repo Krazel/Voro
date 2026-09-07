@@ -5,6 +5,7 @@ import {
   constrainToShore,
 } from './population.mjs';
 import { MicroWorld, makeEntity, TILE } from './micro-world.mjs';
+import { animalTarget } from './animal-steering.mjs';
 import { random, clamp } from './simulation.mjs';
 import {
   STAGE_SPECIES,
@@ -62,6 +63,8 @@ export class JourneyWorld extends MicroWorld {
       ),
       medium = list.filter((s) => !small.includes(s) && !isDanger(s)),
       danger = list.filter(isDanger);
+    const hunters = danger.filter(s => s.kind === 'hunter');
+    const hazards = danger.filter(s => s.kind !== 'hunter');
     const rng = random(
         (this.seed ^
           Math.imul(cx | 0, 73856093) ^
@@ -82,8 +85,10 @@ export class JourneyWorld extends MicroWorld {
     const [starters, forage, threats] = plan.slots;
     const recovery = [...small].sort((a, b) => a.r - b.r)[0];
     for (let i = 0; i < starters + forage + threats; i++) {
-      const pool =
+      let pool =
         i < starters ? small : i < starters + forage ? medium : danger;
+      if (stageId === 'water' && i >= starters + forage)
+        pool = i === starters + forage ? hunters : hazards;
       const s = i === 0 ? recovery : pick(pool.length ? pool : list);
       const seed = rng() * 6.28,
         id = `${cx}:${cy}:${i}`;
@@ -168,14 +173,7 @@ export class JourneyWorld extends MicroWorld {
         d = Math.hypot(dx, dy);
       if (d > 1100) continue;
       const edible = p.biomass >= e.requiredMass;
-      let tx = e.homeX + Math.sin(time * 0.21 + e.seed) * 80,
-        ty = e.homeY + Math.cos(time * 0.17 + e.seed) * 80;
-      if (['hunter', 'flee', 'ranged'].includes(s.kind) && d < 340) {
-        let sign = edible || e.escape > 0 || s.kind === 'flee' ? -1 : 1;
-        if (s.kind === 'ranged') sign = d < 230 ? -1 : d > 300 ? 1 : 0;
-        tx = e.x + dx * sign;
-        ty = e.y + dy * sign;
-      }
+      const { x: tx, y: ty } = animalTarget(e, s, p, time, 340, 280, 80);
       let speed = e.wound >= 1 ? 0 : s.speed;
       const step = Math.sin(time * (s.motion === 'insect' ? 16 : 8) + e.seed);
       if (s.motion === 'hop') speed *= 0.2 + 1.8 * Math.max(0, step);
@@ -186,18 +184,19 @@ export class JourneyWorld extends MicroWorld {
       )
         speed *= 1 - stats.trailSlow;
       const len = Math.max(1, Math.hypot(tx - e.x, ty - e.y));
-      e.x += ((tx - e.x) / len) * speed * dt;
-      e.y += ((ty - e.y) / len) * speed * dt;
+      const oldX = e.x, oldY = e.y, distance = Math.min(len, speed * dt);
+      e.x += ((tx - e.x) / len) * distance;
+      e.y += ((ty - e.y) / len) * distance;
       e.x = clamp(e.x, e.homeX - 280, e.homeX + 280);
       e.y = clamp(e.y, e.homeY - 280, e.homeY + 280);
-      if (speed > 4) {
-        const angle = Math.atan2(ty - e.y, tx - e.x);
+      if (STAGES[this.stage].id === 'land') constrainToShore(e, s);
+      if (speed > 4 && Math.hypot(e.x - oldX, e.y - oldY) > 0.001) {
+        const angle = Math.atan2(e.y - oldY, e.x - oldX);
         e.heading +=
           Math.atan2(Math.sin(angle - e.heading), Math.cos(angle - e.heading)) *
           Math.min(1, dt * 3);
       } else if (['spin', 'galaxy', 'cosmic'].includes(s.motion))
         e.heading += dt * (s.motion === 'spin' ? 0.06 : 0.025);
-      if (STAGES[this.stage].id === 'land') constrainToShore(e, s);
       if (s.kind === 'gravity' && !edible && d < 320 && d > 1) {
         p.x -= (dx / d) * (1 - d / 320) * 28 * dt;
         p.y -= (dy / d) * (1 - d / 320) * 28 * dt;

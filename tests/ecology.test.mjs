@@ -14,6 +14,16 @@ import {
 } from '../app/journey-transitions.mjs';
 import { newJourney, journeyLife } from '../app/journey-progress.mjs';
 
+test('Marine hunters have a dedicated encounter slot without increasing total density', () => {
+  const report = populationReport(3);
+  const hunters = report.rows.filter(row => SPECIES_BY_ID[row.id].kind === 'hunter');
+  const share = hunters.reduce((sum,row) => sum + row.per100, 0);
+  assert.ok(share >= 5 && share <= 9);
+  assert.ok(report.average <= 12);
+  assert.equal(POPULATION_PLANS.water.slots.reduce((sum,n)=>sum+n,0),12);
+  assert.ok(report.rows.find(row=>row.id==='water-13').per100 < 1);
+});
+
 test('Shore creatures stay on dry sand, even while fleeing; coast coordinates mirror at negative tiles', () => {
   for (const x of [-4800, -1700, -10, 0, 250, 900, 1500]) {
     assert.ok(shoreFraction(x) >= 0 && shoreFraction(x) <= 1);

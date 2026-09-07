@@ -14,8 +14,8 @@ export const POPULATION_PLANS = {
     note: 'Arena, conchas y vegetación. Los animales terrestres permanecen fuera del agua.',
   },
   water: {
-    slots: [5, 6, 1],
-    note: 'Peces pequeños y fondo marino abierto. Nadadores y grandes depredadores son excepcionales.',
+    slots: [5, 5, 2],
+    note: 'Una plaza de cazador y otra de peligro por zona, con la misma densidad total. Nadadores y tiburones martillo siguen siendo escasos.',
   },
   city: {
     slots: [5, 7, 2],
@@ -46,7 +46,7 @@ const WEIGHTS = {
   pond: [12, 10, 8, 3, 1, 1, 2, 0.4],
   land: [12, 10, 7, 6, 3, 2, 1, 0.3, 0.7, 0.4, 0.5, 0.65],
   water: [
-    14, 16, 15, 7, 5, 1.5, 4, 5, 1, 0.15, 0.25, 0.12, 0.25, 0.12, 0.35, 1,
+    14, 16, 15, 7, 5, 1.5, 4, 5, 1, 0.15, 1.1, 0.7, 0.8, 0.18, 0.35, 1,
   ],
   city: [1, 0.7, 0.25, 0.25, 1, 0.8, 0.5, 2, 1, 0.6, 5, 2],
   orbit: [10, 12, 2, 1, 0.15, 2, 1, 0.3],

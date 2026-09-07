@@ -1,4 +1,3 @@
-import { drawCoastalGround } from './coastal-ground.mjs';
 import { WorldGround } from './world-ground.mjs';
 import { StageAssets } from './stage-assets.mjs';
 import { FrameMonitor } from './frame-monitor.mjs';
@@ -255,7 +254,7 @@ export class VoroEngine {
   }
   performanceReport() {
     if (this.lastPerformanceReport) return this.lastPerformanceReport;
-    return this.frameMonitor.export({ version: '0.4.5', build: 1,
+    return this.frameMonitor.export({ version: '0.4.6', build: 1,
       date: new Date().toISOString(), userAgent: typeof navigator === 'undefined' ? '' : navigator.userAgent,
       viewport: { width: this.canvas.width, height: this.canvas.height, pixelRatio: this.pixelRatio },
       animationSheets: this.animationSheets.stats(), animationCache: animationCacheStats(),
@@ -350,6 +349,8 @@ export class VoroEngine {
     this.observer = new ResizeObserver(() => this.resize());
     this.observer.observe(canvas);
     const opt = { signal: this.lifecycle.signal };
+    canvas.parentElement?.addEventListener('contextmenu', (event) => event.preventDefault(), opt);
+    canvas.parentElement?.addEventListener('dragstart', (event) => event.preventDefault(), opt);
     canvas.addEventListener(
       'pointerdown',
       (e) => {
@@ -1569,22 +1570,10 @@ export class VoroEngine {
       )
         return;
     }
-    const custom =
-        stage.id === 'land'
-          ? this.shoreBackground
-          : ['water', 'pond'].includes(stage.id)
-            ? this.seaBackground
-            : null,
-      im = index === 0 ? this.background : this.environments;
-    if (custom?.complete && custom.naturalWidth) {
-      drawCoastalGround(c, custom, this.camera, this.zoom, this.height);
-      if (stage.id === 'pond') {
-        c.fillStyle = 'rgba(78,121,74,.16)';
-        c.fillRect(0, 0, 480, this.height);
-      }
-      return;
-    }
-    if (im.complete && im.naturalWidth) {
+    // A non-microscopic stage never falls back to an unrelated old atlas.
+    if (stage.id !== 'micro') return;
+    const im = this.groundImages.micro;
+    if (im?.complete && im.naturalWidth) {
       const cell = stage.background,
         sw = index === 0 ? im.width : im.width / 4,
         sh = index === 0 ? im.height : im.height / 2;

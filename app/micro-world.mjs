@@ -1,4 +1,5 @@
 import { MIN_SIZE_FACTOR, MAX_SIZE_FACTOR } from './entity-sizes.mjs';
+import { animalTarget } from './animal-steering.mjs';
 import { random, clamp } from './simulation.mjs';
 export const TILE = 600;
 export const SPECIES = [
@@ -270,14 +271,7 @@ export class MicroWorld {
       e.flash = Math.max(0, e.flash - dt * 2);
       const d = Math.hypot(player.x - e.x, player.y - e.y);
       if (d > 1000) continue;
-      const edible = player.biomass >= e.requiredMass;
-      let tx = e.homeX + Math.sin(time * 0.21 + e.seed) * 65,
-        ty = e.homeY + Math.cos(time * 0.17 + e.seed) * 65;
-      if ((s.kind === 'hunter' || s.kind === 'flee') && d < 240) {
-        const direction = edible || e.escape > 0 ? -1 : 1;
-        tx = e.x + (player.x - e.x) * direction;
-        ty = e.y + (player.y - e.y) * direction;
-      }
+      const { x: tx, y: ty } = animalTarget(e, s, player, time, 240, 260, 65);
       const len = Math.max(1, Math.hypot(tx - e.x, ty - e.y));
       let speed = e.wound >= 1 ? 0 : s.speed;
       if (
@@ -285,15 +279,16 @@ export class MicroWorld {
         trail.some((q) => Math.hypot(q.x - e.x, q.y - e.y) < q.r)
       )
         speed *= 1 - stats.trailSlow;
-      e.x += ((tx - e.x) / len) * speed * dt;
-      e.y += ((ty - e.y) / len) * speed * dt;
+      const oldX = e.x, oldY = e.y, step = Math.min(len, speed * dt);
+      e.x += ((tx - e.x) / len) * step;
+      e.y += ((ty - e.y) / len) * step;
       e.x = clamp(e.x, e.homeX - 260, e.homeX + 260);
       e.y = clamp(e.y, e.homeY - 260, e.homeY + 260);
-      if (speed > 4)
+      if (speed > 4 && Math.hypot(e.x - oldX, e.y - oldY) > 0.001)
         e.heading +=
           Math.atan2(
-            Math.sin(Math.atan2(ty - e.y, tx - e.x) - e.heading),
-            Math.cos(Math.atan2(ty - e.y, tx - e.x) - e.heading),
+            Math.sin(Math.atan2(e.y - oldY, e.x - oldX) - e.heading),
+            Math.cos(Math.atan2(e.y - oldY, e.x - oldX) - e.heading),
           ) * Math.min(1, dt * 2.5);
     }
   }

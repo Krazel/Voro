@@ -75,12 +75,26 @@ button {
   color: inherit;
 }
 .voro-shell {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
   height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
   background: radial-gradient(ellipse at 50% 30%, #0a202a 0, #030b12 65%);
   position: relative;
+}
+.voro-shell *, .cristal-dialog {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+.voro-shell img { -webkit-user-drag: none; }
+.cristal-dialog :is(textarea, input:not([type='range'])) {
+  -webkit-user-select: text;
+  user-select: text;
+  -webkit-touch-callout: default;
 }
 .viewport {
   height: 100%;

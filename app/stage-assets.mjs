@@ -1,5 +1,5 @@
 import { STAGES, STAGE_SPECIES, ATLAS_URLS } from './journey-data.mjs';
-import { GROUND_PROFILES } from './world-ground.mjs';
+import { BACKGROUND_ASSETS } from './background-assets.mjs';
 
 export function stageResources(stage) {
   return RESOURCE_LISTS[stage];
@@ -8,9 +8,7 @@ const RESOURCE_LISTS = STAGES.map((_, stage) => {
   const resources = [...new Set(STAGE_SPECIES[stage].map(s => s.imageAtlas || s.atlas))]
     .map(key => ({ key, url: ATLAS_URLS[key], kind: 'atlas' }));
   const id = STAGES[stage].id;
-  resources.push({ key: id, kind: 'ground', url: id === 'micro'
-    ? './abyssal-background.png'
-    : `./backgrounds/${GROUND_PROFILES[id].file}-variants.webp` });
+  resources.push({ key: id, kind: 'ground', url: BACKGROUND_ASSETS[id] });
   return resources;
 });
 
