@@ -2,6 +2,7 @@ import { drawCoastalGround } from './coastal-ground.mjs';
 import { WorldGround } from './world-ground.mjs';
 import { StageAssets } from './stage-assets.mjs';
 import { FrameMonitor } from './frame-monitor.mjs';
+import { AnimationSheets } from './animation-sheets.mjs';
 import { transitionScene } from './journey-transitions.mjs';
 // Canvas2D rendering and input. The simulation stays independent of frame rendering.
 import {
@@ -30,6 +31,7 @@ import {
   endAnimationFrame,
   clearAnimationCache,
   animationCacheStats,
+  retainAnimationSpecies,
 } from './inhabitant-animation.mjs';
 import { gameplayZoom, followGameplayZoom } from './camera.mjs';
 import {
@@ -62,7 +64,8 @@ import {
 } from './journey-progress.mjs';
 
 export type Snapshot = {
-  performance?: { fps: number; cpu: number; peak: number; loading: number; pending: number; cacheMB: number };
+  performance?: ReturnType<FrameMonitor['summary']> & { loading: number; pending: number; cacheMB: number;
+    recording: boolean; remaining: number; sheetErrors: number };
   testMode: boolean;
   stage: number;
   stageName: string;
@@ -215,12 +218,34 @@ export class VoroEngine {
   assetStages = '';
   diagnosticsEnabled = false;
   frameMonitor = new FrameMonitor();
+  animationSheets = new AnimationSheets({ changed: () => { this.renderDirty = true; },
+    event: (name, ms, detail) => { if (this.diagnosticsEnabled) this.frameMonitor.event(name, ms, detail); } });
+  diagnosticCompleted = false;
+  benchmarkSeconds = 0;
+  saveJob: { id: number; idle: boolean } | null = null;
   measuredLastFrame = false;
   setDiagnostics(enabled: boolean) {
     this.diagnosticsEnabled = enabled;
-    this.frameMonitor.reset();
+    this.diagnosticCompleted = false;
+    this.benchmarkSeconds = 0;
+    if (enabled) this.frameMonitor.reset();
     this.measuredLastFrame = false;
     this.publish();
+  }
+  startBenchmark() {
+    this.setDiagnostics(true);
+    this.benchmarkSeconds = 30;
+    this.publish();
+  }
+  performanceReport() {
+    return this.frameMonitor.export({ version: '0.4.3', build: 1,
+      date: new Date().toISOString(), userAgent: typeof navigator === 'undefined' ? '' : navigator.userAgent,
+      viewport: { width: this.canvas.width, height: this.canvas.height, pixelRatio: this.pixelRatio },
+      animationSheets: this.animationSheets.stats(), animationCache: animationCacheStats(),
+      backgroundRebuilds: this.worldGround.redraws });
+  }
+  measured<T>(name: string, run: () => T): T {
+    return this.diagnosticsEnabled ? this.frameMonitor.measure(name, run) : run();
   }
   syncStageAssets() {
     const stages = this.transition > 0
@@ -229,7 +254,9 @@ export class VoroEngine {
     const key = stages.join(':');
     if (key === this.assetStages) return;
     this.assetStages = key;
-    clearAnimationCache();
+    const species = stages.flatMap<{ id: string }>(stage => STAGE_SPECIES[stage]);
+    retainAnimationSpecies(species);
+    this.animationSheets.setSpecies(species);
     this.assets.setStages(stages);
     if (this.atlasImages.micro) this.spriteAtlas = this.atlasImages.micro;
     if (this.groundImages.micro) this.background = this.groundImages.micro;
@@ -534,7 +561,9 @@ export class VoroEngine {
     }
   }
   save() {
+    this.cancelSaveJob();
     if (this.testMode || (!this.started && !this.saved)) return;
+    const startedAt = this.diagnosticsEnabled ? performance.now() : 0;
     try {
       localStorage.setItem(
         JOURNEY_SAVE,
@@ -550,7 +579,23 @@ export class VoroEngine {
       this.storageAvailable = true;
     } catch {
       this.storageAvailable = false;
+    } finally {
+      if (this.diagnosticsEnabled) this.frameMonitor.event('save', performance.now() - startedAt,
+        { ok: this.storageAvailable, stage: this.progress.stage });
     }
+  }
+  cancelSaveJob() {
+    if (!this.saveJob) return;
+    if (this.saveJob.idle) window.cancelIdleCallback(this.saveJob.id);
+    else clearTimeout(this.saveJob.id);
+    this.saveJob = null;
+  }
+  scheduleSave() {
+    if (this.saveJob || this.testMode) return;
+    const flush = () => { this.saveJob = null; if (!this.destroyed) this.save(); };
+    this.saveJob = typeof window.requestIdleCallback === 'function'
+      ? { id: window.requestIdleCallback(flush, { timeout: 1000 }), idle: true }
+      : { id: setTimeout(flush, 0) as unknown as number, idle: false };
   }
   startTest(
     stage: number,
@@ -783,11 +828,14 @@ export class VoroEngine {
     this.syncStageAssets();
     this.renderDirty = true;
     this.emit({
-      performance: this.diagnosticsEnabled ? {
-        ...this.frameMonitor.report(),
-        loading: this.assets.stats().loading,
+      performance: this.diagnosticsEnabled || this.diagnosticCompleted ? {
+        ...this.frameMonitor.summary(this.diagnosticCompleted),
+        loading: this.assets.stats().loading + this.animationSheets.stats().pending,
         pending: animationCacheStats().pending + Number(animationCacheStats().active),
-        cacheMB: Math.round(animationCacheStats().bytes / 1048576),
+        cacheMB: Math.round((animationCacheStats().bytes + this.animationSheets.stats().bytes) / 1048576),
+        recording: this.diagnosticsEnabled,
+        remaining: this.benchmarkSeconds ? Math.max(0, Math.ceil(this.benchmarkSeconds - this.frameMonitor.elapsed / 1000)) : 0,
+        sheetErrors: this.animationSheets.stats().errors,
       } : undefined,
       testMode: this.testMode,
       stage: this.progress.stage,
@@ -871,6 +919,7 @@ export class VoroEngine {
     const frameStart = this.diagnosticsEnabled ? performance.now() : 0;
     const interval = this.last ? stamp - this.last : 0;
     let measured = false;
+    if (this.diagnosticsEnabled) this.frameMonitor.beginFrame();
     this.syncStageAssets();
     const dt = this.last ? Math.min((stamp - this.last) / 1000, 0.035) : 0.016;
     this.last = stamp;
@@ -901,17 +950,27 @@ export class VoroEngine {
         (!this.started || this.assetsReady)
       ) {
         this.time += dt;
-        this.update(dt);
+        this.measured('simulation', () => this.update(dt));
         this.renderDirty = true;
         measured = this.started && this.diagnosticsEnabled;
       }
       if (this.renderDirty) {
-        this.render();
+        this.measured('render', () => this.render());
         this.renderDirty = false;
       }
     }
-    if (measured && this.measuredLastFrame)
-      this.frameMonitor.add(interval, performance.now() - frameStart);
+    if (measured && this.measuredLastFrame) {
+      this.frameMonitor.add(interval, performance.now() - frameStart, {
+        stage: this.progress.stage, radius: +this.life.radius.toFixed(1), zoom: +this.zoom.toFixed(3),
+        entities: this.food.length, transition: this.transition > 0,
+        loading: this.assets.stats().loading + this.animationSheets.stats().pending,
+        queuedPoses: animationCacheStats().pending, groundRebuilds: this.worldGround.redraws,
+      });
+      if (this.benchmarkSeconds && this.frameMonitor.elapsed >= this.benchmarkSeconds * 1000) {
+        this.diagnosticsEnabled = false; this.diagnosticCompleted = true;
+        this.publish();
+      }
+    }
     this.measuredLastFrame = measured;
     this.raf = requestAnimationFrame(this.frame);
   };
@@ -1154,7 +1213,7 @@ export class VoroEngine {
     this.saveClock += dt;
     if (this.saveClock > 5) {
       this.saveClock = 0;
-      this.save();
+      this.scheduleSave();
     }
     if (this.hint && this.time > this.hintUntil) this.hint = '';
     if (this.time - this.lastEmit > 0.12) {
@@ -1451,6 +1510,9 @@ export class VoroEngine {
     this.circle(x, y, r, g as unknown as string);
   }
   drawBackground(index: number) {
+    return this.measured('background', () => this.paintBackground(index));
+  }
+  paintBackground(index: number) {
     const c = this.ctx;
     const stage = STAGES[index];
     if (stage.id !== 'micro') {
@@ -1508,7 +1570,10 @@ export class VoroEngine {
     }
   }
   render() {
-    beginAnimationFrame();
+    this.measured('animationPreparation', () => {
+      this.animationSheets.beginFrame();
+      beginAnimationFrame();
+    });
     try {
       this.renderScene();
     } finally {
@@ -1560,6 +1625,7 @@ export class VoroEngine {
           m.r,
           '#9bd3dc35',
         );
+    const inhabitantsStarted = this.diagnosticsEnabled ? performance.now() : 0;
     for (const f of this.food) {
       if (f.eaten || !visible(f.x, f.y, (f.r || 8) * 1.3)) continue;
       const edible = p.biomass >= (f.requiredMass || 0),
@@ -1582,6 +1648,7 @@ export class VoroEngine {
           this.reduced ? 0 : this.time,
           (f.escape || 0) > 0 || (f.attack || 0) > 0 ? 1.5 : 1,
           f.flash || 0,
+          this.animationSheets,
         );
       c.restore();
       const spec = SPECIES_BY_ID[f.kind || 'nutrient'];
@@ -1602,6 +1669,8 @@ export class VoroEngine {
         c.fillText('DEMASIADO GRANDE', f.x, f.y + r + 14 / this.zoom);
       }
     }
+    if (this.diagnosticsEnabled)
+      this.frameMonitor.frameParts.inhabitants = performance.now() - inhabitantsStarted;
     for (const b of this.world.projectiles) {
       if (!visible(b.x, b.y, 10)) continue;
       c.strokeStyle = b.plasma ? '#b9e6ff' : '#ffda9c';
@@ -1623,7 +1692,7 @@ export class VoroEngine {
           : 'rgba(140,220,230,' + a * 0.35 + ')',
       );
     }
-    this.drawCell();
+    this.measured('protagonist', () => this.drawCell());
     for (const f of this.floating) {
       c.save();
       c.globalAlpha = Math.min(1, f.life * 1.8);
@@ -2012,6 +2081,9 @@ export class VoroEngine {
             f.r * (1 - broken * 0.7),
             f.rotation,
             this.time,
+            1,
+            0,
+            this.animationSheets,
           );
       }
       c.restore();
@@ -2079,6 +2151,7 @@ export class VoroEngine {
     this.save();
     this.destroyed = true;
     this.assets.destroy();
+    this.animationSheets.destroy();
     clearAnimationCache();
     cancelAnimationFrame(this.raf);
     this.lifecycle.abort();

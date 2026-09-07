@@ -517,25 +517,12 @@ const rigidFamilies = new Set([
   'elliptical',
   'lenticular',
 ]);
-// Gameplay can advance the same painter in small batches. The gallery drains
-// it immediately, so both paths keep precisely the same rig and triangles.
-export function drawPose(...args) {
-  for (const _ of paintPose(...args)) { /* drain */ }
+export function simpleAnimation(profile) {
+  return !profile.surface && (profile.rigid || rigidFamilies.has(profile.family));
 }
-function* paintPose(
-  c,
-  image,
-  s,
-  r,
-  phase,
-  { activity = 1, detail = false } = {},
-) {
-  const profile = ANIMATIONS[s.id],
-    f = profile.family,
-    crop = animationCrop(s, image),
-    w = r * 2,
-    h = (w * crop[3]) / crop[2];
-  c.save();
+// Cheap rigid motion remains continuous between exported deformation poses.
+export function applyPoseTransform(c, profile, r, phase, activity) {
+  const f = profile.family;
   if (f === 'puffer') {
     const inflation =
       1 + 0.009 * Math.sin(phase) + Math.max(0, activity - 1) * 0.12;
@@ -571,6 +558,27 @@ function* paintPose(
     c.rotate(Math.sin(phase) * 0.012 * activity);
     c.translate(0, Math.sin(phase * 4) * r * 0.006 * activity);
   }
+}
+// Gameplay can advance the same painter in small batches. The gallery drains
+// it immediately, so both paths keep precisely the same rig and triangles.
+export function drawPose(...args) {
+  for (const _ of paintPose(...args)) { /* drain */ }
+}
+function* paintPose(
+  c,
+  image,
+  s,
+  r,
+  phase,
+  { activity = 1, detail = false, transform = true } = {},
+) {
+  const profile = ANIMATIONS[s.id],
+    f = profile.family,
+    crop = animationCrop(s, image),
+    w = r * 2,
+    h = (w * crop[3]) / crop[2];
+  c.save();
+  if (transform) applyPoseTransform(c, profile, r, phase, activity);
   if (f === 'helicopter') {
     // Rig cutouts use the original painted rotor blades. The fuselage is clipped
     // as its own rigid layer, so a stationary rotor is not left underneath.
@@ -795,6 +803,10 @@ let approximations = 0;
 let activeBake = null;
 let bakeSteps = 0;
 let evictions = 0;
+let frameSerial = 0;
+let dropped = 0;
+let activeJob = null;
+const visibleAssets = new Map();
 const CACHE_LIMIT = 24 * 1024 * 1024;
 const QUEUE_LIMIT = 64;
 let bytes = 0;
@@ -806,6 +818,13 @@ const POSE_COUNT = 24;
 // the visible draw loop and amortize it over frames, including cold encounters.
 export function beginAnimationFrame() {
   paced = true;
+  frameSerial++;
+  for (const [key, job] of pending) if (frameSerial - job.seen > 3) {
+    pending.delete(key); dropped++;
+  }
+  if (activeJob && frameSerial - (visibleAssets.get(activeJob.asset) ?? -10) > 3) {
+    activeBake = activeJob = null; dropped++;
+  }
   generatedThisFrame = 0;
   const start = performance.now();
   while (
@@ -817,11 +836,13 @@ export function beginAnimationFrame() {
       const [key, job] = pending.entries().next().value;
       pending.delete(key);
       if (frames.has(key)) continue;
+      activeJob = job;
       activeBake = bakePoseSteps(job);
     }
     bakeSteps++;
     if (activeBake.next().done) {
       activeBake = null;
+      activeJob = null;
       generatedThisFrame++;
     }
   }
@@ -916,6 +937,7 @@ export function animationCacheStats() {
     bakeSteps,
     evictions,
     active: !!activeBake,
+    dropped,
   };
 }
 export function clearAnimationCache() {
@@ -925,11 +947,25 @@ export function clearAnimationCache() {
   latestByAsset.clear();
   pending.clear();
   activeBake = null;
+  activeJob = null;
+  frameSerial = dropped = 0;
+  visibleAssets.clear();
   bakeSteps = evictions = 0;
   paced = false;
   generatedThisFrame = approximations = 0;
   bytes = 0;
   hits = misses = direct = 0;
+}
+export function retainAnimationSpecies(species) {
+  const keep = new Set(species.map(s => ANIMATIONS[s.id]?.assetKey));
+  for (const [key, job] of pending) if (!keep.has(job.asset)) pending.delete(key);
+  if (activeJob && !keep.has(activeJob.asset)) activeBake = activeJob = null;
+  for (const [key, e] of frames) if (!keep.has(e.asset)) {
+    frames.delete(key); bytes -= e.bytes; e.canvas.width = e.canvas.height = 1;
+    const group = poseGroups.get(e.group);
+    if (group) { group[e.pose] = undefined; if (!group.some(Boolean)) poseGroups.delete(e.group); }
+    if (latestByAsset.get(e.asset) === e) latestByAsset.delete(e.asset);
+  }
 }
 export function drawInhabitant(
   c,
@@ -938,15 +974,28 @@ export function drawInhabitant(
   r,
   seed,
   time,
-  { activity = 1, detail = false, cache = true, hurt = 0 } = {},
+  { activity = 1, detail = false, cache = true, hurt = 0, sheets = null } = {},
 ) {
   if (!image?.complete || !image.naturalWidth || r <= 0) return;
   const profile = ANIMATIONS[s.id];
   if (!profile) return;
+  visibleAssets.set(profile.assetKey, frameSerial);
   const phase =
     ((((time / profile.period + (seed || 0) / TAU) % 1) + 1) % 1) * TAU;
   c.save();
   if (hurt > 0) c.globalAlpha *= 0.75 + 0.25 * Math.cos(hurt * 12);
+  if (sheets && !detail && cache) {
+    if (simpleAnimation(profile)) {
+      drawPose(c, image, s, r, phase, { activity }); c.restore(); return;
+    }
+    const result = sheets.draw(c, s, r, phase, activity);
+    if (result === 'ready') { c.restore(); return; }
+    if (result === 'pending') {
+      const crop = animationCrop(s, image), h = r * 2 * crop[3] / crop[2];
+      c.drawImage(image, ...crop, -r, -h / 2, r * 2, h);
+      c.restore(); return;
+    }
+  }
   const transform =
     typeof c.getTransform === 'function' ? c.getTransform() : null;
   const screenR = transform ? Math.hypot(transform.a, transform.b) * r : r;
@@ -974,9 +1023,13 @@ export function drawInhabitant(
         energy,
         image,
         s,
+        seen: frameSerial,
       };
       if (paced) {
-        if (!pending.has(key) && pending.size < QUEUE_LIMIT)
+        const existing = pending.get(key);
+        if (existing) existing.seen = frameSerial;
+        else if (activeJob?.key === key) activeJob.seen = frameSerial;
+        else if (pending.size < QUEUE_LIMIT)
           pending.set(key, job);
         entry = nearestPose(group, pose, profile.assetKey);
         approximations++;

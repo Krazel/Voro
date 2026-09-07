@@ -31,6 +31,7 @@ test('A slow device can yield inside one pose instead of painting a whole animal
       const before = triangles;
       beginAnimationFrame();
       assert.ok(triangles - before <= 8, 'At most eight triangles per slow-device slice');
+      drawInhabitant(c, {complete: true, naturalWidth: 1536, naturalHeight: 1024}, SPECIES_BY_ID['water-2'], 40, 0, 0);
       endAnimationFrame();
     }
     assert.ok(loops > 2 && loops < 200);

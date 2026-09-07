@@ -39,6 +39,8 @@ export default function Home() {
   const [settings, setSettings] = useState(false),
     [confirmReset, setConfirmReset] = useState(false);
   const [testPanel, setTestPanel] = useState(false);
+  const [reportText, setReportText] = useState('');
+  const [reportCopied, setReportCopied] = useState(false);
   const [uiPreview, setUiPreview] = useState(false);
   const [testStage, setTestStage] = useState(0);
   const [testSize, setTestSize] = useState(0);
@@ -484,8 +486,10 @@ export default function Home() {
         </div>
         {state.performance && (
           <output className="performance-readout">
-            {state.performance.fps || '—'} FPS · CPU {state.performance.cpu} ms · pico {state.performance.peak} ms
-            <br />Cargas {state.performance.loading} · poses pendientes {state.performance.pending} · caché {state.performance.cacheMB} MB
+            {state.performance.recording ? state.performance.remaining ? `Midiendo · ${state.performance.remaining} s` : 'Rendimiento' : 'Medición terminada'}
+            <br />{state.performance.fps || '—'} FPS · P95 {state.performance.p95} ms · pico {state.performance.peak} ms
+            <br />CPU {state.performance.cpu} ms · lentos {state.performance.slowFrames}
+            <br />Cargas {state.performance.loading} · poses {state.performance.pending} · {state.performance.cacheMB} MB
           </output>
         )}
       </section>
@@ -545,6 +549,22 @@ export default function Home() {
             aria-pressed={!!state.performance}>
             Mostrar rendimiento<span>{state.performance ? 'Activado' : 'Desactivado'}</span>
           </button>
+          <button className="settings-row" onClick={() => {
+            setReportText(''); setReportCopied(false);
+            engine.current?.startBenchmark(); changeSettings(false);
+          }}>Medir una partida de 30 s<span>Iniciar</span></button>
+          <button className="settings-row" onClick={async () => {
+            const report = engine.current?.performanceReport();
+            if (!report) return;
+            const text = JSON.stringify(report, null, 2);
+            setReportText(text); setReportCopied(false);
+            try { await navigator.clipboard.writeText(text); setReportCopied(true); } catch { /* selectable fallback below */ }
+          }}>Copiar informe de rendimiento<span>{reportCopied ? 'Copiado' : 'Copiar'}</span></button>
+          <p className="save-note">La prueba cuenta solo mientras juegas. Incluye FPS, fotogramas lentos, cargas y tiempos por sistema. El informe se queda en tu dispositivo hasta que lo compartas.</p>
+          {reportText && <label className="performance-report-label">Informe de rendimiento
+            <textarea className="performance-report" readOnly rows={5} value={reportText}
+              onFocus={event => event.currentTarget.select()} />
+          </label>}
           <button
             className="settings-row"
             onClick={() => action('sound')}

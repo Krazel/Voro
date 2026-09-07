@@ -1,6 +1,8 @@
 # VORO · Abisal — del origen al universo
 
-Campaña completa jugable en navegador, con nueve escalas y un final. Mantiene el organismo azul translúcido con núcleo ámbar del inicio aprobado. Esta entrega no genera una IPA ni un paquete Steam.
+Juego 2D para web e iOS con Capacitor, con diez escalas y un final. Mantiene el organismo azul translúcido con núcleo ámbar del inicio aprobado. Steam sigue pendiente.
+
+Estado vigente y optimización 0.4.3: [rendimiento, pruebas y entrega](design/streaming-performance.md). La última entrega anterior verificada es [0.4.2 (1)](design/loading-audit.md). Los apartados siguientes conservan decisiones históricas de la campaña; los documentos de entrega y el código prevalecen para valores y distribución actuales.
 
 ## Recorrido y controles
 

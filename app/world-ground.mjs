@@ -36,6 +36,7 @@ export class WorldGround {
     this.cache = new Map();
     this.surface = null;
     this.view = null;
+    this.views = new Map();
     this.redraws = 0;
   }
   prepare(image, shore) {
@@ -93,6 +94,11 @@ export class WorldGround {
     if (!profile || !image?.complete || !image.naturalWidth) return false;
     const shore = stage === 'land',
       patches = this.prepare(image, shore);
+    // A crossfade needs both paintings alive. Alternating stages must never
+    // invalidate the other stage's surface on every frame.
+    const saved = this.views.get(stage);
+    this.surface = saved?.surface || null;
+    this.view = saved?.view || null;
     if (!this.surface) this.surface = this.createCanvas();
     const surface = this.surface;
     const pad = 128;
@@ -136,6 +142,14 @@ export class WorldGround {
       surface.height = Math.ceil(height) + pad * 2;
     }
     this.view = { image, stage, seed, height, zoom, px, py };
+    this.views.delete(stage);
+    this.views.set(stage, { surface, view: this.view });
+    while (this.views.size > 2) {
+      const oldest = this.views.keys().next().value;
+      const discarded = this.views.get(oldest);
+      discarded.surface.width = discarded.surface.height = 1;
+      this.views.delete(oldest);
+    }
     this.redraws++;
     const layer = surface.getContext('2d');
     layer.clearRect(0, 0, surface.width, surface.height);

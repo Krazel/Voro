@@ -1,0 +1,4422 @@
+{
+  "kind": "Native Skia pixel comparison against approved procedural rigs, compressed exports; not browser GPU testing",
+  "protagonistUnchanged": true,
+  "species": 105,
+  "comparisons": 630,
+  "uniqueFiles": 140,
+  "encodedBytes": 74386492,
+  "maxColorMae": 2.218,
+  "maxAlphaMae": 1.7,
+  "samples": [
+    {
+      "id": "bacillus",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.266,
+      "alphaMae": 0
+    },
+    {
+      "id": "bacillus",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.266,
+      "alphaMae": 0
+    },
+    {
+      "id": "bacillus",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.259,
+      "alphaMae": 0
+    },
+    {
+      "id": "bacillus",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.268,
+      "alphaMae": 0
+    },
+    {
+      "id": "bacillus",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.269,
+      "alphaMae": 0
+    },
+    {
+      "id": "bacillus",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.259,
+      "alphaMae": 0
+    },
+    {
+      "id": "cocci",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.719,
+      "alphaMae": 0
+    },
+    {
+      "id": "cocci",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.699,
+      "alphaMae": 0
+    },
+    {
+      "id": "cocci",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.712,
+      "alphaMae": 0
+    },
+    {
+      "id": "cocci",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.719,
+      "alphaMae": 0
+    },
+    {
+      "id": "cocci",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.699,
+      "alphaMae": 0
+    },
+    {
+      "id": "cocci",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.712,
+      "alphaMae": 0
+    },
+    {
+      "id": "paramecium",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.662,
+      "alphaMae": 0
+    },
+    {
+      "id": "paramecium",
+      "energy": 1,
+      "frame": 11,
+      "premultipliedMae": 0.663,
+      "alphaMae": 0
+    },
+    {
+      "id": "paramecium",
+      "energy": 1,
+      "frame": 29,
+      "premultipliedMae": 0.659,
+      "alphaMae": 0
+    },
+    {
+      "id": "paramecium",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.662,
+      "alphaMae": 0
+    },
+    {
+      "id": "paramecium",
+      "energy": 1.5,
+      "frame": 11,
+      "premultipliedMae": 0.663,
+      "alphaMae": 0
+    },
+    {
+      "id": "paramecium",
+      "energy": 1.5,
+      "frame": 29,
+      "premultipliedMae": 0.659,
+      "alphaMae": 0
+    },
+    {
+      "id": "amoeba",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.916,
+      "alphaMae": 0
+    },
+    {
+      "id": "amoeba",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.928,
+      "alphaMae": 0
+    },
+    {
+      "id": "amoeba",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.901,
+      "alphaMae": 0
+    },
+    {
+      "id": "amoeba",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.9,
+      "alphaMae": 0
+    },
+    {
+      "id": "amoeba",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.922,
+      "alphaMae": 0
+    },
+    {
+      "id": "amoeba",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.888,
+      "alphaMae": 0
+    },
+    {
+      "id": "flagellate",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.33,
+      "alphaMae": 0
+    },
+    {
+      "id": "flagellate",
+      "energy": 1,
+      "frame": 7,
+      "premultipliedMae": 0.312,
+      "alphaMae": 0
+    },
+    {
+      "id": "flagellate",
+      "energy": 1,
+      "frame": 19,
+      "premultipliedMae": 0.306,
+      "alphaMae": 0
+    },
+    {
+      "id": "flagellate",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.326,
+      "alphaMae": 0
+    },
+    {
+      "id": "flagellate",
+      "energy": 1.5,
+      "frame": 7,
+      "premultipliedMae": 0.311,
+      "alphaMae": 0
+    },
+    {
+      "id": "flagellate",
+      "energy": 1.5,
+      "frame": 19,
+      "premultipliedMae": 0.305,
+      "alphaMae": 0
+    },
+    {
+      "id": "spiral",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.514,
+      "alphaMae": 0
+    },
+    {
+      "id": "spiral",
+      "energy": 1,
+      "frame": 9,
+      "premultipliedMae": 0.531,
+      "alphaMae": 0
+    },
+    {
+      "id": "spiral",
+      "energy": 1,
+      "frame": 25,
+      "premultipliedMae": 0.518,
+      "alphaMae": 0
+    },
+    {
+      "id": "spiral",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.519,
+      "alphaMae": 0
+    },
+    {
+      "id": "spiral",
+      "energy": 1.5,
+      "frame": 9,
+      "premultipliedMae": 0.535,
+      "alphaMae": 0
+    },
+    {
+      "id": "spiral",
+      "energy": 1.5,
+      "frame": 25,
+      "premultipliedMae": 0.516,
+      "alphaMae": 0
+    },
+    {
+      "id": "hunter",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.822,
+      "alphaMae": 0
+    },
+    {
+      "id": "hunter",
+      "energy": 1,
+      "frame": 7,
+      "premultipliedMae": 0.823,
+      "alphaMae": 0
+    },
+    {
+      "id": "hunter",
+      "energy": 1,
+      "frame": 19,
+      "premultipliedMae": 0.822,
+      "alphaMae": 0
+    },
+    {
+      "id": "hunter",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.822,
+      "alphaMae": 0
+    },
+    {
+      "id": "hunter",
+      "energy": 1.5,
+      "frame": 7,
+      "premultipliedMae": 0.823,
+      "alphaMae": 0
+    },
+    {
+      "id": "hunter",
+      "energy": 1.5,
+      "frame": 19,
+      "premultipliedMae": 0.822,
+      "alphaMae": 0
+    },
+    {
+      "id": "spiny",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.495,
+      "alphaMae": 0
+    },
+    {
+      "id": "spiny",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.535,
+      "alphaMae": 0
+    },
+    {
+      "id": "spiny",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.491,
+      "alphaMae": 0
+    },
+    {
+      "id": "spiny",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.496,
+      "alphaMae": 0
+    },
+    {
+      "id": "spiny",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.555,
+      "alphaMae": 0
+    },
+    {
+      "id": "spiny",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.499,
+      "alphaMae": 0
+    },
+    {
+      "id": "giant",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 1.29,
+      "alphaMae": 0
+    },
+    {
+      "id": "giant",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 1.309,
+      "alphaMae": 0
+    },
+    {
+      "id": "giant",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 1.289,
+      "alphaMae": 0
+    },
+    {
+      "id": "giant",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 1.287,
+      "alphaMae": 0
+    },
+    {
+      "id": "giant",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 1.303,
+      "alphaMae": 0
+    },
+    {
+      "id": "giant",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 1.273,
+      "alphaMae": 0
+    },
+    {
+      "id": "chain",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.407,
+      "alphaMae": 0
+    },
+    {
+      "id": "chain",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.417,
+      "alphaMae": 0
+    },
+    {
+      "id": "chain",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.405,
+      "alphaMae": 0
+    },
+    {
+      "id": "chain",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.406,
+      "alphaMae": 0
+    },
+    {
+      "id": "chain",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.411,
+      "alphaMae": 0
+    },
+    {
+      "id": "chain",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.399,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-0",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.377,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-0",
+      "energy": 1,
+      "frame": 6,
+      "premultipliedMae": 0.376,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-0",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.376,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-0",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.379,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-0",
+      "energy": 1.5,
+      "frame": 6,
+      "premultipliedMae": 0.375,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-0",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.376,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-1",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.202,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-1",
+      "energy": 1,
+      "frame": 6,
+      "premultipliedMae": 0.195,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-1",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.198,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-1",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.201,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-1",
+      "energy": 1.5,
+      "frame": 6,
+      "premultipliedMae": 0.198,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-1",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.193,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-2",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.303,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-2",
+      "energy": 1,
+      "frame": 6,
+      "premultipliedMae": 0.294,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-2",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.292,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-2",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.306,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-2",
+      "energy": 1.5,
+      "frame": 6,
+      "premultipliedMae": 0.296,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-2",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.29,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-3",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.732,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-3",
+      "energy": 1,
+      "frame": 6,
+      "premultipliedMae": 0.727,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-3",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.727,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-3",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.735,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-3",
+      "energy": 1.5,
+      "frame": 6,
+      "premultipliedMae": 0.734,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-3",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.728,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-4",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.87,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-4",
+      "energy": 1,
+      "frame": 6,
+      "premultipliedMae": 0.867,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-4",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.87,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-4",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.882,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-4",
+      "energy": 1.5,
+      "frame": 6,
+      "premultipliedMae": 0.875,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-4",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.868,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-5",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.657,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-5",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 1.679,
+      "alphaMae": 1.275
+    },
+    {
+      "id": "water-5",
+      "energy": 1,
+      "frame": 44,
+      "premultipliedMae": 1.594,
+      "alphaMae": 1.237
+    },
+    {
+      "id": "water-5",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 2.18,
+      "alphaMae": 1.634
+    },
+    {
+      "id": "water-5",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 2.218,
+      "alphaMae": 1.573
+    },
+    {
+      "id": "water-5",
+      "energy": 1.5,
+      "frame": 44,
+      "premultipliedMae": 2.13,
+      "alphaMae": 1.626
+    },
+    {
+      "id": "water-6",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.641,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-6",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.646,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-6",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.637,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-6",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.641,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-6",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.643,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-6",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.639,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-7",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.489,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-7",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.477,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-7",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.487,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-7",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.486,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-7",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.489,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-7",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.474,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-8",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.785,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-8",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.798,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-8",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.758,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-8",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.798,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-8",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.811,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-8",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.738,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-9",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.406,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-9",
+      "energy": 1,
+      "frame": 9,
+      "premultipliedMae": 0.403,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-9",
+      "energy": 1,
+      "frame": 24,
+      "premultipliedMae": 0.414,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-9",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.4,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-9",
+      "energy": 1.5,
+      "frame": 9,
+      "premultipliedMae": 0.397,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-9",
+      "energy": 1.5,
+      "frame": 24,
+      "premultipliedMae": 0.412,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-10",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 1.114,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-10",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 1.25,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-10",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.95,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-10",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 1.115,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-10",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 1.252,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-10",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.941,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-11",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.775,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-11",
+      "energy": 1,
+      "frame": 14,
+      "premultipliedMae": 0.776,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-11",
+      "energy": 1,
+      "frame": 37,
+      "premultipliedMae": 0.8,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-11",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.779,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-11",
+      "energy": 1.5,
+      "frame": 14,
+      "premultipliedMae": 0.773,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-11",
+      "energy": 1.5,
+      "frame": 37,
+      "premultipliedMae": 0.793,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-12",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.203,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-12",
+      "energy": 1,
+      "frame": 10,
+      "premultipliedMae": 0.202,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-12",
+      "energy": 1,
+      "frame": 26,
+      "premultipliedMae": 0.206,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-12",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.206,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-12",
+      "energy": 1.5,
+      "frame": 10,
+      "premultipliedMae": 0.202,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-12",
+      "energy": 1.5,
+      "frame": 26,
+      "premultipliedMae": 0.202,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-13",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.229,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-13",
+      "energy": 1,
+      "frame": 11,
+      "premultipliedMae": 0.225,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-13",
+      "energy": 1,
+      "frame": 29,
+      "premultipliedMae": 0.215,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-13",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.227,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-13",
+      "energy": 1.5,
+      "frame": 11,
+      "premultipliedMae": 0.222,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-13",
+      "energy": 1.5,
+      "frame": 29,
+      "premultipliedMae": 0.217,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-14",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.199,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-14",
+      "energy": 1,
+      "frame": 12,
+      "premultipliedMae": 0.205,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-14",
+      "energy": 1,
+      "frame": 31,
+      "premultipliedMae": 0.187,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-14",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.198,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-14",
+      "energy": 1.5,
+      "frame": 12,
+      "premultipliedMae": 0.203,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-14",
+      "energy": 1.5,
+      "frame": 31,
+      "premultipliedMae": 0.185,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-15",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.223,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-15",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.197,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-15",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.24,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-15",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.223,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-15",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.197,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-15",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.24,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-16",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.312,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-16",
+      "energy": 1,
+      "frame": 13,
+      "premultipliedMae": 0.312,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-16",
+      "energy": 1,
+      "frame": 35,
+      "premultipliedMae": 0.297,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-16",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.308,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-16",
+      "energy": 1.5,
+      "frame": 13,
+      "premultipliedMae": 0.31,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-16",
+      "energy": 1.5,
+      "frame": 35,
+      "premultipliedMae": 0.296,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-0",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.71,
+      "alphaMae": 1.086
+    },
+    {
+      "id": "land-0",
+      "energy": 1,
+      "frame": 6,
+      "premultipliedMae": 0.73,
+      "alphaMae": 1.101
+    },
+    {
+      "id": "land-0",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.7,
+      "alphaMae": 1.004
+    },
+    {
+      "id": "land-0",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.784,
+      "alphaMae": 1.213
+    },
+    {
+      "id": "land-0",
+      "energy": 1.5,
+      "frame": 6,
+      "premultipliedMae": 0.826,
+      "alphaMae": 1.293
+    },
+    {
+      "id": "land-0",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.832,
+      "alphaMae": 1.327
+    },
+    {
+      "id": "land-1",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.828,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-1",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.84,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-1",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.84,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-1",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.828,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-1",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.84,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-1",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.84,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-2",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 1.051,
+      "alphaMae": 1.252
+    },
+    {
+      "id": "land-2",
+      "energy": 1,
+      "frame": 8,
+      "premultipliedMae": 1.066,
+      "alphaMae": 1.226
+    },
+    {
+      "id": "land-2",
+      "energy": 1,
+      "frame": 22,
+      "premultipliedMae": 0.903,
+      "alphaMae": 1.002
+    },
+    {
+      "id": "land-2",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 1.193,
+      "alphaMae": 1.412
+    },
+    {
+      "id": "land-2",
+      "energy": 1.5,
+      "frame": 8,
+      "premultipliedMae": 1.182,
+      "alphaMae": 1.37
+    },
+    {
+      "id": "land-2",
+      "energy": 1.5,
+      "frame": 22,
+      "premultipliedMae": 1.126,
+      "alphaMae": 1.357
+    },
+    {
+      "id": "land-3",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 1.547,
+      "alphaMae": 1.289
+    },
+    {
+      "id": "land-3",
+      "energy": 1,
+      "frame": 7,
+      "premultipliedMae": 1.529,
+      "alphaMae": 1.337
+    },
+    {
+      "id": "land-3",
+      "energy": 1,
+      "frame": 18,
+      "premultipliedMae": 1.365,
+      "alphaMae": 1.038
+    },
+    {
+      "id": "land-3",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 1.693,
+      "alphaMae": 1.533
+    },
+    {
+      "id": "land-3",
+      "energy": 1.5,
+      "frame": 7,
+      "premultipliedMae": 1.696,
+      "alphaMae": 1.573
+    },
+    {
+      "id": "land-3",
+      "energy": 1.5,
+      "frame": 18,
+      "premultipliedMae": 1.581,
+      "alphaMae": 1.402
+    },
+    {
+      "id": "land-4",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.688,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-4",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.679,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-4",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.682,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-4",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.688,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-4",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.679,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-4",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.682,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-5",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 1.53,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-5",
+      "energy": 1,
+      "frame": 6,
+      "premultipliedMae": 1.187,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-5",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 1.073,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-5",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 1.53,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-5",
+      "energy": 1.5,
+      "frame": 6,
+      "premultipliedMae": 1.187,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-5",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 1.073,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-6",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 1.327,
+      "alphaMae": 1.196
+    },
+    {
+      "id": "land-6",
+      "energy": 1,
+      "frame": 8,
+      "premultipliedMae": 1.299,
+      "alphaMae": 1.179
+    },
+    {
+      "id": "land-6",
+      "energy": 1,
+      "frame": 21,
+      "premultipliedMae": 1.187,
+      "alphaMae": 1.069
+    },
+    {
+      "id": "land-6",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 1.515,
+      "alphaMae": 1.408
+    },
+    {
+      "id": "land-6",
+      "energy": 1.5,
+      "frame": 8,
+      "premultipliedMae": 1.492,
+      "alphaMae": 1.465
+    },
+    {
+      "id": "land-6",
+      "energy": 1.5,
+      "frame": 21,
+      "premultipliedMae": 1.405,
+      "alphaMae": 1.416
+    },
+    {
+      "id": "land-7",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.771,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-7",
+      "energy": 1,
+      "frame": 12,
+      "premultipliedMae": 0.771,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-7",
+      "energy": 1,
+      "frame": 31,
+      "premultipliedMae": 0.756,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-7",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.776,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-7",
+      "energy": 1.5,
+      "frame": 12,
+      "premultipliedMae": 0.761,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-7",
+      "energy": 1.5,
+      "frame": 31,
+      "premultipliedMae": 0.755,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-8",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 1.058,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-8",
+      "energy": 1,
+      "frame": 14,
+      "premultipliedMae": 2.139,
+      "alphaMae": 1.648
+    },
+    {
+      "id": "land-8",
+      "energy": 1,
+      "frame": 38,
+      "premultipliedMae": 1.016,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-8",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 1.056,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-8",
+      "energy": 1.5,
+      "frame": 14,
+      "premultipliedMae": 2.172,
+      "alphaMae": 1.7
+    },
+    {
+      "id": "land-8",
+      "energy": 1.5,
+      "frame": 38,
+      "premultipliedMae": 0.994,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-9",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.674,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-9",
+      "energy": 1,
+      "frame": 8,
+      "premultipliedMae": 0.671,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-9",
+      "energy": 1,
+      "frame": 23,
+      "premultipliedMae": 0.676,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-9",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.679,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-9",
+      "energy": 1.5,
+      "frame": 8,
+      "premultipliedMae": 0.676,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-9",
+      "energy": 1.5,
+      "frame": 23,
+      "premultipliedMae": 0.68,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-10",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 1.128,
+      "alphaMae": 1.161
+    },
+    {
+      "id": "land-10",
+      "energy": 1,
+      "frame": 6,
+      "premultipliedMae": 1.166,
+      "alphaMae": 1.095
+    },
+    {
+      "id": "land-10",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 1.081,
+      "alphaMae": 0.982
+    },
+    {
+      "id": "land-10",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 1.301,
+      "alphaMae": 1.287
+    },
+    {
+      "id": "land-10",
+      "energy": 1.5,
+      "frame": 6,
+      "premultipliedMae": 1.3,
+      "alphaMae": 1.271
+    },
+    {
+      "id": "land-10",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 1.274,
+      "alphaMae": 1.213
+    },
+    {
+      "id": "land-11",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.638,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-11",
+      "energy": 1,
+      "frame": 13,
+      "premultipliedMae": 1.894,
+      "alphaMae": 1.25
+    },
+    {
+      "id": "land-11",
+      "energy": 1,
+      "frame": 36,
+      "premultipliedMae": 0.633,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-11",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.637,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-11",
+      "energy": 1.5,
+      "frame": 13,
+      "premultipliedMae": 1.912,
+      "alphaMae": 1.237
+    },
+    {
+      "id": "land-11",
+      "energy": 1.5,
+      "frame": 36,
+      "premultipliedMae": 0.633,
+      "alphaMae": 0
+    },
+    {
+      "id": "city-0",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 1.033,
+      "alphaMae": 0.881
+    },
+    {
+      "id": "city-0",
+      "energy": 1,
+      "frame": 7,
+      "premultipliedMae": 1.023,
+      "alphaMae": 0.909
+    },
+    {
+      "id": "city-0",
+      "energy": 1,
+      "frame": 19,
+      "premultipliedMae": 0.947,
+      "alphaMae": 0.834
+    },
+    {
+      "id": "city-0",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 1.136,
+      "alphaMae": 0.996
+    },
+    {
+      "id": "city-0",
+      "energy": 1.5,
+      "frame": 7,
+      "premultipliedMae": 1.143,
+      "alphaMae": 1.06
+    },
+    {
+      "id": "city-0",
+      "energy": 1.5,
+      "frame": 19,
+      "premultipliedMae": 1.118,
+      "alphaMae": 1.068
+    },
+    {
+      "id": "city-1",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 1.191,
+      "alphaMae": 0.896
+    },
+    {
+      "id": "city-1",
+      "energy": 1,
+      "frame": 8,
+      "premultipliedMae": 1.21,
+      "alphaMae": 0.905
+    },
+    {
+      "id": "city-1",
+      "energy": 1,
+      "frame": 23,
+      "premultipliedMae": 1.082,
+      "alphaMae": 0.769
+    },
+    {
+      "id": "city-1",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 1.333,
+      "alphaMae": 1.021
+    },
+    {
+      "id": "city-1",
+      "energy": 1.5,
+      "frame": 8,
+      "premultipliedMae": 1.332,
+      "alphaMae": 1.036
+    },
+    {
+      "id": "city-1",
+      "energy": 1.5,
+      "frame": 23,
+      "premultipliedMae": 1.292,
+      "alphaMae": 0.993
+    },
+    {
+      "id": "city-2",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 1.204,
+      "alphaMae": 1.039
+    },
+    {
+      "id": "city-2",
+      "energy": 1,
+      "frame": 11,
+      "premultipliedMae": 1.154,
+      "alphaMae": 1.035
+    },
+    {
+      "id": "city-2",
+      "energy": 1,
+      "frame": 29,
+      "premultipliedMae": 1.088,
+      "alphaMae": 0.955
+    },
+    {
+      "id": "city-2",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 1.386,
+      "alphaMae": 1.254
+    },
+    {
+      "id": "city-2",
+      "energy": 1.5,
+      "frame": 11,
+      "premultipliedMae": 1.357,
+      "alphaMae": 1.261
+    },
+    {
+      "id": "city-2",
+      "energy": 1.5,
+      "frame": 29,
+      "premultipliedMae": 1.316,
+      "alphaMae": 1.226
+    },
+    {
+      "id": "city-3",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 1.636,
+      "alphaMae": 1.138
+    },
+    {
+      "id": "city-3",
+      "energy": 1,
+      "frame": 12,
+      "premultipliedMae": 1.617,
+      "alphaMae": 1.13
+    },
+    {
+      "id": "city-3",
+      "energy": 1,
+      "frame": 31,
+      "premultipliedMae": 1.395,
+      "alphaMae": 0.966
+    },
+    {
+      "id": "city-3",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 1.848,
+      "alphaMae": 1.294
+    },
+    {
+      "id": "city-3",
+      "energy": 1.5,
+      "frame": 12,
+      "premultipliedMae": 1.843,
+      "alphaMae": 1.312
+    },
+    {
+      "id": "city-3",
+      "energy": 1.5,
+      "frame": 31,
+      "premultipliedMae": 1.709,
+      "alphaMae": 1.206
+    },
+    {
+      "id": "orbit-5",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.304,
+      "alphaMae": 0
+    },
+    {
+      "id": "orbit-5",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.302,
+      "alphaMae": 0
+    },
+    {
+      "id": "orbit-5",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.295,
+      "alphaMae": 0
+    },
+    {
+      "id": "orbit-5",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.304,
+      "alphaMae": 0
+    },
+    {
+      "id": "orbit-5",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.302,
+      "alphaMae": 0
+    },
+    {
+      "id": "orbit-5",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.295,
+      "alphaMae": 0
+    },
+    {
+      "id": "orbit-Luna helada",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.676,
+      "alphaMae": 0
+    },
+    {
+      "id": "orbit-Luna helada",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.671,
+      "alphaMae": 0
+    },
+    {
+      "id": "orbit-Luna helada",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.675,
+      "alphaMae": 0
+    },
+    {
+      "id": "orbit-Luna helada",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.676,
+      "alphaMae": 0
+    },
+    {
+      "id": "orbit-Luna helada",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.671,
+      "alphaMae": 0
+    },
+    {
+      "id": "orbit-Luna helada",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.675,
+      "alphaMae": 0
+    },
+    {
+      "id": "orbit-Luna volcánica",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 1.479,
+      "alphaMae": 0
+    },
+    {
+      "id": "orbit-Luna volcánica",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 1.475,
+      "alphaMae": 0
+    },
+    {
+      "id": "orbit-Luna volcánica",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 1.468,
+      "alphaMae": 0
+    },
+    {
+      "id": "orbit-Luna volcánica",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 1.495,
+      "alphaMae": 0
+    },
+    {
+      "id": "orbit-Luna volcánica",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 1.479,
+      "alphaMae": 0
+    },
+    {
+      "id": "orbit-Luna volcánica",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 1.487,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-0",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.836,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-0",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.835,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-0",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.841,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-0",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.836,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-0",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.835,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-0",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.841,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-1",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 1.059,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-1",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 1.044,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-1",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 1.052,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-1",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 1.059,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-1",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 1.044,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-1",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 1.052,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-2",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 1.479,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-2",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 1.475,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-2",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 1.468,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-2",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 1.495,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-2",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 1.479,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-2",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 1.487,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-3",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.676,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-3",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.671,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-3",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.675,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-3",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.676,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-3",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.671,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-3",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.675,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-4",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.878,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-4",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.872,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-4",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.871,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-4",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.878,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-4",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.872,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-4",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.871,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-5",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.467,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-5",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.464,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-5",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.469,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-5",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.467,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-5",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.464,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-5",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.469,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-Nube protoplanetaria",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.653,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-Nube protoplanetaria",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.648,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-Nube protoplanetaria",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.651,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-Nube protoplanetaria",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.653,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-Nube protoplanetaria",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.648,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-Nube protoplanetaria",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.651,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-0",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.601,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-0",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.593,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-0",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.599,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-0",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.602,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-0",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.596,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-0",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.599,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-1",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 1.224,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-1",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 1.214,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-1",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 1.209,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-1",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 1.22,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-1",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 1.212,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-1",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 1.207,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-2",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 1.084,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-2",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 1.079,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-2",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 1.075,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-2",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 1.076,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-2",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 1.069,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-2",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 1.072,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-3",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.989,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-3",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.979,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-3",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.972,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-3",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.984,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-3",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.975,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-3",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.984,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-4",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 1.424,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-4",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 1.418,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-4",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 1.415,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-4",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 1.42,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-4",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 1.42,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-4",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 1.412,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-5",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.347,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-5",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.351,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-5",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.336,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-5",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.345,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-5",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.351,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-5",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.335,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-Nube estelar",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.85,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-Nube estelar",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.843,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-Nube estelar",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.849,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-Nube estelar",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.85,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-Nube estelar",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.843,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-Nube estelar",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.849,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-Agujero negro estelar",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.521,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-Agujero negro estelar",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.519,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-Agujero negro estelar",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.519,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-Agujero negro estelar",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.521,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-Agujero negro estelar",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.519,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-Agujero negro estelar",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.519,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-0",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.792,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-0",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.783,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-0",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.782,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-0",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.792,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-0",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.783,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-0",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.782,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-1",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.98,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-1",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.976,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-1",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.969,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-1",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.98,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-1",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.976,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-1",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.969,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-2",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.528,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-2",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.535,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-2",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.527,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-2",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.528,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-2",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.535,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-2",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.527,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-3",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.877,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-3",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.874,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-3",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.876,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-3",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.877,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-3",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.874,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-3",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.876,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-4",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.724,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-4",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.722,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-4",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.714,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-4",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.724,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-4",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.722,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-4",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.714,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-5",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.468,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-5",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.46,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-5",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.461,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-5",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.468,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-5",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.46,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-5",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.461,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-Cúmulo abierto",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.524,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-Cúmulo abierto",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.521,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-Cúmulo abierto",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.526,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-Cúmulo abierto",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.525,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-Cúmulo abierto",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.524,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-Cúmulo abierto",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.526,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-Núcleo activo",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.49,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-Núcleo activo",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.493,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-Núcleo activo",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.475,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-Núcleo activo",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.491,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-Núcleo activo",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.493,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-Núcleo activo",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.47,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-Colisión galáctica",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.564,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-Colisión galáctica",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.549,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-Colisión galáctica",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.565,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-Colisión galáctica",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.564,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-Colisión galáctica",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.549,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-Colisión galáctica",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.565,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-Grupo galáctico",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.68,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-Grupo galáctico",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.666,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-Grupo galáctico",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.668,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-Grupo galáctico",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.681,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-Grupo galáctico",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.671,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-Grupo galáctico",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.67,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-0",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.524,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-0",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.521,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-0",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.526,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-0",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.525,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-0",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.524,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-0",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.526,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-1",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.653,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-1",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.648,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-1",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.651,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-1",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.653,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-1",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.648,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-1",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.651,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-2",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.85,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-2",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.843,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-2",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.849,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-2",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.85,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-2",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.843,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-2",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.849,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-3",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.882,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-3",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.946,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-3",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.819,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-3",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.882,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-3",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.946,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-3",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.819,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-4",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.521,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-4",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.519,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-4",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.519,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-4",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.521,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-4",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.519,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-4",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.519,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-5",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.49,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-5",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.493,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-5",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.475,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-5",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.491,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-5",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.493,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-5",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.47,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-6",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.564,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-6",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.549,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-6",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.565,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-6",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.564,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-6",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.549,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-6",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.565,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-7",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.68,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-7",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.666,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-7",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.668,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-7",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.681,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-7",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.671,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-7",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.67,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-8",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 1.002,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-8",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.992,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-8",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.985,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-8",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.998,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-8",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.985,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-8",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.986,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-9",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.789,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-9",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.787,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-9",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.781,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-9",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.783,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-9",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.781,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-9",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.776,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-10",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 1.005,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-10",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 2.02,
+      "alphaMae": 1.217
+    },
+    {
+      "id": "universe-10",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 2.044,
+      "alphaMae": 1.177
+    },
+    {
+      "id": "universe-10",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 1.005,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-10",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 2.02,
+      "alphaMae": 1.217
+    },
+    {
+      "id": "universe-10",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 2.044,
+      "alphaMae": 1.177
+    },
+    {
+      "id": "universe-11",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 1.136,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-11",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 1.143,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-11",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 1.147,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-11",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 1.103,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-11",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 1.05,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-11",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 1.145,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-1",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.377,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-1",
+      "energy": 1,
+      "frame": 6,
+      "premultipliedMae": 0.376,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-1",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.376,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-1",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.379,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-1",
+      "energy": 1.5,
+      "frame": 6,
+      "premultipliedMae": 0.375,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-1",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.376,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-2",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.828,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-2",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.84,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-2",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.84,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-2",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.828,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-2",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.84,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-2",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.84,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-3",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.489,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-3",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.477,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-3",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.487,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-3",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.486,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-3",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.489,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-3",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.474,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-4",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.785,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-4",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.798,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-4",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.758,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-4",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.798,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-4",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.811,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-4",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.738,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-5",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.406,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-5",
+      "energy": 1,
+      "frame": 9,
+      "premultipliedMae": 0.403,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-5",
+      "energy": 1,
+      "frame": 24,
+      "premultipliedMae": 0.414,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-5",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.4,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-5",
+      "energy": 1.5,
+      "frame": 9,
+      "premultipliedMae": 0.397,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-5",
+      "energy": 1.5,
+      "frame": 24,
+      "premultipliedMae": 0.412,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-6",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.202,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-6",
+      "energy": 1,
+      "frame": 6,
+      "premultipliedMae": 0.195,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-6",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.198,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-6",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.201,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-6",
+      "energy": 1.5,
+      "frame": 6,
+      "premultipliedMae": 0.198,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-6",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.193,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-7",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.202,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-7",
+      "energy": 1,
+      "frame": 6,
+      "premultipliedMae": 0.195,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-7",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.198,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-7",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.201,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-7",
+      "energy": 1.5,
+      "frame": 6,
+      "premultipliedMae": 0.198,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-7",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.193,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-matter-algae",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.617,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-matter-algae",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.614,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-matter-algae",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.612,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-matter-algae",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.625,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-matter-algae",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.618,
+      "alphaMae": 0
+    },
+    {
+      "id": "pond-matter-algae",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.618,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-matter-grass",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.63,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-matter-grass",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.624,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-matter-grass",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.625,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-matter-grass",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.63,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-matter-grass",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.62,
+      "alphaMae": 0
+    },
+    {
+      "id": "land-matter-grass",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.626,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-matter-kelp",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.58,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-matter-kelp",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.585,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-matter-kelp",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.579,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-matter-kelp",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.577,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-matter-kelp",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.582,
+      "alphaMae": 0
+    },
+    {
+      "id": "water-matter-kelp",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.58,
+      "alphaMae": 0
+    },
+    {
+      "id": "city-matter-shrub",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 1.108,
+      "alphaMae": 0
+    },
+    {
+      "id": "city-matter-shrub",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 1.102,
+      "alphaMae": 0
+    },
+    {
+      "id": "city-matter-shrub",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 1.111,
+      "alphaMae": 0
+    },
+    {
+      "id": "city-matter-shrub",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 1.119,
+      "alphaMae": 0
+    },
+    {
+      "id": "city-matter-shrub",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 1.114,
+      "alphaMae": 0
+    },
+    {
+      "id": "city-matter-shrub",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 1.107,
+      "alphaMae": 0
+    },
+    {
+      "id": "city-matter-palm",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.707,
+      "alphaMae": 0
+    },
+    {
+      "id": "city-matter-palm",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.703,
+      "alphaMae": 0
+    },
+    {
+      "id": "city-matter-palm",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.705,
+      "alphaMae": 0
+    },
+    {
+      "id": "city-matter-palm",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.715,
+      "alphaMae": 0
+    },
+    {
+      "id": "city-matter-palm",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.714,
+      "alphaMae": 0
+    },
+    {
+      "id": "city-matter-palm",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.715,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-matter-gas",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.718,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-matter-gas",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.712,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-matter-gas",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.721,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-matter-gas",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.718,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-matter-gas",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.712,
+      "alphaMae": 0
+    },
+    {
+      "id": "planets-matter-gas",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.721,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-matter-plasma",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 1.342,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-matter-plasma",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 1.336,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-matter-plasma",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 1.355,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-matter-plasma",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 1.342,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-matter-plasma",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 1.336,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-matter-plasma",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 1.355,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-matter-dust",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.927,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-matter-dust",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.935,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-matter-dust",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.932,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-matter-dust",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.927,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-matter-dust",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.935,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-matter-dust",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.932,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-matter-ejecta",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 1.431,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-matter-ejecta",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 1.417,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-matter-ejecta",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 1.437,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-matter-ejecta",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 1.431,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-matter-ejecta",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 1.417,
+      "alphaMae": 0
+    },
+    {
+      "id": "stars-matter-ejecta",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 1.437,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-matter-dust",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.927,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-matter-dust",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.935,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-matter-dust",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.932,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-matter-dust",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.927,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-matter-dust",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.935,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-matter-dust",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.932,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-matter-filament",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.305,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-matter-filament",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.312,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-matter-filament",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.304,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-matter-filament",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.305,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-matter-filament",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.312,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-matter-filament",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.304,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-matter-gas",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 1.223,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-matter-gas",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 1.227,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-matter-gas",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 1.236,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-matter-gas",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 1.223,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-matter-gas",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 1.227,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-matter-gas",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 1.236,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-matter-filament",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.305,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-matter-filament",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.312,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-matter-filament",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.304,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-matter-filament",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.305,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-matter-filament",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.312,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-matter-filament",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.304,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-matter-knot",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 1.223,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-matter-knot",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 1.227,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-matter-knot",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 1.236,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-matter-knot",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 1.223,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-matter-knot",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 1.227,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-matter-knot",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 1.236,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-matter-web",
+      "energy": 1,
+      "frame": 0,
+      "premultipliedMae": 0.575,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-matter-web",
+      "energy": 1,
+      "frame": 17,
+      "premultipliedMae": 0.574,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-matter-web",
+      "energy": 1,
+      "frame": 45,
+      "premultipliedMae": 0.58,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-matter-web",
+      "energy": 1.5,
+      "frame": 0,
+      "premultipliedMae": 0.575,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-matter-web",
+      "energy": 1.5,
+      "frame": 17,
+      "premultipliedMae": 0.574,
+      "alphaMae": 0
+    },
+    {
+      "id": "universe-matter-web",
+      "energy": 1.5,
+      "frame": 45,
+      "premultipliedMae": 0.58,
+      "alphaMae": 0
+    }
+  ]
+}

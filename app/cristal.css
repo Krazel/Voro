@@ -11,6 +11,9 @@
   color: #e6f2ef;
   font: 12px/1.5 monospace;
 }
+.performance-report-label { display: grid; gap: 8px; font-size: 14px; }
+.performance-report { width: 100%; padding: 8px; font: 12px/1.4 monospace; background: #03131b;
+  color: #e6f2ef; user-select: text; -webkit-user-select: text; border: 1px solid #78959e; border-radius: 8px; }
 :root {
   --cristal-ink: #eef3ed;
   --cristal-muted: #b7cdd1;
