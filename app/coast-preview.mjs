@@ -40,7 +40,7 @@ export class CoastPreview {
     const water = maskContext.createImageData(mw, mh), shade = maskContext.createImageData(mw, mh), foam = maskContext.createImageData(mw, mh);
     for (let y = 0; y < mh; y++) for (let x = 0; x < mw; x++) {
       const d = shoreDepth(x0 + x * step, y0 + y * step), i = (y * mw + x) * 4;
-      water.data[i + 3] = Math.round(clamp((d + 2) / 4) * 255);
+      water.data[i + 3] = Math.round((1 - clamp((d + 2) / 4)) * 255);
       shade.data[i] = 15; shade.data[i + 1] = 62; shade.data[i + 2] = 61;
       shade.data[i + 3] = Math.round(255 * (d > 0 ? clamp(d / 180) * .36 : clamp(1 + d / 38) * .23));
       foam.data[i] = 244; foam.data[i + 1] = 250; foam.data[i + 2] = 232;
@@ -57,11 +57,13 @@ export class CoastPreview {
     }
     // Pixel samples represent cell centres: avoid shifting habitat edges.
     const rect = [x0 - step / 2, y0 - step / 2, mw * step, mh * step];
+    const screenRect = [rect[0] * zoom + ox, rect[1] * zoom + oy, rect[2] * zoom, rect[3] * zoom];
     maskContext.clearRect(0, 0, mw, mh); maskContext.putImageData(water, 0, 0);
-    wet.globalCompositeOperation = 'destination-in'; wet.drawImage(this.mask, ...rect);
+    wet.setTransform(1, 0, 0, 1, 0, 0);
+    wet.globalCompositeOperation = 'destination-out'; wet.drawImage(this.mask, 0, 0, mw, mh, ...screenRect);
     layer.setTransform(1, 0, 0, 1, 0, 0); layer.drawImage(this.waterLayer, 0, 0);
     maskContext.clearRect(0, 0, mw, mh); maskContext.putImageData(shade, 0, 0);
-    layer.setTransform(zoom, 0, 0, zoom, ox, oy); layer.drawImage(this.mask, ...rect);
+    layer.drawImage(this.mask, 0, 0, mw, mh, ...screenRect);
     foamContext.clearRect(0, 0, mw, mh); foamContext.putImageData(foam, 0, 0);
     this.view = { image: this.image, x: camera.x, y: camera.y, zoom, width, height, anchorY, rect };
     this.rebuilds++;

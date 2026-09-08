@@ -53,5 +53,5 @@ assert.ok(
   'Terrain must remain fixed in world coordinates while the camera moves',
 );
 console.log(
-  '18 raster coverage cases and real terrain camera movement passed.',
+  '16 atlas raster coverage cases and real terrain camera movement passed.',
 );
