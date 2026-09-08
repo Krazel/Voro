@@ -65,7 +65,7 @@ test('Offscreen queued sheets expire while visible cache entries are never evict
 });
 
 test('Crossfade reuses two distinct grounds and bounds retained surfaces', () => {
-  const layer = new Proxy({createLinearGradient:()=>({addColorStop(){}})}, {get:(o,k)=>k in o?o[k]:()=>{},set:()=>true});
+  const layer = new Proxy({createImageData:(w,h)=>({data:new Uint8ClampedArray(w*h*4)}),createLinearGradient:()=>({addColorStop(){}})}, {get:(o,k)=>k in o?o[k]:()=>{},set:()=>true});
   const ground = new WorldGround(()=>({width:0,height:0,getContext:()=>layer}));
   const image={complete:true,naturalWidth:100,width:100,height:100};
   for(let i=0;i<20;i++) for(const stage of ['land','water']) ground.draw(c,image,stage,{x:i,y:i},1,850);

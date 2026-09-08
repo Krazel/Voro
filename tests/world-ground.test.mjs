@@ -4,21 +4,18 @@ import { groundPatch, GROUND_PROFILES } from '../app/world-ground.mjs';
 import { STAGES, SPECIES_BY_ID } from '../app/journey-data.mjs';
 import { makeEngine } from './engine-fixture.mjs';
 
-test('All non-microscopic backgrounds stream stable varied regions and retain the shore orientation', () => {
+test('Non-shore atlases stream stable varied regions; every biome has a ground profile', () => {
   assert.deepEqual(
     Object.keys(GROUND_PROFILES),
     STAGES.slice(1).map((s) => s.id),
   );
-  for (const stage of Object.keys(GROUND_PROFILES)) {
+  for (const stage of Object.keys(GROUND_PROFILES).filter(s => s !== 'land')) {
     const seen = new Set();
     for (let x = -20; x < 20; x++) {
       const patch = groundPatch(stage, x, 8, 71);
       seen.add(patch.variant);
       assert.deepEqual(patch, groundPatch(stage, x, 8, 71));
-      if (stage === 'land') {
-        assert.equal(patch.flipX, false);
-        assert.equal(patch.turn, 0);
-      }
+
     }
     assert.equal(seen.size, 8);
   }

@@ -101,7 +101,7 @@ export class JourneyWorld extends MicroWorld {
       for (let attempt = 0; attempt < 10; attempt++) {
         x = cx * TILE + margin + rng() * (TILE - 2 * margin);
         y = cy * TILE + margin + rng() * (TILE - 2 * margin);
-        if (stageId === 'land' && !shoreAllows(s, x)) continue;
+        if (stageId === 'land' && !shoreAllows(s, x, y, candidate.r)) continue;
         if (
           occupied.some(
             (e) =>

@@ -3,10 +3,10 @@ import assert from 'node:assert/strict';
 import { JourneyWorld } from '../app/journey-world.mjs';
 import { STAGES, SPECIES_BY_ID } from '../app/journey-data.mjs';
 import {
-  shoreFraction,
   shoreHabitat,
   POPULATION_PLANS,
 } from '../app/population.mjs';
+import { dryClearance } from '../app/shore-geography.mjs';
 import { populationReport } from '../app/population-report.mjs';
 import {
   transitionScene,
@@ -24,11 +24,7 @@ test('Marine hunters have a dedicated encounter slot without increasing total de
   assert.ok(report.rows.find(row=>row.id==='water-13').per100 < 1);
 });
 
-test('Shore creatures stay on dry sand, even while fleeing; coast coordinates mirror at negative tiles', () => {
-  for (const x of [-4800, -1700, -10, 0, 250, 900, 1500]) {
-    assert.ok(shoreFraction(x) >= 0 && shoreFraction(x) <= 1);
-    assert.ok(Math.abs(shoreFraction(x) - shoreFraction(x + 2400)) < 1e-9);
-  }
+test('Shore creatures stay on dry sand while fleeing along the continuous coastline', () => {
   const w = new JourneyWorld(91, [], 2),
     life = journeyLife(newJourney(1));
   life.biomass = 100;
@@ -40,7 +36,7 @@ test('Shore creatures stay on dry sand, even while fleeing; coast coordinates mi
     for (const e of w.entities) {
       const s = SPECIES_BY_ID[e.kind];
       if (shoreHabitat(s) === 'dry')
-        assert.ok(shoreFraction(e.x) + e.r / 1200 <= 0.531, e.kind);
+        assert.ok(dryClearance(e.x, e.y, e.r) <= -7.99, e.kind);
     }
   }
 });

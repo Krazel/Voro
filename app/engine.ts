@@ -275,7 +275,7 @@ export class VoroEngine {
     const image = this.groundImages[stage];
     const entry = this.assets.entries.get(`ground:${stage}`);
     const view = this.worldGround.views.get(stage);
-    return { stage, loaded: !!entry?.ready, error: !!entry?.error,
+    return { stage, renderer: stage === 'land' ? 'tidal-shore-v1' : 'approved-atlas-v1', loaded: !!entry?.ready, error: !!entry?.error,
       width: image?.naturalWidth || 0, height: image?.naturalHeight || 0,
       prepared: stage === 'micro' ? !!entry?.ready : !!view && view.view.image === image,
       surfaceWidth: view?.surface.width || 0, surfaceHeight: view?.surface.height || 0 };
@@ -1611,6 +1611,8 @@ export class VoroEngine {
           this.zoom,
           this.height,
           this.progress.seed,
+          this.time,
+          !this.reduced,
         )
       )
         return;

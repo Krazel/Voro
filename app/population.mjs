@@ -1,3 +1,4 @@
+import { shoreDepth, dryClearance } from './shore-geography.mjs';
 // Maximum encounter slots per 600x600 region: newborn food, larger food, danger.
 // Empty water on the shore and protected spawn areas can leave some slots unused.
 export const POPULATION_PLANS = {
@@ -80,29 +81,24 @@ export function populationWeight(s, stageId, list) {
     ] ?? 1
   );
 }
-export const COAST_TILE = 1200;
-export function shoreFraction(x) {
-  const tile = Math.floor(x / COAST_TILE),
-    u = x / COAST_TILE - tile;
-  return Math.abs(tile % 2) === 1 ? 1 - u : u;
-}
 export function shoreHabitat(s) {
   if (!s.edibleMatter) return 'dry';
   return /shell|scallop|pebble/.test(s.id) ? 'tidal' : 'dry';
 }
-export function shoreAllows(s, x) {
-  const u = shoreFraction(x);
-  return shoreHabitat(s) === 'tidal'
-    ? u >= 0.25 && u <= 0.78
-    : u <= 0.53 - s.r / COAST_TILE;
+export function shoreAllows(s, x, y, radius = s.r) {
+  const d = shoreDepth(x, y);
+  return shoreHabitat(s) === 'tidal' ? d >= -70 && d <= 18 : dryClearance(x, y, radius) <= -8;
 }
 export function constrainToShore(e, s) {
-  const tile = Math.floor(e.x / COAST_TILE),
-    reversed = Math.abs(tile % 2) === 1;
-  let u = shoreFraction(e.x);
-  u =
-    shoreHabitat(s) === 'tidal'
-      ? Math.max(0.25, Math.min(0.78, u))
-      : Math.min(0.53 - Math.max(s.r, e.r) / COAST_TILE, u);
-  e.x = (tile + (reversed ? 1 - u : u)) * COAST_TILE;
+  const radius = Math.max(s.r, e.r);
+  if (shoreAllows(s, e.x, e.y, radius)) { e.shoreSafe = { x: e.x, y: e.y }; return; }
+  if (e.shoreSafe) { e.x = e.shoreSafe.x; e.y = e.shoreSafe.y; return; }
+  // Handles arrival food and old saved inhabitants without clamping them all
+  // onto a straight edge. Normal movement returns to its last safe position.
+  const ox = e.x, oy = e.y;
+  for (let distance = 24; distance <= 1200; distance += 24)
+    for (let i = 0; i < 16; i++) {
+      const a = i * Math.PI / 8, x = ox + Math.cos(a) * distance, y = oy + Math.sin(a) * distance;
+      if (shoreAllows(s, x, y, radius)) { e.x = x; e.y = y; e.shoreSafe = { x, y }; return; }
+    }
 }

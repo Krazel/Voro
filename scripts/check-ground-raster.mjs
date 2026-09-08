@@ -14,7 +14,9 @@ wc.fillStyle = '#fff';
 wc.fillRect(0, 0, 768, 512);
 const image = await loadImage(white.toBuffer('image/png'));
 const ground = new WorldGround(() => createCanvas(1, 1));
-for (const stage of Object.keys(GROUND_PROFILES))
+// The coast intentionally shades the wet sand and water. It has a separate
+// coverage/cache/geography raster check instead of the white-atlas seam test.
+for (const stage of Object.keys(GROUND_PROFILES).filter(stage => stage !== 'land'))
   for (const zoom of [0.65, 1]) {
     const screen = createCanvas(480, 720),
       c = screen.getContext('2d');

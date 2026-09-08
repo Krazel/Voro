@@ -128,7 +128,7 @@ test('Ground cache scrolls and scales continuously, invalidating on travel, biom
     {},
     {
       get: (_, k) =>
-        k === 'createLinearGradient' ? () => ({ addColorStop() {} }) : () => {},
+        k === 'createImageData' ? (w,h) => ({data:new Uint8ClampedArray(w*h*4)}) : k === 'createLinearGradient' ? () => ({ addColorStop() {} }) : () => {},
       set: () => true,
     },
   );

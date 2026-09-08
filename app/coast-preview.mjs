@@ -1,17 +1,8 @@
-// Experimental geography shared by the painting and the habitat preview.
-function noise(y, seed) {
-  const i = Math.floor(y), t = y - i, u = t * t * (3 - 2 * t);
-  const hash = n => { let h = Math.imul(n, 374761393) ^ seed; h = Math.imul(h ^ h >>> 13, 1274126177); return ((h ^ h >>> 16) >>> 0) / 4294967295; };
-  return hash(i) * (1 - u) + hash(i + 1) * u - .5;
-}
-export function coastX(y) {
-  return noise(y / 1800, 823) * 1100 + noise(y / 570, 921) * 260 + noise(y / 170, 334) * 28;
-}
-export function coastHabitat(x, y) {
-  const d = x - coastX(y);
-  return d < -75 ? 'Arena seca' : d < 0 ? 'Arena húmeda' : 'Agua';
-}
-// Mirroring MATERIALS makes their edges meet; the geography is never tiled.
+import { shoreDepth } from './shore-geography.mjs';
+export { coastHabitat } from './shore-geography.mjs';
+
+// Approved painted materials meet at mirrored edges. The sand/water geography
+// comes from a continuous field, never from repeated pictures of a coastline.
 function material(image, crop, createCanvas) {
   const tile = createCanvas(); tile.width = tile.height = 512;
   const c = tile.getContext('2d');
@@ -21,69 +12,78 @@ function material(image, crop, createCanvas) {
   }
   return tile;
 }
+const clamp = x => Math.max(0, Math.min(1, x));
+function resize(canvas, width, height) {
+  if (canvas.width !== width || canvas.height !== height) { canvas.width = width; canvas.height = height; }
+}
 export class CoastPreview {
   constructor(image, createCanvas = () => document.createElement('canvas')) {
-    this.createCanvas = createCanvas;
-    const w = image.naturalWidth, h = image.naturalHeight;
+    this.image = image;
+    const w = image.naturalWidth || image.width, h = image.naturalHeight || image.height;
     this.sand = material(image, [w * .52, h * .08, w * .22, h * .32], createCanvas);
-    this.water = material(image, [w * .86, h * .08, w * .13, h * .32], createCanvas);
-    this.depth = createCanvas(); this.depth.width = 618; this.depth.height = 2;
-    const d = this.depth.getContext('2d');
-    const wet = d.createLinearGradient(0, 0, 90, 0);
-    wet.addColorStop(0, 'rgba(62,73,57,0)'); wet.addColorStop(1, 'rgba(62,73,57,.23)');
-    d.fillStyle = wet; d.fillRect(0, 0, 90, 2);
-    const sea = d.createLinearGradient(90, 0, 618, 0);
-    sea.addColorStop(0, 'rgba(3,67,77,0)'); sea.addColorStop(1, 'rgba(3,67,77,.44)');
-    d.fillStyle = sea; d.fillRect(90, 0, 528, 2);
-    this.surface = createCanvas(); this.view = null; this.rebuilds = 0;
+    this.water = material(image, [w * .40, h * .58, w * .09, h * .32], createCanvas);
+    this.surface = createCanvas(); this.foam = createCanvas();
+    this.mask = createCanvas(); this.waterLayer = createCanvas();
+    this.view = null; this.rebuilds = 0;
   }
-  region(c, x0, x1, y0, y1, offset) {
-    c.beginPath(); c.moveTo(x1, y0); c.lineTo(coastX(y0) + offset, y0);
-    // Global sample grid avoids changing the curve when the viewport moves.
-    for (let y = Math.ceil(y0 / 12) * 12; y < y1; y += 12) c.lineTo(coastX(y) + offset, y);
-    c.lineTo(coastX(y1) + offset, y1); c.lineTo(x1, y1); c.closePath();
-  }
-  draw(c, camera, zoom, width, height, time, waves = true) {
-    const pad = 160, v = this.view;
-    const dx = v ? (v.x - camera.x) * zoom - pad : 0;
-    const dy = v ? (v.y - camera.y) * zoom - pad : 0;
-    if (!v || v.zoom !== zoom || v.width !== width || v.height !== height || dx > 0 || dy > 0 || dx + this.surface.width < width || dy + this.surface.height < height) {
-      this.surface.width = Math.ceil(width + pad * 2); this.surface.height = Math.ceil(height + pad * 2);
-      const layer = this.surface.getContext('2d');
-      const x0 = camera.x - (width / 2 + pad) / zoom, x1 = camera.x + (width / 2 + pad) / zoom;
-      const y0 = camera.y - (height / 2 + pad) / zoom, y1 = camera.y + (height / 2 + pad) / zoom;
-      layer.setTransform(zoom, 0, 0, zoom, -x0 * zoom, -y0 * zoom);
-      layer.fillStyle = layer.createPattern(this.sand, 'repeat'); layer.fillRect(x0, y0, x1 - x0, y1 - y0);
-      this.region(layer, x0, x1, y0, y1, 0);
-      layer.fillStyle = layer.createPattern(this.water, 'repeat'); layer.fill();
-      this.region(layer, x0, x1, y0, y1, 528);
-      layer.fillStyle = 'rgba(3,67,77,.44)'; layer.fill();
-      // Warp a tiny precomputed gradient along the coast. Each pixel is shaded
-      // once, instead of drawing dozens of full-water translucent polygons.
-      for (let y = Math.floor(y0 / 12) * 12; y < y1; y += 12) {
-        const start = coastX(y), slope = (coastX(y + 12) - start) / 12;
-        layer.save(); layer.transform(1, 0, slope, 1, start - 90, y);
-        layer.drawImage(this.depth, 0, 0, 618, 12); layer.restore();
-      }
-      this.view = { x: camera.x, y: camera.y, zoom, width, height }; this.rebuilds++;
+  rebuild(camera, zoom, width, height, anchorY) {
+    const pad = 192;
+    for (const canvas of [this.surface, this.waterLayer]) resize(canvas, Math.ceil(width + pad * 2), Math.ceil(height + pad * 2));
+    // Masks stay on a global grid so revisiting a place gives identical edges.
+    const step = 12;
+    const x0 = Math.floor((camera.x - (width / 2 + pad) / zoom) / step) * step;
+    const y0 = Math.floor((camera.y - (height * anchorY + pad) / zoom) / step) * step;
+    const mw = Math.ceil(this.surface.width / zoom / step) + 3;
+    const mh = Math.ceil(this.surface.height / zoom / step) + 3;
+    for (const canvas of [this.mask, this.foam]) resize(canvas, mw, mh);
+    const maskContext = this.mask.getContext('2d'), foamContext = this.foam.getContext('2d');
+    const water = maskContext.createImageData(mw, mh), shade = maskContext.createImageData(mw, mh), foam = maskContext.createImageData(mw, mh);
+    for (let y = 0; y < mh; y++) for (let x = 0; x < mw; x++) {
+      const d = shoreDepth(x0 + x * step, y0 + y * step), i = (y * mw + x) * 4;
+      water.data[i + 3] = Math.round(clamp((d + 2) / 4) * 255);
+      shade.data[i] = 15; shade.data[i + 1] = 62; shade.data[i + 2] = 61;
+      shade.data[i + 3] = Math.round(255 * (d > 0 ? clamp(d / 180) * .36 : clamp(1 + d / 38) * .23));
+      foam.data[i] = 244; foam.data[i + 1] = 250; foam.data[i + 2] = 232;
+      foam.data[i + 3] = Math.round(Math.exp(-(((d - 3) / 3.2) ** 2)) * 135);
     }
-    const sx = pad + (camera.x - this.view.x) * zoom, sy = pad + (camera.y - this.view.y) * zoom;
-    c.drawImage(this.surface, sx, sy, width, height, 0, 0, width, height);
-    if (!waves) return;
-    c.save(); c.translate(width / 2, height / 2); c.scale(zoom, zoom); c.translate(-camera.x, -camera.y);
-    const y0 = camera.y - height / (2 * zoom) - 24, y1 = camera.y + height / (2 * zoom) + 24;
-    for (let wave = 0; wave < 3; wave++) {
-      const phase = ((time * .12 + wave / 3) % 1 + 1) % 1;
-      const offset = 48 * (1 - phase) - 8, alpha = Math.sin(phase * Math.PI) * .32;
-      c.beginPath();
-      for (let y = Math.floor(y0 / 8) * 8, first = true; y <= y1; y += 8) {
-        const x = coastX(y) + offset + Math.sin(y * .045 + wave) * 2.2 + noise(y / 18, wave + 53) * 5;
-        if (first) c.moveTo(x, y); else c.lineTo(x, y); first = false;
-      }
-      c.strokeStyle = `rgba(237,249,237,${alpha * .22})`; c.lineWidth = 11; c.stroke();
-      c.strokeStyle = `rgba(246,251,237,${alpha})`; c.lineWidth = 2.4; c.stroke();
+    const layer = this.surface.getContext('2d'), wet = this.waterLayer.getContext('2d');
+    const ox = width / 2 + pad - camera.x * zoom, oy = height * anchorY + pad - camera.y * zoom;
+    for (const [c, texture] of [[layer, this.sand], [wet, this.water]]) {
+      c.globalCompositeOperation = 'source-over';
+      c.setTransform(1, 0, 0, 1, 0, 0); c.clearRect(0, 0, this.surface.width, this.surface.height);
+      c.setTransform(zoom, 0, 0, zoom, ox, oy);
+      c.fillStyle = c.createPattern(texture, 'repeat');
+      c.fillRect(-ox / zoom, -oy / zoom, this.surface.width / zoom, this.surface.height / zoom);
     }
-    c.restore();
+    // Pixel samples represent cell centres: avoid shifting habitat edges.
+    const rect = [x0 - step / 2, y0 - step / 2, mw * step, mh * step];
+    maskContext.clearRect(0, 0, mw, mh); maskContext.putImageData(water, 0, 0);
+    wet.globalCompositeOperation = 'destination-in'; wet.drawImage(this.mask, ...rect);
+    layer.setTransform(1, 0, 0, 1, 0, 0); layer.drawImage(this.waterLayer, 0, 0);
+    maskContext.clearRect(0, 0, mw, mh); maskContext.putImageData(shade, 0, 0);
+    layer.setTransform(zoom, 0, 0, zoom, ox, oy); layer.drawImage(this.mask, ...rect);
+    foamContext.clearRect(0, 0, mw, mh); foamContext.putImageData(foam, 0, 0);
+    this.view = { image: this.image, x: camera.x, y: camera.y, zoom, width, height, anchorY, rect };
+    this.rebuilds++;
   }
-  destroy() { this.surface.width = this.surface.height = 1; this.sand.width = this.water.width = this.depth.width = 1; }
+  draw(c, camera, zoom, width, height, time, waves = true, anchorY = .5) {
+    const pad = 192, v = this.view, ratio = v ? zoom / v.zoom : 1;
+    const dx = v ? width / 2 * (1 - ratio) + (v.x - camera.x) * zoom - pad * ratio : 0;
+    const dy = v ? height * anchorY * (1 - ratio) + (v.y - camera.y) * zoom - pad * ratio : 0;
+    if (!v || ratio < .85 || ratio > 1.18 || v.anchorY !== anchorY || v.width !== width || v.height !== height || dx > 0 || dy > 0 || dx + this.surface.width * ratio < width || dy + this.surface.height * ratio < height)
+      this.rebuild(camera, zoom, width, height, anchorY);
+    const scale = zoom / this.view.zoom;
+    const sx = pad + (camera.x - this.view.x) * this.view.zoom + width / 2 * (1 - 1 / scale);
+    const sy = pad + (camera.y - this.view.y) * this.view.zoom + height * anchorY * (1 - 1 / scale);
+    c.drawImage(this.surface, sx, sy, width / scale, height / scale, 0, 0, width, height);
+    if (waves) {
+      const [x, y, w, h] = this.view.rect;
+      c.save(); c.globalAlpha *= .58 + Math.sin(time * 1.5) * .2;
+      c.drawImage(this.foam, (x - camera.x) * zoom + width / 2, (y - camera.y) * zoom + height * anchorY, w * zoom, h * zoom);
+      c.restore();
+    }
+  }
+  destroy() {
+    for (const c of [this.surface, this.foam, this.mask, this.waterLayer, this.sand, this.water]) c.width = c.height = 1;
+  }
 }

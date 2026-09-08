@@ -93,7 +93,9 @@ test('Plants bend from fixed bases; shells and urban objects never stretch', () 
 test('Consumed matter remains absent when its chunk is restored from the journal', () => {
   for (let stage = 0; stage < STAGES.length; stage++) {
     const world = new JourneyWorld(56, [], stage);
-    const original = world.generate(4, 4, 0);
+    let cx = 4;
+    while (cx < 30 && !world.generate(cx, 4, 0).entities.some(e => SPECIES_BY_ID[e.kind].edibleMatter)) cx++;
+    const original = world.generate(cx, 4, 0);
     const meal = original.entities.find(
       (e) => SPECIES_BY_ID[e.kind].edibleMatter,
     );
@@ -101,10 +103,10 @@ test('Consumed matter remains absent when its chunk is restored from the journal
     world.eat(meal, 1);
     const restored = new JourneyWorld(56, [...world.journal], stage);
     assert.ok(
-      !restored.generate(4, 4, 2).entities.some((e) => e.id === meal.id),
+      !restored.generate(cx, 4, 2).entities.some((e) => e.id === meal.id),
     );
     const regrown = restored
-      .generate(4, 4, 152)
+      .generate(cx, 4, 152)
       .entities.find((e) => e.id === meal.id);
     assert.equal(regrown.kind, meal.kind);
     assert.equal(regrown.r, meal.r);

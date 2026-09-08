@@ -1,11 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { BACKGROUND_ASSETS } from '../app/background-assets.mjs';
 import { stageResources } from '../app/stage-assets.mjs';
 import { STAGES } from '../app/journey-data.mjs';
 import { makeEngine } from './engine-fixture.mjs';
+
+test('Obsolete background atlases cannot ship from public',()=>{
+ for(const path of ['shore-v2.png','sea-v2.png','inhabitants/environments.png'])
+   assert.equal(existsSync(new URL('../public/'+path,import.meta.url)),false,path);
+});
 
 test('Every biome loads its approved local background with a matching content revision',()=>{
  assert.equal(Object.keys(BACKGROUND_ASSETS).length,10);

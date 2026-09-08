@@ -32,7 +32,8 @@ const newUrls = stageResources(0).map(r => r.url);
 async function footprint(urls) {
   let bytes = 0, decoded = 0;
   for (const url of urls) {
-    const path = 'public/' + url.slice(2), image = await loadImage(path);
+    const legacy = /shore-v2|sea-v2|environments/.test(url);
+    const path = legacy ? 'design/archived/backgrounds/' + url.split('/').at(-1) : 'public/' + url.slice(2).split('?')[0], image = await loadImage(path);
     bytes += statSync(path).size;
     decoded += image.width * image.height * 4;
   }

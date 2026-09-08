@@ -23,6 +23,7 @@ export function makeEngine() {
   const gradient = { addColorStop() {} };
   const base = {
     globalAlpha: 1,
+    createImageData: (w,h) => ({data: new Uint8ClampedArray(w*h*4)}),
     createRadialGradient: () => gradient,
     createLinearGradient: () => gradient,
   };
