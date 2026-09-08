@@ -155,6 +155,16 @@ test('Ground cache scrolls and scales continuously, invalidating on travel, biom
   assert.equal(ground.redraws, 4);
 });
 
+test('Evicting atlas textures immediately releases their Canvas backing stores', () => {
+  const layer = new Proxy({}, {get:(_,k)=>k==='createLinearGradient'?()=>({addColorStop(){}}):()=>{},set:()=>true});
+  const ground = new WorldGround(()=>({width:0,height:0,getContext:()=>layer}));
+  const images = Array.from({length:4},()=>({width:100,height:100}));
+  const first = ground.prepare(images[0]);
+  for(const image of images.slice(1)) ground.prepare(image);
+  assert.equal(ground.cache.size,3);
+  assert.ok(first.every(canvas=>canvas.width===1 && canvas.height===1));
+});
+
 test('Cold encounters stay visible without baking inline; queued work is bounded and drains', () => {
   const oldCanvas = globalThis.OffscreenCanvas;
   let visible = 0;

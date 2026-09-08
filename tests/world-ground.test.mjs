@@ -30,9 +30,11 @@ test('Background streaming remains bounded through every sandbox biome and leave
   game.drawBackground(0);
   assert.equal(game.worldGround.cache.size, 0);
   for (let stage = 1; stage < STAGES.length; stage++) {
+    game.startTest(stage, 1);
     game.camera = { x: -1874.3, y: -2351.7 };
     game.zoom = 0.65;
     game.drawBackground(stage);
+    assert.ok(game.worldGround.views.has(STAGES[stage].id));
     assert.ok(game.worldGround.cache.size <= 3);
   }
   const entries = game.worldGround.cache.size;

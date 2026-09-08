@@ -93,7 +93,11 @@ export class WorldGround {
     }
     this.cache.set(key, { patches });
     // Bound decoded texture memory when using the environment test controls.
-    if (this.cache.size > 3) this.cache.delete(this.cache.keys().next().value);
+    if (this.cache.size > 3) {
+      const oldest = this.cache.keys().next().value;
+      for (const canvas of this.cache.get(oldest).patches) canvas.width = canvas.height = 1;
+      this.cache.delete(oldest);
+    }
     return patches;
   }
   draw(c, image, stage, camera, zoom, height, seed = 834, time = 0, waves = false) {

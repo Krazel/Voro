@@ -275,7 +275,7 @@ export class VoroEngine {
     const image = this.groundImages[stage];
     const entry = this.assets.entries.get(`ground:${stage}`);
     const view = this.worldGround.views.get(stage);
-    return { stage, renderer: stage === 'land' ? 'tidal-shore-v1' : 'approved-atlas-v1', loaded: !!entry?.ready, error: !!entry?.error,
+    return { stage, mode: this.testMode ? 'test' : 'campaign', renderer: stage === 'land' ? 'tidal-shore-v1' : 'approved-atlas-v1', loaded: !!entry?.ready, error: !!entry?.error,
       width: image?.naturalWidth || 0, height: image?.naturalHeight || 0,
       prepared: stage === 'micro' ? !!entry?.ready : !!view && view.view.image === image,
       surfaceWidth: view?.surface.width || 0, surfaceHeight: view?.surface.height || 0 };
@@ -1600,6 +1600,11 @@ export class VoroEngine {
   paintBackground(index: number) {
     const c = this.ctx;
     const stage = STAGES[index];
+    // Direct test jumps can render while another asset finishes loading. An
+    // Image may report complete before decode() resolves; never bake that
+    // intermediate result into the persistent terrain cache.
+    const entry = this.assets.entries.get(`ground:${stage.id}`);
+    if (!entry?.ready || entry.image !== this.groundImages[stage.id]) return;
     if (stage.id !== 'micro') {
       const image = this.groundImages[stage.id];
       if (

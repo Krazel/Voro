@@ -29,8 +29,27 @@ test('Gameplay renderer selects the current biome image, including after a stage
  game.worldGround.draw=(_context,image,stage)=>{selected={image,stage};return true;};
  for(let i=1;i<STAGES.length;i++) {
    const stage=STAGES[i].id, image={complete:true,naturalWidth:1536};
+   game.assets.entries.set(`ground:${stage}`, {ready:true,image});
    game.groundImages[stage]=image;game.paintBackground(i);
    assert.equal(selected.image,image);assert.equal(selected.stage,stage);
  }
  game.destroy();
+});
+
+test('Direct environment tests never cache a background before its decode has finished',()=>{
+ const {game}=makeEngine();
+ let prepared=0;
+ game.worldGround.draw=()=>{prepared++;return true;};
+ for(const stage of [1,3,2,1,8,1]) {
+   game.startTest(stage,1);
+   const entry=game.assets.entries.get(`ground:${STAGES[stage].id}`);
+   entry.ready=false; // Image.complete/naturalWidth can precede decode().
+   const before=prepared;
+   game.paintBackground(stage);
+   assert.equal(prepared,before,'Undecoded image must not enter the terrain cache');
+   entry.ready=true;
+   game.paintBackground(stage);
+   assert.equal(prepared,before+1);
+ }
+ game.exitTest(); game.destroy();
 });
