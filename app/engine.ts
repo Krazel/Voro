@@ -1,4 +1,4 @@
-import { UniverseFinale, FINALE_SECONDS } from './universe-finale.mjs';
+import { UniverseFinale, FINALE_SECONDS, drawVoidSurvivor } from './universe-finale.mjs';
 import { WorldGround } from './world-ground.mjs';
 import { RELEASE } from './release.mjs';
 import { TiltControl } from './tilt-control.ts';
@@ -182,6 +182,7 @@ export class VoroEngine {
   time = 0;
   last = 0;
   renderDirty = true;
+  lastVoidFrame = 0;
   raf = 0;
   destroyed = false;
   width = 480;
@@ -1046,6 +1047,13 @@ export class VoroEngine {
       } else this.gamepadButtons = [false, false];
     }
     if (!document.hidden) {
+      // Only the solitary cell breathes after the ending. No world simulation,
+      // streaming or HUD updates; keep this quiet screen at most 20 fps.
+      if (this.progress.completed && this.ending === 0 && !this.paused && !this.settingsOpen
+        && !this.reduced && stamp - this.lastVoidFrame >= 50) {
+        this.time += Math.min(.1, (stamp - this.lastVoidFrame) / 1000);
+        this.lastVoidFrame = stamp; this.renderDirty = true;
+      }
       if (
         !this.paused &&
         !this.settingsOpen &&
@@ -1365,6 +1373,8 @@ export class VoroEngine {
     this.universeFinale?.destroy(); this.universeFinale = new UniverseFinale(frame);
     this.progress.completed = true; this.progress.finalReady = true;
     this.progress.offer = []; this.life.finalEaten = true;
+    this.life.digestion = []; this.life.hurt = this.life.boost = 0;
+    this.huntingTentacles.arms = [];
     this.ending = FINALE_SECONDS; this.hint = ''; this.flash = this.hitFlash = 0;
     this.life.vx = this.life.vy = 0; this.keys.clear(); this.pointer = null;
     this.tilt.read(false); this.paused = false;
@@ -1675,10 +1685,17 @@ export class VoroEngine {
     c.setTransform(k, 0, 0, k, 0, 0);
     if (this.progress.completed) {
       c.fillStyle = '#000'; c.fillRect(0,0,480,this.height);
-      if (this.ending > 0 && this.universeFinale) this.universeFinale.draw(c,480,this.height,this.ending,this.reduced,(growth: number) => {
-        c.save(); c.translate(240,this.height*.48); c.scale(this.zoom*growth,this.zoom*growth);
+      const protagonist = (growth: number, survivor = false) => {
+        // Pull the camera back as the body grows: its membrane must remain
+        // readable while the captured universe visibly enters it.
+        const scale = survivor ? Math.min(66,this.height*.1) / Math.max(.8,p.radius) * growth
+          : Math.min(this.zoom * growth, 194 / Math.max(.8,p.radius));
+        c.save(); c.translate(240,this.height*.48); c.scale(scale,scale);
         c.translate(-p.x,-p.y); this.drawCell(); c.restore();
-      });
+      };
+      if (this.ending > 0 && this.universeFinale)
+        this.universeFinale.draw(c,480,this.height,this.ending,this.reduced,protagonist,this.time);
+      else drawVoidSurvivor(c,480,this.height,this.time,this.reduced,protagonist);
       return;
     }
     c.fillStyle = '#041423';
@@ -2129,6 +2146,7 @@ export class VoroEngine {
     c.restore();
   }
   drawDigestion(outside: boolean) {
+    if (this.progress.completed) return;
     const c = this.ctx,
       p = this.life;
     for (const f of p.digestion) {

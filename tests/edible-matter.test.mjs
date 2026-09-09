@@ -13,7 +13,7 @@ import { beginAbsorb, digest } from '../app/simulation.mjs';
 import { ANIMATIONS } from '../app/animation-catalog.mjs';
 import { poseMesh } from '../app/inhabitant-animation.mjs';
 
-test('Every stage naturally spawns its new matter without increasing population limits', () => {
+test('Every stage naturally spawns its new matter within each environment population limit', () => {
   for (let stage = 0; stage < STAGES.length; stage++) {
     const world = new JourneyWorld(56, [], stage),
       found = new Set();
@@ -28,7 +28,7 @@ test('Every stage naturally spawns its new matter without increasing population 
           );
         else
           assert.ok(
-            chunk.entities.length <= ([1, 3].includes(stage) ? 12 : 22),
+            chunk.entities.length <= ([1, 3].includes(stage) ? 12 : STAGES[stage].id === 'city' ? 24 : 22),
           );
         for (const e of chunk.entities)
           if (SPECIES_BY_ID[e.kind].edibleMatter) found.add(e.kind);

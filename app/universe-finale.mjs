@@ -3,7 +3,20 @@ const smooth = (a,b,x) => { const t = Math.max(0,Math.min(1,(x-a)/(b-a))); retur
 export function finaleState(remaining) {
   const u = Math.max(0,Math.min(1,1-remaining/FINALE_SECONDS));
   return { u, growth: 1+11*smooth(0,.55,u), darkness: smooth(.55,.8,u),
-    black: u>=.8, caption: u<.3 ? 'Ya no hay nada más grande que tú.' : u<.55 ? 'Todo el universo vuelve a ti.' : u<.7 ? 'La última luz.' : '' };
+    black: u>=.8, survivor: smooth(.84,1,u), caption: u<.3 ? 'Ya no hay nada más grande que tú.' : u<.55 ? 'Todo el universo vuelve a ti.' : u<.7 ? 'La última luz.' : '' };
+}
+export function drawVoidSurvivor(c, width, height, time, reduced, drawProtagonist, reveal = 1) {
+  if (reveal <= 0) return;
+  const pulse = reduced ? 0 : Math.sin(time * .8);
+  const x=width/2,y=height*.48,r=Math.min(width*.2,height*.16);
+  c.save();
+  const glow=c.createRadialGradient(x,y,0,x,y,r);
+  glow.addColorStop(0,`rgba(112,189,200,${(.035+.006*pulse)*reveal})`);
+  glow.addColorStop(1,'transparent');
+  c.fillStyle=glow;c.fillRect(x-r,y-r,r*2,r*2);
+  c.globalAlpha=(.48+.035*pulse)*reveal;
+  drawProtagonist(1+.012*pulse,true);
+  c.restore();
 }
 // One captured scene and a bounded set of paths. No blur, new textures or
 // per-frame canvas allocations, including on older iPhones.
@@ -11,14 +24,15 @@ export class UniverseFinale {
   /** @param {HTMLCanvasElement|null} frame */
   constructor(frame = null) { this.frame=frame; }
   destroy() { if(this.frame) this.frame.width=this.frame.height=1; this.frame=null; }
-  draw(c, width, height, remaining, reduced, drawProtagonist) {
+  draw(c, width, height, remaining, reduced, drawProtagonist, time = 0) {
     const s=finaleState(remaining), {u}=s, x=width/2, y=height*.48;
     c.fillStyle='#000'; c.fillRect(0,0,width,height);
-    if(s.black) return;
+    if(s.black) { drawVoidSurvivor(c,width,height,time,reduced,drawProtagonist,s.survivor); return; }
     if(this.frame) {
-      const z=1-.7*smooth(.06,.58,u);
-      c.save(); c.globalAlpha=1-smooth(.2,.64,u);
-      c.drawImage(this.frame,x-x*z,y-y*z,width*z,height*z); c.restore();
+      const collapse=smooth(.06,.68,u), z=Math.max(.001,1-collapse);
+      c.save(); c.globalAlpha=1-smooth(.65,.7,u);
+      c.translate(x,y); c.rotate(reduced?0:collapse*.22);
+      c.drawImage(this.frame,-x*z,-y*z,width*z,height*z); c.restore();
     }
     c.save(); c.globalAlpha=1-smooth(.54,.77,u);
     drawProtagonist(reduced ? 1+2*smooth(0,.55,u) : s.growth);

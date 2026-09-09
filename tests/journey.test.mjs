@@ -115,7 +115,7 @@ test('Every stage generates stable inhabitants, recoverable food, bounded chunks
       );
     assert.ok(w.entities.some((e) => e.requiredMass === 0));
     assert.equal(w.chunks.size, 25);
-    assert.ok(w.entities.length <= 557);
+    assert.ok(w.entities.length <= (STAGES[stage].id === 'city' ? 607 : 557));
     for (const s of STAGE_SPECIES[stage])
       for (const time of [0, 0.5])
         drawJourneySprite(c, images, s.id, s.r, 0, time, 1, 0.2);

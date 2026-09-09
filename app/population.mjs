@@ -19,8 +19,9 @@ export const POPULATION_PLANS = {
     note: 'Una plaza de cazador y otra de peligro por zona, con la misma densidad total. Nadadores y tiburones martillo siguen siendo escasos.',
   },
   city: {
-    slots: [5, 7, 2],
-    note: 'Predominan objetos y edificios. Las personas son una minoría; la defensa también usa vehículos.',
+    slots: [15, 7, 2],
+    pedestrians: 10,
+    note: 'Diez plazas de peatones por zona, además de objetos, edificios y defensa. Circulan por las aceras.',
   },
   orbit: {
     slots: [5, 8, 1],

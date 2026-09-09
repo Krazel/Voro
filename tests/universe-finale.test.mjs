@@ -27,21 +27,36 @@ test('Ending respects the final stage, biomass threshold and fixed-biome testing
   }
   game.destroy();
 });
-test('The finale grows the protagonist, then remains exact black with no paths, image or captions',()=>{
+test('The universe contracts fully into the cell, then only the softly lit survivor remains',()=>{
   assert.ok(finaleState(6).growth>10);
-  for(const remaining of [2.4,1,0,-100]) {
-    const calls=[],c={fillStyle:'',fillRect(...args){calls.push([this.fillStyle,...args]);}};
-    new UniverseFinale().draw(c,480,850,remaining,false,()=>assert.fail('No protagonist in the darkness'));
-    assert.deepEqual(calls,[['#000',0,0,480,850]]);
+  const images=[], survivors=[],fills=[];
+  const c=new Proxy({fillStyle:'',fillRect(...args){fills.push([this.fillStyle,...args]);},
+    drawImage(...args){images.push(args);},createRadialGradient(){return {addColorStop(){}}}},
+    {get:(o,k)=>k in o?o[k]:()=>{}});
+  const frame={width:1000,height:1800},scene=new UniverseFinale(frame);
+  scene.draw(c,480,850,3.84,false,()=>{},0);
+  assert.ok(images[0][3]<1,'Captured matter reaches the centre, not a faded large square');
+  images.length=0;
+  scene.draw(c,480,850,2.4,false,()=>assert.fail('A short completely dark pause'),0);
+  assert.equal(images.length,0);
+  for(const remaining of [1,0,-100]) {
+    scene.draw(c,480,850,remaining,false,(size,solitary)=>survivors.push([size,solitary]),4);
     assert.equal(finaleState(remaining).caption,'');
   }
-  const frame={width:1000,height:1800},scene=new UniverseFinale(frame);
-  scene.destroy();assert.equal(frame.width,1);assert.equal(frame.height,1);assert.equal(scene.frame,null);
+  assert.equal(survivors.length,3);assert.ok(survivors.every(s=>s[1]===true));
+  assert.equal(images.length,0,'No background, galaxies or particles after absorption');
+  assert.equal(fills[0][0],'#000');
+  scene.destroy();assert.equal(frame.width,1);assert.equal(frame.height,1);
 });
-test('Completed black screen stops scheduling scene work, including after resuming a saved final',()=>{
+test('The completed survivor breathes at most 20 fps without running gameplay; reduced motion stays still',()=>{
   const f=makeEngine(),{game}=f;
-  game.startTest(last,230,false,true,true);isolate(game);game.update(1/60);
-  game.update(12);game.renderDirty=true;game.frame(1000);const before=f.draws;
-  for(let i=1;i<60;i++)game.frame(1000+i*16.67);
-  assert.equal(f.draws,before);game.resize();game.frame(2100);assert.ok(f.draws>before);game.destroy();
+  game.startTest(last,230,false,true,true);isolate(game);game.update(1/60);game.update(12);
+  let renders=0,simulations=0;game.render=()=>renders++;game.update=()=>simulations++;
+  game.renderDirty=true;game.frame(1000);renders=0;
+  for(let i=1;i<=60;i++)game.frame(1000+i*1000/60);
+  assert.ok(renders>10&&renders<=20);assert.equal(simulations,0);
+  game.reduced=true;const before=renders;
+  for(let i=1;i<=60;i++)game.frame(2100+i*1000/60);
+  assert.equal(renders,before);game.resize();game.frame(3200);assert.ok(renders>before);
+  game.destroy();
 });

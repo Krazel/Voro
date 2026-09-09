@@ -53,3 +53,16 @@ test('Planet ecology offers nine world types with rare ocean worlds and varied s
     assert.ok(report.rows.find(s=>s.id===id).count>0);
   assert.ok(new Set(worlds.map(s=>s.sizeFactors.join(':'))).size>=6);
 });
+
+test('City sidewalks consistently receive a substantial civilian population without replacing buildings',()=>{
+  const stage=STAGES.findIndex(s=>s.id==='city'),w=new JourneyWorld(51,[],stage);
+  let people=0,total=0;
+  for(let x=-15;x<15;x++) {
+    const entities=w.generate(x,12,0).entities;
+    const civilians=entities.filter(e=>e.kind==='city-0');people+=civilians.length;total+=entities.length;
+    assert.ok(civilians.length>=9);assert.ok(entities.length<=24);
+    assert.ok(civilians.every(e=>e.cityAxis==='x'||e.cityAxis==='y'));
+    assert.equal(entities.filter(e=>SPECIES_BY_ID[e.kind].building).length,cityLots(x,12,51).length);
+  }
+  assert.ok(people/total>.38&&people/total<.5);
+});

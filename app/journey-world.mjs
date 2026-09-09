@@ -102,7 +102,9 @@ export class JourneyWorld extends MicroWorld {
         i < starters ? small : i < starters + forage ? medium : danger;
       if (stageId === 'water' && i >= starters + forage)
         pool = i === starters + forage ? hunters : hazards;
-      const s = i === 0 ? recovery : pick(pool.length ? pool : list);
+      const pedestrians = plan.pedestrians || 0;
+      const s = i < pedestrians ? SPECIES_BY_ID['city-0']
+        : i === pedestrians ? recovery : pick(pool.length ? pool : list);
       const seed = rng() * 6.28,
         id = `${cx}:${cy}:${i}`;
       const candidate = journeyEntity(s, 0, 0, seed, id);

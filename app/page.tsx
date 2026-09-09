@@ -461,7 +461,7 @@ export default function Home() {
           </div>
         )}
         {state.ending > 0 && finalCaption && <div className="ending-caption" aria-live="polite"><p>{finalCaption}</p></div>}
-        {state.complete && !finalDetails && <button className="universe-black-screen" aria-label="Universo absorbido. Ver el final y tu recorrido" onClick={() => setFinalDetails(true)} />}
+        {state.complete && !finalDetails && <button className="universe-black-screen" aria-label="VORO permanece solo en el vacío. Ver el final y tu recorrido" onClick={() => setFinalDetails(true)} />}
         {state.complete && finalDetails && (
           <div className="finish-panel journey-finish" aria-live="polite">
             <p className="eyebrow">UNIVERSO ABSORBIDO</p>

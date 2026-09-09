@@ -40,7 +40,7 @@ test('Shore creatures stay on dry sand while fleeing along the continuous coastl
     }
   }
 });
-test('Every biome uses bounded populations with rare rabbits, swimmers and human crowds', () => {
+test('Every biome uses bounded populations with rare rabbits/swimmers and populated city sidewalks', () => {
   for (let stage = 1; stage < STAGES.length; stage++) {
     const w = new JourneyWorld(33, [], stage),
       max = POPULATION_PLANS[STAGES[stage].id].slots.reduce((a, b) => a + b, 0);
@@ -59,11 +59,11 @@ test('Every biome uses bounded populations with rare rabbits, swimmers and human
   assert.ok(
     city.rows
       .filter((s) => ['city-0', 'city-1', 'city-2', 'city-3'].includes(s.id))
-      .reduce((n, s) => n + s.per100, 0) < 7,
+      .reduce((n, s) => n + s.per100, 0) > 35,
   );
   assert.ok(shore.average < 12);
   assert.ok(sea.average <= 12 && sea.average > 8);
-  assert.ok(city.average <= 14 && city.average > 10);
+  assert.ok(city.average <= 24 && city.average > 22);
 });
 test('Transitions connect every successive environment; coastal journeys crossfade without a scale jump', () => {
   for (const stage of STAGES.slice(0, -1)) {
