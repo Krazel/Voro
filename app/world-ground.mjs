@@ -1,11 +1,12 @@
 import { CoastPreview } from './coast-preview.mjs';
+import { cityTiles, cityDistrict } from './city-layout.mjs';
 
 export const GROUND_PROFILES = {
   micro: { file: 'micro', step: 640, depth: 0.65, tint: '#071e25' },
   pond: { file: 'pond', step: 360, depth: 1, tint: '#102c29' },
   land: { file: 'shore', step: 600, depth: 1, tint: '#1d3437' },
   water: { file: 'sea', step: 420, depth: 1, tint: '#082f3b' },
-  city: { file: 'city', step: 440, depth: 1, tint: '#1c2930' },
+  city: { file: 'city', step: 600, depth: 1, tint: '#343b3e' },
   orbit: { file: 'orbit', step: 600, depth: 0.48, tint: '#060e1c' },
   planets: { file: 'planets', step: 640, depth: 0.4, tint: '#050d1a' },
   stars: { file: 'stars', step: 660, depth: 0.35, tint: '#120d19' },
@@ -47,15 +48,15 @@ export class WorldGround {
       this.views.delete(oldest);
     }
   }
-  prepare(image) {
+  prepare(image, stage) {
     const key = image;
     const cached = this.cache.get(key);
     if (cached) return cached.patches;
-    const patches = [];
+    const patches = stage === 'city' ? cityTiles(image, this.createCanvas) : [];
     const size = 384,
       sw = image.width / 2,
       sh = image.height / 2;
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; stage !== 'city' && i < 8; i++) {
       const panel = i % 4,
         crop = i < 4 ? 1 : 0.8;
       const canvas = this.createCanvas();
@@ -120,7 +121,7 @@ export class WorldGround {
       this.trimViews();
       return true;
     }
-    const patches = this.prepare(image);
+    const patches = this.prepare(image, stage);
     // A crossfade needs both paintings alive. Alternating stages must never
     // invalidate the other stage's surface on every frame.
     const saved = this.views.get(stage);
@@ -174,18 +175,19 @@ export class WorldGround {
     layer.clearRect(0, 0, surface.width, surface.height);
     layer.save();
     layer.translate(pad, pad);
-    layer.globalCompositeOperation = 'lighter';
+    layer.globalCompositeOperation = stage === 'city' ? 'source-over' : 'lighter';
     const sx = profile.step,
       sy = profile.step;
-    const width = (sx * 4) / 3,
-      h = (sy * 4) / 3;
+    const width = stage === 'city' ? sx : (sx * 4) / 3,
+      h = stage === 'city' ? sy : (sy * 4) / 3;
     const x0 = Math.floor((px - (240 + pad) / zoom) / sx) - 1;
     const x1 = Math.floor((px + (240 + pad) / zoom) / sx) + 1;
     const y0 = Math.floor((py - (height * 0.48 + pad) / zoom) / sy) - 1;
     const y1 = Math.floor((py + (height * 0.52 + pad) / zoom) / sy) + 1;
     for (let y = y0; y <= y1; y++)
       for (let x = x0; x <= x1; x++) {
-        const patch = groundPatch(stage, x, y, seed);
+        const patch = stage === 'city' ? { variant: cityDistrict(x,y,seed), flipX: false, flipY: false, turn: 0 }
+          : groundPatch(stage, x, y, seed);
         const fx = patch.flipX;
         const drawWidth = width * zoom;
         layer.save();

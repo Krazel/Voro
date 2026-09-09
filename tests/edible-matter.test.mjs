@@ -73,7 +73,7 @@ test('Scenery stays anchored while floating matter drifts without chasing the pl
     life.y = 100;
     world.move(1, 2, life, {}, []);
     assert.deepEqual(e, other, s.id);
-    if (!s.speed) assert.deepEqual([e.x, e.y, e.heading], [400, 970, 1], s.id);
+    if (!s.speed) assert.deepEqual([e.x, e.y, e.heading], [400, 970, s.fixedHeading ?? 1], s.id);
     else assert.ok(Math.hypot(e.x - 400, e.y - 970) > 0, s.id);
   }
 });

@@ -8,6 +8,7 @@ import { MicroWorld, makeEntity, TILE } from './micro-world.mjs';
 import { animalTarget } from './animal-steering.mjs';
 import { random, clamp } from './simulation.mjs';
 import { ORBITAL_EARTH } from './earth-landmark.mjs';
+import { cityLots, cityPlacement, constrainCity } from './city-layout.mjs';
 import {
   STAGE_SPECIES,
   STAGES,
@@ -20,6 +21,7 @@ export function journeyEntity(s, x, y, seed, id) {
   e.final = s.kind === 'final';
   e.shotClock = 1.2 + (seed % 1) * 2;
   e.attack = 0;
+  if (s.fixedHeading !== undefined) e.heading = s.fixedHeading;
   return e;
 }
 export class JourneyWorld extends MicroWorld {
@@ -55,7 +57,7 @@ export class JourneyWorld extends MicroWorld {
     }
     let depleted = false;
     const list = STAGE_SPECIES[this.stage].filter(
-      (s) => s.kind !== 'final' && !s.variantOf && !s.unique,
+      (s) => s.kind !== 'final' && !s.variantOf && !s.unique && !s.building,
     );
     const small = list.filter(
         (s) =>
@@ -84,7 +86,16 @@ export class JourneyWorld extends MicroWorld {
       let roll = rng() * arr.reduce((n, s) => n + weight(s), 0);
       return arr.find((s) => (roll -= weight(s)) < 0) || arr.at(-1);
     };
-    const [starters, forage, threats] = plan.slots;
+    const [starters, plannedForage, threats] = plan.slots;
+    const lots = stageId === 'city' ? cityLots(cx, cy, this.seed) : [];
+    const forage = plannedForage - lots.length;
+    for (const lot of lots) {
+      const id = `city-lot:${cx}:${cy}:${lot.slot}`;
+      const e = journeyEntity(SPECIES_BY_ID[lot.kind],lot.x,lot.y,rng()*6.28,id);
+      occupied.push({x:e.x,y:e.y,r:e.r});
+      if ((this.journal.get(id)||0)>time) depleted=true;
+      else entities.push(e);
+    }
     const recovery = [...small].sort((a, b) => a.r - b.r)[0];
     for (let i = 0; i < starters + forage + threats; i++) {
       let pool =
@@ -96,12 +107,17 @@ export class JourneyWorld extends MicroWorld {
         id = `${cx}:${cy}:${i}`;
       const candidate = journeyEntity(s, 0, 0, seed, id);
       const margin = Math.max(40, Math.min(220, candidate.r * 1.1 + 8));
+      let cityAxis;
       let x = 0,
         y = 0,
         placed = false;
       for (let attempt = 0; attempt < 10; attempt++) {
         x = cx * TILE + margin + rng() * (TILE - 2 * margin);
         y = cy * TILE + margin + rng() * (TILE - 2 * margin);
+        if (stageId === 'city') {
+          const pos = cityPlacement(s,x,y,cx,cy);
+          x=pos.x; y=pos.y; cityAxis=pos.axis;
+        }
         if (stageId === 'orbit' && Math.hypot(x - ORBITAL_EARTH.x, y - ORBITAL_EARTH.y)
           < ORBITAL_EARTH.radius + candidate.r + 30) continue;
         if (stageId === 'land' && !shoreAllows(s, x, y, candidate.r)) continue;
@@ -123,7 +139,9 @@ export class JourneyWorld extends MicroWorld {
       if ((this.journal.get(id) || 0) > time) { depleted = true; continue; }
       const inhabitant =
         s.id === 'water-14' && seed >= Math.PI ? SPECIES_BY_ID['water-16'] : s;
-      entities.push(journeyEntity(inhabitant, x, y, seed, id));
+      const entity = journeyEntity(inhabitant, x, y, seed, id);
+      if (cityAxis) { entity.cityAxis=cityAxis; entity.heading=cityAxis==='x'?0:Math.PI/2; }
+      entities.push(entity);
     }
     if (cx === 1 && cy === 1)
       for (let i = 0; i < 7; i++) {
@@ -143,6 +161,11 @@ export class JourneyWorld extends MicroWorld {
       }
     if (stageId === 'land')
       for (const e of entities) constrainToShore(e, SPECIES_BY_ID[e.kind]);
+    if (stageId === 'city') for (const e of entities) {
+      if (!e.id.startsWith('first:')) continue;
+      const pos=cityPlacement(SPECIES_BY_ID[e.kind],e.x,e.y,cx,cy);
+      e.x=e.homeX=pos.x; e.y=e.homeY=pos.y; e.cityAxis=pos.axis;
+    }
     if (stageId === 'orbit') {
       // Starter food and drifting objects also stay above the Earth's surface.
       for (let i = entities.length - 1; i >= 0; i--)
@@ -205,6 +228,7 @@ export class JourneyWorld extends MicroWorld {
       e.x = clamp(e.x, e.homeX - 280, e.homeX + 280);
       e.y = clamp(e.y, e.homeY - 280, e.homeY + 280);
       if (STAGES[this.stage].id === 'land') constrainToShore(e, s);
+      if (STAGES[this.stage].id === 'city') constrainCity(e);
       if (STAGES[this.stage].id === 'orbit') {
         const dx = e.x - ORBITAL_EARTH.x, dy = e.y - ORBITAL_EARTH.y;
         const distance = Math.hypot(dx, dy), min = ORBITAL_EARTH.radius + e.r + 15;

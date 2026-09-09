@@ -1,5 +1,6 @@
 import { SPECIES_BY_ID } from './journey-data.mjs';
 import { drawInhabitant } from './inhabitant-animation.mjs';
+export const journeyHeading = (id, heading) => SPECIES_BY_ID[id]?.fixedHeading ?? heading;
 // The gallery and the game use the identical pose renderer.
 /** @param {import('./animation-sheets.mjs').AnimationSheets | null} sheets */
 export function drawJourneySprite(

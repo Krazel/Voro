@@ -31,13 +31,13 @@
   },
   {
     "biome": "city",
-    "source": "design/approved/backgrounds/city-variants.png",
-    "asset": "public/backgrounds/city-variants.webp",
-    "sha256": "ca2cd57d7a970df6b7029c5a4f3955dddd4a817323b58405e91f8fa07835f508",
-    "date": "2026-09-05",
+    "source": "design/city-cosmos-0.4.14/materials-source.png",
+    "asset": "public/backgrounds/city-materials-v2.webp",
+    "sha256": "1824e210ae88354d17e48bddad9446acd877d7e5a8fe130c40d48f49203cc1d0",
+    "date": "2026-09-09",
     "generator": "ChatGPT image_gen",
-    "panels": "2x2, each 768x512",
-    "status": "Implemented under user-delegated art direction; play review pending"
+    "panels": "2x2 materials, coherent street geometry in app/city-layout.mjs",
+    "status": "Implemented under user-delegated art direction; local gameplay reviewed, device review pending"
   },
   {
     "biome": "orbit",

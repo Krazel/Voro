@@ -28,7 +28,7 @@ import {
   formatSize,
   isDanger,
 } from './journey-data.mjs';
-import { drawJourneySprite } from './journey-sprites.mjs';
+import { drawJourneySprite, journeyHeading } from './journey-sprites.mjs';
 import {
   beginAnimationFrame,
   endAnimationFrame,
@@ -1737,7 +1737,7 @@ export class VoroEngine {
       if (danger) this.halo(f.x, f.y, r * 1.25, 'rgba(166,77,86,.065)');
       c.save();
       c.translate(f.x, f.y);
-      c.rotate(f.heading ?? f.seed);
+      c.rotate(journeyHeading(f.kind || 'nutrient', f.heading ?? f.seed));
       if (f.recycled)
         drawBiomassFragment(c, r, f.seed, this.reduced ? 0 : this.time);
       else

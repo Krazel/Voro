@@ -49,7 +49,7 @@ const WEIGHTS = {
   water: [
     14, 16, 15, 7, 5, 1.5, 4, 5, 1, 0.15, 1.1, 0.7, 0.8, 0.18, 0.35, 1,
   ],
-  city: [1, 0.7, 0.25, 0.25, 1, 0.8, 0.5, 2, 1, 0.6, 5, 2],
+  city: [1, 0.7, 0.25, 0.25, 2, 4, 2, 2, 1, 0.6, 5, 2],
   orbit: [10, 12, 2, 1, 0.15, 2, 1, 0.3],
   planets: [8, 5, 0.5, 4, 1, 0.6, 10, 5],
   stars: [10, 6, 4, 0.5, 1, 0.3, 4, 0.5],
@@ -68,6 +68,7 @@ const MATTER_WEIGHTS = {
   universe: [8, 5, 2],
 };
 export function populationWeight(s, stageId, list) {
+  if (s.populationWeight !== undefined) return s.populationWeight;
   if (s.edibleMatter)
     return (
       MATTER_WEIGHTS[stageId]?.[

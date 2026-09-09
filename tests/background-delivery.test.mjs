@@ -8,7 +8,7 @@ import { STAGES } from '../app/journey-data.mjs';
 import { makeEngine } from './engine-fixture.mjs';
 
 test('Obsolete background atlases cannot ship from public',()=>{
- for(const path of ['shore-v2.png','sea-v2.png','inhabitants/environments.png'])
+ for(const path of ['shore-v2.png','sea-v2.png','inhabitants/environments.png','backgrounds/city-variants.webp'])
    assert.equal(existsSync(new URL('../public/'+path,import.meta.url)),false,path);
 });
 

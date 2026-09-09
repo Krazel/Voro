@@ -1,0 +1,42 @@
+[
+  {
+    "path": "design/city-cosmos-0.4.14/buildings-source.png",
+    "bytes": 2468150,
+    "sha256": "fa29dbdbebe972e0ae122ca2d20b874050fd390e34692367e208648cf2576682"
+  },
+  {
+    "path": "design/city-cosmos-0.4.14/materials-source.png",
+    "bytes": 3730793,
+    "sha256": "10ac08374aafcaf81acab32622ae4422c72fe4a3510e0b40a0ce88e2ce26ac27"
+  },
+  {
+    "path": "design/city-cosmos-0.4.14/planets-source.png",
+    "bytes": 2328082,
+    "sha256": "835200ea69bfdc3efbf8095855c29dbf4da51fdb69198276d6098799deccff0b"
+  },
+  {
+    "path": "design/city-cosmos-0.4.14/ringed-planet-source.png",
+    "bytes": 1319007,
+    "sha256": "820ab4560fa73ad63aa80a1ce6ef8a79ae14c1b70e14844aaae6aed09b47945e"
+  },
+  {
+    "path": "public/inhabitants/city-buildings-v2.webp",
+    "bytes": 327180,
+    "sha256": "12337ad92101dda061231886bbc077300505a3f36bca4d90064ce22458f84659"
+  },
+  {
+    "path": "public/inhabitants/planet-diversity-v2.webp",
+    "bytes": 334618,
+    "sha256": "72b15e7f9ae9e93deef4cde520edcd8a93166cadce750ba09e8e122228d6a886"
+  },
+  {
+    "path": "public/inhabitants/ringed-planet-v2.webp",
+    "bytes": 69836,
+    "sha256": "09d98a7b71a77dea5062e2bd3046e7305be1e997de3abb97db1d9773aecb0597"
+  },
+  {
+    "path": "public/backgrounds/city-materials-v2.webp",
+    "bytes": 428790,
+    "sha256": "1824e210ae88354d17e48bddad9446acd877d7e5a8fe130c40d48f49203cc1d0"
+  }
+]

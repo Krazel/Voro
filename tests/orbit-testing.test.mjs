@@ -47,7 +47,6 @@ test('Orbital gravity contains prolonged fully upgraded outward movement and das
     for(let i=0;i<fps*30;i++) {
       impulse(p); integrate(p,1/fps,{x:1,y:0}); constrainOrbit(p,1/fps);
       assert.ok(Math.hypot(p.x-earth.x,p.y-earth.y)<=earth.limit+.00001);
-      assert.ok(Math.hypot(p.x-earth.x,p.y-earth.y)>=earth.radius);
     }
     p.x=1e7;constrainOrbit(p,1/fps);
     assert.ok(Math.hypot(p.x-earth.x,p.y-earth.y)<=earth.limit+.00001); game.destroy();

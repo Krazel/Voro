@@ -6,11 +6,11 @@ export function constrainOrbit(p, dt) {
   // A broad free ring, then increasingly strong inward drift. The final bound
   // also handles upgraded dash, knockback and saves from the old endless orbit.
   const pull = Math.max(0, d - e.softLimit) * (1 - Math.exp(-dt * 2.5));
-  const distance = Math.max(e.radius + p.radius * .45, Math.min(e.limit, d - pull));
+  const distance = Math.max(0, Math.min(e.limit, d - pull));
   p.x = e.x + nx * distance; p.y = e.y + ny * distance;
-  if (d >= e.limit || d < e.radius + p.radius * .45) {
+  if (d >= e.limit) {
     const radial = p.vx * nx + p.vy * ny;
-    if ((d >= e.limit && radial > 0) || (d < e.radius + p.radius * .45 && radial < 0)) {
+    if (radial > 0) {
       p.vx -= radial * nx; p.vy -= radial * ny;
     }
   }

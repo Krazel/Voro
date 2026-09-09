@@ -1,5 +1,6 @@
 import { EDIBLE_MATTER } from './edible-matter.mjs';
 import { applyScaleAudit } from './scale-audit.mjs';
+import { applyCityCosmosArt } from './city-cosmos-art.mjs';
 import { SPECIES as MICRO_SPECIES } from './micro-world.mjs';
 export const STAGE_START_MASS = 2;
 export const stageStartMass = (stage) =>
@@ -552,6 +553,7 @@ STAGES[2].evolution = 'La marea te abre el camino.';
 STAGES[3].evolution = 'Tu sombra alcanza el puerto.';
 
 applyScaleAudit(STAGES, STAGE_SPECIES, SPECIES_BY_ID);
+applyCityCosmosArt(STAGES, STAGE_SPECIES, SPECIES_BY_ID, ATLAS_URLS);
 // Every scale includes a tiny recovery food after a severe hit.
 for (const list of STAGE_SPECIES) {
   const tiniest = list
