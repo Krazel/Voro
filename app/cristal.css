@@ -558,3 +558,12 @@ body:has(.cristal-dialog) [data-slot='dialog-overlay'] {
 .voro-shell[data-ui='cristal'] .notice-region > .cristal-toast.show { transform: translateY(0); }
 .notice-region > .cristal-toast:not(.show) { display: none; }
 .voro-shell .notice-region > .protection-badge { position: static; font-size: 11px; line-height: 1.5; }
+
+.camera-settings { display:grid; gap:12px; }
+.camera-settings label { display:flex; justify-content:space-between; font-size:16px; }
+.camera-settings input { width:100%; min-height:32px; accent-color:#b6dedb; }
+.zoom-controls { margin:0; padding:0; position:absolute; z-index:7; right:14px; top:43%; display:flex; flex-direction:column; overflow:hidden; border:1px solid #a4d8d24d; border-radius:18px; background:#071e29e8; color:#dcf1ec; }
+.zoom-controls button { min-width:52px; min-height:44px; border:0; background:transparent; color:inherit; font-size:16px; touch-action:manipulation; }
+.zoom-controls button:first-child,.zoom-controls button:last-child { font-size:24px; }
+.zoom-controls button:disabled { opacity:.35; }
+.zoom-controls button:focus-visible { outline:2px solid #dfc383; outline-offset:-3px; }

@@ -2,15 +2,15 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { makeEngine } from './engine-fixture.mjs';
 import { gameplayZoom, followGameplayZoom } from '../app/camera.mjs';
-test('Newborn framing is unchanged; growth opens smoothly without hiding body growth', () => {
-  assert.equal(gameplayZoom(11), 1);
-  assert.equal(gameplayZoom(24), 1);
-  assert.equal(gameplayZoom(42), 1);
-  let previous = 1,
+test('Newborn framing is closer; growth opens smoothly without hiding body growth', () => {
+  assert.equal(gameplayZoom(11), 1.12);
+  assert.equal(gameplayZoom(24), 1.12);
+  assert.equal(gameplayZoom(42), 1.12);
+  let previous = 1.12,
     screenRadius = 0;
   for (const radius of [24, 42, 60, 96, 150, 240, 320]) {
     const z = gameplayZoom(radius);
-    assert.ok(z >= 0.65 && z <= previous);
+    assert.ok(z >= 0.78 && z <= previous);
     assert.ok(radius * z > screenRadius);
     previous = z;
     screenRadius = radius * z;
@@ -20,17 +20,17 @@ test('Newborn framing is unchanged; growth opens smoothly without hiding body gr
   for (let i = 0; i < 60; i++) a = followGameplayZoom(a, 150, 1 / 30);
   for (let i = 0; i < 120; i++) b = followGameplayZoom(b, 150, 1 / 60);
   assert.ok(Math.abs(a - b) < 1e-10);
-  assert.ok(a > gameplayZoom(150) && a < 1);
+  assert.ok(a > gameplayZoom(150) && a < 1.12);
   assert.ok(followGameplayZoom(a, 24, 1 / 60) > a);
   // Doubling body radius should visibly increase screen size by at least 65%,
   // while still opening the view a little to reveal more surroundings.
-  const doubledScreenSize = (84 * gameplayZoom(84)) / 42;
+  const doubledScreenSize = (84 * gameplayZoom(84)) / (42 * 1.12);
   assert.ok(doubledScreenSize >= 1.65 && doubledScreenSize < 2);
 });
 test('Engine eases camera after growth, damage and the end of cinematics', () => {
   const { game } = makeEngine();
   game.saved = true;
-  assert.equal(game.zoom, 1);
+  assert.equal(game.zoom, 1.12);
   assert.equal(game.scale, 390 / 480);
   game.life.radius = 200;
   game.zoom = 1;

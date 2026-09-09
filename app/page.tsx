@@ -44,6 +44,7 @@ export default function Home() {
   const [settings, setSettings] = useState(false),
     [confirmReset, setConfirmReset] = useState(false);
   const [testPanel, setTestPanel] = useState(false);
+  const [zoomControls, setZoomControls] = useState(false);
   const [finalDetails, setFinalDetails] = useState(false);
   const leftHanded = useSyncExternalStore(subscribeControls, readLeftHanded, serverLeftHanded);
   const [controlsSaveError, setControlsSaveError] = useState(false);
@@ -86,6 +87,7 @@ export default function Home() {
       (testSize / 100);
   const resume = useRef(false);
   const [state, setState] = useState<Snapshot>({
+    zoomFactor: 1,
     testMode: false,
     stage: 0,
     stageName: STAGES[0].name,
@@ -303,7 +305,14 @@ export default function Home() {
                 ? 'Tu evolución continúa.'
                 : 'De una célula a todo lo que existe.'}
             </p>
-            {movementChoice}
+            <div className="camera-settings">
+            <label htmlFor="camera-zoom">Zoom de cámara <output>{Math.round(state.zoomFactor * 100)} %</output></label>
+            <input id="camera-zoom" type="range" min="75" max="175" step="5" value={Math.round(state.zoomFactor * 100)} onChange={e => engine.current?.setZoom(Number(e.target.value) / 100)} />
+            <button className="settings-row" onClick={() => engine.current?.setZoom(1)}>Restablecer encuadre<span>Automático</span></button>
+            <button className="settings-row" aria-pressed={zoomControls} onClick={() => setZoomControls(!zoomControls)}>Botones de zoom al jugar<span>{zoomControls ? 'Activados' : 'Desactivados'}</span></button>
+            <p className="save-note">Baja el porcentaje para ver más mundo o súbelo para acercarte. El ajuste se mantiene entre entornos durante esta sesión.</p>
+          </div>
+          {movementChoice}
             <button
               className="primary-button"
               disabled={!state.assetsReady}
@@ -340,6 +349,11 @@ export default function Home() {
             </output>
             {state.protected && !state.paused && !state.offer.length && <div className="protection-badge">MEMBRANA PROTEGIDA · ESCAPA</div>}
             </div>
+            {zoomControls && !state.paused && !state.offer.length && !state.transition && <fieldset className="zoom-controls" aria-label="Zoom de cámara">
+              <button aria-label="Alejar cámara" disabled={state.zoomFactor <= .75} onClick={() => engine.current?.setZoom(state.zoomFactor - .1)}>−</button>
+              <button aria-label="Restablecer zoom automático" onClick={() => engine.current?.setZoom(1)}>{Math.round(state.zoomFactor * 100)} %</button>
+              <button aria-label="Acercar cámara" disabled={state.zoomFactor >= 1.75} onClick={() => engine.current?.setZoom(state.zoomFactor + .1)}>+</button>
+            </fieldset>}
             <div className="bottom-controls" data-dash-side={leftHanded ? 'left' : 'right'}>
               <button
                 className={'dash-button ' + (state.dash > 0 ? 'cooldown' : '')}

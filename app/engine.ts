@@ -36,7 +36,8 @@ import {
   animationCacheStats,
   retainAnimationSpecies,
 } from './inhabitant-animation.mjs';
-import { gameplayZoom, followGameplayZoom } from './camera.mjs';
+import { gameplayZoom, followGameplayZoom, zoomPreference } from './camera.mjs';
+import { FramePacer, RasterBudget, rasterRatio } from './render-budget.mjs';
 import {
   shedBiomass,
   moveFragments,
@@ -67,6 +68,7 @@ import {
 } from './journey-progress.mjs';
 
 export type Snapshot = {
+  zoomFactor: number;
   performance?: ReturnType<FrameMonitor['summary']> & { loading: number; pending: number; cacheMB: number;
     recording: boolean; remaining: number; sheetErrors: number };
   testMode: boolean;
@@ -190,6 +192,9 @@ export class VoroEngine {
   pixelRatio = 1;
   scale = 1;
   zoom = 1;
+  zoomFactor = 1;
+  framePacer = new FramePacer();
+  rasterBudget = new RasterBudget();
   testMode = false;
   testInvulnerable = false;
   testEvolution = false;
@@ -269,6 +274,8 @@ export class VoroEngine {
     return this.frameMonitor.export({ ...RELEASE,
       date: new Date().toISOString(), userAgent: typeof navigator === 'undefined' ? '' : navigator.userAgent,
       viewport: { width: this.canvas.width, height: this.canvas.height, pixelRatio: this.pixelRatio },
+      rendering: { targetFPS: 60, skippedRefreshes: this.framePacer.skipped,
+        quality: this.rasterBudget.quality, pixels: this.canvas.width * this.canvas.height, zoomFactor: this.zoomFactor, zoom: this.zoom },
       animationSheets: this.animationSheets.stats(), animationCache: animationCacheStats(),
       backgroundRebuilds: this.worldGround.redraws,
       background: this.backgroundStatus(),
@@ -367,7 +374,7 @@ export class VoroEngine {
     this.fragments = restoredFragments;
     this.food = [...this.world.entities, ...this.fragments];
     this.camera = { x: this.life.x, y: this.life.y };
-    this.zoom = gameplayZoom(this.life.radius);
+    this.zoom = gameplayZoom(this.life.radius) * this.zoomFactor;
     this.resize();
     this.observer = new ResizeObserver(() => this.resize());
     this.observer.observe(canvas);
@@ -520,10 +527,8 @@ export class VoroEngine {
     this.width = 480;
     this.height = b.height / this.scale;
     // Raster resolution is independent of the world camera and edible sizes.
-    this.pixelRatio = Math.min(
-      devicePixelRatio || 1,
-      matchMedia('(pointer: coarse)').matches ? 1.5 : 2,
-    );
+    this.pixelRatio = rasterRatio(b.width, b.height, devicePixelRatio,
+      matchMedia('(pointer: coarse)').matches) * this.rasterBudget.quality;
     const width = Math.round(b.width * this.pixelRatio), height = Math.round(b.height * this.pixelRatio);
     if (this.canvas.width !== width || this.canvas.height !== height) {
       this.canvas.width = width;
@@ -537,6 +542,13 @@ export class VoroEngine {
       x: (e.clientX - b.left) / this.scale,
       y: (e.clientY - b.top) / this.scale,
     };
+  }
+  setZoom(value: number) {
+    this.zoomFactor = zoomPreference(value);
+    this.zoom = gameplayZoom(this.life.radius) * this.zoomFactor;
+    this.pointer = null;
+    this.renderDirty = true;
+    this.publish();
   }
   initAudio() {
     if (this.audioStarted) {
@@ -710,7 +722,7 @@ export class VoroEngine {
     this.comboMeals = 0;
     this.lastMeal = -100;
     this.camera = { x: this.life.x, y: this.life.y };
-    this.zoom = gameplayZoom(this.life.radius);
+    this.zoom = gameplayZoom(this.life.radius) * this.zoomFactor;
     this.started = true;
     this.paused = false;
     this.keys.clear();
@@ -760,7 +772,7 @@ export class VoroEngine {
     this.comboMeals = 0;
     this.lastMeal = -100;
     this.camera = { x: this.life.x, y: this.life.y };
-    this.zoom = gameplayZoom(this.life.radius);
+    this.zoom = gameplayZoom(this.life.radius) * this.zoomFactor;
     this.keys.clear();
     this.pointer = null;
     this.padInput = { x: 0, y: 0 };
@@ -839,7 +851,7 @@ export class VoroEngine {
       this.stats = upgradeStats(this.progress.mutations);
       this.seed();
       this.camera = { x: 700, y: 970 };
-      this.zoom = gameplayZoom(this.life.radius);
+      this.zoom = gameplayZoom(this.life.radius) * this.zoomFactor;
       this.started = true;
       this.paused = false;
       this.keys.clear();
@@ -923,6 +935,7 @@ export class VoroEngine {
       this.diagnosticSnapshotAt = this.time;
     }
     this.emit({
+      zoomFactor: this.zoomFactor,
       performance: this.diagnosticsEnabled || this.diagnosticCompleted ? {
         ...(this.diagnosticSnapshot || this.frameMonitor.summary(this.diagnosticCompleted)),
         loading: this.assets.stats().loading + this.animationSheets.stats().pending,
@@ -1017,6 +1030,10 @@ export class VoroEngine {
   }
   frame = (stamp: number) => {
     if (this.destroyed) return;
+    if (!this.framePacer.accept(stamp)) {
+      this.raf = requestAnimationFrame(this.frame);
+      return;
+    }
     if (this.paused || !this.started || this.settingsOpen || this.progress.offer.length || this.transition || this.life.dead || document.hidden)
       this.tilt.read(false);
     const frameStart = this.diagnosticsEnabled ? performance.now() : 0;
@@ -1066,6 +1083,13 @@ export class VoroEngine {
         this.renderDirty = true;
         measured = this.started && this.diagnosticsEnabled;
       }
+      if (this.rasterBudget.observe(interval, this.started && !this.paused && !this.settingsOpen
+        && !document.hidden && this.assetsReady && !this.transition && !this.birth
+        && !this.progress.completed && !this.progress.offer.length && !this.life.dead)) {
+        this.resize();
+        if (this.diagnosticsEnabled) this.frameMonitor.event('raster-downshift', 0,
+          { quality: this.rasterBudget.quality, reason: 'sustained-missed-frames', width: this.canvas.width, height: this.canvas.height });
+      }
       if (this.renderDirty) {
         this.measured('render', () => this.render());
         this.renderDirty = false;
@@ -1074,6 +1098,7 @@ export class VoroEngine {
     if (measured && this.measuredLastFrame) {
       this.frameMonitor.add(interval, performance.now() - frameStart, {
         stage: this.progress.stage, radius: +this.life.radius.toFixed(1), zoom: +this.zoom.toFixed(3),
+        rasterQuality: this.rasterBudget.quality, pixels: this.canvas.width * this.canvas.height,
         entities: this.food.length, transition: this.transition > 0,
         loading: this.assets.stats().loading + this.animationSheets.stats().pending,
         queuedPoses: animationCacheStats().pending, groundRebuilds: this.worldGround.redraws,
@@ -1126,7 +1151,9 @@ export class VoroEngine {
         );
         this.seed();
         this.camera = { x: this.life.x, y: this.life.y };
-        // Keep the camera continuous while the next local scale is revealed.
+        // The scale changes at the crossfade midpoint: start the new biome
+        // at its own framing, never inherit the previous giant's wide view.
+        this.zoom = gameplayZoom(this.life.radius) * this.zoomFactor;
         this.comboClock = 0;
         this.comboMeals = 0;
         this.lastMeal = -100;
@@ -1312,17 +1339,12 @@ export class VoroEngine {
     this.camera.y += (cameraY - this.camera.y) * (1 - Math.exp(-dt * 3));
     this.animateMembrane(dt);
     if (this.transition > 0) {
-      const scene = transitionScene(
-        STAGES[this.transitionFrom].id,
-        (7.2 - this.transition) / 7.2,
-        this.reduced,
-      );
       const target =
         this.transition > 3.6
-          ? Math.max(gameplayZoom(p.radius) * 0.96, this.transitionStartZoom * (scene.coastal ? 1 : 0.96))
-          : gameplayZoom(p.radius);
+          ? Math.max(gameplayZoom(p.radius) * this.zoomFactor, this.transitionStartZoom)
+          : gameplayZoom(p.radius) * this.zoomFactor;
       this.zoom += (target - this.zoom) * (1 - Math.exp(-dt * 1.2));
-    } else this.zoom = followGameplayZoom(this.zoom, p.radius, dt);
+    } else this.zoom = followGameplayZoom(this.zoom, p.radius, dt, this.zoomFactor);
     this.flash = Math.max(0, this.flash - dt * 0.6);
     this.hitFlash = Math.max(0, this.hitFlash - dt);
     for (const q of this.particles) {
