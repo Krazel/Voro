@@ -1,4 +1,4 @@
-# Final del universo — 0.4.13 (1)
+# Final del universo — 0.4.13 (2)
 
 El antiguo desenlace requería absorber un objeto final fuera de la pantalla y
 mantenía el HUD/panel sobre un fondo oscuro. Ahora alcanzar la meta de biomasa
@@ -24,4 +24,8 @@ Verificación: pruebas de final por biomasa, guardado, aislamiento de campaña,
 respeto al modo fijo, crecimiento, negro puro, liberación de captura y reposo.
 Comprobación de UI local: inicio de absorción, negro completo, resumen solo al
 tocar. No equivale a validación de la IPA en iPhone. Entrega y evidencia exacta
-se registran en la biblioteca y artifact/testflight-0.4.13-build-1/.
+se registran en la biblioteca y artifact/testflight-0.4.13-build-2/.
+
+La revisión intermedia detectó el rectángulo de la captura al contraerse. La
+segunda build aplica una máscara elíptica suave una sola vez a la captura.
+La build 1 llegó a Apple antes de poder cancelarla; no se habilitó en el grupo.

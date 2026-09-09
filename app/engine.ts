@@ -1350,7 +1350,17 @@ export class VoroEngine {
       this.renderScene(true);
       frame = document.createElement('canvas');
       frame.width = this.canvas.width; frame.height = this.canvas.height;
-      frame.getContext('2d')?.drawImage(this.canvas,0,0);
+      const captured = frame.getContext('2d');
+      if (captured) {
+        captured.drawImage(this.canvas,0,0);
+        // Feather the captured universe once, so contraction never exposes
+        // rectangular screenshot edges behind the transparent membrane.
+        captured.save(); captured.scale(frame.width,frame.height);
+        captured.globalCompositeOperation = 'destination-in';
+        const edge = captured.createRadialGradient(.5,.48,.24,.5,.48,.5);
+        edge.addColorStop(0,'#fff'); edge.addColorStop(1,'transparent');
+        captured.fillStyle = edge; captured.fillRect(0,0,1,1); captured.restore();
+      }
     }
     this.universeFinale?.destroy(); this.universeFinale = new UniverseFinale(frame);
     this.progress.completed = true; this.progress.finalReady = true;
