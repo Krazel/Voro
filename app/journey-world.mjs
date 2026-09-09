@@ -7,6 +7,7 @@ import {
 import { MicroWorld, makeEntity, TILE } from './micro-world.mjs';
 import { animalTarget } from './animal-steering.mjs';
 import { random, clamp } from './simulation.mjs';
+import { ORBITAL_EARTH } from './earth-landmark.mjs';
 import {
   STAGE_SPECIES,
   STAGES,
@@ -101,6 +102,8 @@ export class JourneyWorld extends MicroWorld {
       for (let attempt = 0; attempt < 10; attempt++) {
         x = cx * TILE + margin + rng() * (TILE - 2 * margin);
         y = cy * TILE + margin + rng() * (TILE - 2 * margin);
+        if (stageId === 'orbit' && Math.hypot(x - ORBITAL_EARTH.x, y - ORBITAL_EARTH.y)
+          < ORBITAL_EARTH.radius + candidate.r + 30) continue;
         if (stageId === 'land' && !shoreAllows(s, x, y, candidate.r)) continue;
         if (
           occupied.some(
@@ -140,6 +143,12 @@ export class JourneyWorld extends MicroWorld {
       }
     if (stageId === 'land')
       for (const e of entities) constrainToShore(e, SPECIES_BY_ID[e.kind]);
+    if (stageId === 'orbit') {
+      // Starter food and drifting objects also stay above the Earth's surface.
+      for (let i = entities.length - 1; i >= 0; i--)
+        if (Math.hypot(entities[i].x - ORBITAL_EARTH.x, entities[i].y - ORBITAL_EARTH.y)
+          < ORBITAL_EARTH.radius + entities[i].r + 15) entities.splice(i, 1);
+    }
     // One Earth at the arrival point. A consumed landmark remains consumed,
     // unlike renewable forage, including after chunk eviction and save/load.
     if (stageId === 'planets' && cx === 1 && cy === 2 && !this.journal.has('landmark:earth')) {
@@ -196,6 +205,14 @@ export class JourneyWorld extends MicroWorld {
       e.x = clamp(e.x, e.homeX - 280, e.homeX + 280);
       e.y = clamp(e.y, e.homeY - 280, e.homeY + 280);
       if (STAGES[this.stage].id === 'land') constrainToShore(e, s);
+      if (STAGES[this.stage].id === 'orbit') {
+        const dx = e.x - ORBITAL_EARTH.x, dy = e.y - ORBITAL_EARTH.y;
+        const distance = Math.hypot(dx, dy), min = ORBITAL_EARTH.radius + e.r + 15;
+        if (distance < min) {
+          e.x = ORBITAL_EARTH.x + (distance ? dx / distance : 0) * min;
+          e.y = ORBITAL_EARTH.y + (distance ? dy / distance : -1) * min;
+        }
+      }
       if (speed > 4 && Math.hypot(e.x - oldX, e.y - oldY) > 0.001) {
         const angle = Math.atan2(e.y - oldY, e.x - oldX);
         e.heading +=

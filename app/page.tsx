@@ -77,6 +77,7 @@ export default function Home() {
   const [testSize, setTestSize] = useState(0);
   const [keepUpgrades, setKeepUpgrades] = useState(true);
   const [testSafe, setTestSafe] = useState(false);
+  const [testEvolution, setTestEvolution] = useState(true);
   const testMass =
     stageStartMass(testStage) *
     ((STAGES[testStage].goal * 1.5) / stageStartMass(testStage)) **
@@ -695,10 +696,23 @@ export default function Home() {
                 />
                 Invulnerabilidad
               </label>
-              <p className="save-note">
-                Puedes comer, moverte y probar el daño. La prueba permanece en
-                el entorno elegido y no cambia tu partida.
-              </p>
+              <label className="test-check">
+                <input type="checkbox" checked={testEvolution} onChange={e => {
+                  setTestEvolution(e.target.checked);
+                  if (engine.current?.testMode) engine.current.testEvolution = e.target.checked;
+                }} />
+                Permitir pasar al siguiente entorno
+              </label>
+              <p className="save-note">Prueba crecimiento, adaptaciones y transiciones sin cambiar tu partida guardada.</p>
+              {state.testMode && <div className="test-boosts">
+                <p className="save-note">Biomasa de prueba: {state.biomass.toFixed(1)} / {state.target}</p>
+                <button className="settings-row" onClick={() => engine.current?.boostTest('biomass')}>Añadir biomasa <span>+25 % de la meta</span></button>
+                <button className="settings-row" onClick={() => engine.current?.boostTest('goal')}>Llenar la barra de biomasa <span>100 %</span></button>
+                <button className="settings-row" disabled={state.level >= MAX_UPGRADE_CHOICES} onClick={() => {
+                  if (engine.current?.boostTest('adaptation')) { resume.current = false; if(engine.current) engine.current.paused = false; changeSettings(false); }
+                }}>Conseguir una adaptación <span>Elegir ahora</span></button>
+              </div>}
+
               <button
                 className="primary-button"
                 onClick={() => {
@@ -708,6 +722,7 @@ export default function Home() {
                       testMass,
                       keepUpgrades,
                       testSafe,
+                      testEvolution,
                     )
                   ) {
                     resume.current = false;
@@ -715,7 +730,7 @@ export default function Home() {
                   }
                 }}
               >
-                Entrar en la prueba <Play size={18} />
+                {state.testMode ? 'Reiniciar prueba elegida' : 'Entrar en la prueba'} <Play size={18} />
               </button>
             </div>
           )}

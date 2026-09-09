@@ -35,6 +35,7 @@ export function newJourney(seed) {
     completed: false,
     pendingEvolution: false,
     finalReady: false,
+    earthConsumed: false,
   };
 }
 export function journeyLife(p) {
@@ -169,6 +170,7 @@ export function loadJourney(raw) {
         upgradeStats(mutations).shieldCapacity,
       ),
       maturitySeen: p.maturitySeen === true,
+      earthConsumed: p.earthConsumed === true && stage >= STAGES.findIndex(s => s.id === 'orbit'),
       pendingEvolution:
         p.pendingEvolution === true && stage < STAGES.length - 1,
       completed: p.completed === true && stage === STAGES.length - 1,

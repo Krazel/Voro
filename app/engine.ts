@@ -1,7 +1,7 @@
 import { WorldGround } from './world-ground.mjs';
 import { RELEASE } from './release.mjs';
 import { TiltControl } from './tilt-control.ts';
-import { drawOrbitalEarth } from './earth-landmark.mjs';
+import { drawOrbitalEarth, constrainOrbit, canAbsorbEarth } from './earth-landmark.mjs';
 import { StageAssets } from './stage-assets.mjs';
 import { FrameMonitor } from './frame-monitor.mjs';
 import { AnimationSheets } from './animation-sheets.mjs';
@@ -189,6 +189,8 @@ export class VoroEngine {
   zoom = 1;
   testMode = false;
   testInvulnerable = false;
+  testEvolution = false;
+  earthAbsorption = 0;
   testBackup: {
     progress: VoroEngine['progress'];
     life: VoroEngine['life'];
@@ -202,6 +204,7 @@ export class VoroEngine {
     transitionStartZoom: number;
     transitionFrame: VoroEngine['transitionFrame'];
     ending: number;
+    earthAbsorption: number;
   } | null = null;
   camera = { x: 700, y: 970 };
   heading = -Math.PI / 2;
@@ -643,6 +646,7 @@ export class VoroEngine {
     biomass: number,
     keepUpgrades = true,
     invulnerable = false,
+    allowEvolution = false,
   ) {
     if (
       !Number.isInteger(stage) ||
@@ -667,10 +671,13 @@ export class VoroEngine {
         transitionStartZoom: this.transitionStartZoom,
         transitionFrame: this.transitionFrame,
         ending: this.ending,
+        earthAbsorption: this.earthAbsorption,
       };
     }
     this.testMode = true;
     this.testInvulnerable = invulnerable;
+    this.testEvolution = allowEvolution;
+    this.earthAbsorption = 0;
     this.progress = newJourney(this.testBackup.progress.seed);
     this.progress.stage = stage;
     this.progress.mutations = keepUpgrades
@@ -711,6 +718,20 @@ export class VoroEngine {
     this.publish();
     return true;
   }
+  boostTest(kind: 'biomass' | 'adaptation' | 'goal') {
+    if (!this.testMode || this.life.dead || this.transition || this.earthAbsorption || this.progress.completed) return false;
+    if (kind === 'adaptation') {
+      this.progress.xp = Math.max(this.progress.xp, nextAdaptation(this.progress.level));
+      refreshOffer(this.progress);
+    } else if (kind === 'biomass' || kind === 'goal') {
+      const goal = stageOf(this.progress).goal;
+      this.life.biomass = kind === 'goal' ? Math.max(this.life.biomass, goal)
+        : Math.min(this.life.maxMass, this.life.biomass + goal * .25);
+      this.life.feedPulse = 1;
+    } else return false;
+    this.publish();
+    return true;
+  }
   exitTest() {
     if (!this.testBackup) return false;
     const backup = this.testBackup;
@@ -718,6 +739,7 @@ export class VoroEngine {
     this.testBackup = null;
     this.testMode = false;
     this.testInvulnerable = false;
+    this.testEvolution = false;
     this.stats = upgradeStats(this.progress.mutations);
     this.food = [...this.world.entities, ...this.fragments];
     this.motes = this.world.motes;
@@ -801,7 +823,7 @@ export class VoroEngine {
       this.life = journeyLife(this.progress);
       this.world = new JourneyWorld(
         this.progress.seed,
-        [],
+        this.progress.earthConsumed ? [['landmark:earth', Number.MAX_SAFE_INTEGER]] : [],
         this.progress.stage,
       );
       this.stats = upgradeStats(this.progress.mutations);
@@ -814,6 +836,7 @@ export class VoroEngine {
       this.pointer = null;
       this.flash = 0;
       this.transition = 0;
+      this.earthAbsorption = 0;
       this.comboClock = 0;
       this.comboMeals = 0;
       this.progress.shieldRecharge = 0;
@@ -1050,6 +1073,18 @@ export class VoroEngine {
     this.raf = requestAnimationFrame(this.frame);
   };
   update(dt: number) {
+    if (this.earthAbsorption > 0) {
+      this.earthAbsorption = Math.min(1, this.earthAbsorption + dt / (this.reduced ? 1 : 3.2));
+      this.animateMembrane(dt);
+      this.life.feedPulse = .8;
+      if (this.earthAbsorption >= 1) {
+        this.progress.earthConsumed = true;
+        this.burst(this.life.x, this.life.y, 24, true);
+        this.beginEvolution();
+        this.earthAbsorption = 0;
+      }
+      return;
+    }
     if (this.birth > 0) {
       this.birth = Math.max(0, this.birth - dt);
       this.camera.x += (this.life.x - this.camera.x) * (1 - Math.exp(-dt * 3));
@@ -1067,7 +1102,7 @@ export class VoroEngine {
         this.life = advanceJourney(this.progress, this.life);
         this.world = new JourneyWorld(
           this.progress.seed,
-          [],
+          this.progress.earthConsumed ? [['landmark:earth', Number.MAX_SAFE_INTEGER]] : [],
           this.progress.stage,
         );
         this.seed();
@@ -1108,6 +1143,7 @@ export class VoroEngine {
       Object.assign(p, this.stats);
       syncShields(this.progress, this.stats, dt);
       integrate(p, dt, this.input());
+      if (stageOf(this.progress).id === 'orbit') constrainOrbit(p, dt);
       const speed = Math.hypot(p.vx, p.vy);
       if (speed > 8) {
         const target = Math.atan2(p.vy, p.vx);
@@ -1180,7 +1216,7 @@ export class VoroEngine {
             'La biomasa te hace crecer. La adaptación desbloquea mejoras.',
             5,
           );
-        if (!this.testMode) refreshOffer(this.progress);
+        refreshOffer(this.progress);
         if (this.progress.offer.length && !p.finalEaten) {
           this.keys.clear();
           this.pointer = null;
@@ -1236,7 +1272,7 @@ export class VoroEngine {
           .slice(-24);
       }
       if (
-        !this.testMode &&
+        (!this.testMode || this.testEvolution) &&
         p.finalEaten &&
         this.progress.stage === STAGES.length - 1
       ) {
@@ -1248,7 +1284,7 @@ export class VoroEngine {
         this.chime(true);
         this.save();
         this.publish();
-      } else if (!this.testMode && p.biomass >= stageOf(this.progress).goal) {
+      } else if ((!this.testMode || this.testEvolution) && p.biomass >= stageOf(this.progress).goal) {
         if (this.progress.stage < STAGES.length - 1) {
           this.beginEvolution();
         } else {
@@ -1308,11 +1344,22 @@ export class VoroEngine {
   }
   beginEvolution() {
     if (
-      this.testMode ||
+      (this.testMode && !this.testEvolution) ||
       this.transition > 0 ||
       this.progress.stage >= STAGES.length - 1
     )
       return;
+    if (stageOf(this.progress).id === 'orbit' && !this.progress.earthConsumed) {
+      this.progress.pendingEvolution = false;
+      if (!this.earthAbsorption && canAbsorbEarth(this.life)) {
+        this.earthAbsorption = .001;
+        this.keys.clear(); this.pointer = null;
+        this.life.vx = this.life.vy = 0;
+        this.toast('Tu mundo vuelve a ti.', 4);
+        this.publish();
+      }
+      return;
+    }
     this.progress.pendingEvolution = true;
     this.progress.maturitySeen = true;
     this.transitionFrom = this.progress.stage;
@@ -1605,49 +1652,8 @@ export class VoroEngine {
     // intermediate result into the persistent terrain cache.
     const entry = this.assets.entries.get(`ground:${stage.id}`);
     if (!entry?.ready || entry.image !== this.groundImages[stage.id]) return;
-    if (stage.id !== 'micro') {
-      const image = this.groundImages[stage.id];
-      if (
-        this.worldGround.draw(
-          c,
-          image,
-          stage.id,
-          this.camera,
-          this.zoom,
-          this.height,
-          this.progress.seed,
-          this.time,
-          !this.reduced,
-        )
-      )
-        return;
-    }
-    // A non-microscopic stage never falls back to an unrelated old atlas.
-    if (stage.id !== 'micro') return;
-    const im = this.groundImages.micro;
-    if (im?.complete && im.naturalWidth) {
-      const cell = stage.background,
-        sw = index === 0 ? im.width : im.width / 4,
-        sh = index === 0 ? im.height : im.height / 2;
-      const sx = cell < 0 ? 0 : (cell % 4) * sw,
-        sy = cell < 0 ? 0 : Math.floor(cell / 4) * sh;
-      const factor = Math.max(540 / sw, (this.height + 80) / sh),
-        w = sw * factor,
-        h = sh * factor;
-      const px = Math.sin(this.camera.x / 1600) * 22,
-        py = Math.sin(this.camera.y / 1800) * 25;
-      c.drawImage(
-        im,
-        sx,
-        sy,
-        sw,
-        sh,
-        (480 - w) / 2 - px,
-        (this.height - h) / 2 - py,
-        w,
-        h,
-      );
-    }
+    this.worldGround.draw(c, this.groundImages[stage.id], stage.id, this.camera,
+      this.zoom, this.height, this.progress.seed, this.time, !this.reduced);
   }
   render() {
     this.measured('animationPreparation', () => {
@@ -1683,10 +1689,10 @@ export class VoroEngine {
       this.drawEvolution();
       return;
     }
-    if (STAGES[this.progress.stage].id === 'orbit') {
+    if (STAGES[this.progress.stage].id === 'orbit' && !this.progress.earthConsumed) {
       c.save();
       c.globalAlpha = this.transition > 0 ? clamp((3.6 - this.transition) / 1.1, 0, 1) : 1;
-      drawOrbitalEarth(c, this.atlasImages.earth, this.camera, this.height);
+      drawOrbitalEarth(c, this.atlasImages.earth, this.camera, this.height, this.zoom, this.life, this.earthAbsorption);
       c.restore();
     }
     const shake = this.reduced ? 0 : this.hitFlash * 3,

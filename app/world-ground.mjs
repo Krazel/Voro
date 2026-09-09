@@ -1,6 +1,7 @@
 import { CoastPreview } from './coast-preview.mjs';
 
 export const GROUND_PROFILES = {
+  micro: { file: 'micro', step: 640, depth: 0.65, tint: '#071e25' },
   pond: { file: 'pond', step: 360, depth: 1, tint: '#102c29' },
   land: { file: 'shore', step: 600, depth: 1, tint: '#1d3437' },
   water: { file: 'sea', step: 420, depth: 1, tint: '#082f3b' },

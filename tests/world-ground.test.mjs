@@ -7,7 +7,7 @@ import { makeEngine } from './engine-fixture.mjs';
 test('Non-shore atlases stream stable varied regions; every biome has a ground profile', () => {
   assert.deepEqual(
     Object.keys(GROUND_PROFILES),
-    STAGES.slice(1).map((s) => s.id),
+    STAGES.map((s) => s.id),
   );
   for (const stage of Object.keys(GROUND_PROFILES).filter(s => s !== 'land')) {
     const seen = new Set();
@@ -25,10 +25,10 @@ test('Non-shore atlases stream stable varied regions; every biome has a ground p
   );
 });
 
-test('Background streaming remains bounded through every sandbox biome and leaves microscope untouched', () => {
+test('Background streaming remains bounded through every sandbox biome including microscope', () => {
   const { game } = makeEngine();
   game.drawBackground(0);
-  assert.equal(game.worldGround.cache.size, 0);
+  assert.equal(game.worldGround.cache.size, 1);
   for (let stage = 1; stage < STAGES.length; stage++) {
     game.startTest(stage, 1);
     game.camera = { x: -1874.3, y: -2351.7 };
