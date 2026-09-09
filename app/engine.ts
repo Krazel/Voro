@@ -1,3 +1,4 @@
+import { UniverseFinale, FINALE_SECONDS } from './universe-finale.mjs';
 import { WorldGround } from './world-ground.mjs';
 import { RELEASE } from './release.mjs';
 import { TiltControl } from './tilt-control.ts';
@@ -161,6 +162,7 @@ export class VoroEngine {
   transitionAdvanced = false;
   transitionFrame: HTMLCanvasElement | null = null;
   ending = 0;
+  universeFinale: UniverseFinale | null = null;
   comboClock = 0;
   comboMeals = 0;
   lastMeal = -100;
@@ -203,6 +205,7 @@ export class VoroEngine {
     transitionFrom: number;
     transitionStartZoom: number;
     transitionFrame: VoroEngine['transitionFrame'];
+    universeFinale: UniverseFinale | null;
     ending: number;
     earthAbsorption: number;
   } | null = null;
@@ -561,14 +564,16 @@ export class VoroEngine {
     }
   }
   setAudio() {
-    if (this.sound && !this.paused && this.audio?.state === 'suspended')
+    if (this.sound && !this.paused && (!this.progress.completed || this.ending > 0) && this.audio?.state === 'suspended')
       this.audio.resume().catch(() => {});
+    if (this.progress.completed && this.ending === 0 && this.audio?.state === 'running')
+      this.audio.suspend().catch(() => {});
     if (this.audio && this.master)
       this.master.gain.setTargetAtTime(
         this.sound &&
           !this.paused &&
           !this.progress.offer.length &&
-          (!this.progress.completed || this.ending > 0)
+          (!this.progress.completed || this.ending > FINALE_SECONDS * .2)
           ? 0.055
           : 0,
         this.audio.currentTime,
@@ -671,9 +676,12 @@ export class VoroEngine {
         transitionStartZoom: this.transitionStartZoom,
         transitionFrame: this.transitionFrame,
         ending: this.ending,
+        universeFinale: this.universeFinale,
         earthAbsorption: this.earthAbsorption,
       };
     }
+    if(this.testMode) this.universeFinale?.destroy();
+    this.universeFinale = null;
     this.testMode = true;
     this.testInvulnerable = invulnerable;
     this.testEvolution = allowEvolution;
@@ -734,6 +742,7 @@ export class VoroEngine {
   }
   exitTest() {
     if (!this.testBackup) return false;
+    this.universeFinale?.destroy();
     const backup = this.testBackup;
     Object.assign(this, backup);
     this.testBackup = null;
@@ -844,6 +853,7 @@ export class VoroEngine {
       this.progress.pendingEvolution = false;
       this.progress.finalReady = false;
       this.ending = 0;
+      this.universeFinale?.destroy(); this.universeFinale = null;
       this.transitionFrame = null;
       if (name === 'restart') this.beginBirth();
       this.toast(
@@ -1040,6 +1050,7 @@ export class VoroEngine {
         !this.paused &&
         !this.settingsOpen &&
         !this.progress.offer.length &&
+        (!this.progress.completed || this.ending > 0) &&
         (!this.started || this.assetsReady)
       ) {
         this.time += dt;
@@ -1121,11 +1132,13 @@ export class VoroEngine {
       }
     }
     if (this.ending > 0) {
+      const before = this.ending;
       this.ending = Math.max(0, this.ending - dt);
-      if (this.ending === 0) {
-        this.setAudio();
-        this.publish();
-      }
+      this.animateMembrane(dt);
+      if (before > FINALE_SECONDS * .2 && this.ending <= FINALE_SECONDS * .2) this.setAudio();
+      if (!this.ending) { this.universeFinale?.destroy(); this.universeFinale = null; this.setAudio(); }
+      if (!this.ending || this.time - this.lastEmit > .12) { this.lastEmit=this.time; this.publish(); }
+      return;
     }
     const p = this.life;
     if (
@@ -1216,6 +1229,10 @@ export class VoroEngine {
             'La biomasa te hace crecer. La adaptación desbloquea mejoras.',
             5,
           );
+        if (this.progress.stage === STAGES.length - 1 && (!this.testMode || this.testEvolution)
+          && (p.biomass >= stageOf(this.progress).goal || p.finalEaten)) {
+          this.beginUniverseFinale(); return;
+        }
         refreshOffer(this.progress);
         if (this.progress.offer.length && !p.finalEaten) {
           this.keys.clear();
@@ -1271,29 +1288,11 @@ export class VoroEngine {
           .filter((f) => !f.eaten && Math.hypot(f.x - p.x, f.y - p.y) < 1300)
           .slice(-24);
       }
-      if (
-        (!this.testMode || this.testEvolution) &&
-        p.finalEaten &&
-        this.progress.stage === STAGES.length - 1
-      ) {
-        this.progress.completed = true;
-        this.progress.offer = [];
-        this.ending = 12;
-        this.keys.clear();
-        this.pointer = null;
-        this.chime(true);
-        this.save();
-        this.publish();
-      } else if ((!this.testMode || this.testEvolution) && p.biomass >= stageOf(this.progress).goal) {
-        if (this.progress.stage < STAGES.length - 1) {
-          this.beginEvolution();
-        } else {
-          if (!this.progress.finalReady)
-            this.toast('El último horizonte ya está a tu alcance.', 7);
-          this.progress.finalReady = true;
-        }
+      if ((!this.testMode || this.testEvolution) && (p.biomass >= stageOf(this.progress).goal || p.finalEaten)) {
+        if (this.progress.stage < STAGES.length - 1) this.beginEvolution();
+        else this.beginUniverseFinale();
       }
-      if (this.progress.finalReady) this.world.spawnFinal(p);
+
     }
     if (p.dead) integrate(p, dt, { x: 0, y: 0 });
     if (!this.started && !this.saved && this.progress.stage === 0) {
@@ -1341,6 +1340,26 @@ export class VoroEngine {
       this.lastEmit = this.time;
       this.publish();
     }
+  }
+  beginUniverseFinale() {
+    if (this.progress.completed || this.life.dead || this.progress.stage !== STAGES.length - 1
+      || (this.testMode && !this.testEvolution)
+      || (this.life.biomass < stageOf(this.progress).goal && !this.life.finalEaten)) return false;
+    let frame = null;
+    if ('createElement' in document) {
+      this.renderScene(true);
+      frame = document.createElement('canvas');
+      frame.width = this.canvas.width; frame.height = this.canvas.height;
+      frame.getContext('2d')?.drawImage(this.canvas,0,0);
+    }
+    this.universeFinale?.destroy(); this.universeFinale = new UniverseFinale(frame);
+    this.progress.completed = true; this.progress.finalReady = true;
+    this.progress.offer = []; this.life.finalEaten = true;
+    this.ending = FINALE_SECONDS; this.hint = ''; this.flash = this.hitFlash = 0;
+    this.life.vx = this.life.vy = 0; this.keys.clear(); this.pointer = null;
+    this.tilt.read(false); this.paused = false;
+    this.tone(100,24,8,.35); this.setAudio(); this.save(); this.publish();
+    return true;
   }
   beginEvolution() {
     if (
@@ -1476,33 +1495,6 @@ export class VoroEngine {
         }
         c.restore();
       }
-    }
-    if (this.progress.completed) {
-      const u = this.ending > 0 ? 1 - this.ending / 12 : 1;
-      c.fillStyle = 'rgba(2,6,12,' + Math.min(1, u * 1.6) + ')';
-      c.fillRect(0, 0, 480, this.height);
-      if (u < 0.88) {
-        c.save();
-        c.translate(240, this.height * 0.48);
-        c.globalAlpha = 1 - Math.max(0, (u - 0.7) / 0.18);
-        drawJourneySprite(
-          c,
-          this.atlasImages,
-          'universe-11',
-          Math.max(3, 230 * (1 - u) ** 2),
-          0,
-          this.time,
-          0.5,
-        );
-        c.restore();
-      }
-      if (u > 0.25 && u < 0.95)
-        this.halo(
-          240,
-          this.height * 0.48,
-          10 + Math.sin(u * Math.PI) * 30,
-          'rgba(250,207,121,' + (1 - u) + ')',
-        );
     }
   }
   slurp() {
@@ -1666,11 +1658,19 @@ export class VoroEngine {
       endAnimationFrame();
     }
   }
-  renderScene() {
+  renderScene(skipProtagonist = false) {
     const c = this.ctx,
       k = this.pixelRatio * this.scale,
       p = this.life;
     c.setTransform(k, 0, 0, k, 0, 0);
+    if (this.progress.completed) {
+      c.fillStyle = '#000'; c.fillRect(0,0,480,this.height);
+      if (this.ending > 0 && this.universeFinale) this.universeFinale.draw(c,480,this.height,this.ending,this.reduced,(growth: number) => {
+        c.save(); c.translate(240,this.height*.48); c.scale(this.zoom*growth,this.zoom*growth);
+        c.translate(-p.x,-p.y); this.drawCell(); c.restore();
+      });
+      return;
+    }
     c.fillStyle = '#041423';
     c.fillRect(0, 0, 480, this.height);
     if (this.transition > 0) {
@@ -1791,7 +1791,7 @@ export class VoroEngine {
       c.translate(p.x, p.y); c.scale(size, size); c.translate(-p.x, -p.y);
       c.globalAlpha = .25 + .75 * t;
     }
-    this.measured('protagonist', () => this.drawCell());
+    if (!skipProtagonist) this.measured('protagonist', () => this.drawCell());
     c.restore();
     for (const f of this.floating) {
       c.save();
@@ -2249,6 +2249,8 @@ export class VoroEngine {
     }
   }
   destroy() {
+    this.universeFinale?.destroy();
+    this.testBackup?.universeFinale?.destroy();
     this.tilt.stop();
     this.save();
     this.destroyed = true;

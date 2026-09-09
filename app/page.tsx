@@ -1,4 +1,5 @@
 'use client';
+import { finaleState } from './universe-finale.mjs';
 import { sharePerformanceFile } from './share-performance';
 import { RELEASE } from './release.mjs';
 import { performanceSummaryText } from './performance-report.mjs';
@@ -43,6 +44,7 @@ export default function Home() {
   const [settings, setSettings] = useState(false),
     [confirmReset, setConfirmReset] = useState(false);
   const [testPanel, setTestPanel] = useState(false);
+  const [finalDetails, setFinalDetails] = useState(false);
   const leftHanded = useSyncExternalStore(subscribeControls, readLeftHanded, serverLeftHanded);
   const [controlsSaveError, setControlsSaveError] = useState(false);
   const [tilt, setTilt] = useState(false);
@@ -140,6 +142,7 @@ export default function Home() {
   const changeSettings = (open: boolean) => {
     if (engine.current) engine.current.settingsOpen = open;
     if (open) {
+      setFinalDetails(false);
       resume.current =
         state.started && !state.paused && !state.offer.length && !state.dead;
       if (resume.current) action('pause');
@@ -150,6 +153,8 @@ export default function Home() {
     setConfirmReset(false);
     setSettings(open);
   };
+  const finale = state.ending > 0 || state.complete;
+  const finalCaption = finaleState(state.ending).caption;
   const active =
     state.started && !state.dead && !state.complete && state.ending === 0;
   const xp =
@@ -164,9 +169,9 @@ export default function Home() {
           ),
         );
   return (
-    <main className="voro-shell" data-ui="cristal">
+    <main className={'voro-shell' + (finale ? ' universe-ended' : '')} data-ui="cristal">
       <section
-        className="viewport"
+        className={'viewport' + (finale ? ' universe-finale' : '')}
         data-event={
           state.birth > 0 ? 'birth' : !state.started ? 'intro' : state.offer.length
             ? 'adaptation'
@@ -180,8 +185,8 @@ export default function Home() {
       >
         <canvas
           ref={canvas}
-          tabIndex={0}
-          aria-label="Arrastra para moverte. También puedes usar WASD, flechas o un mando. Espacio para impulsarte."
+          tabIndex={finale ? -1 : 0}
+          aria-label={finale ? 'El universo se apaga.' : 'Arrastra para moverte. También puedes usar WASD, flechas o un mando. Espacio para impulsarte.'}
         />
         <div className="shade" />
         <header className="game-header">
@@ -275,7 +280,7 @@ export default function Home() {
             <b style={{ transform: `scaleX(${xp})` }} />
           </i>
         </div>
-        {!state.started && (
+        {!state.started && !finale && (
           <div className="intro">
             <p className="eyebrow">{state.saved ? 'TU EVOLUCIÓN' : 'EL ORIGEN'}</p>
             <h1>
@@ -455,19 +460,9 @@ export default function Home() {
             )}
           </div>
         )}
-        {state.ending > 0 && (
-          <div className="ending-caption" aria-live="polite">
-            <span>EL ÚLTIMO HORIZONTE</span>
-            <p>
-              {state.ending > 7
-                ? 'Toda la materia converge.'
-                : state.ending > 3
-                  ? 'Toda la luz vuelve a casa.'
-                  : 'Ya no queda nada fuera de ti.'}
-            </p>
-          </div>
-        )}
-        {state.started && state.complete && (
+        {state.ending > 0 && finalCaption && <div className="ending-caption" aria-live="polite"><p>{finalCaption}</p></div>}
+        {state.complete && !finalDetails && <button className="universe-black-screen" aria-label="Universo absorbido. Ver el final y tu recorrido" onClick={() => setFinalDetails(true)} />}
+        {state.complete && finalDetails && (
           <div className="finish-panel journey-finish" aria-live="polite">
             <p className="eyebrow">UNIVERSO ABSORBIDO</p>
             <h2>
@@ -494,10 +489,11 @@ export default function Home() {
               Ver tu recorrido
               <Sparkles size={18} />
             </button>
+            <button className="text-button" onClick={() => setFinalDetails(false)}>Volver al silencio</button>
             <span className="short-note">FIN · VORO</span>
           </div>
         )}
-        {state.performance && (
+        {state.performance && !finale && (
           <output className="performance-readout">
             {state.performance.recording ? state.performance.remaining ? `Midiendo · ${state.performance.remaining} s` : 'Rendimiento' : 'Medición terminada'}
             <br />{state.performance.fps || '—'} FPS · P95 {state.performance.p95} ms · pico {state.performance.peak} ms
@@ -838,7 +834,7 @@ export default function Home() {
           </DialogClose>
         </DialogContent>
       </Dialog>}
-      <aside className="desktop-note">
+      {!finale && <aside className="desktop-note">
         <span>
           {String(state.stage + 1).padStart(2, '0')} —{' '}
           {state.stageName.toUpperCase()}
@@ -855,7 +851,7 @@ export default function Home() {
           <br />
           {UPGRADES.length} adaptaciones · mundo infinito
         </small>
-      </aside>
+      </aside>}
     </main>
   );
 }
