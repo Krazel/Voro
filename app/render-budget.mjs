@@ -30,7 +30,7 @@ export class RasterBudget {
     this.elapsed += interval; this.frames++;
     if (interval > 22) this.slow++;
     if (this.elapsed < 2400) return false;
-    const lower = this.frames >= 40 && this.slow / this.frames > .25 && this.quality > .71;
+    const lower = this.frames >= 12 && this.slow / this.frames > .25 && this.quality > .71;
     this.resetWindow();
     if (lower) this.quality = Math.max(.7, Math.round((this.quality - .1) * 10) / 10);
     return lower;

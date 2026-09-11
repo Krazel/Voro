@@ -68,3 +68,11 @@ test('Adaptive raster ignores isolated stalls and pauses, reduces sustained load
   for(let i=0;i<1000;i++)paused.observe(40,false);
   assert.equal(paused.quality,1);
 });
+
+test('Sustained 10 fps also lowers resolution; severe stalls cannot miss a minimum-frame threshold',()=>{
+  const budget=new RasterBudget();
+  for(let i=0;i<25;i++)budget.observe(100,true);
+  assert.equal(budget.quality,.9);
+  for(let i=0;i<75;i++)budget.observe(100,true);
+  assert.equal(budget.quality,.7);
+});
