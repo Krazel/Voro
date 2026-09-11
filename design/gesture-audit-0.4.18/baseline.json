@@ -1,0 +1,132 @@
+{
+  "renderer": "Actual VORO engine + Skia in Node; no browser, WebKit, device FPS, or GPU timing",
+  "source": "346a3ddf6f300774f22c23b98eb91f8b9c322531",
+  "decodeElapsedMs": 474.2159,
+  "decodedSheets": 17,
+  "results": [
+    {
+      "quality": 1,
+      "moving": false,
+      "frames": 360,
+      "cpuAndSynchronousRasterMs": {
+        "mean": 10.722747500000006,
+        "p95": 13.123900000000049,
+        "max": 51.571500000000015
+      },
+      "parts": {
+        "animationPreparation": {
+          "mean": 0.01030277777777668,
+          "p95": 0.011300000000005639,
+          "max": 0.8546999999998661
+        },
+        "background": {
+          "mean": 0.9821372222222298,
+          "p95": 1.1440000000002328,
+          "max": 31.18610000000001
+        },
+        "protagonist": {
+          "mean": 1.9753052777777835,
+          "p95": 2.665300000000002,
+          "max": 3.8538999999999533
+        }
+      },
+      "groundRebuilds": 1,
+      "entities": 505,
+      "sheetBytes": 54953520,
+      "finalPixels": "8ab54c7a3fa401519b309d4e25bd9c7c8c0d1f2738451b17f0661eb6fbdfdfe0"
+    },
+    {
+      "quality": 1,
+      "moving": true,
+      "frames": 360,
+      "cpuAndSynchronousRasterMs": {
+        "mean": 12.566537499999994,
+        "p95": 15.339100000000144,
+        "max": 37.225000000000364
+      },
+      "parts": {
+        "animationPreparation": {
+          "mean": 0.006670833333353382,
+          "p95": 0.007400000000416185,
+          "max": 0.3981999999996333
+        },
+        "background": {
+          "mean": 1.2551188888888798,
+          "p95": 1.4501999999993131,
+          "max": 25.498099999999795
+        },
+        "protagonist": {
+          "mean": 2.003485833333394,
+          "p95": 3.2044999999998254,
+          "max": 4.956700000000637
+        }
+      },
+      "groundRebuilds": 3,
+      "entities": 505,
+      "sheetBytes": 54953520,
+      "finalPixels": "302cffb5c5a971082ddd451b7cad8667487f08d5f7125dc296954df1fe174c49"
+    },
+    {
+      "quality": 0.7,
+      "moving": false,
+      "frames": 360,
+      "cpuAndSynchronousRasterMs": {
+        "mean": 10.428104444444468,
+        "p95": 14.289699999999357,
+        "max": 46.61099999999897
+      },
+      "parts": {
+        "animationPreparation": {
+          "mean": 0.005501666666628403,
+          "p95": 0.007900000000518048,
+          "max": 0.06979999999930442
+        },
+        "background": {
+          "mean": 1.3139852777777832,
+          "p95": 1.5789000000004307,
+          "max": 35.555599999999686
+        },
+        "protagonist": {
+          "mean": 2.456646944444482,
+          "p95": 3.902200000000448,
+          "max": 5.319999999999709
+        }
+      },
+      "groundRebuilds": 1,
+      "entities": 505,
+      "sheetBytes": 54953520,
+      "finalPixels": "cec432d44150f65bec232517c3292332979dea22c02f217e12d5384c82733ba6"
+    },
+    {
+      "quality": 0.7,
+      "moving": true,
+      "frames": 360,
+      "cpuAndSynchronousRasterMs": {
+        "mean": 11.05058972222224,
+        "p95": 14.997599999998783,
+        "max": 38.62669999999889
+      },
+      "parts": {
+        "animationPreparation": {
+          "mean": 0.003734444444424096,
+          "p95": 0.005800000002636807,
+          "max": 0.010700000000724685
+        },
+        "background": {
+          "mean": 1.2049213888888668,
+          "p95": 1.440600000001723,
+          "max": 30.20390000000043
+        },
+        "protagonist": {
+          "mean": 2.42003305555542,
+          "p95": 3.9003999999986263,
+          "max": 5.350800000000163
+        }
+      },
+      "groundRebuilds": 3,
+      "entities": 505,
+      "sheetBytes": 54953520,
+      "finalPixels": "3e1c31ac7d1dc41db61a48cae61970c21751304a07ae524b7d9f77df0d61c028"
+    }
+  ]
+}

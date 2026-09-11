@@ -565,7 +565,7 @@ export default function Home() {
             <input id="camera-zoom" type="range" min="75" max="175" step="5" value={Math.round(state.zoomFactor * 100)} onChange={e => engine.current?.setZoom(Number(e.target.value) / 100)} />
             <button className="settings-row" onClick={() => engine.current?.setZoom(1)}>Restablecer encuadre<span>Automático</span></button>
             <button className="settings-row" aria-pressed={zoomControls} onClick={() => setZoomControls(!zoomControls)}>Botones de zoom al jugar<span>{zoomControls ? 'Activados' : 'Desactivados'}</span></button>
-            <p className="save-note">Baja el porcentaje para ver más mundo o súbelo para acercarte. El ajuste se mantiene entre entornos durante esta sesión.</p>
+            <p className="save-note">Pellizca con dos dedos para ajustar el zoom. En ordenador puedes usar la rueda o los botones. El ajuste se mantiene entre entornos durante esta sesión.</p>
           </div>
           {movementChoice}
           {tilt && <button className="settings-row" onClick={() => { engine.current?.tilt.calibrate(); setTiltMessage('Posición centrada. Mantén el móvil cómodo al continuar.'); }}>Centrar inclinación<span>Recalibrar</span></button>}

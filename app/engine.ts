@@ -37,6 +37,7 @@ import {
   retainAnimationSpecies,
 } from './inhabitant-animation.mjs';
 import { gameplayZoom, followGameplayZoom, zoomPreference } from './camera.mjs';
+import { ZoomGesture, wheelZoom } from './zoom-gesture.mjs';
 import { FramePacer, RasterBudget, rasterRatio } from './render-budget.mjs';
 import {
   shedBiomass,
@@ -193,6 +194,7 @@ export class VoroEngine {
   scale = 1;
   zoom = 1;
   zoomFactor = 1;
+  zoomGesture = new ZoomGesture();
   framePacer = new FramePacer();
   rasterBudget = new RasterBudget();
   testMode = false;
@@ -384,16 +386,13 @@ export class VoroEngine {
     canvas.addEventListener(
       'pointerdown',
       (e) => {
-        if (
-          !this.started ||
-          this.paused ||
-          this.life.complete ||
-          this.progress.offer.length > 0 ||
-          this.life.dead
-        )
-          return;
+        if (!this.cameraInputAllowed()) return;
         canvas.focus({ preventScroll: true });
         const p = this.point(e);
+        if(e.pointerType === 'touch')this.zoomGesture.down(e.pointerId,p);
+        canvas.setPointerCapture(e.pointerId);
+        e.preventDefault();
+        if(this.zoomGesture.locked) {this.pointer=null;return;}
         this.pointer = {
           id: e.pointerId,
           x: p.x,
@@ -402,14 +401,19 @@ export class VoroEngine {
           sy: p.y,
           touch: e.pointerType === 'touch',
         };
-        canvas.setPointerCapture(e.pointerId);
-        e.preventDefault();
       },
       opt,
     );
     canvas.addEventListener(
       'pointermove',
       (e) => {
+        if(!this.cameraInputAllowed())return;
+        const factor=this.zoomGesture.move(e.pointerId,this.point(e),this.zoomFactor);
+        if(this.zoomGesture.locked) {
+          this.pointer=null;
+          if(factor!==null)this.setZoom(factor,true);
+          e.preventDefault();return;
+        }
         if (this.pointer?.id === e.pointerId) {
           const p = this.point(e);
           this.pointer.x = p.x;
@@ -418,14 +422,24 @@ export class VoroEngine {
       },
       opt,
     );
-    for (const event of ['pointerup', 'pointercancel', 'lostpointercapture'])
+    for (const event of ['pointerup', 'pointercancel', 'lostpointercapture'] as const)
       canvas.addEventListener(
         event,
-        () => {
-          this.pointer = null;
+        (e: PointerEvent) => {
+          this.zoomGesture.up(e.pointerId);
+          if(this.pointer?.id===e.pointerId)this.pointer = null;
         },
         opt,
       );
+    canvas.addEventListener('wheel',e=>{
+      if(!this.cameraInputAllowed())return;
+      e.preventDefault();
+      this.setZoom(wheelZoom(this.zoomFactor,e.deltaY,e.deltaMode),true);
+    },{...opt,passive:false});
+    window.addEventListener('blur',()=>this.zoomGesture.reset(),opt);
+    window.addEventListener('keydown',e=>{if(e.code==='Escape')this.zoomGesture.reset();},opt);
+    window.addEventListener('resize',()=>this.zoomGesture.reset(),opt);
+    document.addEventListener('visibilitychange',()=>this.zoomGesture.reset(),opt);
     window.addEventListener(
       'keydown',
       (e) => {
@@ -543,12 +557,17 @@ export class VoroEngine {
       y: (e.clientY - b.top) / this.scale,
     };
   }
-  setZoom(value: number) {
+  cameraInputAllowed() {
+    return this.started && !this.paused && !this.settingsOpen && !this.life.dead
+      && !this.progress.completed && !this.progress.offer.length && !this.transition && !this.birth;
+  }
+  setZoom(value: number, continuous = false) {
+    const previous=this.zoomFactor;
     this.zoomFactor = zoomPreference(value);
-    this.zoom = gameplayZoom(this.life.radius) * this.zoomFactor;
+    this.zoom = continuous ? this.zoom*this.zoomFactor/previous : gameplayZoom(this.life.radius) * this.zoomFactor;
     this.pointer = null;
     this.renderDirty = true;
-    this.publish();
+    if(!continuous)this.publish();
   }
   initAudio() {
     if (this.audioStarted) {
@@ -892,6 +911,7 @@ export class VoroEngine {
     }
     if (
       name === 'dash' &&
+      !this.zoomGesture.locked &&
       this.started &&
       !this.progress.completed &&
       !this.paused &&
@@ -993,6 +1013,7 @@ export class VoroEngine {
   }
   tilt = new TiltControl();
   input() {
+    if(this.zoomGesture.locked)return {x:0,y:0};
     let x =
         (this.keys.has('KeyD') || this.keys.has('ArrowRight') ? 1 : 0) -
         (this.keys.has('KeyA') || this.keys.has('ArrowLeft') ? 1 : 0),
@@ -1036,6 +1057,7 @@ export class VoroEngine {
     }
     if (this.paused || !this.started || this.settingsOpen || this.progress.offer.length || this.transition || this.life.dead || document.hidden)
       this.tilt.read(false);
+    if(!this.cameraInputAllowed())this.zoomGesture.reset();
     const frameStart = this.diagnosticsEnabled ? performance.now() : 0;
     const groundBefore = this.worldGround.redraws, uiBefore = this.uiPublishCount;
     const interval = this.last ? stamp - this.last : 0;
@@ -1686,7 +1708,7 @@ export class VoroEngine {
     // intermediate result into the persistent terrain cache.
     const entry = this.assets.entries.get(`ground:${stage.id}`);
     if (!entry?.ready || entry.image !== this.groundImages[stage.id]) return;
-    this.worldGround.draw(c, this.groundImages[stage.id], stage.id, this.camera,
+    return this.worldGround.draw(c, this.groundImages[stage.id], stage.id, this.camera,
       this.zoom, this.height, this.progress.seed, this.time, !this.reduced);
   }
   render() {
@@ -1720,20 +1742,26 @@ export class VoroEngine {
       else drawVoidSurvivor(c,480,this.height,this.time,this.reduced,protagonist);
       return;
     }
-    c.fillStyle = '#041423';
-    c.fillRect(0, 0, 480, this.height);
-    if (this.transition > 0) {
-      const scene = transitionScene(
-        STAGES[this.transitionFrom].id,
-        (7.2 - this.transition) / 7.2,
-        this.reduced,
-      );
-      this.drawBackground(this.transitionFrom);
-      c.save();
-      c.globalAlpha = scene.incoming;
-      this.drawBackground(Math.min(STAGES.length - 1, this.transitionFrom + 1));
-      c.restore();
-    } else this.drawBackground(this.progress.stage);
+    // The microscope cache is fully opaque. Drawing a full-screen base beneath
+    // it every frame wastes a second pass over every pixel. Keep the fallback
+    // for loading and the existing composition for transitions/other biomes.
+    const opaqueMicro = this.progress.stage === 0 && !this.transition && this.drawBackground(0);
+    if (!opaqueMicro) {
+      c.fillStyle = '#041423';
+      c.fillRect(0, 0, 480, this.height);
+      if (this.transition > 0) {
+        const scene = transitionScene(
+          STAGES[this.transitionFrom].id,
+          (7.2 - this.transition) / 7.2,
+          this.reduced,
+        );
+        this.drawBackground(this.transitionFrom);
+        c.save();
+        c.globalAlpha = scene.incoming;
+        this.drawBackground(Math.min(STAGES.length - 1, this.transitionFrom + 1));
+        c.restore();
+      } else this.drawBackground(this.progress.stage);
+    }
     if (this.transition > 3.6 && this.transitionFrame) {
       this.drawEvolution();
       return;
