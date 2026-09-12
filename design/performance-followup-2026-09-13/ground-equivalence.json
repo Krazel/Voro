@@ -1,0 +1,198 @@
+{
+  "kind": "Skia raster equivalence; not WebKit or device FPS",
+  "cases": [
+    {
+      "stage": "micro",
+      "zoom": 0.585,
+      "equal": true,
+      "before": 115,
+      "after": 63
+    },
+    {
+      "stage": "micro",
+      "zoom": 1.12,
+      "equal": true,
+      "before": 68,
+      "after": 35
+    },
+    {
+      "stage": "micro",
+      "zoom": 1.96,
+      "equal": true,
+      "before": 64,
+      "after": 24
+    },
+    {
+      "stage": "pond",
+      "zoom": 0.585,
+      "equal": true,
+      "before": 211,
+      "after": 152
+    },
+    {
+      "stage": "pond",
+      "zoom": 1.12,
+      "equal": true,
+      "before": 122,
+      "after": 64
+    },
+    {
+      "stage": "pond",
+      "zoom": 1.96,
+      "equal": true,
+      "before": 68,
+      "after": 34
+    },
+    {
+      "stage": "water",
+      "zoom": 0.585,
+      "equal": true,
+      "before": 188,
+      "after": 113
+    },
+    {
+      "stage": "water",
+      "zoom": 1.12,
+      "equal": true,
+      "before": 98,
+      "after": 55
+    },
+    {
+      "stage": "water",
+      "zoom": 1.96,
+      "equal": true,
+      "before": 68,
+      "after": 29
+    },
+    {
+      "stage": "city",
+      "zoom": 0.585,
+      "equal": true,
+      "before": 644,
+      "after": 580
+    },
+    {
+      "stage": "city",
+      "zoom": 1.12,
+      "equal": true,
+      "before": 585,
+      "after": 543
+    },
+    {
+      "stage": "city",
+      "zoom": 1.96,
+      "equal": true,
+      "before": 577,
+      "after": 539
+    },
+    {
+      "stage": "orbit",
+      "zoom": 0.585,
+      "equal": true,
+      "before": 120,
+      "after": 66
+    },
+    {
+      "stage": "orbit",
+      "zoom": 1.12,
+      "equal": true,
+      "before": 73,
+      "after": 35
+    },
+    {
+      "stage": "orbit",
+      "zoom": 1.96,
+      "equal": true,
+      "before": 56,
+      "after": 24
+    },
+    {
+      "stage": "planets",
+      "zoom": 0.585,
+      "equal": true,
+      "before": 108,
+      "after": 68
+    },
+    {
+      "stage": "planets",
+      "zoom": 1.12,
+      "equal": true,
+      "before": 73,
+      "after": 29
+    },
+    {
+      "stage": "planets",
+      "zoom": 1.96,
+      "equal": true,
+      "before": 48,
+      "after": 24
+    },
+    {
+      "stage": "stars",
+      "zoom": 0.585,
+      "equal": true,
+      "before": 113,
+      "after": 68
+    },
+    {
+      "stage": "stars",
+      "zoom": 1.12,
+      "equal": true,
+      "before": 73,
+      "after": 29
+    },
+    {
+      "stage": "stars",
+      "zoom": 1.96,
+      "equal": true,
+      "before": 51,
+      "after": 26
+    },
+    {
+      "stage": "galaxies",
+      "zoom": 0.585,
+      "equal": true,
+      "before": 108,
+      "after": 63
+    },
+    {
+      "stage": "galaxies",
+      "zoom": 1.12,
+      "equal": true,
+      "before": 73,
+      "after": 29
+    },
+    {
+      "stage": "galaxies",
+      "zoom": 1.96,
+      "equal": true,
+      "before": 52,
+      "after": 24
+    },
+    {
+      "stage": "universe",
+      "zoom": 0.585,
+      "equal": true,
+      "before": 108,
+      "after": 58
+    },
+    {
+      "stage": "universe",
+      "zoom": 1.12,
+      "equal": true,
+      "before": 68,
+      "after": 32
+    },
+    {
+      "stage": "universe",
+      "zoom": 1.96,
+      "equal": true,
+      "before": 52,
+      "after": 24
+    }
+  ],
+  "frames": 81,
+  "identical": true,
+  "before": 3984,
+  "after": 2830
+}

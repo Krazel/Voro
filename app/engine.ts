@@ -1231,7 +1231,10 @@ export class VoroEngine {
         Math.ceil(((this.height * 0.55) / this.zoom + 300) / 600),
       );
       moveFragments(this.fragments, dt);
-      this.food = [...this.world.entities, ...this.fragments];
+      // World membership already persists between streamed chunks. Most frames
+      // have no recoverable fragments, so avoid copying hundreds of references.
+      this.food = this.fragments.length
+        ? [...this.world.entities, ...this.fragments] : this.world.entities;
       this.motes = this.world.motes;
       this.world.move(dt, p.elapsed, p, this.stats, this.trail);
       this.huntingTentacles.update(

@@ -186,6 +186,14 @@ export class WorldGround {
     const y1 = Math.floor((py + (height * 0.52 + pad) / zoom) / sy) + 1;
     for (let y = y0; y <= y1; y++)
       for (let x = x0; x <= x1; x++) {
+        const left = (x * sx - px) * zoom + 240,
+          top = (y * sy - py) * zoom + height * 0.48;
+        // The conservative grid includes whole patches outside the backing
+        // surface. Reject those before texture submission, including overscan.
+        // Patches are square and only use quarter turns, so these bounds hold
+        // for every reflection and rotation. Keep a pixel for edge filtering.
+        if (left > 480 + pad + 1 || top > height + pad + 1 ||
+          left + width * zoom < -pad - 1 || top + h * zoom < -pad - 1) continue;
         const patch = stage === 'city' ? { variant: cityDistrict(x,y,seed), flipX: false, flipY: false, turn: 0 }
           : groundPatch(stage, x, y, seed);
         const fx = patch.flipX;
