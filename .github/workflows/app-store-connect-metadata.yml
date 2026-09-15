@@ -1,0 +1,46 @@
+name: VORO App Store Connect metadata
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: voro-app-store-connect-metadata
+  cancel-in-progress: false
+
+jobs:
+  metadata:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: app-store-production
+    env:
+      ASC_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+      ASC_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+      ASC_KEY_BASE64: ${{ secrets.APP_STORE_CONNECT_API_KEY_BASE64 }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Check protected API credentials
+        run: |
+          set -euo pipefail
+          test -n "$ASC_KEY_ID"
+          test -n "$ASC_ISSUER_ID"
+          test -n "$ASC_KEY_BASE64"
+      - name: Write temporary API key
+        run: |
+          set -euo pipefail
+          key_dir="$RUNNER_TEMP/asc"
+          mkdir -m 700 -p "$key_dir"
+          printf '%s' "$ASC_KEY_BASE64" | base64 --decode > "$key_dir/AuthKey_${ASC_KEY_ID}.p8"
+          chmod 600 "$key_dir/AuthKey_${ASC_KEY_ID}.p8"
+          echo "ASC_PRIVATE_KEY_PATH=$key_dir/AuthKey_${ASC_KEY_ID}.p8" >> "$GITHUB_ENV"
+      - name: Update and verify metadata through App Store Connect API
+        run: node scripts/appstoreconnect-full-metadata.mjs store/app-store-connect-metadata.json
+      - name: Remove temporary API key
+        if: always()
+        run: rm -rf "$RUNNER_TEMP/asc"

@@ -1,0 +1,39 @@
+{
+  "app": {
+    "name": "VORO: Abisal",
+    "appleId": "6809193565",
+    "iosBundleId": "com.dmkr.voro",
+    "sku": "voro-ios",
+    "platform": "IOS",
+    "primaryLocale": "en-US"
+  },
+  "ios": {
+    "versionString": "1.0",
+    "platform": "IOS",
+    "locales": {
+      "en-US": {
+        "name": "VORO: Abyssal",
+        "subtitle": "Absorb, grow, evolve",
+        "promotionalText": "Start as a tiny lifeform. Absorb matter, avoid threats and choose adaptations on a journey through ten environments, from microscope to cosmos.",
+        "keywords": "organism,biomass,cell,cosmos,microscope,survival,ocean,galaxies,action,adventure",
+        "description": "Before everything, a life.\n\nIn VORO: Abyssal you control a blue-membraned organism with an amber nucleus. Absorb what you can, evade what is larger than you and gather the biomass you need to grow.\n\nTravel through ten environments: microscope, pond, shore, sea, city, orbit, planets, stars, galaxies and universe. Each change of scale transforms what surrounds you.\n\nChoose adaptations when the action pauses and keep your improvements as you evolve. Use the impulse to escape danger or reach prey. Taking damage reduces your biomass, so growing also means surviving.\n\nPlay with touch controls and adjust the zoom with two fingers. Your journey is saved locally so you can continue on the same device.\n\nA 2D action and evolution campaign by Krazel Games.",
+        "whatsNew": "First store version prepared from the 0.4.18 internal beta."
+      },
+      "es-ES": {
+        "name": "VORO: Abisal",
+        "subtitle": "Absorbe, crece y evoluciona",
+        "promotionalText": "Empieza como una vida diminuta. Absorbe materia, evita amenazas y elige adaptaciones en un viaje por diez entornos, desde el microscopio hasta el cosmos.",
+        "keywords": "organismo,biomasa,celula,cosmos,microscopio,supervivencia,oceano,galaxias,accion,aventura",
+        "description": "Antes de todo, una vida.\n\nEn VORO: Abisal controlas un organismo de membrana azul y núcleo ámbar. Absorbe lo que puedes, esquiva a quienes te superan y reúne la biomasa necesaria para crecer.\n\nRecorre diez entornos: microscopio, charca, orilla, mar, ciudad, órbita, planetas, estrellas, galaxias y universo. Cada cambio de escala transforma lo que tienes alrededor.\n\nElige adaptaciones cuando la acción se detiene y conserva tus mejoras al evolucionar. Usa el impulso para escapar del peligro o acercarte a una presa. Recibir daño reduce tu biomasa, así que crecer también exige sobrevivir.\n\nJuega con controles táctiles y ajusta el zoom con dos dedos. Tu recorrido se guarda localmente para continuar en el mismo dispositivo.\n\nUna campaña de acción y evolución en 2D, de Krazel Games.",
+        "whatsNew": "Primera versión de tienda preparada a partir de la beta interna 0.4.18."
+      }
+    }
+  },
+  "constraints": {
+    "supportUrl": null,
+    "privacyPolicyUrl": null,
+    "category": null,
+    "copyright": null,
+    "screenshots": "No acreditadas para esta actualización"
+  }
+}
