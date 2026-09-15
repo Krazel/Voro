@@ -5,7 +5,9 @@
     "iosBundleId": "com.dmkr.voro",
     "sku": "voro-ios",
     "platform": "IOS",
-    "primaryLocale": "en-US"
+    "primaryLocale": "en-US",
+    "privacyPolicyUrl": "https://voro-abisal.krazel.chatgpt.site/privacy",
+    "supportUrl": "https://voro-abisal.krazel.chatgpt.site/support"
   },
   "ios": {
     "versionString": "1.0",
@@ -14,24 +16,28 @@
       "en-US": {
         "name": "VORO: Abyssal",
         "subtitle": "Absorb, grow, evolve",
-        "promotionalText": "Start as a tiny lifeform. Absorb matter, avoid threats and choose adaptations on a journey through ten environments, from microscope to cosmos.",
+        "promotionalText": "Start as a tiny lifeform. Absorb matter, avoid threats and choose adaptations on a journey from the microscopic to the cosmos.",
         "keywords": "organism,biomass,cell,cosmos,microscope,survival,ocean,galaxies,action,adventure",
         "description": "Before everything, a life.\n\nIn VORO: Abyssal you control a blue-membraned organism with an amber nucleus. Absorb what you can, evade what is larger than you and gather the biomass you need to grow.\n\nTravel through a world that expands from the microscope to the universe. Each change of scale transforms what surrounds you.\n\nChoose adaptations to decide what you will become. Seek what you can absorb, evade what still overpowers you and protect your biomass: every hit can make you fall back.",
-        "whatsNew": "First store version prepared from the 0.4.18 internal beta."
+        "whatsNew": "First store version prepared from the 0.4.18 internal beta.",
+        "privacyPolicyUrl": "https://voro-abisal.krazel.chatgpt.site/privacy",
+        "supportUrl": "https://voro-abisal.krazel.chatgpt.site/support"
       },
       "es-ES": {
         "name": "VORO: Abisal",
         "subtitle": "Absorbe, crece y evoluciona",
-        "promotionalText": "Empieza como una vida diminuta. Absorbe materia, evita amenazas y elige adaptaciones en un viaje por diez entornos, desde el microscopio hasta el cosmos.",
+        "promotionalText": "Empieza como una vida diminuta. Absorbe materia, evita amenazas y elige adaptaciones en un viaje desde lo microscópico hasta el cosmos.",
         "keywords": "organismo,biomasa,celula,cosmos,microscopio,supervivencia,oceano,galaxias,accion,aventura",
         "description": "Antes de todo, una vida.\n\nEn VORO: Abisal controlas un organismo de membrana azul y núcleo ámbar. Absorbe lo que puedes, esquiva a quienes te superan y reúne la biomasa necesaria para crecer.\n\nRecorre un mundo en expansión, desde el microscopio hasta el universo. Cada cambio de escala transforma lo que tienes alrededor.\n\nElige adaptaciones para decidir en qué te convertirás. Busca lo que puedes absorber, esquiva a quienes todavía te superan y protege tu biomasa: cada golpe puede hacerte retroceder.",
-        "whatsNew": "Primera versión de tienda preparada a partir de la beta interna 0.4.18."
+        "whatsNew": "Primera versión de tienda preparada a partir de la beta interna 0.4.18.",
+        "privacyPolicyUrl": "https://voro-abisal.krazel.chatgpt.site/privacy",
+        "supportUrl": "https://voro-abisal.krazel.chatgpt.site/support"
       }
     }
   },
   "constraints": {
-    "supportUrl": null,
-    "privacyPolicyUrl": null,
+    "supportUrl": "https://voro-abisal.krazel.chatgpt.site/support",
+    "privacyPolicyUrl": "https://voro-abisal.krazel.chatgpt.site/privacy",
     "category": null,
     "copyright": null,
     "screenshots": "No acreditadas para esta actualización"

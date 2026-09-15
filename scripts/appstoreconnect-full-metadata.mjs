@@ -55,7 +55,12 @@ for (const [locale, content] of Object.entries(ios.locales)) {
   await upsert(
     "appInfoLocalizations",
     infoLocs.find((item) => item.attributes?.locale === locale),
-    { locale, name: content.name, subtitle: content.subtitle },
+    {
+      locale,
+      name: content.name,
+      subtitle: content.subtitle,
+      privacyPolicyUrl: content.privacyPolicyUrl ?? manifest.app.privacyPolicyUrl
+    },
     "appInfo",
     "appInfos",
     info.id
@@ -70,7 +75,8 @@ for (const [locale, content] of Object.entries(ios.locales)) {
       description: content.description,
       keywords: content.keywords,
       promotionalText: content.promotionalText,
-      whatsNew: content.whatsNew
+      whatsNew: content.whatsNew,
+      supportUrl: content.supportUrl ?? manifest.app.supportUrl
     },
     "appStoreVersion",
     "appStoreVersions",
@@ -114,6 +120,16 @@ function validateLocale(locale, content) {
   if (!/^[a-z]{2}-[A-Z]{2}$/.test(locale)) fail(`Locale no valida: ${locale}`);
   for (const field of ["name", "subtitle", "keywords", "description", "promotionalText", "whatsNew"]) {
     if (typeof content[field] !== "string" || !content[field].trim()) fail(`${locale}: falta ${field}.`);
+  }
+  for (const field of ["privacyPolicyUrl", "supportUrl"]) {
+    if (content[field] !== undefined && content[field] !== null) {
+      try {
+        const url = new URL(content[field]);
+        if (url.protocol !== "https:") fail(`${locale}: ${field} debe usar HTTPS.`);
+      } catch {
+        fail(`${locale}: ${field} no es una URL valida.`);
+      }
+    }
   }
   if (content.name.length > 30) fail(`${locale}: name supera 30 caracteres.`);
   if (content.subtitle.length > 30) fail(`${locale}: subtitle supera 30 caracteres.`);
