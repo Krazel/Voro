@@ -135,7 +135,7 @@ async function syncAppPrice(appId, target) {
     console.log(`Precio verificado: ${amount} EUR (${territory})`);
     return;
   }
-  const manualId = `voro-price-${Date.now()}`;
+  const manualId = "${voro-price-0}";
   const body = {
     data: {
       type: "appPriceSchedules",
