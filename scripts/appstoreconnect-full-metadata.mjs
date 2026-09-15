@@ -105,7 +105,7 @@ const verification = {
 if (manifest.app.price?.amount && manifest.app.price?.currency === "EUR") {
   const priceSchedule = await asc(
     "GET",
-    `/v1/apps/${app.id}/appPriceSchedule?include=baseTerritory,manualPrices&fields[appPriceSchedules]=baseTerritory,manualPrices&fields[appPrices]=appPricePoint,territory&fields[appPricePoints]=customerPrice&fields[territories]=currency&limit[manualPrices]=200`
+    `/v1/apps/${app.id}/appPriceSchedule?include=baseTerritory,manualPrices&limit[manualPrices]=50`
   );
   verification.priceSchedule = redactPriceSchedule(priceSchedule);
 }
@@ -116,13 +116,13 @@ async function syncAppPrice(appId, target) {
   const territory = target.territory ?? "ESP";
   const points = (await asc(
     "GET",
-    `/v1/apps/${appId}/appPricePoints?filter[territory]=${encodeURIComponent(territory)}&include=territory&fields[appPricePoints]=customerPrice&fields[territories]=currency&limit=200`
+    `/v1/apps/${appId}/appPricePoints?filter[territory]=${encodeURIComponent(territory)}&include=territory&limit=200`
   )).data ?? [];
   const point = points.find((item) => String(item.attributes?.customerPrice) === amount);
   if (!point) fail(`No se encontro un precio ${amount} EUR para el territorio ${territory}.`);
   const current = await asc(
     "GET",
-    `/v1/apps/${appId}/appPriceSchedule?include=baseTerritory,manualPrices&fields[appPriceSchedules]=baseTerritory,manualPrices&fields[appPrices]=appPricePoint,territory&fields[appPricePoints]=customerPrice&fields[territories]=currency&limit[manualPrices]=200`,
+    `/v1/apps/${appId}/appPriceSchedule?include=baseTerritory,manualPrices&limit[manualPrices]=50`,
     undefined,
     { allowNotFound: true }
   );
