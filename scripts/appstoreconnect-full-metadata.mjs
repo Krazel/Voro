@@ -107,7 +107,10 @@ if (manifest.app.price?.amount && manifest.app.price?.currency === "EUR") {
     "GET",
     `/v1/apps/${app.id}/appPriceSchedule?include=baseTerritory,manualPrices&limit[manualPrices]=50`
   );
-  verification.priceSchedule = redactPriceSchedule(priceSchedule);
+  const manualPrices = priceSchedule.data?.id
+    ? await asc("GET", `/v1/appPriceSchedules/${priceSchedule.data.id}/manualPrices?include=appPricePoint,territory&limit=50`)
+    : { data: [] };
+  verification.priceSchedule = redactPriceSchedule(priceSchedule, manualPrices);
 }
 console.log(JSON.stringify(verification, null, 2));
 
@@ -127,11 +130,13 @@ async function syncAppPrice(appId, target) {
     { allowNotFound: true }
   );
   const currentBase = current.data?.relationships?.baseTerritory?.data?.id;
-  const currentIncluded = current.included ?? [];
-  const alreadySet = currentBase === territory && currentIncluded.some((item) =>
-    item.type === "appPricePoints" && String(item.attributes?.customerPrice) === amount
+  const currentManual = current.data?.id
+    ? await asc("GET", `/v1/appPriceSchedules/${current.data.id}/manualPrices?include=appPricePoint,territory&limit=50`)
+    : { data: [] };
+  const manualPointSet = currentBase === territory && (currentManual.data ?? []).some((item) =>
+    item.relationships?.appPricePoint?.data?.id === point.id
   );
-  if (alreadySet) {
+  if (manualPointSet) {
     console.log(`Precio verificado: ${amount} EUR (${territory})`);
     return;
   }
@@ -157,12 +162,17 @@ async function syncAppPrice(appId, target) {
   console.log(`Precio actualizado: ${amount} EUR (${territory})`);
 }
 
-function redactPriceSchedule(result) {
+function redactPriceSchedule(result, manualPrices = { data: [] }) {
   const base = result.data?.relationships?.baseTerritory?.data?.id ?? null;
-  const prices = (result.included ?? [])
+  const includedPoints = (manualPrices.included ?? [])
     .filter((item) => item.type === "appPricePoints")
     .map((item) => ({ id: item.id, customerPrice: item.attributes?.customerPrice }));
-  return { baseTerritory: base, pricePoints: prices };
+  const prices = (manualPrices.data ?? []).map((item) => ({
+    territory: item.relationships?.territory?.data?.id ?? null,
+    appPricePointId: item.relationships?.appPricePoint?.data?.id ?? null,
+    customerPrice: includedPoints.find((point) => point.id === item.relationships?.appPricePoint?.data?.id)?.customerPrice ?? null
+  }));
+  return { baseTerritory: base, prices };
 }
 
 function redactLocalization(item) {
