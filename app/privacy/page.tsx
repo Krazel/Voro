@@ -15,7 +15,7 @@ export default function PrivacyPage() {
         <h1>Privacidad</h1>
         <p>VORO: Abisal está diseñado para jugar sin cuenta y sin enviar automáticamente datos personales a nuestros servidores.</p>
         <h2>Datos que guarda la app</h2>
-        <p>El progreso, las preferencias y los informes de rendimiento se guardan localmente en el dispositivo. Puedes borrarlos desde la configuración del juego.</p>
+        <p>El progreso y las preferencias se guardan localmente en el dispositivo. Puedes borrarlos desde la configuración del juego.</p>
         <h2>Datos que no recopilamos</h2>
         <p>La app no usa publicidad ni seguimiento y no crea perfiles de usuario. No vendemos ni compartimos datos personales con terceros.</p>
         <h2>Contacto</h2>
