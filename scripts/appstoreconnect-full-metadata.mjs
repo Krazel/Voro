@@ -21,14 +21,18 @@ if (manifest.app.appleId && app.id !== manifest.app.appleId) {
 console.log(`App comprobada: ${app.id} (${app.attributes?.name ?? "sin nombre"})`);
 
 if (manifest.app.primaryLocale && app.attributes?.primaryLocale !== manifest.app.primaryLocale) {
-  await asc("PATCH", `/v1/apps/${app.id}`, {
+  const primaryLocaleResult = await asc("PATCH", `/v1/apps/${app.id}`, {
     data: {
       type: "apps",
       id: app.id,
       attributes: { primaryLocale: manifest.app.primaryLocale }
     }
-  });
-  console.log(`Locale principal actualizado: ${manifest.app.primaryLocale}`);
+  }, { allowPrimaryLocaleScreenshotBlock: true });
+  if (primaryLocaleResult.blocked) {
+    console.log("Locale principal pendiente: Apple exige capturas de la nueva locale para cada version.");
+  } else {
+    console.log(`Locale principal actualizado: ${manifest.app.primaryLocale}`);
+  }
 } else {
   console.log(`Locale principal verificado: ${app.attributes?.primaryLocale ?? "no informado"}`);
 }
@@ -133,7 +137,7 @@ async function upsert(type, existing, attributes, relation, parentType, parentId
   });
 }
 
-async function asc(method, endpoint, body) {
+async function asc(method, endpoint, body, options = {}) {
   const response = await fetch(`https://api.appstoreconnect.apple.com${endpoint}`, {
     method,
     headers: { Authorization: `Bearer ${token}`, ...(body ? { "Content-Type": "application/json" } : {}) },
@@ -142,7 +146,14 @@ async function asc(method, endpoint, body) {
   const raw = await response.text();
   let json = {};
   try { json = raw ? JSON.parse(raw) : {}; } catch { /* preserve status without echoing raw secrets */ }
-  if (!response.ok) fail(`${method} ${endpoint}: ${response.status} ${JSON.stringify(json.errors ?? {})}`);
+  if (!response.ok) {
+    const errors = json.errors ?? [];
+    const screenshotBlock = errors.some((error) => error.code === "ENTITY_ERROR.ATTRIBUTE.INVALID.INVALID_STATE.MISSING_SCREENSHOTS_PRIMARY_LOCALE");
+    if (options.allowPrimaryLocaleScreenshotBlock && response.status === 409 && screenshotBlock) {
+      return { blocked: true };
+    }
+    fail(`${method} ${endpoint}: ${response.status} ${JSON.stringify(errors)}`);
+  }
   return json;
 }
 
