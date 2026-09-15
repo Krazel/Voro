@@ -74,7 +74,8 @@ for (const [locale, content] of Object.entries(ios.locales)) {
     },
     "appStoreVersion",
     "appStoreVersions",
-    version.id
+    version.id,
+    { allowWhatsNewStateBlock: true }
   );
   console.log(`Metadatos escritos: ${locale}`);
 }
@@ -122,19 +123,40 @@ function validateLocale(locale, content) {
   if (content.whatsNew.length > 4000) fail(`${locale}: whatsNew supera 4000 caracteres.`);
 }
 
-async function upsert(type, existing, attributes, relation, parentType, parentId) {
+async function upsert(type, existing, attributes, relation, parentType, parentId, options = {}) {
   if (existing) {
     const { locale: _locale, ...updates } = attributes;
-    await asc("PATCH", `/v1/${type}/${existing.id}`, { data: { type, id: existing.id, attributes: updates } });
+    const result = await asc("PATCH", `/v1/${type}/${existing.id}`, {
+      data: { type, id: existing.id, attributes: updates }
+    }, options);
+    if (result.blocked === "whatsNew") {
+      delete updates.whatsNew;
+      await asc("PATCH", `/v1/${type}/${existing.id}`, {
+        data: { type, id: existing.id, attributes: updates }
+      });
+      console.log("  whatsNew pendiente por estado de la version");
+    }
     return;
   }
-  await asc("POST", `/v1/${type}`, {
+  const result = await asc("POST", `/v1/${type}`, {
     data: {
       type,
       attributes,
       relationships: { [relation]: { data: { type: parentType, id: parentId } } }
     }
-  });
+  }, options);
+  if (result.blocked === "whatsNew") {
+    const withoutWhatsNew = { ...attributes };
+    delete withoutWhatsNew.whatsNew;
+    await asc("POST", `/v1/${type}`, {
+      data: {
+        type,
+        attributes: withoutWhatsNew,
+        relationships: { [relation]: { data: { type: parentType, id: parentId } } }
+      }
+    });
+    console.log("  whatsNew pendiente por estado de la version");
+  }
 }
 
 async function asc(method, endpoint, body, options = {}) {
@@ -151,6 +173,12 @@ async function asc(method, endpoint, body, options = {}) {
     const screenshotBlock = errors.some((error) => error.code === "ENTITY_ERROR.ATTRIBUTE.INVALID.INVALID_STATE.MISSING_SCREENSHOTS_PRIMARY_LOCALE");
     if (options.allowPrimaryLocaleScreenshotBlock && response.status === 409 && screenshotBlock) {
       return { blocked: true };
+    }
+    const whatsNewStateBlock = errors.some((error) =>
+      error.code === "STATE_ERROR" && /whatsNew/i.test(error.detail ?? "")
+    );
+    if (options.allowWhatsNewStateBlock && response.status === 409 && whatsNewStateBlock) {
+      return { blocked: "whatsNew" };
     }
     fail(`${method} ${endpoint}: ${response.status} ${JSON.stringify(errors)}`);
   }
