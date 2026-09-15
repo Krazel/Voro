@@ -49,6 +49,10 @@ const version = (await asc(
 if (!version) fail(`No se encontro version ${ios.versionString}.`);
 console.log(`Version comprobada: ${version.attributes?.versionString} (${version.id}), estado ${version.attributes?.appStoreState ?? "desconocido"}`);
 
+if (manifest.app.price?.amount && manifest.app.price?.currency === "EUR") {
+  await syncAppPrice(app.id, manifest.app.price);
+}
+
 for (const [locale, content] of Object.entries(ios.locales)) {
   validateLocale(locale, content);
   const infoLocs = (await asc("GET", `/v1/appInfos/${info.id}/appInfoLocalizations?limit=200`)).data ?? [];
@@ -98,7 +102,68 @@ const verification = {
   infoLocalizations: freshInfoLocs.map(redactLocalization),
   versionLocalizations: freshVersionLocs.map(redactLocalization)
 };
+if (manifest.app.price?.amount && manifest.app.price?.currency === "EUR") {
+  const priceSchedule = await asc(
+    "GET",
+    `/v1/apps/${app.id}/appPriceSchedule?include=baseTerritory,manualPrices&fields[appPriceSchedules]=baseTerritory,manualPrices&fields[appPrices]=appPricePoint,territory&fields[appPricePoints]=customerPrice&fields[territories]=currency&limit[manualPrices]=200`
+  );
+  verification.priceSchedule = redactPriceSchedule(priceSchedule);
+}
 console.log(JSON.stringify(verification, null, 2));
+
+async function syncAppPrice(appId, target) {
+  const amount = String(target.amount);
+  const territory = target.territory ?? "ESP";
+  const points = (await asc(
+    "GET",
+    `/v1/apps/${appId}/appPricePoints?filter[territory]=${encodeURIComponent(territory)}&include=territory&fields[appPricePoints]=customerPrice&fields[territories]=currency&limit=200`
+  )).data ?? [];
+  const point = points.find((item) => String(item.attributes?.customerPrice) === amount);
+  if (!point) fail(`No se encontro un precio ${amount} EUR para el territorio ${territory}.`);
+  const current = await asc(
+    "GET",
+    `/v1/apps/${appId}/appPriceSchedule?include=baseTerritory,manualPrices&fields[appPriceSchedules]=baseTerritory,manualPrices&fields[appPrices]=appPricePoint,territory&fields[appPricePoints]=customerPrice&fields[territories]=currency&limit[manualPrices]=200`,
+    undefined,
+    { allowNotFound: true }
+  );
+  const currentBase = current.data?.relationships?.baseTerritory?.data?.id;
+  const currentIncluded = current.included ?? [];
+  const alreadySet = currentBase === territory && currentIncluded.some((item) =>
+    item.type === "appPricePoints" && String(item.attributes?.customerPrice) === amount
+  );
+  if (alreadySet) {
+    console.log(`Precio verificado: ${amount} EUR (${territory})`);
+    return;
+  }
+  const manualId = `voro-price-${Date.now()}`;
+  const body = {
+    data: {
+      type: "appPriceSchedules",
+      attributes: {},
+      relationships: {
+        app: { data: { type: "apps", id: appId } },
+        baseTerritory: { data: { type: "territories", id: territory } },
+        manualPrices: { data: [{ type: "appPrices", id: manualId }] }
+      }
+    },
+    included: [{
+      type: "appPrices",
+      id: manualId,
+      attributes: { startDate: null, endDate: null },
+      relationships: { appPricePoint: { data: { type: "appPricePoints", id: point.id } } }
+    }]
+  };
+  await asc("POST", "/v1/appPriceSchedules", body);
+  console.log(`Precio actualizado: ${amount} EUR (${territory})`);
+}
+
+function redactPriceSchedule(result) {
+  const base = result.data?.relationships?.baseTerritory?.data?.id ?? null;
+  const prices = (result.included ?? [])
+    .filter((item) => item.type === "appPricePoints")
+    .map((item) => ({ id: item.id, customerPrice: item.attributes?.customerPrice }));
+  return { baseTerritory: base, pricePoints: prices };
+}
 
 function redactLocalization(item) {
   const a = item.attributes ?? {};
@@ -185,6 +250,7 @@ async function asc(method, endpoint, body, options = {}) {
   let json = {};
   try { json = raw ? JSON.parse(raw) : {}; } catch { /* preserve status without echoing raw secrets */ }
   if (!response.ok) {
+    if (options.allowNotFound && response.status === 404) return { notFound: true };
     const errors = json.errors ?? [];
     const screenshotBlock = errors.some((error) => error.code === "ENTITY_ERROR.ATTRIBUTE.INVALID.INVALID_STATE.MISSING_SCREENSHOTS_PRIMARY_LOCALE");
     if (options.allowPrimaryLocaleScreenshotBlock && response.status === 409 && screenshotBlock) {
