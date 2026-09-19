@@ -95,7 +95,7 @@ export function FinalSettings({
       {tr(section === 'journey' && <>
         <section className="living-panel journey-panel">
           <ol className="final-journey" aria-label={tr("Evolución de Voro")}>
-            {tr(STAGES.map((item, index) => <li key={item.id} className={complete || index < stage ? 'done' : index === stage ? 'current' : 'locked'}>
+            {tr(STAGES.slice(0, complete ? STAGES.length : stage + 1).map((item, index) => <li key={item.id} className={complete || index < stage ? 'done' : index === stage ? 'current' : 'locked'}>
               <i aria-hidden="true"/><span>{tr(item.short)}</span>{tr(index === stage && !complete && <small>{tr("Actual")}</small>)}
             </li>))}
           </ol>
@@ -119,4 +119,3 @@ export function FinalSettings({
     </div>
   );
 }
-
