@@ -11,7 +11,10 @@ import Link from 'next/link';
 import { AdaptationChoices, CristalPreview } from './cristal-ui';
 import { ReviewMilestone } from './review-milestone';
 import './cristal.css';
+import './final-ui.css';
+import { readUiMode, writeUiMode } from './ui-mode.mjs';
 import {
+  X,
   Pause,
   Play,
   RotateCcw,
@@ -45,7 +48,13 @@ export default function Home() {
   const [settings, setSettings] = useState(false),
     [confirmReset, setConfirmReset] = useState(false);
   const [testPanel, setTestPanel] = useState(false);
+  const [uiMode,setUiMode]=useState('development');
+  const finalUI=uiMode==='final';
+  const [uiModeSaved,setUiModeSaved]=useState(true);
+  useEffect(()=>{setUiMode(readUiMode(window.localStorage));},[]);
   const [zoomControls, setZoomControls] = useState(true);
+  const [finalZoomControls,setFinalZoomControls]=useState(false);
+  const showZoomControls=finalUI?finalZoomControls:zoomControls;
   const [finalDetails, setFinalDetails] = useState(false);
   const leftHanded = useSyncExternalStore(subscribeControls, readLeftHanded, serverLeftHanded);
   const [controlsSaveError, setControlsSaveError] = useState(false);
@@ -154,6 +163,15 @@ export default function Home() {
     setConfirmReset(false);
     setSettings(open);
   };
+  const toggleUiMode=()=>{
+    const mode=finalUI?'development':'final';
+    setUiMode(mode);setUiModeSaved(writeUiMode(window.localStorage,mode));
+    setTestPanel(false);setUiPreview(false);
+    if(mode==='final')engine.current?.setDiagnostics(false);
+  };
+  const modeButton=<button type="button" className="ui-mode-toggle" data-ui-mode-toggle aria-pressed={finalUI} onClick={toggleUiMode}>
+    {finalUI?'Volver a UI de desarrollo':'Pasar a UI final'}<span>{finalUI?'Final':'Desarrollo'}</span>
+  </button>;
   const finale = state.ending > 0 || state.complete;
   const finalCaption = finaleState(state.ending).caption;
   const active =
@@ -170,7 +188,7 @@ export default function Home() {
           ),
         );
   return (
-    <main className={'voro-shell' + (finale ? ' universe-ended' : '')} data-ui="cristal">
+    <main className={'voro-shell' + (finale ? ' universe-ended' : '')} data-ui="cristal" data-ui-mode={uiMode}>
       <section
         className={'viewport' + (finale ? ' universe-finale' : '')}
         data-event={
@@ -186,8 +204,8 @@ export default function Home() {
       >
         <canvas
           ref={canvas}
-          tabIndex={finale ? -1 : 0}
-          aria-label={finale ? 'El universo se apaga.' : 'Arrastra para moverte. También puedes usar WASD, flechas o un mando. Espacio para impulsarte.'}
+          tabIndex={state.ending>0 ? -1 : 0}
+          aria-label={finale ? state.ending>0 ? 'El universo se apaga.' : 'Mueve al superviviente con el dedo, las flechas o un mando.' : 'Arrastra para moverte. También puedes usar WASD, flechas o un mando. Espacio para impulsarte.'}
         />
         <div className="shade" />
         <header className="game-header">
@@ -230,7 +248,7 @@ export default function Home() {
           <div className="size">
             <strong className="journey-size">{state.scale}</strong>
             <span>
-              {state.testMode ? 'PRUEBA · ' : ''}
+              {state.testMode ? finalUI?'VISTA PREVIA · ':'PRUEBA · ' : ''}
               {STAGES[state.stage].short}
             </span>
           </div>
@@ -304,7 +322,7 @@ export default function Home() {
                 ? 'Tu evolución continúa.'
                 : 'De una célula a todo lo que existe.'}
             </p>
-          {movementChoice}
+          {!finalUI && movementChoice}
             <button
               className="primary-button"
               disabled={!state.assetsReady}
@@ -317,6 +335,7 @@ export default function Home() {
                   : 'Despertar'}
               <ArrowUpRight size={20} />
             </button>
+            {modeButton}
             {state.assetError && !state.assetsReady && (
               <button
                 className="text-button"
@@ -341,7 +360,7 @@ export default function Home() {
             </output>
             {state.protected && !state.paused && !state.offer.length && <div className="protection-badge">MEMBRANA PROTEGIDA · ESCAPA</div>}
             </div>
-            {zoomControls && !state.paused && !state.offer.length && !state.transition && <fieldset className="zoom-controls" aria-label="Zoom de cámara">
+            {showZoomControls && !state.paused && !state.offer.length && !state.transition && <fieldset className="zoom-controls" aria-label="Zoom de cámara">
               <button aria-label="Alejar cámara" disabled={state.zoomFactor <= .75} onClick={() => engine.current?.setZoom(state.zoomFactor - .1)}>−</button>
               <button aria-label="Restablecer zoom automático" onClick={() => engine.current?.setZoom(1)}>{Math.round(state.zoomFactor * 100)} %</button>
               <button aria-label="Acercar cámara" disabled={state.zoomFactor >= 1.75} onClick={() => engine.current?.setZoom(state.zoomFactor + .1)}>+</button>
@@ -390,7 +409,7 @@ export default function Home() {
             </div>
           </>
         )}
-        {active && state.paused && !settings && (
+        {(active || state.complete) && state.paused && !settings && (
           <div className="pause-panel">
             <p className="eyebrow">EN SUSPENSIÓN</p>
             <h2>Respira.</h2>
@@ -467,6 +486,10 @@ export default function Home() {
           </div>
         )}
         {state.ending > 0 && finalCaption && <div className="ending-caption" aria-live="polite"><p>{finalCaption}</p></div>}
+        {state.complete && state.ending===0 && !finalDetails && <div className="final-survivor-actions">
+          <button className="icon-button" aria-label="Configuración" onClick={()=>changeSettings(true)}><Settings size={19}/></button>
+          <button className="icon-button" aria-label={state.paused?'Reanudar':'Pausar'} onClick={()=>action('pause')}>{state.paused?<Play size={19}/>:<Pause size={19}/>}</button>
+        </div>}
         {state.complete && state.ending === 0 && !finalDetails && <button className="universe-survivor-control" aria-label="VORO permanece solo en el vacío. Ver el final y tu recorrido" onClick={() => setFinalDetails(true)}>Recorrido</button>}
         {state.complete && finalDetails && (
           <div className="finish-panel journey-finish" aria-live="polite">
@@ -499,7 +522,7 @@ export default function Home() {
             <span className="short-note">FIN · VORO</span>
           </div>
         )}
-        {state.performance && !finale && (
+        {!finalUI && state.performance && !finale && (
           <output className="performance-readout">
             {state.performance.recording ? state.performance.remaining ? `Midiendo · ${state.performance.remaining} s` : 'Rendimiento' : 'Medición terminada'}
             <br />{state.performance.fps || '—'} FPS · P95 {state.performance.p95} ms · pico {state.performance.peak} ms
@@ -538,19 +561,23 @@ export default function Home() {
       />}
       {settings && <Dialog open={!uiPreview} onOpenChange={changeSettings}>
         <DialogContent
-          className="voro-settings cristal-dialog"
+          className={'voro-settings cristal-dialog'+(finalUI?' final-ui':'')}
           showCloseButton={false}
         >
+          <DialogClose className="settings-close icon-button" aria-label="Cerrar configuración"><X size={20}/></DialogClose>
           <p className="eyebrow">VORO · ABISAL</p>
           <DialogTitle>Configuración</DialogTitle>
-          <DialogDescription>{state.stageName} · VORO {RELEASE.version} ({RELEASE.build})</DialogDescription>
+          <DialogDescription>{state.stageName}{!finalUI && ` · VORO ${RELEASE.version} (${RELEASE.build})`}</DialogDescription>
+          {modeButton}
+          {!uiModeSaved && <p role="status" className="save-note">La vista ha cambiado; no se ha podido recordar para la próxima sesión.</p>}
+          <details className="camera-details" open={finalUI?undefined:true}><summary>Encuadre y zoom</summary>
             <div className="camera-settings">
             <label htmlFor="camera-zoom">Zoom de cámara <output>{Math.round(state.zoomFactor * 100)} %</output></label>
             <input id="camera-zoom" type="range" min="75" max="175" step="5" value={Math.round(state.zoomFactor * 100)} onChange={e => engine.current?.setZoom(Number(e.target.value) / 100)} />
             <button className="settings-row" onClick={() => engine.current?.setZoom(1)}>Restablecer encuadre<span>Automático</span></button>
-            <button className="settings-row" aria-pressed={zoomControls} onClick={() => setZoomControls(!zoomControls)}>Botones de zoom al jugar<span>{zoomControls ? 'Activados' : 'Desactivados'}</span></button>
+            <button className="settings-row" aria-pressed={showZoomControls} onClick={() => finalUI?setFinalZoomControls(!finalZoomControls):setZoomControls(!zoomControls)}>Botones de zoom al jugar<span>{showZoomControls ? 'Activados' : 'Desactivados'}</span></button>
             <p className="save-note">Pellizca con dos dedos para ajustar el zoom. En ordenador puedes usar la rueda o los botones. El ajuste se mantiene entre entornos durante esta sesión.</p>
-          </div>
+          </div></details>
           {movementChoice}
           {tilt && <button className="settings-row" onClick={() => { engine.current?.tilt.calibrate(); setTiltMessage('Posición centrada. Mantén el móvil cómodo al continuar.'); }}>Centrar inclinación<span>Recalibrar</span></button>}
           <button className="settings-row"
@@ -561,6 +588,7 @@ export default function Home() {
             Impulso a la izquierda<span>{leftHanded ? 'Activado' : 'Desactivado'}</span>
           </button>
           {controlsSaveError && <output className="save-note">El cambio funciona ahora, pero no se ha podido guardar para la próxima sesión.</output>}
+          {!finalUI && <>
           <button className="settings-row"
             onClick={() => engine.current?.setDiagnostics(!state.performance)}
             aria-pressed={!!state.performance}>
@@ -596,6 +624,7 @@ export default function Home() {
             <textarea className="performance-report" readOnly rows={5} value={reportText}
               onFocus={event => event.currentTarget.select()} />
           </label>}
+          </>}
           <button
             className="settings-row"
             onClick={() => action('sound')}
@@ -621,6 +650,7 @@ export default function Home() {
                 ? 'La partida se guarda en este dispositivo.'
                 : 'El guardado no está disponible en este navegador.'}
           </p>
+          {!finalUI && <>
           <button
             className="settings-row"
             aria-expanded={testPanel}
@@ -735,6 +765,7 @@ export default function Home() {
               </button>
             </div>
           )}
+          </>}
           {state.testMode && (
             <button
               className="settings-row"
@@ -744,9 +775,10 @@ export default function Home() {
                 changeSettings(false);
               }}
             >
-              Salir de pruebas y volver a mi partida <ArrowUpRight size={17} />
+              {finalUI?'Volver a mi partida':'Salir de pruebas y volver a mi partida'} <ArrowUpRight size={17} />
             </button>
           )}
+          <details className="route-details" open={finalUI?undefined:true}><summary>Tu recorrido</summary>
           <ol className="journey-route" aria-label="Tu recorrido">
             {STAGES.map((s, i) => (
               <li
@@ -770,7 +802,8 @@ export default function Home() {
                 </small>
               </li>
             ))}
-          </ol>
+          </ol></details>
+          {!finalUI && <>
           <button className="settings-row" onClick={() => setUiPreview(true)}>
             Probar interfaz Cristal <Sparkles size={17} />
           </button>
@@ -786,6 +819,7 @@ export default function Home() {
             Probar la nueva orilla
             <ArrowUpRight size={17} />
           </Link>
+          </>}
           {state.level > 0 && (
             <div className="micro-upgrade-list">
               {UPGRADES.map((u) => {
@@ -840,7 +874,7 @@ export default function Home() {
         </DialogContent>
       </Dialog>}
       <ReviewMilestone state={state} blocked={settings || testPanel || uiPreview || state.birth > 0 || finale} />
-      {!finale && <aside className="desktop-note">
+      {!finalUI && !finale && <aside className="desktop-note">
         <span>
           {String(state.stage + 1).padStart(2, '0')} —{' '}
           {state.stageName.toUpperCase()}

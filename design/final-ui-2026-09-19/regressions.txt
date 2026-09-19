@@ -1,0 +1,20 @@
+✔ Every environment and size can be tested without altering or overwriting the saved campaign (212.5366ms)
+✔ Test controls reject invalid inputs, can disable upgrades and damage, and never trigger evolution (11.6199ms)
+✔ Twelve approved tracks cover menu, every stage and the completed survivor (1.2391ms)
+✔ No playback before a gesture; two streams crossfade and loop without restarting on repeated state (2.0633ms)
+✔ Pause fades then freezes playback; hidden state stops immediately and resume preserves position (1.5099ms)
+✔ Rapid stage changes and blocked autoplay keep bounded decks and can retry on a gesture (0.8576ms)
+✔ third environment milestone excludes previews and earlier environments (1.3929ms)
+✔ review waits for safe gameplay and all overlays/transitions to finish (0.423ms)
+✔ Final biomass starts the universe ending without searching for another object, and saves a completed run (106.7656ms)
+✔ Ending respects the final stage, biomass threshold and fixed-biome testing (14.7938ms)
+✔ The universe contracts fully into the cell, then only the softly lit survivor remains (1.3864ms)
+✔ The completed survivor breathes at most 20 fps without running gameplay; reduced motion stays still (12.7354ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 568.1927

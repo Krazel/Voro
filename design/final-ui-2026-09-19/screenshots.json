@@ -1,0 +1,86 @@
+[
+  {
+    "file": "development-hud.png",
+    "sha256": "cca944257e5be346c3406168ceb276d34a83e822f22e883206205c9fdcbdda77",
+    "surface": "Chromium real app",
+    "status": "candidate for user review, not approved"
+  },
+  {
+    "file": "development-intro.png",
+    "sha256": "1cd5a95e4f82536833d2b17220a835756807ec1e93aaf343f14eace1798f37cc",
+    "surface": "Chromium real app",
+    "status": "candidate for user review, not approved"
+  },
+  {
+    "file": "development-settings.png",
+    "sha256": "66b2f6316f19d36afa872ef1918408b35424e1d66892425eeb16ef74460de9a1",
+    "surface": "Chromium real app",
+    "status": "candidate for user review, not approved"
+  },
+  {
+    "file": "final-adaptation.png",
+    "sha256": "849dd72fce5e1e4652389880efe23ca13db97e3026befed0d3105b84607a3e5b",
+    "surface": "Chromium real app",
+    "status": "candidate for user review, not approved"
+  },
+  {
+    "file": "final-credits.png",
+    "sha256": "0c4b23226ca4630585c2f19fcea83f79705521a2cfbae6984176450971868482",
+    "surface": "Chromium real app",
+    "status": "candidate for user review, not approved"
+  },
+  {
+    "file": "final-death.png",
+    "sha256": "af4bf5bea29376e0541ff25e6f9b6ef8fdb7cc12fd2165baca9bf1dc9f6c63f1",
+    "surface": "Chromium real app",
+    "status": "candidate for user review, not approved"
+  },
+  {
+    "file": "final-hud.png",
+    "sha256": "50624704f0edb4d31a3e69f83affd9a0df33d5931e3f549268d12dbf6e6ceb2b",
+    "surface": "Chromium real app",
+    "status": "candidate for user review, not approved"
+  },
+  {
+    "file": "final-intro-360.png",
+    "sha256": "bc5f2924a790321f404ad3edac82a1efe6ceb300b72863eb0ab4622cafd818a8",
+    "surface": "Chromium real app",
+    "status": "candidate for user review, not approved"
+  },
+  {
+    "file": "final-intro-768.png",
+    "sha256": "ca431a4e86641218d131165c3326806361a9dbb976b01af9ea2d55d99076c596",
+    "surface": "Chromium real app",
+    "status": "candidate for user review, not approved"
+  },
+  {
+    "file": "final-intro.png",
+    "sha256": "1dc14612b4428439ef10f13733e1219f41f58d990cfd2ba1f5cfab209c046d4d",
+    "surface": "Chromium real app",
+    "status": "candidate for user review, not approved"
+  },
+  {
+    "file": "final-pause.png",
+    "sha256": "995b94d4bad79ca2191dae616c9937d3b12df639f36f83c0eeaf8c21707ad489",
+    "surface": "Chromium real app",
+    "status": "candidate for user review, not approved"
+  },
+  {
+    "file": "final-settings.png",
+    "sha256": "fac4c6bfc7457ea489a40b1c023f5eb9aa364996e0005450995cf6098d481404",
+    "surface": "Chromium real app",
+    "status": "candidate for user review, not approved"
+  },
+  {
+    "file": "final-survivor-pause.png",
+    "sha256": "691b70f53317d56ce20416f45deca152f28ee0f44eab4cbbfc093a014624ba64",
+    "surface": "Chromium real app",
+    "status": "candidate for user review, not approved"
+  },
+  {
+    "file": "final-survivor.png",
+    "sha256": "35296a8af108199219c418d138a8e69458f39582359614fbb63e2aec221402ea",
+    "surface": "Chromium real app",
+    "status": "candidate for user review, not approved"
+  }
+]

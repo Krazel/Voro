@@ -1,0 +1,16 @@
+{
+  "errors": [],
+  "progressPreserved": true,
+  "modePersists": true,
+  "credits": 12,
+  "responsive": [
+    {
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "overflow": false
+    }
+  ]
+}
