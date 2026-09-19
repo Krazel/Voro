@@ -1,0 +1,22 @@
+{
+  "verified": true,
+  "id": "PR-009",
+  "previousRevision": 63,
+  "revision": 64,
+  "version": "0.5",
+  "build": 1,
+  "testflight": "Interno",
+  "appStore": "Creada en App Store Connect",
+  "appleBuildId": "2e344dc7-137d-45b4-b14e-98ef31321045",
+  "processingState": "VALID",
+  "internalBuildState": "IN_BETA_TESTING",
+  "groupId": "05db8744-bcf3-4c2d-a465-2635012bfeeb",
+  "groupName": "VORO Interno",
+  "preserved": [
+    "tracking",
+    "distribution",
+    "publicVersion",
+    "releases",
+    "source"
+  ]
+}
