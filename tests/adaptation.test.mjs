@@ -39,7 +39,9 @@ test('Every new stage starts half-size, only the smallest species are edible, an
       } else locked++;
     }
     assert.ok(edible >= 1);
-    assert.ok(locked > edible);
+    // City now includes edible armed humans alongside civilians. Large
+    // vehicles/buildings still remain locked; weapons add no hidden threshold.
+    assert.ok(STAGES[stage].id === 'city' ? locked > 0 : locked > edible);
     const w = new JourneyWorld(p.seed, [], stage);
     w.stream(l.x, l.y, 0);
     assert.ok(

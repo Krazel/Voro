@@ -1,0 +1,35 @@
+{
+  "checks": [
+    {
+      "id": "city-1",
+      "eaten": true,
+      "digested": 1,
+      "mass": 2.856221615865709
+    },
+    {
+      "id": "city-7",
+      "eaten": true,
+      "digested": 1,
+      "mass": 8.509432683801013
+    },
+    {
+      "id": "city-5",
+      "eaten": true,
+      "digested": 1,
+      "mass": 3.7547163419005063
+    },
+    {
+      "capture": {
+        "items": 398,
+        "shots": 0
+      },
+      "outcome": {
+        "earthConsumed": true,
+        "sweep": null,
+        "remaining": 0,
+        "transition": 6.900000000000001
+      }
+    }
+  ],
+  "errors": []
+}

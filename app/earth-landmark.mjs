@@ -27,7 +27,7 @@ export function drawOrbitalEarth(c, image, camera, height, zoom = 1, life = null
   const wy = ORBITAL_EARTH.y + ((life?.y ?? ORBITAL_EARTH.y) - ORBITAL_EARTH.y) * ease;
   const x = 240 + (wx - camera.x) * zoom;
   const y = height * .48 + (wy - camera.y) * zoom;
-  const r = ORBITAL_EARTH.radius * zoom * (1 - ease * .98);
+  const r = ORBITAL_EARTH.radius * zoom * (1 - ease);
   if (x + r < 0 || x - r > 480 || y + r < 0 || y - r > height) {
     const dx = x - 240, dy = y - height * .48;
     const angle = Math.atan2(dy, dx);

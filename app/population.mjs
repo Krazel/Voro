@@ -21,7 +21,7 @@ export const POPULATION_PLANS = {
   city: {
     slots: [15, 7, 2],
     pedestrians: 10,
-    note: 'Diez plazas de peatones por zona, además de objetos, edificios y defensa. Circulan por las aceras.',
+    note: 'Diez plazas de peatones y una de automóvil sin armas por zona, dentro del mismo límite de población; además de objetos, edificios y defensa.',
   },
   orbit: {
     slots: [5, 8, 1],

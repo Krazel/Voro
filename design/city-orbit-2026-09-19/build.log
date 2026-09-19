@@ -1,0 +1,24 @@
+vite v8.0.13 building client environment for production...
+[2K
+transforming...✓ 2041 modules transformed.
+rendering chunks...
+computing gzip size...
+artifact/city-orbit-preview-2026-09-19/index.html                          0.42 kB │ gzip:   0.30 kB
+artifact/city-orbit-preview-2026-09-19/assets/page-DOeI38q3.css            2.69 kB │ gzip:   1.02 kB
+artifact/city-orbit-preview-2026-09-19/assets/page-CFs7LMlZ.css            6.28 kB │ gzip:   1.90 kB
+artifact/city-orbit-preview-2026-09-19/assets/page-Dq4JE098.css           23.87 kB │ gzip:   5.67 kB
+artifact/city-orbit-preview-2026-09-19/assets/index-S1wvHFQ7.css         189.90 kB │ gzip:  32.61 kB
+artifact/city-orbit-preview-2026-09-19/assets/chevron-right-CVE3K0o3.js    0.23 kB │ gzip:   0.19 kB
+artifact/city-orbit-preview-2026-09-19/assets/web-D0ewVXl9.js              0.36 kB │ gzip:   0.25 kB
+artifact/city-orbit-preview-2026-09-19/assets/page-Ct0Ei3i-.js             3.61 kB │ gzip:   1.70 kB
+artifact/city-orbit-preview-2026-09-19/assets/web-DmEis6A4.js              8.45 kB │ gzip:   2.82 kB
+artifact/city-orbit-preview-2026-09-19/assets/page-DtYiwF9p.js            12.84 kB │ gzip:   4.88 kB
+artifact/city-orbit-preview-2026-09-19/assets/page-CyuZa6nT.js            15.02 kB │ gzip:   4.30 kB
+artifact/city-orbit-preview-2026-09-19/assets/index-D2Z6Rhkf.js          540.72 kB │ gzip: 175.32 kB
+
+✓ built in 1.29s
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.

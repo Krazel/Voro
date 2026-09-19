@@ -1,3 +1,4 @@
+import { captureOrbit, sweepPosition } from './orbital-sweep.mjs';
 import { UniverseFinale, FINALE_SECONDS, drawVoidSurvivor } from './universe-finale.mjs';
 import { WorldGround } from './world-ground.mjs';
 import { RELEASE } from './release.mjs';
@@ -357,6 +358,7 @@ export class VoroEngine {
         restoredFragments = loaded.fragments;
         this.progress = loaded.progress;
         this.life = loaded.life;
+        if (this.progress.orbitSweep) this.earthAbsorption = .001;
         this.sound = loaded.sound;
         this.saved = true;
         this.world = new JourneyWorld(
@@ -372,6 +374,10 @@ export class VoroEngine {
     this.seed();
     this.fragments = restoredFragments;
     this.food = [...this.world.entities, ...this.fragments];
+    if (stageOf(this.progress).id === 'orbit' && this.progress.earthConsumed) {
+      this.world.entities = []; this.world.projectiles = [];
+      this.food = []; this.fragments = []; this.motes = [];
+    }
     this.camera = { x: this.life.x, y: this.life.y };
     this.zoom = gameplayZoom(this.life.radius, this.cameraEntryRadius) * this.zoomFactor;
     this.resize();
@@ -556,7 +562,7 @@ export class VoroEngine {
   }
   cameraInputAllowed() {
     return this.started && !this.paused && !this.settingsOpen && !this.life.dead
-      && !this.progress.completed && !this.progress.offer.length && !this.transition && !this.birth;
+      && !this.progress.completed && !this.progress.offer.length && !this.transition && !this.birth && !this.earthAbsorption;
   }
   get cameraEntryRadius() {
     return this.progress.cameraEntryRadius ?? radiusForMass(stageStartMass(this.progress.stage));
@@ -849,6 +855,7 @@ export class VoroEngine {
         this.progress.totalTime += this.life.elapsed;
       }
       this.progress.cameraEntryRadius = null;
+      this.progress.orbitSweep = null;
       this.life = journeyLife(this.progress);
       this.world = new JourneyWorld(
         this.progress.seed,
@@ -1126,10 +1133,21 @@ export class VoroEngine {
   };
   update(dt: number) {
     if (this.earthAbsorption > 0) {
+      if (!this.started) return;
       this.earthAbsorption = Math.min(1, this.earthAbsorption + dt / (this.reduced ? 1 : 3.2));
       this.animateMembrane(dt);
       this.life.feedPulse = .8;
       if (this.earthAbsorption >= 1) {
+        // Commit the cinematic only once. It grants no extra biomass/XP;
+        // finish only meals already earned before the orbital sweep began.
+        const xpBefore = this.life.adaptationGained;
+        digest(this.life, 100);
+        this.progress.xp += (this.life.adaptationGained - xpBefore) * .85 * this.stats.adaptationFactor;
+        for (const e of this.world.entities) e.eaten = true;
+        this.world.entities = []; this.world.projectiles = [];
+        this.food = []; this.fragments = []; this.motes = [];
+        this.huntingTentacles.clear();
+        this.progress.orbitSweep = null;
         this.progress.earthConsumed = true;
         this.burst(this.life.x, this.life.y, 24, true);
         this.beginEvolution();
@@ -1290,10 +1308,14 @@ export class VoroEngine {
         }
       }
       for (const e of this.world.entities) {
-        if (e.eaten || p.biomass >= e.requiredMass || p.invulnerable > 0)
+        if (e.eaten || p.invulnerable > 0)
           continue;
         const spec = SPECIES_BY_ID[e.kind];
         if (!isDanger(spec)) continue;
+        if (p.biomass >= e.requiredMass && stageOf(this.progress).id !== 'city') continue;
+        // Eligible city defenders get an absorption attempt before contact
+        // damage. They still hurt if capacity is full, and keep firing outside.
+        if (p.biomass >= e.requiredMass && Math.hypot(p.x-e.x,p.y-e.y) > p.radius*1.12*p.reachFactor) continue;
         if (Math.hypot(p.x - e.x, p.y - e.y) > p.radius * 0.85 + e.r * 0.76)
           continue;
         this.receiveHit(e, 0.22);
@@ -1424,7 +1446,9 @@ export class VoroEngine {
     if (stageOf(this.progress).id === 'orbit' && !this.progress.earthConsumed) {
       this.progress.pendingEvolution = false;
       if (!this.earthAbsorption && canAbsorbEarth(this.life)) {
+        this.progress.orbitSweep = captureOrbit(this.world, this.fragments, this.life.elapsed);
         this.earthAbsorption = .001;
+        this.save();
         this.keys.clear(); this.pointer = null;
         this.life.vx = this.life.vy = 0;
         this.toast('Tu mundo vuelve a ti.', 4);
@@ -1784,7 +1808,9 @@ export class VoroEngine {
           '#9bd3dc35',
         );
     const inhabitantsStarted = this.diagnosticsEnabled ? performance.now() : 0;
-    for (const f of this.food) {
+    const sweep = this.earthAbsorption > 0 ? this.progress.orbitSweep : null;
+    const renderedFood = sweep ? sweep.items.map((f: Food) => sweepPosition(f, p, this.earthAbsorption)) : this.food;
+    for (const f of renderedFood) {
       if (f.eaten || !visible(f.x, f.y, (f.r || 8) * 1.3)) continue;
       const edible = p.biomass >= (f.requiredMass || 0),
         r = f.r || 8,
@@ -1829,7 +1855,8 @@ export class VoroEngine {
     }
     if (this.diagnosticsEnabled)
       this.frameMonitor.frameParts.inhabitants = performance.now() - inhabitantsStarted;
-    for (const b of this.world.projectiles) {
+    const renderedShots = sweep ? sweep.shots.map((b: {x:number;y:number;r:number;vx:number;vy:number;plasma:boolean}) => sweepPosition(b, p, this.earthAbsorption)) : this.world.projectiles;
+    for (const b of renderedShots) {
       if (!visible(b.x, b.y, 10)) continue;
       c.strokeStyle = b.plasma ? '#b9e6ff' : '#ffda9c';
       c.lineWidth = b.r;
@@ -1883,7 +1910,7 @@ export class VoroEngine {
       !this.progress.offer.length &&
       !this.progress.completed &&
       !this.transition
-      && !this.birth
+      && !this.birth && !this.earthAbsorption
     )
       this.drawFoodGuide(ox, oy);
     this.drawEvolution();

@@ -7,7 +7,6 @@ import {
 import { MicroWorld, makeEntity, TILE } from './micro-world.mjs';
 import { animalTarget } from './animal-steering.mjs';
 import { random, clamp } from './simulation.mjs';
-import { ORBITAL_EARTH } from './earth-landmark.mjs';
 import { cityLots, cityPlacement, constrainCity } from './city-layout.mjs';
 import {
   STAGE_SPECIES,
@@ -62,7 +61,7 @@ export class JourneyWorld extends MicroWorld {
     const small = list.filter(
         (s) =>
           journeyEntity(s, 0, 0, 0, 'starter').requiredMass <=
-            stageStartMass(this.stage) && !isDanger(s),
+            stageStartMass(this.stage) && !isDanger(s) && s.id !== 'city-5',
       ),
       medium = list.filter((s) => !small.includes(s) && !isDanger(s)),
       danger = list.filter(isDanger);
@@ -102,8 +101,12 @@ export class JourneyWorld extends MicroWorld {
         i < starters ? small : i < starters + forage ? medium : danger;
       if (stageId === 'water' && i >= starters + forage)
         pool = i === starters + forage ? hunters : hazards;
+      // One civilian car replaces a forage slot; never add population on top
+      // of the existing budget or let random starter picks flood the roads.
+      if (stageId === 'city') pool = pool.filter(s => s.id !== 'city-5');
       const pedestrians = plan.pedestrians || 0;
       const s = i < pedestrians ? SPECIES_BY_ID['city-0']
+        : stageId === 'city' && i === starters ? SPECIES_BY_ID['city-5']
         : i === pedestrians ? recovery : pick(pool.length ? pool : list);
       const seed = rng() * 6.28,
         id = `${cx}:${cy}:${i}`;
@@ -120,8 +123,6 @@ export class JourneyWorld extends MicroWorld {
           const pos = cityPlacement(s,x,y,cx,cy);
           x=pos.x; y=pos.y; cityAxis=pos.axis;
         }
-        if (stageId === 'orbit' && Math.hypot(x - ORBITAL_EARTH.x, y - ORBITAL_EARTH.y)
-          < ORBITAL_EARTH.radius + candidate.r + 30) continue;
         if (stageId === 'land' && !shoreAllows(s, x, y, candidate.r)) continue;
         if (
           occupied.some(
@@ -167,12 +168,6 @@ export class JourneyWorld extends MicroWorld {
       if (!e.id.startsWith('first:')) continue;
       const pos=cityPlacement(SPECIES_BY_ID[e.kind],e.x,e.y,cx,cy);
       e.x=e.homeX=pos.x; e.y=e.homeY=pos.y; e.cityAxis=pos.axis;
-    }
-    if (stageId === 'orbit') {
-      // Starter food and drifting objects also stay above the Earth's surface.
-      for (let i = entities.length - 1; i >= 0; i--)
-        if (Math.hypot(entities[i].x - ORBITAL_EARTH.x, entities[i].y - ORBITAL_EARTH.y)
-          < ORBITAL_EARTH.radius + entities[i].r + 15) entities.splice(i, 1);
     }
     // One Earth at the arrival point. A consumed landmark remains consumed,
     // unlike renewable forage, including after chunk eviction and save/load.
@@ -231,14 +226,6 @@ export class JourneyWorld extends MicroWorld {
       e.y = clamp(e.y, e.homeY - 280, e.homeY + 280);
       if (STAGES[this.stage].id === 'land') constrainToShore(e, s);
       if (STAGES[this.stage].id === 'city') constrainCity(e);
-      if (STAGES[this.stage].id === 'orbit') {
-        const dx = e.x - ORBITAL_EARTH.x, dy = e.y - ORBITAL_EARTH.y;
-        const distance = Math.hypot(dx, dy), min = ORBITAL_EARTH.radius + e.r + 15;
-        if (distance < min) {
-          e.x = ORBITAL_EARTH.x + (distance ? dx / distance : 0) * min;
-          e.y = ORBITAL_EARTH.y + (distance ? dy / distance : -1) * min;
-        }
-      }
       if (speed > 4 && Math.hypot(e.x - oldX, e.y - oldY) > 0.001) {
         const angle = Math.atan2(e.y - oldY, e.x - oldX);
         e.heading +=

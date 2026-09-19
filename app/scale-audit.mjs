@@ -11,8 +11,12 @@ export function applyScaleAudit(stages, lists, byId) {
   set('water-16', { r: 72 });
   set('water-8', { r: 30 });
   set('city-matter-can', { r: 0.6 });
-  for (const id of ['city-0', 'city-1']) set(id, { r: 6.17 });
-  for (const id of ['city-2', 'city-3']) set(id, { r: 6.6 });
+  for (const id of ['city-0', 'city-1']) set(id, { r: 10 });
+  for (const id of ['city-2', 'city-3']) set(id, { r: 10.7 });
+  // Weapons do not impose a second, invisible eating threshold. Use the same
+  // radius-derived requirement (including each individual's size) as civilians.
+  for (const id of ['city-0','city-1','city-2','city-3','city-7','city-8','city-9'])
+    set(id, { requiredMass: undefined });
   set('orbit-matter-panel', { r: 5 });
   set('orbit-matter-comet', { name: 'Fragmento de cometa' });
   set('planets-matter-comet', { name: 'Núcleo de planetoide helado' });

@@ -1,3 +1,4 @@
+import { restoreOrbitSweep } from './orbital-sweep.mjs';
 import { createLife, radiusForMass, clamp } from './simulation.mjs';
 import { newMicro, loadMicro, MICRO_SAVE } from './micro-progress.mjs';
 import {
@@ -28,6 +29,7 @@ export function newJourney(seed) {
     ...newMicro(seed),
     stage: 0,
     cameraEntryRadius: null,
+    orbitSweep: /** @type {ReturnType<typeof restoreOrbitSweep>} */ (null),
     adaptationVersion: 4,
     upgradeLimitsVersion: 1,
     shieldChoiceVersion: 1,
@@ -161,6 +163,8 @@ export function loadJourney(raw) {
     const progress = {
       ...newJourney(p.seed),
       stage,
+      orbitSweep: STAGES[stage].id === 'orbit' && !p.earthConsumed && l.biomass >= STAGES[stage].goal
+        ? restoreOrbitSweep(p.orbitSweep) : null,
       cameraEntryRadius: Number.isFinite(p.cameraEntryRadius) && p.cameraEntryRadius >= radiusForMass(stageStartMass(stage)) &&
         p.cameraEntryRadius <= radiusForMass(STAGES[stage].goal * 1.5)
         ? p.cameraEntryRadius : null,
