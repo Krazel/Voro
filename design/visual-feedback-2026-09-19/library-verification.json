@@ -1,0 +1,8 @@
+{
+  "next": "Candidato local 734966d en Voro-camera: protagonista real/3 mejoras, membranas lentas, HUD y nitidez, ciudad/escala/6 civiles/daño, Tierra original y movimiento posfinal implementados. 169 tests, tipos y build local; vídeos design/visual-feedback-2026-09-19/README.md. Responsable 01a0b934-3ec1-79f1-8029-de6177fd0228. Pendiente QA iPhone de nitidez/FPS Órbita y StoreKit; no nueva subida. Logos:4 pendientes, .studio/marketing/voro/logos-2026-09-19/README.md, tarea01a096e2-5834-7233-9b36-d034a2d281fb. TestFlight interno0.5(1), build2e344dc7-137d-45b4-b14e-98ef31321045/binario689a23c; IPA artifact/testflight-0.5-build-1. Probar dispositivo/StoreKit/rendimiento. Nuevos cambios sin subida. Sin beta externa/revisión/publicación. ASC: capturas/whatsNew editable,1.0 PREPARE_FOR_SUBMISSION. itch Draft: verificar descripción.",
+  "beforeRevision": 71,
+  "trackingPreserved": true,
+  "revision": 72,
+  "id": "PR-009",
+  "verifiedAt": "2026-09-19T19:21:47.3751495+02:00"
+}
