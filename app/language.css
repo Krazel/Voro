@@ -1,0 +1,5 @@
+.language-preference {display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;width:100%;}
+.language-preference label {color:inherit;}
+.language-preference select {min-height:44px;max-width:100%;border:1px solid #73bbc3;border-radius:14px;padding:8px 12px;background:#092b35;color:#eaf6f1;font:16px Arial,sans-serif;}
+.language-preference small {flex-basis:100%;font:12px/1.4 Arial,sans-serif;}
+html[lang='en'] .adaptation-copy small {overflow-wrap:anywhere;}

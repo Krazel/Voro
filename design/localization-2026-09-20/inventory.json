@@ -1,0 +1,1903 @@
+{
+  "use client": [
+    "adaptation-constellation.tsx",
+    "cristal-ui.tsx",
+    "final-settings.tsx",
+    "page.tsx",
+    "review-milestone.tsx"
+  ],
+  "(prefers-reduced-motion: reduce)": [
+    "adaptation-constellation.tsx",
+    "engine.ts"
+  ],
+  "Deriva lenta de partículas, sin deformar la materia.": [
+    "animation-catalog.mjs"
+  ],
+  "Flexión suave de la cápsula y contracción interna.": [
+    "animation-catalog.mjs"
+  ],
+  "Contracción alterna de las dos células unidas.": [
+    "animation-catalog.mjs"
+  ],
+  "Rotación lenta de la cubierta rígida de sílice.": [
+    "animation-catalog.mjs"
+  ],
+  "Batido de cilios que avanza por el borde del paramecio.": [
+    "animation-catalog.mjs"
+  ],
+  "Pseudópodos que se estiran y recogen alrededor del núcleo.": [
+    "animation-catalog.mjs"
+  ],
+  "El flagelo impulsa el cuerpo con una onda que crece hacia la punta.": [
+    "animation-catalog.mjs"
+  ],
+  "Una onda continua recorre la bacteria espiral.": [
+    "animation-catalog.mjs"
+  ],
+  "Cilios rápidos y contracción del extremo de ataque.": [
+    "animation-catalog.mjs"
+  ],
+  "Las espinas se abren al reaccionar; el centro se mantiene estable.": [
+    "animation-catalog.mjs"
+  ],
+  "Lóbulos amplios que se estiran y vuelven al citoplasma.": [
+    "animation-catalog.mjs"
+  ],
+  "Cada célula sigue a la anterior con un pequeño retardo.": [
+    "animation-catalog.mjs"
+  ],
+  "Abdomen articulado, patas nadadoras y antenas independientes.": [
+    "animation-catalog.mjs"
+  ],
+  "Cabeza estable, cola rápida y aletas pequeñas.": [
+    "animation-catalog.mjs"
+  ],
+  "El nado aprobado: cabeza estable, flexión corporal y cola propulsora.": [
+    "animation-catalog.mjs"
+  ],
+  "Aleteo corto, cola flexible y respiración de las branquias.": [
+    "animation-catalog.mjs"
+  ],
+  "Cola amarilla con barrido amplio y aletas de ajuste.": [
+    "animation-catalog.mjs"
+  ],
+  "Respira al nadar y se infla al reaccionar; aletas rápidas.": [
+    "animation-catalog.mjs"
+  ],
+  "Aleta dorsal rápida, cabeza estable y cola que se enrosca.": [
+    "animation-catalog.mjs"
+  ],
+  "La campana se contrae; los filamentos la siguen con retardo.": [
+    "animation-catalog.mjs"
+  ],
+  "Contracción de campana y ondas largas por los tentáculos.": [
+    "animation-catalog.mjs"
+  ],
+  "El manto se comprime antes del impulso; brazos con flexión propia.": [
+    "animation-catalog.mjs"
+  ],
+  "Brazos que se recogen y se despliegan alrededor de un manto estable.": [
+    "animation-catalog.mjs"
+  ],
+  "Onda que recorre el cuerpo curvado y llega a la cola.": [
+    "animation-catalog.mjs"
+  ],
+  "Tronco firme y barrido lento de la cola del tiburón.": [
+    "animation-catalog.mjs"
+  ],
+  "Cabeza ancha estable y movimiento potente desde el pedúnculo.": [
+    "animation-catalog.mjs"
+  ],
+  "Brazada y patada alterna, con el torso estable.": [
+    "animation-catalog.mjs"
+  ],
+  "Las aletas pectorales baten desde sus raíces y la cola las sigue.": [
+    "animation-catalog.mjs"
+  ],
+  "Seis patas alternan dos trípodes; las antenas exploran.": [
+    "animation-catalog.mjs"
+  ],
+  "Contracción por segmentos alrededor del cuerpo curvado.": [
+    "animation-catalog.mjs"
+  ],
+  "Las patas avanzan en una onda bajo la cubierta segmentada.": [
+    "animation-catalog.mjs"
+  ],
+  "Élitros rígidos y seis patas articuladas.": [
+    "animation-catalog.mjs"
+  ],
+  "Onda en el pie, tentáculos sensibles y concha estable.": [
+    "animation-catalog.mjs"
+  ],
+  "Las alas se pliegan desde el tórax, sin aplastar el cuerpo.": [
+    "animation-catalog.mjs"
+  ],
+  "Ocho patas alternan apoyos alrededor del cuerpo.": [
+    "animation-catalog.mjs"
+  ],
+  "Patas alternas, pinzas móviles y cola que se prepara para atacar.": [
+    "animation-catalog.mjs"
+  ],
+  "Se agacha, extiende las patas traseras, salta y amortigua la caída.": [
+    "animation-catalog.mjs"
+  ],
+  "Apoyos diagonales de las patas y contrapeso de la cola.": [
+    "animation-catalog.mjs"
+  ],
+  "Pasos cortos, respiración y cola flexible.": [
+    "animation-catalog.mjs"
+  ],
+  "Compresión antes del salto, extensión y orejas con retardo.": [
+    "animation-catalog.mjs"
+  ],
+  "Pasos alternos y balanceo de brazos al huir.": [
+    "animation-catalog.mjs"
+  ],
+  "Piernas articuladas; mantiene el arma y reacciona con retroceso.": [
+    "animation-catalog.mjs"
+  ],
+  "Avanza con el escudo firme y adelanta la porra al atacar.": [
+    "animation-catalog.mjs"
+  ],
+  "Paso pesado, arma estable y retroceso al disparar.": [
+    "animation-catalog.mjs"
+  ],
+  "Dirección delantera y suspensión durante la marcha.": [
+    "animation-catalog.mjs"
+  ],
+  "Ruedas delanteras orientables y suspensión suave.": [
+    "animation-catalog.mjs"
+  ],
+  "Suspensión más lenta y balanceo del vehículo al girar.": [
+    "animation-catalog.mjs"
+  ],
+  "Ruedas y torreta independientes; retroceso al atacar.": [
+    "animation-catalog.mjs"
+  ],
+  "Orugas en movimiento y cañón con giro y retroceso.": [
+    "animation-catalog.mjs"
+  ],
+  "Rotor principal articulado sobre el fuselaje estable.": [
+    "animation-catalog.mjs"
+  ],
+  "Edificio estable: giran los ventiladores de la azotea.": [
+    "animation-catalog.mjs"
+  ],
+  "Ventilación y balizas de la azotea; la estructura permanece rígida.": [
+    "animation-catalog.mjs"
+  ],
+  "Rotación de un asteroide rígido y deriva de sus fragmentos.": [
+    "animation-catalog.mjs"
+  ],
+  "Restos que giran lentamente sobre su centro de masa.": [
+    "animation-catalog.mjs"
+  ],
+  "Orientación del satélite y ligera articulación de los paneles.": [
+    "animation-catalog.mjs"
+  ],
+  "Giro de la estación y orientación de sus módulos solares.": [
+    "animation-catalog.mjs"
+  ],
+  "Los motores emiten pulsos y el casco permanece rígido.": [
+    "animation-catalog.mjs"
+  ],
+  "Rotación suave de la luna craterizada.": [
+    "animation-catalog.mjs"
+  ],
+  "Rotación lenta de la superficie rocosa.": [
+    "animation-catalog.mjs"
+  ],
+  "Rotación del mundo y circulación suave de las nubes.": [
+    "animation-catalog.mjs"
+  ],
+  "Pulsos de lava en la corteza, sin deformar la esfera.": [
+    "animation-catalog.mjs"
+  ],
+  "Giro lento de la superficie helada.": [
+    "animation-catalog.mjs"
+  ],
+  "Las bandas gaseosas circulan a distintas velocidades.": [
+    "animation-catalog.mjs"
+  ],
+  "El planeta gira suavemente dentro de sus anillos.": [
+    "animation-catalog.mjs"
+  ],
+  "Convección lenta de la superficie de la enana marrón.": [
+    "animation-catalog.mjs"
+  ],
+  "Pulsos de la corona roja y pequeñas erupciones.": [
+    "animation-catalog.mjs"
+  ],
+  "La fotosfera circula y la corona lanza llamaradas.": [
+    "animation-catalog.mjs"
+  ],
+  "Corona azul más rápida e intensa al reaccionar.": [
+    "animation-catalog.mjs"
+  ],
+  "Pulsación lenta de una gigante y expansión de su corona.": [
+    "animation-catalog.mjs"
+  ],
+  "Precesión de los chorros y pulsos del núcleo compacto.": [
+    "animation-catalog.mjs"
+  ],
+  "Rotación del disco estelar alrededor del núcleo.": [
+    "animation-catalog.mjs"
+  ],
+  "Los brazos espirales giran alrededor de un núcleo estable.": [
+    "animation-catalog.mjs"
+  ],
+  "Rotación lenta de una población estelar elíptica.": [
+    "animation-catalog.mjs"
+  ],
+  "La barra central gira con el disco; los brazos la siguen.": [
+    "animation-catalog.mjs"
+  ],
+  "Deriva irregular de nubes y regiones de formación estelar.": [
+    "animation-catalog.mjs"
+  ],
+  "Rotación de perfil del disco y brillo del núcleo.": [
+    "animation-catalog.mjs"
+  ],
+  "Las estrellas orbitan lentamente y cambian de brillo.": [
+    "animation-catalog.mjs"
+  ],
+  "Corrientes internas de gas alrededor del centro de la nebulosa.": [
+    "animation-catalog.mjs"
+  ],
+  "Las columnas conservan su forma mientras fluye el gas exterior.": [
+    "animation-catalog.mjs"
+  ],
+  "La onda exterior se expande mientras el centro permanece vacío.": [
+    "animation-catalog.mjs"
+  ],
+  "El disco de acreción circula alrededor del horizonte oscuro.": [
+    "animation-catalog.mjs"
+  ],
+  "Chorros pulsantes sobre un disco de acreción en movimiento.": [
+    "animation-catalog.mjs"
+  ],
+  "Dos núcleos orbitan y arrastran sus brazos estelares.": [
+    "animation-catalog.mjs"
+  ],
+  "Pequeñas galaxias orbitan dentro del cúmulo.": [
+    "animation-catalog.mjs"
+  ],
+  "La luz recorre las conexiones del supercúmulo.": [
+    "animation-catalog.mjs"
+  ],
+  "Pulsos que recorren los filamentos entre sus nudos.": [
+    "animation-catalog.mjs"
+  ],
+  "Materia que circula por el borde de un vacío estable.": [
+    "animation-catalog.mjs"
+  ],
+  "La red se ilumina por sectores y converge al reaccionar.": [
+    "animation-catalog.mjs"
+  ],
+  "Cuerpo firme, barrido corto de la cola y aletas de ajuste.": [
+    "animation-catalog.mjs"
+  ],
+  "Nadador aislado: hombros, codos, caderas y rodillas articulados.": [
+    "animation-catalog.mjs"
+  ],
+  "Cuerpo y cola estables; batido de la pequeña aleta dorsal.": [
+    "animation-catalog.mjs"
+  ],
+  "Patas traseras que se recogen y extienden desde caderas y rodillas.": [
+    "animation-catalog.mjs"
+  ],
+  "Pequeños saltos con patas articuladas y orejas de movimiento suave.": [
+    "animation-catalog.mjs"
+  ],
+  "Pasos alternos desde caderas y rodillas; brazos que acompañan la carrera.": [
+    "animation-catalog.mjs"
+  ],
+  "Rodillas articuladas y pasos cortos, con torso y fusil estables.": [
+    "animation-catalog.mjs"
+  ],
+  "Avance con el escudo firme, pasos contenidos y movimiento de la porra.": [
+    "animation-catalog.mjs"
+  ],
+  "Pasos pesados desde las caderas, manteniendo firme el arma.": [
+    "animation-catalog.mjs"
+  ],
+  "Orientación suave del satélite, con paneles solares rígidos.": [
+    "animation-catalog.mjs"
+  ],
+  "Orientación lenta de la estación, sin doblar sus módulos.": [
+    "animation-catalog.mjs"
+  ],
+  "Casco firme y pulsos de luz concentrados en los motores.": [
+    "animation-catalog.mjs"
+  ],
+  "Movimiento suave de la superficie, con los anillos estables.": [
+    "animation-catalog.mjs"
+  ],
+  "Movimiento suave de la superficie, conservando el contorno y la iluminación.": [
+    "animation-catalog.mjs"
+  ],
+  "Circulación lenta de la materia, conservando la inclinación del disco.": [
+    "animation-catalog.mjs"
+  ],
+  "El disco de acreción circula alrededor de un horizonte estable.": [
+    "animation-catalog.mjs"
+  ],
+  "El globo conserva su forma, con un giro lento.": [
+    "animation-catalog.mjs"
+  ],
+  "Brazos y piernas articulados, con brazada y patada alternas.": [
+    "animation-catalog.mjs"
+  ],
+  "El despertar": [
+    "campaign.mjs"
+  ],
+  "Organismo unicelular": [
+    "campaign.mjs"
+  ],
+  "Una gota de agua": [
+    "campaign.mjs"
+  ],
+  "Nada hacia el dorado. Tu membrana hará el resto.": [
+    "campaign.mjs"
+  ],
+  "Tu membrana se multiplica. Generación tras generación, la gota se convierte en un océano.": [
+    "campaign.mjs"
+  ],
+  "La primera marea": [
+    "campaign.mjs"
+  ],
+  "Colonia acuática": [
+    "campaign.mjs"
+  ],
+  "El estanque": [
+    "campaign.mjs"
+  ],
+  "Los peces pequeños alimentan tu colonia. Los grandes todavía se defienden.": [
+    "campaign.mjs"
+  ],
+  "Aprendes a retener el agua. La vida se arrastra hacia la orilla.": [
+    "campaign.mjs"
+  ],
+  "Fuera del agua": [
+    "campaign.mjs"
+  ],
+  "Masa anfibia": [
+    "campaign.mjs"
+  ],
+  "El bosque húmedo": [
+    "campaign.mjs"
+  ],
+  "Absorbe hongos e insectos. Crece para engullir la vegetación.": [
+    "campaign.mjs"
+  ],
+  "Las raíces dejan de ser un obstáculo. A lo lejos, un nuevo mundo brilla.": [
+    "campaign.mjs"
+  ],
+  "La ciudad diminuta": [
+    "campaign.mjs"
+  ],
+  "Organismo colosal": [
+    "campaign.mjs"
+  ],
+  "La costa habitada": [
+    "campaign.mjs"
+  ],
+  "Empieza por los vehículos. Cuando crezcas, los edificios cederán.": [
+    "campaign.mjs"
+  ],
+  "No queda nada que pueda contenerte. La gravedad empieza a parecer una sugerencia.": [
+    "campaign.mjs"
+  ],
+  "Sin gravedad": [
+    "campaign.mjs"
+  ],
+  "Leviatán orbital": [
+    "campaign.mjs"
+  ],
+  "La órbita": [
+    "campaign.mjs"
+  ],
+  "Devora fragmentos y lunas. Evita las tormentas solares.": [
+    "campaign.mjs"
+  ],
+  "La Tierra queda atrás. Tu hambre viaja entre las estrellas.": [
+    "campaign.mjs"
+  ],
+  "El hambre del universo": [
+    "campaign.mjs"
+  ],
+  "El sistema olvidado": [
+    "campaign.mjs"
+  ],
+  "Crece hasta 56 de biomasa y busca Gaia, el último mundo.": [
+    "campaign.mjs"
+  ],
+  "De una célula a un universo por dentro. El último planeta late en tu núcleo.": [
+    "campaign.mjs"
+  ],
+  "Flagelos vivos": [
+    "campaign.mjs"
+  ],
+  "+12 % de velocidad · impulso más frecuente": [
+    "campaign.mjs"
+  ],
+  "Membrana densa": [
+    "campaign.mjs"
+  ],
+  "Recibes un 15 % menos de daño": [
+    "campaign.mjs"
+  ],
+  "Núcleo voraz": [
+    "campaign.mjs"
+  ],
+  "Digestión un 20 % más rápida · mayor atracción": [
+    "campaign.mjs"
+  ],
+  "Peatona con bolso": [
+    "city-cosmos-art.mjs"
+  ],
+  "Persona con bastón": [
+    "city-cosmos-art.mjs"
+  ],
+  "Civil distinto, con silueta, ropa y accesorios propios.": [
+    "city-cosmos-art.mjs"
+  ],
+  "Edificio fijo, alineado con su parcela y las calles.": [
+    "city-cosmos-art.mjs"
+  ],
+  "Bloque de apartamentos": [
+    "city-cosmos-art.mjs"
+  ],
+  "Torre de oficinas": [
+    "city-cosmos-art.mjs"
+  ],
+  "Casa de tejas": [
+    "city-cosmos-art.mjs"
+  ],
+  "Nave industrial": [
+    "city-cosmos-art.mjs"
+  ],
+  "Edificio municipal": [
+    "city-cosmos-art.mjs"
+  ],
+  "Globo estable con iluminación coherente; deriva orbital lenta.": [
+    "city-cosmos-art.mjs"
+  ],
+  "Mundo desértico": [
+    "city-cosmos-art.mjs"
+  ],
+  "Mundo de nubes sulfurosas": [
+    "city-cosmos-art.mjs"
+  ],
+  "Gigante de hielo": [
+    "city-cosmos-art.mjs"
+  ],
+  "stars-Agujero negro estelar": [
+    "cosmic-scales.mjs",
+    "scale-audit.mjs"
+  ],
+  "cristal-dialog cristal-preview": [
+    "cristal-ui.tsx"
+  ],
+  "Membrana · Cristal": [
+    "cristal-ui.tsx"
+  ],
+  "Cerrar prueba de interfaz": [
+    "cristal-ui.tsx"
+  ],
+  "Prueba los botones. Tu partida no cambia.": [
+    "cristal-ui.tsx"
+  ],
+  "Pantalla de prueba": [
+    "cristal-ui.tsx"
+  ],
+  "Evolución": [
+    "cristal-ui.tsx"
+  ],
+  "La vida encuentra otra forma.": [
+    "cristal-ui.tsx"
+  ],
+  "Elige una adaptación": [
+    "cristal-ui.tsx"
+  ],
+  "cristal-demo-toast membrane-control": [
+    "cristal-ui.tsx",
+    "cristal-ui.tsx"
+  ],
+  "Adaptación integrada ·": [
+    "cristal-ui.tsx"
+  ],
+  "La marea te abre el camino": [
+    "cristal-ui.tsx"
+  ],
+  "primary-button membrane-control": [
+    "cristal-ui.tsx",
+    "cristal-ui.tsx",
+    "page.tsx",
+    "page.tsx"
+  ],
+  "Configuración": [
+    "cristal-ui.tsx",
+    "final-settings.tsx",
+    "page.tsx",
+    "page.tsx",
+    "page.tsx",
+    "page.tsx"
+  ],
+  "Adaptación integrada": [
+    "cristal-ui.tsx"
+  ],
+  "12px Arial": [
+    "earth-landmark.mjs"
+  ],
+  "11px Arial": [
+    "earth-landmark.mjs"
+  ],
+  "TU MUNDO VUELVE A TI": [
+    "earth-landmark.mjs"
+  ],
+  "LA TIERRA · ACÉRCATE PARA ABSORBERLA": [
+    "earth-landmark.mjs"
+  ],
+  "LA TIERRA · REÚNE BIOMASA EN SU ÓRBITA": [
+    "earth-landmark.mjs"
+  ],
+  "Gota de lípidos": [
+    "edible-matter.mjs"
+  ],
+  "Microcristal mineral": [
+    "edible-matter.mjs"
+  ],
+  "Restos de membrana": [
+    "edible-matter.mjs"
+  ],
+  "Grano de polen": [
+    "edible-matter.mjs"
+  ],
+  "Alga filamentosa": [
+    "edible-matter.mjs"
+  ],
+  "Fragmento de hoja": [
+    "edible-matter.mjs"
+  ],
+  "Microconcha vacía": [
+    "edible-matter.mjs"
+  ],
+  "Grano de arena": [
+    "edible-matter.mjs"
+  ],
+  "Concha de playa": [
+    "edible-matter.mjs"
+  ],
+  "Concha espiral": [
+    "edible-matter.mjs"
+  ],
+  "Hierba de la orilla": [
+    "edible-matter.mjs"
+  ],
+  "Rama caída": [
+    "edible-matter.mjs"
+  ],
+  "Hoja caída": [
+    "edible-matter.mjs"
+  ],
+  "Alga marina": [
+    "edible-matter.mjs"
+  ],
+  "Rama de coral": [
+    "edible-matter.mjs"
+  ],
+  "Botella hundida": [
+    "edible-matter.mjs"
+  ],
+  "Restos de naufragio": [
+    "edible-matter.mjs"
+  ],
+  "Roca del fondo": [
+    "edible-matter.mjs"
+  ],
+  "Concha marina": [
+    "edible-matter.mjs"
+  ],
+  "Lata vacía": [
+    "edible-matter.mjs"
+  ],
+  "Banco de madera": [
+    "edible-matter.mjs"
+  ],
+  "Señal de tráfico": [
+    "edible-matter.mjs"
+  ],
+  "Contenedor de carga": [
+    "edible-matter.mjs"
+  ],
+  "Chatarra orbital": [
+    "edible-matter.mjs"
+  ],
+  "Panel solar desprendido": [
+    "edible-matter.mjs"
+  ],
+  "Cometa de hielo": [
+    "edible-matter.mjs"
+  ],
+  "Fragmento de asteroide": [
+    "edible-matter.mjs"
+  ],
+  "Cometa errante": [
+    "edible-matter.mjs"
+  ],
+  "Corteza planetaria": [
+    "edible-matter.mjs"
+  ],
+  "Anillo de escombros": [
+    "edible-matter.mjs"
+  ],
+  "Disco protoplanetario": [
+    "edible-matter.mjs"
+  ],
+  "Arco de plasma": [
+    "edible-matter.mjs"
+  ],
+  "Nube de polvo estelar": [
+    "edible-matter.mjs"
+  ],
+  "Restos de supernova": [
+    "edible-matter.mjs"
+  ],
+  "Polvo intergaláctico": [
+    "edible-matter.mjs"
+  ],
+  "Filamento interestelar": [
+    "edible-matter.mjs"
+  ],
+  "Nudo de gas cósmico": [
+    "edible-matter.mjs"
+  ],
+  "Filamento de materia": [
+    "edible-matter.mjs"
+  ],
+  "Concentración de materia": [
+    "edible-matter.mjs"
+  ],
+  "Rama de la red cósmica": [
+    "edible-matter.mjs"
+  ],
+  "Balanceo suave de las hojas, con la base estable.": [
+    "edible-matter.mjs"
+  ],
+  "Flujo lento de gas y polvo dentro de su silueta.": [
+    "edible-matter.mjs"
+  ],
+  "Deriva y giro lentos, conservando su forma.": [
+    "edible-matter.mjs"
+  ],
+  "Permanece en su lugar y conserva su forma al ser absorbido.": [
+    "edible-matter.mjs"
+  ],
+  "(pointer: coarse)": [
+    "engine.ts"
+  ],
+  "Prueba de entorno. Vuelve a tu partida desde Configuración.": [
+    "engine.ts"
+  ],
+  "Has vuelto a tu partida.": [
+    "engine.ts"
+  ],
+  "· adaptación adquirida": [
+    "engine.ts"
+  ],
+  "Una nueva vida.": [
+    "engine.ts"
+  ],
+  "Conservas tus adaptaciones.": [
+    "engine.ts"
+  ],
+  "La biomasa te hace crecer. La adaptación desbloquea mejoras.": [
+    "engine.ts"
+  ],
+  "Tu mundo vuelve a ti.": [
+    "engine.ts"
+  ],
+  "Tu escudo ha absorbido el golpe.": [
+    "engine.ts"
+  ],
+  "Tu membrana se ha deshecho.": [
+    "engine.ts"
+  ],
+  "Has perdido biomasa y progreso de adaptación. Come para recuperarte.": [
+    "engine.ts"
+  ],
+  "Partes de tu membrana se han desprendido. Cómetelas para recuperar biomasa.": [
+    "engine.ts"
+  ],
+  "px Arial": [
+    "engine.ts",
+    "engine.ts"
+  ],
+  "DEMASIADO GRANDE": [
+    "engine.ts"
+  ],
+  "Start or resume the VORO evolution game.": [
+    "engine.ts"
+  ],
+  "Restart VORO and clear this run.": [
+    "engine.ts"
+  ],
+  "Expected an empty object": [
+    "engine.ts"
+  ],
+  "Volver al juego": [
+    "final-settings.tsx",
+    "final-settings.tsx",
+    "page.tsx"
+  ],
+  "Volver a configuración": [
+    "final-settings.tsx"
+  ],
+  "Créditos": [
+    "final-settings.tsx",
+    "final-settings.tsx"
+  ],
+  "living-panel final-settings-panel": [
+    "final-settings.tsx"
+  ],
+  "Configuración general": [
+    "final-settings.tsx"
+  ],
+  "final-setting-row final-movement-row": [
+    "final-settings.tsx"
+  ],
+  "Modo zurdo": [
+    "final-settings.tsx"
+  ],
+  "Automático": [
+    "final-settings.tsx",
+    "page.tsx"
+  ],
+  "Más opciones": [
+    "final-settings.tsx"
+  ],
+  "noopener noreferrer": [
+    "final-settings.tsx",
+    "final-settings.tsx",
+    "final-settings.tsx",
+    "page.tsx",
+    "page.tsx",
+    "page.tsx"
+  ],
+  "Volver a nacer": [
+    "final-settings.tsx",
+    "page.tsx"
+  ],
+  "living-panel reset-sheet": [
+    "final-settings.tsx"
+  ],
+  "Confirmar nueva vida": [
+    "final-settings.tsx"
+  ],
+  "Se borrará esta partida y sus adaptaciones.": [
+    "final-settings.tsx",
+    "page.tsx"
+  ],
+  "Sí, volver a nacer": [
+    "final-settings.tsx",
+    "page.tsx"
+  ],
+  "living-panel journey-panel": [
+    "final-settings.tsx"
+  ],
+  "Evolución de Voro": [
+    "final-settings.tsx"
+  ],
+  "living-panel credits-panel": [
+    "final-settings.tsx"
+  ],
+  "Voro Abisal": [
+    "final-settings.tsx"
+  ],
+  "Un juego de Krazel Games": [
+    "final-settings.tsx"
+  ],
+  "Creación y desarrollo": [
+    "final-settings.tsx"
+  ],
+  "Krazel Games": [
+    "final-settings.tsx"
+  ],
+  "Música y licencias": [
+    "final-settings.tsx"
+  ],
+  "Música de Scott Buckley ·": [
+    "final-settings.tsx",
+    "page.tsx"
+  ],
+  "CC BY 4.0": [
+    "final-settings.tsx",
+    "page.tsx"
+  ],
+  "Gracias por acompañar a Voro desde el origen.": [
+    "final-settings.tsx"
+  ],
+  "Intervals are requestAnimationFrame cadence, not GPU timings.": [
+    "frame-monitor.mjs"
+  ],
+  "A long interval can reflect work in the previous frame; worstFrames includes that frame for correlation.": [
+    "frame-monitor.mjs"
+  ],
+  "CPU sections overlap: render includes backgrounds, inhabitants and protagonist; simulation can include saving.": [
+    "frame-monitor.mjs"
+  ],
+  "Paused, hidden and asset-wait frames excluded. Up to 3600 active frames retained; worst frames refer to that window.": [
+    "frame-monitor.mjs"
+  ],
+  "No telemetry is sent automatically.": [
+    "frame-monitor.mjs"
+  ],
+  "La vida encuentra\notra forma.": [
+    "journey-captions.mjs"
+  ],
+  "Todo empieza\ncon hambre.": [
+    "journey-captions.mjs"
+  ],
+  "Tu cuerpo aprende\na ser más.": [
+    "journey-captions.mjs"
+  ],
+  "Bajo el agua,\nalgo despierta.": [
+    "journey-captions.mjs"
+  ],
+  "Lo diminuto\ntambién tiene hambre.": [
+    "journey-captions.mjs"
+  ],
+  "La orilla entera\npuede ser parte de ti.": [
+    "journey-captions.mjs"
+  ],
+  "Raíces, conchas, alas.\nTodo te transforma.": [
+    "journey-captions.mjs"
+  ],
+  "El mar guarda\nnuevas formas.": [
+    "journey-captions.mjs"
+  ],
+  "Tu sombra crece\nbajo las olas.": [
+    "journey-captions.mjs"
+  ],
+  "Las calles ya no saben\ncómo detenerte.": [
+    "journey-captions.mjs"
+  ],
+  "Lo que construyeron\ntambién te alimenta.": [
+    "journey-captions.mjs"
+  ],
+  "El cielo era\nsolo otra orilla.": [
+    "journey-captions.mjs"
+  ],
+  "El mundo que te vio nacer\nqueda bajo tu sombra.": [
+    "journey-captions.mjs"
+  ],
+  "Cada mundo\nte cambia por dentro.": [
+    "journey-captions.mjs"
+  ],
+  "Los océanos caben\nen un solo latido.": [
+    "journey-captions.mjs"
+  ],
+  "La luz también\npuede tener sabor.": [
+    "journey-captions.mjs"
+  ],
+  "Llevas nuevos soles\nbajo la membrana.": [
+    "journey-captions.mjs"
+  ],
+  "Un cielo entero\nes apenas un bocado.": [
+    "journey-captions.mjs"
+  ],
+  "Las espirales de luz\nse enredan en ti.": [
+    "journey-captions.mjs"
+  ],
+  "El universo empieza\na caber en ti.": [
+    "journey-captions.mjs"
+  ],
+  "Aún recuerdas\naquella primera gota.": [
+    "journey-captions.mjs"
+  ],
+  "La vida en una gota": [
+    "journey-data.mjs"
+  ],
+  "Come lo pequeño. Evita a los cazadores.": [
+    "journey-data.mjs"
+  ],
+  "La gota ya no puede contenerte.": [
+    "journey-data.mjs"
+  ],
+  "Bajo la superficie": [
+    "journey-data.mjs"
+  ],
+  "Los bancos se dispersan. Los tiburones te han visto.": [
+    "journey-data.mjs"
+  ],
+  "El agua se queda pequeña.": [
+    "journey-data.mjs"
+  ],
+  "El primer paso": [
+    "journey-data.mjs"
+  ],
+  "Las presas corren. Los cazadores saltan.": [
+    "journey-data.mjs"
+  ],
+  "Tu sombra alcanza las calles.": [
+    "journey-data.mjs",
+    "journey-data.mjs"
+  ],
+  "La respuesta humana": [
+    "journey-data.mjs"
+  ],
+  "Esquiva los disparos. Crece hasta poder absorberlos.": [
+    "journey-data.mjs"
+  ],
+  "El horizonte se curva bajo ti.": [
+    "journey-data.mjs"
+  ],
+  "Más allá del cielo": [
+    "journey-data.mjs"
+  ],
+  "Satélites, estaciones y lunas flotan a tu alcance.": [
+    "journey-data.mjs"
+  ],
+  "Los mundos parecen semillas.": [
+    "journey-data.mjs"
+  ],
+  "Absorbe mundos pequeños antes de acercarte a los gigantes.": [
+    "journey-data.mjs"
+  ],
+  "Ahora tienes hambre de luz.": [
+    "journey-data.mjs"
+  ],
+  "El hambre de luz": [
+    "journey-data.mjs"
+  ],
+  "Las estrellas más intensas aún pueden desgarrarte.": [
+    "journey-data.mjs"
+  ],
+  "Cada punto de luz contiene un cielo.": [
+    "journey-data.mjs"
+  ],
+  "Mares de estrellas": [
+    "journey-data.mjs"
+  ],
+  "Las galaxias giran. Los cuásares lanzan materia.": [
+    "journey-data.mjs"
+  ],
+  "Solo queda la red que lo une todo.": [
+    "journey-data.mjs"
+  ],
+  "años luz": [
+    "journey-data.mjs",
+    "journey-data.mjs",
+    "journey-data.mjs"
+  ],
+  "La última frontera": [
+    "journey-data.mjs"
+  ],
+  "Absorbe la red cósmica. Busca el último horizonte.": [
+    "journey-data.mjs"
+  ],
+  "Todo vuelve a tu núcleo.": [
+    "journey-data.mjs"
+  ],
+  "Pez payaso": [
+    "journey-data.mjs"
+  ],
+  "Pez cirujano": [
+    "journey-data.mjs"
+  ],
+  "Pez globo": [
+    "journey-data.mjs"
+  ],
+  "Caballito de mar": [
+    "journey-data.mjs"
+  ],
+  "Medusa luna": [
+    "journey-data.mjs"
+  ],
+  "Medusa de filamentos": [
+    "journey-data.mjs"
+  ],
+  "Tiburón de arrecife": [
+    "journey-data.mjs"
+  ],
+  "Tiburón martillo": [
+    "journey-data.mjs"
+  ],
+  "Araña": [
+    "journey-data.mjs"
+  ],
+  "Escorpión": [
+    "journey-data.mjs"
+  ],
+  "Ratón": [
+    "journey-data.mjs"
+  ],
+  "Unidad con escudo": [
+    "journey-data.mjs"
+  ],
+  "Soldado pesado": [
+    "journey-data.mjs"
+  ],
+  "Automóvil": [
+    "journey-data.mjs"
+  ],
+  "Helicóptero": [
+    "journey-data.mjs"
+  ],
+  "Edificio bajo": [
+    "journey-data.mjs"
+  ],
+  "Restos metálicos": [
+    "journey-data.mjs"
+  ],
+  "Satélite": [
+    "journey-data.mjs"
+  ],
+  "Estación espacial": [
+    "journey-data.mjs"
+  ],
+  "Nave armada": [
+    "journey-data.mjs"
+  ],
+  "Luna craterizada": [
+    "journey-data.mjs"
+  ],
+  "Mundo rocoso": [
+    "journey-data.mjs"
+  ],
+  "Mundo oceánico": [
+    "journey-data.mjs"
+  ],
+  "Mundo volcánico": [
+    "journey-data.mjs"
+  ],
+  "Mundo helado": [
+    "journey-data.mjs"
+  ],
+  "Gigante gaseoso": [
+    "journey-data.mjs"
+  ],
+  "Gigante anillado": [
+    "journey-data.mjs"
+  ],
+  "Enana marrón": [
+    "journey-data.mjs"
+  ],
+  "Enana roja": [
+    "journey-data.mjs"
+  ],
+  "Estrella amarilla": [
+    "journey-data.mjs"
+  ],
+  "Estrella azul": [
+    "journey-data.mjs"
+  ],
+  "Gigante roja": [
+    "journey-data.mjs"
+  ],
+  "Estrella de neutrones": [
+    "journey-data.mjs"
+  ],
+  "Galaxia enana": [
+    "journey-data.mjs"
+  ],
+  "Galaxia espiral": [
+    "journey-data.mjs"
+  ],
+  "Galaxia elíptica": [
+    "journey-data.mjs"
+  ],
+  "Espiral barrada": [
+    "journey-data.mjs"
+  ],
+  "Galaxia irregular": [
+    "journey-data.mjs"
+  ],
+  "Galaxia lenticular": [
+    "journey-data.mjs"
+  ],
+  "Cúmulo de estrellas": [
+    "journey-data.mjs"
+  ],
+  "Nudo de nebulosa": [
+    "journey-data.mjs"
+  ],
+  "Vivero estelar": [
+    "journey-data.mjs"
+  ],
+  "Remanente de supernova": [
+    "journey-data.mjs"
+  ],
+  "Agujero negro": [
+    "journey-data.mjs"
+  ],
+  "Cuásar": [
+    "journey-data.mjs"
+  ],
+  "Galaxias en colisión": [
+    "journey-data.mjs"
+  ],
+  "Cúmulo galáctico": [
+    "journey-data.mjs",
+    "scale-audit.mjs"
+  ],
+  "Supercúmulo": [
+    "journey-data.mjs"
+  ],
+  "Filamento cósmico": [
+    "journey-data.mjs"
+  ],
+  "Borde del vacío": [
+    "journey-data.mjs"
+  ],
+  "Luna helada": [
+    "journey-data.mjs"
+  ],
+  "Luna volcánica": [
+    "journey-data.mjs"
+  ],
+  "Fragmento planetario": [
+    "journey-data.mjs"
+  ],
+  "Nube protoplanetaria": [
+    "journey-data.mjs"
+  ],
+  "Nube estelar": [
+    "journey-data.mjs"
+  ],
+  "Agujero negro estelar": [
+    "journey-data.mjs"
+  ],
+  "Cúmulo abierto": [
+    "journey-data.mjs"
+  ],
+  "Núcleo activo": [
+    "journey-data.mjs"
+  ],
+  "Colisión galáctica": [
+    "journey-data.mjs"
+  ],
+  "Grupo galáctico": [
+    "journey-data.mjs"
+  ],
+  "Una charca litoral": [
+    "journey-data.mjs"
+  ],
+  "Entre algas y larvas, busca la vida más pequeña.": [
+    "journey-data.mjs"
+  ],
+  "Ya puedes explorar la orilla.": [
+    "journey-data.mjs"
+  ],
+  "La orilla": [
+    "journey-data.mjs"
+  ],
+  "De insectos diminutos a animales pequeños.": [
+    "journey-data.mjs"
+  ],
+  "El mar se abre ante ti.": [
+    "journey-data.mjs"
+  ],
+  "El mar abierto": [
+    "journey-data.mjs"
+  ],
+  "Busca peces pequeños. Los grandes depredadores aún te superan.": [
+    "journey-data.mjs"
+  ],
+  "Fragmento de alga": [
+    "journey-data.mjs"
+  ],
+  "Microcrustáceo": [
+    "journey-data.mjs"
+  ],
+  "Larva acuática": [
+    "journey-data.mjs"
+  ],
+  "Hidromedusa urticante": [
+    "journey-data.mjs"
+  ],
+  "Larva de cefalópodo": [
+    "journey-data.mjs"
+  ],
+  "Alevín": [
+    "journey-data.mjs"
+  ],
+  "Alevín cazador": [
+    "journey-data.mjs"
+  ],
+  "Entre algas, larvas y fragmentos, empieza por lo pequeño.": [
+    "journey-data.mjs"
+  ],
+  "Insectos, conchas y plantas: toda la orilla puede alimentarte.": [
+    "journey-data.mjs"
+  ],
+  "La franja de la marea": [
+    "journey-data.mjs"
+  ],
+  "La marea te abre el camino.": [
+    "journey-data.mjs"
+  ],
+  "Tu sombra alcanza el puerto.": [
+    "journey-data.mjs"
+  ],
+  "La gota forma parte de una charca junto a la costa.": [
+    "journey-transitions.mjs"
+  ],
+  "El agua se hace somera. La arena aparece bajo ti.": [
+    "journey-transitions.mjs"
+  ],
+  "La marea cubre la arena. Sigues creciendo bajo el agua.": [
+    "journey-transitions.mjs"
+  ],
+  "Sigues la costa hasta el puerto y sus calles.": [
+    "journey-transitions.mjs"
+  ],
+  "Las calles se alejan. La curvatura del mundo aparece.": [
+    "journey-transitions.mjs"
+  ],
+  "Tu mundo de origen ya forma parte de ti. Otros planetas te esperan.": [
+    "journey-transitions.mjs"
+  ],
+  "Más allá de los planetas están los soles que los iluminan.": [
+    "journey-transitions.mjs"
+  ],
+  "Al alejarte, los soles dibujan los brazos de una galaxia.": [
+    "journey-transitions.mjs"
+  ],
+  "Las galaxias se unen en filamentos de una misma red.": [
+    "journey-transitions.mjs"
+  ],
+  "VORO · Abisal": [
+    "layout.tsx"
+  ],
+  "De una única célula al universo entero. Explora, absorbe y evoluciona a través de nueve escalas en VORO.": [
+    "layout.tsx"
+  ],
+  "Bacilo verde": [
+    "micro-world.mjs"
+  ],
+  "Cocos gemelos": [
+    "micro-world.mjs"
+  ],
+  "Diatomea azul": [
+    "micro-world.mjs"
+  ],
+  "Ameba pequeña": [
+    "micro-world.mjs"
+  ],
+  "Bacteria espiral": [
+    "micro-world.mjs"
+  ],
+  "Ciliado cazador": [
+    "micro-world.mjs"
+  ],
+  "Protista espinoso": [
+    "micro-world.mjs"
+  ],
+  "Ameba gigante": [
+    "micro-world.mjs"
+  ],
+  "Cadena celular": [
+    "micro-world.mjs"
+  ],
+  "Life In Silico": [
+    "music.mjs"
+  ],
+  "Hymn To The Dawn": [
+    "music.mjs"
+  ],
+  "Shadows And Dust": [
+    "music.mjs"
+  ],
+  "The Distant Sun": [
+    "music.mjs"
+  ],
+  "Pseudópodos largos": [
+    "mutations.mjs"
+  ],
+  "+7,5 % de alcance": [
+    "mutations.mjs"
+  ],
+  "Vacuolas adicionales": [
+    "mutations.mjs"
+  ],
+  "+1 alimento simultáneo": [
+    "mutations.mjs"
+  ],
+  "Enzimas rápidas": [
+    "mutations.mjs"
+  ],
+  "+12,5 % de velocidad de digestión": [
+    "mutations.mjs"
+  ],
+  "Adaptación acelerada": [
+    "mutations.mjs"
+  ],
+  "+10 % de progreso de adaptación por alimento": [
+    "mutations.mjs"
+  ],
+  "Flagelos potentes": [
+    "mutations.mjs"
+  ],
+  "+7,5 % de velocidad": [
+    "mutations.mjs"
+  ],
+  "Cuerpo flexible": [
+    "mutations.mjs"
+  ],
+  "+15 % de agilidad": [
+    "mutations.mjs"
+  ],
+  "Impulso elástico": [
+    "mutations.mjs"
+  ],
+  "+0,18 de potencia · +0,05 s de impulso · −1 s de recarga": [
+    "mutations.mjs"
+  ],
+  "Corriente aspirante": [
+    "mutations.mjs"
+  ],
+  "+14 de alcance de la corriente aspirante": [
+    "mutations.mjs"
+  ],
+  "Escudo gelatinoso": [
+    "mutations.mjs"
+  ],
+  "Bloquea un golpe. Recarga en 40 s.": [
+    "mutations.mjs"
+  ],
+  "Reciclaje celular": [
+    "mutations.mjs"
+  ],
+  "+12,5 % de recuperación de la biomasa perdida": [
+    "mutations.mjs"
+  ],
+  "Espinas retráctiles": [
+    "mutations.mjs"
+  ],
+  "+6 % de daño al atacante cuando te golpea": [
+    "mutations.mjs"
+  ],
+  "Tentáculos cazadores": [
+    "mutations.mjs"
+  ],
+  "+1 tentáculo que agarra y acerca lentamente presas comestibles": [
+    "mutations.mjs"
+  ],
+  "Tentáculos extensibles": [
+    "mutations.mjs"
+  ],
+  "+15 % del radio corporal de alcance para tus tentáculos": [
+    "mutations.mjs"
+  ],
+  "Hambre encadenada": [
+    "mutations.mjs",
+    "page.tsx"
+  ],
+  "3 comidas seguidas: +10 % de movimiento y digestión durante 4 s": [
+    "mutations.mjs"
+  ],
+  "Sujeta el móvil en una posición cómoda…": [
+    "page.tsx"
+  ],
+  "Inclina suavemente. Puedes recalibrar en Configuración.": [
+    "page.tsx"
+  ],
+  "No se reciben datos de inclinación. Puedes seguir jugando con el dedo.": [
+    "page.tsx"
+  ],
+  "Cómo quieres moverte": [
+    "page.tsx"
+  ],
+  "Con el dedo": [
+    "page.tsx"
+  ],
+  "Inclinando el móvil": [
+    "page.tsx"
+  ],
+  "Volver a UI de desarrollo": [
+    "page.tsx"
+  ],
+  "Pasar a UI final": [
+    "page.tsx"
+  ],
+  "VORO: del origen al universo": [
+    "page.tsx"
+  ],
+  "El universo se apaga.": [
+    "page.tsx"
+  ],
+  "Mueve al superviviente con el dedo, las flechas o un mando.": [
+    "page.tsx"
+  ],
+  "Arrastra para moverte. También puedes usar WASD, flechas o un mando. Espacio para impulsarte.": [
+    "page.tsx"
+  ],
+  "Silenciar sonido": [
+    "page.tsx"
+  ],
+  "Activar sonido": [
+    "page.tsx"
+  ],
+  "VISTA PREVIA ·": [
+    "page.tsx"
+  ],
+  "ADAPTACIONES COMPLETAS": [
+    "page.tsx"
+  ],
+  "Experiencia para la siguiente adaptación": [
+    "page.tsx"
+  ],
+  "TU EVOLUCIÓN": [
+    "page.tsx"
+  ],
+  "EL ORIGEN": [
+    "page.tsx"
+  ],
+  "La vida": [
+    "page.tsx"
+  ],
+  "te espera.": [
+    "page.tsx"
+  ],
+  "Antes de todo,": [
+    "page.tsx"
+  ],
+  "una vida.": [
+    "page.tsx"
+  ],
+  "Tu evolución continúa.": [
+    "page.tsx"
+  ],
+  "De una célula a todo lo que existe.": [
+    "page.tsx"
+  ],
+  "Preparando tu mundo…": [
+    "page.tsx"
+  ],
+  "Continuar partida": [
+    "page.tsx"
+  ],
+  "Reintentar carga": [
+    "page.tsx",
+    "page.tsx"
+  ],
+  "Un latido.": [
+    "page.tsx"
+  ],
+  "La vida despierta.": [
+    "page.tsx"
+  ],
+  "hint micro-hint cristal-toast membrane-control": [
+    "page.tsx"
+  ],
+  "MEMBRANA PROTEGIDA · ESCAPA": [
+    "page.tsx"
+  ],
+  "Zoom de cámara": [
+    "page.tsx",
+    "page.tsx"
+  ],
+  "Alejar cámara": [
+    "page.tsx"
+  ],
+  "Restablecer zoom automático": [
+    "page.tsx"
+  ],
+  "Acercar cámara": [
+    "page.tsx"
+  ],
+  "1 escudo listo": [
+    "page.tsx"
+  ],
+  "escudos listos": [
+    "page.tsx"
+  ],
+  "EN SUSPENSIÓN": [
+    "page.tsx"
+  ],
+  "Tu progreso queda guardado.": [
+    "page.tsx"
+  ],
+  "finish-panel death-panel": [
+    "page.tsx"
+  ],
+  "BIOMASA AGOTADA": [
+    "page.tsx"
+  ],
+  "La vida insiste.": [
+    "page.tsx"
+  ],
+  "Vuelves a ser pequeño.": [
+    "page.tsx"
+  ],
+  "Conservas tu escala y tus adaptaciones.": [
+    "page.tsx"
+  ],
+  "stage-transition journey-transition": [
+    "page.tsx"
+  ],
+  "El siguiente mundo está despertando…": [
+    "page.tsx"
+  ],
+  "VORO permanece solo en el vacío. Ver el final y tu recorrido": [
+    "page.tsx"
+  ],
+  "finish-panel journey-finish": [
+    "page.tsx"
+  ],
+  "UNIVERSO ABSORBIDO": [
+    "page.tsx"
+  ],
+  "Todo estaba": [
+    "page.tsx"
+  ],
+  "dentro de ti.": [
+    "page.tsx"
+  ],
+  "De una única célula al último punto de luz.": [
+    "page.tsx"
+  ],
+  "Ver tu recorrido": [
+    "page.tsx"
+  ],
+  "Volver al silencio": [
+    "page.tsx"
+  ],
+  "FIN · VORO": [
+    "page.tsx"
+  ],
+  "Medición terminada": [
+    "page.tsx"
+  ],
+  "ms · pico": [
+    "page.tsx"
+  ],
+  "ms · lentos": [
+    "page.tsx"
+  ],
+  "· poses": [
+    "page.tsx"
+  ],
+  "micro-upgrade-dialog cristal-dialog adaptation-dialog": [
+    "page.tsx"
+  ],
+  "Adaptación emergente": [
+    "page.tsx"
+  ],
+  "El tiempo se detiene. Elige tu evolución.": [
+    "page.tsx"
+  ],
+  "voro-settings cristal-dialog": [
+    "page.tsx"
+  ],
+  "settings-close icon-button": [
+    "page.tsx"
+  ],
+  "Cerrar configuración": [
+    "page.tsx"
+  ],
+  "VORO · ABISAL": [
+    "page.tsx"
+  ],
+  "La vista ha cambiado; no se ha podido recordar para la próxima sesión.": [
+    "page.tsx"
+  ],
+  "Encuadre y zoom": [
+    "page.tsx"
+  ],
+  "Restablecer encuadre": [
+    "page.tsx"
+  ],
+  "Botones de zoom al jugar": [
+    "page.tsx"
+  ],
+  "Pellizca con dos dedos para ajustar el zoom. En ordenador puedes usar la rueda o los botones. El ajuste se mantiene entre entornos durante esta sesión.": [
+    "page.tsx"
+  ],
+  "Velocidad visual entre entornos": [
+    "page.tsx"
+  ],
+  "Clásica": [
+    "page.tsx"
+  ],
+  "Uniforme compensa la escala de cada entorno. Clásica conserva el movimiento anterior.": [
+    "page.tsx"
+  ],
+  "Posición centrada. Mantén el móvil cómodo al continuar.": [
+    "page.tsx"
+  ],
+  "Centrar inclinación": [
+    "page.tsx"
+  ],
+  "Impulso a la izquierda": [
+    "page.tsx"
+  ],
+  "El cambio funciona ahora, pero no se ha podido guardar para la próxima sesión.": [
+    "page.tsx"
+  ],
+  "Mostrar rendimiento": [
+    "page.tsx"
+  ],
+  "Medir una partida de 30 s": [
+    "page.tsx"
+  ],
+  "Primero mide una partida de 30 s.": [
+    "page.tsx",
+    "page.tsx",
+    "performance-report.mjs"
+  ],
+  "Copiar resumen de rendimiento": [
+    "page.tsx"
+  ],
+  "Archivo descargado. Puedes adjuntarlo en WhatsApp.": [
+    "page.tsx"
+  ],
+  "Archivo preparado. Puedes volver a compartirlo cuando quieras.": [
+    "page.tsx"
+  ],
+  "No se ha compartido el archivo.": [
+    "page.tsx"
+  ],
+  "No se pudo compartir. Puedes copiar el resumen y volver a intentarlo.": [
+    "page.tsx"
+  ],
+  "Compartir informe como archivo": [
+    "page.tsx"
+  ],
+  "Elige WhatsApp en el menú de compartir. El archivo incluye el resumen y los peores tirones. La prueba cuenta solo mientras juegas. Incluye FPS, fotogramas lentos, cargas y tiempos por sistema. El informe se queda en tu dispositivo hasta que lo compartas.": [
+    "page.tsx"
+  ],
+  "Informe de rendimiento": [
+    "page.tsx"
+  ],
+  "Créditos musicales": [
+    "page.tsx"
+  ],
+  "— Scott Buckley": [
+    "page.tsx"
+  ],
+  "Composiciones completas. Volumen normalizado, conversión MP3 y fundidos de entrada, salida y repetición. Sin recortes de secciones.": [
+    "page.tsx"
+  ],
+  "Fuentes y condiciones del autor": [
+    "page.tsx"
+  ],
+  "min de vida": [
+    "page.tsx"
+  ],
+  "Modo de pruebas. Tu partida está a salvo.": [
+    "page.tsx"
+  ],
+  "La partida se guarda en este dispositivo.": [
+    "page.tsx"
+  ],
+  "El guardado no está disponible en este navegador.": [
+    "page.tsx"
+  ],
+  "Probar entornos y tamaños": [
+    "page.tsx"
+  ],
+  "Tamaño": [
+    "page.tsx"
+  ],
+  "Pequeño": [
+    "page.tsx"
+  ],
+  "Usar mis adaptaciones": [
+    "page.tsx"
+  ],
+  "Permitir pasar al siguiente entorno": [
+    "page.tsx"
+  ],
+  "Prueba crecimiento, adaptaciones y transiciones sin cambiar tu partida guardada.": [
+    "page.tsx"
+  ],
+  "Biomasa de prueba:": [
+    "page.tsx"
+  ],
+  "Añadir biomasa": [
+    "page.tsx"
+  ],
+  "+25 % de la meta": [
+    "page.tsx"
+  ],
+  "Llenar la barra de biomasa": [
+    "page.tsx"
+  ],
+  "Conseguir una adaptación": [
+    "page.tsx"
+  ],
+  "Elegir ahora": [
+    "page.tsx"
+  ],
+  "Reiniciar prueba elegida": [
+    "page.tsx"
+  ],
+  "Entrar en la prueba": [
+    "page.tsx"
+  ],
+  "Volver a mi partida": [
+    "page.tsx"
+  ],
+  "Salir de pruebas y volver a mi partida": [
+    "page.tsx"
+  ],
+  "Tu recorrido": [
+    "page.tsx",
+    "page.tsx"
+  ],
+  "Aquí estás": [
+    "page.tsx"
+  ],
+  "Por descubrir": [
+    "page.tsx"
+  ],
+  "Probar interfaz Cristal": [
+    "page.tsx"
+  ],
+  "Probar diseños de interfaz": [
+    "page.tsx"
+  ],
+  "Galería de animaciones": [
+    "page.tsx"
+  ],
+  "Probar la nueva orilla": [
+    "page.tsx"
+  ],
+  "· Completa": [
+    "page.tsx"
+  ],
+  "Arrastra para moverte": [
+    "page.tsx"
+  ],
+  "WASD / flechas · espacio para impulso": [
+    "page.tsx"
+  ],
+  "Mando · stick izquierdo + A": [
+    "page.tsx"
+  ],
+  "habitantes en esta escala": [
+    "page.tsx"
+  ],
+  "adaptaciones · mundo infinito": [
+    "page.tsx"
+  ],
+  "Cadencia de frames aceptados (máximo 60 FPS), no tiempo de GPU. CPU del motor; no incluye todo WebKit.": [
+    "performance-report.mjs"
+  ],
+  "Secciones de CPU anidadas. El intervalo puede reflejar trabajo del fotograma anterior.": [
+    "performance-report.mjs"
+  ],
+  "Cargas: tiempo transcurrido, no CPU. Memoria: buffers propios, no memoria total de la app.": [
+    "performance-report.mjs"
+  ],
+  "Pausas y espera de assets base excluidas. Se omiten muestras crudas; se conservan resumen y peores cuadros.": [
+    "performance-report.mjs"
+  ],
+  "Correlaciones no excluyentes con el fotograma anterior, no causas demostradas. Retraso rAF no equivale a GPU.": [
+    "performance-report.mjs"
+  ],
+  "uiDeliveryDelay mide espera y entrega a React, no CPU de React aislada. Cero si no hubo entrega en ese cuadro.": [
+    "performance-report.mjs"
+  ],
+  "Se conserva la población microscópica: nutrientes y células pequeñas predominan.": [
+    "population.mjs"
+  ],
+  "Vida diminuta entre algas y restos; un peligro como máximo por zona.": [
+    "population.mjs"
+  ],
+  "Arena, conchas y vegetación. Los animales terrestres permanecen fuera del agua.": [
+    "population.mjs"
+  ],
+  "Una plaza de cazador y otra de peligro por zona, con la misma densidad total. Nadadores y tiburones martillo siguen siendo escasos.": [
+    "population.mjs"
+  ],
+  "Diez plazas de peatones y una de automóvil sin armas por zona, dentro del mismo límite de población; además de objetos, edificios y defensa.": [
+    "population.mjs"
+  ],
+  "Más escombros, roca y hielo que naves o estaciones.": [
+    "population.mjs"
+  ],
+  "Mundos pequeños y materia suelta, con gigantes dispersos.": [
+    "population.mjs"
+  ],
+  "Estrellas pequeñas, polvo y plasma; las estrellas extremas son escasas.": [
+    "population.mjs"
+  ],
+  "Menor densidad al aumentar la escala, con polvo y cúmulos entre galaxias.": [
+    "population.mjs"
+  ],
+  "Grandes espacios entre filamentos y cúmulos. El universo final aparece una sola vez.": [
+    "population.mjs"
+  ],
+  "La Tierra sigue bajo ti. Empieza por los restos orbitales.": [
+    "scale-audit.mjs"
+  ],
+  "Fragmento de cometa": [
+    "scale-audit.mjs"
+  ],
+  "Núcleo de planetoide helado": [
+    "scale-audit.mjs"
+  ],
+  "Asteroide craterizado": [
+    "scale-audit.mjs"
+  ],
+  "orbit-Luna helada": [
+    "scale-audit.mjs"
+  ],
+  "Bloque de hielo orbital": [
+    "scale-audit.mjs"
+  ],
+  "orbit-Luna volcánica": [
+    "scale-audit.mjs"
+  ],
+  "Fragmento volcánico": [
+    "scale-audit.mjs"
+  ],
+  "Envoltura de un púlsar": [
+    "scale-audit.mjs"
+  ],
+  "Zona de energía alrededor del núcleo compacto": [
+    "scale-audit.mjs"
+  ],
+  "Disco de acreción estelar": [
+    "scale-audit.mjs"
+  ],
+  "Disco de materia, no diámetro del agujero negro": [
+    "scale-audit.mjs"
+  ],
+  "galaxies-Cúmulo abierto": [
+    "scale-audit.mjs"
+  ],
+  "Cúmulo estelar": [
+    "scale-audit.mjs"
+  ],
+  "Grupo de galaxias": [
+    "scale-audit.mjs"
+  ],
+  "Nudo de la red cósmica": [
+    "scale-audit.mjs"
+  ],
+  "Región de formación galáctica": [
+    "scale-audit.mjs"
+  ],
+  "Frente de energía intergaláctico": [
+    "scale-audit.mjs"
+  ],
+  "Concentración oscura": [
+    "scale-audit.mjs"
+  ],
+  "Región de núcleos activos": [
+    "scale-audit.mjs"
+  ],
+  "Supercúmulos en colisión": [
+    "scale-audit.mjs"
+  ],
+  "La Tierra": [
+    "scale-audit.mjs"
+  ],
+  "Tu mundo de origen": [
+    "scale-audit.mjs"
+  ],
+  "Informe de rendimiento de VORO": [
+    "share-performance.ts",
+    "share-performance.ts"
+  ],
+  "Arena seca": [
+    "shore-geography.mjs"
+  ],
+  "Arena húmeda": [
+    "shore-geography.mjs"
+  ],
+  "Ya no hay nada más grande que tú.": [
+    "universe-finale.mjs"
+  ],
+  "Todo el universo vuelve a ti.": [
+    "universe-finale.mjs"
+  ],
+  "La última luz.": [
+    "universe-finale.mjs"
+  ]
+}

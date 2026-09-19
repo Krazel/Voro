@@ -1,4 +1,7 @@
 'use client';
+import { t as tr } from '../language.mjs';
+import { useLanguage } from '../language-picker';
+
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import {
@@ -47,6 +50,7 @@ function Thumbnail({ id, images }: { id: string; images: Images }) {
   return <canvas ref={ref} width={100} height={100} aria-hidden="true" />;
 }
 export default function AnimationStudio() {
+  useLanguage();
   const [stage, setStage] = useState(STAGES.findIndex((s) => s.id === 'water')),
     [selected, setSelected] = useState('water-matter-kelp');
   const [images, setImages] = useState<Images>({}),
@@ -113,7 +117,7 @@ export default function AnimationStudio() {
       }
       c!.font = '13px Arial';
       c!.fillStyle = '#87b5bd';
-      c!.fillText('V O R O   /   ' + STAGES[stage].short.toUpperCase(), 32, 34);
+      c!.fillText(tr('V O R O   /   ' + STAGES[stage].short.toUpperCase()), 32, 34);
       const crop = profile.crop || s.crop,
         aspect = crop ? crop[3] / crop[2] : s.atlas === 'water' ? 2 / 3 : 1;
       const radius = Math.min(208, 158 / Math.max(0.6, aspect)),
@@ -133,7 +137,7 @@ export default function AnimationStudio() {
       c!.stroke();
       c!.fillStyle = '#97b9b9';
       c!.font = '14px Arial';
-      c!.fillText('Vista en miniatura', 32, 500);
+      c!.fillText(tr('Vista en miniatura'), 32, 500);
       c!.save();
       c!.translate(337, 508);
       drawInhabitant(
@@ -149,11 +153,11 @@ export default function AnimationStudio() {
       c!.fillStyle = '#86acae';
       c!.font = '13px Arial';
       c!.fillText(
-        mode === 'idle'
+        tr(mode === 'idle'
           ? 'REPOSO'
           : mode === 'react'
             ? 'REACCIÓN / ESFUERZO'
-            : 'MOVIMIENTO',
+            : 'MOVIMIENTO'),
         706,
         504,
       );
@@ -183,58 +187,47 @@ export default function AnimationStudio() {
     <main className="animation-studio">
       <header className="studio-header">
         <Link href="/" className="studio-back">
-          <ArrowLeft size={17} />
-          Volver al juego
-        </Link>
-        <Link href="/interfaz" className="studio-back">
-          Probar interfaces <ChevronRight size={17} />
+          <ArrowLeft size={17} />{tr(" Volver al juego ")}</Link>
+        <Link href="/interfaz" className="studio-back">{tr(" Probar interfaces ")}<ChevronRight size={17} />
         </Link>
         <span>
-          {seen.size} / {TOTAL} explorados
-        </span>
+          {tr(seen.size)}{tr(" / ")}{tr(TOTAL)}{tr(" explorados ")}</span>
       </header>
       <div className="studio-title">
         <div>
-          <p>EL ATLAS VIVO</p>
-          <h1>Todo tiene su movimiento.</h1>
+          <p>{tr("EL ATLAS VIVO")}</p>
+          <h1>{tr("Todo tiene su movimiento.")}</h1>
         </div>
         <span>
-          {TOTAL} elementos · {STAGES.length} escalas
-        </span>
+          {tr(TOTAL)}{tr(" elementos · ")}{tr(STAGES.length)}{tr(" escalas ")}</span>
       </div>
       <Tabs value={stage} onValueChange={changeStage}>
         <TabsList className="studio-stages">
-          {STAGES.map((stage, i) => (
+          {tr(STAGES.map((stage, i) => (
             <TabsTrigger key={stage.id} value={i}>
-              {stage.short}
+              {tr(stage.short)}
             </TabsTrigger>
-          ))}
+          )))}
         </TabsList>
       </Tabs>
       <div
         className="studio-controls studio-view-switch"
-        aria-label="Vista del atlas"
+        aria-label={tr("Vista del atlas")}
       >
         <button
           aria-pressed={view === 'animation'}
           onClick={() => setView('animation')}
-        >
-          Animaciones
-        </button>
+        >{tr(" Animaciones ")}</button>
         <button
           aria-pressed={view === 'sizes'}
           onClick={() => setView('sizes')}
-        >
-          Comparar tamaños · mín. / máx.
-        </button>
+        >{tr(" Comparar tamaños · mín. / máx. ")}</button>
         <button
           aria-pressed={view === 'population'}
           onClick={() => setView('population')}
-        >
-          Población · cantidades
-        </button>
+        >{tr(" Población · cantidades ")}</button>
       </div>
-      {view === 'population' ? (
+      {tr(view === 'population' ? (
         <Population
           stage={stage}
           onSelect={(id) => {
@@ -254,47 +247,43 @@ export default function AnimationStudio() {
         />
       ) : (
         <div className="studio-layout">
-          <section className="studio-view" aria-label="Animación seleccionada">
+          <section className="studio-view" aria-label={tr("Animación seleccionada")}>
             <div className="studio-canvas-wrap">
               <canvas
                 ref={canvas}
                 width={960}
                 height={570}
-                aria-label={`Animación de ${s.name}`}
+                aria-label={tr(`Animación de ${s.name}`)}
               />
-              {!images[s.imageAtlas || s.atlas] && (
+              {tr(!images[s.imageAtlas || s.atlas] && (
                 <div className="studio-loading">
-                  {error ? (
+                  {tr(error ? (
                     <>
-                      <p>No se han podido cargar las ilustraciones.</p>
-                      <button onClick={() => location.reload()}>
-                        Reintentar
-                      </button>
+                      <p>{tr("No se han podido cargar las ilustraciones.")}</p>
+                      <button onClick={() => location.reload()}>{tr(" Reintentar ")}</button>
                     </>
                   ) : (
                     'Cargando las ilustraciones…'
-                  )}
+                  ))}
                 </div>
-              )}
+              ))}
             </div>
             <div className="studio-controls">
               <button onClick={() => setPlaying(!playing)}>
-                {playing ? <Pause size={17} /> : <Play size={17} />}{' '}
-                {playing ? 'Pausar' : 'Reanudar'}
+                {tr(playing ? <Pause size={17} /> : <Play size={17} />)}{tr(' ')}
+                {tr(playing ? 'Pausar' : 'Reanudar')}
               </button>
-              <button aria-pressed={slow} onClick={() => setSlow(!slow)}>
-                Cámara lenta
-              </button>
+              <button aria-pressed={slow} onClick={() => setSlow(!slow)}>{tr(" Cámara lenta ")}</button>
               <button
-                aria-label="Reiniciar ciclo"
+                aria-label={tr("Reiniciar ciclo")}
                 onClick={() => {
                   time.current = 0;
                 }}
               >
                 <RotateCcw size={17} />
               </button>
-              <div className="studio-modes" aria-label="Intensidad">
-                {[
+              <div className="studio-modes" aria-label={tr("Intensidad")}>
+                {tr([
                   ['idle', 'Reposo'],
                   ['move', 'Movimiento'],
                   ['react', 'Reacción'],
@@ -304,21 +293,21 @@ export default function AnimationStudio() {
                     aria-pressed={mode === id}
                     onClick={() => setMode(id)}
                   >
-                    {name}
+                    {tr(name)}
                   </button>
-                ))}
+                )))}
               </div>
             </div>
             <div className="studio-caption">
               <div>
-                <h2>{s.name}</h2>
-                <p>{profile.description}</p>
+                <h2>{tr(s.name)}</h2>
+                <p>{tr(profile.description)}</p>
               </div>
               <div className="studio-next">
-                <button aria-label="Elemento anterior" onClick={() => next(-1)}>
+                <button aria-label={tr("Elemento anterior")} onClick={() => next(-1)}>
                   <ChevronLeft />
                 </button>
-                <button aria-label="Siguiente elemento" onClick={() => next(1)}>
+                <button aria-label={tr("Siguiente elemento")} onClick={() => next(1)}>
                   <ChevronRight />
                 </button>
               </div>
@@ -326,9 +315,9 @@ export default function AnimationStudio() {
           </section>
           <aside
             className="studio-catalog"
-            aria-label={`Elementos de ${STAGES[stage].short}`}
+            aria-label={tr(`Elementos de ${STAGES[stage].short}`)}
           >
-            {species.map((e) => (
+            {tr(species.map((e) => (
               <button
                 key={e.id}
                 aria-pressed={e.id === s.id}
@@ -336,9 +325,9 @@ export default function AnimationStudio() {
               >
                 <Thumbnail id={e.id} images={images} />
                 <span>
-                  {e.name}
+                  {tr(e.name)}
                   <small>
-                    {'edibleMatter' in e && e.edibleMatter
+                    {tr('edibleMatter' in e && e.edibleMatter
                       ? 'Materia comestible'
                       : ANIMATIONS[e.id].revision === 2
                         ? 'Nueva revisión'
@@ -346,19 +335,15 @@ export default function AnimationStudio() {
                           ? 'Animación revisada'
                           : seen.has(e.id)
                             ? 'Visto'
-                            : 'Ver animación'}
+                            : 'Ver animación')}
                   </small>
                 </span>
               </button>
-            ))}
+            )))}
           </aside>
         </div>
-      )}
-      <p className="studio-note">
-        La misma animación se usa en el juego. Las ilustraciones conservan su
-        estilo: animales articulados, plantas que se balancean y objetos sólidos
-        que conservan su forma.
-      </p>
+      ))}
+      <p className="studio-note">{tr(" La misma animación se usa en el juego. Las ilustraciones conservan su estilo: animales articulados, plantas que se balancean y objetos sólidos que conservan su forma. ")}</p>
     </main>
   );
 }

@@ -3,10 +3,12 @@ import { t as tr } from './language.mjs';
 
 
 import { useState } from 'react';
+import { LanguagePicker } from './language-picker';
 import { ChevronLeft } from 'lucide-react';
 import { DialogClose } from '@/components/ui/dialog';
 import { MUSIC } from './music.mjs';
 import { STAGES } from './journey-data.mjs';
+import './approved-settings.css';
 
 type Section = 'main' | 'journey' | 'credits';
 
@@ -41,9 +43,12 @@ export function FinalSettings({
 }) {
   const [section, setSection] = useState<Section>('main');
   const [confirmReset, setConfirmReset] = useState(false);
+  const [licenses, setLicenses] = useState(false);
 
   return (
-    <div className="final-settings-shell" data-section={section}>
+    <div className="final-settings-shell approved-settings" data-section={section}>
+      <div className="approved-art" aria-hidden="true" />
+      <div className="approved-breath" aria-hidden="true" />
       <header className="final-settings-heading">
         {tr(section === 'main' ? (
           <DialogClose className="living-back" aria-label={tr("Volver al juego")}><ChevronLeft /></DialogClose>
@@ -69,13 +74,13 @@ export function FinalSettings({
             <span>{tr("Sonido")}</span><i className="living-toggle" aria-hidden="true" />
           </button>
           <div className="final-setting-row">
-            <span>{tr("Idioma")}</span><b className="setting-value">{tr("Automático")}</b>
+            <LanguagePicker />
           </div>
         </section>
         <nav className="final-settings-links" aria-label={tr("Más opciones")}>
           <button onClick={() => setSection('journey')}>{tr("Recorrido")}</button>
           <button onClick={() => setSection('credits')}>{tr("Créditos")}</button>
-          <button onClick={onDevelopment}>{tr("Desarrollo")}</button>
+          <button className="development-access" onClick={onDevelopment}>{tr("Desarrollo")}</button>
           <a href="https://www.instagram.com/krazelgames/" target="_blank" rel="noopener noreferrer">{tr("Instagram")}</a>
           {tr(!testMode && <button className="rebirth-link" onClick={() => setConfirmReset(true)}>{tr("Volver a nacer")}</button>)}
         </nav>
@@ -103,8 +108,8 @@ export function FinalSettings({
           <h3>{tr("Voro Abisal")}</h3><p>{tr("Un juego de Krazel Games")}</p>
           <hr/><h4>{tr("Creación y desarrollo")}</h4><p>{tr("Krazel Games")}</p>
           <hr/><h4>{tr("Música y licencias")}</h4>
-          <p>{tr("Música de Scott Buckley · ")}<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">{tr("CC BY 4.0")}</a></p>
-          <ul>{tr(MUSIC.map(track => <li key={track.id}><a href={track.source} target="_blank" rel="noopener noreferrer">{tr(track.title)}</a></li>))}</ul>
+          <button className="license-open" aria-expanded={licenses} onClick={()=>setLicenses(!licenses)}>{tr('Ver licencias')}</button>
+          {licenses && <div className="license-sheet"><button onClick={()=>setLicenses(false)}>{tr('Volver')}</button><p>{tr("Música de Scott Buckley · ")}<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a></p><ul>{MUSIC.map(track => <li key={track.id}><a href={track.source} target="_blank" rel="noopener noreferrer">{track.title}</a> — Scott Buckley</li>)}</ul><p>{tr('Composiciones completas. Volumen normalizado, conversión MP3 y fundidos de entrada, salida y repetición. Sin recortes de secciones.')}</p></div>}
         </section>
         <p className="credits-thanks">{tr("Gracias por acompañar a Voro desde el origen.")}</p>
         <button className="living-primary" onClick={() => setSection('main')}>{tr("Volver")}</button>

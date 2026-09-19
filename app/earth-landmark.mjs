@@ -1,3 +1,5 @@
+
+import { t as tr } from './language.mjs';
 // The orbital arena and its painting use the same world coordinates.
 export const ORBITAL_EARTH = { x: 700, y: 1750, radius: 620, softLimit: 1200, limit: 1550 };
 export function constrainOrbit(p, dt) {
@@ -36,7 +38,7 @@ export function drawOrbitalEarth(c, image, camera, height, zoom = 1, life = null
     const angle = Math.atan2(dy, dx);
     const arrow = ['→','↘','↓','↙','←','↖','↑','↗'][(Math.round(angle / (Math.PI / 4)) + 8) % 8];
     c.save(); c.fillStyle = '#e0eef4'; c.font = '12px Arial'; c.textAlign = 'center';
-    c.fillText(`TIERRA ${arrow}`, Math.max(70,Math.min(410,x)), Math.max(165,Math.min(height-125,y)));
+    c.fillText(tr(`TIERRA ${arrow}`), Math.max(70,Math.min(410,x)), Math.max(165,Math.min(height-125,y)));
     c.restore(); return;
   }
   c.save();
@@ -44,8 +46,8 @@ export function drawOrbitalEarth(c, image, camera, height, zoom = 1, life = null
   c.fillStyle = '#e0eef4';
   c.textAlign = 'center';
   c.font = '11px Arial';
-  c.fillText(t > 0 ? 'TU MUNDO VUELVE A TI' : life?.biomass >= life?.goalMass
-    ? 'LA TIERRA · ACÉRCATE PARA ABSORBERLA' : 'LA TIERRA · REÚNE BIOMASA EN SU ÓRBITA',
+  c.fillText(tr(t > 0 ? 'TU MUNDO VUELVE A TI' : life?.biomass >= life?.goalMass
+    ? 'LA TIERRA · ACÉRCATE PARA ABSORBERLA' : 'LA TIERRA · REÚNE BIOMASA EN SU ÓRBITA'),
     240, Math.max(110, Math.min(height - 120, y - r + 28)));
   c.restore();
 }

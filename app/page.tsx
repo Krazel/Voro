@@ -1,4 +1,7 @@
 'use client';
+import { t as tr } from './language.mjs';
+import { LanguagePicker, useLanguage } from './language-picker';
+
 import { MUSIC } from './music.mjs';
 import { finaleState } from './universe-finale.mjs';
 import { sharePerformanceFile } from './share-performance';
@@ -43,6 +46,7 @@ import {
   formatSize,
 } from './journey-data.mjs';
 export default function Home() {
+  useLanguage();
   const canvas = useRef<HTMLCanvasElement>(null),
     engine = useRef<VoroEngine | null>(null);
   const connectProtagonist = useCallback((node: HTMLCanvasElement | null) => engine.current?.setAdaptationCanvas(node), []);
@@ -77,12 +81,12 @@ export default function Home() {
     }
   };
   const movementChoice = <div className="movement-choice">
-    <span>Cómo quieres moverte</span>
+    <span>{tr("Cómo quieres moverte")}</span>
     <div>
-      <button aria-pressed={!tilt && !tiltPending} onClick={() => selectMovement(false)}>Con el dedo</button>
-      <button aria-pressed={tilt} disabled={tiltPending} onClick={() => selectMovement(true)}>{tiltPending ? 'Conectando…' : 'Inclinando el móvil'}</button>
+      <button aria-pressed={!tilt && !tiltPending} onClick={() => selectMovement(false)}>{tr("Con el dedo")}</button>
+      <button aria-pressed={tilt} disabled={tiltPending} onClick={() => selectMovement(true)}>{tr(tiltPending ? 'Conectando…' : 'Inclinando el móvil')}</button>
     </div>
-    {tiltMessage && <output>{tiltMessage}</output>}
+    {tr(tiltMessage && <output>{tr(tiltMessage)}</output>)}
   </div>;
   const [reportText, setReportText] = useState('');
   const [reportCopied, setReportCopied] = useState(false);
@@ -174,7 +178,7 @@ export default function Home() {
     if(mode==='final')engine.current?.setDiagnostics(false);
   };
   const modeButton=<button type="button" className="ui-mode-toggle" data-ui-mode-toggle aria-pressed={finalUI} onClick={toggleUiMode}>
-    {finalUI?'Volver a UI de desarrollo':'Pasar a UI final'}<span>{finalUI?'Final':'Desarrollo'}</span>
+    {tr(finalUI?'Volver a UI de desarrollo':'Pasar a UI final')}<span>{tr(finalUI?'Final':'Desarrollo')}</span>
   </button>;
   const finale = state.ending > 0 || state.complete;
   const finalCaption = finaleState(state.ending).caption;
@@ -204,42 +208,41 @@ export default function Home() {
                 ? 'pause'
                 : 'play'
         }
-        aria-label="VORO: del origen al universo"
+        aria-label={tr("VORO: del origen al universo")}
       >
         <canvas
           ref={canvas}
           tabIndex={state.ending>0 ? -1 : 0}
-          aria-label={finale ? state.ending>0 ? 'El universo se apaga.' : 'Mueve al superviviente con el dedo, las flechas o un mando.' : 'Arrastra para moverte. También puedes usar WASD, flechas o un mando. Espacio para impulsarte.'}
+          aria-label={tr(finale ? state.ending>0 ? 'El universo se apaga.' : 'Mueve al superviviente con el dedo, las flechas o un mando.' : 'Arrastra para moverte. También puedes usar WASD, flechas o un mando. Espacio para impulsarte.')}
         />
         <div className="shade" />
         <header className="game-header">
-          <div className="brand">
-            VORO<span>ABISAL</span>
+          <div className="brand">{tr(" VORO")}<span>{tr("ABISAL")}</span>
           </div>
           <div className="header-actions">
             <button
               className="icon-button"
               onClick={() => changeSettings(true)}
-              aria-label="Configuración"
+              aria-label={tr("Configuración")}
             >
               <Settings size={19} />
             </button>
             <button
               className="icon-button"
               onClick={() => action('sound')}
-              aria-label={state.sound ? 'Silenciar sonido' : 'Activar sonido'}
+              aria-label={tr(state.sound ? 'Silenciar sonido' : 'Activar sonido')}
             >
-              {state.sound ? <Volume2 size={19} /> : <VolumeX size={19} />}
+              {tr(state.sound ? <Volume2 size={19} /> : <VolumeX size={19} />)}
             </button>
-            {active && !state.offer.length && (
+            {tr(active && !state.offer.length && (
               <button
                 className="icon-button"
                 onClick={() => action('pause')}
-                aria-label={state.paused ? 'Reanudar' : 'Pausar'}
+                aria-label={tr(state.paused ? 'Reanudar' : 'Pausar')}
               >
-                {state.paused ? <Play size={19} /> : <Pause size={19} />}
+                {tr(state.paused ? <Play size={19} /> : <Pause size={19} />)}
               </button>
-            )}
+            ))}
           </div>
         </header>
         <div
@@ -250,22 +253,22 @@ export default function Home() {
           }
         >
           <div className="size">
-            <strong className="journey-size">{state.scale}</strong>
+            <strong className="journey-size">{tr(state.scale)}</strong>
             <span>
-              {state.testMode ? finalUI?'VISTA PREVIA · ':'PRUEBA · ' : ''}
-              {STAGES[state.stage].short}
+              {tr(state.testMode ? finalUI?'VISTA PREVIA · ':'PRUEBA · ' : '')}
+              {tr(STAGES[state.stage].short)}
             </span>
           </div>
           <div className="growth">
             <div className="growth-label">
-              <span>BIOMASA</span>
+              <span>{tr("BIOMASA")}</span>
               <span>
-                {state.biomass.toFixed(1)} / {state.target}
+                {tr(state.biomass.toFixed(1))}{tr(" / ")}{tr(state.target)}
               </span>
             </div>
             <progress
               className="sr-only"
-              aria-label="Biomasa"
+              aria-label={tr("Biomasa")}
               value={Math.min(state.biomass, state.target)}
               max={state.target}
             />
@@ -286,15 +289,15 @@ export default function Home() {
         <div className="micro-adaptation">
           <div>
             <span>
-              {state.level >= MAX_UPGRADE_CHOICES
+              {tr(state.level >= MAX_UPGRADE_CHOICES
                 ? 'ADAPTACIONES COMPLETAS'
-                : 'ADAPTACIÓN ' + (state.level + 1)}
+                : 'ADAPTACIÓN ' + (state.level + 1))}
             </span>
-            <span>{state.level} mejoras</span>
+            <span>{tr(state.level)}{tr(" mejoras")}</span>
           </div>
           <progress
             className="sr-only"
-            aria-label="Experiencia para la siguiente adaptación"
+            aria-label={tr("Experiencia para la siguiente adaptación")}
             value={xp}
             max={1}
           />
@@ -303,55 +306,45 @@ export default function Home() {
           </i>
         </div>
         </div>
-        {!state.started && !finale && (
+        {tr(!state.started && !finale && (
           <div className="intro">
-            <p className="eyebrow">{state.saved ? 'TU EVOLUCIÓN' : 'EL ORIGEN'}</p>
+            <p className="eyebrow">{tr(state.saved ? 'TU EVOLUCIÓN' : 'EL ORIGEN')}</p>
             <h1>
-              {state.saved ? (
-                <>
-                  La vida
-                  <br />
-                  te espera.
-                </>
+              {tr(state.saved ? (
+                <>{tr(" La vida ")}<br />{tr(" te espera. ")}</>
               ) : (
-                <>
-                  Antes de todo,
-                  <br />
-                  una vida.
-                </>
-              )}
+                <>{tr(" Antes de todo, ")}<br />{tr(" una vida. ")}</>
+              ))}
             </h1>
             <p className="intro-instruction">
-              {state.saved
+              {tr(state.saved
                 ? 'Tu evolución continúa.'
-                : 'De una célula a todo lo que existe.'}
+                : 'De una célula a todo lo que existe.')}
             </p>
-          {!finalUI && movementChoice}
+          {tr(!finalUI && movementChoice)}
             <button
               className="primary-button"
               disabled={!state.assetsReady}
               onClick={() => { engine.current?.tilt.calibrate(); action('start'); }}
             >
-              {!state.assetsReady
+              {tr(!state.assetsReady
                 ? 'Preparando tu mundo…'
                 : state.saved
                   ? 'Continuar partida'
-                  : 'Despertar'}
+                  : 'Despertar')}
               <ArrowUpRight size={20} />
             </button>
-            {modeButton}
-            {state.assetError && !state.assetsReady && (
+            {tr(modeButton)}
+            {tr(state.assetError && !state.assetsReady && (
               <button
                 className="text-button"
                 onClick={() => window.location.reload()}
-              >
-                Reintentar carga
-              </button>
-            )}
+              >{tr(" Reintentar carga ")}</button>
+            ))}
           </div>
-        )}
-        {state.birth > 0 && <div className="birth-reveal" aria-live="polite"><p>{state.birth > 1.4 ? 'Un latido.' : 'La vida despierta.'}</p></div>}
-        {active && state.birth === 0 && (
+        ))}
+        {tr(state.birth > 0 && <div className="birth-reveal" aria-live="polite"><p>{tr(state.birth > 1.4 ? 'Un latido.' : 'La vida despierta.')}</p></div>)}
+        {tr(active && state.birth === 0 && (
           <>
             <div className="notice-region">
             <output
@@ -360,15 +353,15 @@ export default function Home() {
                 (state.hint ? 'show' : '')
               }
             >
-              {state.hint}
+              {tr(state.hint)}
             </output>
-            {state.protected && !state.paused && !state.offer.length && <div className="protection-badge">MEMBRANA PROTEGIDA · ESCAPA</div>}
+            {tr(state.protected && !state.paused && !state.offer.length && <div className="protection-badge">{tr("MEMBRANA PROTEGIDA · ESCAPA")}</div>)}
             </div>
-            {showZoomControls && !state.paused && !state.offer.length && !state.transition && <fieldset className="zoom-controls" aria-label="Zoom de cámara">
-              <button aria-label="Alejar cámara" disabled={state.zoomFactor <= .75} onClick={() => engine.current?.setZoom(state.zoomFactor - .1)}>−</button>
-              <button aria-label="Restablecer zoom automático" onClick={() => engine.current?.setZoom(1)}>{Math.round(state.zoomFactor * 100)} %</button>
-              <button aria-label="Acercar cámara" disabled={state.zoomFactor >= 1.75} onClick={() => engine.current?.setZoom(state.zoomFactor + .1)}>+</button>
-            </fieldset>}
+            {tr(showZoomControls && !state.paused && !state.offer.length && !state.transition && <fieldset className="zoom-controls" aria-label={tr("Zoom de cámara")}>
+              <button aria-label={tr("Alejar cámara")} disabled={state.zoomFactor <= .75} onClick={() => engine.current?.setZoom(state.zoomFactor - .1)}>{tr("−")}</button>
+              <button aria-label={tr("Restablecer zoom automático")} onClick={() => engine.current?.setZoom(1)}>{tr(Math.round(state.zoomFactor * 100))}{tr(" %")}</button>
+              <button aria-label={tr("Acercar cámara")} disabled={state.zoomFactor >= 1.75} onClick={() => engine.current?.setZoom(state.zoomFactor + .1)}>{tr("+")}</button>
+            </fieldset>)}
             <div className="bottom-controls" data-dash-side={leftHanded ? 'left' : 'right'}>
               <button
                 className={'dash-button ' + (state.dash > 0 ? 'cooldown' : '')}
@@ -385,157 +378,129 @@ export default function Home() {
                 onClick={(e) => {
                   if (e.detail === 0) action('dash');
                 }}
-                aria-label="Impulso"
+                aria-label={tr("Impulso")}
               >
                 <ChevronsRight size={31} />
                 <span>
-                  {state.dash > 0 ? state.dash.toFixed(1) + ' s' : 'IMPULSO'}
+                  {tr(state.dash > 0 ? state.dash.toFixed(1) + ' s' : 'IMPULSO')}
                 </span>
               </button>
             </div>
             <div className="micro-buffs">
-              {state.shield >= 0 && (
+              {tr(state.shield >= 0 && (
                 <span>
                   <Shield size={12} />
-                  {state.shield > 0
+                  {tr(state.shield > 0
                     ? 'Escudo · ' + Math.ceil(state.shield) + ' s'
                     : state.shieldReady === 1
                       ? '1 escudo listo'
-                      : state.shieldReady + ' escudos listos'}
+                      : state.shieldReady + ' escudos listos')}
                 </span>
-              )}
-              {state.combo && (
+              ))}
+              {tr(state.combo && (
                 <span>
-                  <Sparkles size={12} />
-                  Hambre encadenada
-                </span>
-              )}
+                  <Sparkles size={12} />{tr(" Hambre encadenada ")}</span>
+              ))}
             </div>
           </>
-        )}
-        {(active || state.complete) && state.paused && !settings && (
+        ))}
+        {tr((active || state.complete) && state.paused && !settings && (
           <div className="pause-panel">
-            <p className="eyebrow">EN SUSPENSIÓN</p>
-            <h2>Respira.</h2>
-            <p className="pause-copy">Tu progreso queda guardado.</p>
+            <p className="eyebrow">{tr("EN SUSPENSIÓN")}</p>
+            <h2>{tr("Respira.")}</h2>
+            <p className="pause-copy">{tr("Tu progreso queda guardado.")}</p>
             <button
               className="primary-button membrane-control"
               onClick={() => action('pause')}
-            >
-              Continuar
-            </button>
+            >{tr(" Continuar ")}</button>
             <button
               className="primary-button membrane-control"
               onClick={() => changeSettings(true)}
-            >
-              Configuración
-            </button>
+            >{tr(" Configuración ")}</button>
           </div>
-        )}
-        {state.started && state.dead && (
+        ))}
+        {tr(state.started && state.dead && (
           <div className="finish-panel death-panel" aria-live="polite">
-            <p className="eyebrow">BIOMASA AGOTADA</p>
-            <h2>La vida insiste.</h2>
-            <p>
-              Vuelves a ser pequeño.
-              <br />
-              Conservas tu escala y tus adaptaciones.
-            </p>
+            <p className="eyebrow">{tr("BIOMASA AGOTADA")}</p>
+            <h2>{tr("La vida insiste.")}</h2>
+            <p>{tr(" Vuelves a ser pequeño. ")}<br />{tr(" Conservas tu escala y tus adaptaciones. ")}</p>
             <div className="finish-stats">
               <span>
-                <b>{state.eaten}</b>absorciones
-              </span>
+                <b>{tr(state.eaten)}</b>{tr("absorciones ")}</span>
               <span>
-                <b>{state.level}</b>mejoras
-              </span>
+                <b>{tr(state.level)}</b>{tr("mejoras ")}</span>
             </div>
-            <button className="primary-button" onClick={() => action('retry')}>
-              Reintentar
-              <RotateCcw size={18} />
+            <button className="primary-button" onClick={() => action('retry')}>{tr(" Reintentar ")}<RotateCcw size={18} />
             </button>
           </div>
-        )}
-        {state.transition > 0 && (
+        ))}
+        {tr(state.transition > 0 && (
           <div
             className="stage-transition journey-transition"
             aria-live="polite"
           >
-            <span>
-              EVOLUCIÓN · {STAGES[state.evolutionFrom].short.toUpperCase()}
+            <span>{tr(" EVOLUCIÓN · ")}{tr(STAGES[state.evolutionFrom].short.toUpperCase())}
             </span>
             <div className="cristal-evolution-halo" aria-hidden="true" />
-            <h2>{STAGES[state.evolutionFrom].evolution}</h2>
+            <h2>{tr(STAGES[state.evolutionFrom].evolution)}</h2>
             <div className="cristal-stage-route">
-              {STAGES[state.evolutionFrom].short}{' '}
-              <span aria-hidden="true">→</span>{' '}
+              {tr(STAGES[state.evolutionFrom].short)}{tr(' ')}
+              <span aria-hidden="true">{tr("→")}</span>{tr(' ')}
               {
-                STAGES[Math.min(state.evolutionFrom + 1, STAGES.length - 1)]
-                  .short
+                tr(STAGES[Math.min(state.evolutionFrom + 1, STAGES.length - 1)]
+                  .short)
               }
             </div>
-            <p>{TRANSITION_ROUTES[STAGES[state.evolutionFrom].id]}</p>
+            <p>{tr(TRANSITION_ROUTES[STAGES[state.evolutionFrom].id])}</p>
           </div>
-        )}
-        {state.started && !state.assetsReady && (
+        ))}
+        {tr(state.started && !state.assetsReady && (
           <div className="journey-loading">
-            <p>El siguiente mundo está despertando…</p>
-            {state.assetError && (
+            <p>{tr("El siguiente mundo está despertando…")}</p>
+            {tr(state.assetError && (
               <button
                 className="primary-button"
                 onClick={() => window.location.reload()}
-              >
-                Reintentar carga
-              </button>
-            )}
+              >{tr(" Reintentar carga ")}</button>
+            ))}
           </div>
-        )}
-        {state.ending > 0 && finalCaption && <div className="ending-caption" aria-live="polite"><p>{finalCaption}</p></div>}
-        {state.complete && state.ending===0 && !finalDetails && <div className="final-survivor-actions">
-          <button className="icon-button" aria-label="Configuración" onClick={()=>changeSettings(true)}><Settings size={19}/></button>
-          <button className="icon-button" aria-label={state.paused?'Reanudar':'Pausar'} onClick={()=>action('pause')}>{state.paused?<Play size={19}/>:<Pause size={19}/>}</button>
-        </div>}
-        {state.complete && state.ending === 0 && !finalDetails && <button className="universe-survivor-control" aria-label="VORO permanece solo en el vacío. Ver el final y tu recorrido" onClick={() => setFinalDetails(true)}>Recorrido</button>}
-        {state.complete && finalDetails && (
+        ))}
+        {tr(state.ending > 0 && finalCaption && <div className="ending-caption" aria-live="polite"><p>{tr(finalCaption)}</p></div>)}
+        {tr(state.complete && state.ending===0 && !finalDetails && <div className="final-survivor-actions">
+          <button className="icon-button" aria-label={tr("Configuración")} onClick={()=>changeSettings(true)}><Settings size={19}/></button>
+          <button className="icon-button" aria-label={tr(state.paused?'Reanudar':'Pausar')} onClick={()=>action('pause')}>{tr(state.paused?<Play size={19}/>:<Pause size={19}/>)}</button>
+        </div>)}
+        {tr(state.complete && state.ending === 0 && !finalDetails && <button className="universe-survivor-control" aria-label={tr("VORO permanece solo en el vacío. Ver el final y tu recorrido")} onClick={() => setFinalDetails(true)}>{tr("Recorrido")}</button>)}
+        {tr(state.complete && finalDetails && (
           <div className="finish-panel journey-finish" aria-live="polite">
-            <p className="eyebrow">UNIVERSO ABSORBIDO</p>
-            <h2>
-              Todo estaba
-              <br />
-              dentro de ti.
-            </h2>
-            <p>De una única célula al último punto de luz.</p>
+            <p className="eyebrow">{tr("UNIVERSO ABSORBIDO")}</p>
+            <h2>{tr(" Todo estaba ")}<br />{tr(" dentro de ti. ")}</h2>
+            <p>{tr("De una única célula al último punto de luz.")}</p>
             <div className="finish-stats">
               <span>
-                <b>{state.eaten}</b>absorciones
-              </span>
+                <b>{tr(state.eaten)}</b>{tr("absorciones ")}</span>
               <span>
-                <b>{Math.floor(state.elapsed / 60)}</b>minutos
-              </span>
+                <b>{tr(Math.floor(state.elapsed / 60))}</b>{tr("minutos ")}</span>
               <span>
-                <b>{state.level}</b>adaptaciones
-              </span>
+                <b>{tr(state.level)}</b>{tr("adaptaciones ")}</span>
             </div>
             <button
               className="primary-button"
               onClick={() => changeSettings(true)}
-            >
-              Ver tu recorrido
-              <Sparkles size={18} />
+            >{tr(" Ver tu recorrido ")}<Sparkles size={18} />
             </button>
-            <button className="text-button" onClick={() => setFinalDetails(false)}>Volver al silencio</button>
-            <span className="short-note">FIN · VORO</span>
+            <button className="text-button" onClick={() => setFinalDetails(false)}>{tr("Volver al silencio")}</button>
+            <span className="short-note">{tr("FIN · VORO")}</span>
           </div>
-        )}
-        {!finalUI && state.performance && !finale && (
+        ))}
+        {tr(!finalUI && state.performance && !finale && (
           <output className="performance-readout">
-            {state.performance.recording ? state.performance.remaining ? `Midiendo · ${state.performance.remaining} s` : 'Rendimiento' : 'Medición terminada'}
-            <br />{state.performance.fps || '—'} FPS · P95 {state.performance.p95} ms · pico {state.performance.peak} ms
-            <br />CPU {state.performance.cpu} ms · lentos {state.performance.slowFrames}
-            <br />Cargas {state.performance.loading} · poses {state.performance.pending} · {state.performance.cacheMB} MB
-          </output>
-        )}
+            {tr(state.performance.recording ? state.performance.remaining ? `Midiendo · ${state.performance.remaining} s` : 'Rendimiento' : 'Medición terminada')}
+            <br />{tr(state.performance.fps || '—')}{tr(" FPS · P95 ")}{tr(state.performance.p95)}{tr(" ms · pico ")}{tr(state.performance.peak)}{tr(" ms ")}<br />{tr("CPU ")}{tr(state.performance.cpu)}{tr(" ms · lentos ")}{tr(state.performance.slowFrames)}
+            <br />{tr("Cargas ")}{tr(state.performance.loading)}{tr(" · poses ")}{tr(state.performance.pending)}{tr(" · ")}{tr(state.performance.cacheMB)}{tr(" MB ")}</output>
+        ))}
       </section>
-      {active && state.offer.length > 0 && <Dialog
+      {tr(active && state.offer.length > 0 && <Dialog
         open={active && state.offer.length > 0 && !settings}
         onOpenChange={() => {}}
       >
@@ -543,10 +508,10 @@ export default function Home() {
           className="micro-upgrade-dialog cristal-dialog adaptation-dialog"
           showCloseButton={false}
         >
-          <p className="adaptation-count">ADAPTACIÓN {state.level + 1}</p>
+          <p className="adaptation-count">{tr("ADAPTACIÓN ")}{tr(state.level + 1)}</p>
           <div className="adaptation-heading">
-            <DialogTitle>Adaptación emergente</DialogTitle>
-            <DialogDescription>El tiempo se detiene. Elige tu evolución.</DialogDescription>
+            <DialogTitle>{tr("Adaptación emergente")}</DialogTitle>
+            <DialogDescription>{tr("El tiempo se detiene. Elige tu evolución.")}</DialogDescription>
           </div>
           <AdaptationChoices
             key={state.level}
@@ -556,19 +521,19 @@ export default function Home() {
             onChoose={(id) => engine.current?.choose(id)}
           />
         </DialogContent>
-      </Dialog>}
-      {uiPreview && <CristalPreview
+      </Dialog>)}
+      {tr(uiPreview && <CristalPreview
         key={uiPreview ? 'open' : 'closed'}
         onProtagonist={connectProtagonist}
         open={uiPreview}
         onClose={() => setUiPreview(false)}
-      />}
-      {settings && <Dialog open={!uiPreview} onOpenChange={changeSettings}>
+      />)}
+      {tr(settings && <Dialog open={!uiPreview} onOpenChange={changeSettings}>
         <DialogContent
           className={'voro-settings cristal-dialog'+(finalUI?' final-ui':'')}
           showCloseButton={false}
         >
-          {finalUI && <FinalSettings
+          {tr(finalUI && <FinalSettings
             stage={state.stage}
             complete={state.complete}
             eaten={state.eaten}
@@ -582,47 +547,45 @@ export default function Home() {
             onSound={() => action('sound')}
             onRestart={() => { resume.current = false; action('restart'); changeSettings(false); }}
             onDevelopment={toggleUiMode}
-          />}
-          <DialogClose className="settings-close icon-button" aria-label="Cerrar configuración"><X size={20}/></DialogClose>
-          <p className="eyebrow">VORO · ABISAL</p>
-          <DialogTitle>Configuración</DialogTitle>
-          <DialogDescription>{state.stageName}{!finalUI && ` · VORO ${RELEASE.version} (${RELEASE.build})`}</DialogDescription>
-          {modeButton}
-          {!uiModeSaved && <p role="status" className="save-note">La vista ha cambiado; no se ha podido recordar para la próxima sesión.</p>}
-          <details className="camera-details" open={finalUI?undefined:true}><summary>Encuadre y zoom</summary>
+          />)}
+          <DialogClose className="settings-close icon-button" aria-label={tr("Cerrar configuración")}><X size={20}/></DialogClose>
+          <p className="eyebrow">{tr("VORO · ABISAL")}</p>
+          <DialogTitle>{tr("Configuración")}</DialogTitle>
+          <DialogDescription>{tr(state.stageName)}{tr(!finalUI && ` · VORO ${RELEASE.version} (${RELEASE.build})`)}</DialogDescription>
+          {!finalUI && <LanguagePicker />}
+          {tr(modeButton)}
+          {tr(!uiModeSaved && <p role="status" className="save-note">{tr("La vista ha cambiado; no se ha podido recordar para la próxima sesión.")}</p>)}
+          <details className="camera-details" open={finalUI?undefined:true}><summary>{tr("Encuadre y zoom")}</summary>
             <div className="camera-settings">
-            <label htmlFor="camera-zoom">Zoom de cámara <output>{Math.round(state.zoomFactor * 100)} %</output></label>
+            <label htmlFor="camera-zoom">{tr("Zoom de cámara ")}<output>{tr(Math.round(state.zoomFactor * 100))}{tr(" %")}</output></label>
             <input id="camera-zoom" type="range" min="75" max="175" step="5" value={Math.round(state.zoomFactor * 100)} onChange={e => engine.current?.setZoom(Number(e.target.value) / 100)} />
-            <button className="settings-row" onClick={() => engine.current?.setZoom(1)}>Restablecer encuadre<span>Automático</span></button>
-            <button className="settings-row" aria-pressed={showZoomControls} onClick={() => finalUI?setFinalZoomControls(!finalZoomControls):setZoomControls(!zoomControls)}>Botones de zoom al jugar<span>{showZoomControls ? 'Activados' : 'Desactivados'}</span></button>
-            <p className="save-note">Pellizca con dos dedos para ajustar el zoom. En ordenador puedes usar la rueda o los botones. El ajuste se mantiene entre entornos durante esta sesión.</p>
+            <button className="settings-row" onClick={() => engine.current?.setZoom(1)}>{tr("Restablecer encuadre")}<span>{tr("Automático")}</span></button>
+            <button className="settings-row" aria-pressed={showZoomControls} onClick={() => finalUI?setFinalZoomControls(!finalZoomControls):setZoomControls(!zoomControls)}>{tr("Botones de zoom al jugar")}<span>{tr(showZoomControls ? 'Activados' : 'Desactivados')}</span></button>
+            <p className="save-note">{tr("Pellizca con dos dedos para ajustar el zoom. En ordenador puedes usar la rueda o los botones. El ajuste se mantiene entre entornos durante esta sesión.")}</p>
           </div></details>
-          {movementChoice}
+          {tr(movementChoice)}
           <button className="settings-row"
             aria-pressed={state.uniformVisualSpeed}
-            onClick={() => engine.current?.setUniformVisualSpeed(!state.uniformVisualSpeed)}>
-            Velocidad visual entre entornos<span>{state.uniformVisualSpeed ? 'Uniforme' : 'Clásica'}</span>
+            onClick={() => engine.current?.setUniformVisualSpeed(!state.uniformVisualSpeed)}>{tr(" Velocidad visual entre entornos")}<span>{tr(state.uniformVisualSpeed ? 'Uniforme' : 'Clásica')}</span>
           </button>
-          <p className="save-note">Uniforme compensa la escala de cada entorno. Clásica conserva el movimiento anterior.</p>
-          {tilt && <button className="settings-row" onClick={() => { engine.current?.tilt.calibrate(); setTiltMessage('Posición centrada. Mantén el móvil cómodo al continuar.'); }}>Centrar inclinación<span>Recalibrar</span></button>}
+          <p className="save-note">{tr("Uniforme compensa la escala de cada entorno. Clásica conserva el movimiento anterior.")}</p>
+          {tr(tilt && <button className="settings-row" onClick={() => { engine.current?.tilt.calibrate(); setTiltMessage('Posición centrada. Mantén el móvil cómodo al continuar.'); }}>{tr("Centrar inclinación")}<span>{tr("Recalibrar")}</span></button>)}
           <button className="settings-row"
             aria-pressed={leftHanded}
             onClick={() => {
               setControlsSaveError(!writeLeftHanded(!leftHanded));
-            }}>
-            Impulso a la izquierda<span>{leftHanded ? 'Activado' : 'Desactivado'}</span>
+            }}>{tr(" Impulso a la izquierda")}<span>{tr(leftHanded ? 'Activado' : 'Desactivado')}</span>
           </button>
-          {controlsSaveError && <output className="save-note">El cambio funciona ahora, pero no se ha podido guardar para la próxima sesión.</output>}
-          {!finalUI && <>
+          {tr(controlsSaveError && <output className="save-note">{tr("El cambio funciona ahora, pero no se ha podido guardar para la próxima sesión.")}</output>)}
+          {tr(!finalUI && <>
           <button className="settings-row"
             onClick={() => engine.current?.setDiagnostics(!state.performance)}
-            aria-pressed={!!state.performance}>
-            Mostrar rendimiento<span>{state.performance ? 'Activado' : 'Desactivado'}</span>
+            aria-pressed={!!state.performance}>{tr(" Mostrar rendimiento")}<span>{tr(state.performance ? 'Activado' : 'Desactivado')}</span>
           </button>
           <button className="settings-row" onClick={() => {
             setReportText(''); setReportCopied(false); setShareMessage('');
             engine.current?.startBenchmark(); changeSettings(false);
-          }}>Medir una partida de 30 s<span>Iniciar</span></button>
+          }}>{tr("Medir una partida de 30 s")}<span>{tr("Iniciar")}</span></button>
           <button className="settings-row" onClick={async () => {
             const report = engine.current?.performanceReport();
             if (!report) return;
@@ -630,7 +593,7 @@ export default function Home() {
             const text = performanceSummaryText(report);
             setReportText(text); setReportCopied(false);
             try { await navigator.clipboard.writeText(text); setReportCopied(true); } catch { /* selectable fallback below */ }
-          }}>Copiar resumen de rendimiento<span>{reportCopied ? 'Copiado' : 'Copiar'}</span></button>
+          }}>{tr("Copiar resumen de rendimiento")}<span>{tr(reportCopied ? 'Copiado' : 'Copiar')}</span></button>
           <button className="settings-row" disabled={sharingReport} onClick={async () => {
             const report=engine.current?.performanceReport();
             if (!report?.summary.frames) { setShareMessage('Primero mide una partida de 30 s.'); return; }
@@ -642,40 +605,38 @@ export default function Home() {
               const message=error instanceof Error ? error.message : String(error);
               setShareMessage(/cancel|abort/i.test(message) ? 'No se ha compartido el archivo.' : 'No se pudo compartir. Puedes copiar el resumen y volver a intentarlo.');
             } finally { setSharingReport(false); }
-          }}>Compartir informe como archivo<span>{sharingReport ? 'Preparando…' : 'Compartir'}</span></button>
-          {shareMessage && <output className="save-note">{shareMessage}</output>}
-          <p className="save-note">Elige WhatsApp en el menú de compartir. El archivo incluye el resumen y los peores tirones. La prueba cuenta solo mientras juegas. Incluye FPS, fotogramas lentos, cargas y tiempos por sistema. El informe se queda en tu dispositivo hasta que lo compartas.</p>
-          {reportText && <label className="performance-report-label">Informe de rendimiento
-            <textarea className="performance-report" readOnly rows={5} value={reportText}
+          }}>{tr("Compartir informe como archivo")}<span>{tr(sharingReport ? 'Preparando…' : 'Compartir')}</span></button>
+          {tr(shareMessage && <output className="save-note">{tr(shareMessage)}</output>)}
+          <p className="save-note">{tr("Elige WhatsApp en el menú de compartir. El archivo incluye el resumen y los peores tirones. La prueba cuenta solo mientras juegas. Incluye FPS, fotogramas lentos, cargas y tiempos por sistema. El informe se queda en tu dispositivo hasta que lo compartas.")}</p>
+          {tr(reportText && <label className="performance-report-label">{tr("Informe de rendimiento ")}<textarea className="performance-report" readOnly rows={5} value={reportText}
               onFocus={event => event.currentTarget.select()} />
-          </label>}
-          </>}
+          </label>)}
+          </>)}
           <button
             className="settings-row"
             onClick={() => action('sound')}
             aria-pressed={state.sound}
-          >
-            Sonido<span>{state.sound ? 'Activado' : 'Desactivado'}</span>
+          >{tr(" Sonido")}<span>{tr(state.sound ? 'Activado' : 'Desactivado')}</span>
           </button>
           <details className="music-credits">
-            <summary>Créditos musicales</summary>
-            <p>Música de Scott Buckley · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a></p>
-            <ul>{MUSIC.map(track=><li key={track.id}><a href={track.source} target="_blank" rel="noopener noreferrer">{track.title}</a> — Scott Buckley</li>)}</ul>
-            <p>Composiciones completas. Volumen normalizado, conversión MP3 y fundidos de entrada, salida y repetición. Sin recortes de secciones.</p>
-            <a href="https://www.scottbuckley.com.au/library/using-this-music/" target="_blank" rel="noopener noreferrer">Fuentes y condiciones del autor</a>
+            <summary>{tr("Créditos musicales")}</summary>
+            <p>{tr("Música de Scott Buckley · ")}<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">{tr("CC BY 4.0")}</a></p>
+            <ul>{tr(MUSIC.map(track=><li key={track.id}><a href={track.source} target="_blank" rel="noopener noreferrer">{tr(track.title)}</a>{tr(" — Scott Buckley")}</li>))}</ul>
+            <p>{tr("Composiciones completas. Volumen normalizado, conversión MP3 y fundidos de entrada, salida y repetición. Sin recortes de secciones.")}</p>
+            <a href="https://www.scottbuckley.com.au/library/using-this-music/" target="_blank" rel="noopener noreferrer">{tr("Fuentes y condiciones del autor")}</a>
           </details>
           <div className="micro-stat-row">
-            <span>{state.eaten} absorciones</span>
-            <span>{Math.floor(state.elapsed / 60)} min de vida</span>
+            <span>{tr(state.eaten)}{tr(" absorciones")}</span>
+            <span>{tr(Math.floor(state.elapsed / 60))}{tr(" min de vida")}</span>
           </div>
           <p className="save-note">
-            {state.testMode
+            {tr(state.testMode
               ? 'Modo de pruebas. Tu partida está a salvo.'
               : state.storageAvailable
                 ? 'La partida se guarda en este dispositivo.'
-                : 'El guardado no está disponible en este navegador.'}
+                : 'El guardado no está disponible en este navegador.')}
           </p>
-          {!finalUI && <>
+          {tr(!finalUI && <>
           <button
             className="settings-row"
             aria-expanded={testPanel}
@@ -687,27 +648,25 @@ export default function Home() {
                 setTestSize(0);
               }
             }}
-          >
-            Probar entornos y tamaños <ChevronsRight size={17} />
+          >{tr(" Probar entornos y tamaños ")}<ChevronsRight size={17} />
           </button>
-          {testPanel && (
+          {tr(testPanel && (
             <div id="environment-tests" className="environment-tests">
-              <label htmlFor="test-environment">Entorno</label>
+              <label htmlFor="test-environment">{tr("Entorno")}</label>
               <select
                 id="test-environment"
                 value={testStage}
                 onChange={(e) => setTestStage(Number(e.target.value))}
               >
-                {STAGES.map((s, i) => (
+                {tr(STAGES.map((s, i) => (
                   <option key={s.id} value={i}>
-                    {String(i + 1).padStart(2, '0')} · {s.short}
+                    {tr(String(i + 1).padStart(2, '0'))}{tr(" · ")}{tr(s.short)}
                   </option>
-                ))}
+                )))}
               </select>
-              <label htmlFor="test-size">
-                Tamaño{' '}
+              <label htmlFor="test-size">{tr(" Tamaño")}{tr(' ')}
                 <output htmlFor="test-size">
-                  {formatSize(testStage, testMass)}
+                  {tr(formatSize(testStage, testMass))}
                 </output>
               </label>
               <input
@@ -721,7 +680,7 @@ export default function Home() {
                 onChange={(e) => setTestSize(Number(e.target.value))}
               />
               <div className="test-presets">
-                {[
+                {tr([
                   ['Pequeño', 0],
                   ['Mediano', 40],
                   ['Grande', 75],
@@ -732,42 +691,36 @@ export default function Home() {
                     aria-pressed={testSize === size}
                     onClick={() => setTestSize(Number(size))}
                   >
-                    {label}
+                    {tr(label)}
                   </button>
-                ))}
+                )))}
               </div>
               <label className="test-check">
                 <input
                   type="checkbox"
                   checked={keepUpgrades}
                   onChange={(e) => setKeepUpgrades(e.target.checked)}
-                />
-                Usar mis adaptaciones
-              </label>
+                />{tr(" Usar mis adaptaciones ")}</label>
               <label className="test-check">
                 <input
                   type="checkbox"
                   checked={testSafe}
                   onChange={(e) => setTestSafe(e.target.checked)}
-                />
-                Invulnerabilidad
-              </label>
+                />{tr(" Invulnerabilidad ")}</label>
               <label className="test-check">
                 <input type="checkbox" checked={testEvolution} onChange={e => {
                   setTestEvolution(e.target.checked);
                   if (engine.current?.testMode) engine.current.testEvolution = e.target.checked;
-                }} />
-                Permitir pasar al siguiente entorno
-              </label>
-              <p className="save-note">Prueba crecimiento, adaptaciones y transiciones sin cambiar tu partida guardada.</p>
-              {state.testMode && <div className="test-boosts">
-                <p className="save-note">Biomasa de prueba: {state.biomass.toFixed(1)} / {state.target}</p>
-                <button className="settings-row" onClick={() => engine.current?.boostTest('biomass')}>Añadir biomasa <span>+25 % de la meta</span></button>
-                <button className="settings-row" onClick={() => engine.current?.boostTest('goal')}>Llenar la barra de biomasa <span>100 %</span></button>
+                }} />{tr(" Permitir pasar al siguiente entorno ")}</label>
+              <p className="save-note">{tr("Prueba crecimiento, adaptaciones y transiciones sin cambiar tu partida guardada.")}</p>
+              {tr(state.testMode && <div className="test-boosts">
+                <p className="save-note">{tr("Biomasa de prueba: ")}{tr(state.biomass.toFixed(1))}{tr(" / ")}{tr(state.target)}</p>
+                <button className="settings-row" onClick={() => engine.current?.boostTest('biomass')}>{tr("Añadir biomasa ")}<span>{tr("+25 % de la meta")}</span></button>
+                <button className="settings-row" onClick={() => engine.current?.boostTest('goal')}>{tr("Llenar la barra de biomasa ")}<span>{tr("100 %")}</span></button>
                 <button className="settings-row" disabled={state.level >= MAX_UPGRADE_CHOICES} onClick={() => {
                   if (engine.current?.boostTest('adaptation')) { resume.current = false; if(engine.current) engine.current.paused = false; changeSettings(false); }
-                }}>Conseguir una adaptación <span>Elegir ahora</span></button>
-              </div>}
+                }}>{tr("Conseguir una adaptación ")}<span>{tr("Elegir ahora")}</span></button>
+              </div>)}
 
               <button
                 className="primary-button"
@@ -786,12 +739,12 @@ export default function Home() {
                   }
                 }}
               >
-                {state.testMode ? 'Reiniciar prueba elegida' : 'Entrar en la prueba'} <Play size={18} />
+                {tr(state.testMode ? 'Reiniciar prueba elegida' : 'Entrar en la prueba')} <Play size={18} />
               </button>
             </div>
-          )}
-          </>}
-          {state.testMode && (
+          ))}
+          </>)}
+          {tr(state.testMode && (
             <button
               className="settings-row"
               onClick={() => {
@@ -800,12 +753,12 @@ export default function Home() {
                 changeSettings(false);
               }}
             >
-              {finalUI?'Volver a mi partida':'Salir de pruebas y volver a mi partida'} <ArrowUpRight size={17} />
+              {tr(finalUI?'Volver a mi partida':'Salir de pruebas y volver a mi partida')} <ArrowUpRight size={17} />
             </button>
-          )}
-          <details className="route-details" open={finalUI?undefined:true}><summary>Tu recorrido</summary>
-          <ol className="journey-route" aria-label="Tu recorrido">
-            {STAGES.map((s, i) => (
+          ))}
+          <details className="route-details" open={finalUI?undefined:true}><summary>{tr("Tu recorrido")}</summary>
+          <ol className="journey-route" aria-label={tr("Tu recorrido")}>
+            {tr(STAGES.map((s, i) => (
               <li
                 key={s.id}
                 className={
@@ -816,55 +769,48 @@ export default function Home() {
                       : 'locked'
                 }
               >
-                <span>{String(i + 1).padStart(2, '0')}</span>
-                <b>{s.short}</b>
+                <span>{tr(String(i + 1).padStart(2, '0'))}</span>
+                <b>{tr(s.short)}</b>
                 <small>
-                  {state.complete || i < state.stage
+                  {tr(state.complete || i < state.stage
                     ? 'Superado'
                     : i === state.stage
                       ? 'Aquí estás'
-                      : 'Por descubrir'}
+                      : 'Por descubrir')}
                 </small>
               </li>
-            ))}
+            )))}
           </ol></details>
-          {!finalUI && <>
-          <button className="settings-row" onClick={() => setUiPreview(true)}>
-            Probar interfaz Cristal <Sparkles size={17} />
+          {tr(!finalUI && <>
+          <button className="settings-row" onClick={() => setUiPreview(true)}>{tr(" Probar interfaz Cristal ")}<Sparkles size={17} />
           </button>
-          <Link className="settings-row" href="/interfaz">
-            Probar diseños de interfaz
-            <ArrowUpRight size={17} />
+          <Link className="settings-row" href="/interfaz">{tr(" Probar diseños de interfaz ")}<ArrowUpRight size={17} />
           </Link>
-          <Link className="settings-row" href="/animaciones">
-            Galería de animaciones
-            <ArrowUpRight size={17} />
+          <Link className="settings-row" href="/animaciones">{tr(" Galería de animaciones ")}<ArrowUpRight size={17} />
           </Link>
-          <Link className="settings-row" href="/orilla">
-            Probar la nueva orilla
-            <ArrowUpRight size={17} />
+          <Link className="settings-row" href="/orilla">{tr(" Probar la nueva orilla ")}<ArrowUpRight size={17} />
           </Link>
-          </>}
-          {state.level > 0 && (
+          </>)}
+          {tr(state.level > 0 && (
             <div className="micro-upgrade-list">
-              {UPGRADES.map((u) => {
+              {tr(UPGRADES.map((u) => {
                 const n = levelOf(state.mutations, u.id);
                 return n ? (
                   <div key={u.id}>
-                    <span>{u.name}</span>
+                    <span>{tr(u.name)}</span>
                     <b>
-                      {n} / {u.max}
-                      {n === u.max ? ' · Completa' : ' adquiridas'}
+                      {tr(n)}{tr(" / ")}{tr(u.max)}
+                      {tr(n === u.max ? ' · Completa' : ' adquiridas')}
                     </b>
                   </div>
                 ) : null;
-              })}
+              }))}
             </div>
-          )}
-          {!state.testMode &&
+          ))}
+          {tr(!state.testMode &&
             (confirmReset ? (
               <div className="reset-confirm">
-                <p>Se borrará esta partida y sus adaptaciones.</p>
+                <p>{tr("Se borrará esta partida y sus adaptaciones.")}</p>
                 <button
                   className="primary-button"
                   onClick={() => {
@@ -872,51 +818,35 @@ export default function Home() {
                     action('restart');
                     changeSettings(false);
                   }}
-                >
-                  Sí, volver a nacer
-                  <RotateCcw size={16} />
+                >{tr(" Sí, volver a nacer ")}<RotateCcw size={16} />
                 </button>
                 <button
                   className="text-button"
                   onClick={() => setConfirmReset(false)}
-                >
-                  Cancelar
-                </button>
+                >{tr(" Cancelar ")}</button>
               </div>
             ) : (
               <button
                 className="settings-row"
                 onClick={() => setConfirmReset(true)}
-              >
-                Volver a nacer
-                <RotateCcw size={16} />
+              >{tr(" Volver a nacer ")}<RotateCcw size={16} />
               </button>
-            ))}
-          <DialogClose className="primary-button">
-            Volver al juego
-            <Play size={18} />
+            )))}
+          <DialogClose className="primary-button">{tr(" Volver al juego ")}<Play size={18} />
           </DialogClose>
         </DialogContent>
-      </Dialog>}
+      </Dialog>)}
       <ReviewMilestone state={state} blocked={settings || testPanel || uiPreview || state.birth > 0 || finale} />
-      {!finalUI && !finale && <aside className="desktop-note">
+      {tr(!finalUI && !finale && <aside className="desktop-note">
         <span>
-          {String(state.stage + 1).padStart(2, '0')} —{' '}
-          {state.stageName.toUpperCase()}
+          {tr(String(state.stage + 1).padStart(2, '0'))}{tr(" —")}{tr(' ')}
+          {tr(state.stageName.toUpperCase())}
         </span>
-        <p>
-          Arrastra para moverte
-          <br />
-          WASD / flechas · espacio para impulso
-          <br />
-          Mando · stick izquierdo + A
-        </p>
+        <p>{tr(" Arrastra para moverte ")}<br />{tr(" WASD / flechas · espacio para impulso ")}<br />{tr(" Mando · stick izquierdo + A ")}</p>
         <small>
-          {STAGE_SPECIES[state.stage].length} habitantes en esta escala
-          <br />
-          {UPGRADES.length} adaptaciones · mundo infinito
-        </small>
-      </aside>}
+          {tr(STAGE_SPECIES[state.stage].length)}{tr(" habitantes en esta escala ")}<br />
+          {tr(UPGRADES.length)}{tr(" adaptaciones · mundo infinito ")}</small>
+      </aside>)}
     </main>
   );
 }

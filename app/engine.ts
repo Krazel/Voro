@@ -1,3 +1,5 @@
+
+import { t as tr } from './language.mjs';
 import { MusicPlayer, musicScene } from './music.mjs';
 import { captureOrbit, sweepPosition } from './orbital-sweep.mjs';
 import { UniverseFinale, FINALE_SECONDS, drawVoidSurvivor } from './universe-finale.mjs';
@@ -1910,7 +1912,7 @@ export class VoroEngine {
         c.fillStyle = '#d7aab2';
         c.font = 10 / this.zoom + 'px Arial';
         c.textAlign = 'center';
-        c.fillText('DEMASIADO GRANDE', f.x, f.y + r + 14 / this.zoom);
+        c.fillText(tr('DEMASIADO GRANDE'), f.x, f.y + r + 14 / this.zoom);
       }
     }
     if (this.diagnosticsEnabled)
@@ -1952,7 +1954,7 @@ export class VoroEngine {
       c.font = 12 / this.zoom + 'px Arial';
       c.textAlign = 'center';
       c.fillStyle = f.damage ? '#ffb29b' : '#f6d793';
-      c.fillText(f.text, f.x, f.y);
+      c.fillText(tr(f.text), f.x, f.y);
       c.restore();
     }
     c.restore();

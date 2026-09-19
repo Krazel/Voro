@@ -1,4 +1,6 @@
 'use client';
+import { t as tr } from './language.mjs';
+
 import { useState } from 'react';
 import { X } from 'lucide-react';
 import {
@@ -36,31 +38,29 @@ export function CristalPreview({
         showCloseButton={false}
       >
         <div className="cristal-preview-top">
-          <DialogTitle>Membrana · Cristal</DialogTitle>
+          <DialogTitle>{tr("Membrana · Cristal")}</DialogTitle>
           <button
             className="icon-button"
-            aria-label="Cerrar prueba de interfaz"
+            aria-label={tr("Cerrar prueba de interfaz")}
             onClick={onClose}
           >
             <X size={20} />
           </button>
         </div>
-        <DialogDescription className="cristal-preview-note">
-          Prueba los botones. Tu partida no cambia.
-        </DialogDescription>
+        <DialogDescription className="cristal-preview-note">{tr(" Prueba los botones. Tu partida no cambia. ")}</DialogDescription>
         <Tabs defaultValue="adaptation" onValueChange={() => setNotice('')}>
           <TabsList
             className="cristal-preview-tabs"
-            aria-label="Pantalla de prueba"
+            aria-label={tr("Pantalla de prueba")}
           >
-            <TabsTrigger value="adaptation">Mejoras</TabsTrigger>
-            <TabsTrigger value="evolution">Evolución</TabsTrigger>
-            <TabsTrigger value="pause">Pausa</TabsTrigger>
+            <TabsTrigger value="adaptation">{tr("Mejoras")}</TabsTrigger>
+            <TabsTrigger value="evolution">{tr("Evolución")}</TabsTrigger>
+            <TabsTrigger value="pause">{tr("Pausa")}</TabsTrigger>
           </TabsList>
           <TabsContent value="adaptation" className="cristal-demo-adaptation">
-            <p className="cristal-wordmark">VORO</p>
-            <h2>La vida encuentra otra forma.</h2>
-            <p className="cristal-subtitle">Elige una adaptación</p>
+            <p className="cristal-wordmark">{tr("VORO")}</p>
+            <h2>{tr("La vida encuentra otra forma.")}</h2>
+            <p className="cristal-subtitle">{tr("Elige una adaptación")}</p>
             <AdaptationChoices
               onProtagonist={onProtagonist}
               offer={offer}
@@ -69,43 +69,34 @@ export function CristalPreview({
                 setNotice(UPGRADES.find((u) => u.id === id)!.name)
               }
             />
-            {notice && (
+            {tr(notice && (
               <output
                 key={notice}
                 className="cristal-demo-toast membrane-control"
-              >
-                Adaptación integrada · {notice}
+              >{tr(" Adaptación integrada · ")}{tr(notice)}
               </output>
-            )}
+            ))}
           </TabsContent>
           <TabsContent value="evolution" className="cristal-demo-evolution">
-            <p className="cristal-wordmark">VORO</p>
+            <p className="cristal-wordmark">{tr("VORO")}</p>
             <div className="cristal-demo-organism" aria-hidden="true">
               <span />
             </div>
-            <h2>La marea te abre el camino</h2>
-            <p className="cristal-stage-route">
-              ORILLA <span aria-hidden="true">→</span> MAR
-            </p>
+            <h2>{tr("La marea te abre el camino")}</h2>
+            <p className="cristal-stage-route">{tr(" ORILLA ")}<span aria-hidden="true">{tr("→")}</span>{tr(" MAR ")}</p>
           </TabsContent>
           <TabsContent value="pause" className="cristal-demo-pause">
-            <p className="cristal-wordmark">VORO</p>
-            <h2>Respira.</h2>
+            <p className="cristal-wordmark">{tr("VORO")}</p>
+            <h2>{tr("Respira.")}</h2>
             <button
               className="primary-button membrane-control"
               onClick={onClose}
-            >
-              Continuar
-            </button>
+            >{tr(" Continuar ")}</button>
             <button
               className="primary-button membrane-control"
               onClick={onClose}
-            >
-              Configuración
-            </button>
-            <output className="cristal-demo-toast membrane-control">
-              Adaptación integrada
-            </output>
+            >{tr(" Configuración ")}</button>
+            <output className="cristal-demo-toast membrane-control">{tr(" Adaptación integrada ")}</output>
           </TabsContent>
         </Tabs>
       </DialogContent>

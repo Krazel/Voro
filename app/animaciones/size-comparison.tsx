@@ -1,5 +1,7 @@
 /* oxlint-disable jsx-a11y/no-noninteractive-tabindex -- The overflowing size table must be keyboard-scrollable. */
 'use client';
+import { t as tr } from '../language.mjs';
+
 import { useEffect, useRef, useState } from 'react';
 import { STAGES, STAGE_SPECIES, formatSize } from '../journey-data.mjs';
 import { animationCrop } from '../animation-catalog.mjs';
@@ -59,7 +61,7 @@ function SizePair({
       width={680}
       height={height}
       style={{ width: 680 * zoom, height: height * zoom }}
-      aria-label={`${s.name}: tamaño mínimo a la izquierda y máximo a la derecha`}
+      aria-label={tr(`${s.name}: tamaño mínimo a la izquierda y máximo a la derecha`)}
     />
   );
 }
@@ -81,25 +83,15 @@ export default function SizeComparison({
   const scale = comparisonScale(species);
   const ready = species.every((s) => images[s.imageAtlas || s.atlas]);
   return (
-    <section className="size-comparison" aria-label="Comparación de tamaños">
+    <section className="size-comparison" aria-label={tr("Comparación de tamaños")}>
       <div className="size-intro">
         <div>
-          <h2>{STAGES[stage].short}: del más pequeño al más grande</h2>
-          <p>
-            Los mínimos y máximos del juego, todos a la misma escala dentro de
-            este entorno. Cada especie tiene su propio rango; la Tierra y el
-            universo final son únicos y tienen tamaño fijo.
-          </p>
-          <p>Referencia de este entorno: {formatSize(stage, 8)}. Al cambiar de entorno
-            cambia la escala de la cámara, no el tamaño físico de los objetos.
-            Las medidas cósmicas son aproximaciones de juego.</p>
-          {stage >= 5 && <p>Planetas: kilómetros. Estrellas: cientos de miles de kilómetros.
-            Galaxias: miles de años luz. Sus ilustraciones se amplían por separado
-            para poder verlas; no representan el mismo tamaño.</p>}
+          <h2>{tr(STAGES[stage].short)}{tr(": del más pequeño al más grande")}</h2>
+          <p>{tr(" Los mínimos y máximos del juego, todos a la misma escala dentro de este entorno. Cada especie tiene su propio rango; la Tierra y el universo final son únicos y tienen tamaño fijo. ")}</p>
+          <p>{tr("Referencia de este entorno: ")}{tr(formatSize(stage, 8))}{tr(". Al cambiar de entorno cambia la escala de la cámara, no el tamaño físico de los objetos. Las medidas cósmicas son aproximaciones de juego.")}</p>
+          {tr(stage >= 5 && <p>{tr("Planetas: kilómetros. Estrellas: cientos de miles de kilómetros. Galaxias: miles de años luz. Sus ilustraciones se amplían por separado para poder verlas; no representan el mismo tamaño.")}</p>)}
         </div>
-        <label htmlFor="comparison-zoom">
-          Ampliación · {Math.round(zoom * 100)} %
-          <input
+        <label htmlFor="comparison-zoom">{tr(" Ampliación · ")}{tr(Math.round(zoom * 100))}{tr(" % ")}<input
             id="comparison-zoom"
             type="range"
             min="0.5"
@@ -110,31 +102,27 @@ export default function SizeComparison({
           />
         </label>
       </div>
-      {!ready ? (
+      {tr(!ready ? (
         <output className="size-loading">
-          {error ? (
+          {tr(error ? (
             <>
-              <span>No se han podido cargar las ilustraciones.</span>
-              <button onClick={() => location.reload()}>Reintentar</button>
+              <span>{tr("No se han podido cargar las ilustraciones.")}</span>
+              <button onClick={() => location.reload()}>{tr("Reintentar")}</button>
             </>
           ) : (
             'Cargando las ilustraciones…'
-          )}
+          ))}
         </output>
       ) : (
         <>
-          <p className="size-scroll-hint">
-            Desliza la tabla hacia los lados para comparar. La ampliación se
-            aplica a todos por igual.
-          </p>
+          <p className="size-scroll-hint">{tr(" Desliza la tabla hacia los lados para comparar. La ampliación se aplica a todos por igual. ")}</p>
           <section
             className="size-scroll"
             tabIndex={0}
-            aria-label="Tabla de tamaños, desplazable horizontalmente"
+            aria-label={tr("Tabla de tamaños, desplazable horizontalmente")}
           >
             <table className="size-table" style={{ width: 200 + 680 * zoom }}>
-              <caption>
-                Tamaños de {species.length} elementos de {STAGES[stage].short}
+              <caption>{tr(" Tamaños de ")}{tr(species.length)}{tr(" elementos de ")}{tr(STAGES[stage].short)}
               </caption>
               <colgroup>
                 <col style={{ width: 200 }} />
@@ -143,21 +131,21 @@ export default function SizeComparison({
               </colgroup>
               <thead>
                 <tr>
-                  <th scope="col">Habitante</th>
-                  <th scope="col">Mínimo</th>
-                  <th scope="col">Máximo</th>
+                  <th scope="col">{tr("Habitante")}</th>
+                  <th scope="col">{tr("Mínimo")}</th>
+                  <th scope="col">{tr("Máximo")}</th>
                 </tr>
               </thead>
-              {species.map((s) => {
+              {tr(species.map((s) => {
                 const range = sizeRange(s);
                 return (
                   <tbody key={s.id}>
                     <tr>
                       <th scope="rowgroup" rowSpan={2}>
                         <button onClick={() => onSelect(s.id)}>
-                          {s.name}
-                          {'sizeMeaning' in s && <span>{String(s.sizeMeaning)}</span>}
-                          <span>Ver animación →</span>
+                          {tr(s.name)}
+                          {tr('sizeMeaning' in s && <span>{tr(String(s.sizeMeaning))}</span>)}
+                          <span>{tr("Ver animación →")}</span>
                         </button>
                       </th>
                       <td colSpan={2} className="size-art">
@@ -170,16 +158,16 @@ export default function SizeComparison({
                       </td>
                     </tr>
                     <tr className="size-values">
-                      <td>{formatSize(stage, 8 * (range.min / 48) ** 2)}</td>
-                      <td>{formatSize(stage, 8 * (range.max / 48) ** 2)}</td>
+                      <td>{tr(formatSize(stage, 8 * (range.min / 48) ** 2))}</td>
+                      <td>{tr(formatSize(stage, 8 * (range.max / 48) ** 2))}</td>
                     </tr>
                   </tbody>
                 );
-              })}
+              }))}
             </table>
           </section>
         </>
-      )}
+      ))}
     </section>
   );
 }

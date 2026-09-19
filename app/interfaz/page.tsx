@@ -1,4 +1,7 @@
 'use client';
+import { t as tr } from '../language.mjs';
+import { useLanguage } from '../language-picker';
+
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import {
@@ -88,6 +91,7 @@ function Artwork({ id }: { id: string }) {
   );
 }
 export default function InterfaceStudio() {
+  useLanguage();
   const [look, setLook] = useState<Look>('abyss'),
     [scene, setScene] = useState<Scene>('adaptation');
   const [compare, setCompare] = useState(false),
@@ -138,25 +142,21 @@ export default function InterfaceStudio() {
       <header className="ui-studio-header">
         <Link href="/" className="ui-back">
           <ArrowLeft size={18} />
-          <span>Volver a VORO</span>
+          <span>{tr("Volver a VORO")}</span>
         </Link>
-        <span className="ui-lab-label">ESTUDIO DE INTERFAZ</span>
-        <Link href="/animaciones" className="ui-gallery-link">
-          Animaciones <ArrowRight size={16} />
+        <span className="ui-lab-label">{tr("ESTUDIO DE INTERFAZ")}</span>
+        <Link href="/animaciones" className="ui-gallery-link">{tr(" Animaciones ")}<ArrowRight size={16} />
         </Link>
       </header>
       <section className="ui-studio-intro">
         <div>
-          <p className="ui-kicker">TARJETAS, AVISOS Y MENÚS</p>
-          <h1>Tres diseños para VORO.</h1>
+          <p className="ui-kicker">{tr("TARJETAS, AVISOS Y MENÚS")}</p>
+          <h1>{tr("Tres diseños para VORO.")}</h1>
         </div>
-        <p>
-          Prueba las tarjetas y los avisos con el arte del juego. Esta vista no
-          modifica tu partida.
-        </p>
+        <p>{tr(" Prueba las tarjetas y los avisos con el arte del juego. Esta vista no modifica tu partida. ")}</p>
       </section>
-      <nav className="ui-look-picker" aria-label="Diseño de interfaz">
-        {LOOKS.map((l) => (
+      <nav className="ui-look-picker" aria-label={tr("Diseño de interfaz")}>
+        {tr(LOOKS.map((l) => (
           <button
             key={l.id}
             aria-pressed={look === l.id && !compare}
@@ -166,37 +166,36 @@ export default function InterfaceStudio() {
               setRound((n) => n + 1);
             }}
           >
-            <span>{l.number}</span>
-            <b>{l.name}</b>
+            <span>{tr(l.number)}</span>
+            <b>{tr(l.name)}</b>
             <small>
-              {l.id === 'abyss'
+              {tr(l.id === 'abyss'
                 ? 'Sutil y envolvente'
                 : l.id === 'core'
                   ? 'Visual y expresivo'
-                  : 'Claro y compacto'}
+                  : 'Claro y compacto')}
             </small>
           </button>
-        ))}
+        )))}
       </nav>
       <div className="ui-lab-toolbar">
-        <nav className="ui-events" aria-label="Aviso que quieres probar">
-          {SCENES.map((s) => (
+        <nav className="ui-events" aria-label={tr("Aviso que quieres probar")}>
+          {tr(SCENES.map((s) => (
             <button
               key={s.id}
               aria-pressed={scene === s.id}
               onClick={() => show(s.id)}
             >
-              {s.name}
+              {tr(s.name)}
             </button>
-          ))}
+          )))}
         </nav>
         <div className="ui-lab-options">
-          <label>
-            Fondo{' '}
+          <label>{tr(" Fondo")}{tr(' ')}
             <select value={biome} onChange={(e) => setBiome(e.target.value)}>
-              <option value="sea">Mar</option>
-              <option value="shore">Orilla</option>
-              <option value="space">Espacio</option>
+              <option value="sea">{tr("Mar")}</option>
+              <option value="shore">{tr("Orilla")}</option>
+              <option value="space">{tr("Espacio")}</option>
             </select>
           </label>
           <label className="ui-check">
@@ -204,29 +203,25 @@ export default function InterfaceStudio() {
               type="checkbox"
               checked={compare}
               onChange={(e) => setCompare(e.target.checked)}
-            />
-            Comparar los tres
-          </label>
+            />{tr(" Comparar los tres ")}</label>
           <button onClick={() => setRound((n) => n + 1)} className="ui-replay">
-            <RotateCcw size={15} />
-            Repetir entrada
-          </button>
+            <RotateCcw size={15} />{tr(" Repetir entrada ")}</button>
         </div>
       </div>
       <section
         className={'ui-previews ' + (compare ? 'ui-compare' : '')}
-        aria-label="Propuestas interactivas"
+        aria-label={tr("Propuestas interactivas")}
       >
-        {visible.map((style) => (
+        {tr(visible.map((style) => (
           <article className={'ui-example theme-' + style.id} key={style.id}>
             <div className="ui-example-title">
               <span>
-                {style.number} / {style.name}
+                {tr(style.number)}{tr(" / ")}{tr(style.name)}
               </span>
               <small>
-                {scene === 'acquired'
+                {tr(scene === 'acquired'
                   ? 'Mejora adquirida'
-                  : SCENES.find((s) => s.id === scene)?.name}
+                  : SCENES.find((s) => s.id === scene)?.name)}
               </small>
             </div>
             <div className={'ui-phone scene-' + scene}>
@@ -237,26 +232,25 @@ export default function InterfaceStudio() {
               />
               <div className="ui-world-shade" />
               <header className="ui-game-top">
-                <span className="ui-logo">
-                  VORO<small>ABISAL</small>
+                <span className="ui-logo">{tr(" VORO")}<small>{tr("ABISAL")}</small>
                 </span>
                 <div>
                   <button
-                    aria-label="Abrir ajustes de muestra"
+                    aria-label={tr("Abrir ajustes de muestra")}
                     onClick={() => show('settings')}
                   >
                     <Settings size={18} />
                   </button>
                   <button
                     aria-label={
-                      sound ? 'Silenciar muestra' : 'Activar sonido de muestra'
+                      tr(sound ? 'Silenciar muestra' : 'Activar sonido de muestra')
                     }
                     onClick={() => setSound(!sound)}
                   >
-                    {sound ? <Volume2 size={18} /> : <VolumeX size={18} />}
+                    {tr(sound ? <Volume2 size={18} /> : <VolumeX size={18} />)}
                   </button>
                   <button
-                    aria-label="Pausar muestra"
+                    aria-label={tr("Pausar muestra")}
                     onClick={() => show('pause')}
                   >
                     <Pause size={18} />
@@ -266,36 +260,35 @@ export default function InterfaceStudio() {
               <div className="ui-hud">
                 <div className="ui-size">
                   <b>
-                    {biome === 'space'
+                    {tr(biome === 'space'
                       ? '4.600 km'
                       : biome === 'shore'
                         ? '8 cm'
-                        : '1,8 m'}
+                        : '1,8 m')}
                   </b>
-                  <span>{biomeName}</span>
+                  <span>{tr(biomeName)}</span>
                 </div>
                 <div className="ui-meters">
                   <label>
-                    <span>Biomasa</span>
-                    <b>{mass.toFixed(1)} / 180</b>
+                    <span>{tr("Biomasa")}</span>
+                    <b>{tr(mass.toFixed(1))}{tr(" / 180")}</b>
                   </label>
                   <div className="ui-meter">
                     <i style={{ width: (mass / 180) * 100 + '%' }} />
                   </div>
                   <label>
-                    <span>Próxima adaptación</span>
-                    <b>{Math.round(xp)} %</b>
+                    <span>{tr("Próxima adaptación")}</span>
+                    <b>{tr(Math.round(xp))}{tr(" %")}</b>
                   </label>
                   <div className="ui-meter ui-xp">
                     <i style={{ width: xp + '%' }} />
                   </div>
                 </div>
               </div>
-              {['play', 'damage', 'caption'].includes(scene) && (
+              {tr(['play', 'damage', 'caption'].includes(scene) && (
                 <div className="ui-game-bottom">
                   <span>
-                    {biome === 'space' ? '07' : biome === 'shore' ? '03' : '04'}{' '}
-                    / 10 <b>{biomeName}</b>
+                    {tr(biome === 'space' ? '07' : biome === 'shore' ? '03' : '04')}{tr(' ')}{tr(" / 10 ")}<b>{tr(biomeName)}</b>
                   </span>
                   <button
                     className="ui-dash"
@@ -303,30 +296,25 @@ export default function InterfaceStudio() {
                     onClick={() => setDash(true)}
                   >
                     <ChevronsRight size={26} />
-                    <span>{dash ? 'Recargando…' : 'Impulso'}</span>
+                    <span>{tr(dash ? 'Recargando…' : 'Impulso')}</span>
                   </button>
                 </div>
-              )}
+              ))}
               <div key={scene + '-' + round} className="ui-scene">
-                {scene === 'adaptation' && (
+                {tr(scene === 'adaptation' && (
                   <div className="ui-overlay">
                     <section
                       className="ui-panel ui-adapt"
-                      aria-label="Elegir una adaptación"
+                      aria-label={tr("Elegir una adaptación")}
                     >
                       <p className="ui-eyebrow">
-                        <Sparkles size={14} /> ADAPTACIÓN 08
-                      </p>
-                      <h2>
-                        La vida encuentra
-                        <br />
-                        <em>otra forma.</em>
+                        <Sparkles size={14} />{tr(" ADAPTACIÓN 08 ")}</p>
+                      <h2>{tr(" La vida encuentra ")}<br />
+                        <em>{tr("otra forma.")}</em>
                       </h2>
-                      <p className="ui-panel-copy">
-                        Elige lo que crecerá contigo.
-                      </p>
+                      <p className="ui-panel-copy">{tr(" Elige lo que crecerá contigo. ")}</p>
                       <div className="ui-cards">
-                        {offer.map((id) => {
+                        {tr(offer.map((id) => {
                           const u = UPGRADES.find((u) => u.id === id)!,
                             count = counts[id] ?? 0;
                           return (
@@ -339,13 +327,13 @@ export default function InterfaceStudio() {
                               <Artwork id={id} />
                               <span className="ui-card-body">
                                 <span className="ui-card-meta">
-                                  {u.group}
+                                  {tr(u.group)}
                                   <small>
-                                    {count} / {u.max}
+                                    {tr(count)}{tr(" / ")}{tr(u.max)}
                                   </small>
                                 </span>
-                                <strong>{u.name}</strong>
-                                <span className="ui-effect">{u.detail}</span>
+                                <strong>{tr(u.name)}</strong>
+                                <span className="ui-effect">{tr(u.detail)}</span>
                               </span>
                               <ChevronRight
                                 className="ui-card-arrow"
@@ -353,62 +341,49 @@ export default function InterfaceStudio() {
                               />
                             </button>
                           );
-                        })}
+                        }))}
                       </div>
-                      <p className="ui-footnote">
-                        La partida espera a que elijas.
-                      </p>
+                      <p className="ui-footnote">{tr(" La partida espera a que elijas. ")}</p>
                     </section>
                   </div>
-                )}
-                {scene === 'acquired' && (
+                ))}
+                {tr(scene === 'acquired' && (
                   <div className="ui-overlay">
                     <section className="ui-panel ui-success">
                       <Artwork id={selected} />
                       <p className="ui-eyebrow">
-                        <Check size={15} /> ADAPTACIÓN INTEGRADA
-                      </p>
-                      <h2>{chosen.name}</h2>
-                      <p className="ui-panel-copy">{chosen.detail}</p>
+                        <Check size={15} />{tr(" ADAPTACIÓN INTEGRADA ")}</p>
+                      <h2>{tr(chosen.name)}</h2>
+                      <p className="ui-panel-copy">{tr(chosen.detail)}</p>
                       <p className="ui-count">
-                        {counts[selected]} de {chosen.max} adquiridas
-                      </p>
+                        {tr(counts[selected])}{tr(" de ")}{tr(chosen.max)}{tr(" adquiridas ")}</p>
                       <button
                         className="ui-primary"
                         onClick={() => show('play')}
-                      >
-                        Seguir creciendo <ArrowRight size={18} />
+                      >{tr(" Seguir creciendo ")}<ArrowRight size={18} />
                       </button>
                       <button
                         className="ui-text"
                         onClick={() => {
                           show('adaptation');
                         }}
-                      >
-                        Probar otra adaptación
-                      </button>
+                      >{tr(" Probar otra adaptación ")}</button>
                     </section>
                   </div>
-                )}
-                {scene === 'evolution' && (
+                ))}
+                {tr(scene === 'evolution' && (
                   <div className="ui-overlay ui-evolution">
                     <section className="ui-panel">
-                      <p className="ui-eyebrow">UNA NUEVA ESCALA</p>
+                      <p className="ui-eyebrow">{tr("UNA NUEVA ESCALA")}</p>
                       <div className="ui-route">
-                        <span>03 · ORILLA</span>
+                        <span>{tr("03 · ORILLA")}</span>
                         <ArrowRight size={22} />
-                        <b>04 · MAR</b>
+                        <b>{tr("04 · MAR")}</b>
                       </div>
-                      <h2>
-                        La marea
-                        <br />
-                        <em>te abre el camino.</em>
+                      <h2>{tr(" La marea ")}<br />
+                        <em>{tr("te abre el camino.")}</em>
                       </h2>
-                      <p className="ui-panel-copy">
-                        Lo que parecía inmenso
-                        <br />
-                        ahora cabe dentro de ti.
-                      </p>
+                      <p className="ui-panel-copy">{tr(" Lo que parecía inmenso ")}<br />{tr(" ahora cabe dentro de ti. ")}</p>
                       <div className="ui-evolution-line">
                         <i />
                       </div>
@@ -418,89 +393,77 @@ export default function InterfaceStudio() {
                           setBiome('sea');
                           show('play');
                         }}
-                      >
-                        Entrar en el mar <ArrowRight size={18} />
+                      >{tr(" Entrar en el mar ")}<ArrowRight size={18} />
                       </button>
                     </section>
                   </div>
-                )}
-                {scene === 'caption' && (
+                ))}
+                {tr(scene === 'caption' && (
                   <output className="ui-narrative">
-                    <span>ALGO HA CAMBIADO</span>
-                    <p>
-                      Ya no persigues la vida.
-                      <br />
-                      <em>La vida huye de ti.</em>
+                    <span>{tr("ALGO HA CAMBIADO")}</span>
+                    <p>{tr(" Ya no persigues la vida. ")}<br />
+                      <em>{tr("La vida huye de ti.")}</em>
                     </p>
-                    <button className="ui-text" onClick={() => show('play')}>
-                      Continuar <ArrowRight size={16} />
+                    <button className="ui-text" onClick={() => show('play')}>{tr(" Continuar ")}<ArrowRight size={16} />
                     </button>
                   </output>
-                )}
-                {scene === 'damage' && (
+                ))}
+                {tr(scene === 'damage' && (
                   <output className="ui-damage">
-                    <span>MEMBRANA HERIDA</span>
-                    <strong>−25 % de biomasa</strong>
-                    <p>También pierdes progreso de adaptación.</p>
-                    <small>Come tus fragmentos para recuperar biomasa.</small>
-                    <button className="ui-text" onClick={() => show('play')}>
-                      Continuar la muestra <ArrowRight size={15} />
+                    <span>{tr("MEMBRANA HERIDA")}</span>
+                    <strong>{tr("−25 % de biomasa")}</strong>
+                    <p>{tr("También pierdes progreso de adaptación.")}</p>
+                    <small>{tr("Come tus fragmentos para recuperar biomasa.")}</small>
+                    <button className="ui-text" onClick={() => show('play')}>{tr(" Continuar la muestra ")}<ArrowRight size={15} />
                     </button>
                   </output>
-                )}
-                {scene === 'pause' && (
+                ))}
+                {tr(scene === 'pause' && (
                   <div className="ui-overlay">
                     <section className="ui-panel ui-pause">
-                      <p className="ui-eyebrow">EN SUSPENSIÓN</p>
-                      <h2>Respira.</h2>
-                      <p className="ui-panel-copy">El mundo puede esperar.</p>
+                      <p className="ui-eyebrow">{tr("EN SUSPENSIÓN")}</p>
+                      <h2>{tr("Respira.")}</h2>
+                      <p className="ui-panel-copy">{tr("El mundo puede esperar.")}</p>
                       <div className="ui-summary">
                         <span>
-                          <b>8</b>adaptaciones
-                        </span>
+                          <b>{tr("8")}</b>{tr("adaptaciones ")}</span>
                         <span>
-                          <b>147</b>absorciones
-                        </span>
+                          <b>{tr("147")}</b>{tr("absorciones ")}</span>
                       </div>
                       <button
                         className="ui-primary"
                         onClick={() => show('play')}
-                      >
-                        Continuar <Play size={18} />
+                      >{tr(" Continuar ")}<Play size={18} />
                       </button>
                       <button
                         className="ui-secondary"
                         onClick={() => show('settings')}
-                      >
-                        Configuración <Settings size={17} />
+                      >{tr(" Configuración ")}<Settings size={17} />
                       </button>
                     </section>
                   </div>
-                )}
-                {scene === 'settings' && (
+                ))}
+                {tr(scene === 'settings' && (
                   <div className="ui-overlay">
                     <section className="ui-panel ui-settings">
                       <div className="ui-panel-top">
-                        <p className="ui-eyebrow">TU MUNDO</p>
+                        <p className="ui-eyebrow">{tr("TU MUNDO")}</p>
                         <button
-                          aria-label="Cerrar ajustes de muestra"
+                          aria-label={tr("Cerrar ajustes de muestra")}
                           className="ui-close"
                           onClick={() => show('play')}
                         >
                           <X size={19} />
                         </button>
                       </div>
-                      <h2>A tu ritmo.</h2>
-                      <p className="ui-panel-copy">
-                        Ajusta esta vista de prueba.
-                      </p>
+                      <h2>{tr("A tu ritmo.")}</h2>
+                      <p className="ui-panel-copy">{tr(" Ajusta esta vista de prueba. ")}</p>
                       <button
                         className="ui-setting"
                         aria-pressed={sound}
                         onClick={() => setSound(!sound)}
                       >
-                        <span>
-                          Sonido<small>Estado de muestra</small>
+                        <span>{tr(" Sonido")}<small>{tr("Estado de muestra")}</small>
                         </span>
                         <i className={sound ? 'on' : ''} />
                       </button>
@@ -509,8 +472,7 @@ export default function InterfaceStudio() {
                         aria-pressed={motion}
                         onClick={() => setMotion(!motion)}
                       >
-                        <span>
-                          Animaciones<small>Entradas y transiciones</small>
+                        <span>{tr(" Animaciones")}<small>{tr("Entradas y transiciones")}</small>
                         </span>
                         <i className={motion ? 'on' : ''} />
                       </button>
@@ -518,8 +480,7 @@ export default function InterfaceStudio() {
                         className="ui-setting"
                         onClick={() => show('adaptation')}
                       >
-                        <span>
-                          Tus adaptaciones<small>Ver tarjetas de muestra</small>
+                        <span>{tr(" Tus adaptaciones")}<small>{tr("Ver tarjetas de muestra")}</small>
                         </span>
                         <ChevronRight size={18} />
                       </button>
@@ -528,142 +489,115 @@ export default function InterfaceStudio() {
                         onClick={() => setConfirm(!confirm)}
                         aria-expanded={confirm}
                       >
-                        <span>
-                          Volver a nacer
-                          <small>Reinicia solo esta muestra</small>
+                        <span>{tr(" Volver a nacer ")}<small>{tr("Reinicia solo esta muestra")}</small>
                         </span>
                         <RotateCcw size={17} />
                       </button>
-                      {confirm && (
+                      {tr(confirm && (
                         <div className="ui-confirm">
-                          <p>¿Reiniciar las elecciones de esta muestra?</p>
-                          <button className="ui-primary" onClick={restart}>
-                            Reiniciar muestra
-                          </button>
+                          <p>{tr("¿Reiniciar las elecciones de esta muestra?")}</p>
+                          <button className="ui-primary" onClick={restart}>{tr(" Reiniciar muestra ")}</button>
                           <button
                             className="ui-text"
                             onClick={() => setConfirm(false)}
-                          >
-                            Cancelar
-                          </button>
+                          >{tr(" Cancelar ")}</button>
                         </div>
-                      )}
+                      ))}
                       <button
                         className="ui-primary"
                         onClick={() => show('play')}
-                      >
-                        Volver <ArrowRight size={18} />
+                      >{tr(" Volver ")}<ArrowRight size={18} />
                       </button>
                     </section>
                   </div>
-                )}
-                {scene === 'death' && (
+                ))}
+                {tr(scene === 'death' && (
                   <div className="ui-overlay">
                     <section className="ui-panel ui-death">
-                      <p className="ui-eyebrow">BIOMASA AGOTADA</p>
-                      <h2>
-                        La vida
-                        <br />
-                        <em>insiste.</em>
+                      <p className="ui-eyebrow">{tr("BIOMASA AGOTADA")}</p>
+                      <h2>{tr(" La vida ")}<br />
+                        <em>{tr("insiste.")}</em>
                       </h2>
-                      <p className="ui-panel-copy">
-                        Vuelves a ser pequeño.
-                        <br />
-                        Conservas tus adaptaciones.
-                      </p>
+                      <p className="ui-panel-copy">{tr(" Vuelves a ser pequeño. ")}<br />{tr(" Conservas tus adaptaciones. ")}</p>
                       <div className="ui-summary">
                         <span>
-                          <b>147</b>absorciones
-                        </span>
+                          <b>{tr("147")}</b>{tr("absorciones ")}</span>
                         <span>
-                          <b>8</b>adaptaciones
-                        </span>
+                          <b>{tr("8")}</b>{tr("adaptaciones ")}</span>
                       </div>
                       <button
                         className="ui-primary"
                         onClick={() => show('play')}
-                      >
-                        Volver a intentarlo <RotateCcw size={18} />
+                      >{tr(" Volver a intentarlo ")}<RotateCcw size={18} />
                       </button>
                     </section>
                   </div>
-                )}
-                {scene === 'ending' && (
+                ))}
+                {tr(scene === 'ending' && (
                   <div className="ui-overlay ui-ending">
                     <section className="ui-panel">
-                      <p className="ui-eyebrow">UNIVERSO ABSORBIDO</p>
-                      <h2>
-                        Todo estaba
-                        <br />
-                        <em>dentro de ti.</em>
+                      <p className="ui-eyebrow">{tr("UNIVERSO ABSORBIDO")}</p>
+                      <h2>{tr(" Todo estaba ")}<br />
+                        <em>{tr("dentro de ti.")}</em>
                       </h2>
-                      <p className="ui-panel-copy">
-                        De una única célula
-                        <br />
-                        al último punto de luz.
-                      </p>
-                      <p className="ui-ending-word">FIN</p>
+                      <p className="ui-panel-copy">{tr(" De una única célula ")}<br />{tr(" al último punto de luz. ")}</p>
+                      <p className="ui-ending-word">{tr("FIN")}</p>
                       <button
                         className="ui-primary"
                         onClick={() => show('settings')}
-                      >
-                        Ver tu recorrido <Sparkles size={18} />
+                      >{tr(" Ver tu recorrido ")}<Sparkles size={18} />
                       </button>
                     </section>
                   </div>
-                )}
+                ))}
               </div>
             </div>
-            <p className="ui-design-note">{style.description}</p>
+            <p className="ui-design-note">{tr(style.description)}</p>
           </article>
-        ))}
-        {!compare && (
+        )))}
+        {tr(!compare && (
           <aside className="ui-preview-notes">
             <p className="ui-kicker">
-              {current.number} / {current.name.toUpperCase()}
+              {tr(current.number)}{tr(" / ")}{tr(current.name.toUpperCase())}
             </p>
             <h2>
-              {current.id === 'abyss'
+              {tr(current.id === 'abyss'
                 ? 'Deja respirar al mundo.'
                 : current.id === 'core'
                   ? 'Cada elección tiene presencia.'
-                  : 'Todo, en su sitio.'}
+                  : 'Todo, en su sitio.')}
             </h2>
-            <p>{current.description}</p>
+            <p>{tr(current.description)}</p>
             <ul>
               <li>
-                {current.id === 'abyss'
+                {tr(current.id === 'abyss'
                   ? 'Tarjetas horizontales fáciles de comparar.'
                   : current.id === 'core'
                     ? 'Arte más grande en cada adaptación.'
-                    : 'Decisiones agrupadas en un panel inferior.'}
+                    : 'Decisiones agrupadas en un panel inferior.')}
               </li>
               <li>
-                {current.id === 'abyss'
+                {tr(current.id === 'abyss'
                   ? 'Frases libres sobre el paisaje.'
                   : current.id === 'core'
                     ? 'Títulos amplios y acentos cálidos.'
-                    : 'Datos alineados y textos directos.'}
+                    : 'Datos alineados y textos directos.')}
               </li>
-              <li>El mismo contenido y los mismos efectos.</li>
+              <li>{tr("El mismo contenido y los mismos efectos.")}</li>
             </ul>
             <button
               className="ui-notes-compare"
               onClick={() => setCompare(true)}
-            >
-              Ver los tres juntos <ArrowRight size={17} />
+            >{tr(" Ver los tres juntos ")}<ArrowRight size={17} />
             </button>
             <button className="ui-replay" onClick={restart}>
-              <RotateCcw size={15} />
-              Reiniciar muestra
-            </button>
+              <RotateCcw size={15} />{tr(" Reiniciar muestra ")}</button>
           </aside>
-        )}
+        ))}
       </section>
       <footer className="ui-lab-footer">
-        <span>Prototipos de interfaz · VORO</span>
-        <Link href="/">
-          Volver a mi partida <ArrowRight size={16} />
+        <span>{tr("Prototipos de interfaz · VORO")}</span>
+        <Link href="/">{tr(" Volver a mi partida ")}<ArrowRight size={16} />
         </Link>
       </footer>
     </main>

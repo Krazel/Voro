@@ -1,0 +1,22 @@
+[
+  {
+    "locale": "en-US",
+    "automatic": "en",
+    "errors": []
+  },
+  {
+    "locale": "es-ES",
+    "automatic": "es",
+    "errors": []
+  },
+  {
+    "locale": "es-MX",
+    "automatic": "es",
+    "errors": []
+  },
+  {
+    "locale": "fr-FR",
+    "automatic": "en",
+    "errors": []
+  }
+]

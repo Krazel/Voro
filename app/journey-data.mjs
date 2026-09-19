@@ -1,4 +1,5 @@
 import { EDIBLE_MATTER } from './edible-matter.mjs';
+import { getLanguage, t } from './language.mjs';
 import { applyScaleAudit } from './scale-audit.mjs';
 import { applyCityCosmosArt } from './city-cosmos-art.mjs';
 import { applyCosmicScales } from './cosmic-scales.mjs';
@@ -386,12 +387,12 @@ export const formatSize = (stage, mass) => {
     unit = 'cm';
   }
   return (
-    new Intl.NumberFormat('es', {
+    new Intl.NumberFormat(getLanguage(), {
       maximumFractionDigits: n < 10 ? 2 : 0,
       notation: n >= 1e7 ? 'compact' : 'standard',
     }).format(n) +
     ' ' +
-    unit
+    t(unit)
   );
 };
 export const isDanger = (s) =>

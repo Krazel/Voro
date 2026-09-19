@@ -1,4 +1,6 @@
 'use client';
+import { t as tr } from './language.mjs';
+
 import { useId, useEffect, useRef, type CSSProperties } from 'react';
 import { ChevronsUp, Shield, Sparkles } from 'lucide-react';
 import { UPGRADES, levelOf } from './mutations.mjs';
@@ -96,21 +98,21 @@ export function AdaptationChoices({ offer, mutations, onChoose, onProtagonist }:
       </g>
     </svg>
     <Protagonist connect={onProtagonist} />
-    {slots.map((id, index) => {
+    {tr(slots.map((id, index) => {
       const upgrade = UPGRADES.find((item) => item.id === id)!;
       const Symbol = symbols[index];
       return <div className={`adaptation-position adaptation-position-${index}`} key={`${index}-${id}`} style={{ '--arrival-delay': `${index * 110}ms`, color: upgradeColor(id) } as CSSProperties}>
-        <button type="button" className="adaptation-bubble" onClick={() => onChoose(id)} aria-label={`${upgrade.name}. ${upgrade.detail}. ${levelOf(mutations, id)} de ${upgrade.max} adquiridas`} data-upgrade={id}>
+        <button type="button" className="adaptation-bubble" onClick={() => onChoose(id)} aria-label={tr(`${upgrade.name}. ${upgrade.detail}. ${levelOf(mutations, id)} de ${upgrade.max} adquiridas`)} data-upgrade={id}>
           <Membrane index={index} />
           <span className="adaptation-copy">
             <span className="mutation-art" aria-hidden="true" style={{ backgroundPosition: `${(upgrade.artIndex % 5) * 25}% ${Math.floor(upgrade.artIndex / 5) * 50}%` }} />
-            <strong>{upgrade.name}</strong>
-            <small>{upgrade.detail}</small>
-            <span className="adaptation-level"><Symbol size={17} aria-hidden="true" />{levelOf(mutations, id)} / {upgrade.max}</span>
+            <strong>{tr(upgrade.name)}</strong>
+            <small>{tr(upgrade.detail)}</small>
+            <span className="adaptation-level"><Symbol size={17} aria-hidden="true" />{tr(levelOf(mutations, id))}{tr(" / ")}{tr(upgrade.max)}</span>
           </span>
         </button>
-        <span className="adaptation-intent" aria-hidden="true">{upgrade.group}</span>
+        <span className="adaptation-intent" aria-hidden="true">{tr(upgrade.group)}</span>
       </div>;
-    })}
+    }))}
   </div>;
 }

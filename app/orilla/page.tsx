@@ -1,4 +1,7 @@
 'use client';
+import { t as tr } from '../language.mjs';
+import { useLanguage } from '../language-picker';
+
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { CoastPreview, coastHabitat } from '../coast-preview.mjs';
@@ -6,6 +9,7 @@ import { BACKGROUND_ASSETS } from '../background-assets.mjs';
 import './orilla.css';
 
 export default function ShorePreview() {
+  useLanguage();
   const canvas = useRef<HTMLCanvasElement>(null);
   const controls = useRef({ auto: true, zoom: .75, waves: true, reset: 0 });
   const [auto, setAuto] = useState(true), [zoom, setZoom] = useState(.75);
@@ -46,14 +50,14 @@ export default function ShorePreview() {
     return () => { alive = false; cancelAnimationFrame(raf); observer.disconnect(); renderer?.destroy(); el.removeEventListener('pointerdown', down); el.removeEventListener('pointermove', move); el.removeEventListener('pointerup', up); el.removeEventListener('pointercancel', up); };
   }, [retry]);
   return <main className="coast-lab">
-    <canvas ref={canvas} aria-label="Prueba de costa continua. Arrastra para explorar la arena y el agua." />
-    <header className="coast-heading"><Link href="/">← Volver al juego</Link><h1>La orilla</h1><p>Arena, charcos y entrantes de mar · el mismo fondo de la partida</p></header>
-    {status && <output className="coast-loading">{status}{status.startsWith('No') && <button onClick={() => {setStatus('Preparando la costa…');setRetry(n => n + 1);}}>Reintentar</button>}</output>}
-    <section className="coast-controls" aria-label="Controles de la prueba">
-      <p>Arrastra para explorar. Tu partida está a salvo.</p>
-      <div className="coast-actions"><button aria-pressed={auto} onClick={() => setAuto(v => !v)}>{auto ? 'Pausar recorrido' : 'Recorrer costa'}</button><button onClick={() => {controls.current.reset++;}}>Volver al inicio</button><button aria-pressed={waves} onClick={() => setWaves(v => !v)}>Espuma {waves ? 'activada' : 'desactivada'}</button></div>
-      <label>Vista <input aria-label="Escala de la vista" type="range" min="0.3" max="1.4" step="0.05" value={zoom} onChange={e => setZoom(Number(e.target.value))} /><span>{Math.round(zoom * 100)} %</span></label>
-      <output>{metrics || 'Cargando…'}<small>Tiempo de dibujo en CPU; no incluye la GPU ni mide el juego completo.</small></output>
+    <canvas ref={canvas} aria-label={tr("Prueba de costa continua. Arrastra para explorar la arena y el agua.")} />
+    <header className="coast-heading"><Link href="/">{tr("← Volver al juego")}</Link><h1>{tr("La orilla")}</h1><p>{tr("Arena, charcos y entrantes de mar · el mismo fondo de la partida")}</p></header>
+    {tr(status && <output className="coast-loading">{tr(status)}{tr(status.startsWith('No') && <button onClick={() => {setStatus('Preparando la costa…');setRetry(n => n + 1);}}>{tr("Reintentar")}</button>)}</output>)}
+    <section className="coast-controls" aria-label={tr("Controles de la prueba")}>
+      <p>{tr("Arrastra para explorar. Tu partida está a salvo.")}</p>
+      <div className="coast-actions"><button aria-pressed={auto} onClick={() => setAuto(v => !v)}>{tr(auto ? 'Pausar recorrido' : 'Recorrer costa')}</button><button onClick={() => {controls.current.reset++;}}>{tr("Volver al inicio")}</button><button aria-pressed={waves} onClick={() => setWaves(v => !v)}>{tr("Espuma ")}{tr(waves ? 'activada' : 'desactivada')}</button></div>
+      <label>{tr("Vista ")}<input aria-label={tr("Escala de la vista")} type="range" min="0.3" max="1.4" step="0.05" value={zoom} onChange={e => setZoom(Number(e.target.value))} /><span>{tr(Math.round(zoom * 100))}{tr(" %")}</span></label>
+      <output>{tr(metrics || 'Cargando…')}<small>{tr("Tiempo de dibujo en CPU; no incluye la GPU ni mide el juego completo.")}</small></output>
     </section>
   </main>;
 }

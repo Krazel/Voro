@@ -1,0 +1,32 @@
+[
+  {
+    "locale": "en-US",
+    "width": 360,
+    "overflow": false
+  },
+  {
+    "locale": "en-US",
+    "width": 430,
+    "overflow": false
+  },
+  {
+    "locale": "en-US",
+    "width": 768,
+    "overflow": false
+  },
+  {
+    "locale": "es-ES",
+    "width": 360,
+    "overflow": false
+  },
+  {
+    "locale": "es-ES",
+    "width": 430,
+    "overflow": false
+  },
+  {
+    "locale": "es-ES",
+    "width": 768,
+    "overflow": false
+  }
+]

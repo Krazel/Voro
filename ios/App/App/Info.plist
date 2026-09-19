@@ -5,7 +5,9 @@
   <key>CAPACITOR_DEBUG</key>
 	<string>$(CAPACITOR_DEBUG)</string>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>es</string>
+	<string>en</string>
+	<key>CFBundleLocalizations</key>
+	<array><string>en</string><string>es</string></array>
 	<key>CFBundleDisplayName</key>
         <string>VORO</string>
 	<key>CFBundleExecutable</key>
