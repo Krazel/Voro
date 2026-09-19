@@ -50,8 +50,7 @@ for (let attempt=0; attempt<150; attempt++) {
 if (result?.data?.length !== 1) throw new Error(`Uploaded build ${version} (${buildNumber}) did not appear`);
 const build = result.data[0];
 if (build.attributes.processingState !== 'VALID') throw new Error(`Build processing state: ${build.attributes.processingState}`);
-const related = await api(`/v1/builds/${build.id}/betaGroups?fields[betaGroups]=name,isInternalGroup&limit=50`);
-if (!related.data.some(item=>item.id===groupId)) await api(`/v1/builds/${build.id}/relationships/betaGroups`,{
+await api(`/v1/builds/${build.id}/relationships/betaGroups`,{
   method:'POST',body:JSON.stringify({data:[{type:'betaGroups',id:groupId}]})
 });
 const verified = await api(`/v1/builds/${build.id}?include=preReleaseVersion,betaGroups,buildBetaDetail`);
