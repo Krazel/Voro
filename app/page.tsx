@@ -10,9 +10,10 @@ import { readLeftHanded, writeLeftHanded, subscribeControls, serverLeftHanded } 
 import Link from 'next/link';
 import { AdaptationChoices, CristalPreview } from './cristal-ui';
 import { ReviewMilestone } from './review-milestone';
+import { FinalSettings } from './final-settings';
 import './cristal.css';
 import './final-ui.css';
-import { readUiMode, writeUiMode } from './ui-mode.mjs';
+import { writeUiMode } from './ui-mode.mjs';
 import {
   X,
   Pause,
@@ -48,10 +49,15 @@ export default function Home() {
   const [settings, setSettings] = useState(false),
     [confirmReset, setConfirmReset] = useState(false);
   const [testPanel, setTestPanel] = useState(false);
-  const [uiMode,setUiMode]=useState('development');
+  const [uiMode,setUiMode]=useState('final');
   const finalUI=uiMode==='final';
   const [uiModeSaved,setUiModeSaved]=useState(true);
-  useEffect(()=>{setUiMode(readUiMode(window.localStorage));},[]);
+  useEffect(()=>{
+    const development = new URLSearchParams(window.location.search).get('ui') === 'development';
+    const mode = development ? 'development' : 'final';
+    setUiMode(mode);
+    if (!development) writeUiMode(window.localStorage, 'final');
+  },[]);
   const [zoomControls, setZoomControls] = useState(true);
   const [finalZoomControls,setFinalZoomControls]=useState(false);
   const showZoomControls=finalUI?finalZoomControls:zoomControls;
@@ -565,6 +571,20 @@ export default function Home() {
           className={'voro-settings cristal-dialog'+(finalUI?' final-ui':'')}
           showCloseButton={false}
         >
+          {finalUI && <FinalSettings
+            stage={state.stage}
+            complete={state.complete}
+            eaten={state.eaten}
+            elapsed={state.elapsed}
+            tilt={tilt}
+            leftHanded={leftHanded}
+            sound={state.sound}
+            testMode={state.testMode}
+            onMovement={selectMovement}
+            onLeftHanded={() => setControlsSaveError(!writeLeftHanded(!leftHanded))}
+            onSound={() => action('sound')}
+            onRestart={() => { resume.current = false; action('restart'); changeSettings(false); }}
+          />}
           <DialogClose className="settings-close icon-button" aria-label="Cerrar configuración"><X size={20}/></DialogClose>
           <p className="eyebrow">VORO · ABISAL</p>
           <DialogTitle>Configuración</DialogTitle>
