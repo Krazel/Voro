@@ -1,6 +1,7 @@
 
 import { t as tr } from './language.mjs';
 import { MusicPlayer, musicScene } from './music.mjs';
+import { SfxPlayer } from './sfx.mjs';
 import { captureOrbit, sweepPosition } from './orbital-sweep.mjs';
 import { UniverseFinale, FINALE_SECONDS, drawVoidSurvivor } from './universe-finale.mjs';
 import { WorldGround } from './world-ground.mjs';
@@ -327,6 +328,7 @@ export class VoroEngine {
   observer: ResizeObserver;
   lifecycle = new AbortController();
   music: MusicPlayer | null = null;
+  sfx: SfxPlayer | null = null;
   audioFocus = true;
   audio: AudioContext | null = null;
   master: GainNode | null = null;
@@ -625,9 +627,12 @@ export class VoroEngine {
       this.master.gain.value = this.sound ? 0.055 : 0;
       this.master.connect(this.audio.destination);
       this.music = new MusicPlayer(this.audio);
+      this.sfx = new SfxPlayer(this.audio, this.master);
+      this.sfx.unlock();
       this.syncMusic();
       this.audio.resume().catch(() => {});
     } catch {
+      this.sfx?.destroy();this.sfx=null;
       this.music?.destroy();this.music=null;
       this.audio?.close().catch(()=>{});this.audio = null;this.audioStarted=false;
     }
@@ -1336,7 +1341,6 @@ export class VoroEngine {
         if (levelOf(this.progress.mutations, 'combo') && this.comboMeals >= 3)
           this.comboClock = 4;
         this.burst(p.x, p.y, 7, true);
-        this.chime();
         this.wobbleVelocity += 0.7;
         this.floating.push({
           x: p.x,
@@ -1630,7 +1634,7 @@ export class VoroEngine {
     }
   }
   slurp() {
-    this.tone(180, 65, 0.3, 0.25);
+    if (this.sound) this.sfx?.playIngest();
   }
   impact() {
     this.tone(85, 28, 0.5, 0.9);
@@ -2420,6 +2424,7 @@ export class VoroEngine {
     this.lifecycle.abort();
     this.observer.disconnect();
     this.music?.destroy();
+    this.sfx?.destroy();
     this.audio?.close().catch(() => {});
   }
 }
