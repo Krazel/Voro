@@ -33,3 +33,5 @@ El barrido de cierre no concede biomasa ni XP adicionales: la meta de evolución
 La única expectativa antigua ajustada exige que en ciudad sigan existiendo objetivos grandes bloqueados, en vez de exigir mayoría de especies bloqueadas: los humanos armados pequeños ya son alimento válido. Se mantiene la comprobación de tamaño para toda absorción.
 
 Candidata ejecutable: artifact/city-orbit-preview-2026-09-19. Vista local: http://127.0.0.1:5192/. No se cambia versión pública, no hay push, IPA, TestFlight, publicación ni envío a revisión. La compilación y validación nativa iOS/StoreKit siguen pendientes. Siguiente paso: revisar esta candidata integrada y probar en dispositivo antes de una distribución autorizada por separado.
+
+Biblioteca: PR-009 revisión 60 guardada sobre 59 y releída; next registra ambas entregas y pendientes. tracking, versión/build, distribución, versión pública, releases, source y detail conservados y comparados. Código 4f362af; recibo library-verification.json.

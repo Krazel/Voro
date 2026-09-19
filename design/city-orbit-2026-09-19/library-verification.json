@@ -1,0 +1,17 @@
+{
+  "verified": true,
+  "preserved": [
+    "tracking",
+    "version",
+    "build",
+    "distribution",
+    "publicVersion",
+    "releases",
+    "source",
+    "detail"
+  ],
+  "id": "PR-009",
+  "next": "Entrega local 19-09, 4f362af, rama camera-framing-2026-09-19 (Voro-camera): humanos +62%, defensores absorbibles por tamaño, pocos coches sin armas; objetos sobre Tierra y absorción orbital visible de todos los restos. Conserva zoom uniforme/manual, selector, escudo único y StoreKit. 160 tests, tipos/lint/build y vídeo Chromium correctos; guardado/carga verificados. Evidencia design/city-orbit-2026-09-19/README.md y city-orbit-evidence.webm. Revisar http://127.0.0.1:5192/. Responsable 01a0b94a-4710-7570-b1bf-16a0fd5a9682. Pendiente iOS/StoreKit, EN/ES e IPA con 01a06eb1-17bb-74c1-b4a4-f88225d8e26d. Sin push, subida ni publicación. ASC: completar capturas y whatsNew cuando editable; precio/privacidad/soporte verificados, web v38 intacta. itch.io: ZIP en Draft, verificar descripción antes de publicar.",
+  "revision": 60,
+  "previousRevision": 59
+}
