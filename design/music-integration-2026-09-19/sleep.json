@@ -1,0 +1,36 @@
+{
+  "slug": "sleep",
+  "source": "https://www.scottbuckley.com.au/library/sleep/",
+  "author": "Scott Buckley",
+  "license": "CC BY 4.0",
+  "duration_seconds": 184.263,
+  "sha256": "575bd0de1a5299f65d8a96b64192464d33c2b583d51d8638e488cbe32134d956",
+  "original_sha256": "575bd0de1a5299f65d8a96b64192464d33c2b583d51d8638e488cbe32134d956",
+  "runtime_sha256": "85fb000507bfb59666e8c1f1b6eb963d5fecb52854f6517bb9249febc408b4d7",
+  "runtime_bytes": 3686506,
+  "original_loudness": {
+    "input_i": "-14.31",
+    "input_tp": "-1.06",
+    "input_lra": "9.80",
+    "input_thresh": "-24.64",
+    "output_i": "-21.87",
+    "output_tp": "-6.67",
+    "output_lra": "8.10",
+    "output_thresh": "-32.12",
+    "normalization_type": "dynamic",
+    "target_offset": "-1.13"
+  },
+  "runtime_loudness": {
+    "input_i": "-23.45",
+    "input_tp": "-9.92",
+    "input_lra": "9.80",
+    "input_thresh": "-33.73",
+    "output_i": "-21.87",
+    "output_tp": "-6.67",
+    "output_lra": "8.10",
+    "output_thresh": "-32.12",
+    "normalization_type": "dynamic",
+    "target_offset": "-1.13"
+  },
+  "processing": "Full composition; two-pass loudness -23 LUFS / -2 dBTP / LRA11; MP3 stereo44.1kHz160kbps; edge fades150/200ms; runtime crossfades4s."
+}

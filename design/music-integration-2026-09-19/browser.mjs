@@ -1,0 +1,11 @@
+import {chromium} from 'file:///C:/Users/dmkra/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs';
+import fs from 'node:fs';
+const b=await chromium.launch({channel:'chrome',headless:true});const p=await b.newPage();const errors=[];p.on('pageerror',e=>errors.push(e.message));
+await p.route('**/music-audit',r=>r.fulfill({contentType:'text/html',body:'<button id="start">Activar música</button>'}));await p.goto('http://127.0.0.1:5194/music-audit');
+await p.evaluate(async()=>{const {MusicPlayer}=await import('/@fs/C:/Users/dmkra/Documents/Codex Apps/Voro-camera/app/music.mjs');window.c=new AudioContext();window.m=new MusicPlayer(c);m.setState('micro',true);window.an=c.createAnalyser();m.bus.connect(an);document.querySelector('button').onclick=()=>m.unlock();});
+await p.getByRole('button').click();await p.waitForTimeout(2500);
+const sample=()=>p.evaluate(()=>{const a=new Float32Array(an.fftSize);an.getFloatTimeDomainData(a);return{track:m.current?.id,paused:m.current?.audio.paused,time:m.current?.audio.currentTime,state:c.state,blocked:m.blocked,signal:a.some(x=>Math.abs(x)>.00001),streams:m.decks.length};});const started=await sample();
+await p.evaluate(()=>m.setState('pond',true));await p.waitForTimeout(1200);const crossfade=await p.evaluate(()=>m.decks.map(d=>({id:d.id,paused:d.audio.paused})));await p.waitForTimeout(3500);const switched=await sample();
+await p.evaluate(()=>{m.current.audio.currentTime=m.current.audio.duration-4;m.tick()});await p.waitForTimeout(1400);const loop=await sample();
+await p.evaluate(()=>m.setState('pond',false));await p.waitForTimeout(250);const paused=await p.evaluate(()=>m.decks.every(d=>d.audio.paused));await p.evaluate(()=>m.setState('pond',true));await p.waitForTimeout(500);const resumed=await sample();await p.evaluate(()=>m.destroy());
+const result={started,crossfade,switched,loop,paused,resumed,errors};fs.writeFileSync('design/music-integration-2026-09-19/browser.json',JSON.stringify(result,null,2));console.log(result);await b.close();

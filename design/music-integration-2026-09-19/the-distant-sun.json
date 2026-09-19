@@ -1,0 +1,36 @@
+{
+  "slug": "the-distant-sun",
+  "source": "https://www.scottbuckley.com.au/library/the-distant-sun/",
+  "author": "Scott Buckley",
+  "license": "CC BY 4.0",
+  "duration_seconds": 224.376,
+  "sha256": "d36718692cbc0fddb36700dc754b90a5205495d3b89eb0b3ab8f4af0cbf6c57e",
+  "original_sha256": "d36718692cbc0fddb36700dc754b90a5205495d3b89eb0b3ab8f4af0cbf6c57e",
+  "runtime_sha256": "50521fd10ddc61a2905d35e5ee02d2906b309019147bcd99b0fb7c64d25b9db5",
+  "runtime_bytes": 4488987,
+  "original_loudness": {
+    "input_i": "-31.84",
+    "input_tp": "-15.74",
+    "input_lra": "12.30",
+    "input_thresh": "-42.18",
+    "output_i": "-21.91",
+    "output_tp": "-6.72",
+    "output_lra": "10.50",
+    "output_thresh": "-32.12",
+    "normalization_type": "dynamic",
+    "target_offset": "-1.09"
+  },
+  "runtime_loudness": {
+    "input_i": "-23.53",
+    "input_tp": "-5.58",
+    "input_lra": "10.60",
+    "input_thresh": "-33.75",
+    "output_i": "-22.97",
+    "output_tp": "-4.20",
+    "output_lra": "9.30",
+    "output_thresh": "-33.07",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.03"
+  },
+  "processing": "Full composition; two-pass loudness -23 LUFS / -2 dBTP / LRA11; MP3 stereo44.1kHz160kbps; edge fades150/200ms; runtime crossfades4s."
+}

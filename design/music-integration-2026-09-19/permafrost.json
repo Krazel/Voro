@@ -1,0 +1,36 @@
+{
+  "slug": "permafrost",
+  "source": "https://www.scottbuckley.com.au/library/permafrost/",
+  "author": "Scott Buckley",
+  "license": "CC BY 4.0",
+  "duration_seconds": 448.368,
+  "sha256": "9585b9825339e7bd421db06368695bab7bc726e98611c7e15cd7d4dfc0c539ab",
+  "original_sha256": "9585b9825339e7bd421db06368695bab7bc726e98611c7e15cd7d4dfc0c539ab",
+  "runtime_sha256": "7e6163dcf46dccd469f22f67b2f9edc71237d2a1052b1c7ba857762071c2cefb",
+  "runtime_bytes": 8968987,
+  "original_loudness": {
+    "input_i": "-14.77",
+    "input_tp": "-0.99",
+    "input_lra": "10.20",
+    "input_thresh": "-25.33",
+    "output_i": "-22.79",
+    "output_tp": "-8.22",
+    "output_lra": "9.60",
+    "output_thresh": "-33.10",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.21"
+  },
+  "runtime_loudness": {
+    "input_i": "-23.45",
+    "input_tp": "-9.64",
+    "input_lra": "10.10",
+    "input_thresh": "-33.97",
+    "output_i": "-22.79",
+    "output_tp": "-8.25",
+    "output_lra": "9.60",
+    "output_thresh": "-33.10",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.21"
+  },
+  "processing": "Full composition; two-pass loudness -23 LUFS / -2 dBTP / LRA11; MP3 stereo44.1kHz160kbps; edge fades150/200ms; runtime crossfades4s."
+}

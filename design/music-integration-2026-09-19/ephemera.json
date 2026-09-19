@@ -1,0 +1,36 @@
+{
+  "slug": "ephemera",
+  "source": "https://www.scottbuckley.com.au/library/ephemera/",
+  "author": "Scott Buckley",
+  "license": "CC BY 4.0",
+  "duration_seconds": 338.362,
+  "sha256": "e38cf3aea1a9fbcc9237cc21c8fc95cdc0fdcf5fc73fc45807b46775039e77c0",
+  "original_sha256": "e38cf3aea1a9fbcc9237cc21c8fc95cdc0fdcf5fc73fc45807b46775039e77c0",
+  "runtime_sha256": "d178f1707c31d036684fe8bda0adeb2d0743441811ba3ef5ca4509baacc5de98",
+  "runtime_bytes": 6768432,
+  "original_loudness": {
+    "input_i": "-14.32",
+    "input_tp": "-0.66",
+    "input_lra": "13.30",
+    "input_thresh": "-25.03",
+    "output_i": "-22.67",
+    "output_tp": "-4.97",
+    "output_lra": "9.70",
+    "output_thresh": "-32.83",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.33"
+  },
+  "runtime_loudness": {
+    "input_i": "-23.68",
+    "input_tp": "-8.41",
+    "input_lra": "10.10",
+    "input_thresh": "-34.05",
+    "output_i": "-22.95",
+    "output_tp": "-4.92",
+    "output_lra": "9.10",
+    "output_thresh": "-33.05",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.05"
+  },
+  "processing": "Full composition; two-pass loudness -23 LUFS / -2 dBTP / LRA11; MP3 stereo44.1kHz160kbps; edge fades150/200ms; runtime crossfades4s."
+}

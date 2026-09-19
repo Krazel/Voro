@@ -1,0 +1,36 @@
+{
+  "slug": "hiraeth",
+  "source": "https://www.scottbuckley.com.au/library/hiraeth/",
+  "author": "Scott Buckley",
+  "license": "CC BY 4.0",
+  "duration_seconds": 346.199,
+  "sha256": "f790c7d53b8d802981ff7cdd8c59e22cdfe103ea66aba296c6cf1a65fe7fcf01",
+  "original_sha256": "f790c7d53b8d802981ff7cdd8c59e22cdfe103ea66aba296c6cf1a65fe7fcf01",
+  "runtime_sha256": "97030bddc230779f68ea257f89b9c5a8a0f793b2e2d2352028d82c181381df1c",
+  "runtime_bytes": 6925167,
+  "original_loudness": {
+    "input_i": "-14.03",
+    "input_tp": "-0.92",
+    "input_lra": "9.20",
+    "input_thresh": "-24.36",
+    "output_i": "-22.42",
+    "output_tp": "-8.83",
+    "output_lra": "8.60",
+    "output_thresh": "-32.62",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.58"
+  },
+  "runtime_loudness": {
+    "input_i": "-23.44",
+    "input_tp": "-10.27",
+    "input_lra": "9.20",
+    "input_thresh": "-33.76",
+    "output_i": "-22.42",
+    "output_tp": "-8.77",
+    "output_lra": "8.60",
+    "output_thresh": "-32.61",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.58"
+  },
+  "processing": "Full composition; two-pass loudness -23 LUFS / -2 dBTP / LRA11; MP3 stereo44.1kHz160kbps; edge fades150/200ms; runtime crossfades4s."
+}

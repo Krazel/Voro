@@ -1,0 +1,36 @@
+{
+  "slug": "reverie",
+  "source": "https://www.scottbuckley.com.au/library/reverie/",
+  "author": "Scott Buckley",
+  "license": "CC BY 4.0",
+  "duration_seconds": 223.673,
+  "sha256": "ca1e7194d7d6f49127c77ff2f4011d07182525c826bb7ded3d3944e69ca678d2",
+  "original_sha256": "ca1e7194d7d6f49127c77ff2f4011d07182525c826bb7ded3d3944e69ca678d2",
+  "runtime_sha256": "b7b4cc65ab2fec59bc00b61dfa7fdda31ea09b09a7dcb457f98d59c562da3201",
+  "runtime_bytes": 4474881,
+  "original_loudness": {
+    "input_i": "-14.28",
+    "input_tp": "-1.01",
+    "input_lra": "4.70",
+    "input_thresh": "-24.54",
+    "output_i": "-22.93",
+    "output_tp": "-9.54",
+    "output_lra": "4.70",
+    "output_thresh": "-33.11",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.07"
+  },
+  "runtime_loudness": {
+    "input_i": "-23.45",
+    "input_tp": "-10.02",
+    "input_lra": "4.70",
+    "input_thresh": "-33.69",
+    "output_i": "-22.93",
+    "output_tp": "-9.42",
+    "output_lra": "4.80",
+    "output_thresh": "-33.12",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.07"
+  },
+  "processing": "Full composition; two-pass loudness -23 LUFS / -2 dBTP / LRA11; MP3 stereo44.1kHz160kbps; edge fades150/200ms; runtime crossfades4s."
+}

@@ -1,0 +1,36 @@
+{
+  "slug": "meanwhile",
+  "source": "https://www.scottbuckley.com.au/library/meanwhile/",
+  "author": "Scott Buckley",
+  "license": "CC BY 4.0",
+  "duration_seconds": 325.83,
+  "sha256": "39fd49bfb138bcee806fb99d8f2c9b7bf89fc72bb7b730125ef20f0c6b2635b7",
+  "original_sha256": "39fd49bfb138bcee806fb99d8f2c9b7bf89fc72bb7b730125ef20f0c6b2635b7",
+  "runtime_sha256": "502d20eb985a2f8b055c3ff8f36dee8363496432b9efbf5f4f28f090fc715bf4",
+  "runtime_bytes": 6518179,
+  "original_loudness": {
+    "input_i": "-14.81",
+    "input_tp": "-0.98",
+    "input_lra": "12.10",
+    "input_thresh": "-25.18",
+    "output_i": "-20.58",
+    "output_tp": "-4.69",
+    "output_lra": "8.00",
+    "output_thresh": "-30.74",
+    "normalization_type": "dynamic",
+    "target_offset": "-2.42"
+  },
+  "runtime_loudness": {
+    "input_i": "-23.47",
+    "input_tp": "-7.52",
+    "input_lra": "8.40",
+    "input_thresh": "-33.70",
+    "output_i": "-21.92",
+    "output_tp": "-4.17",
+    "output_lra": "7.20",
+    "output_thresh": "-32.05",
+    "normalization_type": "dynamic",
+    "target_offset": "-1.08"
+  },
+  "processing": "Full composition; two-pass loudness -23 LUFS / -2 dBTP / LRA11; MP3 stereo44.1kHz160kbps; edge fades150/200ms; runtime crossfades4s."
+}

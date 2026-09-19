@@ -1,0 +1,36 @@
+{
+  "slug": "shadows-and-dust",
+  "source": "https://www.scottbuckley.com.au/library/shadows-and-dust/",
+  "author": "Scott Buckley",
+  "license": "CC BY 4.0",
+  "duration_seconds": 408.38,
+  "sha256": "5ea11efb8df8df8c97f944973dee2203a7b44fa1dbc21026a80035d4619a4ae5",
+  "original_sha256": "5ea11efb8df8df8c97f944973dee2203a7b44fa1dbc21026a80035d4619a4ae5",
+  "runtime_sha256": "c9fee983ad60fa601db8a0e998f19c6d790dac4af1276cfc85db353bc7f4d54c",
+  "runtime_bytes": 8169118,
+  "original_loudness": {
+    "input_i": "-15.47",
+    "input_tp": "-1.06",
+    "input_lra": "10.00",
+    "input_thresh": "-25.93",
+    "output_i": "-22.41",
+    "output_tp": "-2.93",
+    "output_lra": "9.40",
+    "output_thresh": "-32.53",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.59"
+  },
+  "runtime_loudness": {
+    "input_i": "-23.44",
+    "input_tp": "-8.79",
+    "input_lra": "10.00",
+    "input_thresh": "-33.88",
+    "output_i": "-22.41",
+    "output_tp": "-2.92",
+    "output_lra": "9.40",
+    "output_thresh": "-32.54",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.59"
+  },
+  "processing": "Full composition; two-pass loudness -23 LUFS / -2 dBTP / LRA11; MP3 stereo44.1kHz160kbps; edge fades150/200ms; runtime crossfades4s."
+}

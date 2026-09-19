@@ -1,3 +1,4 @@
+import { MusicPlayer, musicScene } from './music.mjs';
 import { captureOrbit, sweepPosition } from './orbital-sweep.mjs';
 import { UniverseFinale, FINALE_SECONDS, drawVoidSurvivor } from './universe-finale.mjs';
 import { WorldGround } from './world-ground.mjs';
@@ -320,6 +321,8 @@ export class VoroEngine {
   } | null = null;
   observer: ResizeObserver;
   lifecycle = new AbortController();
+  music: MusicPlayer | null = null;
+  audioFocus = true;
   audio: AudioContext | null = null;
   master: GainNode | null = null;
   hint = '';
@@ -384,6 +387,10 @@ export class VoroEngine {
     this.observer = new ResizeObserver(() => this.resize());
     this.observer.observe(canvas);
     const opt = { signal: this.lifecycle.signal };
+    const unlockMusic = () => { if(this.sound) { this.initAudio(); this.syncMusic(); this.music?.unlock(); } };
+    window.addEventListener('pointerdown',unlockMusic,opt);
+    window.addEventListener('keydown',unlockMusic,opt);
+    window.addEventListener('focus',()=>{this.audioFocus=true;this.setAudio();},opt);
     canvas.parentElement?.addEventListener('contextmenu', (event) => event.preventDefault(), opt);
     canvas.parentElement?.addEventListener('dragstart', (event) => event.preventDefault(), opt);
     canvas.addEventListener(
@@ -477,6 +484,7 @@ export class VoroEngine {
     window.addEventListener(
       'blur',
       () => {
+        this.audioFocus=false; this.setAudio();
         this.tilt.read(false);
         this.save();
         this.keys.clear();
@@ -501,6 +509,7 @@ export class VoroEngine {
           this.setAudio();
           this.publish();
         }
+        this.setAudio();
         this.last = 0;
       },
       opt,
@@ -603,29 +612,23 @@ export class VoroEngine {
       this.master = this.audio.createGain();
       this.master.gain.value = this.sound ? 0.055 : 0;
       this.master.connect(this.audio.destination);
-      for (const f of [55, 82.41]) {
-        const osc = this.audio.createOscillator();
-        osc.type = 'sine';
-        osc.frequency.value = f;
-        const g = this.audio.createGain();
-        g.gain.value = 0.2;
-        osc.connect(g);
-        g.connect(this.master);
-        osc.start();
-      }
+      this.music = new MusicPlayer(this.audio);
+      this.syncMusic();
       this.audio.resume().catch(() => {});
     } catch {
-      this.audio = null;
+      this.music?.destroy();this.music=null;
+      this.audio?.close().catch(()=>{});this.audio = null;this.audioStarted=false;
     }
   }
+  syncMusic() {
+    this.music?.setState(musicScene(this.started,this.progress.completed,stageOf(this.progress).id),
+      this.sound && this.audioFocus && !document.hidden && !this.paused && !this.settingsOpen && !this.progress.offer.length && !this.life.dead, document.hidden || !this.audioFocus);
+  }
   setAudio() {
-    if (this.sound && !this.paused && (!this.progress.completed || this.ending > 0) && this.audio?.state === 'suspended')
-      this.audio.resume().catch(() => {});
-    if (this.progress.completed && this.ending === 0 && this.audio?.state === 'running')
-      this.audio.suspend().catch(() => {});
+    this.syncMusic();
     if (this.audio && this.master)
       this.master.gain.setTargetAtTime(
-        this.sound &&
+        this.sound && this.audioFocus && !document.hidden && !this.settingsOpen &&
           !this.paused &&
           !this.progress.offer.length &&
           (!this.progress.completed || this.ending > FINALE_SECONDS * .2)
@@ -1061,6 +1064,7 @@ export class VoroEngine {
   }
   frame = (stamp: number) => {
     if (this.destroyed) return;
+    this.syncMusic();
     if (!this.framePacer.accept(stamp)) {
       this.raf = requestAnimationFrame(this.frame);
       return;
@@ -2402,6 +2406,7 @@ export class VoroEngine {
     cancelAnimationFrame(this.raf);
     this.lifecycle.abort();
     this.observer.disconnect();
+    this.music?.destroy();
     this.audio?.close().catch(() => {});
   }
 }

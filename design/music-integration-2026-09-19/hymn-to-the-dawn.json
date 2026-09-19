@@ -1,0 +1,36 @@
+{
+  "slug": "hymn-to-the-dawn",
+  "source": "https://www.scottbuckley.com.au/library/hymn-to-the-dawn/",
+  "author": "Scott Buckley",
+  "license": "CC BY 4.0",
+  "duration_seconds": 418.341,
+  "sha256": "a7797ccc8cae700d9b0f07fc31e13424da00e406a154e308afe5d272c29aec6b",
+  "original_sha256": "a7797ccc8cae700d9b0f07fc31e13424da00e406a154e308afe5d272c29aec6b",
+  "runtime_sha256": "818aa4bd16331abd23f70f60523bb50aac332115726a2449fbd308a0679d66f6",
+  "runtime_bytes": 8368171,
+  "original_loudness": {
+    "input_i": "-14.27",
+    "input_tp": "-1.06",
+    "input_lra": "13.60",
+    "input_thresh": "-24.86",
+    "output_i": "-20.38",
+    "output_tp": "-6.31",
+    "output_lra": "7.20",
+    "output_thresh": "-30.63",
+    "normalization_type": "dynamic",
+    "target_offset": "-2.62"
+  },
+  "runtime_loudness": {
+    "input_i": "-23.48",
+    "input_tp": "-9.32",
+    "input_lra": "9.60",
+    "input_thresh": "-33.97",
+    "output_i": "-21.99",
+    "output_tp": "-6.84",
+    "output_lra": "8.00",
+    "output_thresh": "-32.21",
+    "normalization_type": "dynamic",
+    "target_offset": "-1.01"
+  },
+  "processing": "Full composition; two-pass loudness -23 LUFS / -2 dBTP / LRA11; MP3 stereo44.1kHz160kbps; edge fades150/200ms; runtime crossfades4s."
+}

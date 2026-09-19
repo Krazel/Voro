@@ -1,4 +1,5 @@
 'use client';
+import { MUSIC } from './music.mjs';
 import { finaleState } from './universe-finale.mjs';
 import { sharePerformanceFile } from './share-performance';
 import { RELEASE } from './release.mjs';
@@ -602,6 +603,13 @@ export default function Home() {
           >
             Sonido<span>{state.sound ? 'Activado' : 'Desactivado'}</span>
           </button>
+          <details className="music-credits">
+            <summary>Créditos musicales</summary>
+            <p>Música de Scott Buckley · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a></p>
+            <ul>{MUSIC.map(track=><li key={track.id}><a href={track.source} target="_blank" rel="noopener noreferrer">{track.title}</a> — Scott Buckley</li>)}</ul>
+            <p>Composiciones completas. Volumen normalizado, conversión MP3 y fundidos de entrada, salida y repetición. Sin recortes de secciones.</p>
+            <a href="https://www.scottbuckley.com.au/library/using-this-music/" target="_blank" rel="noopener noreferrer">Fuentes y condiciones del autor</a>
+          </details>
           <div className="micro-stat-row">
             <span>{state.eaten} absorciones</span>
             <span>{Math.floor(state.elapsed / 60)} min de vida</span>

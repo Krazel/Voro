@@ -1,0 +1,36 @@
+{
+  "slug": "cirrus",
+  "source": "https://www.scottbuckley.com.au/library/cirrus/",
+  "author": "Scott Buckley",
+  "license": "CC BY 4.0",
+  "duration_seconds": 418.38,
+  "sha256": "020b1e913bfc263cb9ce732fb277fa777afba5e755e7165023a559068171d04b",
+  "original_sha256": "020b1e913bfc263cb9ce732fb277fa777afba5e755e7165023a559068171d04b",
+  "runtime_sha256": "b1265b22fa559d5da1494c51ebe06630fab90dcc602e448490be8d52d82743f0",
+  "runtime_bytes": 8369216,
+  "original_loudness": {
+    "input_i": "-13.06",
+    "input_tp": "0.03",
+    "input_lra": "9.90",
+    "input_thresh": "-23.27",
+    "output_i": "-21.57",
+    "output_tp": "-7.80",
+    "output_lra": "7.90",
+    "output_thresh": "-31.69",
+    "normalization_type": "dynamic",
+    "target_offset": "-1.43"
+  },
+  "runtime_loudness": {
+    "input_i": "-23.44",
+    "input_tp": "-10.06",
+    "input_lra": "9.90",
+    "input_thresh": "-33.63",
+    "output_i": "-21.57",
+    "output_tp": "-7.73",
+    "output_lra": "7.90",
+    "output_thresh": "-31.70",
+    "normalization_type": "dynamic",
+    "target_offset": "-1.43"
+  },
+  "processing": "Full composition; two-pass loudness -23 LUFS / -2 dBTP / LRA11; MP3 stereo44.1kHz160kbps; edge fades150/200ms; runtime crossfades4s."
+}

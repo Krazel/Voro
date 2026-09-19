@@ -1,0 +1,50 @@
+{
+  "started": {
+    "track": "micro",
+    "paused": false,
+    "time": 2.496525,
+    "state": "running",
+    "blocked": false,
+    "signal": true,
+    "streams": 2
+  },
+  "crossfade": [
+    {
+      "id": "micro",
+      "paused": false
+    },
+    {
+      "id": "pond",
+      "paused": false
+    }
+  ],
+  "switched": {
+    "track": "pond",
+    "paused": false,
+    "time": 4.710748,
+    "state": "running",
+    "blocked": false,
+    "signal": true,
+    "streams": 2
+  },
+  "loop": {
+    "track": "pond",
+    "paused": false,
+    "time": 1.399002,
+    "state": "running",
+    "blocked": false,
+    "signal": true,
+    "streams": 2
+  },
+  "paused": true,
+  "resumed": {
+    "track": "pond",
+    "paused": false,
+    "time": 2.060771,
+    "state": "running",
+    "blocked": false,
+    "signal": true,
+    "streams": 2
+  },
+  "errors": []
+}

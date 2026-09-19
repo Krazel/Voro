@@ -1,0 +1,36 @@
+{
+  "slug": "life-in-silico",
+  "source": "https://www.scottbuckley.com.au/library/life-in-silico/",
+  "author": "Scott Buckley",
+  "license": "CC BY 4.0",
+  "duration_seconds": 236.314,
+  "sha256": "63c98d71edb0071e143fc68b529cedac43b3f3eb9ebf9737b9f701d610db8f86",
+  "original_sha256": "63c98d71edb0071e143fc68b529cedac43b3f3eb9ebf9737b9f701d610db8f86",
+  "runtime_sha256": "83451bc93822b5f80f8bac7a7c627a7fd53ddc105e5bb0d89c1098894d44b24d",
+  "runtime_bytes": 4727746,
+  "original_loudness": {
+    "input_i": "-14.09",
+    "input_tp": "-1.03",
+    "input_lra": "8.20",
+    "input_thresh": "-24.36",
+    "output_i": "-22.64",
+    "output_tp": "-8.52",
+    "output_lra": "8.20",
+    "output_thresh": "-32.81",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.36"
+  },
+  "runtime_loudness": {
+    "input_i": "-23.44",
+    "input_tp": "-10.09",
+    "input_lra": "8.10",
+    "input_thresh": "-33.70",
+    "output_i": "-22.63",
+    "output_tp": "-8.52",
+    "output_lra": "8.20",
+    "output_thresh": "-32.81",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.37"
+  },
+  "processing": "Full composition; two-pass loudness -23 LUFS / -2 dBTP / LRA11; MP3 stereo44.1kHz160kbps; edge fades150/200ms; runtime crossfades4s."
+}
