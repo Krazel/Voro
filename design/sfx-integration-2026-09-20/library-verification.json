@@ -1,0 +1,11 @@
+{
+  "projectId": "PR-009",
+  "revision": 93,
+  "updatedAt": "2026-09-19T23:45:48.084Z",
+  "candidateCommit": "007fe9f",
+  "version": "0.5",
+  "build": 2,
+  "testflight": "Interno",
+  "evidenceLinked": true,
+  "verifiedByReread": true
+}
