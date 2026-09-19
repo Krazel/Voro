@@ -14,3 +14,5 @@ La elección se recuerda en `localStorage`. Se verificó en Chromium el ciclo Un
 Validación: 174/174 pruebas, TypeScript y build móvil correctos. La prueba nueva comprueba la igualdad matemática en radios de entrada representativos, incluidos Agua y Órbita.
 
 No se ha subido una nueva build ni se ha publicado el juego.
+
+Biblioteca: ficha `PR-009`, revisión 89, guardada por API y releída. Se conservaron versión, build y estados de distribución. Recibo: `library-verification.json`.

@@ -1,0 +1,16 @@
+{
+  "detail": "Candidata local 9a3b525: velocidad visual uniforme entre entornos, con modo Clásica reversible y persistente en Configuración; mejoras, impulso y zoom manual intactos. 174 tests, TypeScript, build móvil y Chromium correctos. Incluye música/UI/B1 aprobada de la candidata previa. TestFlight interno permanece 0.5 (2), VALID e IN_BETA_TESTING en VORO Interno; QA físico pendiente. ASC 1.0 PREPARE_FOR_SUBMISSION; web v38 e itch Draft intactos.",
+  "next": "Revisar candidata 9a3b525 en iPhone/iPad: velocidad Uniforme/Clásica, nitidez, FPS Órbita, música y StoreKit. Evidencia: Voro-camera/design/visual-speed-2026-09-20/README.md. UI final reversible y membrana B1+10 tentáculos integradas; revisar visual/iPhone. PC horizontal sigue como propuesta, sin port autorizado. Música12 integrada con créditos/volumen/fundidos; escuchar en iPhone. SFXv2 seleccionados, variantes pendientes, sin integrar: .studio/audio-selection/voro/sfx/manifest.json. Tráiler revisable en .studio/marketing/voro/trailer-2026-09-19/README.md; cuatro iconos pendientes. Sin nueva subida, TestFlight externo, App Review, publicación ni anuncios.",
+  "verifiedAt": "2026-09-19T22:30:36.5553198Z",
+  "previousRevision": 88,
+  "tracking": {
+    "testflight": "Interno",
+    "appStore": "Creada en App Store Connect",
+    "ads": "Por confirmar",
+    "testflightUrl": "https://appstoreconnect.apple.com/teams/7f069118-9712-49c8-a1f0-fda00b62a281/apps/6809193565/testflight/groups/05db8744-bcf3-4c2d-a465-2635012bfeeb",
+    "appStoreUrl": "https://appstoreconnect.apple.com/apps/6809193565/distribution"
+  },
+  "verified": true,
+  "revision": 89,
+  "id": "PR-009"
+}
