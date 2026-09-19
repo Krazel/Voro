@@ -63,7 +63,7 @@ export const radiusForMass = (mass) =>
   48 * Math.sqrt(Math.max(0, mass) / INITIAL_MASS);
 export const sizeForMass = (mass) =>
   40 * Math.sqrt(Math.max(0, mass) / INITIAL_MASS);
-export function integrate(life, dt, input) {
+export function integrate(life, dt, input, movementScale = 1) {
   dt = clamp(dt, 0, 0.04);
   life.hurt = Math.max(0, life.hurt - dt * 1.7);
   life.feedPulse = Math.max(0, life.feedPulse - dt * 1.4);
@@ -86,6 +86,7 @@ export function integrate(life, dt, input) {
   const speed =
     (life.evolved ? 145 : 125) *
     life.speedFactor *
+    (Number.isFinite(movementScale) && movementScale > 0 ? movementScale : 1) *
     (life.boost > 0 ? life.boostStrength : 1);
   const blend = 1 - Math.exp(-dt * 4.4 * life.steeringFactor);
   life.vx +=

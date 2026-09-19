@@ -98,6 +98,7 @@ export default function Home() {
   const resume = useRef(false);
   const [state, setState] = useState<Snapshot>({
     zoomFactor: 1,
+    uniformVisualSpeed: true,
     testMode: false,
     stage: 0,
     stageName: STAGES[0].name,
@@ -579,6 +580,12 @@ export default function Home() {
             <p className="save-note">Pellizca con dos dedos para ajustar el zoom. En ordenador puedes usar la rueda o los botones. El ajuste se mantiene entre entornos durante esta sesión.</p>
           </div></details>
           {movementChoice}
+          <button className="settings-row"
+            aria-pressed={state.uniformVisualSpeed}
+            onClick={() => engine.current?.setUniformVisualSpeed(!state.uniformVisualSpeed)}>
+            Velocidad visual entre entornos<span>{state.uniformVisualSpeed ? 'Uniforme' : 'Clásica'}</span>
+          </button>
+          <p className="save-note">Uniforme compensa la escala de cada entorno. Clásica conserva el movimiento anterior.</p>
           {tilt && <button className="settings-row" onClick={() => { engine.current?.tilt.calibrate(); setTiltMessage('Posición centrada. Mantén el móvil cómodo al continuar.'); }}>Centrar inclinación<span>Recalibrar</span></button>}
           <button className="settings-row"
             aria-pressed={leftHanded}

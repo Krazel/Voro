@@ -7,6 +7,12 @@ export function gameplayZoom(radius = 0, entryRadius = 24) {
   if (!Number.isFinite(normalizedRadius) || normalizedRadius <= 42) return 1.12 * scale;
   return Math.max(0.78, 1.12 * (42 / normalizedRadius) ** 0.22) * scale;
 }
+// Keep automatic entry framing from changing perceived travel speed.
+// Manual zoom remains a visual preference and does not alter gameplay speed.
+export function visualSpeedFactor(entryRadius = 24) {
+  const zoom = gameplayZoom(entryRadius, entryRadius);
+  return Number.isFinite(zoom) && zoom > 0 ? 1.12 / zoom : 1;
+}
 export function zoomPreference(value) {
   return Number.isFinite(value) ? Math.max(.75, Math.min(1.75, value)) : 1;
 }

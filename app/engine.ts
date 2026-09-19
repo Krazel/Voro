@@ -39,7 +39,7 @@ import {
   animationCacheStats,
   retainAnimationSpecies,
 } from './inhabitant-animation.mjs';
-import { gameplayZoom, followGameplayZoom, zoomPreference } from './camera.mjs';
+import { gameplayZoom, followGameplayZoom, visualSpeedFactor, zoomPreference } from './camera.mjs';
 import { ZoomGesture, wheelZoom } from './zoom-gesture.mjs';
 import { FramePacer, RasterBudget, rasterRatio } from './render-budget.mjs';
 import {
@@ -71,6 +71,7 @@ import {
 
 export type Snapshot = {
   zoomFactor: number;
+  uniformVisualSpeed: boolean;
   performance?: ReturnType<FrameMonitor['summary']> & { loading: number; pending: number; cacheMB: number;
     recording: boolean; remaining: number; sheetErrors: number };
   testMode: boolean;
@@ -146,6 +147,7 @@ type Particle = {
   gold: boolean;
 };
 const TAU = Math.PI * 2;
+const VISUAL_SPEED_MODE = 'voro-visual-speed-v1';
 
 export class VoroEngine {
   canvas: HTMLCanvasElement;
@@ -193,6 +195,7 @@ export class VoroEngine {
   scale = 1;
   zoom = 1;
   zoomFactor = 1;
+  uniformVisualSpeed = true;
   zoomGesture = new ZoomGesture();
   framePacer = new FramePacer();
   rasterBudget = new RasterBudget();
@@ -354,6 +357,7 @@ export class VoroEngine {
     this.emit = emit;
     let restoredFragments: Food[] = [];
     try {
+      this.uniformVisualSpeed = localStorage.getItem(VISUAL_SPEED_MODE) !== 'classic';
       const loaded =
         loadJourney(localStorage.getItem(JOURNEY_SAVE)) ||
         migrateMicro(localStorage.getItem(MICRO_SAVE));
@@ -600,6 +604,12 @@ export class VoroEngine {
     this.pointer = null;
     this.renderDirty = true;
     if(!continuous)this.publish();
+  }
+  setUniformVisualSpeed(enabled: boolean) {
+    this.uniformVisualSpeed = enabled;
+    try { localStorage.setItem(VISUAL_SPEED_MODE, enabled ? 'uniform' : 'classic'); }
+    catch { /* The current-session choice still works without storage. */ }
+    this.publish();
   }
   initAudio() {
     if (this.audioStarted) {
@@ -971,6 +981,7 @@ export class VoroEngine {
     }
     this.emit({
       zoomFactor: this.zoomFactor,
+      uniformVisualSpeed: this.uniformVisualSpeed,
       performance: this.diagnosticsEnabled || this.diagnosticCompleted ? {
         ...(this.diagnosticSnapshot || this.frameMonitor.summary(this.diagnosticCompleted)),
         loading: this.assets.stats().loading + this.animationSheets.stats().pending,
@@ -1256,7 +1267,7 @@ export class VoroEngine {
       this.stats = upgradeStats(this.progress.mutations, this.comboClock > 0);
       Object.assign(p, this.stats);
       syncShields(this.progress, this.stats, dt);
-      integrate(p, dt, this.input());
+      integrate(p, dt, this.input(), this.uniformVisualSpeed ? visualSpeedFactor(this.cameraEntryRadius) : 1);
       if (stageOf(this.progress).id === 'orbit') constrainOrbit(p, dt);
       const speed = Math.hypot(p.vx, p.vy);
       if (speed > 8) {

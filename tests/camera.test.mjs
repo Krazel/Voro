@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { makeEngine } from './engine-fixture.mjs';
-import { gameplayZoom, followGameplayZoom } from '../app/camera.mjs';
+import { gameplayZoom, followGameplayZoom, visualSpeedFactor } from '../app/camera.mjs';
 test('Newborn framing is closer; growth opens smoothly without hiding body growth', () => {
   assert.equal(gameplayZoom(11), 1.12);
   assert.equal(gameplayZoom(24), 1.12);
@@ -43,4 +43,10 @@ test('Engine eases camera after growth, damage and the end of cinematics', () =>
   assert.equal(game.transition, 0);
   assert.ok(Math.abs(game.zoom - 0.7) < 0.01);
   game.destroy();
+});
+test('Visual speed compensation cancels every environment entry zoom', () => {
+  for (const radius of [11.384, 24, 43.037, 96]) {
+    const zoom = gameplayZoom(radius, radius);
+    assert.ok(Math.abs(125 * visualSpeedFactor(radius) * zoom - 140) < 0.001);
+  }
 });
