@@ -922,7 +922,7 @@ export class VoroEngine {
     }
     if (name === 'sound') {
       this.sound = !this.sound;
-      if (this.started) this.initAudio();
+      if (this.sound) {this.initAudio();this.syncMusic();this.music?.unlock();}
     }
     if (
       name === 'dash' &&
