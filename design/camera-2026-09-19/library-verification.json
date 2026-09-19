@@ -1,0 +1,17 @@
+{
+  "previousRevision": 56,
+  "id": "PR-009",
+  "verified": true,
+  "preserved": [
+    "tracking",
+    "version",
+    "build",
+    "distribution",
+    "publicVersion",
+    "releases",
+    "source",
+    "detail"
+  ],
+  "revision": 57,
+  "next": "Entrega local 19-09: encuadre uniforme en 10 entornos, zoom manual conservado; rama camera-framing-2026-09-19, commit f18149d, worktree Voro-camera. Integra 0.4.18 (github/main 1fbff49), selector/escudo único y StoreKit. 155 tests, 13 checks Chromium, tipos y build web correctos. Evidencia: Voro-camera/design/camera-2026-09-19/README.md y comparison.png. Revisar candidata local http://127.0.0.1:5192/; pendiente validación iOS/StoreKit, EN/ES e IPA por propietario 01a06eb1-17bb-74c1-b4a4-f88225d8e26d. Sin push, publicación ni nueva subida. Responsable cámara 01a0b94a-4710-7570-b1bf-16a0fd5a9682. ASC: completar capturas y whatsNew cuando editable; precio/privacidad/soporte verificados, web v38 intacta. itch.io: ZIP en Draft, verificar descripción actualizada antes de publicar."
+}

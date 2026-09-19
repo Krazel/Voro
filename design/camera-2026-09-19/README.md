@@ -25,3 +25,5 @@ Se conserva la curva de crecimiento relativo, suavizado, límites 75–175 %, ru
 - TypeScript sin errores; lint dirigido sin errores; [build Vite de producción](build.log) correcto. Permanece el aviso de bundle superior a 500 kB.
 
 Candidata ejecutable: artifact/camera-preview-2026-09-19 dentro de este worktree. Conserva versión 0.4.18 como base; no representa una nueva versión distribuida. Sin push, publicación Sites, IPA nueva, TestFlight ni envío a revisión. StoreKit requiere compilación y validación nativa iOS. Siguiente paso: revisar esta candidata integrada y validar en dispositivo antes de cualquier distribución autorizada por separado.
+
+Biblioteca: PR-009 revisión 57 guardada por API y releída; next actualizado con entrega y pendientes. tracking, versiones, distribución, releases, source y detail conservados y comparados. Recibo: library-verification.json. Código de la entrega: f18149d.
