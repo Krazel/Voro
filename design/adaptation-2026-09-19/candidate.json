@@ -1,0 +1,23 @@
+{
+  "candidate": "local 2026-09-19",
+  "publicVersionUnchanged": "v38 / TestFlight 0.4.18 (1)",
+  "bundle": "artifact/adaptation-preview-2026-09-19/assets/index-C3HX54fL.js",
+  "bundleSha256": "53566339d9911c7ee1db6564ef5624a4c3c541e73978af4f44290fc131403bb8",
+  "source": {
+    "app/adaptation-constellation.tsx": "43b1879f08f1cda240c5132370af536bd754c64c4a2f4e0d75234c35860ccec4",
+    "app/adaptation-constellation.css": "8bdcb7d185df74ce9bbf20d5b141edded3f6d2f323ae2fec9997d012aafe2f91",
+    "app/page.tsx": "6dff7658bb6108e5e4b796768a2a894cac2461b7800df9f996aed6a7693a4a37",
+    "app/cristal-ui.tsx": "15e91ffe00e9db22873881baabbcff2b3c1a6571de1b178093c239ae05a3670c",
+    "app/engine.ts": "e29cee5ad6d62aa2a772ad8f8c1127b6b42f50b5533d3dec48dc641a3a557009",
+    "app/mutations.mjs": "73aa5b2ead453146bc1164c1bc5b46d5900548b70ad31fb13f3e0dd7213767e9",
+    "app/journey-progress.mjs": "5ba1889d960d8c169f00b2270e357991c0c777c10d180f4249f78971decf66ad"
+  },
+  "checks": {
+    "node": 124,
+    "browser": 13,
+    "typescript": "pass",
+    "targetedLint": "pass",
+    "productionWebBuild": "pass"
+  },
+  "nativeBuildValidated": false
+}

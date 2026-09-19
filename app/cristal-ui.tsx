@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { Shuffle, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -8,49 +8,10 @@ import {
   DialogDescription,
 } from '@/components/ui/dialog';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
-import { UPGRADES, levelOf } from './mutations.mjs';
+import { UPGRADES } from './mutations.mjs';
 
-export function AdaptationChoices({
-  offer,
-  mutations,
-  onChoose,
-}: {
-  offer: string[];
-  mutations: string[];
-  onChoose: (id: string) => void;
-}) {
-  return (
-    <div className="mutation-choices cristal-choices">
-      {offer.map((id) => {
-        const upgrade = UPGRADES.find((item) => item.id === id)!;
-        return (
-          <button
-            className="membrane-control"
-            key={id}
-            onClick={() => onChoose(id)}
-          >
-            <span
-              className="mutation-art"
-              aria-hidden="true"
-              style={{
-                backgroundPosition: `${(upgrade.artIndex % 5) * 25}% ${Math.floor(upgrade.artIndex / 5) * 50}%`,
-              }}
-            />
-            <span className="cristal-choice-copy">
-              <strong>{upgrade.name}</strong>
-              <small>{upgrade.detail}</small>
-              <em
-                aria-label={`${levelOf(mutations, id)} de ${upgrade.max} adquiridas`}
-              >
-                {levelOf(mutations, id)} / {upgrade.max}
-              </em>
-            </span>
-          </button>
-        );
-      })}
-    </div>
-  );
-}
+export { AdaptationChoices } from './adaptation-constellation';
+import { AdaptationChoices } from './adaptation-constellation';
 
 export function CristalPreview({
   open,
@@ -59,9 +20,8 @@ export function CristalPreview({
   open: boolean;
   onClose: () => void;
 }) {
-  const [offer, setOffer] = useState(['reach', 'digest', 'tentacles']);
+  const offer = ['speed', 'digest', 'shield'];
   const [notice, setNotice] = useState('');
-  const [rerolled, setRerolled] = useState(false);
   return (
     <Dialog
       open={open}
@@ -106,18 +66,6 @@ export function CristalPreview({
                 setNotice(UPGRADES.find((u) => u.id === id)!.name)
               }
             />
-            <button
-              className="adaptation-reroll membrane-control"
-              disabled={rerolled}
-              onClick={() => {
-                setOffer(['yield', 'speed', 'dash']);
-                setRerolled(true);
-                setNotice('');
-              }}
-            >
-              <Shuffle size={16} />
-              {rerolled ? 'Cambio utilizado' : 'Otras opciones · 1 gratis'}
-            </button>
             {notice && (
               <output
                 key={notice}

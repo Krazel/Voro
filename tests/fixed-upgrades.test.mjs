@@ -64,35 +64,27 @@ test('Real damage removes the same fraction of unspent adaptation progress and p
   g.destroy();
 });
 
-test('Each shield selection grants one equal charge; timers and old saves survive reload', () => {
+test('Shield can be acquired once; consuming and reloading never unlocks it again', () => {
   const p = newJourney(12);
-  for (let i = 0; i < 2; i++) {
-    p.offer = ['shield'];
-    assert.ok(chooseUpgrade(p, 'shield'));
-    const stats = upgradeStats(p.mutations);
-    assert.equal(stats.shieldCooldown, 40);
-    assert.equal(p.shieldTimers.length, i + 1);
-  }
+  p.offer = ['shield'];
+  assert.ok(chooseUpgrade(p, 'shield'));
+  p.offer = ['shield']; // Even a stale or forged offer cannot grant a second one.
+  assert.equal(chooseUpgrade(p, 'shield'), false);
   const stats = upgradeStats(p.mutations);
+  assert.equal(stats.shieldCapacity, 1);
   assert.ok(consumeShield(p, stats));
   syncShields(p, stats, 5);
-  assert.ok(consumeShield(p, stats));
-  assert.deepEqual(p.shieldTimers, [35, 40]);
+  assert.deepEqual(p.shieldTimers, [35]);
   assert.equal(consumeShield(p, stats), false);
-  syncShields(p, stats, 35);
-  assert.ok(consumeShield(p, stats));
   const { game: g } = makeEngine();
-  g.progress = p;
-  const raw = saveJourney(p, g.life, g.world, true),
-    restored = loadJourney(raw);
-  assert.deepEqual(restored.progress.shieldTimers, p.shieldTimers);
-  const legacy = JSON.parse(raw);
-  delete legacy.progress.shieldTimers;
-  legacy.progress.shieldRecharge = 13;
-  assert.deepEqual(
-    loadJourney(JSON.stringify(legacy)).progress.shieldTimers,
-    [13, 13],
-  );
+  p.xp = journeyAdaptation(p.level);
+  const restored = loadJourney(saveJourney(p, g.life, g.world, true));
+  assert.deepEqual(restored.progress.shieldTimers, [35]);
+  assert.ok(!restored.progress.offer.includes('shield'));
+  syncShields(restored.progress, stats, 35);
+  assert.deepEqual(restored.progress.shieldTimers, [0]);
+  restored.progress.offer = ['shield'];
+  assert.equal(chooseUpgrade(restored.progress, 'shield'), false);
   g.destroy();
 });
 

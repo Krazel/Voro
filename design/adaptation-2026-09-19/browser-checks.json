@@ -1,0 +1,178 @@
+{
+  "date": "2026-09-19T10:45:33.195Z",
+  "browser": "153.0.8010.48",
+  "platform": "web Chromium; not a native iOS build",
+  "results": [
+    {
+      "check": "entry and continuous motion",
+      "before": "matrix(0.999991, 0.00418324, -0.00418324, 0.999991, 0, -5.17778)",
+      "after": "matrix(0.999975, 0.00700489, -0.00700489, 0.999975, 0, -6.30948)",
+      "passed": true
+    },
+    {
+      "check": "no skip on Escape or outside click",
+      "passed": true
+    },
+    {
+      "check": "choice 0",
+      "id": "pull",
+      "input": "pointer",
+      "passed": true
+    },
+    {
+      "check": "choice 1",
+      "id": "reach",
+      "input": "keyboard",
+      "passed": true
+    },
+    {
+      "check": "choice 2",
+      "id": "shield",
+      "input": "pointer",
+      "passed": true
+    },
+    {
+      "check": "reload preserves three choices",
+      "original": [
+        "pull",
+        "reach",
+        "shield"
+      ],
+      "passed": true
+    },
+    {
+      "check": "layout 320x568",
+      "layout": [
+        {
+          "x": 88.22720336914062,
+          "y": 178.4801788330078,
+          "w": 143.52996826171875,
+          "h": 143.5299835205078,
+          "scroll": 143,
+          "client": 143
+        },
+        {
+          "x": 13.386621475219727,
+          "y": 381.41729736328125,
+          "w": 144.30487060546875,
+          "h": 144.30487060546875,
+          "scroll": 143,
+          "client": 143
+        },
+        {
+          "x": 162.49476623535156,
+          "y": 387.458984375,
+          "w": 143.93235778808594,
+          "h": 143.932373046875,
+          "scroll": 143,
+          "client": 143
+        }
+      ],
+      "passed": true
+    },
+    {
+      "check": "layout 390x844",
+      "layout": [
+        {
+          "x": 105.69412231445312,
+          "y": 256.560546875,
+          "w": 178.58050537109375,
+          "h": 178.58047485351562,
+          "scroll": 177,
+          "client": 177
+        },
+        {
+          "x": 13.831737518310547,
+          "y": 516.890380859375,
+          "w": 177.71151733398438,
+          "h": 177.7115478515625,
+          "scroll": 177,
+          "client": 177
+        },
+        {
+          "x": 197.88653564453125,
+          "y": 520.4354858398438,
+          "w": 178.8519287109375,
+          "h": 178.8519287109375,
+          "scroll": 177,
+          "client": 177
+        }
+      ],
+      "passed": true
+    },
+    {
+      "check": "layout 768x1024",
+      "layout": [
+        {
+          "x": 242.28897094726562,
+          "y": 222.654052734375,
+          "w": 283.3908386230469,
+          "h": 283.39080810546875,
+          "scroll": 281,
+          "client": 281
+        },
+        {
+          "x": 95.90081787109375,
+          "y": 637.805908203125,
+          "w": 283.4483642578125,
+          "h": 283.4483642578125,
+          "scroll": 281,
+          "client": 281
+        },
+        {
+          "x": 389.7138977050781,
+          "y": 635.61865234375,
+          "w": 281.3222351074219,
+          "h": 281.322265625,
+          "scroll": 281,
+          "client": 281
+        }
+      ],
+      "passed": true
+    },
+    {
+      "check": "layout 932x430",
+      "layout": [
+        {
+          "x": 370.28631591796875,
+          "y": 169.06207275390625,
+          "w": 191.3961181640625,
+          "h": 191.3961181640625,
+          "scroll": 191,
+          "client": 191
+        },
+        {
+          "x": 270.33367919921875,
+          "y": 448.59356689453125,
+          "w": 192.4263916015625,
+          "h": 192.4263916015625,
+          "scroll": 191,
+          "client": 191
+        },
+        {
+          "x": 469.11846923828125,
+          "y": 442.3446350097656,
+          "w": 192.6693115234375,
+          "h": 192.66934204101562,
+          "scroll": 191,
+          "client": 191
+        }
+      ],
+      "passed": true
+    },
+    {
+      "check": "reduced motion",
+      "animations": 0,
+      "passed": true
+    },
+    {
+      "check": "final 1 types fill three capped choices",
+      "passed": true
+    },
+    {
+      "check": "final 2 types fill three capped choices",
+      "passed": true
+    }
+  ],
+  "errors": []
+}

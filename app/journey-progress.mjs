@@ -11,7 +11,6 @@ import {
   nextAdaptation,
   previousJourneyAdaptation,
   v3JourneyAdaptation,
-  eligibleUpgrade,
   boundedUpgrades,
 } from './mutations.mjs';
 import {
@@ -30,6 +29,7 @@ export function newJourney(seed) {
     stage: 0,
     adaptationVersion: 4,
     upgradeLimitsVersion: 1,
+    shieldChoiceVersion: 1,
     journeyVersion: 2,
     rerollUsed: false,
     completed: false,
@@ -134,7 +134,7 @@ export function loadJourney(raw) {
       return null;
     if (
       !Array.isArray(p.mutations) ||
-      p.mutations.length > Math.max(45, MAX_UPGRADE_CHOICES) ||
+      p.mutations.length > Math.max(45, MAX_UPGRADE_CHOICES + (p.shieldChoiceVersion === 1 ? 0 : 3)) ||
       p.level !== p.mutations.length ||
       p.mutations.some(
         (id) =>
@@ -145,11 +145,17 @@ export function loadJourney(raw) {
       UPGRADES.some(
         (u) =>
           levelOf(p.mutations, u.id) >
-          (p.upgradeLimitsVersion === 1 ? u.max : Math.max(3, u.max)),
+          (u.id === 'shield'
+            ? (p.shieldChoiceVersion === 1 ? 1 : 4)
+            : p.upgradeLimitsVersion === 1 ? u.max : Math.max(3, u.max)),
       )
     )
       return null;
     const mutations = boundedUpgrades(p.mutations);
+    // Historical repeated shields become one charge. Preserve the soonest
+    // available charge; the existing XP refund below restores excess choices.
+    const oldShields = restoreShieldTimers(p, levelOf(p.mutations, 'shield'));
+    const shieldTimers = oldShields.length ? [Math.min(...oldShields)] : [];
     const progress = {
       ...newJourney(p.seed),
       stage,
@@ -164,11 +170,8 @@ export function loadJourney(raw) {
       deaths: p.deaths,
       totalEaten: p.totalEaten,
       totalTime: p.totalTime,
-      shieldRecharge: clamp(p.shieldRecharge, 0, SHIELD_RECHARGE),
-      shieldTimers: restoreShieldTimers(
-        p,
-        upgradeStats(mutations).shieldCapacity,
-      ),
+      shieldRecharge: shieldTimers[0] ?? clamp(p.shieldRecharge, 0, SHIELD_RECHARGE),
+      shieldTimers,
       maturitySeen: p.maturitySeen === true,
       earthConsumed: p.earthConsumed === true && stage >= STAGES.findIndex(s => s.id === 'orbit'),
       pendingEvolution:
@@ -296,22 +299,10 @@ export function refreshOffer(p) {
   }
   return p.offer;
 }
-export function canReroll(p) {
-  return (
-    !p.completed &&
-    !p.rerollUsed &&
-    p.offer.length > 0 &&
-    UPGRADES.some(
-      (u) => eligibleUpgrade(p.mutations, u) && !p.offer.includes(u.id),
-    )
-  );
-}
-export function rerollAdaptation(p) {
-  if (!canReroll(p)) return false;
-  p.offer = offerUpgrades(p.mutations, p.seed, p.level, p.offer);
-  p.rerollUsed = true;
-  return true;
-}
+// Kept as inert compatibility exports for old integrations. Saved rerollUsed
+// remains readable so loading a legacy pending offer never changes its choices.
+export function canReroll() { return false; }
+export function rerollAdaptation() { return false; }
 export function chooseUpgrade(p, id) {
   if (!validChoice(p.mutations, id, p.offer)) return false;
   p.mutations.push(id);

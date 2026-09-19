@@ -76,8 +76,8 @@ export const UPGRADES = [
   {
     id: 'shield',
     name: 'Escudo gelatinoso',
-    detail: '+1 escudo que bloquea un golpe y se recarga en 40 s',
-    max: 4,
+    detail: 'Bloquea un golpe. Recarga en 40 s.',
+    max: 1,
     group: 'Defenderse',
   },
   {

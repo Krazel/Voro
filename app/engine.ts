@@ -59,8 +59,6 @@ import {
   journeyLife,
   refreshOffer,
   chooseUpgrade,
-  rerollAdaptation,
-  canReroll,
   saveJourney,
   loadJourney,
   migrateMicro,
@@ -82,8 +80,6 @@ export type Snapshot = {
   assetError: boolean;
   mutations: string[];
   offer: string[];
-  canReroll: boolean;
-  rerollUsed: boolean;
   level: number;
   adaptation: number;
   adaptationStart: number;
@@ -805,19 +801,6 @@ export class VoroEngine {
     this.syncStageAssets();
     return this.assets.ready(this.progress.stage);
   }
-  reroll() {
-    if (
-      !this.started ||
-      this.life.dead ||
-      this.settingsOpen ||
-      !rerollAdaptation(this.progress)
-    )
-      return;
-    this.keys.clear();
-    this.pointer = null;
-    this.save();
-    this.publish();
-  }
   choose(id: string) {
     if (this.life.dead || !chooseUpgrade(this.progress, id)) return;
     this.stats = upgradeStats(this.progress.mutations, this.comboClock > 0);
@@ -976,8 +959,6 @@ export class VoroEngine {
       assetError: this.assets.failed(this.progress.stage),
       mutations: [...this.progress.mutations],
       offer: [...this.progress.offer],
-      canReroll: canReroll(this.progress),
-      rerollUsed: this.progress.rerollUsed,
       level: this.progress.level,
       adaptation: this.progress.xp,
       adaptationStart: this.progress.level

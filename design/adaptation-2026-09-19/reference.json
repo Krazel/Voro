@@ -1,0 +1,14 @@
+{
+  "screen": "Selección de adaptaciones",
+  "reference": "../approved/adaptations/reference-2026-09-19.png",
+  "original": "C:/Users/dmkra/Documents/Codex Apps/Voro_Music/7e9e99f5-97d0-43ea-a365-4ae0e97aaa7f.png",
+  "sha256": "4b85b23b5ce5dbdf9afe7af1f403242e777c996556e2151b8c431014f94285d7",
+  "date": "2026-09-19",
+  "language": "es",
+  "referenceDimensions": [
+    941,
+    1672
+  ],
+  "implementationEvidence": "mobile-430.png",
+  "approval": "Referencia indicada expresamente en el encargo. Se elimina Omitir y no se cambian los efectos del juego por los porcentajes ilustrativos de la referencia."
+}

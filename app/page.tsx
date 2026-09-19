@@ -8,12 +8,12 @@ import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } fr
 import { readLeftHanded, writeLeftHanded, subscribeControls, serverLeftHanded } from './control-preferences';
 import Link from 'next/link';
 import { AdaptationChoices, CristalPreview } from './cristal-ui';
+import { ReviewMilestone } from './review-milestone';
 import './cristal.css';
 import {
   Pause,
   Play,
   RotateCcw,
-  Shuffle,
   Volume2,
   VolumeX,
   ArrowUpRight,
@@ -31,7 +31,6 @@ import {
 } from '@/components/ui/dialog';
 import { VoroEngine, type Snapshot } from './engine';
 import { UPGRADES, levelOf, MAX_UPGRADE_CHOICES } from './mutations.mjs';
-import { adaptationCaption } from './journey-captions.mjs';
 import {
   STAGES,
   STAGE_SPECIES,
@@ -98,8 +97,6 @@ export default function Home() {
     assetError: false,
     mutations: [],
     offer: [],
-    canReroll: false,
-    rerollUsed: false,
     level: 0,
     adaptation: 0,
     adaptationStart: 0,
@@ -514,37 +511,20 @@ export default function Home() {
         onOpenChange={() => {}}
       >
         <DialogContent
-          className="micro-upgrade-dialog cristal-dialog"
+          className="micro-upgrade-dialog cristal-dialog adaptation-dialog"
           showCloseButton={false}
         >
-          <p className="cristal-wordmark">VORO</p>
-          <p className="eyebrow">ADAPTACIÓN {state.level + 1}</p>
-          <DialogTitle style={{ whiteSpace: 'pre-line' }}>
-            {adaptationCaption(STAGES[state.stage].id, state.level)}
-          </DialogTitle>
-          <DialogDescription>Elige una adaptación</DialogDescription>
+          <p className="adaptation-count">ADAPTACIÓN {state.level + 1}</p>
+          <div className="adaptation-heading">
+            <DialogTitle>Adaptación emergente</DialogTitle>
+            <DialogDescription>El tiempo se detiene. Elige tu evolución.</DialogDescription>
+          </div>
           <AdaptationChoices
+            key={state.level}
             offer={state.offer}
             mutations={state.mutations}
             onChoose={(id) => engine.current?.choose(id)}
           />
-          <button
-            className="adaptation-reroll membrane-control"
-            disabled={!state.canReroll}
-            onClick={() => engine.current?.reroll()}
-          >
-            <Shuffle size={17} />
-            <span>
-              {state.rerollUsed
-                ? 'Cambio utilizado'
-                : state.canReroll
-                  ? 'Otras opciones · 1 gratis'
-                  : 'No quedan otras opciones'}
-            </span>
-          </button>
-          <span className="short-note">
-            El tiempo se detiene mientras eliges.
-          </span>
         </DialogContent>
       </Dialog>}
       {uiPreview && <CristalPreview
@@ -848,6 +828,7 @@ export default function Home() {
           </DialogClose>
         </DialogContent>
       </Dialog>}
+      <ReviewMilestone state={state} blocked={settings || testPanel || uiPreview || state.birth > 0 || finale} />
       {!finale && <aside className="desktop-note">
         <span>
           {String(state.stage + 1).padStart(2, '0')} —{' '}

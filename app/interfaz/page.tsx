@@ -11,7 +11,6 @@ import {
   Play,
   RotateCcw,
   Settings,
-  Shuffle,
   Sparkles,
   Volume2,
   VolumeX,
@@ -67,8 +66,7 @@ const SCENES: { id: Scene; name: string }[] = [
   { id: 'ending', name: 'Final' },
   { id: 'play', name: 'En juego' },
 ];
-const FIRST = ['reach', 'digest', 'tentacles'],
-  SECOND = ['speed', 'recycle', 'shield'];
+const FIRST = ['reach', 'digest', 'tentacles'];
 const INITIAL: Record<string, number> = {
   reach: 1,
   digest: 2,
@@ -95,7 +93,6 @@ export default function InterfaceStudio() {
   const [compare, setCompare] = useState(false),
     [biome, setBiome] = useState('sea');
   const [round, setRound] = useState(0),
-    [rerolled, setRerolled] = useState(false),
     [counts, setCounts] = useState(INITIAL);
   const [selected, setSelected] = useState('reach'),
     [sound, setSound] = useState(true),
@@ -114,7 +111,6 @@ export default function InterfaceStudio() {
   }
   function restart() {
     setCounts({ ...INITIAL });
-    setRerolled(false);
     setDash(false);
     show('adaptation');
   }
@@ -129,7 +125,7 @@ export default function InterfaceStudio() {
     }));
     show('acquired');
   }
-  const offer = rerolled ? SECOND : FIRST;
+  const offer = FIRST;
   const chosen = UPGRADES.find((u) => u.id === selected)!;
   const current = LOOKS.find((l) => l.id === look)!;
   const visible = compare ? LOOKS : LOOKS.filter((l) => l.id === look);
@@ -359,20 +355,6 @@ export default function InterfaceStudio() {
                           );
                         })}
                       </div>
-                      <button
-                        className="ui-reroll"
-                        disabled={rerolled}
-                        onClick={() => {
-                          setRerolled(true);
-                          setRound((n) => n + 1);
-                        }}
-                      >
-                        <Shuffle size={16} />
-                        {rerolled
-                          ? 'Cambio de opciones usado'
-                          : 'Otras opciones'}
-                        <span>{rerolled ? '0 / 1' : '1 gratis'}</span>
-                      </button>
                       <p className="ui-footnote">
                         La partida espera a que elijas.
                       </p>
@@ -400,7 +382,6 @@ export default function InterfaceStudio() {
                       <button
                         className="ui-text"
                         onClick={() => {
-                          setRerolled(false);
                           show('adaptation');
                         }}
                       >

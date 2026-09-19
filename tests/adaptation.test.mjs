@@ -51,48 +51,37 @@ test('Every new stage starts half-size, only the smallest species are edible, an
     );
   }
 });
-test('One free reroll gives different choices, persists across reload and renews at the next adaptation', () => {
-  const p = newJourney(6),
-    l = journeyLife(p),
-    w = new JourneyWorld(6);
+test('Three stable choices survive reload and cannot be rerolled', () => {
+  const p = newJourney(6), l = journeyLife(p), w = new JourneyWorld(6);
   p.xp = journeyAdaptation(0);
   refreshOffer(p);
   const original = [...p.offer];
-  assert.ok(canReroll(p));
-  assert.equal(rerollAdaptation(p), true);
-  assert.equal(p.offer.length, 3);
-  assert.equal(new Set(p.offer).size, 3);
-  assert.ok(p.offer.every((id) => !original.includes(id)));
-  const rerolled = [...p.offer];
-  assert.equal(rerollAdaptation(p), false);
-  assert.deepEqual(p.offer, rerolled);
-  const restored = loadJourney(saveJourney(p, l, w, true));
-  assert.deepEqual(restored.progress.offer, rerolled);
-  assert.equal(canReroll(restored.progress), false);
-  assert.equal(chooseUpgrade(restored.progress, original[0]), false);
-  assert.equal(chooseUpgrade(restored.progress, rerolled[0]), true);
-  restored.progress.xp = journeyAdaptation(1);
-  refreshOffer(restored.progress);
-  assert.equal(canReroll(restored.progress), true);
-});
-test('Reroll remains well-defined when fewer than six upgrade types remain', () => {
-  const p = newJourney(8);
-  p.mutations = UPGRADES.flatMap((u, i) =>
-    Array(u.max - (i < 4 ? 1 : 0)).fill(u.id),
-  );
-  p.level = p.mutations.length;
-  p.xp = journeyAdaptation(p.level);
-  refreshOffer(p);
-  const old = [...p.offer];
-  assert.ok(canReroll(p));
-  rerollAdaptation(p);
-  assert.equal(p.offer.length, 3);
-  assert.equal(new Set(p.offer).size, 3);
-  assert.ok(p.offer.some((id) => !old.includes(id)));
-  chooseUpgrade(p, p.offer[0]);
-  p.xp = journeyAdaptation(p.level);
-  refreshOffer(p);
+  assert.equal(original.length, 3);
+  assert.equal(new Set(original).size, 3);
   assert.equal(canReroll(p), false);
+  assert.equal(rerollAdaptation(p), false);
+  assert.deepEqual(p.offer, original);
+  const restored = loadJourney(saveJourney(p, l, w, true));
+  assert.deepEqual(restored.progress.offer, original);
+  assert.equal(chooseUpgrade(restored.progress, 'not-offered'), false);
+  assert.equal(chooseUpgrade(restored.progress, original[0]), true);
+  assert.equal(restored.progress.level, 1);
+  assert.equal(chooseUpgrade(restored.progress, original[0]), false);
+});
+test('Final capped choices remain selectable without renewing the offer', () => {
+  for (const remaining of [1, 2, 3]) {
+    const p = newJourney(8);
+    p.mutations = UPGRADES.flatMap((u, i) => Array(u.max - (i < remaining ? 1 : 0)).fill(u.id));
+    p.level = p.mutations.length;
+    p.xp = journeyAdaptation(p.level);
+    refreshOffer(p);
+    const old = [...p.offer];
+    assert.equal(old.length, remaining);
+    assert.equal(rerollAdaptation(p), false);
+    assert.deepEqual(p.offer, old);
+    assert.equal(chooseUpgrade(p, old[0]), true);
+    assert.equal(chooseUpgrade(p, old[0]), false);
+  }
 });
 test('Adaptations arrive one third sooner; old saves retain their upgrades, body and fractional progress', () => {
   for (let level = 0; level < 43; level++)
@@ -120,7 +109,7 @@ test('Adaptations arrive one third sooner; old saves retain their upgrades, body
   const again = loadJourney(saveJourney(r.progress, r.life, w, true));
   assert.equal(again.progress.xp, r.progress.xp);
 });
-test('Reroll leaves world time frozen and a newborn survives a first contact hit', () => {
+test('Choosing freezes world time, consumes one adaptation and survives a first hit', () => {
   const { game: g } = makeEngine();
   g.progress = newJourney(27);
   g.life = journeyLife(g.progress);
@@ -130,11 +119,11 @@ test('Reroll leaves world time frozen and a newborn survives a first contact hit
   g.progress.xp = journeyAdaptation(0);
   refreshOffer(g.progress);
   const elapsed = g.life.elapsed;
-  g.reroll();
+  assert.equal(typeof g.reroll, 'undefined');
   g.frame(100);
   g.frame(200);
   assert.equal(g.life.elapsed, elapsed);
-  assert.ok(g.progress.rerollUsed);
+  assert.equal(g.progress.rerollUsed, false);
   g.choose(g.progress.offer.find((id) => id !== 'shield'));
   g.receiveHit({ x: g.life.x + 40, y: g.life.y }, 0.22);
   assert.ok(g.life.biomass > 0 && g.life.biomass < 2);
