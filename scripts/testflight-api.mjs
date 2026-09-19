@@ -6,8 +6,8 @@ const keyId = process.env.APP_STORE_CONNECT_API_KEY_ID;
 const issuer = process.env.APP_STORE_CONNECT_ISSUER_ID;
 const keyPath = process.env.APP_STORE_CONNECT_API_KEY_PATH;
 const bundleId = process.env.BUNDLE_ID;
-if (!['preflight', 'finish'].includes(mode) || !version || !buildNumber || !groupId)
-  throw new Error('Usage: testflight-api.mjs preflight|finish VERSION BUILD GROUP_ID');
+if (!['latest', 'preflight', 'finish'].includes(mode) || !version || !groupId || (mode !== 'latest' && !buildNumber))
+  throw new Error('Usage: testflight-api.mjs latest|preflight|finish VERSION BUILD_OR_DASH GROUP_ID');
 if (![keyId, issuer, keyPath, bundleId].every(Boolean)) throw new Error('Missing App Store Connect API configuration');
 const b64 = value => Buffer.from(value).toString('base64url');
 const token = () => {
@@ -34,6 +34,14 @@ if (apps.data.length !== 1) throw new Error(`Expected one app for ${bundleId}; f
 const appId = apps.data[0].id;
 const group = await api(`/v1/betaGroups/${groupId}?fields[betaGroups]=name,isInternalGroup,publicLinkEnabled`);
 if (!group.data.attributes.isInternalGroup) throw new Error(`Refusing non-internal beta group ${groupId}`);
+if (mode === 'latest') {
+  const builds = await api(`/v1/builds?filter[app]=${appId}&filter[preReleaseVersion.version]=${encodeURIComponent(version)}&include=preReleaseVersion&sort=-uploadedDate&limit=200`);
+  const numbers = builds.data.map(item=>Number(item.attributes.version)).filter(Number.isSafeInteger);
+  const latest = numbers.length ? Math.max(...numbers) : 0;
+  console.log(JSON.stringify({appId,bundleId,version,existingBuilds:[...new Set(numbers)].sort((a,b)=>a-b),latestBuild:latest,nextBuild:latest+1,
+    group:{id:groupId,name:group.data.attributes.name,internal:true}}));
+  process.exit(0);
+}
 const buildPath = `/v1/builds?filter[app]=${appId}&filter[version]=${encodeURIComponent(buildNumber)}&filter[preReleaseVersion.version]=${encodeURIComponent(version)}&include=preReleaseVersion,betaGroups,buildBetaDetail&limit=10`;
 if (mode === 'preflight') {
   const existing = await api(buildPath);

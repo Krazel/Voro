@@ -1,0 +1,42 @@
+name: VORO TestFlight build number
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  query:
+    if: github.ref == 'refs/heads/main'
+    runs-on: macos-latest
+    timeout-minutes: 10
+    environment: app-store-production
+    env:
+      BUNDLE_ID: com.dmkr.voro
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Prepare protected App Store Connect API key
+        env:
+          API_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_BASE64 }}
+        run: |
+          mkdir -p "$HOME/private_keys"
+          printf '%s' "$API_KEY" | base64 --decode > "$HOME/private_keys/AuthKey_${API_ID}.p8"
+          chmod 600 "$HOME/private_keys/AuthKey_${API_ID}.p8"
+          echo "APP_STORE_CONNECT_API_KEY_PATH=$HOME/private_keys/AuthKey_${API_ID}.p8" >> "$GITHUB_ENV"
+      - name: Read next available 0.5 build number
+        env:
+          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+        run: node scripts/testflight-api.mjs latest 0.5 - 05db8744-bcf3-4c2d-a465-2635012bfeeb | tee build-number.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Voro-TestFlight-0.5-build-number
+          path: build-number.json
+          retention-days: 14
+      - name: Remove API key
+        if: always()
+        env:
+          API_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+        run: rm -f "$HOME/private_keys/AuthKey_${API_ID}.p8"
