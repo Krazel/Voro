@@ -5,12 +5,31 @@ import { UPGRADES, levelOf } from './mutations.mjs';
 import './adaptation-constellation.css';
 
 // A living outline, separate from the text and from the real player canvas.
-function membranePath(time: number, phase: number) {
-  const points = Array.from({length: 80}, (_, i) => {
-    const a = i / 80 * Math.PI * 2;
-    const lobes = Math.max(0, Math.cos(a * 5 + Math.sin(time * .23 + phase) * .45));
-    const r = 96 + 17 * lobes ** 7 + 5 * Math.sin(a * 3 - time * .42 + phase);
-    return [120 + Math.cos(a) * r, 120 + Math.sin(a) * r];
+function membranePath(time: number, phase: number, scale = 1) {
+  // Approved B1: five slow extensions, with ten smaller independent tips.
+  const t = time + phase * 1.7, tau = Math.PI * 2;
+  const wrap = (a: number) => Math.atan2(Math.sin(a), Math.cos(a));
+  const points = Array.from({length: 240}, (_, i) => {
+    const a = i / 240 * tau;
+    let r = 82, twist = 0;
+    for (let j = 0; j < 5; j++) {
+      const p = t * .8 - j * 1.35, pulse = (.5 + .5 * Math.sin(p)) ** 2;
+      const dist = wrap(a - j * tau / 5 - .08 * Math.sin(p));
+      const lobe = Math.exp(-dist * dist / .025);
+      r += 32 * pulse * lobe;
+      twist += .15 * lobe * pulse * Math.sin(p * .5 + j);
+    }
+    for (let j = 0; j < 10; j++) {
+      const offset = j % 2 === 0 ? .32 : .68;
+      const p = t * (.63 + (j % 4) * .065) - j * 1.73;
+      const pulse = .22 + .78 * (.5 + .5 * Math.sin(p)) ** 2;
+      const center = (Math.floor(j / 2) + offset) * tau / 5 + .026 * Math.sin(p * .7 + j);
+      const dist = wrap(a - center), lobe = Math.exp(-dist * dist / .0038);
+      r += (10 + (j % 3) * 2) * pulse * lobe;
+      twist += .032 * lobe * pulse * Math.sin(p + j * .8);
+    }
+    r = (r + 1.5 * Math.sin(a * 3 + t * .35)) * scale;
+    return [120 + Math.cos(a + twist) * r, 120 + Math.sin(a + twist) * r];
   });
   const last = points.at(-1)!;
   return `M${(last[0]+points[0][0])/2},${(last[1]+points[0][1])/2}` + points.map((p,i) => {
@@ -26,7 +45,7 @@ function Membrane({ index }: { index: number }) {
     let frame = 0, last = 0;
     const paint = (stamp: number) => {
       if (stamp-last > 32) {
-        outline.current?.querySelectorAll('path').forEach((p,i) => p.setAttribute('d',membranePath(stamp/1000,index+i*.45)));
+        outline.current?.querySelectorAll('path').forEach((p,i) => p.setAttribute('d',membranePath(stamp/1000,index,i ? .975 : 1)));
         last=stamp;
       }
       if (!media.matches) frame=requestAnimationFrame(paint);
@@ -39,7 +58,7 @@ function Membrane({ index }: { index: number }) {
     <defs><radialGradient id={uid}><stop offset="65%" stopColor="currentColor" stopOpacity="0"/><stop offset="96%" stopColor="currentColor" stopOpacity=".22"/></radialGradient></defs>
     <g ref={outline} stroke="currentColor">
       <path d={membranePath(0,index)} fill={`url(#${uid})`} strokeWidth="1.5"/>
-      <path d={membranePath(0,index+.45)} fill="none" strokeWidth=".6" opacity=".6"/>
+      <path d={membranePath(0,index,.975)} fill="none" strokeWidth=".6" opacity=".6"/>
     </g>
     <g className="adaptation-satellites" fill="currentColor">
       {Array.from({length:10},(_,i)=><circle key={i} cx={120+Math.cos(i*Math.PI/5)*108} cy={120+Math.sin(i*Math.PI/5)*108} r={i%3?1.2:2.8} opacity=".7"/>)}
