@@ -13,7 +13,7 @@ import { ReviewMilestone } from './review-milestone';
 import { FinalSettings } from './final-settings';
 import './cristal.css';
 import './final-ui.css';
-import { writeUiMode } from './ui-mode.mjs';
+import { initialUiMode, writeUiMode } from './ui-mode.mjs';
 import {
   X,
   Pause,
@@ -53,10 +53,7 @@ export default function Home() {
   const finalUI=uiMode==='final';
   const [uiModeSaved,setUiModeSaved]=useState(true);
   useEffect(()=>{
-    const development = new URLSearchParams(window.location.search).get('ui') === 'development';
-    const mode = development ? 'development' : 'final';
-    setUiMode(mode);
-    if (!development) writeUiMode(window.localStorage, 'final');
+    setUiMode(initialUiMode(window.localStorage, window.location.search));
   },[]);
   const [zoomControls, setZoomControls] = useState(true);
   const [finalZoomControls,setFinalZoomControls]=useState(false);
@@ -584,6 +581,7 @@ export default function Home() {
             onLeftHanded={() => setControlsSaveError(!writeLeftHanded(!leftHanded))}
             onSound={() => action('sound')}
             onRestart={() => { resume.current = false; action('restart'); changeSettings(false); }}
+            onDevelopment={toggleUiMode}
           />}
           <DialogClose className="settings-close icon-button" aria-label="Cerrar configuración"><X size={20}/></DialogClose>
           <p className="eyebrow">VORO · ABISAL</p>
