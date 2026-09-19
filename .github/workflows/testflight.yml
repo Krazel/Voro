@@ -10,7 +10,7 @@ jobs:
   testflight:
     if: github.ref == 'refs/heads/main'
     runs-on: macos-latest
-    timeout-minutes: 30
+    timeout-minutes: 75
     environment: app-store-production
     env:
       TEAM_ID: B2X6D3A9J9
@@ -36,6 +36,20 @@ jobs:
       - run: npm ci
       - run: node --test tests/*.test.mjs
       - run: npm run ios:sync
+      - name: Prepare App Store Connect API key
+        env:
+          API_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_BASE64 }}
+        run: |
+          mkdir -p "$HOME/private_keys"
+          printf '%s' "$API_KEY" | base64 --decode > "$HOME/private_keys/AuthKey_${API_ID}.p8"
+          chmod 600 "$HOME/private_keys/AuthKey_${API_ID}.p8"
+          echo "APP_STORE_CONNECT_API_KEY_PATH=$HOME/private_keys/AuthKey_${API_ID}.p8" >> "$GITHUB_ENV"
+      - name: Verify version, build and internal group by API
+        env:
+          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+        run: node scripts/testflight-api.mjs preflight 0.5 1 05db8744-bcf3-4c2d-a465-2635012bfeeb
       - name: Install distribution signing identity
         env:
           CERT: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
@@ -106,10 +120,12 @@ jobs:
           API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_BASE64 }}
         run: |
           set -euo pipefail
-          mkdir -p "$HOME/private_keys"
-          printf '%s' "$API_KEY" | base64 --decode > "$HOME/private_keys/AuthKey_${API_ID}.p8"
-          chmod 600 "$HOME/private_keys/AuthKey_${API_ID}.p8"
           xcrun altool --upload-app --type ios --file "$RUNNER_TEMP/voro-export/"*.ipa --apiKey "$API_ID" --apiIssuer "$API_ISSUER"
+      - name: Wait for processing and enable internal TestFlight access by API
+        env:
+          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+        run: node scripts/testflight-api.mjs finish 0.5 1 05db8744-bcf3-4c2d-a465-2635012bfeeb | tee artifact/testflight/app-store-connect.json
       - uses: actions/upload-artifact@v4
         if: success()
         with:
