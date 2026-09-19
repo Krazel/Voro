@@ -29,18 +29,18 @@ test('Zoom controls change the framing, not biomass, and survive biome entry and
   const {game}=makeEngine();game.startTest(0,150,false,true,true);
   const mass=game.life.biomass;
   game.setZoom(1.5);assert.equal(game.life.biomass,mass);
-  assert.equal(game.zoom,gameplayZoom(game.life.radius)*1.5);
+  assert.equal(game.zoom,gameplayZoom(game.life.radius, game.cameraEntryRadius)*1.5);
   game.transition=3.61;game.transitionAdvanced=false;game.transitionFrom=0;
   game.zoom=.6;game.update(.02);
   assert.equal(game.progress.stage,1);
-  assert.equal(game.zoom,gameplayZoom(game.life.radius)*1.5);
+  assert.equal(game.zoom,gameplayZoom(game.life.radius, game.cameraEntryRadius)*1.5);
   game.startTest(2,1,false,true,false);
   assert.equal(game.zoomFactor,1.5);
-  assert.equal(game.zoom,gameplayZoom(game.life.radius)*1.5);
+  assert.equal(game.zoom,gameplayZoom(game.life.radius, game.cameraEntryRadius)*1.5);
   game.setZoom(-100);assert.equal(game.zoomFactor,.75);
   game.setZoom(Infinity);assert.equal(game.zoomFactor,1);
   game.setZoom(100);assert.equal(game.zoomFactor,1.75);
-  game.setZoom(1);assert.equal(game.zoom,gameplayZoom(game.life.radius));
+  game.setZoom(1);assert.equal(game.zoom,gameplayZoom(game.life.radius, game.cameraEntryRadius));
   game.destroy();
 });
 

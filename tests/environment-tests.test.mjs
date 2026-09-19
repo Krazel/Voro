@@ -37,7 +37,7 @@ test('Every environment and size can be tested without altering or overwriting t
       assert.ok(game.startTest(stage, mass));
       assert.equal(game.progress.stage, stage);
       assert.equal(game.life.radius, radiusForMass(mass));
-      assert.equal(game.zoom, gameplayZoom(game.life.radius));
+      assert.equal(game.zoom, gameplayZoom(game.life.radius, game.cameraEntryRadius));
       assert.deepEqual(game.progress.mutations, ['tentacles', 'dash']);
       game.update(1 / 60);
       game.save();
@@ -53,7 +53,7 @@ test('Every environment and size can be tested without altering or overwriting t
   assert.equal(game.life.biomass, 19);
   assert.equal(game.life.elapsed, 50);
   assert.equal(game.testMode, false);
-  assert.equal(game.zoom, gameplayZoom(game.life.radius));
+  assert.equal(game.zoom, gameplayZoom(game.life.radius, game.cameraEntryRadius));
   game.destroy();
   delete globalThis.localStorage;
 });

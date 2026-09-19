@@ -25,6 +25,7 @@ import {
   STAGES,
   SPECIES_BY_ID,
   stageOf,
+  stageStartMass,
   formatSize,
   isDanger,
 } from './journey-data.mjs';
@@ -372,7 +373,7 @@ export class VoroEngine {
     this.fragments = restoredFragments;
     this.food = [...this.world.entities, ...this.fragments];
     this.camera = { x: this.life.x, y: this.life.y };
-    this.zoom = gameplayZoom(this.life.radius) * this.zoomFactor;
+    this.zoom = gameplayZoom(this.life.radius, this.cameraEntryRadius) * this.zoomFactor;
     this.resize();
     this.observer = new ResizeObserver(() => this.resize());
     this.observer.observe(canvas);
@@ -557,10 +558,13 @@ export class VoroEngine {
     return this.started && !this.paused && !this.settingsOpen && !this.life.dead
       && !this.progress.completed && !this.progress.offer.length && !this.transition && !this.birth;
   }
+  get cameraEntryRadius() {
+    return this.progress.cameraEntryRadius ?? radiusForMass(stageStartMass(this.progress.stage));
+  }
   setZoom(value: number, continuous = false) {
     const previous=this.zoomFactor;
     this.zoomFactor = zoomPreference(value);
-    this.zoom = continuous ? this.zoom*this.zoomFactor/previous : gameplayZoom(this.life.radius) * this.zoomFactor;
+    this.zoom = continuous ? this.zoom*this.zoomFactor/previous : gameplayZoom(this.life.radius, this.cameraEntryRadius) * this.zoomFactor;
     this.pointer = null;
     this.renderDirty = true;
     if(!continuous)this.publish();
@@ -737,7 +741,7 @@ export class VoroEngine {
     this.comboMeals = 0;
     this.lastMeal = -100;
     this.camera = { x: this.life.x, y: this.life.y };
-    this.zoom = gameplayZoom(this.life.radius) * this.zoomFactor;
+    this.zoom = gameplayZoom(this.life.radius, this.cameraEntryRadius) * this.zoomFactor;
     this.started = true;
     this.paused = false;
     this.keys.clear();
@@ -787,7 +791,7 @@ export class VoroEngine {
     this.comboMeals = 0;
     this.lastMeal = -100;
     this.camera = { x: this.life.x, y: this.life.y };
-    this.zoom = gameplayZoom(this.life.radius) * this.zoomFactor;
+    this.zoom = gameplayZoom(this.life.radius, this.cameraEntryRadius) * this.zoomFactor;
     this.keys.clear();
     this.pointer = null;
     this.padInput = { x: 0, y: 0 };
@@ -844,6 +848,7 @@ export class VoroEngine {
         this.progress.totalEaten += this.life.eaten;
         this.progress.totalTime += this.life.elapsed;
       }
+      this.progress.cameraEntryRadius = null;
       this.life = journeyLife(this.progress);
       this.world = new JourneyWorld(
         this.progress.seed,
@@ -853,7 +858,7 @@ export class VoroEngine {
       this.stats = upgradeStats(this.progress.mutations);
       this.seed();
       this.camera = { x: 700, y: 970 };
-      this.zoom = gameplayZoom(this.life.radius) * this.zoomFactor;
+      this.zoom = gameplayZoom(this.life.radius, this.cameraEntryRadius) * this.zoomFactor;
       this.started = true;
       this.paused = false;
       this.keys.clear();
@@ -1156,7 +1161,7 @@ export class VoroEngine {
         this.camera = { x: this.life.x, y: this.life.y };
         // The scale changes at the crossfade midpoint: start the new biome
         // at its own framing, never inherit the previous giant's wide view.
-        this.zoom = gameplayZoom(this.life.radius) * this.zoomFactor;
+        this.zoom = gameplayZoom(this.life.radius, this.cameraEntryRadius) * this.zoomFactor;
         this.comboClock = 0;
         this.comboMeals = 0;
         this.lastMeal = -100;
@@ -1347,10 +1352,10 @@ export class VoroEngine {
     if (this.transition > 0) {
       const target =
         this.transition > 3.6
-          ? Math.max(gameplayZoom(p.radius) * this.zoomFactor, this.transitionStartZoom)
-          : gameplayZoom(p.radius) * this.zoomFactor;
+          ? Math.max(gameplayZoom(p.radius, this.cameraEntryRadius) * this.zoomFactor, this.transitionStartZoom)
+          : gameplayZoom(p.radius, this.cameraEntryRadius) * this.zoomFactor;
       this.zoom += (target - this.zoom) * (1 - Math.exp(-dt * 1.2));
-    } else this.zoom = followGameplayZoom(this.zoom, p.radius, dt, this.zoomFactor);
+    } else this.zoom = followGameplayZoom(this.zoom, p.radius, dt, this.zoomFactor, this.cameraEntryRadius);
     this.flash = Math.max(0, this.flash - dt * 0.6);
     this.hitFlash = Math.max(0, this.hitFlash - dt);
     for (const q of this.particles) {

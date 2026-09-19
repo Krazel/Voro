@@ -27,6 +27,7 @@ export function newJourney(seed) {
   return {
     ...newMicro(seed),
     stage: 0,
+    cameraEntryRadius: null,
     adaptationVersion: 4,
     upgradeLimitsVersion: 1,
     shieldChoiceVersion: 1,
@@ -66,6 +67,7 @@ export function advanceJourney(p, life) {
   const scale = STAGES[p.stage].base * metersPerUnit(STAGES[p.stage].unit);
   next.biomass = Math.max(next.biomass, 8 * (previousDiameter / scale) ** 2);
   next.radius = radiusForMass(next.biomass);
+  p.cameraEntryRadius = next.radius;
   next.invulnerable = 3;
   return next;
 }
@@ -159,6 +161,9 @@ export function loadJourney(raw) {
     const progress = {
       ...newJourney(p.seed),
       stage,
+      cameraEntryRadius: Number.isFinite(p.cameraEntryRadius) && p.cameraEntryRadius >= radiusForMass(stageStartMass(stage)) &&
+        p.cameraEntryRadius <= radiusForMass(STAGES[stage].goal * 1.5)
+        ? p.cameraEntryRadius : null,
       xp:
         p.adaptationVersion === 4
           ? p.xp

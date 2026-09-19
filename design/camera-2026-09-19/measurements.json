@@ -1,0 +1,145 @@
+{
+  "result": [
+    {
+      "stage": "micro",
+      "before": true,
+      "radius": 24,
+      "zoom": 1.12,
+      "screenDiameter": 43.68
+    },
+    {
+      "stage": "micro",
+      "before": false,
+      "radius": 24,
+      "zoom": 1.12,
+      "screenDiameter": 43.68
+    },
+    {
+      "stage": "pond",
+      "before": true,
+      "radius": 11.384199576606164,
+      "zoom": 1.12,
+      "screenDiameter": 20.71924322942322
+    },
+    {
+      "stage": "pond",
+      "before": false,
+      "radius": 11.384199576606164,
+      "zoom": 2.3611673195923903,
+      "screenDiameter": 43.68
+    },
+    {
+      "stage": "land",
+      "before": true,
+      "radius": 11.384199576606164,
+      "zoom": 1.12,
+      "screenDiameter": 20.71924322942322
+    },
+    {
+      "stage": "land",
+      "before": false,
+      "radius": 11.384199576606164,
+      "zoom": 2.3611673195923903,
+      "screenDiameter": 43.68
+    },
+    {
+      "stage": "water",
+      "before": true,
+      "radius": 11.384199576606164,
+      "zoom": 1.12,
+      "screenDiameter": 20.71924322942322
+    },
+    {
+      "stage": "water",
+      "before": false,
+      "radius": 11.384199576606164,
+      "zoom": 2.3611673195923903,
+      "screenDiameter": 43.68
+    },
+    {
+      "stage": "city",
+      "before": true,
+      "radius": 24,
+      "zoom": 1.12,
+      "screenDiameter": 43.68
+    },
+    {
+      "stage": "city",
+      "before": false,
+      "radius": 24,
+      "zoom": 1.12,
+      "screenDiameter": 43.68
+    },
+    {
+      "stage": "orbit",
+      "before": true,
+      "radius": 43.03719321703031,
+      "zoom": 1.114005153089925,
+      "screenDiameter": 77.90843940473512
+    },
+    {
+      "stage": "orbit",
+      "before": false,
+      "radius": 43.03719321703031,
+      "zoom": 0.6245760466870615,
+      "screenDiameter": 43.680000000000014
+    },
+    {
+      "stage": "planets",
+      "before": true,
+      "radius": 24,
+      "zoom": 1.12,
+      "screenDiameter": 43.68
+    },
+    {
+      "stage": "planets",
+      "before": false,
+      "radius": 24,
+      "zoom": 1.12,
+      "screenDiameter": 43.68
+    },
+    {
+      "stage": "stars",
+      "before": true,
+      "radius": 24,
+      "zoom": 1.12,
+      "screenDiameter": 43.68
+    },
+    {
+      "stage": "stars",
+      "before": false,
+      "radius": 24,
+      "zoom": 1.12,
+      "screenDiameter": 43.68
+    },
+    {
+      "stage": "galaxies",
+      "before": true,
+      "radius": 24,
+      "zoom": 1.12,
+      "screenDiameter": 43.68
+    },
+    {
+      "stage": "galaxies",
+      "before": false,
+      "radius": 24,
+      "zoom": 1.12,
+      "screenDiameter": 43.68
+    },
+    {
+      "stage": "universe",
+      "before": true,
+      "radius": 24,
+      "zoom": 1.12,
+      "screenDiameter": 43.68
+    },
+    {
+      "stage": "universe",
+      "before": false,
+      "radius": 24,
+      "zoom": 1.12,
+      "screenDiameter": 43.68
+    }
+  ],
+  "errors": []
+}
