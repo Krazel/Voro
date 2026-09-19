@@ -1794,6 +1794,9 @@ export class VoroEngine {
     c.save();
     c.scale(this.zoom, this.zoom);
     c.translate(ox, oy);
+    if (this.transition > 0) c.globalAlpha *= transitionScene(
+      STAGES[this.transitionFrom].id, (7.2-this.transition)/7.2, this.reduced,
+    ).inhabitants;
     const visible = (x: number, y: number, r: number) =>
       x + ox > -r &&
       x + ox < 480 / this.zoom + r &&

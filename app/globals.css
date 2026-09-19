@@ -1134,7 +1134,7 @@ button {
 .universe-finale > .micro-adaptation,
 .universe-finale::before,
 .universe-finale::after { display: none !important; }
-.universe-black-screen {
+.universe-survivor-control {
   position: absolute;
   inset: 0;
   z-index: 8;
@@ -1143,11 +1143,31 @@ button {
   border: 0;
   padding: 0;
   border-radius: 0;
-  background: #000;
+  background: transparent;
   cursor: pointer;
 }
 .universe-finale .journey-finish { background: #000; }
 .universe-finale .ending-caption { bottom: 17%; }
+
+/* A long physical scale never pushes biomass outside the playfield. */
+.biomass-hud { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 12px; align-items: start; }
+.biomass-hud .size { min-width: 0; white-space: normal; }
+.biomass-hud .journey-size { display: block; max-width: none; overflow-wrap: anywhere; }
+.biomass-hud .size > span { display: block; margin: 3px 0 0; font-size: 10px; }
+.biomass-hud .growth { min-width: 0; }
+.biomass-hud .growth-label { flex-wrap: wrap; gap: 3px 8px; letter-spacing: .5px; }
+.biomass-hud .growth-label > span:last-child { margin-left: auto; white-space: normal; overflow-wrap: anywhere; text-align: right; }
+.universe-survivor-control:focus-visible { outline: 1px solid #95bac1; outline-offset: -8px; }
+.micro-adaptation { top: max(186px, calc(env(safe-area-inset-top) + 154px)); }
+.journey-transition { animation: stage-arrival 7.2s ease-in-out both; }
+@keyframes stage-arrival {
+  0% { opacity: 0; transform: translateY(12px); }
+  18%, 72% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-6px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .journey-transition { animation: new-world 7.2s linear both; }
+}
 .journey-loading {
   position: absolute;
   inset: 0;

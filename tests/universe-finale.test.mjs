@@ -14,7 +14,7 @@ test('Final biomass starts the universe ending without searching for another obj
   const loaded=loadJourney(saveJourney(game.progress,game.life,game.world,true));
   assert.equal(loaded.progress.completed,true);
   const x=game.life.x,y=game.life.y; game.action('dash');
-  for(let i=0;i<730;i++) { game.time+=1/60;game.update(1/60); }
+  for(let i=0;i<FINALE_SECONDS*60+10;i++) { game.time+=1/60;game.update(1/60); }
   assert.equal(game.ending,0);assert.equal(game.universeFinale,null);
   assert.equal(game.life.x,x);assert.equal(game.life.y,y);
   game.exitTest();assert.equal(game.progress.completed,false);game.destroy();
@@ -34,10 +34,10 @@ test('The universe contracts fully into the cell, then only the softly lit survi
     drawImage(...args){images.push(args);},createRadialGradient(){return {addColorStop(){}}}},
     {get:(o,k)=>k in o?o[k]:()=>{}});
   const frame={width:1000,height:1800},scene=new UniverseFinale(frame);
-  scene.draw(c,480,850,3.84,false,()=>{},0);
+  scene.draw(c,480,850,FINALE_SECONDS-8.16,false,()=>{},0);
   assert.ok(images[0][3]<1,'Captured matter reaches the centre, not a faded large square');
   images.length=0;
-  scene.draw(c,480,850,2.4,false,()=>assert.fail('A short completely dark pause'),0);
+  scene.draw(c,480,850,FINALE_SECONDS-9.6,false,()=>assert.fail('A short completely dark pause'),0);
   assert.equal(images.length,0);
   for(const remaining of [1,0,-100]) {
     scene.draw(c,480,850,remaining,false,(size,solitary)=>survivors.push([size,solitary]),4);
@@ -50,7 +50,7 @@ test('The universe contracts fully into the cell, then only the softly lit survi
 });
 test('The completed survivor breathes at most 20 fps without running gameplay; reduced motion stays still',()=>{
   const f=makeEngine(),{game}=f;
-  game.startTest(last,230,false,true,true);isolate(game);game.update(1/60);game.update(12);
+  game.startTest(last,230,false,true,true);isolate(game);game.update(1/60);game.update(FINALE_SECONDS);
   let renders=0,simulations=0;game.render=()=>renders++;game.update=()=>simulations++;
   game.renderDirty=true;game.frame(1000);renders=0;
   for(let i=1;i<=60;i++)game.frame(1000+i*1000/60);

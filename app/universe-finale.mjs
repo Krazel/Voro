@@ -1,9 +1,12 @@
-export const FINALE_SECONDS = 12;
+export const FINALE_SECONDS = 17;
 const smooth = (a,b,x) => { const t = Math.max(0,Math.min(1,(x-a)/(b-a))); return t*t*(3-2*t); };
 export function finaleState(remaining) {
-  const u = Math.max(0,Math.min(1,1-remaining/FINALE_SECONDS));
+  // Keep the original absorption beat (first 9.6 s), then take six seconds
+  // to reveal the survivor. Final state remains visible indefinitely.
+  const elapsed = Math.max(0, FINALE_SECONDS - remaining);
+  const u = Math.max(0,Math.min(1,elapsed/12));
   return { u, growth: 1+11*smooth(0,.55,u), darkness: smooth(.55,.8,u),
-    black: u>=.8, survivor: smooth(.84,1,u), caption: u<.3 ? 'Ya no hay nada más grande que tú.' : u<.55 ? 'Todo el universo vuelve a ti.' : u<.7 ? 'La última luz.' : '' };
+    black: elapsed>=9.6, survivor: smooth(10.2,16.2,elapsed), caption: u<.3 ? 'Ya no hay nada más grande que tú.' : u<.55 ? 'Todo el universo vuelve a ti.' : u<.7 ? 'La última luz.' : '' };
 }
 export function drawVoidSurvivor(c, width, height, time, reduced, drawProtagonist, reveal = 1) {
   if (reveal <= 0) return;
@@ -14,7 +17,7 @@ export function drawVoidSurvivor(c, width, height, time, reduced, drawProtagonis
   glow.addColorStop(0,`rgba(112,189,200,${(.035+.006*pulse)*reveal})`);
   glow.addColorStop(1,'transparent');
   c.fillStyle=glow;c.fillRect(x-r,y-r,r*2,r*2);
-  c.globalAlpha=(.48+.035*pulse)*reveal;
+  c.globalAlpha=(.72+.035*pulse)*reveal;
   drawProtagonist(1+.012*pulse,true);
   c.restore();
 }

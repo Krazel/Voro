@@ -777,7 +777,7 @@ function* paintPose(
   ) {
     c.save();
     c.globalCompositeOperation = 'screen';
-    c.globalAlpha =
+    c.globalAlpha *=
       (0.035 + 0.065 * (0.5 + 0.5 * Math.sin(phase * 2))) * activity;
     if (f === 'spaceship') {
       // Engine light belongs at the exhausts, not over the entire metal hull.
@@ -984,7 +984,9 @@ export function drawInhabitant(
     ((((time / profile.period + (seed || 0) / TAU) % 1) + 1) % 1) * TAU;
   c.save();
   if (hurt > 0) c.globalAlpha *= 0.75 + 0.25 * Math.cos(hurt * 12);
-  if (sheets && !detail && cache) {
+  // Previously exported sheets contain the old clipped galaxy crops. These
+  // six use the same bounded live-pose cache until sheets are regenerated.
+  if (sheets && !detail && cache && !s.animationCropRevision) {
     if (simpleAnimation(profile)) {
       drawPose(c, image, s, r, phase, { activity }); c.restore(); return;
     }

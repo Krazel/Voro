@@ -19,13 +19,14 @@ export function transitionScene(stageId, progress, reduced = false) {
     coastal = ['pond', 'land', 'water'].includes(stageId);
   return {
     coastal,
-    incoming: smooth(0.18, 0.72, t),
-    outgoing: 1 - smooth(0.12, 0.72, t),
+    incoming: smooth(0.25, 0.8, t),
+    outgoing: 1 - smooth(0.25, 0.8, t),
+    inhabitants: smooth(0.5, 0.82, t),
     scale: reduced
       ? 1
       : coastal
-        ? 1 + 0.035 * smooth(0, 1, t)
-        : 1 - 0.3 * smooth(0.08, 0.82, t),
+        ? 1 + 0.025 * smooth(0, 1, t)
+        : 1 - 0.08 * smooth(0.08, 0.82, t),
     panX: reduced
       ? 0
       : stageId === 'land'
@@ -34,6 +35,6 @@ export function transitionScene(stageId, progress, reduced = false) {
           ? 20 * smooth(0, 1, t)
           : 0,
     panY: reduced ? 0 : stageId === 'pond' ? 12 * smooth(0, 1, t) : 0,
-    wash: Math.sin(t * Math.PI) * (coastal ? 0.12 : 0.22),
+    wash: Math.sin(t * Math.PI) * (coastal ? 0.06 : 0.1),
   };
 }

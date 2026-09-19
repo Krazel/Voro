@@ -96,7 +96,11 @@ export class JourneyWorld extends MicroWorld {
       else entities.push(e);
     }
     const recovery = [...small].sort((a, b) => a.r - b.r)[0];
-    for (let i = 0; i < starters + forage + threats; i++) {
+    const slots = Array.from({length:starters+forage+threats},(_,i)=>i);
+    // Reserve room for the large stellar threat before placing surrounding
+    // stars. Otherwise the enlarged accretion disc could never fit anywhere.
+    if (stageId === 'stars') slots.unshift(...slots.splice(starters+forage));
+    for (const i of slots) {
       let pool =
         i < starters ? small : i < starters + forage ? medium : danger;
       if (stageId === 'water' && i >= starters + forage)
@@ -138,7 +142,7 @@ export class JourneyWorld extends MicroWorld {
       // Consumed slots also reserve their geometry until regeneration, so eating
       // one object never moves or rerolls neighbouring objects on chunk reload.
       occupied.push({ x, y, r: candidate.r });
-      if (isDanger(s) && Math.hypot(x - 700, y - 970) < 310) continue;
+      if (isDanger(s) && Math.hypot(x - 700, y - 970) < 310 + Math.max(0,candidate.r-150)) continue;
       if ((this.journal.get(id) || 0) > time) { depleted = true; continue; }
       const inhabitant =
         s.id === 'water-14' && seed >= Math.PI ? SPECIES_BY_ID['water-16'] : s;

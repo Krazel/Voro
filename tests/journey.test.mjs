@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { FINALE_SECONDS } from '../app/universe-finale.mjs';
 import { makeEngine } from './engine-fixture.mjs';
 import {
   newJourney,
@@ -364,7 +365,7 @@ test('A complete run eats planets, stars, galaxies and the universe in order, wi
     timings.map((t) => t.stage),
     STAGES.map((s) => s.id),
   );
-  step(g, 361, true);
+  step(g, Math.ceil(FINALE_SECONDS * 30) + 1, true);
   g.publish();
   assert.equal(g.ending, 0);
   assert.equal(g.progress.offer.length, 0);
