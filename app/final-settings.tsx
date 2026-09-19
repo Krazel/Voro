@@ -9,6 +9,7 @@ import { DialogClose } from '@/components/ui/dialog';
 import { MUSIC } from './music.mjs';
 import { STAGES } from './journey-data.mjs';
 import './approved-settings.css';
+import { LivingMenuArt } from './living-menu-art';
 
 type Section = 'main' | 'journey' | 'credits';
 
@@ -48,7 +49,7 @@ export function FinalSettings({
   return (
     <div className="final-settings-shell approved-settings" data-section={section}>
       <div className="approved-art" aria-hidden="true" />
-      <div className="approved-breath" aria-hidden="true" />
+      <LivingMenuArt journey={section === 'journey'} />
       <header className="final-settings-heading">
         {tr(section === 'main' ? (
           <DialogClose className="living-back" aria-label={tr("Volver al juego")}><ChevronLeft /></DialogClose>
@@ -118,3 +119,4 @@ export function FinalSettings({
     </div>
   );
 }
+
