@@ -30,7 +30,7 @@ test('Big military vehicles remain inedible to newborns; edible shooters still s
  const w=new JourneyWorld(8,[],city);w.entities=[e];w.move(.02,0,g.life,g.stats,[]);assert.equal(w.projectiles.length,1);
  e.x=g.life.x;e.y=g.life.y;g.world.entities=[e];
  g.life.digestion=Array.from({length:g.life.absorptionSlots},()=>({progress:0,done:false,value:1,kind:'city-0',r:10,dx:0,dy:0}));
- g.update(.01);assert.equal(e.eaten,false);assert.ok(g.life.hurt>0);
+ g.update(.01);assert.equal(e.eaten,false);assert.equal(g.life.hurt,0);
  g.destroy();
 });
 test('Larger people and one unarmed car slot preserve bounded, deterministic streets and consumed slots',()=>{

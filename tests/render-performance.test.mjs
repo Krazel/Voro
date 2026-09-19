@@ -73,7 +73,8 @@ test('Touch framebuffer reduces pixels without changing world framing or input',
     globalThis.devicePixelRatio = 3;
     globalThis.matchMedia = (q) => ({ matches: q === '(pointer: coarse)' });
     const { game } = makeEngine();
-    assert.equal(game.pixelRatio, 1.5);
+    assert.ok(game.pixelRatio > 2 && game.pixelRatio <= 2.5);
+    assert.ok(game.canvas.width*game.canvas.height <= 2003000);
     assert.equal(game.width, 480);
     assert.equal(game.height, 844 / (390 / 480));
     assert.equal(game.point({ clientX: 195, clientY: 0 }).x, 240);

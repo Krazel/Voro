@@ -4,7 +4,7 @@ import { sharePerformanceFile } from './share-performance';
 import { RELEASE } from './release.mjs';
 import { performanceSummaryText } from './performance-report.mjs';
 import { TRANSITION_ROUTES } from './journey-transitions.mjs';
-import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { readLeftHanded, writeLeftHanded, subscribeControls, serverLeftHanded } from './control-preferences';
 import Link from 'next/link';
 import { AdaptationChoices, CristalPreview } from './cristal-ui';
@@ -40,6 +40,7 @@ import {
 export default function Home() {
   const canvas = useRef<HTMLCanvasElement>(null),
     engine = useRef<VoroEngine | null>(null);
+  const connectProtagonist = useCallback((node: HTMLCanvasElement | null) => engine.current?.setAdaptationCanvas(node), []);
   const [settings, setSettings] = useState(false),
     [confirmReset, setConfirmReset] = useState(false);
   const [testPanel, setTestPanel] = useState(false);
@@ -259,7 +260,6 @@ export default function Home() {
               />
             </div>
           </div>
-        </div>
         <div className="micro-adaptation">
           <div>
             <span>
@@ -278,6 +278,7 @@ export default function Home() {
           <i aria-hidden="true">
             <b style={{ transform: `scaleX(${xp})` }} />
           </i>
+        </div>
         </div>
         {!state.started && !finale && (
           <div className="intro">
@@ -465,7 +466,7 @@ export default function Home() {
           </div>
         )}
         {state.ending > 0 && finalCaption && <div className="ending-caption" aria-live="polite"><p>{finalCaption}</p></div>}
-        {state.complete && state.ending === 0 && !finalDetails && <button className="universe-survivor-control" aria-label="VORO permanece solo en el vacío. Ver el final y tu recorrido" onClick={() => setFinalDetails(true)} />}
+        {state.complete && state.ending === 0 && !finalDetails && <button className="universe-survivor-control" aria-label="VORO permanece solo en el vacío. Ver el final y tu recorrido" onClick={() => setFinalDetails(true)}>Recorrido</button>}
         {state.complete && finalDetails && (
           <div className="finish-panel journey-finish" aria-live="polite">
             <p className="eyebrow">UNIVERSO ABSORBIDO</p>
@@ -521,6 +522,7 @@ export default function Home() {
           </div>
           <AdaptationChoices
             key={state.level}
+            onProtagonist={connectProtagonist}
             offer={state.offer}
             mutations={state.mutations}
             onChoose={(id) => engine.current?.choose(id)}
@@ -529,6 +531,7 @@ export default function Home() {
       </Dialog>}
       {uiPreview && <CristalPreview
         key={uiPreview ? 'open' : 'closed'}
+        onProtagonist={connectProtagonist}
         open={uiPreview}
         onClose={() => setUiPreview(false)}
       />}

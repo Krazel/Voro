@@ -134,7 +134,7 @@ export function makeEntity(species, x, y, seed, id) {
     sizeFactor,
     value: species.value * sizeFactor ** 2,
     requiredMass:
-      (species.requiredMass ?? 8 * ((species.r * 1.17) / 48) ** 2) *
+      (species.requiredMass ?? 8 * ((species.r * (species.edibleRadiusFactor || 1) * 1.17) / 48) ** 2) *
       sizeFactor ** 2,
     heading: seed,
     escape: 0,

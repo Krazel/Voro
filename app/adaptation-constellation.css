@@ -32,14 +32,14 @@ body:has(.adaptation-dialog) [data-slot='dialog-overlay'] {
 }
 .adaptation-constellation { position: relative; width: 100%; aspect-ratio: 4 / 5; margin: 3px auto 0; isolation: isolate; }
 .adaptation-connections { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .8; filter: drop-shadow(0 0 5px #88dfff); animation: adaptation-current 4s ease-in-out infinite alternate; pointer-events: none; }
-.adaptation-organism { position: absolute; top: 36%; left: 30%; width: 40%; height: 27%; overflow: visible; filter: drop-shadow(0 0 8px #79dfff88); pointer-events: none; }
+.adaptation-organism { position: absolute; top: 36%; left: 30%; width: 40%; height: 27%; overflow: visible;  pointer-events: none; }
 .adaptation-cell { transform-origin: center; animation: adaptation-cell-breathe 6s ease-in-out infinite; }
 .adaptation-orbit { transform-origin: center; animation: adaptation-turn 45s linear infinite; }
 .adaptation-position { position: absolute; width: 49%; animation: adaptation-arrive .8s cubic-bezier(.2,.7,.3,1) both; animation-delay: var(--arrival-delay); }
-.adaptation-position-0 { left: 25.5%; top: 0; color: #63f9e8; }
-.adaptation-position-1 { left: 0; top: 57%; color: #ffc269; }
-.adaptation-position-2 { right: 0; top: 57%; color: #b9a0ff; }
-.adaptation-bubble { position: relative; display: grid; place-items: center; width: 100%; aspect-ratio: 1; border: 0; border-radius: 50%; padding: 0; cursor: pointer; color: inherit; background: radial-gradient(circle, #001019e8 30%, #00101899 61%, transparent 72%); animation: adaptation-float 6s ease-in-out infinite; -webkit-tap-highlight-color: transparent; }
+.adaptation-position-0 { --spawn-y: 100%; left: 25.5%; top: 0; color: #63f9e8; }
+.adaptation-position-1 { --spawn-x: 53%; --spawn-y: -62%; left: 0; top: 57%; color: #ffc269; }
+.adaptation-position-2 { --spawn-x: -53%; --spawn-y: -62%; right: 0; top: 57%; color: #b9a0ff; }
+.adaptation-bubble { position: relative; display: grid; place-items: center; width: 100%; aspect-ratio: 1; border: 0; border-radius: 50%; padding: 0; cursor: pointer; color: inherit; background: radial-gradient(circle, #001019e8 30%, #00101899 61%, transparent 72%); animation: adaptation-float 10s ease-in-out infinite; -webkit-tap-highlight-color: transparent; }
 .adaptation-position-1 .adaptation-bubble { animation-delay: -2s; }
 .adaptation-position-2 .adaptation-bubble { animation-delay: -4s; }
 .adaptation-bubble:hover { background-color: #85dbe910; }
@@ -56,8 +56,8 @@ body:has(.adaptation-dialog) [data-slot='dialog-overlay'] {
 .adaptation-intent { display: block; text-align: center; color: #b2d6e0; font: 10px/1.4 Arial, sans-serif; letter-spacing: .27em; text-transform: uppercase; margin-top: 4px; }
 .adaptation-position-0 .adaptation-intent { position: absolute; left: 97%; top: 50%; width: 50%; }
 .adaptation-dialog .adaptation-count { text-align: center; color: #9ebfc6; font-size: 10px; letter-spacing: .18em; margin: 7px 0; }
-@keyframes adaptation-arrive { from { opacity: 0; transform: scale(.72) translateY(18px); } to { opacity: 1; transform: scale(1) translateY(0); } }
-@keyframes adaptation-float { 0%,100% { transform: translateY(0) rotate(-.5deg); } 50% { transform: translateY(-7px) rotate(.5deg); } }
+@keyframes adaptation-arrive { from { opacity: 0; transform: translate(var(--spawn-x, 0), var(--spawn-y, 0)) scale(.15); } to { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes adaptation-float { 0%,100% { transform: translateY(0) rotate(-.5deg); } 50% { transform: translateY(-10px) rotate(.5deg); } }
 @keyframes adaptation-turn { to { transform: rotate(360deg); } }
 @keyframes adaptation-cell-breathe { 0%,100% { transform: scale(.96) rotate(-3deg); } 50% { transform: scale(1.04) rotate(3deg); } }
 @keyframes adaptation-current { from { opacity: .45; } to { opacity: .95; } }
@@ -66,3 +66,5 @@ body:has(.adaptation-dialog) [data-slot='dialog-overlay'] {
 @media (prefers-reduced-motion: reduce) {
   .adaptation-constellation *, .adaptation-heading::before, .adaptation-heading::after { animation: none !important; transition: none !important; }
 }
+
+.biomass-hud > .micro-adaptation { position: static; grid-column: 1 / -1; margin-top: -2px; }

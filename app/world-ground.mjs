@@ -53,7 +53,7 @@ export class WorldGround {
     const cached = this.cache.get(key);
     if (cached) return cached.patches;
     const patches = stage === 'city' ? cityTiles(image, this.createCanvas) : [];
-    const size = 384,
+    const size = ['micro','pond','water'].includes(stage) ? 768 : 384,
       sw = image.width / 2,
       sh = image.height / 2;
     for (let i = 0; stage !== 'city' && i < 8; i++) {
@@ -129,6 +129,8 @@ export class WorldGround {
     this.view = saved?.view || null;
     if (!this.surface) this.surface = this.createCanvas();
     const surface = this.surface;
+    const transform = c.getTransform?.();
+    const raster = Math.max(1,Math.min(2,transform ? Math.hypot(transform.a,transform.b) : 1));
     const pad = 192;
     const px = camera.x * profile.depth,
       py = camera.y * profile.depth;
@@ -138,7 +140,7 @@ export class WorldGround {
       view.image === image &&
       view.stage === stage &&
       view.seed === seed &&
-      view.height === height
+      view.height === height && view.raster === raster
     ) {
       const ratio = zoom / view.zoom;
       const dx = 240 * (1 - ratio) - pad * ratio + (view.px - px) * zoom;
@@ -149,31 +151,33 @@ export class WorldGround {
         ratio <= 1.18 &&
         dx <= 0 &&
         dy <= 0 &&
-        dx + surface.width * ratio >= 480 &&
-        dy + surface.height * ratio >= height
+        dx + surface.width / raster * ratio >= 480 &&
+        dy + surface.height / raster * ratio >= height
       ) {
         // Submit only the visible source rectangle, not the overscan buffer.
         this.views.delete(stage); this.views.set(stage, saved);
-        c.drawImage(surface, -dx / ratio, -dy / ratio, 480 / ratio,
-          height / ratio, 0, 0, 480, height);
+        c.drawImage(surface, -dx / ratio * raster, -dy / ratio * raster, 480 / ratio * raster,
+          height / ratio * raster, 0, 0, 480, height);
         return true;
       }
     }
     if (
-      surface.width !== 480 + pad * 2 ||
-      surface.height !== Math.ceil(height) + pad * 2
+      surface.width !== Math.ceil((480 + pad * 2)*raster) ||
+      surface.height !== Math.ceil((height + pad * 2)*raster)
     ) {
-      surface.width = 480 + pad * 2;
-      surface.height = Math.ceil(height) + pad * 2;
+      surface.width = Math.ceil((480 + pad * 2)*raster);
+      surface.height = Math.ceil((height + pad * 2)*raster);
     }
-    this.view = { image, stage, seed, height, zoom, px, py };
+    this.view = { image, stage, seed, height, zoom, px, py, raster };
     this.views.delete(stage);
     this.views.set(stage, { surface, view: this.view });
     this.trimViews();
     this.redraws++;
     const layer = surface.getContext('2d');
+    layer.setTransform(1,0,0,1,0,0);
     layer.clearRect(0, 0, surface.width, surface.height);
     layer.save();
+    layer.scale(raster,raster);
     layer.translate(pad, pad);
     layer.globalCompositeOperation = stage === 'city' ? 'source-over' : 'lighter';
     const sx = profile.step,
@@ -219,7 +223,7 @@ export class WorldGround {
     layer.fillRect(-pad, -pad, surface.width, surface.height);
     layer.restore();
     // Composite once so evolution crossfades retain their intended opacity.
-    c.drawImage(surface, pad, pad, 480, height, 0, 0, 480, height);
+    c.drawImage(surface, pad*raster, pad*raster, 480*raster, height*raster, 0, 0, 480, height);
     return true;
   }
 }

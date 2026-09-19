@@ -12,8 +12,8 @@ export class FramePacer {
 
 // Bound total raster work, including large tablets. World scale stays intact.
 export function rasterRatio(width, height, deviceRatio, coarse) {
-  const budget = coarse ? 1000000 : 1500000;
-  return Math.min(deviceRatio || 1, coarse ? 1.5 : 2,
+  const budget = coarse ? 2000000 : 2500000;
+  return Math.min(deviceRatio || 1, coarse ? 2.5 : 2,
     Math.sqrt(budget / Math.max(1, width * height)));
 }
 
@@ -30,9 +30,9 @@ export class RasterBudget {
     this.elapsed += interval; this.frames++;
     if (interval > 22) this.slow++;
     if (this.elapsed < 2400) return false;
-    const lower = this.frames >= 12 && this.slow / this.frames > .25 && this.quality > .71;
+    const lower = this.frames >= 12 && this.slow / this.frames > .25 && this.quality > .86;
     this.resetWindow();
-    if (lower) this.quality = Math.max(.7, Math.round((this.quality - .1) * 10) / 10);
+    if (lower) this.quality = Math.max(.85, Math.round((this.quality - .1) * 10) / 10);
     return lower;
   }
 }

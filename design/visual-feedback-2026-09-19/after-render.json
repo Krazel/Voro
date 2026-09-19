@@ -1,0 +1,42 @@
+[
+  {
+    "stage": 0,
+    "radius": 24,
+    "zoom": 1.12,
+    "pixelRatio": 2.233946735213272,
+    "width": 961,
+    "height": 2082
+  },
+  {
+    "stage": 1,
+    "radius": 11.384199576606164,
+    "zoom": 2.3611673195923903,
+    "pixelRatio": 2.233946735213272,
+    "width": 961,
+    "height": 2082
+  },
+  {
+    "stage": 3,
+    "radius": 11.384199576606164,
+    "zoom": 2.3611673195923903,
+    "pixelRatio": 2.233946735213272,
+    "width": 961,
+    "height": 2082
+  },
+  {
+    "stage": 4,
+    "radius": 24,
+    "zoom": 1.12,
+    "pixelRatio": 2.233946735213272,
+    "width": 961,
+    "height": 2082
+  },
+  {
+    "stage": 5,
+    "radius": 24,
+    "zoom": 1.12,
+    "pixelRatio": 2.233946735213272,
+    "width": 961,
+    "height": 2082
+  }
+]

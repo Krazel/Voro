@@ -16,9 +16,11 @@ import { AdaptationChoices } from './adaptation-constellation';
 export function CristalPreview({
   open,
   onClose,
+  onProtagonist,
 }: {
   open: boolean;
   onClose: () => void;
+  onProtagonist?: (canvas: HTMLCanvasElement | null) => void;
 }) {
   const offer = ['speed', 'digest', 'shield'];
   const [notice, setNotice] = useState('');
@@ -60,6 +62,7 @@ export function CristalPreview({
             <h2>La vida encuentra otra forma.</h2>
             <p className="cristal-subtitle">Elige una adaptación</p>
             <AdaptationChoices
+              onProtagonist={onProtagonist}
               offer={offer}
               mutations={[]}
               onChoose={(id) =>

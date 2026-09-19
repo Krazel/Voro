@@ -9,7 +9,7 @@ import { SPECIES_BY_ID } from '../app/journey-data.mjs';
 
 function sheetsFixture(limit = 300) {
   const images = [];
-  const meta = url => ({url,bytes:100,frames:24,cols:6,w:2,h:2,x:0,y:0,size:8,extent:3});
+  const meta = url => ({url,bytes:100,frames:24,cols:6,w:2,h:2,x:0,y:0,size:192,extent:3});
   const manifest = {'water-2':{1:meta('normal'),1.5:meta('reaction')},'water-3':{1:meta('other')}};
   const sheets = new AnimationSheets({limit,manifest,createImage:()=> {
     const i = {complete:false,naturalWidth:12,decode:()=>Promise.resolve()}; images.push(i); return i;

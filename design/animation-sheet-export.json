@@ -1,10 +1,10 @@
 {
-  "species": 105,
-  "size": 192,
-  "encodedBytes": 74386492,
-  "sourceHash": "cbc6ef85a89b2dec86b490b1d74f7a876493887391b22ea24e080c5c5ad96416",
-  "format": "WebP quality 94, alpha 100, same rigs; 24–64 poses per cycle, up to 30 poses/s; rigid transforms continuous; tight common crop",
+  "species": 106,
   "targetFps": 30,
   "maxFrames": 64,
-  "uniqueFiles": 140
+  "size": 192,
+  "uniqueFiles": 149,
+  "encodedBytes": 76652568,
+  "sourceHash": "f23d24bc04c2adeb63b2bef44b707bfc742148a46113d6d8fa9593c6f9caa54c",
+  "format": "WebP quality 94, alpha 100, same rigs; 24–64 poses per cycle, up to 30 poses/s; rigid transforms continuous; tight common crop"
 }

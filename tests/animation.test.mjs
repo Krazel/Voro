@@ -11,6 +11,7 @@ import { STAGE_SPECIES } from '../app/journey-data.mjs';
 import { newJourney, journeyLife } from '../app/journey-progress.mjs';
 import { HuntingTentacles } from '../app/hunting-tentacles.mjs';
 const sizes = {
+  cityCivilians: [1536,1024],
   ringedPlanet: [640,640],
   cityBuildings: [1536,1024],
   planetDiversity: [1536,1024],

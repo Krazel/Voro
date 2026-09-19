@@ -1008,7 +1008,7 @@ export function drawInhabitant(
       (typeof document !== 'undefined' && 'createElement' in document))
   ) {
     const size =
-      screenR < 24 ? 64 : screenR < 65 ? 128 : screenR < 160 ? 192 : 256;
+      screenR < 20 ? 64 : screenR < 40 ? 128 : screenR < 62 ? 192 : screenR < 84 ? 256 : 512;
     const pose = Math.floor((phase / TAU) * POSE_COUNT),
       energy = activity < 0.65 ? 0.35 : activity > 1.25 ? 1.5 : 1;
     const group = `${profile.assetKey}:${size}:${energy}`;

@@ -11,11 +11,13 @@ const { createCanvas, loadImage } = req('@napi-rs/canvas');
 const sharp = req('sharp');
 const size = 192, fps = 30;
 const sourceHash = createHash('sha256').update(readFileSync('app/inhabitant-animation.mjs')).digest('hex');
-const images = {}, manifest = {};
+const selected = process.env.VORO_EXPORT_IDS?.split(',');
+const images = {}, manifest = selected ? JSON.parse(readFileSync('app/animation-sheets.json','utf8')) : {};
 mkdirSync('public/animation-sheets', { recursive: true });
 for (const [key, url] of Object.entries(ATLAS_URLS)) images[key] = await loadImage('public/' + url.slice(2));
 let exported = 0, bytes = 0;
 for (const s of Object.values(SPECIES_BY_ID)) {
+  if (selected && !selected.includes(s.id)) continue;
   const profile = ANIMATIONS[s.id];
   if (simpleAnimation(profile)) continue;
   const image = images[s.imageAtlas || s.atlas];
@@ -59,7 +61,7 @@ for (const s of Object.values(SPECIES_BY_ID)) {
 }
 writeFileSync('app/animation-sheets.json', JSON.stringify(manifest) + '\n');
 const unique = new Map(Object.values(manifest).flatMap(x => Object.values(x)).map(x => [x.url, x]));
-writeFileSync('design/animation-sheet-export.json', JSON.stringify({ species: exported, targetFps: fps, maxFrames: 64, size,
+writeFileSync('design/animation-sheet-export.json', JSON.stringify({ species: Object.keys(manifest).length, targetFps: fps, maxFrames: 64, size,
   uniqueFiles: unique.size, encodedBytes: [...unique.values()].reduce((n, x) => n + x.encodedBytes, 0),
   sourceHash,
   format: 'WebP quality 94, alpha 100, same rigs; 24–64 poses per cycle, up to 30 poses/s; rigid transforms continuous; tight common crop' }, null, 2) + '\n');

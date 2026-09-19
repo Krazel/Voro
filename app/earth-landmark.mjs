@@ -23,11 +23,14 @@ export function canAbsorbEarth(p) {
 export function drawOrbitalEarth(c, image, camera, height, zoom = 1, life = null, absorption = 0) {
   if (!image?.naturalWidth) return;
   const t = Math.max(0, Math.min(1, absorption)), ease = t * t * (3 - 2 * t);
-  const wx = ORBITAL_EARTH.x + ((life?.x ?? ORBITAL_EARTH.x) - ORBITAL_EARTH.x) * ease;
-  const wy = ORBITAL_EARTH.y + ((life?.y ?? ORBITAL_EARTH.y) - ORBITAL_EARTH.y) * ease;
-  const x = 240 + (wx - camera.x) * zoom;
-  const y = height * .48 + (wy - camera.y) * zoom;
-  const r = ORBITAL_EARTH.radius * zoom * (1 - ease);
+  // Original screen-space painting: gameplay framing must not shrink Earth.
+  const originX = 240 - (camera.x - 700) * .08;
+  const originY = height * .6 + 460 - (camera.y - 970) * .08;
+  const targetX = 240 + ((life?.x ?? camera.x) - camera.x) * zoom;
+  const targetY = height * .48 + ((life?.y ?? camera.y) - camera.y) * zoom;
+  const x = originX + (targetX - originX) * ease;
+  const y = originY + (targetY - originY) * ease;
+  const r = ORBITAL_EARTH.radius * (1 - ease);
   if (x + r < 0 || x - r > 480 || y + r < 0 || y - r > height) {
     const dx = x - 240, dy = y - height * .48;
     const angle = Math.atan2(dy, dx);

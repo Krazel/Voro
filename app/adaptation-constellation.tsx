@@ -1,47 +1,65 @@
 'use client';
-import { useId, type CSSProperties } from 'react';
+import { useId, useEffect, useRef, type CSSProperties } from 'react';
 import { ChevronsUp, Shield, Sparkles } from 'lucide-react';
 import { UPGRADES, levelOf } from './mutations.mjs';
 import './adaptation-constellation.css';
 
-// Vector filaments stay crisp at every device size and animate independently of copy.
+// A living outline, separate from the text and from the real player canvas.
+function membranePath(time: number, phase: number) {
+  const points = Array.from({length: 80}, (_, i) => {
+    const a = i / 80 * Math.PI * 2;
+    const lobes = Math.max(0, Math.cos(a * 5 + Math.sin(time * .23 + phase) * .45));
+    const r = 96 + 17 * lobes ** 7 + 5 * Math.sin(a * 3 - time * .42 + phase);
+    return [120 + Math.cos(a) * r, 120 + Math.sin(a) * r];
+  });
+  const last = points.at(-1)!;
+  return `M${(last[0]+points[0][0])/2},${(last[1]+points[0][1])/2}` + points.map((p,i) => {
+    const n = points[(i+1)%points.length];
+    return `Q${p[0]},${p[1]} ${(p[0]+n[0])/2},${(p[1]+n[1])/2}`;
+  }).join('') + 'Z';
+}
 function Membrane({ index }: { index: number }) {
   const uid = useId().replace(/:/g, '');
+  const outline = useRef<SVGGElement>(null);
+  useEffect(() => {
+    const media = matchMedia('(prefers-reduced-motion: reduce)');
+    let frame = 0, last = 0;
+    const paint = (stamp: number) => {
+      if (stamp-last > 32) {
+        outline.current?.querySelectorAll('path').forEach((p,i) => p.setAttribute('d',membranePath(stamp/1000,index+i*.45)));
+        last=stamp;
+      }
+      if (!media.matches) frame=requestAnimationFrame(paint);
+    };
+    const start = () => {cancelAnimationFrame(frame); if(!media.matches)frame=requestAnimationFrame(paint);};
+    start(); media.addEventListener('change',start);
+    return () => {cancelAnimationFrame(frame);media.removeEventListener('change',start);};
+  }, [index]);
   return <svg className="adaptation-membrane" viewBox="0 0 240 240" aria-hidden="true">
-    <defs>
-      <radialGradient id={uid}><stop offset="70%" stopColor="currentColor" stopOpacity="0" /><stop offset="94%" stopColor="currentColor" stopOpacity=".24" /><stop offset="100%" stopColor="currentColor" stopOpacity="0" /></radialGradient>
-    </defs>
-    <circle cx="120" cy="120" r="112" fill={`url(#${uid})`} />
-    <g className="adaptation-filaments" fill="none" stroke="currentColor">
-      {[0, 45, 90, 135].map((angle, i) => <path key={angle} transform={`rotate(${angle} 120 120)`} strokeWidth={i === 0 ? 1.7 : .65} opacity={i === 0 ? .95 : .65} d="M120 13 C163 3 215 59 222 106 S186 224 130 224 S16 190 15 128 S62 29 120 13Z" />)}
-      <ellipse cx="120" cy="120" rx="108" ry="97" strokeWidth=".55" strokeDasharray="1 5 12 8" />
+    <defs><radialGradient id={uid}><stop offset="65%" stopColor="currentColor" stopOpacity="0"/><stop offset="96%" stopColor="currentColor" stopOpacity=".22"/></radialGradient></defs>
+    <g ref={outline} stroke="currentColor">
+      <path d={membranePath(0,index)} fill={`url(#${uid})`} strokeWidth="1.5"/>
+      <path d={membranePath(0,index+.45)} fill="none" strokeWidth=".6" opacity=".6"/>
     </g>
     <g className="adaptation-satellites" fill="currentColor">
-      {Array.from({ length: 12 }, (_, n) => {
-        const a = n * Math.PI / 6 + index;
-        return <circle key={n} cx={120 + Math.cos(a) * (n % 2 ? 110 : 102)} cy={120 + Math.sin(a) * (n % 2 ? 110 : 102)} r={n % 3 === 0 ? 2.9 : 1.2} opacity={n % 2 ? .55 : .95} />;
-      })}
+      {Array.from({length:10},(_,i)=><circle key={i} cx={120+Math.cos(i*Math.PI/5)*108} cy={120+Math.sin(i*Math.PI/5)*108} r={i%3?1.2:2.8} opacity=".7"/>)}
     </g>
   </svg>;
 }
-
-function Organism() {
-  return <svg className="adaptation-organism" viewBox="0 0 200 200" aria-hidden="true">
-    <circle className="adaptation-orbit" cx="100" cy="100" r="91" fill="none" stroke="#79daee" strokeWidth=".55" strokeDasharray="1 4 30 5" />
-    <circle cx="100" cy="100" r="82" fill="none" stroke="#67c3d8" strokeOpacity=".35" strokeWidth=".6" />
-    <g className="adaptation-cell">
-      <path d="M90 41 C101 20 118 29 119 48 C123 65 139 64 147 52 C159 39 170 54 160 71 C149 91 165 98 174 109 C187 127 169 139 153 129 C134 117 133 140 132 154 C129 177 109 170 108 150 C104 130 88 141 79 157 C64 174 48 158 60 141 C74 121 56 118 41 122 C16 129 18 105 41 101 C67 94 52 84 39 73 C22 58 39 41 54 56 C71 73 83 62 90 41Z" fill="#7fd9ef30" stroke="#b4f5ff" strokeWidth="2" />
-      <path d="M90 41L82 80 41 101 92 114 79 157 113 117 153 129 127 96 160 71 112 77Z M82 80L112 77 127 96 113 117 92 114Z" fill="#c4f2f01a" stroke="#c8ecf3" strokeOpacity=".6" strokeWidth=".8" />
-      <circle cx="103" cy="98" r="26" fill="#e9a54135" stroke="#ffd480" strokeWidth="1.5" />
-      <circle cx="103" cy="98" r="14" fill="#ffd17580" stroke="#ffe7a1" />
-      <path d="M103 77L106 94 121 98 106 102 103 121 99 103 86 98 99 94Z" fill="#fff5ca" />
-      {[ [77,83], [126,73], [139,111], [72,122], [108,136], [56,69] ].map(([x,y]) => <circle key={x} cx={x} cy={y} r="3.5" fill="#b5eaff50" stroke="#e4faff" strokeWidth=".65" />)}
-    </g>
-  </svg>;
+function Protagonist({ connect }: { connect?: (canvas: HTMLCanvasElement | null) => void }) {
+  const canvas = useRef<HTMLCanvasElement>(null);
+  useEffect(() => {
+    const node=canvas.current!;
+    const resize=()=>{const r=node.getBoundingClientRect();const d=Math.min(devicePixelRatio||1,3);node.width=Math.round(r.width*d);node.height=Math.round(r.height*d);};
+    resize(); const observer=new ResizeObserver(resize);observer.observe(node);
+    connect?.(node);
+    return()=>{observer.disconnect();connect?.(null);};
+  },[connect]);
+  return <canvas ref={canvas} className="adaptation-organism" aria-hidden="true" data-renderer="live-protagonist"/>;
 }
 
-export function AdaptationChoices({ offer, mutations, onChoose }: {
-  offer: string[]; mutations: string[]; onChoose: (id: string) => void;
+export function AdaptationChoices({ offer, mutations, onChoose, onProtagonist }: {
+  offer: string[]; mutations: string[]; onChoose: (id: string) => void; onProtagonist?: (canvas: HTMLCanvasElement | null) => void;
 }) {
   // Keep three selectable positions even at the final capped upgrades. Repeated
   // positions grant the same remaining upgrade, never an extra level or reroll.
@@ -55,7 +73,7 @@ export function AdaptationChoices({ offer, mutations, onChoose }: {
         <path stroke="#ae99ff" d="M209 255 C268 254 244 305 298 326 M209 255 C229 293 283 273 298 326" />
       </g>
     </svg>
-    <Organism />
+    <Protagonist connect={onProtagonist} />
     {slots.map((id, index) => {
       const upgrade = UPGRADES.find((item) => item.id === id)!;
       const Symbol = symbols[index];

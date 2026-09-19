@@ -58,7 +58,7 @@ test('Every biome uses bounded populations with rare rabbits/swimmers and popula
   );
   assert.ok(
     city.rows
-      .filter((s) => ['city-0', 'city-1', 'city-2', 'city-3'].includes(s.id))
+      .filter((s) => ['city-0', 'city-1', 'city-2', 'city-3'].includes(s.id)||s.id.startsWith('city-civilian-'))
       .reduce((n, s) => n + s.per100, 0) > 35,
   );
   assert.ok(shore.average < 12);

@@ -1,0 +1,26 @@
+{
+  "mean": 1.4550000000538097,
+  "p95": 3,
+  "zoom": 0.6260990336999412,
+  "r": 42.93250516799596,
+  "entities": 314,
+  "pixels": 1998880,
+  "parts": {
+    "animationPreparation": 0,
+    "background": 0,
+    "inhabitants": 0.5,
+    "protagonist": 0.30000000074505806
+  },
+  "animation": {
+    "bytes": 0,
+    "limit": 67108864,
+    "resident": 0,
+    "active": 0,
+    "pending": 0,
+    "hits": 0,
+    "loads": 0,
+    "evictions": 0,
+    "dropped": 0,
+    "errors": 0
+  }
+}

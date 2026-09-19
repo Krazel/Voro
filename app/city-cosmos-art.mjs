@@ -1,6 +1,7 @@
 import CROPS from './city-cosmos-crops.json' with { type: 'json' };
 // New artwork is attached after the historic catalogue so saved IDs remain valid.
 export function applyCityCosmosArt(stages, lists, byId, urls) {
+  urls.cityCivilians = './inhabitants/city-civilians.png';
   urls.cityBuildings = './inhabitants/city-buildings-v2.webp';
   urls.ringedPlanet = './inhabitants/ringed-planet-v2.webp';
   urls.planetDiversity = './inhabitants/planet-diversity-v2.webp';
@@ -12,9 +13,17 @@ export function applyCityCosmosArt(stages, lists, byId, urls) {
     const s = { ...source, id, name, stage, ...changes };
     lists[stage].push(s); byId[id] = s; return s;
   };
+  const civilianCrops = [[73,75,362,398],[580,53,400,434],[1080,68,367,415],
+    [77,523,380,428],[576,532,406,421],[1127,532,343,421]];
+  const civilianNames = ['Peatona con bolso','Trabajador','Corredora','Persona con bastón','Oficinista','Repartidor'];
+  civilianCrops.forEach((crop,i) => add(byId['city-0'], 'city-civilian-'+i,civilianNames[i],city,{
+    variantOf:'city-0', imageAtlas:'cityCivilians', crop,
+    artProfile:{family:'human',period:1.3,amount:.22,revision:1,
+      description:'Civil distinto, con silueta, ropa y accesorios propios.'}
+  }));
   const building = (s, i, r) => Object.assign(s, { building: true, fixedHeading: 0,
     imageAtlas: 'cityBuildings', crop: CROPS.city[i],
-    r, sizeFactors: [.92,1.06], kind: 'still', speed: 0, requiredMass: undefined,
+    r, edibleRadiusFactor: Math.max(1, CROPS.city[i][3] / CROPS.city[i][2]), sizeFactors: [.92,1.06], kind: 'still', speed: 0, requiredMass: undefined,
     artProfile: { family: 'prop', rigid: true, period: 8, revision: 3,
       description: 'Edificio fijo, alineado con su parcela y las calles.' } });
   building(byId['city-10'], 1, 78); byId['city-10'].name = 'Bloque de apartamentos';

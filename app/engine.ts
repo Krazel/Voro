@@ -374,7 +374,7 @@ export class VoroEngine {
     this.seed();
     this.fragments = restoredFragments;
     this.food = [...this.world.entities, ...this.fragments];
-    if (stageOf(this.progress).id === 'orbit' && this.progress.earthConsumed) {
+    if (this.progress.completed || (stageOf(this.progress).id === 'orbit' && this.progress.earthConsumed)) {
       this.world.entities = []; this.world.projectiles = [];
       this.food = []; this.fragments = []; this.motes = [];
     }
@@ -537,6 +537,23 @@ export class VoroEngine {
     this.hitFlash = 0;
     this.heading = -Math.PI / 2;
   }
+  adaptationCanvas: HTMLCanvasElement | null = null;
+  setAdaptationCanvas(canvas: HTMLCanvasElement | null) {
+    this.adaptationCanvas = canvas;
+    this.renderDirty = true;
+  }
+  drawAdaptationProtagonist(time: number) {
+    const canvas = this.adaptationCanvas, original = this.ctx;
+    if (!canvas?.width || !canvas.height) return;
+    const c = canvas.getContext('2d');
+    if (!c) return;
+    c.setTransform(1,0,0,1,0,0); c.clearRect(0,0,canvas.width,canvas.height);
+    c.save(); c.translate(canvas.width/2,canvas.height/2);
+    const scale=Math.min(canvas.width,canvas.height)*.29 / Math.max(.8,this.life.radius);
+    c.scale(scale,scale); c.translate(-this.life.x,-this.life.y);
+    try { this.ctx=c; this.drawCell(this.reduced ? this.time : time*.35); }
+    finally { this.ctx=original; c.restore(); }
+  }
   resize() {
     this.renderDirty = true;
     const b = this.canvas.getBoundingClientRect();
@@ -562,7 +579,7 @@ export class VoroEngine {
   }
   cameraInputAllowed() {
     return this.started && !this.paused && !this.settingsOpen && !this.life.dead
-      && !this.progress.completed && !this.progress.offer.length && !this.transition && !this.birth && !this.earthAbsorption;
+      && !this.ending && !this.progress.offer.length && !this.transition && !this.birth && !this.earthAbsorption;
   }
   get cameraEntryRadius() {
     return this.progress.cameraEntryRadius ?? radiusForMass(stageStartMass(this.progress.stage));
@@ -894,7 +911,7 @@ export class VoroEngine {
       this.started &&
       !this.life.dead &&
       !this.progress.offer.length &&
-      !this.progress.completed
+      this.ending === 0
     ) {
       this.paused = !this.paused;
       this.keys.clear();
@@ -1027,11 +1044,11 @@ export class VoroEngine {
         y = (this.pointer.y - this.pointer.sy) / 48;
       } else {
         x =
-          (this.pointer.x - ((this.life.x - this.camera.x) * this.zoom + 240)) /
+          (this.pointer.x - ((this.life.x - this.camera.x) * (this.progress.completed ? 1 : this.zoom) + 240)) /
           65;
         y =
           (this.pointer.y -
-            ((this.life.y - this.camera.y) * this.zoom + this.height * 0.48)) /
+            ((this.life.y - this.camera.y) * (this.progress.completed ? 1 : this.zoom) + this.height * 0.48)) /
           65;
       }
       const d = Math.hypot(x, y);
@@ -1079,12 +1096,15 @@ export class VoroEngine {
       } else this.gamepadButtons = [false, false];
     }
     if (!document.hidden) {
-      // Only the solitary cell breathes after the ending. No world simulation,
-      // streaming or HUD updates; keep this quiet screen at most 20 fps.
-      if (this.progress.completed && this.ending === 0 && !this.paused && !this.settingsOpen
-        && !this.reduced && stamp - this.lastVoidFrame >= 50) {
-        this.time += Math.min(.1, (stamp - this.lastVoidFrame) / 1000);
-        this.lastVoidFrame = stamp; this.renderDirty = true;
+      // Movement after the finale is isolated from progression and world simulation.
+      if (this.progress.completed && this.ending === 0 && this.started && !this.paused && !this.settingsOpen) {
+        const direction=this.input();
+        const moving=Math.hypot(direction.x,direction.y,this.life.vx,this.life.vy)>.1;
+        if(moving || (!this.reduced && stamp-this.lastVoidFrame>=50)) {
+          const step=moving?dt:Math.min(.1,(stamp-this.lastVoidFrame)/1000);
+          this.time += step; this.updateSurvivor(step);
+          this.lastVoidFrame=stamp; this.renderDirty=true;
+        }
       }
       if (
         !this.paused &&
@@ -1110,6 +1130,7 @@ export class VoroEngine {
         this.renderDirty = false;
       }
     }
+    if (this.adaptationCanvas && !document.hidden) this.drawAdaptationProtagonist(stamp/1000);
     if (measured && this.measuredLastFrame) {
       this.frameMonitor.add(interval, performance.now() - frameStart, {
         stage: this.progress.stage, radius: +this.life.radius.toFixed(1), zoom: +this.zoom.toFixed(3),
@@ -1131,6 +1152,16 @@ export class VoroEngine {
     this.uiCommitDelay = 0;
     this.raf = requestAnimationFrame(this.frame);
   };
+  updateSurvivor(dt: number) {
+    const p=this.life, input=this.input(), magnitude=Math.max(1,Math.hypot(input.x,input.y));
+    const blend=1-Math.exp(-dt*8);
+    p.vx+=(input.x/magnitude*100-p.vx)*blend;
+    p.vy+=(input.y/magnitude*100-p.vy)*blend;
+    p.x=Math.max(this.camera.x-170,Math.min(this.camera.x+170,p.x+p.vx*dt));
+    p.y=Math.max(this.camera.y-this.height*.48+76,Math.min(this.camera.y+this.height*.52-76,p.y+p.vy*dt));
+    if(Math.hypot(p.vx,p.vy)>2) this.heading=Math.atan2(p.vy,p.vx);
+    this.animateMembrane(dt);
+  }
   update(dt: number) {
     if (this.earthAbsorption > 0) {
       if (!this.started) return;
@@ -1197,7 +1228,12 @@ export class VoroEngine {
       this.ending = Math.max(0, this.ending - dt);
       this.animateMembrane(dt);
       if (before > FINALE_SECONDS * .2 && this.ending <= FINALE_SECONDS * .2) this.setAudio();
-      if (!this.ending) { this.universeFinale?.destroy(); this.universeFinale = null; this.setAudio(); }
+      if (!this.ending) {
+        this.camera.x=this.life.x; this.camera.y=this.life.y;
+        this.life.vx=0; this.life.vy=0;
+        this.food=[]; this.fragments=[]; this.motes=[]; this.world.entities=[]; this.world.projectiles=[];
+        this.huntingTentacles.clear();
+        this.universeFinale?.destroy(); this.universeFinale = null; this.setAudio(); }
       if (!this.ending || this.time - this.lastEmit > .12) { this.lastEmit=this.time; this.publish(); }
       return;
     }
@@ -1240,7 +1276,11 @@ export class VoroEngine {
       this.food = this.fragments.length
         ? [...this.world.entities, ...this.fragments] : this.world.entities;
       this.motes = this.world.motes;
-      this.world.move(dt, p.elapsed, p, this.stats, this.trail);
+      this.world.move(dt, p.elapsed, p, this.stats, this.trail,
+        stageOf(this.progress).id==='orbit' ? {
+          left:this.camera.x-240/this.zoom-80,right:this.camera.x+240/this.zoom+80,
+          top:this.camera.y-this.height*.48/this.zoom-80,bottom:this.camera.y+this.height*.52/this.zoom+80,
+        } : null);
       this.huntingTentacles.update(
         dt,
         p,
@@ -1312,10 +1352,8 @@ export class VoroEngine {
           continue;
         const spec = SPECIES_BY_ID[e.kind];
         if (!isDanger(spec)) continue;
-        if (p.biomass >= e.requiredMass && stageOf(this.progress).id !== 'city') continue;
-        // Eligible city defenders get an absorption attempt before contact
-        // damage. They still hurt if capacity is full, and keep firing outside.
-        if (p.biomass >= e.requiredMass && Math.hypot(p.x-e.x,p.y-e.y) > p.radius*1.12*p.reachFactor) continue;
+        // A smaller edible defender cannot hurt first, even when digestion is full.
+        if (p.biomass >= e.requiredMass) continue;
         if (Math.hypot(p.x - e.x, p.y - e.y) > p.radius * 0.85 + e.r * 0.76)
           continue;
         this.receiveHit(e, 0.22);
@@ -1752,7 +1790,11 @@ export class VoroEngine {
       };
       if (this.ending > 0 && this.universeFinale)
         this.universeFinale.draw(c,480,this.height,this.ending,this.reduced,protagonist,this.time);
-      else drawVoidSurvivor(c,480,this.height,this.time,this.reduced,protagonist);
+      else {
+        c.save(); c.translate(p.x-this.camera.x,p.y-this.camera.y);
+        drawVoidSurvivor(c,480,this.height,this.time,this.reduced,protagonist);
+        c.restore();
+      }
       return;
     }
     // The microscope cache is fully opaque. Drawing a full-screen base beneath
@@ -1785,7 +1827,7 @@ export class VoroEngine {
       drawOrbitalEarth(c, this.atlasImages.earth, this.camera, this.height, this.zoom, this.life, this.earthAbsorption);
       c.restore();
     }
-    const shake = this.reduced ? 0 : this.hitFlash * 3,
+    const shake = 0,
       ox = 240 / this.zoom - this.camera.x + Math.sin(this.time * 55) * shake,
       oy =
         (this.height * 0.48) / this.zoom -
@@ -1887,7 +1929,7 @@ export class VoroEngine {
       c.translate(p.x, p.y); c.scale(size, size); c.translate(-p.x, -p.y);
       c.globalAlpha = .25 + .75 * t;
     }
-    if (!skipProtagonist) this.measured('protagonist', () => this.drawCell());
+    if (!skipProtagonist && !this.adaptationCanvas) this.measured('protagonist', () => this.drawCell());
     c.restore();
     for (const f of this.floating) {
       c.save();
@@ -1992,15 +2034,18 @@ export class VoroEngine {
     }
     c.closePath();
   }
-  drawCell() {
+  drawCell(time = this.time) {
     const c = this.ctx,
       p = this.life,
-      t = this.time;
+      t = time;
     if (p.radius < 0.8) return;
-    const r = p.radius * (1 + Math.sin(t * 2.2) * 0.017),
-      pts = this.shape(r);
+    const unit = this.cameraEntryRadius / 24;
+    const worldRadius = p.radius * (1 + Math.sin(t * 2.2) * 0.017);
+    const r = worldRadius / unit,
+      pts = this.shape(worldRadius).map((q: {x:number;y:number}) => ({x:q.x/unit,y:q.y/unit}));
     c.save();
     c.translate(p.x, p.y);
+    c.scale(unit,unit);
     if (p.dead) c.globalAlpha = Math.min(1, p.radius / 35);
     this.halo(0, 0, r * 1.75, 'rgba(39,173,213,.095)');
     if (
@@ -2110,9 +2155,9 @@ export class VoroEngine {
         i % 5 === 0 ? '#e9c88550' : '#a4e4ef38',
       );
     }
-    this.drawDigestion(false);
+    c.save(); c.scale(1/unit,1/unit); this.drawDigestion(false); c.restore();
     c.restore();
-    this.drawDigestion(true);
+    c.save(); c.scale(1/unit,1/unit); this.drawDigestion(true); c.restore();
     this.trace(pts);
     c.strokeStyle =
       p.hurt > 0 ? 'rgba(255,168,145,.85)' : 'rgba(155,223,239,.72)';
@@ -2167,8 +2212,8 @@ export class VoroEngine {
       c.lineWidth = 0.75;
       c.stroke();
     }
-    const nx = this.nucleus.x + Math.sin(t * 0.6) * 2,
-      ny = this.nucleus.y + Math.cos(t * 0.65) * 2,
+    const nx = this.nucleus.x / unit + Math.sin(t * 0.6) * 2,
+      ny = this.nucleus.y / unit + Math.cos(t * 0.65) * 2,
       nr = r * (0.205 + Math.sin(t * 3) * 0.008 + p.feedPulse * 0.025);
     this.halo(nx, ny, nr * 3.2, 'rgba(242,164,39,.16)');
     const g = c.createRadialGradient(

@@ -80,6 +80,10 @@ export class AnimationSheets {
     if (!this.enabled || this.destroyed) return 'unavailable';
     const versions = this.manifest[s.id];
     if (!versions || activity < 0.65) return 'unavailable';
+    // Do not enlarge a small baked pose beyond its source pixels at close zoom.
+    const matrix = typeof c.getTransform === 'function' ? c.getTransform() : null;
+    const pixels = matrix ? Math.hypot(matrix.a, matrix.b) : 1;
+    if (r * versions[1].extent * pixels > versions[1].size * 1.25) return 'unavailable';
     // Normal motion first, then the reaction variant. A missing reaction never
     // removes the normal swimming cycle from the screen.
     const normal = this.request(versions[1]);

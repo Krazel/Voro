@@ -19,10 +19,10 @@ test('120 Hz submits sixty frames per second, while 60 and 30 Hz keep their cade
 test('Raster work has a tablet pixel budget without changing camera or CSS geometry',()=>{
   for(const [w,h,dpr,coarse] of [[375,812,3,true],[1024,1366,2,true],[1920,1080,2,false]]){
     const ratio=rasterRatio(w,h,dpr,coarse);
-    assert.ok(w*h*ratio*ratio <= (coarse?1000000:1500000)+.01);
+    assert.ok(w*h*ratio*ratio <= (coarse?2000000:2500000)+.01);
     assert.ok(ratio<=dpr);
   }
-  assert.equal(rasterRatio(375,812,3,true),1.5);
+  assert.equal(rasterRatio(375,812,3,true),2.5);
 });
 
 test('Zoom controls change the framing, not biomass, and survive biome entry and tests',()=>{
@@ -63,7 +63,7 @@ test('Adaptive raster ignores isolated stalls and pauses, reduces sustained load
   for(let i=0;i<300;i++)b.observe(16.67,true);
   assert.equal(b.quality,.9);
   for(let i=0;i<1000;i++)b.observe(40,true);
-  assert.equal(b.quality,.7);
+  assert.equal(b.quality,.85);
   const paused=new RasterBudget();
   for(let i=0;i<1000;i++)paused.observe(40,false);
   assert.equal(paused.quality,1);
@@ -74,5 +74,5 @@ test('Sustained 10 fps also lowers resolution; severe stalls cannot miss a minim
   for(let i=0;i<25;i++)budget.observe(100,true);
   assert.equal(budget.quality,.9);
   for(let i=0;i<75;i++)budget.observe(100,true);
-  assert.equal(budget.quality,.7);
+  assert.equal(budget.quality,.85);
 });

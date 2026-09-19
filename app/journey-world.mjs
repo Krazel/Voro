@@ -7,6 +7,7 @@ import {
 import { MicroWorld, makeEntity, TILE } from './micro-world.mjs';
 import { animalTarget } from './animal-steering.mjs';
 import { random, clamp } from './simulation.mjs';
+import { projectileThreatMass } from './threat-scale.mjs';
 import { cityLots, cityPlacement, constrainCity } from './city-layout.mjs';
 import {
   STAGE_SPECIES,
@@ -109,7 +110,7 @@ export class JourneyWorld extends MicroWorld {
       // of the existing budget or let random starter picks flood the roads.
       if (stageId === 'city') pool = pool.filter(s => s.id !== 'city-5');
       const pedestrians = plan.pedestrians || 0;
-      const s = i < pedestrians ? SPECIES_BY_ID['city-0']
+      const s = i < pedestrians ? SPECIES_BY_ID[i % 7 === 0 ? 'city-0' : 'city-civilian-'+((i + Math.abs(cx*3+cy)) % 6)]
         : stageId === 'city' && i === starters ? SPECIES_BY_ID['city-5']
         : i === pedestrians ? recovery : pick(pool.length ? pool : list);
       const seed = rng() * 6.28,
@@ -187,7 +188,8 @@ export class JourneyWorld extends MicroWorld {
       });
     return { entities, motes, depleted };
   }
-  move(dt, time, p, stats, trail) {
+  /** @param {{left:number,right:number,top:number,bottom:number}|null} view */
+  move(dt, time, p, stats, trail, view = null) {
     if (this.stage === 0) {
       super.move(dt, time, p, stats, trail);
       for (const e of this.entities) {
@@ -200,6 +202,11 @@ export class JourneyWorld extends MicroWorld {
       if (e.eaten) continue;
       const s = SPECIES_BY_ID[e.kind];
       if (!s) continue;
+      // Keep every orbital entity resident and edible. Only suspend remote
+      // motion outside the padded view and outside all attack/feeding reach.
+      if (view && STAGES[this.stage].id === 'orbit'
+        && Math.hypot(e.x-p.x,e.y-p.y)>Math.max(460,p.radius*p.reachFactor+100)
+        && (e.x+e.r<view.left || e.x-e.r>view.right || e.y+e.r<view.top || e.y-e.r>view.bottom)) continue;
       if (s.edibleMatter) {
         this.moveMatter(e, s, dt, time);
         continue;
@@ -255,7 +262,7 @@ export class JourneyWorld extends MicroWorld {
             vy: Math.sin(angle) * v,
             life: 4.5,
             damage: s.shot.damage,
-            edibleAt: s.shot.edibleAt,
+            edibleAt: Math.min(s.shot.edibleAt, projectileThreatMass(e.requiredMass, s.shot.damage)),
             r: STAGES[this.stage].id === 'city' ? 3 : 6,
             plasma: STAGES[this.stage].id !== 'city',
           });
