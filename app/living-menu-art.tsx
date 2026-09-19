@@ -50,7 +50,7 @@ export function LivingMenuArt({ journey }: { journey: boolean }) {
         const width=Math.min(941,Math.max(1,Math.round(canvas!.clientWidth* Math.min(devicePixelRatio,1.5))));
         const height=Math.round(width*1672/941);
         if(canvas!.width!==width || canvas!.height!==height){canvas!.width=width;canvas!.height=height;gl!.viewport(0,0,width,height);}
-        gl!.uniform1f(clock,time * 7);gl!.drawArrays(gl!.TRIANGLE_STRIP,0,4);canvas!.style.opacity='1';
+        gl!.uniform1f(clock,time * 3.5);gl!.drawArrays(gl!.TRIANGLE_STRIP,0,4);canvas!.style.opacity='1';
       }
       frame=requestAnimationFrame(draw);
     }
