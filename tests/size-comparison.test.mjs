@@ -47,3 +47,13 @@ test('Starting dash travels slightly less than the original, more than the weak 
   assert.ok((current - baseline) / (old - baseline) > 0.8);
   assert.ok((current - baseline) / (old - baseline) < 0.9);
 });
+
+test('All city humans have similar visible heights, including civilian variants', () => {
+  const people = STAGE_SPECIES.flat().filter(s => /^city-([0-3]|civilian-\d)$/.test(s.id));
+  assert.equal(people.length, 10);
+  const heights = people.flatMap(s => {
+    const range = sizeRange(s);
+    return [range.min, range.max].map(r => 2 * r * s.crop[3] / s.crop[2]);
+  });
+  assert.ok(Math.max(...heights) / Math.min(...heights) < 1.063);
+});

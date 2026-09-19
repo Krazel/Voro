@@ -21,6 +21,11 @@ export function applyCityCosmosArt(stages, lists, byId, urls) {
     artProfile:{family:'human',period:1.3,amount:.22,revision:1,
       description:'Civil distinto, con silueta, ropa y accesorios propios.'}
   }));
+  // Radius describes sprite width: normalize human height across atlas crops.
+  for (const person of lists[city].filter(s => /^city-([0-3]|civilian-\d)$/.test(s.id))) {
+    person.r = 10 * person.crop[2] / person.crop[3];
+    person.sizeFactors = [.97, 1.03];
+  }
   const building = (s, i, r) => Object.assign(s, { building: true, fixedHeading: 0,
     imageAtlas: 'cityBuildings', crop: CROPS.city[i],
     r, edibleRadiusFactor: Math.max(1, CROPS.city[i][3] / CROPS.city[i][2]), sizeFactors: [.92,1.06], kind: 'still', speed: 0, requiredMass: undefined,
@@ -47,3 +52,4 @@ export function applyCityCosmosArt(stages, lists, byId, urls) {
   // Ocean worlds are exceptional, not the default model for a planet.
   byId['planets-1'].populationWeight = .35;
 }
+

@@ -5,7 +5,7 @@ export const MAX_SIZE_FACTOR = 1.12;
 export function sizeFactors(s) {
   if (s.kind === 'final' || s.unique) return [1, 1];
   if (s.sizeFactors) return s.sizeFactors;
-  if (s.motion === 'swimmer' || /^city-[0-3]$/.test(s.id)) return [0.94, 1.06];
+  if (s.motion === 'swimmer' || /^city-([0-3]|civilian-\d)$/.test(s.id)) return [0.97, 1.03];
   if (s.motion === 'vehicle' || s.motion === 'rotor') return [0.9, 1.1];
   if (s.motion === 'building') return [0.7, 1.35];
   if (s.motion === 'planet') return [0.55, 1.5];
@@ -28,3 +28,4 @@ export function sizeRange(species) {
 export function comparisonScale(species) {
   return Math.min(1, 145 / Math.max(...species.map((s) => sizeRange(s).max)));
 }
+
