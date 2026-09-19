@@ -71,7 +71,7 @@ export function FinalSettings({
         <nav className="final-settings-links" aria-label="Más opciones">
           <button onClick={() => setSection('journey')}>Recorrido</button>
           <button onClick={() => setSection('credits')}>Créditos</button>
-          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a href="https://www.instagram.com/krazelgames/" target="_blank" rel="noopener noreferrer">Instagram</a>
           {!testMode && <button className="rebirth-link" onClick={() => setConfirmReset(true)}>Volver a nacer</button>}
         </nav>
         {confirmReset && <div className="living-panel reset-sheet" role="alertdialog" aria-label="Confirmar nueva vida">
