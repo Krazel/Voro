@@ -15,3 +15,5 @@ Las transiciones conservan los 7,2 segundos y el encuadre uniforme; los fondos s
 Validación: 164 tests correctos (campaña completa incluida), TypeScript, lint dirigido y build móvil con verificación de assets correctos. Vite mantiene su aviso de chunk superior a 500 kB. Los dos scripts Playwright y sus resultados JSON quedan junto a las capturas. Cero errores de página. Son pruebas Chromium, no una validación nativa iOS/StoreKit ni una medición de rendimiento en dispositivo.
 
 Candidata: `artifact/cosmic-finale-preview-2026-09-19`, servida en http://127.0.0.1:5193/. El checkout original Voro permanece intacto. Sin push, subida de build ni publicación. Pendientes de la tarea principal: revisión iOS/StoreKit, EN/ES e IPA; capturas/whatsNew de ASC cuando editable y descripción itch.io Draft antes de publicar.
+
+Biblioteca PR-009: revisión 62 guardada sobre 61 y releída. Se conservan y comparan tracking, versión/build, distribución, versión pública, releases, source y detail. Código 10a63b6; recibo library-verification.json. Smoke de la candidata compilada: Despertar abre el canvas sin errores de página.

@@ -1,0 +1,17 @@
+{
+  "preserved": [
+    "tracking",
+    "version",
+    "build",
+    "distribution",
+    "publicVersion",
+    "releases",
+    "source",
+    "detail"
+  ],
+  "revision": 62,
+  "id": "PR-009",
+  "next": "Entrega local 19-09, 10a63b6, Voro-camera/camera-framing-2026-09-19: planetas/estrellas/galaxias con más variedad; disco de acreción existente ampliado (decisión del usuario), recorte galáctico corregido; biomasa completa; final con reaparición de 6 s y protagonista persistente; transiciones suaves. Conserva ciudad/órbita, zoom/manual, selector/escudo/StoreKit. 164 tests, tipos/lint/build y QA Chromium correctos. Demo http://127.0.0.1:5193/. Evidencias design/cosmic-finale-2026-09-19/README.md, ui-finale.webm y cosmos-transitions.webm. Responsable 01a0b94a-4710-7570-b1bf-16a0fd5a9682. Pendiente iOS/StoreKit, EN/ES e IPA con 01a06eb1-17bb-74c1-b4a4-f88225d8e26d. Sin push/subida/publicación. ASC: capturas y whatsNew cuando editable; precio/privacidad/soporte verificados, web v38 intacta. itch.io: ZIP Draft; verificar descripción antes de publicar.",
+  "previousRevision": 61,
+  "verified": true
+}
