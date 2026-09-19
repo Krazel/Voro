@@ -4,6 +4,12 @@ import { ChevronsUp, Shield, Sparkles } from 'lucide-react';
 import { UPGRADES, levelOf } from './mutations.mjs';
 import './adaptation-constellation.css';
 
+const GROUP_COLORS: Record<string, string> = {
+  Comer: '#63f9b0', Moverse: '#65d9ff', Defenderse: '#b9a0ff',
+  Cazar: '#ffad69', Rara: '#f5d76e',
+};
+const upgradeColor = (id: string) => GROUP_COLORS[UPGRADES.find(u => u.id === id)?.group ?? ''] ?? '#d2e6e9';
+
 // A living outline, separate from the text and from the real player canvas.
 function membranePath(time: number, phase: number, scale = 1) {
   // Approved B1: five slow extensions, with ten smaller independent tips.
@@ -84,16 +90,16 @@ export function AdaptationChoices({ offer, mutations, onChoose, onProtagonist }:
   return <div className="adaptation-constellation" data-choice-count={slots.length}>
     <svg className="adaptation-connections" viewBox="0 0 400 500" preserveAspectRatio="none" aria-hidden="true">
       <g fill="none" strokeWidth="1.4">
-        <path stroke="#5aeae5" d="M200 238 C163 206 230 192 200 144 M200 238 C222 203 183 197 200 144" />
-        <path stroke="#ffc26d" d="M191 255 C132 254 156 305 102 326 M191 255 C171 293 117 273 102 326" />
-        <path stroke="#ae99ff" d="M209 255 C268 254 244 305 298 326 M209 255 C229 293 283 273 298 326" />
+        <path stroke={upgradeColor(slots[0])} d="M200 238 C163 206 230 192 200 144 M200 238 C222 203 183 197 200 144" />
+        <path stroke={upgradeColor(slots[1])} d="M191 255 C132 254 156 305 102 326 M191 255 C171 293 117 273 102 326" />
+        <path stroke={upgradeColor(slots[2])} d="M209 255 C268 254 244 305 298 326 M209 255 C229 293 283 273 298 326" />
       </g>
     </svg>
     <Protagonist connect={onProtagonist} />
     {slots.map((id, index) => {
       const upgrade = UPGRADES.find((item) => item.id === id)!;
       const Symbol = symbols[index];
-      return <div className={`adaptation-position adaptation-position-${index}`} key={`${index}-${id}`} style={{ '--arrival-delay': `${index * 110}ms` } as CSSProperties}>
+      return <div className={`adaptation-position adaptation-position-${index}`} key={`${index}-${id}`} style={{ '--arrival-delay': `${index * 110}ms`, color: upgradeColor(id) } as CSSProperties}>
         <button type="button" className="adaptation-bubble" onClick={() => onChoose(id)} aria-label={`${upgrade.name}. ${upgrade.detail}. ${levelOf(mutations, id)} de ${upgrade.max} adquiridas`} data-upgrade={id}>
           <Membrane index={index} />
           <span className="adaptation-copy">
