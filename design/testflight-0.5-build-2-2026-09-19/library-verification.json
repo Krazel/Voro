@@ -1,0 +1,25 @@
+{
+  "detail": "TestFlight interno 0.5 (2): Apple build 3d3ce5a1-f9f2-4ca4-882e-8fe902e93600, VALID e IN_BETA_TESTING en VORO Interno. Binario d45930e; CI 35460427304; IPA 112006835 bytes, SHA256 498e044d7d5a87211f20a57733f5188f3340e492aa0b5f40dbaa3defab6c7cd2. 169 tests, tipos, build móvil e iOS correctos. Tierra ampliada desde la entrada en Órbita; el final no cambia su tamaño. QA físico pendiente. ASC 1.0 PREPARE_FOR_SUBMISSION; web v38 e itch Draft intactos.",
+  "tracking": {
+    "testflight": "Interno",
+    "appStore": "Creada en App Store Connect",
+    "ads": "Por confirmar",
+    "testflightUrl": "https://appstoreconnect.apple.com/teams/7f069118-9712-49c8-a1f0-fda00b62a281/apps/6809193565/testflight/groups/05db8744-bcf3-4c2d-a465-2635012bfeeb",
+    "appStoreUrl": "https://appstoreconnect.apple.com/apps/6809193565/distribution"
+  },
+  "verifiedAt": "2026-09-19T18:21:48.1388215Z",
+  "preserved": [
+    "tracking",
+    "distribution",
+    "publicVersion",
+    "releases",
+    "source"
+  ],
+  "id": "PR-009",
+  "previousRevision": 81,
+  "verified": true,
+  "version": "0.5",
+  "build": 2,
+  "revision": 82,
+  "next": "Validar 0.5 (2) en iPhone/iPad: nitidez, FPS de Órbita y compra/restauración StoreKit. Tierra ampliada desde la entrada en Órbita durante toda la etapa; la absorción final no activa el tamaño. Audio solo selección, sin implementar: música tranquila distinta por entorno, tarea 01a0bade-5ed3-7152-89dd-bc543764cf67; 26 SFX/14 acciones en .studio/audio-selection/voro/sfx/index.html. Tráiler: .studio/marketing/voro/trailer-2026-09-19/README.md. Cuatro iconos sin letras: .studio/marketing/voro/iconos-iphone-2026-09-19/estilos-distintos/README.md. Sin TestFlight externo, App Review, publicación ni anuncios."
+}
