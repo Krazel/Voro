@@ -100,6 +100,7 @@ export function FinalSettings({
           </ol>
           <div className="final-stats"><span>{tr("Absorciones ")}<b>{tr(eaten)}</b></span><span>{tr("Tiempo ")}<b>{tr(Math.floor(elapsed / 60))}{tr(" min")}</b></span></div>
         </section>
+        {!testMode && <button className="journey-rebirth" onClick={()=>{setSection('main');setConfirmReset(true);}}>{tr('Volver a nacer')}</button>}
         <button className="living-primary" onClick={() => setSection('main')}>{tr("Volver")}</button>
       </>)}
 
