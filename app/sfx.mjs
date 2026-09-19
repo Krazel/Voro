@@ -33,6 +33,10 @@ export class SfxPlayer {
     const index = choices[Math.min(choices.length - 1, Math.floor(this.random() * choices.length))];
     const source = this.context.createBufferSource();
     source.buffer = this.buffers[index];
+    // Resampling changes pitch and duration together, preserving the whole bite.
+    // -5 to +6 semitones: roughly 1.33x to 0.71x its original duration.
+    const semitones = -5 + this.random() * 11;
+    source.playbackRate.value = 2 ** (semitones / 12);
     source.connect(this.output);
     source.onended = () => source.disconnect();
     source.start();

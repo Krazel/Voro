@@ -9,7 +9,7 @@ test('Approved ingest variants decode, rate-limit and never repeat consecutively
     resume: async () => {},
     decodeAudioData: async data => { decoded.push(data.byteLength); return { id: decoded.length }; },
     createBufferSource: () => ({
-      buffer: null,
+      buffer: null, playbackRate: { value: 1 },
       connect() {},
       disconnect() {},
       start() { starts++; },
@@ -40,4 +40,23 @@ test('Digest completion no longer calls the legacy chime', async () => {
   const source = await import('node:fs/promises').then(fs => fs.readFile(new URL('../app/engine.ts', import.meta.url), 'utf8'));
   const finished = source.slice(source.indexOf('if (finished) {'), source.indexOf('if (p.eaten === 1)'));
   assert.doesNotMatch(finished, /this\.chime\(\)/);
+});
+
+test('Ingest pitch varies over a broad range and changes the full sample duration', () => {
+  const sources = [];
+  let time = 0, roll = 0;
+  const player = new SfxPlayer({ createBufferSource() {
+    const source = { playbackRate: { value: 1 }, connect() {}, disconnect() {}, start() {} };
+    sources.push(source); return source;
+  } }, {}, { now: () => time, random: () => roll });
+  player.buffers = [{ duration: 1 }, { duration: 1 }, { duration: 1 }];
+  player.playIngest();
+  time += 400; roll = .999999;
+  player.playIngest();
+  assert.ok(sources[0].playbackRate.value < .75);
+  assert.ok(sources[1].playbackRate.value > 1.4);
+  for (const source of sources) {
+    const duration = source.buffer.duration / source.playbackRate.value;
+    assert.ok(duration > .70 && duration < 1.34);
+  }
 });
