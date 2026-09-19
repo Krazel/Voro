@@ -60,9 +60,6 @@ function Membrane({ index }: { index: number }) {
       <path d={membranePath(0,index)} fill={`url(#${uid})`} strokeWidth="1.5"/>
       <path d={membranePath(0,index,.975)} fill="none" strokeWidth=".6" opacity=".6"/>
     </g>
-    <g className="adaptation-satellites" fill="currentColor">
-      {Array.from({length:10},(_,i)=><circle key={i} cx={120+Math.cos(i*Math.PI/5)*108} cy={120+Math.sin(i*Math.PI/5)*108} r={i%3?1.2:2.8} opacity=".7"/>)}
-    </g>
   </svg>;
 }
 function Protagonist({ connect }: { connect?: (canvas: HTMLCanvasElement | null) => void }) {
