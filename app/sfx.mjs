@@ -37,8 +37,11 @@ export class SfxPlayer {
     // -5 to +6 semitones: roughly 1.33x to 0.71x its original duration.
     const semitones = -5 + this.random() * 11;
     source.playbackRate.value = 2 ** (semitones / 12);
-    source.connect(this.output);
-    source.onended = () => source.disconnect();
+    const gain = this.context.createGain();
+    gain.gain.value = 0.65;
+    source.connect(gain);
+    gain.connect(this.output);
+    source.onended = () => { source.disconnect(); gain.disconnect(); };
     source.start();
     this.last = index;
     this.lastPlayedAt = at;

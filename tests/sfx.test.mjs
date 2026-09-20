@@ -7,6 +7,7 @@ test('Approved ingest variants decode, rate-limit and never repeat consecutively
   const decoded = [];
   const context = {
     resume: async () => {},
+    createGain: () => ({ gain: { value: 1 }, connect() {}, disconnect() {} }),
     decodeAudioData: async data => { decoded.push(data.byteLength); return { id: decoded.length }; },
     createBufferSource: () => ({
       buffer: null, playbackRate: { value: 1 },
@@ -45,7 +46,7 @@ test('Digest completion no longer calls the legacy chime', async () => {
 test('Ingest pitch varies over a broad range and changes the full sample duration', () => {
   const sources = [];
   let time = 0, roll = 0;
-  const player = new SfxPlayer({ createBufferSource() {
+  const player = new SfxPlayer({ createGain: () => ({ gain: { value: 1 }, connect() {}, disconnect() {} }), createBufferSource() {
     const source = { playbackRate: { value: 1 }, connect() {}, disconnect() {}, start() {} };
     sources.push(source); return source;
   } }, {}, { now: () => time, random: () => roll });

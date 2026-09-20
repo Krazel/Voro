@@ -103,6 +103,7 @@ export default function Home() {
     ((STAGES[testStage].goal * 1.5) / stageStartMass(testStage)) **
       (testSize / 100);
   const resume = useRef(false);
+  const adaptationHeading = useRef<HTMLDivElement>(null);
   const [state, setState] = useState<Snapshot>({
     zoomFactor: 1,
     uniformVisualSpeed: true,
@@ -506,10 +507,11 @@ export default function Home() {
       >
         <DialogContent
           className="micro-upgrade-dialog cristal-dialog adaptation-dialog"
+          initialFocus={adaptationHeading}
           showCloseButton={false}
         >
           <p className="adaptation-count">{tr("ADAPTACIÓN ")}{tr(state.level + 1)}</p>
-          <div className="adaptation-heading">
+          <div className="adaptation-heading" ref={adaptationHeading} tabIndex={-1} style={{ outline: 'none' }}>
             <DialogTitle>{tr("Adaptación emergente")}</DialogTitle>
             <DialogDescription>{tr("El tiempo se detiene. Elige tu evolución.")}</DialogDescription>
           </div>
