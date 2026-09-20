@@ -19,3 +19,6 @@ Entrega vigente: VORO-trailer-v2-26s-60fps.mp4. Misma duración de 26 s y 60 fps
 Cuatro planos de 5,5 s: microscopio, mar, ciudad y planetas. Cierre de 4 s: el icono vigente (V cian y núcleo ámbar) se dibuja con luces convergentes; después entra el nombre y el lema.
 Sin etapas de estrellas, galaxias ni universo. Sin atribución musical sobreimpresa: CREDITOS.txt acompaña la entrega y debe incluirse en la descripción al publicar.
 Exportación reproducible: export-v2.ps1. Verificación: encoding-check-v2.txt y contact-sheet-v2.jpg. Versión 1 conservada.
+
+## Versión 3 — música del primer entorno
+Entrega vigente: VORO-trailer-v3-Solace-26s-60fps.mp4. Solace (Scott Buckley), pista real de micro en app/music.mjs, primeros 26 segundos con fundidos. Vídeo copiado sin recodificar desde v2; montaje e imagen idénticos. Créditos vigentes en CREDITOS.txt. Receta export-v3.ps1.
