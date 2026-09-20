@@ -1,0 +1,13 @@
+{
+  "projectId": "PR-009",
+  "revision": 100,
+  "updatedAt": "2026-09-20T11:04:58.238Z",
+  "version": "0.5",
+  "build": 3,
+  "testflight": "Interno",
+  "binaryCommit": "ddb894d7413344010455645e9641a75f0bf7c5d5",
+  "appleBuildId": "b233dc04-2bb5-4593-a172-4fee7c2c3d96",
+  "processingState": "VALID",
+  "internalBuildState": "IN_BETA_TESTING",
+  "verifiedByReread": true
+}

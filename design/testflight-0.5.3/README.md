@@ -24,4 +24,14 @@
 - `npm run build:mobile` superado, incluida la verificación de recursos.
 - Catálogo iOS apunta al icono universal de 1024×1024.
 
-La comprobación final del icono dentro del IPA, su firma, carga, procesamiento y asignación interna se registra con el resultado del workflow de entrega.
+## Entrega verificada
+
+- Commit binario: `ddb894d7413344010455645e9641a75f0bf7c5d5`.
+- CI: [VORO TestFlight 35506392624](https://github.com/Krazel/Voro/actions/runs/35506392624), correcto.
+- App Store Connect build ID: `b233dc04-2bb5-4593-a172-4fee7c2c3d96`.
+- Estado: `VALID` e `IN_BETA_TESTING`.
+- Fecha de carga informada por Apple: `2026-09-20T03:59:39-07:00`.
+- Grupo asignado: `VORO Interno`.
+- SHA-256 del IPA: `7b750f159c9e1b55da69274e925eae029771518151c14888da880eba9117def7`.
+
+El IPA firmado contiene `AppIcon60x60@2x.png` (120×120, SHA-256 `82382e980ba95f0b7299358bc7977604c5cd286604afb5f7d337cc6a14c48b29`) y `AppIcon76x76@2x~ipad.png` (152×152, SHA-256 `f44a5e82793db6f86b466242b79276c6353777cce398921ee511390072124ae6`). Tras revertir la optimización CgBI de Apple, ambas imágenes coinciden perceptualmente con la fuente «Membrana» reducida: diferencia absoluta media de 0,81–1,23 niveles por canal, correspondiente a la recompresión de Xcode.
