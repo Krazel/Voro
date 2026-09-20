@@ -22,3 +22,6 @@ Exportación reproducible: export-v2.ps1. Verificación: encoding-check-v2.txt y
 
 ## Versión 3 — música del primer entorno
 Entrega vigente: VORO-trailer-v3-Solace-26s-60fps.mp4. Solace (Scott Buckley), pista real de micro en app/music.mjs, primeros 26 segundos con fundidos. Vídeo copiado sin recodificar desde v2; montaje e imagen idénticos. Créditos vigentes en CREDITOS.txt. Receta export-v3.ps1.
+
+## Aprobación definitiva del usuario
+El usuario aprueba expresamente la versión 3: «perf, este es el definitivo». Archivo definitivo: VORO-trailer-v3-Solace-26s-60fps.mp4. 26 segundos, 720×1280, 60 fps, cuatro entornos y cierre animado, música Solace del primer entorno. Las versiones anteriores se conservan como historial. Esta aprobación no inicia ninguna publicación.
