@@ -1,0 +1,9 @@
+{
+  "version": "0.5.1",
+  "build": "1",
+  "bundle": "com.dmkr.voro",
+  "commit": "76f124d0f3d62ea276a442d52a8e4f078d76e45e",
+  "run": "35630156408",
+  "signed": true,
+  "purpose": "TestFlight"
+}
