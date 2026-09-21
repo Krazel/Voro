@@ -4,10 +4,6 @@ export function writeUiMode(storage,mode){try{storage?.setItem(UI_MODE_KEY,mode=
 export function initialUiMode(storage, search='') {
   const requested = new URLSearchParams(search).get('ui');
   if (requested === 'development' || requested === 'final') return requested;
-  try {
-    const saved = storage?.getItem(UI_MODE_KEY);
-    return saved === 'development' ? 'development' : 'final';
-  } catch {
-    return 'final';
-  }
+  // Legacy development preferences must not restore retired menus at launch.
+  return 'final';
 }
