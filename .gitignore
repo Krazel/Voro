@@ -38,5 +38,6 @@ next-env.d.ts
 /work/
 *.tsbuildinfo
 /mobile-dist/
+/pc-dist/
 /artifact/
 /build/

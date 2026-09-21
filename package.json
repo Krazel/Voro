@@ -6,6 +6,8 @@
     "node": ">=22.13.0"
   },
   "scripts": {
+    "dev:pc": "vite --config vite.pc.config.ts",
+    "build:pc": "vite build --config vite.pc.config.ts",
     "dev": "vinext dev",
     "build": "vinext build",
     "build:mobile": "vite build --config vite.mobile.config.ts && node scripts/verify-mobile-assets.mjs",

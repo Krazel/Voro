@@ -17,7 +17,7 @@ globalThis.requestAnimationFrame = () => 1;
 globalThis.cancelAnimationFrame = () => {};
 globalThis.window = new EventTarget();
 globalThis.document = Object.assign(new EventTarget(), { hidden: false });
-export function makeEngine() {
+export function makeEngine({ desktop = false, bounds = { width: 390, height: 844, left: 0, top: 0 } } = {}) {
   let snapshot;
   let draws = 0;
   const gradient = { addColorStop() {} };
@@ -47,13 +47,13 @@ export function makeEngine() {
   });
   const canvas = Object.assign(new EventTarget(), {
     getContext: () => ctx,
-    getBoundingClientRect: () => ({ width: 390, height: 844, left: 0, top: 0 }),
+    getBoundingClientRect: () => bounds,
     focus() {},
     setPointerCapture() {},
     width: 0,
     height: 0,
   });
-  const game = new VoroEngine(canvas, (value) => (snapshot = value));
+  const game = new VoroEngine(canvas, (value) => (snapshot = value), desktop);
   game.worldGround.createCanvas = () => ({
     width: 0,
     height: 0,

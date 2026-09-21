@@ -357,7 +357,9 @@ export class VoroEngine {
   rng = random(834);
   audioStarted = false;
   reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  constructor(canvas: HTMLCanvasElement, emit: (s: Snapshot) => void, readonly desktop = false) {
+  readonly desktop: boolean;
+  constructor(canvas: HTMLCanvasElement, emit: (s: Snapshot) => void, desktop = false) {
+    this.desktop = desktop;
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d', { alpha: false })!;
     this.emit = emit;
