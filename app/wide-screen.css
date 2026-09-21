@@ -1,0 +1,4 @@
+/* Shared game and approved menus; only the playable viewport gets wider. */
+.voro-shell[data-wide='true'] .viewport { width:100%; max-width:none; border-inline:0; }
+.voro-shell[data-wide='true'] .intro { max-width:520px; margin-inline:auto; }
+.voro-shell[data-wide='true'] .desktop-note { display:none; }

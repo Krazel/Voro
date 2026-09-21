@@ -1,0 +1,42 @@
+[
+  {
+    "label": "before",
+    "cache": {
+      "entries": 24,
+      "bytes": 25165824,
+      "limit": 25165824,
+      "hits": 566,
+      "misses": 245,
+      "direct": 0,
+      "pending": 0,
+      "generatedThisFrame": 1,
+      "approximations": 245,
+      "bakeSteps": 6660,
+      "evictions": 198,
+      "active": false,
+      "dropped": 4
+    },
+    "renderP95": 3.5,
+    "frames": 400
+  },
+  {
+    "label": "after",
+    "cache": {
+      "entries": 4,
+      "bytes": 4194304,
+      "limit": 25165824,
+      "hits": 2,
+      "misses": 8,
+      "direct": 849,
+      "pending": 0,
+      "generatedThisFrame": 0,
+      "approximations": 8,
+      "bakeSteps": 120,
+      "evictions": 0,
+      "active": false,
+      "dropped": 0
+    },
+    "renderP95": 3.899999998509884,
+    "frames": 422
+  }
+]

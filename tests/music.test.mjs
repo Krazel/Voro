@@ -8,6 +8,14 @@ function fixture(){
  return {player,context,media,get cancelled(){return cancelled}};
 }
 const settle=async()=>{await Promise.resolve();await Promise.resolve();};
+test('Repeated movement gestures never restart an already running audio deck',async()=>{
+ const {player:p,context:c,media}=fixture();c.state='running';let plays=0,resumes=0;
+ c.resume=()=>{resumes++;return Promise.resolve();};
+ media.forEach(a=>{const play=a.play;a.play=function(){plays++;return play.call(this);};});
+ p.setState('micro',true);p.unlock();await settle();const initial=plays;
+ for(let i=0;i<100;i++)p.unlock();await settle();
+ assert.equal(plays,initial);assert.equal(resumes,0);p.destroy();
+});
 test('Twelve approved tracks cover menu, every stage and the completed survivor',()=>{
  assert.equal(MUSIC.length,12);assert.equal(new Set(MUSIC.map(t=>t.slug)).size,12);
  assert.equal(musicScene(false,false,'micro'),'menu');assert.equal(musicScene(true,true,'universe'),'final');

@@ -16,6 +16,7 @@ export class SfxPlayer {
     this.lastPlayedAt = -Infinity;
     this.loading = null;
     this.destroyed = false;
+    this.voices = new Set();
   }
   unlock() {
     this.context.resume?.().catch(() => {});
@@ -41,7 +42,9 @@ export class SfxPlayer {
     gain.gain.value = 0.65;
     source.connect(gain);
     gain.connect(this.output);
-    source.onended = () => { source.disconnect(); gain.disconnect(); };
+    const voice = { source, gain };
+    this.voices.add(voice);
+    source.onended = () => { source.disconnect(); gain.disconnect(); this.voices.delete(voice); };
     source.start();
     this.last = index;
     this.lastPlayedAt = at;
@@ -49,6 +52,8 @@ export class SfxPlayer {
   }
   destroy() {
     this.destroyed = true;
+    for(const {source,gain} of this.voices){source.onended=null;try{source.stop();}catch{}source.disconnect();gain.disconnect();}
+    this.voices.clear();
     this.buffers = [];
   }
 }

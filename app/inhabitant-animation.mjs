@@ -1001,6 +1001,10 @@ export function drawInhabitant(
   const transform =
     typeof c.getTransform === 'function' ? c.getTransform() : null;
   const screenR = transform ? Math.hypot(transform.a, transform.b) * r : r;
+  // Close-up microscopic hunters exceed the exported sheet resolution. Their
+  // 512px fallback cycles otherwise churn the 24 MiB pose cache and reuse old,
+  // unrelated phases. Paint the same approved rig at the current phase instead.
+  if (['giant', 'hunter'].includes(s.id) && screenR >= 62) cache = false;
   if (
     !detail &&
     cache &&

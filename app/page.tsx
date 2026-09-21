@@ -1,6 +1,7 @@
 'use client';
 import { t as tr } from './language.mjs';
 import { LanguagePicker, useLanguage } from './language-picker';
+import { ApprovedPause } from './approved-pause';
 
 import { MUSIC } from './music.mjs';
 import { finaleState } from './universe-finale.mjs';
@@ -14,7 +15,8 @@ import Link from 'next/link';
 import { AdaptationChoices, CristalPreview } from './cristal-ui';
 import { ReviewMilestone } from './review-milestone';
 import { FinalSettings } from './final-settings';
-import { PcSettings, PcPause, PcTools } from '../pc/menus';
+import { isTabletDevice, wideScreenEnabled } from './desktop-viewport.mjs';
+import './wide-screen.css';
 import './cristal.css';
 import './final-ui.css';
 import { initialUiMode, writeUiMode } from './ui-mode.mjs';
@@ -47,6 +49,13 @@ import {
   formatSize,
 } from './journey-data.mjs';
 export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
+  const [wideScreen, setWideScreen] = useState(desktop);
+  useLayoutEffect(() => {
+    const update = () => setWideScreen(wideScreenEnabled(desktop, isTabletDevice(navigator), window.innerWidth, window.innerHeight));
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, [desktop]);
   useLanguage();
   const canvas = useRef<HTMLCanvasElement>(null),
     engine = useRef<VoroEngine | null>(null);
@@ -182,7 +191,7 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
   const modeButton=<button type="button" className="ui-mode-toggle" data-ui-mode-toggle aria-pressed={finalUI} onClick={toggleUiMode}>
     {tr(finalUI?'Volver a UI de desarrollo':'Pasar a UI final')}<span>{tr(finalUI?'Final':'Desarrollo')}</span>
   </button>;
-  const finale = state.ending > 0 || state.complete;
+  const finale = state.started && (state.ending > 0 || state.complete);
   const finalCaption = finaleState(state.ending).caption;
   const active =
     state.started && !state.dead && !state.complete && state.ending === 0;
@@ -198,8 +207,7 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
           ),
         );
   return (
-    <main className={'voro-shell' + (finale ? ' universe-ended' : '')} data-ui="cristal" data-ui-mode={uiMode}>
-      {desktop && <PcTools engine={engine} settings={settings} />}
+    <main className={'voro-shell' + (finale ? ' universe-ended' : '')} data-wide={wideScreen} data-ui="cristal" data-ui-mode={uiMode}>
       <section
         className={'viewport' + (finale ? ' universe-finale' : '')}
         data-event={
@@ -407,9 +415,8 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
             </div>
           </>
         ))}
-        {desktop && (active || state.complete) && state.paused && !settings && <PcPause onResume={()=>action('pause')} onSettings={()=>changeSettings(true)} onMenu={()=>{engine.current?.returnToMenu();}} />}
-        {tr(!desktop && (active || state.complete) && state.paused && !settings && (
-          <div className="pause-panel">
+        {tr((active || state.complete) && state.paused && !settings && (
+          finalUI ? <ApprovedPause onContinue={()=>action('pause')} onSettings={()=>changeSettings(true)} onMenu={()=>engine.current?.returnToMenu()} onProtagonist={connectProtagonist}/> : <div className="pause-panel">
             <p className="eyebrow">{tr("EN SUSPENSIÓN")}</p>
             <h2>{tr("Respira.")}</h2>
             <p className="pause-copy">{tr("Tu progreso queda guardado.")}</p>
@@ -538,8 +545,7 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
           className={'voro-settings cristal-dialog'+(finalUI?' final-ui':'')}
           showCloseButton={false}
         >
-          {desktop && finalUI && <PcSettings stage={state.stage} complete={state.complete} eaten={state.eaten} elapsed={state.elapsed} sound={state.sound} onSound={()=>action('sound')} onClose={()=>changeSettings(false)} onRestart={()=>{resume.current=false;action('restart');changeSettings(false);}} />}
-          {tr(!desktop && finalUI && <FinalSettings
+          {tr(finalUI && <FinalSettings
             stage={state.stage}
             complete={state.complete}
             eaten={state.eaten}

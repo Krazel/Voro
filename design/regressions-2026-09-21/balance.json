@@ -1,0 +1,48 @@
+{
+  "density": [
+    {
+      "smallSlots": 6,
+      "zones": 100,
+      "total": 1190,
+      "mean": 11.9
+    },
+    {
+      "smallSlots": 7,
+      "zones": 100,
+      "total": 1290,
+      "mean": 12.9
+    }
+  ],
+  "zoom": [
+    {
+      "radius": 24,
+      "before": 1.12,
+      "after": 1.12
+    },
+    {
+      "radius": 34,
+      "before": 1.12,
+      "after": 1.12
+    },
+    {
+      "radius": 42,
+      "before": 1.12,
+      "after": 1.064616353521102
+    },
+    {
+      "radius": 60,
+      "before": 1.0354749368407363,
+      "after": 0.9772747155422474
+    },
+    {
+      "radius": 96,
+      "before": 0.9337555481176366,
+      "after": 0.8730273850471942
+    },
+    {
+      "radius": 150,
+      "before": 0.8464333949528935,
+      "after": 0.7843520944617535
+    }
+  ]
+}

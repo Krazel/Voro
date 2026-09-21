@@ -4,8 +4,8 @@ export function gameplayZoom(radius = 0, entryRadius = 24) {
   const reference = Number.isFinite(entryRadius) && entryRadius > 0 ? entryRadius : 24;
   const scale = 24 / reference;
   const normalizedRadius = radius * scale;
-  if (!Number.isFinite(normalizedRadius) || normalizedRadius <= 42) return 1.12 * scale;
-  return Math.max(0.78, 1.12 * (42 / normalizedRadius) ** 0.22) * scale;
+  if (!Number.isFinite(normalizedRadius) || normalizedRadius <= 34) return 1.12 * scale;
+  return Math.max(0.74, 1.12 * (34 / normalizedRadius) ** 0.24) * scale;
 }
 // Keep automatic entry framing from changing perceived travel speed.
 // Manual zoom remains a visual preference and does not alter gameplay speed.

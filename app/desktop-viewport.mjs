@@ -1,5 +1,11 @@
 // Keep a fixed vertical field of view. Wider windows reveal more world laterally,
 // never stretch the original portrait render or shrink the organism to fit it.
+export function isTabletDevice(device) {
+  return /iPad/.test(device.userAgent || '') || (/Mac/.test(device.platform || '') && device.maxTouchPoints > 1);
+}
+export function wideScreenEnabled(desktop, tablet, width, height) {
+  return desktop || (tablet && width > height);
+}
 export function desktopViewport(width, height, dpr = 1) {
   const logicalHeight = 720;
   const scale = Math.max(1, height) / logicalHeight;

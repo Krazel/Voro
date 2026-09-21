@@ -154,7 +154,9 @@ export const previousJourneyAdaptation = (level) =>
   24 + level * 24 + level * level * 4;
 export const v3JourneyAdaptation = (level) =>
   18 + level * 18 + level * level * 3;
-export const journeyAdaptation = (level) => 12 + level * 12 + level * level * 2;
+export const v4JourneyAdaptation = (level) => 12 + level * 12 + level * level * 2;
+// 25% more food between choices; keep the benefit of each upgrade unchanged.
+export const journeyAdaptation = (level) => 15 + level * 15 + level * level * 2.5;
 export function offerUpgrades(chosen, seed, level, excluded = []) {
   const rng = random(
     (seed + Math.imul(level + 1, 104729) + (excluded.length ? 32452843 : 0)) >>>

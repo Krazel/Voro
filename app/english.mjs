@@ -3,6 +3,8 @@ import { STUDIO_ENGLISH } from './english-studio.mjs';
 // is translated, so species keys, upgrade groups and progression stay stable.
 export const ENGLISH = Object.fromEntries(`
 Cargando…|Loading…
+Volver al menú|Back to menu
+El progreso se guarda automáticamente.|Progress is saved automatically.
 Bellota|Acorn
 Guijarro|Pebble
 Krill|Krill
