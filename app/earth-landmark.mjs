@@ -22,23 +22,23 @@ export function canAbsorbEarth(p) {
     <= ORBITAL_EARTH.radius + p.radius + 65;
 }
 /** @param {{x:number,y:number,biomass:number,goalMass:number}|null} life */
-export function drawOrbitalEarth(c, image, camera, height, zoom = 1, life = null, absorption = 0) {
+export function drawOrbitalEarth(c, image, camera, height, zoom = 1, life = null, absorption = 0, width = 480) {
   if (!image?.naturalWidth) return;
   const t = Math.max(0, Math.min(1, absorption)), ease = t * t * (3 - 2 * t);
   // Original screen-space painting: gameplay framing must not shrink Earth.
-  const originX = 240 - (camera.x - 700) * .08;
+  const originX = width/2 - (camera.x - 700) * .08;
   const originY = height * .6 + 460 - (camera.y - 970) * .08;
-  const targetX = 240 + ((life?.x ?? camera.x) - camera.x) * zoom;
+  const targetX = width/2 + ((life?.x ?? camera.x) - camera.x) * zoom;
   const targetY = height * .48 + ((life?.y ?? camera.y) - camera.y) * zoom;
   const x = originX + (targetX - originX) * ease;
   const y = originY + (targetY - originY) * ease;
   const r = ORBITAL_EARTH.radius * (1 - ease);
-  if (x + r < 0 || x - r > 480 || y + r < 0 || y - r > height) {
-    const dx = x - 240, dy = y - height * .48;
+  if (x + r < 0 || x - r > width || y + r < 0 || y - r > height) {
+    const dx = x - width/2, dy = y - height * .48;
     const angle = Math.atan2(dy, dx);
     const arrow = ['→','↘','↓','↙','←','↖','↑','↗'][(Math.round(angle / (Math.PI / 4)) + 8) % 8];
     c.save(); c.fillStyle = '#e0eef4'; c.font = '12px Arial'; c.textAlign = 'center';
-    c.fillText(tr(`TIERRA ${arrow}`), Math.max(70,Math.min(410,x)), Math.max(165,Math.min(height-125,y)));
+    c.fillText(tr(`TIERRA ${arrow}`), Math.max(70,Math.min(width-70,x)), Math.max(165,Math.min(height-125,y)));
     c.restore(); return;
   }
   c.save();
@@ -48,6 +48,6 @@ export function drawOrbitalEarth(c, image, camera, height, zoom = 1, life = null
   c.font = '11px Arial';
   c.fillText(tr(t > 0 ? 'TU MUNDO VUELVE A TI' : life?.biomass >= life?.goalMass
     ? 'LA TIERRA · ACÉRCATE PARA ABSORBERLA' : 'LA TIERRA · REÚNE BIOMASA EN SU ÓRBITA'),
-    240, Math.max(110, Math.min(height - 120, y - r + 28)));
+    width/2, Math.max(110, Math.min(height - 120, y - r + 28)));
   c.restore();
 }

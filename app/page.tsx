@@ -14,6 +14,7 @@ import Link from 'next/link';
 import { AdaptationChoices, CristalPreview } from './cristal-ui';
 import { ReviewMilestone } from './review-milestone';
 import { FinalSettings } from './final-settings';
+import { PcSettings, PcPause, PcTools } from '../pc/menus';
 import './cristal.css';
 import './final-ui.css';
 import { initialUiMode, writeUiMode } from './ui-mode.mjs';
@@ -45,7 +46,7 @@ import {
   stageStartMass,
   formatSize,
 } from './journey-data.mjs';
-export default function Home() {
+export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
   useLanguage();
   const canvas = useRef<HTMLCanvasElement>(null),
     engine = useRef<VoroEngine | null>(null);
@@ -147,7 +148,7 @@ export default function Home() {
     assetsReady: false,
   });
   useEffect(() => {
-    const game = new VoroEngine(canvas.current!, setState);
+    const game = new VoroEngine(canvas.current!, setState, desktop);
     engine.current = game;
     return () => {
       game.destroy();
@@ -198,6 +199,7 @@ export default function Home() {
         );
   return (
     <main className={'voro-shell' + (finale ? ' universe-ended' : '')} data-ui="cristal" data-ui-mode={uiMode}>
+      {desktop && <PcTools engine={engine} settings={settings} />}
       <section
         className={'viewport' + (finale ? ' universe-finale' : '')}
         data-event={
@@ -405,7 +407,8 @@ export default function Home() {
             </div>
           </>
         ))}
-        {tr((active || state.complete) && state.paused && !settings && (
+        {desktop && (active || state.complete) && state.paused && !settings && <PcPause onResume={()=>action('pause')} onSettings={()=>changeSettings(true)} onMenu={()=>{engine.current?.returnToMenu();}} />}
+        {tr(!desktop && (active || state.complete) && state.paused && !settings && (
           <div className="pause-panel">
             <p className="eyebrow">{tr("EN SUSPENSIÓN")}</p>
             <h2>{tr("Respira.")}</h2>
@@ -535,7 +538,8 @@ export default function Home() {
           className={'voro-settings cristal-dialog'+(finalUI?' final-ui':'')}
           showCloseButton={false}
         >
-          {tr(finalUI && <FinalSettings
+          {desktop && finalUI && <PcSettings stage={state.stage} complete={state.complete} eaten={state.eaten} elapsed={state.elapsed} sound={state.sound} onSound={()=>action('sound')} onClose={()=>changeSettings(false)} onRestart={()=>{resume.current=false;action('restart');changeSettings(false);}} />}
+          {tr(!desktop && finalUI && <FinalSettings
             stage={state.stage}
             complete={state.complete}
             eaten={state.eaten}

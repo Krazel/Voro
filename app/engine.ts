@@ -1,3 +1,4 @@
+import { desktopViewport, visibleChunkRadius } from './desktop-viewport.mjs';
 
 import { t as tr } from './language.mjs';
 import { MusicPlayer, musicScene } from './music.mjs';
@@ -355,16 +356,16 @@ export class VoroEngine {
   rng = random(834);
   audioStarted = false;
   reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  constructor(canvas: HTMLCanvasElement, emit: (s: Snapshot) => void) {
+  constructor(canvas: HTMLCanvasElement, emit: (s: Snapshot) => void, readonly desktop = false) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d', { alpha: false })!;
     this.emit = emit;
     let restoredFragments: Food[] = [];
     try {
-      this.uniformVisualSpeed = localStorage.getItem(VISUAL_SPEED_MODE) !== 'classic';
+      this.uniformVisualSpeed = localStorage.getItem(this.desktop ? "voro-pc-demo-speed-v1" : VISUAL_SPEED_MODE) !== 'classic';
       const loaded =
-        loadJourney(localStorage.getItem(JOURNEY_SAVE)) ||
-        migrateMicro(localStorage.getItem(MICRO_SAVE));
+        loadJourney(localStorage.getItem(this.desktop ? 'voro-pc-demo-journey-v1' : JOURNEY_SAVE)) ||
+        (this.desktop ? null : migrateMicro(localStorage.getItem(MICRO_SAVE)));
       if (loaded) {
         restoredFragments = loaded.fragments;
         this.progress = loaded.progress;
@@ -574,12 +575,13 @@ export class VoroEngine {
   resize() {
     this.renderDirty = true;
     const b = this.canvas.getBoundingClientRect();
-    this.scale = b.width / 480;
-    this.width = 480;
+    this.scale = this.desktop ? b.height / 720 : b.width / 480;
+    this.width = this.desktop ? b.width / this.scale : 480;
     this.height = b.height / this.scale;
     // Raster resolution is independent of the world camera and edible sizes.
     this.pixelRatio = rasterRatio(b.width, b.height, devicePixelRatio,
       matchMedia('(pointer: coarse)').matches) * this.rasterBudget.quality;
+    if (this.desktop) this.pixelRatio = desktopViewport(b.width,b.height,devicePixelRatio).pixelRatio * this.rasterBudget.quality;
     const width = Math.round(b.width * this.pixelRatio), height = Math.round(b.height * this.pixelRatio);
     if (this.canvas.width !== width || this.canvas.height !== height) {
       this.canvas.width = width;
@@ -611,7 +613,7 @@ export class VoroEngine {
   }
   setUniformVisualSpeed(enabled: boolean) {
     this.uniformVisualSpeed = enabled;
-    try { localStorage.setItem(VISUAL_SPEED_MODE, enabled ? 'uniform' : 'classic'); }
+    try { localStorage.setItem(this.desktop ? "voro-pc-demo-speed-v1" : VISUAL_SPEED_MODE, enabled ? 'uniform' : 'classic'); }
     catch { /* The current-session choice still works without storage. */ }
     this.publish();
   }
@@ -690,7 +692,7 @@ export class VoroEngine {
     const startedAt = this.diagnosticsEnabled ? performance.now() : 0;
     try {
       localStorage.setItem(
-        JOURNEY_SAVE,
+        this.desktop ? "voro-pc-demo-journey-v1" : JOURNEY_SAVE,
         saveJourney(
           this.progress,
           this.life,
@@ -963,6 +965,16 @@ export class VoroEngine {
     this.setAudio();
     this.publish();
   }
+  returnToMenu() {
+    this.save();
+    this.started = false;
+    this.paused = false;
+    this.saved = true;
+    this.keys.clear();
+    this.pointer = null;
+    this.setAudio();
+    this.publish();
+  }
   toast(text: string, seconds = 3) {
     this.hint = text;
     this.hintUntil = this.time + seconds;
@@ -1065,7 +1077,7 @@ export class VoroEngine {
         y = (this.pointer.y - this.pointer.sy) / 48;
       } else {
         x =
-          (this.pointer.x - ((this.life.x - this.camera.x) * (this.progress.completed ? 1 : this.zoom) + 240)) /
+          (this.pointer.x - ((this.life.x - this.camera.x) * (this.progress.completed ? 1 : this.zoom) + this.width / 2)) /
           65;
         y =
           (this.pointer.y -
@@ -1290,7 +1302,7 @@ export class VoroEngine {
         p.y,
         p.elapsed,
         false,
-        Math.ceil(((this.height * 0.55) / this.zoom + 300) / 600),
+        visibleChunkRadius(this.width,this.height,this.zoom),
       );
       moveFragments(this.fragments, dt);
       // World membership already persists between streamed chunks. Most frames
@@ -1300,7 +1312,7 @@ export class VoroEngine {
       this.motes = this.world.motes;
       this.world.move(dt, p.elapsed, p, this.stats, this.trail,
         stageOf(this.progress).id==='orbit' ? {
-          left:this.camera.x-240/this.zoom-80,right:this.camera.x+240/this.zoom+80,
+          left:this.camera.x-this.width/2/this.zoom-80,right:this.camera.x+this.width/2/this.zoom+80,
           top:this.camera.y-this.height*.48/this.zoom-80,bottom:this.camera.y+this.height*.52/this.zoom+80,
         } : null);
       this.huntingTentacles.update(
@@ -1607,18 +1619,18 @@ export class VoroEngine {
         c.globalAlpha = scene.outgoing;
         c.drawImage(
           this.transitionFrame,
-          (480 - 480 * scene.scale) / 2 + scene.panX,
+          (this.width - this.width * scene.scale) / 2 + scene.panX,
           (this.height - this.height * scene.scale) / 2 + scene.panY,
-          480 * scene.scale,
+          this.width * scene.scale,
           this.height * scene.scale,
         );
         c.restore();
       }
       c.fillStyle = 'rgba(8,38,48,' + scene.wash + ')';
-      c.fillRect(0, 0, 480, this.height);
+      c.fillRect(0, 0, this.width, this.height);
       if (!this.reduced && !scene.coastal) {
         c.save();
-        c.translate(240, this.height * 0.48);
+        c.translate(this.width/2, this.height * 0.48);
         c.strokeStyle = 'rgba(181,222,228,' + Math.sin(u * Math.PI) * 0.3 + ')';
         c.lineWidth = 0.7;
         for (let i = 0; i < 28; i++) {
@@ -1781,7 +1793,7 @@ export class VoroEngine {
     const entry = this.assets.entries.get(`ground:${stage.id}`);
     if (!entry?.ready || entry.image !== this.groundImages[stage.id]) return;
     return this.worldGround.draw(c, this.groundImages[stage.id], stage.id, this.camera,
-      this.zoom, this.height, this.progress.seed, this.time, !this.reduced);
+      this.zoom, this.height, this.progress.seed, this.time, !this.reduced, this.width);
   }
   render() {
     this.measured('animationPreparation', () => {
@@ -1800,20 +1812,20 @@ export class VoroEngine {
       p = this.life;
     c.setTransform(k, 0, 0, k, 0, 0);
     if (this.progress.completed) {
-      c.fillStyle = '#000'; c.fillRect(0,0,480,this.height);
+      c.fillStyle = '#000'; c.fillRect(0,0,this.width,this.height);
       const protagonist = (growth: number, survivor = false) => {
         // Pull the camera back as the body grows: its membrane must remain
         // readable while the captured universe visibly enters it.
         const scale = survivor ? Math.min(66,this.height*.1) / Math.max(.8,p.radius) * growth
           : Math.min(this.zoom * growth, 194 / Math.max(.8,p.radius));
-        c.save(); c.translate(240,this.height*.48); c.scale(scale,scale);
+        c.save(); c.translate(this.width/2,this.height*.48); c.scale(scale,scale);
         c.translate(-p.x,-p.y); this.drawCell(); c.restore();
       };
       if (this.ending > 0 && this.universeFinale)
-        this.universeFinale.draw(c,480,this.height,this.ending,this.reduced,protagonist,this.time);
+        this.universeFinale.draw(c,this.width,this.height,this.ending,this.reduced,protagonist,this.time);
       else {
         c.save(); c.translate(p.x-this.camera.x,p.y-this.camera.y);
-        drawVoidSurvivor(c,480,this.height,this.time,this.reduced,protagonist);
+        drawVoidSurvivor(c,this.width,this.height,this.time,this.reduced,protagonist);
         c.restore();
       }
       return;
@@ -1824,7 +1836,7 @@ export class VoroEngine {
     const opaqueMicro = this.progress.stage === 0 && !this.transition && this.drawBackground(0);
     if (!opaqueMicro) {
       c.fillStyle = '#041423';
-      c.fillRect(0, 0, 480, this.height);
+      c.fillRect(0, 0, this.width, this.height);
       if (this.transition > 0) {
         const scene = transitionScene(
           STAGES[this.transitionFrom].id,
@@ -1845,11 +1857,11 @@ export class VoroEngine {
     if (STAGES[this.progress.stage].id === 'orbit' && !this.progress.earthConsumed) {
       c.save();
       c.globalAlpha = this.transition > 0 ? clamp((3.6 - this.transition) / 1.1, 0, 1) : 1;
-      drawOrbitalEarth(c, this.atlasImages.earth, this.camera, this.height, this.zoom, this.life, this.earthAbsorption);
+      drawOrbitalEarth(c, this.atlasImages.earth, this.camera, this.height, this.zoom, this.life, this.earthAbsorption, this.width);
       c.restore();
     }
     const shake = 0,
-      ox = 240 / this.zoom - this.camera.x + Math.sin(this.time * 55) * shake,
+      ox = this.width / 2 / this.zoom - this.camera.x + Math.sin(this.time * 55) * shake,
       oy =
         (this.height * 0.48) / this.zoom -
         this.camera.y +
@@ -1862,7 +1874,7 @@ export class VoroEngine {
     ).inhabitants;
     const visible = (x: number, y: number, r: number) =>
       x + ox > -r &&
-      x + ox < 480 / this.zoom + r &&
+      x + ox < this.width / this.zoom + r &&
       y + oy > -r &&
       y + oy < this.height / this.zoom + r;
     for (const m of this.motes)
@@ -1964,11 +1976,11 @@ export class VoroEngine {
     c.restore();
     if (this.flash > 0) {
       c.fillStyle = 'rgba(144,226,241,' + this.flash * 0.14 + ')';
-      c.fillRect(0, 0, 480, this.height);
+      c.fillRect(0, 0, this.width, this.height);
     }
     if (this.hitFlash > 0) {
       c.fillStyle = 'rgba(197,85,84,' + this.hitFlash * 0.18 + ')';
-      c.fillRect(0, 0, 480, this.height);
+      c.fillRect(0, 0, this.width, this.height);
     }
     if (
       this.started &&
@@ -2000,10 +2012,10 @@ export class VoroEngine {
     if (!nearest) return;
     const x = (nearest.x + ox) * this.zoom,
       y = (nearest.y + oy) * this.zoom;
-    if (x > 25 && x < 455 && y > 190 && y < this.height - 130) return;
+    if (x > 25 && x < this.width - 25 && y > 190 && y < this.height - 130) return;
     const a = Math.atan2(nearest.y - this.life.y, nearest.x - this.life.x),
       r = Math.min(175, this.height * 0.23);
-    const cx = 240 + Math.cos(a) * r,
+    const cx = this.width/2 + Math.cos(a) * r,
       cy = this.height * 0.48 + Math.sin(a) * r;
     const c = this.ctx;
     c.save();

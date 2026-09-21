@@ -102,7 +102,7 @@ export class WorldGround {
     }
     return patches;
   }
-  draw(c, image, stage, camera, zoom, height, seed = 834, time = 0, waves = false) {
+  draw(c, image, stage, camera, zoom, height, seed = 834, time = 0, waves = false, viewportWidth = 480) {
     const profile = GROUND_PROFILES[stage];
     if (!profile || !image?.complete || !image.naturalWidth) return false;
     if (stage === 'land') {
@@ -113,7 +113,7 @@ export class WorldGround {
         coast = new CoastPreview(image, this.createCanvas);
       }
       const before = coast.rebuilds;
-      coast.draw(c, camera, zoom, 480, height, time, waves, .48);
+      coast.draw(c, camera, zoom, viewportWidth, height, time, waves, .48);
       this.redraws += coast.rebuilds - before;
       this.surface = coast.surface; this.view = coast.view;
       this.views.delete(stage);
@@ -140,10 +140,10 @@ export class WorldGround {
       view.image === image &&
       view.stage === stage &&
       view.seed === seed &&
-      view.height === height && view.raster === raster
+      view.viewportWidth === viewportWidth && view.height === height && view.raster === raster
     ) {
       const ratio = zoom / view.zoom;
-      const dx = 240 * (1 - ratio) - pad * ratio + (view.px - px) * zoom;
+      const dx = viewportWidth/2 * (1 - ratio) - pad * ratio + (view.px - px) * zoom;
       const dy =
         height * 0.48 * (1 - ratio) - pad * ratio + (view.py - py) * zoom;
       if (
@@ -151,24 +151,24 @@ export class WorldGround {
         ratio <= 1.18 &&
         dx <= 0 &&
         dy <= 0 &&
-        dx + surface.width / raster * ratio >= 480 &&
+        dx + surface.width / raster * ratio >= viewportWidth &&
         dy + surface.height / raster * ratio >= height
       ) {
         // Submit only the visible source rectangle, not the overscan buffer.
         this.views.delete(stage); this.views.set(stage, saved);
-        c.drawImage(surface, -dx / ratio * raster, -dy / ratio * raster, 480 / ratio * raster,
-          height / ratio * raster, 0, 0, 480, height);
+        c.drawImage(surface, -dx / ratio * raster, -dy / ratio * raster, viewportWidth / ratio * raster,
+          height / ratio * raster, 0, 0, viewportWidth, height);
         return true;
       }
     }
     if (
-      surface.width !== Math.ceil((480 + pad * 2)*raster) ||
+      surface.width !== Math.ceil((viewportWidth + pad * 2)*raster) ||
       surface.height !== Math.ceil((height + pad * 2)*raster)
     ) {
-      surface.width = Math.ceil((480 + pad * 2)*raster);
+      surface.width = Math.ceil((viewportWidth + pad * 2)*raster);
       surface.height = Math.ceil((height + pad * 2)*raster);
     }
-    this.view = { image, stage, seed, height, zoom, px, py, raster };
+    this.view = { image, stage, seed, viewportWidth, height, zoom, px, py, raster };
     this.views.delete(stage);
     this.views.set(stage, { surface, view: this.view });
     this.trimViews();
@@ -184,19 +184,19 @@ export class WorldGround {
       sy = profile.step;
     const width = stage === 'city' ? sx : (sx * 4) / 3,
       h = stage === 'city' ? sy : (sy * 4) / 3;
-    const x0 = Math.floor((px - (240 + pad) / zoom) / sx) - 1;
-    const x1 = Math.floor((px + (240 + pad) / zoom) / sx) + 1;
+    const x0 = Math.floor((px - (viewportWidth/2 + pad) / zoom) / sx) - 1;
+    const x1 = Math.floor((px + (viewportWidth/2 + pad) / zoom) / sx) + 1;
     const y0 = Math.floor((py - (height * 0.48 + pad) / zoom) / sy) - 1;
     const y1 = Math.floor((py + (height * 0.52 + pad) / zoom) / sy) + 1;
     for (let y = y0; y <= y1; y++)
       for (let x = x0; x <= x1; x++) {
-        const left = (x * sx - px) * zoom + 240,
+        const left = (x * sx - px) * zoom + viewportWidth/2,
           top = (y * sy - py) * zoom + height * 0.48;
         // The conservative grid includes whole patches outside the backing
         // surface. Reject those before texture submission, including overscan.
         // Patches are square and only use quarter turns, so these bounds hold
         // for every reflection and rotation. Keep a pixel for edge filtering.
-        if (left > 480 + pad + 1 || top > height + pad + 1 ||
+        if (left > viewportWidth + pad + 1 || top > height + pad + 1 ||
           left + width * zoom < -pad - 1 || top + h * zoom < -pad - 1) continue;
         const patch = stage === 'city' ? { variant: cityDistrict(x,y,seed), flipX: false, flipY: false, turn: 0 }
           : groundPatch(stage, x, y, seed);
@@ -204,7 +204,7 @@ export class WorldGround {
         const drawWidth = width * zoom;
         layer.save();
         layer.translate(
-          (x * sx + width / 2 - px) * zoom + 240,
+          (x * sx + width / 2 - px) * zoom + viewportWidth/2,
           (y * sy + h / 2 - py) * zoom + height * 0.48,
         );
         layer.scale(fx ? -1 : 1, patch.flipY ? -1 : 1);
@@ -223,7 +223,7 @@ export class WorldGround {
     layer.fillRect(-pad, -pad, surface.width, surface.height);
     layer.restore();
     // Composite once so evolution crossfades retain their intended opacity.
-    c.drawImage(surface, pad*raster, pad*raster, 480*raster, height*raster, 0, 0, 480, height);
+    c.drawImage(surface, pad*raster, pad*raster, viewportWidth*raster, height*raster, 0, 0, viewportWidth, height);
     return true;
   }
 }
