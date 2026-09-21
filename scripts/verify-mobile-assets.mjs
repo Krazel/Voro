@@ -17,11 +17,12 @@ const css = styles.map(p => fs.readFileSync(path.resolve(root, p), 'utf8')).join
 const oldRule = '.micro-upgrade-dialog .mutation-choices button{';
 const newRule = '.cristal-choices.mutation-choices>button{';
 assert.ok(css.lastIndexOf(newRule) > css.lastIndexOf(oldRule), 'Cristal must load after legacy global styles');
-for (const url of [...Object.values(BACKGROUND_ASSETS), ...Object.values(ATLAS_URLS), './ui/cristal/membrane-frame.png', './ui/approved/pause-plate-v1.png']) {
+for (const url of [...Object.values(BACKGROUND_ASSETS), ...Object.values(ATLAS_URLS), './ui/cristal/membrane-frame.png']) {
   const relative = url.split('?')[0].replace(/^\.\//, '');
   const bundled = fs.readFileSync(path.join(root, relative));
   const source = fs.readFileSync(path.join('public', relative));
   assert.ok(bundled.equals(source), `Missing or stale mobile asset: ${relative}`);
 }
-assert.ok(css.includes('pause-plate-v1.png'), 'Mobile pause must reference its current artwork');
-console.log('Mobile output verified: Cristal precedence, 10 backgrounds, generated UI frame and current pause artwork.');
+assert.ok(!fs.existsSync(path.join(root, 'ui/approved/pause-plate-v1.png')), 'Rejected pause C artwork must not ship');
+assert.ok(!css.includes('.approved-pause'), 'Rejected pause B/C styles must not ship');
+console.log('Mobile output verified: Cristal precedence, 10 backgrounds, UI frame and restored pause A.');

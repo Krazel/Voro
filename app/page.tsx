@@ -1,7 +1,6 @@
 'use client';
 import { t as tr } from './language.mjs';
 import { LanguagePicker, useLanguage } from './language-picker';
-import { ApprovedPause } from './approved-pause';
 
 import { MUSIC } from './music.mjs';
 import { finaleState } from './universe-finale.mjs';
@@ -416,7 +415,7 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
           </>
         ))}
         {tr((active || state.complete) && state.paused && !settings && (
-          finalUI ? <ApprovedPause onContinue={()=>action('pause')} onSettings={()=>changeSettings(true)} onMenu={()=>engine.current?.returnToMenu()} onProtagonist={connectProtagonist}/> : <div className="pause-panel">
+          <div className="pause-panel">
             <p className="eyebrow">{tr("EN SUSPENSIÓN")}</p>
             <h2>{tr("Respira.")}</h2>
             <p className="pause-copy">{tr("Tu progreso queda guardado.")}</p>
