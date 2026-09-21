@@ -10,10 +10,13 @@ import { MUSIC } from './music.mjs';
 import { STAGES } from './journey-data.mjs';
 import './approved-settings.css';
 import { LivingMenuArt } from './living-menu-art';
+import { LandscapeMenuArt } from './landscape-menu-art';
+import './landscape-settings.css';
 
 type Section = 'main' | 'journey' | 'credits';
 
 export function FinalSettings({
+  wide = false,
   stage,
   complete,
   eaten,
@@ -28,6 +31,7 @@ export function FinalSettings({
   onRestart,
   onDevelopment,
 }: {
+  wide?: boolean;
   stage: number;
   complete: boolean;
   eaten: number;
@@ -47,9 +51,9 @@ export function FinalSettings({
   const [licenses, setLicenses] = useState(false);
 
   return (
-    <div className="final-settings-shell approved-settings" data-section={section}>
+    <div className="final-settings-shell approved-settings" data-section={section} data-wide={wide}>
       <div className="approved-art" aria-hidden="true" />
-      <LivingMenuArt journey={section === 'journey'} />
+      {wide ? <LandscapeMenuArt /> : <LivingMenuArt journey={section === 'journey'} />}
       <header className="final-settings-heading">
         {tr(section === 'main' ? (
           <DialogClose className="living-back" aria-label={tr("Volver al juego")}><ChevronLeft /></DialogClose>
@@ -58,6 +62,14 @@ export function FinalSettings({
         ))}
         <h2>{tr(section === 'main' ? 'Configuración' : section === 'journey' ? 'Recorrido' : 'Créditos')}</h2>
       </header>
+      {wide && <nav className="landscape-tabs" aria-label={tr('Configuración')}>
+        <button aria-current={section === 'main' ? 'page' : undefined} onClick={() => setSection('main')}>{tr('Configuración')}</button>
+        <button aria-current={section === 'journey' ? 'page' : undefined} onClick={() => setSection('journey')}>{tr('Recorrido')}</button>
+        <button aria-current={section === 'credits' ? 'page' : undefined} onClick={() => setSection('credits')}>{tr('Créditos')}</button>
+        <a href="https://www.instagram.com/krazelgames/" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
+        {!testMode && <button className="landscape-rebirth" onClick={() => {setSection('main');setConfirmReset(true);}}>{tr('Volver a nacer')}</button>}
+        <button className="landscape-development" onClick={onDevelopment}>{tr('Desarrollo')}</button>
+      </nav>}
 
       {tr(section === 'main' && <>
         <section className="living-panel final-settings-panel" aria-label={tr("Configuración general")}>

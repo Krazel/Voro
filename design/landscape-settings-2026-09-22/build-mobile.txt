@@ -1,0 +1,29 @@
+
+> sites-project@0.2.0 build:mobile
+> vite build --config vite.mobile.config.ts && node scripts/verify-mobile-assets.mjs
+
+vite v8.0.13 building client environment for production...
+[2K
+transforming...✓ 2059 modules transformed.
+rendering chunks...
+computing gzip size...
+mobile-dist/index.html                          0.42 kB │ gzip:   0.30 kB
+mobile-dist/assets/page-DOeI38q3.css            2.69 kB │ gzip:   1.02 kB
+mobile-dist/assets/page-CFs7LMlZ.css            6.28 kB │ gzip:   1.90 kB
+mobile-dist/assets/page-Dq4JE098.css           23.87 kB │ gzip:   5.67 kB
+mobile-dist/assets/index-FWaYs5za.css         218.37 kB │ gzip:  38.56 kB
+mobile-dist/assets/chevron-right-BBSMVPof.js    0.23 kB │ gzip:   0.19 kB
+mobile-dist/assets/web-CRZiI6sw.js              0.36 kB │ gzip:   0.25 kB
+mobile-dist/assets/page-B4eaFTRw.js             3.69 kB │ gzip:   1.73 kB
+mobile-dist/assets/web-CPq1Bot9.js              8.45 kB │ gzip:   2.82 kB
+mobile-dist/assets/page-CVdeuoek.js            13.11 kB │ gzip:   4.92 kB
+mobile-dist/assets/page-BJW2K3mB.js            15.57 kB │ gzip:   4.40 kB
+mobile-dist/assets/index-C-DqREjK.js          619.67 kB │ gzip: 205.62 kB
+
+✓ built in 1.50s
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+Mobile output verified: Cristal precedence, 10 backgrounds, UI frame and restored pause A.

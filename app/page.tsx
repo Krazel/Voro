@@ -49,8 +49,13 @@ import {
 } from './journey-data.mjs';
 export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
   const [wideScreen, setWideScreen] = useState(desktop);
+  const [wideSettings, setWideSettings] = useState(false);
   useLayoutEffect(() => {
-    const update = () => setWideScreen(wideScreenEnabled(desktop, isTabletDevice(navigator), window.innerWidth, window.innerHeight));
+    const update = () => {
+      const wide = wideScreenEnabled(desktop, isTabletDevice(navigator), window.innerWidth, window.innerHeight);
+      setWideScreen(wide);
+      setWideSettings(wide && window.innerWidth >= 760 && window.innerHeight >= 520 && window.innerWidth > window.innerHeight);
+    };
     update();
     window.addEventListener('resize', update);
     return () => window.removeEventListener('resize', update);
@@ -545,6 +550,7 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
           showCloseButton={false}
         >
           {tr(finalUI && <FinalSettings
+            wide={wideSettings}
             stage={state.stage}
             complete={state.complete}
             eaten={state.eaten}

@@ -1,0 +1,14 @@
+✔ Normal launch uses approved UI even with an old development preference (0.8196ms)
+✔ UI query override works without preventing later saved changes (0.2082ms)
+✔ Landscape is enabled on both iPad browser identities, never on portrait iPad or iPhone (0.8943ms)
+✔ PC aspect ratios reveal more world without changing vertical scale; raster is bounded (0.3647ms)
+✔ iPad rotation resizes the same game and preserves progression and camera (27.3137ms)
+✔ All backgrounds render at desktop width and invalidate cached crop after resize (46.6367ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 309.6046

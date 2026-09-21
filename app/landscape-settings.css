@@ -1,0 +1,53 @@
+/* Landscape only; portrait art and touch controls retain their existing rules. */
+.voro-settings.final-ui .approved-settings[data-wide=false]{min-height:0;height:auto;aspect-ratio:941/1672;}
+.voro-settings.final-ui .approved-settings[data-wide=true]{width:min(1160px,96vw);height:min(680px,96dvh);aspect-ratio:auto;overflow:visible;background:#00111b;}
+.approved-settings[data-wide=true]>.approved-art{display:none}
+.landscape-surface{position:absolute;pointer-events:none;isolation:isolate;z-index:-1;mask-image:linear-gradient(90deg,transparent,#000 2%,#000 98%,transparent),linear-gradient(transparent,#000 2%,#000 98%,transparent);mask-composite:intersect;}
+.landscape-surface>svg,.landscape-surface>.living-menu-art{position:absolute;inset:0;width:100%;height:100%;}
+.landscape-surface>.living-menu-art{z-index:1}
+.landscape-panel-surface{left:24%;top:16%;width:75%;height:63%;}
+.landscape-button-surface{left:44%;top:80%;width:35%;height:17%;}
+.approved-settings[data-wide=true] .final-settings-heading{left:2%;right:2%;top:3%;height:10%;display:flex;align-items:center;gap:24px;}
+.approved-settings[data-wide=true] .final-settings-heading h2{position:static;font:400 clamp(24px,3vw,36px)/1.1 Georgia,serif;letter-spacing:.13em;white-space:normal;text-align:left;}
+.approved-settings[data-wide=true] .living-back{position:relative;left:auto;top:auto;width:48px;height:48px;flex:none;background:#06303bbb;border:1px solid #84eeee;border-radius:43% 57% 48% 52%;box-shadow:inset 0 0 8px #69e1e866,0 0 6px #6ce2e655;}
+.approved-settings[data-wide=true] .living-back svg{width:26px;height:26px;}
+.landscape-tabs{position:absolute;left:2%;top:23%;width:19%;display:flex;flex-direction:column;gap:12px;}
+.landscape-tabs button,.landscape-tabs a{min-height:48px;padding:12px 10px;text-align:left;color:#c6e4e5;font:400 clamp(13px,1.5vw,18px)/1.2 Georgia,serif;letter-spacing:.06em;text-transform:uppercase;border:1px solid transparent;border-radius:18px;background:none;text-decoration:none;}
+.landscape-tabs button[aria-current=page]{color:#ffe2a2;border-color:#d6ae5470;background:#97722c1e;}
+.landscape-tabs .landscape-rebirth{margin-top:14px;color:#8ebac5;font-size:13px;}
+.landscape-tabs .landscape-development{font:11px sans-serif;color:#809b9e;min-height:32px;padding-block:4px;}
+.approved-settings[data-wide=true] .final-settings-links,.approved-settings[data-wide=true] .journey-rebirth{display:none}
+.approved-settings[data-wide=true] .final-settings-panel{left:31%;top:23%;width:61%;height:49%;}
+.approved-settings[data-wide=true] .final-setting-row{min-height:0;padding:0 12px;font:400 clamp(15px,1.7vw,22px)/1.2 Georgia,serif;gap:20px;letter-spacing:.075em;}
+.approved-settings[data-wide=true] .living-segmented{gap:12px;}
+.approved-settings[data-wide=true] .living-segmented button{width:clamp(94px,11vw,135px);height:48px;font:17px Georgia,serif;border-radius:28px;}
+.approved-settings[data-wide=true] .living-toggle{width:84px;height:44px;border-radius:26px;}
+.approved-settings[data-wide=true] .living-toggle::after{width:34px;height:34px;top:4px;left:4px;}
+.approved-settings[data-wide=true] [aria-pressed=true]>.living-toggle::after{transform:translateX(40px);}
+.approved-settings[data-wide=true] .language-preference{gap:20px;}
+.approved-settings[data-wide=true] .language-preference select{width:clamp(180px,23vw,280px);height:48px;font:17px Georgia,serif;padding:0 20px;border-radius:28px;}
+.approved-settings[data-wide=true]>.living-primary{left:44%;top:80%;width:35%;height:17%;font:400 clamp(17px,2vw,25px)/1.15 Georgia,serif;padding:10px 30px;}
+.approved-settings[data-wide=true] .journey-panel{left:31%;top:24%;width:60%;height:47%;}
+.approved-settings[data-wide=true] .final-journey{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 20px;align-content:start;padding:0 8px;height:76%;overflow:auto;}
+.approved-settings[data-wide=true] .final-journey li{min-height:60px;grid-template-columns:28px 1fr;gap:12px;font:400 clamp(13px,1.4vw,18px)/1.2 Georgia,serif;}
+.approved-settings[data-wide=true] .final-journey li::before{display:none}
+.approved-settings[data-wide=true] .final-journey i{width:26px;height:26px;}
+.approved-settings[data-wide=true] .final-journey small{margin:0;font:12px Georgia,serif;}
+.approved-settings[data-wide=true] .final-stats{height:24%;padding:14px 0 0;font:13px Georgia,serif;}
+.approved-settings[data-wide=true] .final-stats b{font:26px Georgia,serif;}
+.approved-settings[data-wide=true] .credits-panel{left:31%;top:24%;width:60%;height:47%;}
+.approved-settings[data-wide=true] .credits-panel h3{font:400 clamp(22px,2.6vw,34px) Georgia,serif;margin:0 0 8px;}
+.approved-settings[data-wide=true] .credits-panel p{font:17px Georgia,serif;}
+.approved-settings[data-wide=true] .credits-panel h4{font:17px Georgia,serif;margin:0 0 12px;}
+.approved-settings[data-wide=true] .credits-panel hr{margin:20px 0;}
+.approved-settings[data-wide=true] .license-open{width:230px;height:44px;font:15px Georgia,serif;border-radius:28px;}
+.approved-settings[data-wide=true] .credits-thanks{left:26%;width:71%;top:76%;font:14px Georgia,serif;}
+.approved-settings[data-wide=true] .reset-sheet{left:29%;right:7%;top:25%;font:16px/1.5 sans-serif;padding:28px;}
+.approved-settings[data-wide=true] .license-sheet{left:0;right:0;top:0;max-height:50dvh;}
+.approved-settings[data-wide=true] .license-sheet p,.approved-settings[data-wide=true] .license-sheet li{font:14px/1.5 sans-serif;}
+@media(max-height:620px){
+  .landscape-tabs{top:19%;gap:3px}.landscape-tabs button,.landscape-tabs a{min-height:40px;font-size:13px}.landscape-tabs .landscape-rebirth{margin-top:4px}
+  .approved-settings[data-wide=true] .living-segmented button,.approved-settings[data-wide=true] .language-preference select{height:40px;font-size:14px}
+  .approved-settings[data-wide=true] .credits-panel hr{margin:12px 0}.approved-settings[data-wide=true] .credits-panel p,.approved-settings[data-wide=true] .credits-panel h4{font-size:14px}
+  .approved-settings[data-wide=true] .credits-panel h3{font-size:24px}.approved-settings[data-wide=true] .credits-thanks{font-size:12px}
+}

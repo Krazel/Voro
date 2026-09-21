@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 // One textured quad. Only the artwork moves; accessible controls stay in the DOM.
-export function LivingMenuArt({ journey }: { journey: boolean }) {
+export function LivingMenuArt({ journey, crop }: { journey: boolean; crop?: readonly number[] }) {
   const ref = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     const canvas = ref.current;
@@ -14,9 +14,9 @@ export function LivingMenuArt({ journey }: { journey: boolean }) {
     const fragment = gl.createShader(gl.FRAGMENT_SHADER)!;
     gl.shaderSource(vertex, 'attribute vec2 p; varying vec2 uv; void main(){uv=vec2((p.x+1.)*.5,(1.-p.y)*.5);gl_Position=vec4(p,0.,1.);}');
     gl.shaderSource(fragment, `precision mediump float;
-      varying vec2 uv; uniform sampler2D art; uniform float t; uniform float journey;
+      varying vec2 uv; uniform sampler2D art; uniform float t; uniform float journey; uniform vec4 crop;
       void main(){
-        vec2 q=uv;
+        vec2 q=crop.xy+uv*crop.zw;
         float bottom=mix(.69,.79,journey);
         float panel=smoothstep(.18,.24,q.y)*(1.-smoothstep(bottom-.035,bottom,q.y));
         float edges=smoothstep(.18,.36,abs(q.x-.5));
@@ -42,13 +42,14 @@ export function LivingMenuArt({ journey }: { journey: boolean }) {
     gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
     gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
     const clock=gl.getUniformLocation(program,'t'); gl.uniform1f(gl.getUniformLocation(program,'journey'),journey?1:0);
+    gl.uniform4fv(gl.getUniformLocation(program,'crop'),crop ?? [0,0,1,1]);
     function draw(now:number){
       frame=0;
       if(disposed || document.hidden || reduced.matches || !ready) return;
       if(now-last>=1000/30){
         time+=last<0?0:Math.min((now-last)/1000,.1); last=now;
         const width=Math.min(941,Math.max(1,Math.round(canvas!.clientWidth* Math.min(devicePixelRatio,1.5))));
-        const height=Math.round(width*1672/941);
+        const height=crop ? Math.max(1,Math.round(width*canvas!.clientHeight/Math.max(1,canvas!.clientWidth))) : Math.round(width*1672/941);
         if(canvas!.width!==width || canvas!.height!==height){canvas!.width=width;canvas!.height=height;gl!.viewport(0,0,width,height);}
         gl!.uniform1f(clock,time * 3.5);gl!.drawArrays(gl!.TRIANGLE_STRIP,0,4);canvas!.style.opacity='1';
       }
@@ -61,6 +62,6 @@ export function LivingMenuArt({ journey }: { journey: boolean }) {
     function lost(event:Event){event.preventDefault();ready=false;cancelAnimationFrame(frame);canvas!.style.opacity='0';}
     canvas.addEventListener('webglcontextlost',lost); document.addEventListener('visibilitychange',resume);reduced.addEventListener('change',resume);
     return()=>{disposed=true;cancelAnimationFrame(frame);canvas.style.opacity='0';canvas.removeEventListener('webglcontextlost',lost);document.removeEventListener('visibilitychange',resume);reduced.removeEventListener('change',resume);gl.deleteTexture(texture);gl.deleteBuffer(buffer);gl.deleteProgram(program);gl.deleteShader(vertex);gl.deleteShader(fragment);};
-  },[journey]);
+  },[journey,crop]);
   return <canvas ref={ref} className="living-menu-art" aria-hidden="true" />;
 }
