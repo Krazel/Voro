@@ -85,10 +85,10 @@ test('Final capped choices remain selectable without renewing the offer', () => 
     assert.equal(chooseUpgrade(p, old[0]), false);
   }
 });
-test('Adaptations arrive one third sooner; old saves retain their upgrades, body and fractional progress', () => {
+test('Moderated cadence retains old saves, upgrades, body and fractional progress', () => {
   for (let level = 0; level < 43; level++)
     assert.ok(
-      Math.abs(journeyAdaptation(level) / v3JourneyAdaptation(level) - 2 / 3) <
+      Math.abs(journeyAdaptation(level) / v3JourneyAdaptation(level) - 5 / 6) <
         1e-9,
     );
   const p = newJourney(14);

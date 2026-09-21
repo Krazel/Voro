@@ -40,8 +40,12 @@ export class MusicPlayer {
   // elements are primed here; rejected autoplay is retried only on a gesture.
   unlock(){
     if(this.destroyed)return;
+    // Ordinary movement gestures must not restart the idle decoder or reschedule
+    // gain ramps. Retry only an interrupted context or rejected/paused playback.
+    if(this.unlocked&&!this.blocked&&this.context.state==='running'
+      &&(!this.active||this.transition||this.current?.audio.paused===false))return;
     this.unlocked=true;this.blocked=false;
-    this.context.resume().catch(()=>{});
+    if(this.context.state!=='running')this.context.resume().catch(()=>{});
     if(!this.current){this.current=this.decks[0];this.current.gain.gain.value=1;}
     for(const d of this.decks){
       if(!d.id){const track=MUSIC.find(t=>t.id===this.desired);d.id=this.desired;d.audio.src=track.url;}

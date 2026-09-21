@@ -1,0 +1,110 @@
+[
+  {
+    "mode": "silent",
+    "frames": 686,
+    "p50": 7,
+    "p95": 7,
+    "over33": 0,
+    "counts": {
+      "play": 4,
+      "resume": 6,
+      "decode": 3,
+      "sources": 0,
+      "gains": 4
+    },
+    "initial": {
+      "play": 4,
+      "resume": 6,
+      "decode": 3,
+      "sources": 0,
+      "gains": 4
+    },
+    "context": "running"
+  },
+  {
+    "mode": "music",
+    "frames": 690,
+    "p50": 7,
+    "p95": 7,
+    "over33": 0,
+    "counts": {
+      "play": 96,
+      "resume": 67,
+      "decode": 3,
+      "sources": 0,
+      "gains": 4
+    },
+    "initial": {
+      "play": 6,
+      "resume": 7,
+      "decode": 3,
+      "sources": 0,
+      "gains": 4
+    },
+    "context": "running",
+    "decks": [
+      {
+        "paused": true,
+        "time": 0.207054
+      },
+      {
+        "paused": false,
+        "time": 6.750854
+      }
+    ]
+  },
+  {
+    "mode": "sfx",
+    "frames": 685,
+    "p50": 7,
+    "p95": 7,
+    "over33": 0,
+    "counts": {
+      "play": 4,
+      "resume": 36,
+      "decode": 3,
+      "sources": 20,
+      "gains": 24
+    },
+    "initial": {
+      "play": 4,
+      "resume": 6,
+      "decode": 3,
+      "sources": 6,
+      "gains": 10
+    },
+    "context": "running"
+  },
+  {
+    "mode": "both",
+    "frames": 681,
+    "p50": 7,
+    "p95": 7,
+    "over33": 0,
+    "counts": {
+      "play": 96,
+      "resume": 67,
+      "decode": 3,
+      "sources": 19,
+      "gains": 23
+    },
+    "initial": {
+      "play": 6,
+      "resume": 7,
+      "decode": 3,
+      "sources": 5,
+      "gains": 9
+    },
+    "context": "running",
+    "decks": [
+      {
+        "paused": true,
+        "time": 0.12771
+      },
+      {
+        "paused": false,
+        "time": 6.701859
+      }
+    ]
+  }
+]

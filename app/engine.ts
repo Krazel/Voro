@@ -183,6 +183,7 @@ export class VoroEngine {
   gamepadButtons = [false, false];
   padInput = { x: 0, y: 0 };
   started = false;
+  menuRun = false;
   birth = 0;
   paused = false;
   sound = true;
@@ -617,7 +618,7 @@ export class VoroEngine {
   }
   initAudio() {
     if (this.audioStarted) {
-      this.audio?.resume().catch(() => {});
+      if(this.audio && this.audio.state !== 'running')this.audio.resume().catch(() => {});
       return;
     }
     this.audioStarted = true;
@@ -680,6 +681,7 @@ export class VoroEngine {
       g.gain.exponentialRampToValueAtTime(0.001, now + i * 0.12 + 1);
       o.connect(g);
       g.connect(this.master);
+      o.onended = () => { o.disconnect(); g.disconnect(); };
       o.start(now + i * 0.12);
       o.stop(now + i * 0.12 + 1.1);
     }
@@ -865,6 +867,11 @@ export class VoroEngine {
     this.publish();
     this.canvas.focus({ preventScroll: true });
   }
+  returnToMenu() {
+    if(this.testMode)this.exitTest();
+    this.save();this.menuRun=true;this.started=false;this.paused=false;this.keys.clear();this.pointer=null;
+    this.setAudio();this.renderDirty=true;this.publish();
+  }
   action(
     name:
       | 'start'
@@ -877,7 +884,8 @@ export class VoroEngine {
   ) {
     if (name === 'start') {
       if (!this.assetsReady) return;
-      if (!this.started && !this.saved) this.beginBirth();
+      if (!this.started && !this.saved && !this.menuRun) this.beginBirth();
+      this.menuRun=false;
       this.started = true;
       this.paused = false;
       this.initAudio();
@@ -1015,7 +1023,7 @@ export class VoroEngine {
         ? nextAdaptation(this.progress.level - 1)
         : 0,
       adaptationTarget: nextAdaptation(this.progress.level),
-      saved: this.saved,
+      saved: this.saved || this.menuRun,
       storageAvailable: this.storageAvailable,
       transition: this.transition,
       deaths: this.progress.deaths,
@@ -1652,6 +1660,7 @@ export class VoroEngine {
     g.gain.exponentialRampToValueAtTime(0.001, at + duration);
     o.connect(g);
     g.connect(this.master);
+    o.onended = () => { o.disconnect(); g.disconnect(); };
     o.start(at);
     o.stop(at + duration + 0.03);
   }

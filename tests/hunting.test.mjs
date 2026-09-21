@@ -104,7 +104,7 @@ test('Current saved cadence migrates once preserving fraction and existing pendi
     loaded.progress.xp,
     (journeyAdaptation(0) + journeyAdaptation(1)) / 2,
   );
-  assert.equal(loaded.progress.adaptationVersion, 4);
+  assert.equal(loaded.progress.adaptationVersion, 5);
   assert.deepEqual(loaded.progress.mutations, ['reach']);
   const again = loadJourney(saveJourney(loaded.progress, loaded.life, w, true));
   assert.equal(again.progress.xp, loaded.progress.xp);

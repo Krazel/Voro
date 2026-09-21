@@ -85,13 +85,14 @@ button {
   background: radial-gradient(ellipse at 50% 30%, #0a202a 0, #030b12 65%);
   position: relative;
 }
-.voro-shell *, .cristal-dialog {
+.voro-shell *, .cristal-dialog, .cristal-dialog * {
   -webkit-user-select: none;
   user-select: none;
   -webkit-touch-callout: none;
 }
 .voro-shell img { -webkit-user-drag: none; }
-.cristal-dialog :is(textarea, input:not([type='range'])) {
+.cristal-dialog { touch-action: manipulation; }
+.cristal-dialog :is(textarea, input:not([type='range']), .credits-panel, .credits-panel *, .music-credits, .music-credits *) {
   -webkit-user-select: text;
   user-select: text;
   -webkit-touch-callout: default;

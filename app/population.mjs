@@ -7,7 +7,7 @@ export const POPULATION_PLANS = {
     note: 'Se conserva la población microscópica: nutrientes y células pequeñas predominan.',
   },
   pond: {
-    slots: [6, 5, 1],
+    slots: [7, 5, 1],
     note: 'Vida diminuta entre algas y restos; un peligro como máximo por zona.',
   },
   land: {

@@ -70,7 +70,7 @@ function Membrane({ index }: { index: number }) {
     </g>
   </svg>;
 }
-function Protagonist({ connect }: { connect?: (canvas: HTMLCanvasElement | null) => void }) {
+export function Protagonist({ connect }: { connect?: (canvas: HTMLCanvasElement | null) => void }) {
   const canvas = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     const node=canvas.current!;

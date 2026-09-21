@@ -187,7 +187,7 @@ test('Existing microscopic saves migrate, and each later stage preserves wounded
   const migrated = migrateMicro(saveMicro(p, l, w, false));
   assert.equal(migrated.life.x, -6000);
   assert.equal(migrated.progress.stage, 0);
-  assert.equal(migrated.progress.xp, 60);
+  assert.equal(migrated.progress.xp, 75);
   for (let stage = 0; stage < STAGES.length; stage++) {
     const p = newJourney(22);
     p.stage = stage;

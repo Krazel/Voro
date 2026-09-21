@@ -1,6 +1,7 @@
 'use client';
 import { t as tr } from './language.mjs';
 import { LanguagePicker, useLanguage } from './language-picker';
+import { ApprovedPause } from './approved-pause';
 
 import { MUSIC } from './music.mjs';
 import { finaleState } from './universe-finale.mjs';
@@ -181,7 +182,7 @@ export default function Home() {
   const modeButton=<button type="button" className="ui-mode-toggle" data-ui-mode-toggle aria-pressed={finalUI} onClick={toggleUiMode}>
     {tr(finalUI?'Volver a UI de desarrollo':'Pasar a UI final')}<span>{tr(finalUI?'Final':'Desarrollo')}</span>
   </button>;
-  const finale = state.ending > 0 || state.complete;
+  const finale = state.started && (state.ending > 0 || state.complete);
   const finalCaption = finaleState(state.ending).caption;
   const active =
     state.started && !state.dead && !state.complete && state.ending === 0;
@@ -406,7 +407,7 @@ export default function Home() {
           </>
         ))}
         {tr((active || state.complete) && state.paused && !settings && (
-          <div className="pause-panel">
+          finalUI ? <ApprovedPause onContinue={()=>action('pause')} onSettings={()=>changeSettings(true)} onMenu={()=>engine.current?.returnToMenu()} onProtagonist={connectProtagonist}/> : <div className="pause-panel">
             <p className="eyebrow">{tr("EN SUSPENSIÓN")}</p>
             <h2>{tr("Respira.")}</h2>
             <p className="pause-copy">{tr("Tu progreso queda guardado.")}</p>

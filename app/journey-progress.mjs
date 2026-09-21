@@ -12,6 +12,7 @@ import {
   nextAdaptation,
   previousJourneyAdaptation,
   v3JourneyAdaptation,
+  v4JourneyAdaptation,
   boundedUpgrades,
 } from './mutations.mjs';
 import {
@@ -30,7 +31,7 @@ export function newJourney(seed) {
     stage: 0,
     cameraEntryRadius: null,
     orbitSweep: /** @type {ReturnType<typeof restoreOrbitSweep>} */ (null),
-    adaptationVersion: 4,
+    adaptationVersion: 5,
     upgradeLimitsVersion: 1,
     shieldChoiceVersion: 1,
     journeyVersion: 2,
@@ -98,7 +99,7 @@ export function migrateMicro(raw) {
   p.xp = migrateAdaptationXp(p.xp, p.level);
   p.mutations = boundedUpgrades(p.mutations);
   p.level = p.mutations.length;
-  p.adaptationVersion = 4;
+  p.adaptationVersion = 5;
   p.offer = [];
   refreshOffer(p);
   const l = journeyLife(p);
@@ -169,7 +170,7 @@ export function loadJourney(raw) {
         p.cameraEntryRadius <= radiusForMass(STAGES[stage].goal * 1.5)
         ? p.cameraEntryRadius : null,
       xp:
-        p.adaptationVersion === 4
+        p.adaptationVersion === 5
           ? p.xp
           : migrateAdaptationXp(p.xp, p.level, p.adaptationVersion),
       rerollUsed: p.rerollUsed === true,
@@ -286,7 +287,9 @@ export function loadJourney(raw) {
 // Preserve progress within the current adaptation when loading the previous cadence.
 export function migrateAdaptationXp(xp, level, version = 1) {
   const oldThreshold =
-    version === 3
+    version === 4
+      ? v4JourneyAdaptation
+      : version === 3
       ? v3JourneyAdaptation
       : version === 2
         ? previousJourneyAdaptation
