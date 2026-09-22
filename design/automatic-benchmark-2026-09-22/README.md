@@ -1,5 +1,7 @@
 # VORO 0.6 (1) — prueba automática desde iPhone/iPad
 
+**Entrega vigente: 0.6.1 (1) disponible en TestFlight interno.** CI35733349091 finalizado correctamente. Apple verificó VALID / IN_BETA_TESTING y pertenencia a VORO Interno para build `52f32357-0604-48fc-8c9e-0a98eabfc3ac` a las 13:32:34 UTC del 22/09. Artefacto firmado descargado y SHA256 contrastado. Evidencias `0.6.1-build-manifest.json`, `0.6.1-app-store-connect.json`, `0.6.1-SHA256SUMS.txt`. Biblioteca PR-009 actualizada y releída en revisión130, versión0.6.1/build1; tracking y marketing preservados. Pendiente únicamente ejecución física del usuario; los registros de PROCESSING inferiores son historial, no el estado final.
+
 ## Revisión corta 0.6.1 (1)
 
 El usuario pidió reducir la duración. Se conservan los 20 escenarios (10 entornos × 2 tamaños), ahora 5s medidos + 1s de calentamiento: 120s nominales más cargas. El primer impulso se intenta a los 2s de movimiento (durante la medición), y los siguientes cada 9s si fueran necesarios. Cancelación, protección de la campaña, informe compartible y pantalla encendida se mantienen. El informe registra los tiempos del protocolo para distinguirlo del anterior; una muestra más corta detectará peor los tirones poco frecuentes.
