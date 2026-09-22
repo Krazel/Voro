@@ -20,4 +20,6 @@ Limitación de automatización: las matrices completas no quedaron verdes en una
 
 `ingest-preview.wav` permite escuchar los cinco gestos sin transposición y una ronda con pitch aleatorio. Es una muestra de los recursos, no una grabación de altavoces físicos.
 
+Selección aprobada expresamente por el usuario el 23/09/2026: «me gusta lo de los sonidos de la ingesta, implementalo». Estos cinco gestos y su pitch aleatorio ya están integrados en la build interna 0.6.4(1) indicada arriba; se mantiene esta selección sin generar otra build por la confirmación.
+
 Trabajo aislado en Voro-store-prep sobre 0.6.3. Los cambios Windows prueba3 de Voro-camera permanecen locales y no se incluyen. App Store 1.0 conserva su candidata seleccionada; no hay envío a App Review.
