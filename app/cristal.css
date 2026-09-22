@@ -11,6 +11,12 @@
   color: #e6f2ef;
   font: 12px/1.5 monospace;
 }
+.automatic-benchmark {position:absolute;left:14px;right:14px;bottom:max(20px,env(safe-area-inset-bottom));z-index:30;padding:16px;background:#041824f5;border:1px solid #57828b;border-radius:16px;color:#e6f2ef;font:14px/1.4 system-ui;}
+.automatic-benchmark p {margin:8px 0;}
+.automatic-benchmark > div {display:flex;gap:10px;flex-wrap:wrap;}
+.automatic-benchmark button {min-height:44px;padding:9px 14px;border:1px solid #709ba5;border-radius:8px;background:#153542;color:#edf5f4;}
+.auto-testing .header-actions,.auto-testing .bottom-controls {visibility:hidden;}
+.auto-testing .pause-panel {display:none;}
 .performance-report-label { display: grid; gap: 8px; font-size: 14px; }
 .performance-report { width: 100%; padding: 8px; font: 12px/1.4 monospace; background: #03131b;
   color: #e6f2ef; user-select: text; -webkit-user-select: text; border: 1px solid #78959e; border-radius: 8px; }

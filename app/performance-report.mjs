@@ -1,5 +1,6 @@
 // Compact exports retain diagnostic evidence, not thousands of per-frame rows.
 export function compactPerformanceReport(report) {
+  if(report?.format==='voro-performance-tour-v1')return report;
   if (!report?.summary?.frames) throw new Error('Primero mide una partida de 30 s.');
   const events = {};
   for (const e of report.events || []) {
@@ -8,6 +9,7 @@ export function compactPerformanceReport(report) {
   }
   return {
     format:'voro-performance-v3-compact',version:report.version,build:report.build,date:report.date,
+    captureMs:report.captureMs,
     userAgent:report.userAgent,viewport:report.viewport,summary:report.summary,session:report.session,
     animationSheets:report.animationSheets,animationCache:report.animationCache,
     background:report.background,backgroundRebuilds:report.backgroundRebuilds,
@@ -24,6 +26,8 @@ export function compactPerformanceReport(report) {
   };
 }
 export function performanceSummaryText(report) {
+  if(report?.format==='voro-performance-tour-v1')return `VORO ${report.version} (${report.build}) · Prueba automática · ${report.status}\n${report.finished}/${report.planned} escenarios · ${report.summary.frames} fotogramas\n`+
+    report.results.map(x=>`${x.name} (${x.size}): ${x.report ? x.report.session.fps+' FPS · P95 '+x.report.summary.p95+' ms' : x.status}`).join('\n');
   const r=compactPerformanceReport(report),s=r.summary;
   return `VORO ${r.version} (${r.build}) · ${s.seconds} s / ${s.frames} fotogramas\nFPS: ${r.session.fps} · P95: ${s.p95} ms · P99: ${r.session.p99} ms · Pico: ${s.peak} ms\nCuadros >33 ms: ${s.slowFrames} · CPU: ${s.cpu} ms\nAnimaciones: ${(r.animationSheets.bytes/1048576).toFixed(1)} MiB · ${r.animationSheets.errors} errores · ${r.animationCache.entries} poses en caché procedural\n${r.userAgent}\nPara analizar los tirones, comparte también el archivo desde Configuración.`;
 }

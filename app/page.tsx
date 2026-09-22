@@ -13,6 +13,7 @@ import { readLeftHanded, writeLeftHanded, subscribeControls, serverLeftHanded } 
 import Link from 'next/link';
 import { AdaptationChoices, CristalPreview } from './cristal-ui';
 import { ReviewMilestone } from './review-milestone';
+import { useBenchmarkAwake } from './benchmark-awake';
 import { FinalSettings } from './final-settings';
 import { isTabletDevice, wideScreenEnabled } from './desktop-viewport.mjs';
 import './wide-screen.css';
@@ -106,6 +107,19 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
   const [reportCopied, setReportCopied] = useState(false);
   const [sharingReport, setSharingReport] = useState(false);
   const [shareMessage, setShareMessage] = useState('');
+  const [tourNoticeDismissed,setTourNoticeDismissed]=useState(false);
+  const shareReport=async()=>{
+    const report=engine.current?.performanceReport();
+    if(!report?.summary.frames && report?.format!=='voro-performance-tour-v1'){setShareMessage('Primero mide una partida de 30 s.');return;}
+    setSharingReport(true);setShareMessage('');
+    try {
+      const result=await sharePerformanceFile(report);
+      setShareMessage(result==='downloaded'?'Archivo descargado. Puedes adjuntarlo en WhatsApp.':'Archivo preparado. Puedes volver a compartirlo cuando quieras.');
+    } catch(error){
+      const message=error instanceof Error?error.message:String(error);
+      setShareMessage(/cancel|abort/i.test(message)?'No se ha compartido el archivo.':'No se pudo compartir. Puedes copiar el resumen y volver a intentarlo.');
+    } finally {setSharingReport(false);}
+  };
   const [uiPreview, setUiPreview] = useState(false);
   const [testStage, setTestStage] = useState(0);
   const [testSize, setTestSize] = useState(0);
@@ -172,6 +186,7 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
     name: 'start' | 'pause' | 'restart' | 'retry' | 'dash' | 'sound',
   ) => engine.current?.action(name);
   useLayoutEffect(() => { engine.current?.recordUiCommit(); }, [state]);
+  useBenchmarkAwake(!!state.automated?.running && !state.automated.paused);
   const changeSettings = (open: boolean) => {
     if (engine.current) engine.current.settingsOpen = open;
     if (open) {
@@ -213,7 +228,7 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
   return (
     <main className={'voro-shell' + (finale ? ' universe-ended' : '')} data-wide={wideScreen} data-ui="cristal" data-ui-mode={uiMode}>
       <section
-        className={'viewport' + (finale ? ' universe-finale' : '')}
+        className={'viewport' + (finale ? ' universe-finale' : '') + (state.automated?.running?' auto-testing':'')}
         data-event={
           state.birth > 0 ? 'birth' : !state.started ? 'intro' : state.offer.length
             ? 'adaptation'
@@ -508,7 +523,22 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
             <span className="short-note">{tr("FIN · VORO")}</span>
           </div>
         ))}
-        {tr(!finalUI && state.performance && !finale && (
+        {tr(state.automated && (!tourNoticeDismissed || state.automated.running) && <section className="automatic-benchmark" aria-label={tr('Prueba automática de rendimiento')}>
+          <strong>{tr(state.automated.running?'Prueba automática de rendimiento':state.automated.status==='completed'?'Prueba terminada':'Prueba cancelada')}</strong>
+          {state.automated.running ? <>
+            <p>{tr(state.automated.stage)} · {tr(state.automated.size==='entry'?'Tamaño inicial':'Tamaño grande')} · {state.automated.step}/{state.automated.total}</p>
+            <p>{tr(state.automated.paused?'Prueba en pausa':state.automated.status==='loading'?'Cargando entorno…':state.automated.status==='warmup'?'Preparando escena…':'Midiendo')}{state.automated.status==='recording' && !state.automated.paused?' · '+state.automated.remaining+' s':''}</p>
+            <div>{state.automated.paused && <button onClick={()=>engine.current?.resumeAutomaticBenchmark()}>{tr('Continuar prueba')}</button>}
+            <button onClick={()=>engine.current?.finishAutomaticBenchmark()}>{tr('Cancelar y volver')}</button></div>
+          </> : <>
+            <p>{state.automated.step}/{state.automated.total} · {tr('Tu partida se ha restaurado.')}</p>
+            {state.automated.failed>0 && <p>{tr('Escenarios incompletos')}: {state.automated.failed}</p>}
+            <div><button disabled={sharingReport} onClick={shareReport}>{tr(sharingReport?'Preparando…':'Compartir informe como archivo')}</button>
+            <button onClick={()=>{setTourNoticeDismissed(true);if(engine.current?.paused)action('pause');}}>{tr('Volver')}</button></div>
+            {shareMessage && <p>{tr(shareMessage)}</p>}
+          </>}
+        </section>)}
+        {tr(!finalUI && state.performance && !finale && !state.automated?.running && (
           <output className="performance-readout">
             {tr(state.performance.recording ? state.performance.remaining ? `Midiendo · ${state.performance.remaining} s` : 'Rendimiento' : 'Medición terminada')}
             <br />{tr(state.performance.fps || '—')}{tr(" FPS · P95 ")}{tr(state.performance.p95)}{tr(" ms · pico ")}{tr(state.performance.peak)}{tr(" ms ")}<br />{tr("CPU ")}{tr(state.performance.cpu)}{tr(" ms · lentos ")}{tr(state.performance.slowFrames)}
@@ -603,26 +633,20 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
             setReportText(''); setReportCopied(false); setShareMessage('');
             engine.current?.startBenchmark(); changeSettings(false);
           }}>{tr("Medir una partida de 30 s")}<span>{tr("Iniciar")}</span></button>
+          <button className="settings-row" onClick={()=>{
+            setReportText('');setReportCopied(false);setShareMessage('');setTourNoticeDismissed(false);
+            if(engine.current?.startAutomaticBenchmark()){resume.current=false;changeSettings(false);}
+          }}>{tr('Probar todos los entornos automáticamente')}<span>{tr('Iniciar')}</span></button>
+          <p className="save-note">{tr('Unos 6 minutos. Prueba dos tamaños por entorno, moviéndose y usando el impulso. Mantén el juego abierto. Puedes cancelar y recuperar tu partida en cualquier momento.')}</p>
           <button className="settings-row" onClick={async () => {
             const report = engine.current?.performanceReport();
             if (!report) return;
-            if (!report.summary.frames) { setShareMessage('Primero mide una partida de 30 s.'); return; }
+            if (!report.summary.frames && report.format!=='voro-performance-tour-v1') { setShareMessage('Primero mide una partida de 30 s.'); return; }
             const text = performanceSummaryText(report);
             setReportText(text); setReportCopied(false);
             try { await navigator.clipboard.writeText(text); setReportCopied(true); } catch { /* selectable fallback below */ }
           }}>{tr("Copiar resumen de rendimiento")}<span>{tr(reportCopied ? 'Copiado' : 'Copiar')}</span></button>
-          <button className="settings-row" disabled={sharingReport} onClick={async () => {
-            const report=engine.current?.performanceReport();
-            if (!report?.summary.frames) { setShareMessage('Primero mide una partida de 30 s.'); return; }
-            setSharingReport(true);setShareMessage('');
-            try {
-              const result=await sharePerformanceFile(report);
-              setShareMessage(result==='downloaded' ? 'Archivo descargado. Puedes adjuntarlo en WhatsApp.' : 'Archivo preparado. Puedes volver a compartirlo cuando quieras.');
-            } catch (error) {
-              const message=error instanceof Error ? error.message : String(error);
-              setShareMessage(/cancel|abort/i.test(message) ? 'No se ha compartido el archivo.' : 'No se pudo compartir. Puedes copiar el resumen y volver a intentarlo.');
-            } finally { setSharingReport(false); }
-          }}>{tr("Compartir informe como archivo")}<span>{tr(sharingReport ? 'Preparando…' : 'Compartir')}</span></button>
+          <button className="settings-row" disabled={sharingReport} onClick={shareReport}>{tr("Compartir informe como archivo")}<span>{tr(sharingReport ? 'Preparando…' : 'Compartir')}</span></button>
           {tr(shareMessage && <output className="save-note">{tr(shareMessage)}</output>)}
           <p className="save-note">{tr("Elige WhatsApp en el menú de compartir. El archivo incluye el resumen y los peores tirones. La prueba cuenta solo mientras juegas. Incluye FPS, fotogramas lentos, cargas y tiempos por sistema. El informe se queda en tu dispositivo hasta que lo compartas.")}</p>
           {tr(reportText && <label className="performance-report-label">{tr("Informe de rendimiento ")}<textarea className="performance-report" readOnly rows={5} value={reportText}

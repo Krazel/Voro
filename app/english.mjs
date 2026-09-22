@@ -3,6 +3,21 @@ import { STUDIO_ENGLISH } from './english-studio.mjs';
 // is translated, so species keys, upgrade groups and progression stay stable.
 export const ENGLISH = Object.fromEntries(`
 Cargando…|Loading…
+Prueba automática de rendimiento|Automatic performance test
+Probar todos los entornos automáticamente|Test all environments automatically
+Unos 6 minutos. Prueba dos tamaños por entorno, moviéndose y usando el impulso. Mantén el juego abierto. Puedes cancelar y recuperar tu partida en cualquier momento.|About 6 minutes. Tests two sizes in every environment with automatic movement and dashes. Keep the game open. You can cancel and restore your run at any time.
+Tamaño inicial|Starting size
+Tamaño grande|Larger size
+Prueba en pausa|Test paused
+Prueba terminada|Test finished
+Escenarios incompletos|Incomplete scenarios
+Prueba cancelada|Test cancelled
+Cargando entorno…|Loading environment…
+Preparando escena…|Preparing scene…
+Midiendo|Measuring
+Continuar prueba|Resume test
+Cancelar y volver|Cancel and return
+Tu partida se ha restaurado.|Your run has been restored.
 Volver al menú|Back to menu
 El progreso se guarda automáticamente.|Progress is saved automatically.
 Bellota|Acorn

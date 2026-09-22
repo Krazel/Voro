@@ -5,7 +5,39 @@ import StoreKit
 class VoroBridgeViewController: CAPBridgeViewController {
     override func capacitorDidLoad() {
         bridge?.registerPluginInstance(VoroReviewPlugin())
+        bridge?.registerPluginInstance(VoroBenchmarkDisplayPlugin())
     }
+}
+
+@objc(VoroBenchmarkDisplayPlugin)
+public class VoroBenchmarkDisplayPlugin: CAPPlugin, CAPBridgedPlugin {
+    public let identifier = "VoroBenchmarkDisplayPlugin"
+    public let jsName = "VoroBenchmarkDisplay"
+    public let pluginMethods = [CAPPluginMethod(name: "setActive", returnType: CAPPluginReturnPromise)]
+    private var requested = false
+    private var previousIdleState = false
+
+    public override func load() {
+        NotificationCenter.default.addObserver(self, selector: #selector(suspend), name: UIApplication.willResignActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(resume), name: UIApplication.didBecomeActiveNotification, object: nil)
+    }
+    @objc func setActive(_ call: CAPPluginCall) {
+        DispatchQueue.main.async {
+            let active = call.getBool("active") ?? false
+            if active && !self.requested { self.previousIdleState = UIApplication.shared.isIdleTimerDisabled }
+            self.requested = active
+            UIApplication.shared.isIdleTimerDisabled = active
+                ? UIApplication.shared.applicationState == .active : self.previousIdleState
+            call.resolve()
+        }
+    }
+    @objc private func suspend() {
+        if requested { UIApplication.shared.isIdleTimerDisabled = false }
+    }
+    @objc private func resume() {
+        if requested { UIApplication.shared.isIdleTimerDisabled = true }
+    }
+    deinit { NotificationCenter.default.removeObserver(self) }
 }
 
 @objc(VoroReviewPlugin)

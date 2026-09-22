@@ -11,6 +11,8 @@ import { TiltControl } from './tilt-control.ts';
 import { drawOrbitalEarth, constrainOrbit, canAbsorbEarth } from './earth-landmark.mjs';
 import { StageAssets } from './stage-assets.mjs';
 import { FrameMonitor } from './frame-monitor.mjs';
+import { BenchmarkTour, tourReport } from './benchmark-tour.mjs';
+import { compactPerformanceReport } from './performance-report.mjs';
 import { AnimationSheets } from './animation-sheets.mjs';
 import { transitionScene } from './journey-transitions.mjs';
 // Canvas2D rendering and input. The simulation stays independent of frame rendering.
@@ -74,6 +76,7 @@ import {
 } from './journey-progress.mjs';
 
 export type Snapshot = {
+  automated?: {running:boolean;status:string;stage:string;size:string;step:number;total:number;remaining:number;paused:boolean;failed:number};
   zoomFactor: number;
   uniformVisualSpeed: boolean;
   performance?: ReturnType<FrameMonitor['summary']> & { loading: number; pending: number; cacheMB: number;
@@ -254,6 +257,10 @@ export class VoroEngine {
   uiQueuedAt: number | null = null;
   uiCommitDelay = 0;
   groundAtCapture = 0;
+  autoTour: BenchmarkTour | null = null;
+  lastTourReport: ReturnType<typeof tourReport> | null = null;
+  tourBackup: {zoomFactor:number;zoom:number;camera:{x:number;y:number};time:number;lastEmit:number;
+    paused:boolean;birth:number;rasterBudget:RasterBudget;uniformVisualSpeed:boolean} | null = null;
   diagnosticSnapshot: ReturnType<FrameMonitor['summary']> | null = null;
   diagnosticSnapshotAt = 0;
   recordUiCommit() {
@@ -271,6 +278,8 @@ export class VoroEngine {
     this.publish();
   }
   startBenchmark() {
+    if(this.autoTour)return;
+    this.lastTourReport=null;
     this.lastPerformanceReport = null;
     this.frameMonitor.reset();
     this.groundAtCapture = this.worldGround.redraws;
@@ -279,8 +288,12 @@ export class VoroEngine {
     this.publish();
   }
   performanceReport() {
+    return this.lastTourReport || this.frameReport();
+  }
+  frameReport() {
     if (this.lastPerformanceReport) return this.lastPerformanceReport;
     return this.frameMonitor.export({ ...RELEASE,
+      captureMs:this.frameMonitor.elapsed,
       date: new Date().toISOString(), userAgent: typeof navigator === 'undefined' ? '' : navigator.userAgent,
       viewport: { width: this.canvas.width, height: this.canvas.height, pixelRatio: this.pixelRatio },
       rendering: { targetFPS: 60, skippedRefreshes: this.framePacer.skipped,
@@ -293,6 +306,60 @@ export class VoroEngine {
       backgroundRebuilds: this.worldGround.redraws,
       background: this.backgroundStatus(),
       backgroundRebuildsDuringCapture: this.worldGround.redraws - this.groundAtCapture });
+  }
+  startAutomaticBenchmark() {
+    if(this.autoTour)return false;
+    if(this.testMode)this.exitTest();
+    this.tourBackup={zoomFactor:this.zoomFactor,zoom:this.zoom,camera:{...this.camera},time:this.time,
+      lastEmit:this.lastEmit,paused:this.paused,birth:this.birth,rasterBudget:this.rasterBudget,uniformVisualSpeed:this.uniformVisualSpeed};
+    this.lastTourReport=null;this.lastPerformanceReport=null;this.diagnosticCompleted=false;
+    this.diagnosticsEnabled=false;this.benchmarkSeconds=0;this.cancelSaveJob();
+    this.autoTour=new BenchmarkTour(STAGES.flatMap((stage,index)=>[
+      {stage:index,id:stage.id,name:stage.short,size:'entry',biomass:stageStartMass(index)},
+      {stage:index,id:stage.id,name:stage.short,size:'grown',biomass:stageStartMass(index)*(stage.goal/stageStartMass(index))**.8},
+    ]));
+    // Enter sandbox synchronously: a blur immediately after tapping cannot save
+    // a benchmark scene into the campaign slot.
+    this.autoTour.tick(0,{active:true,ready:false,error:false});this.enterAutomaticScene();
+    this.publish();return true;
+  }
+  enterAutomaticScene() {
+    const tour=this.autoTour;if(!tour)return;
+    this.diagnosticsEnabled=false;this.lastPerformanceReport=null;this.diagnosticCompleted=false;
+    this.frameMonitor.reset();this.diagnosticSnapshot=null;this.measuredLastFrame=false;
+    this.zoomFactor=1;this.uniformVisualSpeed=true;this.rasterBudget=new RasterBudget();this.resize();
+    this.startTest(tour.current.stage,tour.current.biomass,false,true,false);
+    this.hint='';this.last=0;this.framePacer=new FramePacer();tour.last=null;
+  }
+  advanceAutomaticBenchmark(stamp:number) {
+    const tour=this.autoTour;if(!tour)return;
+    const command=tour.tick(stamp,{active:!document.hidden&&!this.paused&&!this.settingsOpen,
+      ready:this.assetsReady,error:this.assets.failed(this.progress.stage)});
+    if(command==='enter')this.enterAutomaticScene();
+    else if(command==='record'){
+      this.frameMonitor.reset();this.lastPerformanceReport=null;this.diagnosticSnapshot=null;
+      this.groundAtCapture=this.worldGround.redraws;this.measuredLastFrame=false;
+      this.diagnosticsEnabled=true;this.benchmarkSeconds=tour.seconds;this.publish();
+    } else if(command==='asset-error'||command==='load-timeout'){
+      tour.complete(command);this.diagnosticsEnabled=false;this.publish();
+    } else if(command==='finish')this.finishAutomaticBenchmark('completed');
+    if(this.autoTour && !this.paused && !document.hidden && this.assetsReady && tour.dashDue())this.action('dash',true);
+  }
+  finishAutomaticBenchmark(status='cancelled') {
+    const tour=this.autoTour,backup=this.tourBackup;if(!tour||!backup)return;
+    if(status==='cancelled' && tour.current && tour.state!=='next'){
+      const report=this.frameMonitor.totalFrames?compactPerformanceReport(this.frameReport()):null;
+      tour.complete('cancelled',report);
+    }
+    this.lastTourReport=tourReport(tour,{...RELEASE,date:new Date().toISOString(),userAgent:navigator.userAgent,
+      seed:this.progress.seed},status);
+    this.autoTour=null;this.diagnosticsEnabled=false;this.diagnosticCompleted=false;this.benchmarkSeconds=0;
+    this.lastPerformanceReport=null;this.measuredLastFrame=false;this.diagnosticSnapshot=null;
+    this.exitTest();Object.assign(this,backup);this.tourBackup=null;
+    this.last=0;this.framePacer=new FramePacer();this.resize();this.setAudio();this.publish();
+  }
+  resumeAutomaticBenchmark() {
+    if(!this.autoTour)return;this.paused=false;this.last=0;this.autoTour.last=null;this.setAudio();this.publish();
   }
   measured<T>(name: string, run: () => T): T {
     return this.diagnosticsEnabled ? this.frameMonitor.measure(name, run) : run();
@@ -605,7 +672,7 @@ export class VoroEngine {
     };
   }
   cameraInputAllowed() {
-    return this.started && !this.paused && !this.settingsOpen && !this.life.dead
+    return !this.autoTour && this.started && !this.paused && !this.settingsOpen && !this.life.dead
       && !this.ending && !this.progress.offer.length && !this.transition && !this.birth && !this.earthAbsorption;
   }
   get cameraEntryRadius() {
@@ -891,7 +958,9 @@ export class VoroEngine {
       | 'dash'
       | 'sound'
       | 'continue',
+    automatic = false,
   ) {
+    if(this.autoTour && !automatic)return;
     if (name === 'start') {
       if (!this.assetsReady) return;
       if (!this.started && !this.saved && !this.menuRun) this.beginBirth();
@@ -1005,6 +1074,13 @@ export class VoroEngine {
       this.diagnosticSnapshotAt = this.time;
     }
     this.emit({
+      automated:this.autoTour ? {running:true,status:this.autoTour.state,stage:this.autoTour.current?.name||'',
+        size:this.autoTour.current?.size||'',step:this.autoTour.index+1,total:this.autoTour.plan.length,
+        remaining:Math.max(0,Math.ceil(this.autoTour.seconds-this.frameMonitor.elapsed/1000)),paused:this.paused,
+        failed:this.autoTour.results.filter(x=>x.status!=='ok').length}
+        : this.lastTourReport ? {running:false,status:this.lastTourReport.status,stage:'',size:'',
+          step:this.lastTourReport.finished,total:this.lastTourReport.planned,remaining:0,paused:false,
+          failed:this.lastTourReport.results.filter((x:{status:string})=>x.status!=='ok').length}:undefined,
       zoomFactor: this.zoomFactor,
       uniformVisualSpeed: this.uniformVisualSpeed,
       performance: this.diagnosticsEnabled || this.diagnosticCompleted ? {
@@ -1062,6 +1138,7 @@ export class VoroEngine {
   }
   tilt = new TiltControl();
   input() {
+    if(this.autoTour)return this.autoTour.movement();
     if(this.zoomGesture.locked)return {x:0,y:0};
     let x =
         (this.keys.has('KeyD') || this.keys.has('ArrowRight') ? 1 : 0) -
@@ -1100,6 +1177,7 @@ export class VoroEngine {
   }
   frame = (stamp: number) => {
     if (this.destroyed) return;
+    this.advanceAutomaticBenchmark(stamp);
     this.syncMusic();
     if (!this.framePacer.accept(stamp)) {
       this.raf = requestAnimationFrame(this.frame);
@@ -1188,8 +1266,13 @@ export class VoroEngine {
         rafDelay: +Math.max(0, frameStart - stamp).toFixed(2), uiCommitDelay: +this.uiCommitDelay.toFixed(2),
       });
       if (this.benchmarkSeconds && this.frameMonitor.elapsed >= this.benchmarkSeconds * 1000) {
-        this.lastPerformanceReport = this.performanceReport();
-        this.diagnosticsEnabled = false; this.diagnosticCompleted = true;
+        if(this.autoTour){
+          this.autoTour.complete('ok',compactPerformanceReport(this.frameReport()));
+          this.diagnosticsEnabled=false;this.benchmarkSeconds=0;this.measuredLastFrame=false;
+        } else {
+          this.lastPerformanceReport = this.frameReport();
+          this.diagnosticsEnabled = false; this.diagnosticCompleted = true;
+        }
         this.publish();
       }
     }
@@ -1381,7 +1464,7 @@ export class VoroEngine {
           && (p.biomass >= stageOf(this.progress).goal || p.finalEaten)) {
           this.beginUniverseFinale(); return;
         }
-        refreshOffer(this.progress);
+        if(!this.autoTour)refreshOffer(this.progress);
         if (this.progress.offer.length && !p.finalEaten) {
           this.keys.clear();
           this.pointer = null;
