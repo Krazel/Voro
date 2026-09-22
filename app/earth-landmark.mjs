@@ -25,14 +25,14 @@ export function canAbsorbEarth(p) {
 export function drawOrbitalEarth(c, image, camera, height, zoom = 1, life = null, absorption = 0, width = 480) {
   if (!image?.naturalWidth) return;
   const t = Math.max(0, Math.min(1, absorption)), ease = t * t * (3 - 2 * t);
-  // Original screen-space painting: gameplay framing must not shrink Earth.
-  const originX = width/2 - (camera.x - 700) * .08;
-  const originY = height * .6 + 460 - (camera.y - 970) * .08;
+  // Painting, absorption and gravity share one world-space planet.
+  const originX = width/2 + (ORBITAL_EARTH.x - camera.x) * zoom;
+  const originY = height * .48 + (ORBITAL_EARTH.y - camera.y) * zoom;
   const targetX = width/2 + ((life?.x ?? camera.x) - camera.x) * zoom;
   const targetY = height * .48 + ((life?.y ?? camera.y) - camera.y) * zoom;
   const x = originX + (targetX - originX) * ease;
   const y = originY + (targetY - originY) * ease;
-  const r = ORBITAL_EARTH.radius * (1 - ease);
+  const r = ORBITAL_EARTH.radius * zoom * (1 - ease);
   if (x + r < 0 || x - r > width || y + r < 0 || y - r > height) {
     const dx = x - width/2, dy = y - height * .48;
     const angle = Math.atan2(dy, dx);

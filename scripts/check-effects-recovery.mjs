@@ -3,7 +3,7 @@ import {mkdir,writeFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 const {chromium}=createRequire(process.env.VORO_PLAYWRIGHT_RUNTIME)('playwright');
 const browser=await chromium.launch({channel:'msedge',headless:true});
-const evidence='design/effects-recovery-2026-09-22';
+const evidence=process.env.VORO_AUDIO_EVIDENCE || 'design/effects-recovery-2026-09-22';
 await mkdir(evidence,{recursive:true});
 try{
   const page=await browser.newPage({locale:'es-ES'});

@@ -53,5 +53,7 @@ test('Planet populations vary much more than humans; sea sizes and cosmic scales
   const planets = STAGE_SPECIES[6].filter(s => s.motion === 'planet');
   const galaxies = STAGE_SPECIES[8].filter(s => /^galaxies-[0-5]$/.test(s.id));
   assert.ok(Math.min(...galaxies.map(s=>diameter(s,sizeRange(s).min))) > Math.max(...planets.map(s=>diameter(s,sizeRange(s).max))) * 1e9);
-  assert.ok(diameter(SPECIES_BY_ID['orbit-2'], sizeRange(SPECIES_BY_ID['orbit-2']).max) < 30);
+  const satellite=SPECIES_BY_ID['orbit-2'];
+  assert.ok(sizeRange(satellite).max/sizeRange(satellite).min>3);
+  assert.ok(diameter(satellite,sizeRange(satellite).max)<diameter(SPECIES_BY_ID['orbit-3'],sizeRange(SPECIES_BY_ID['orbit-3']).max));
 });

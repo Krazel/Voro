@@ -86,6 +86,15 @@ export class SfxPlayer {
     source.playbackRate.value = 2 ** (semitones / 12);
     const gain = this.context.createGain();
     gain.gain.value = INGEST_GAIN;
+    const audioAt=this.context.currentTime || 0;
+    const duration=source.buffer.duration/source.playbackRate.value;
+    // De-click both ends, including pitch-shifted samples; preserve the full bite.
+    if(Number.isFinite(duration)&&gain.gain.setValueAtTime){
+      gain.gain.setValueAtTime(0,audioAt);
+      gain.gain.linearRampToValueAtTime(INGEST_GAIN,audioAt+Math.min(.006,duration*.1));
+      gain.gain.setValueAtTime(INGEST_GAIN,audioAt+Math.max(duration*.5,duration-.02));
+      gain.gain.linearRampToValueAtTime(0,audioAt+duration);
+    }
     source.connect(gain);
     gain.connect(this.output);
     const voice = { source, gain };

@@ -27,15 +27,16 @@ test('Ending respects the final stage, biomass threshold and fixed-biome testing
   }
   game.destroy();
 });
-test('The universe contracts fully into the cell, then only the softly lit survivor remains',()=>{
-  assert.ok(finaleState(6).growth>10);
+test('The universe stays full-sized while darkness closes from its edges, then the survivor remains',()=>{
+  assert.equal(finaleState(6).growth,1);
   const images=[], survivors=[],fills=[];
   const c=new Proxy({fillStyle:'',fillRect(...args){fills.push([this.fillStyle,...args]);},
     drawImage(...args){images.push(args);},createRadialGradient(){return {addColorStop(){}}}},
     {get:(o,k)=>k in o?o[k]:()=>{}});
   const frame={width:1000,height:1800},scene=new UniverseFinale(frame);
   scene.draw(c,480,850,FINALE_SECONDS-8.16,false,()=>{},0);
-  assert.ok(images[0][3]<1,'Captured matter reaches the centre, not a faded large square');
+  assert.equal(images[0][3],480,'Captured universe never shrinks into the cell');
+  assert.equal(images[0][4],850);
   images.length=0;
   scene.draw(c,480,850,FINALE_SECONDS-9.6,false,()=>assert.fail('A short completely dark pause'),0);
   assert.equal(images.length,0);
@@ -47,6 +48,17 @@ test('The universe contracts fully into the cell, then only the softly lit survi
   assert.equal(images.length,0,'No background, galaxies or particles after absorption');
   assert.equal(fills[0][0],'#000');
   scene.destroy();assert.equal(frame.width,1);assert.equal(frame.height,1);
+});
+
+test('Completed movement stays unbounded for sustained motion in every direction',()=>{
+ const {game:g}=makeEngine();g.progress.completed=true;g.started=true;g.ending=0;
+ for(const direction of [{x:1,y:0},{x:-1,y:0},{x:0,y:1},{x:0,y:-1}]){
+  g.input=()=>direction;const x=g.life.x,y=g.life.y;
+  for(let i=0;i<60*120;i++)g.updateSurvivor(1/60);
+  assert.ok(Math.hypot(g.life.x-x,g.life.y-y)>11000);
+  assert.ok(Math.hypot(g.life.x-g.camera.x,g.life.y-g.camera.y)<60,'camera follows the survivor');
+ }
+ g.destroy();
 });
 test('The completed survivor breathes at most 20 fps without running gameplay; reduced motion stays still',()=>{
   const f=makeEngine(),{game}=f;

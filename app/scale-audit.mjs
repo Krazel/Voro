@@ -22,11 +22,16 @@ export function applyScaleAudit(stages, lists, byId) {
   set('planets-matter-comet', { name: 'Núcleo de planetoide helado' });
   set('orbit-0', { r: 40, requiredMass: undefined, sizeFactors: [0.45, 1.7] });
   set('orbit-1', { r: 4, requiredMass: 0 });
-  set('orbit-2', { r: 8 });
+  set('orbit-2', { r: 24, sizeFactors: [.7, 2.4], requiredMass: undefined });
+  set('orbit-3', { r: 65, sizeFactors: [.8, 1.8], requiredMass: undefined });
   set('orbit-4', { r: 48 });
   set('orbit-5', { name: 'Asteroide craterizado', sizeFactors: [0.55, 1.45] });
   set('orbit-Luna helada', { name: 'Bloque de hielo orbital', sizeFactors: [0.5, 1.5] });
   set('orbit-Luna volcánica', { name: 'Fragmento volcánico', sizeFactors: [0.6, 1.4] });
+  // These atlas images still look like planets even when renamed as fragments.
+  // Keep historical IDs for save compatibility, but never spawn them in orbit.
+  const orbit=stages.findIndex(s=>s.id==='orbit');
+  lists[orbit]=lists[orbit].filter(s=>!['orbit-5','orbit-Luna helada','orbit-Luna volcánica'].includes(s.id));
   set('planets-0', { sizeFactors: [0.45, 1.6] });
   set('planets-1', { sizeFactors: [0.6, 1.55] });
   set('planets-2', { sizeFactors: [0.55, 1.45] });

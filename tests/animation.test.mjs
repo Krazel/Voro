@@ -29,8 +29,9 @@ const sizes = {
   universe: [1536, 1024],
 };
 test('Every edible element has an explicit animation profile and valid art bounds', () => {
-  assert.equal(Object.keys(ANIMATIONS).length, STAGE_SPECIES.flat().length);
-  for (const s of STAGE_SPECIES.flat()) {
+  // Retired residents remain drawable for historical in-progress meals.
+  assert.equal(Object.keys(ANIMATIONS).length, Object.keys(SPECIES_BY_ID).length);
+  for (const s of Object.values(SPECIES_BY_ID)) {
     const p = ANIMATIONS[s.id];
     assert.ok(p.family && p.description && p.period > 0);
     const [w, h] = sizes[s.imageAtlas || s.atlas],

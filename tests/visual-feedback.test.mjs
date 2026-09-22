@@ -5,7 +5,7 @@ import {SPECIES_BY_ID as S,STAGES} from '../app/journey-data.mjs';
 import {journeyEntity,JourneyWorld} from '../app/journey-world.mjs';
 import {radiusForMass,beginAbsorb} from '../app/simulation.mjs';
 import {projectileThreatMass} from '../app/threat-scale.mjs';
-import {drawOrbitalEarth} from '../app/earth-landmark.mjs';
+import {drawOrbitalEarth,ORBITAL_EARTH} from '../app/earth-landmark.mjs';
 import {FINALE_SECONDS} from '../app/universe-finale.mjs';
 import {saveJourney,loadJourney} from '../app/journey-progress.mjs';
 function isolate(g){g.world.entities=[];g.world.stream=()=>{};g.world.move=()=>{};g.world.replenish=()=>{};}
@@ -27,10 +27,15 @@ test('Shots compare live mass at impact: outgrown soldiers are harmless, larger 
  g.life.biomass=threshold*.9;g.life.invulnerable=0;g.world.projectiles=[shot()];g.update(.01);assert.ok(g.life.hurt>0);
  assert.ok(projectileThreatMass(soldier.requiredMass,.22)>threshold);g.destroy();
 });
-test('Original Earth painting keeps identical framing at all gameplay zooms',()=>{
+test('Earth painting tracks the same world coordinates and radius as gravity at every zoom',()=>{
  const positions=[];const c=new Proxy({drawImage:(_, ...coords)=>positions.push(coords)},{get:(o,k)=>o[k]||(()=>{}),set:(o,k,v)=>(o[k]=v,true)});
- for(const zoom of [.624,1.114,2.3])drawOrbitalEarth(c,{naturalWidth:1254},{x:700,y:970},844,zoom);
- assert.deepEqual(positions[0],positions[1]);assert.deepEqual(positions[1],positions[2]);assert.equal(positions[0][2],1240);
+ for(const zoom of [.624,1.114,2.3]){
+  drawOrbitalEarth(c,{naturalWidth:1254},{x:ORBITAL_EARTH.x+100,y:ORBITAL_EARTH.y+200},844,zoom);
+  const [x,y,w,h]=positions.at(-1);
+  assert.equal(w,ORBITAL_EARTH.radius*2*zoom);assert.equal(h,w);
+  assert.ok(Math.abs((x+w/2-240)/zoom+100)<1e-8);
+  assert.ok(Math.abs((y+h/2-844*.48)/zoom+200)<1e-8);
+ }
 });
 test('Completed survivor moves with every input route, preserves completion and never resumes world rewards',()=>{
  const {game:g}=makeEngine();g.startTest(STAGES.length-1,230,false,true,true);isolate(g);g.update(.02);g.update(FINALE_SECONDS);
@@ -42,8 +47,9 @@ test('Completed survivor moves with every input route, preserves completion and 
   if(mode==='touch')g.pointer={x:80,y:0,sx:0,sy:0,touch:true};
   if(mode==='pad')g.padInput={x:1,y:0};
   if(mode==='tilt'){g.tilt.enabled=true;g.tilt.read=()=>({x:1,y:0});}
+  const startX=g.life.x;
   for(let i=0;i<60;i++)g.updateSurvivor(1/60);
-  assert.ok(g.life.x>g.camera.x+60,mode);assert.equal(g.life.biomass,mass);assert.equal(g.progress.xp,xp);assert.equal(g.life.elapsed,elapsed);
+  assert.ok(g.life.x>startX+60,mode);assert.equal(g.life.biomass,mass);assert.equal(g.progress.xp,xp);assert.equal(g.life.elapsed,elapsed);
  }
  g.action('pause');assert.equal(g.paused,true);assert.equal(g.cameraInputAllowed(),false);g.action('pause');assert.equal(g.paused,false);
  assert.equal(loadJourney(saveJourney(g.progress,g.life,g.world,false)).progress.completed,true);

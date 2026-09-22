@@ -23,7 +23,10 @@ export class MusicPlayer {
     });
     this.timer=schedule(()=>this.tick());
   }
-  ramp(param,value,seconds){const now=this.context.currentTime;param.cancelScheduledValues(now);param.setValueAtTime(param.value,now);param.linearRampToValueAtTime(value,now+seconds);}
+  ramp(param,value,seconds){const now=this.context.currentTime;
+    if(param.cancelAndHoldAtTime)param.cancelAndHoldAtTime(now);
+    else {param.cancelScheduledValues(now);param.setValueAtTime(param.value,now);}
+    param.linearRampToValueAtTime(value,now+seconds);}
   setState(id,active,immediate=false){
     if(this.destroyed)return;
     if(MUSIC.some(t=>t.id===id))this.desired=id;
@@ -50,6 +53,7 @@ export class MusicPlayer {
     for(const d of this.decks){
       if(!d.id){const track=MUSIC.find(t=>t.id===this.desired);d.id=this.desired;d.audio.src=track.url;}
       if(!this.active)continue;
+      if(d!==this.current&&d!==this.transition?.next){d.gain.gain.cancelScheduledValues(this.context.currentTime);d.gain.gain.value=0;}
       d.audio.play().then(()=>{if(this.destroyed||!this.active)d.audio.pause();else if(d!==this.current&&d!==this.transition?.next)d.audio.pause();}).catch(e=>{if(e.name!=='AbortError')this.blocked=true;});
     }
     if(this.active)this.resume();
@@ -58,7 +62,8 @@ export class MusicPlayer {
     if(!this.active||!this.unlocked||this.destroyed)return;
     if(!this.current||this.current.id!==this.desired){this.switchTo(this.desired);return;}
     const d=this.current,token=this.serial;
-    d.audio.play().then(()=>{if(!this.active||this.destroyed||token!==this.serial){d.audio.pause();return;}this.ramp(d.gain.gain,1,.25);}).catch(()=>{this.blocked=true;});
+    for(const other of this.decks)if(other!==d&&other!==this.transition?.next){other.audio.pause();other.gain.gain.cancelScheduledValues(this.context.currentTime);other.gain.gain.value=0;}
+    d.audio.play().then(()=>{if(!this.active||this.destroyed){d.audio.pause();return;}if(token!==this.serial)return;this.ramp(d.gain.gain,1,.25);}).catch(()=>{if(token===this.serial)this.blocked=true;});
   }
   switchTo(id,loop=false){
     if(!this.active||this.destroyed||this.blocked||this.transition)return;
@@ -70,12 +75,15 @@ export class MusicPlayer {
     if(next.id!==id){next.id=id;next.audio.src=track.url;}next.audio.currentTime=0;
     this.transition={next,old,token,end:Infinity};
     next.audio.play().then(()=>{
+      if(this.destroyed||!this.active){next.audio.pause();return;}
+      // A cancelled transition may reuse this same deck before play resolves.
+      // Its stale promise must not pause or clear the newer request.
+      if(token!==this.serial)return;
       next.pending=false;
-      if(this.destroyed||!this.active||token!==this.serial){next.audio.pause();return;}
       this.current=next;this.ramp(next.gain.gain,1,4);
       if(old)this.ramp(old.gain.gain,0,4);
       this.transition={next,old,token,end:this.context.currentTime+4};
-    }).catch(()=>{next.pending=false;if(token===this.serial){this.transition=null;this.blocked=true;}});
+    }).catch(()=>{if(token===this.serial){next.pending=false;this.transition=null;this.blocked=true;}});
   }
   tick(){
     if(!this.active&&this.pauseAt!=null&&this.context.currentTime>=this.pauseAt){this.decks.forEach(d=>d.audio.pause());this.pauseAt=null;}

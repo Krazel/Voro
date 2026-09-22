@@ -335,6 +335,7 @@ Al alejarte, los soles dibujan los brazos de una galaxia.|As you move away, the 
 Las galaxias se unen en filamentos de una misma red.|Galaxies join in the filaments of a single web.
 Ya no hay nada más grande que tú.|Nothing is larger than you now.
 Todo el universo vuelve a ti.|The entire universe returns to you.
+Todo se apaga.|Everything fades away.
 La última luz.|The last light.
 La Tierra sigue bajo ti. Empieza por los restos orbitales.|Earth is still beneath you. Start with orbital debris.
 La Tierra|Earth

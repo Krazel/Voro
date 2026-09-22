@@ -1,12 +1,11 @@
 export const FINALE_SECONDS = 17;
 const smooth = (a,b,x) => { const t = Math.max(0,Math.min(1,(x-a)/(b-a))); return t*t*(3-2*t); };
 export function finaleState(remaining) {
-  // Keep the original absorption beat (first 9.6 s), then take six seconds
-  // to reveal the survivor. Final state remains visible indefinitely.
+  // Darkness closes from the outer universe to its centre, without shrinking it.
   const elapsed = Math.max(0, FINALE_SECONDS - remaining);
   const u = Math.max(0,Math.min(1,elapsed/12));
-  return { u, growth: 1+11*smooth(0,.55,u), darkness: smooth(.55,.8,u),
-    black: elapsed>=9.6, survivor: smooth(10.2,16.2,elapsed), caption: u<.3 ? 'Ya no hay nada más grande que tú.' : u<.55 ? 'Todo el universo vuelve a ti.' : u<.7 ? 'La última luz.' : '' };
+  return { u, growth: 1, darkness: smooth(.03,.8,u),
+    black: elapsed>=9.6, survivor: smooth(10.2,16.2,elapsed), caption: u<.3 ? 'Ya no hay nada más grande que tú.' : u<.55 ? 'Todo se apaga.' : u<.7 ? 'La última luz.' : '' };
 }
 export function drawVoidSurvivor(c, width, height, time, reduced, drawProtagonist, reveal = 1) {
   if (reveal <= 0) return;
@@ -28,39 +27,16 @@ export class UniverseFinale {
   constructor(frame = null) { this.frame=frame; }
   destroy() { if(this.frame) this.frame.width=this.frame.height=1; this.frame=null; }
   draw(c, width, height, remaining, reduced, drawProtagonist, time = 0) {
-    const s=finaleState(remaining), {u}=s, x=width/2, y=height*.48;
+    const s=finaleState(remaining), x=width/2, y=height*.48;
     c.fillStyle='#000'; c.fillRect(0,0,width,height);
     if(s.black) { drawVoidSurvivor(c,width,height,time,reduced,drawProtagonist,s.survivor); return; }
     if(this.frame) {
-      const collapse=smooth(.06,.68,u), z=Math.max(.001,1-collapse);
-      c.save(); c.globalAlpha=1-smooth(.65,.7,u);
-      c.translate(x,y); c.rotate(reduced?0:collapse*.22);
-      c.drawImage(this.frame,-x*z,-y*z,width*z,height*z); c.restore();
+      c.drawImage(this.frame,0,0,width,height);
     }
-    c.save(); c.globalAlpha=1-smooth(.54,.77,u);
-    drawProtagonist(reduced ? 1+2*smooth(0,.55,u) : s.growth);
-    c.restore();
-    const collapse=smooth(.12,.72,u), span=Math.hypot(width,height)*.7;
-    c.save();
-    for(let i=0;i<(reduced?24:88);i++) {
-      const a=i*2.399963 + (reduced?0:collapse*(.6+(i%5)*.19));
-      const r=(.2+((i*37)%97)/97)*span*(1-collapse);
-      const tail=reduced?2:3+48*Math.sin(collapse*Math.PI);
-      c.strokeStyle=i%4===0?'#eacb95':'#a8d2e5';
-      c.globalAlpha=(.22+(i%4)*.12)*Math.sin(Math.min(1,u/.1)*Math.PI/2)*(1-smooth(.58,.76,u));
-      c.lineWidth=i%5===0?1.5:.7; c.beginPath();
-      c.moveTo(x+Math.cos(a)*r,y+Math.sin(a)*r);
-      c.quadraticCurveTo(x+Math.cos(a+.04)*(r+tail*.5),y+Math.sin(a+.04)*(r+tail*.5),
-        x+Math.cos(a+.09)*(r+tail),y+Math.sin(a+.09)*(r+tail)); c.stroke();
-    }
-    c.restore();
-    c.fillStyle=`rgba(0,0,0,${s.darkness})`; c.fillRect(0,0,width,height);
-    // The last light contracts and disappears before the silent black hold.
-    if(u>.48 && u<.8) {
-      const r=(reduced?10:24)*(1-smooth(.58,.8,u));
-      const glow=c.createRadialGradient(x,y,0,x,y,Math.max(.01,r*3));
-      glow.addColorStop(0,'#fff5d8');glow.addColorStop(.18,'#e2c080');glow.addColorStop(1,'transparent');
-      c.fillStyle=glow;c.fillRect(x-r*3,y-r*3,r*6,r*6);
-    }
+    const span=Math.hypot(width/2,Math.max(y,height-y)), edge=span*(1-s.darkness);
+    const feather=span*.23;
+    const shadow=c.createRadialGradient(x,y,Math.max(0,edge-feather),x,y,Math.max(.01,edge));
+    shadow.addColorStop(0,'rgba(0,0,0,0)');shadow.addColorStop(1,'#000');
+    c.fillStyle=shadow;c.fillRect(0,0,width,height);
   }
 }

@@ -736,8 +736,8 @@ export class VoroEngine {
     const target=this.effectsAudible()?0.055:0;
     if(this.audio && this.master && this.effectsGainTarget!==target){
       const now=this.audio.currentTime;
-      this.master.gain.cancelScheduledValues(now);
-      this.master.gain.setValueAtTime(this.master.gain.value,now);
+      if(this.master.gain.cancelAndHoldAtTime)this.master.gain.cancelAndHoldAtTime(now);
+      else {this.master.gain.cancelScheduledValues(now);this.master.gain.setValueAtTime(this.master.gain.value,now);}
       this.master.gain.setTargetAtTime(target,now,.035);
       this.effectsGainTarget=target;
     }
@@ -1308,8 +1308,11 @@ export class VoroEngine {
     const blend=1-Math.exp(-dt*8);
     p.vx+=(input.x/magnitude*100-p.vx)*blend;
     p.vy+=(input.y/magnitude*100-p.vy)*blend;
-    p.x=Math.max(this.camera.x-170,Math.min(this.camera.x+170,p.x+p.vx*dt));
-    p.y=Math.max(this.camera.y-this.height*.48+76,Math.min(this.camera.y+this.height*.52-76,p.y+p.vy*dt));
+    p.x+=p.vx*dt;
+    p.y+=p.vy*dt;
+    const follow=1-Math.exp(-dt*2);
+    this.camera.x+=(p.x-this.camera.x)*follow;
+    this.camera.y+=(p.y-this.camera.y)*follow;
     if(Math.hypot(p.vx,p.vy)>2) this.heading=Math.atan2(p.vy,p.vx);
     this.animateMembrane(dt);
   }
@@ -1598,19 +1601,12 @@ export class VoroEngine {
       || (this.life.biomass < stageOf(this.progress).goal && !this.life.finalEaten)) return false;
     let frame = null;
     if ('createElement' in document) {
-      this.renderScene(true);
+      this.renderScene();
       frame = document.createElement('canvas');
       frame.width = this.canvas.width; frame.height = this.canvas.height;
       const captured = frame.getContext('2d');
       if (captured) {
         captured.drawImage(this.canvas,0,0);
-        // Feather the captured universe once, so contraction never exposes
-        // rectangular screenshot edges behind the transparent membrane.
-        captured.save(); captured.scale(frame.width,frame.height);
-        captured.globalCompositeOperation = 'destination-in';
-        const edge = captured.createRadialGradient(.5,.48,.24,.5,.48,.5);
-        edge.addColorStop(0,'#fff'); edge.addColorStop(1,'transparent');
-        captured.fillStyle = edge; captured.fillRect(0,0,1,1); captured.restore();
       }
     }
     this.universeFinale?.destroy(); this.universeFinale = new UniverseFinale(frame);
@@ -1932,8 +1928,7 @@ export class VoroEngine {
     if (this.progress.completed) {
       c.fillStyle = '#000'; c.fillRect(0,0,this.width,this.height);
       const protagonist = (growth: number, survivor = false) => {
-        // Pull the camera back as the body grows: its membrane must remain
-        // readable while the captured universe visibly enters it.
+        // Keep the solitary cell readable after the universe has gone dark.
         const scale = survivor ? Math.min(66,this.height*.1) / Math.max(.8,p.radius) * growth
           : Math.min(this.zoom * growth, 194 / Math.max(.8,p.radius));
         c.save(); c.translate(this.width/2,this.height*.48); c.scale(scale,scale);

@@ -1,6 +1,6 @@
 import { matterAnimation } from './edible-matter.mjs';
 import { ANATOMICAL_RIGS } from './anatomical-rigs.mjs';
-import { STAGE_SPECIES } from './journey-data.mjs';
+import { STAGE_SPECIES, SPECIES_BY_ID } from './journey-data.mjs';
 // Individual art-directed rigs. Shared families describe anatomy, not a universal wobble.
 const rig = (family, description, period, options = {}) => ({
   family,
@@ -561,7 +561,7 @@ Object.assign(universe[4], {
     'El disco de acreción circula alrededor de un horizonte estable.',
 });
 export const ANIMATIONS = Object.fromEntries(
-  STAGE_SPECIES.flat().map((s) => {
+  Object.values(SPECIES_BY_ID).map((s) => {
     const index =
       s.atlas === 'micro'
         ? STAGE_SPECIES[0].findIndex((e) => e.id === (s.animationId || s.id))

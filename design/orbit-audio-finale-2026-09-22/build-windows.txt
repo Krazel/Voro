@@ -1,0 +1,25 @@
+
+> sites-project@0.2.0 build:windows
+> npm run build:pc && npm --prefix desktop run package
+
+
+> sites-project@0.2.0 build:pc
+> vite build --config vite.pc.config.ts
+
+vite v8.0.13 building client environment for production...
+[2K
+transforming...✓ 2048 modules transformed.
+rendering chunks...
+computing gzip size...
+pc-dist/index.html                   0.41 kB │ gzip:   0.29 kB
+pc-dist/assets/index-CBSrhNsm.css  220.40 kB │ gzip:  38.91 kB
+pc-dist/assets/web-Cmj_2GN4.js       0.36 kB │ gzip:   0.25 kB
+pc-dist/assets/web-J2qb0blO.js       8.45 kB │ gzip:   2.82 kB
+pc-dist/assets/index-Dj7t3T8H.js   631.85 kB │ gzip: 208.77 kB
+
+✓ built in 2.28s
+> voro-desktop-tools@0.6.2 package
+> node package.mjs
+
+Packaging app for platform win32 x64 using electron v44.4.3
+{"appPath":"C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-camera\\artifact\\windows\\0.6.2-preview.3\\VORO-win32-x64","version":"0.6.2","desktopBuild":3,"electron":"44.4.3"}

@@ -115,6 +115,21 @@ test('Bite gain compensates the quiet sample without pushing the shared master n
   assert.ok(INGEST_GAIN*.055>.1);assert.ok(INGEST_GAIN*.055<.15);
 });
 
+test('Pitch-shifted bites fade at both sample boundaries without affecting the wall-clock rate limit', () => {
+  let time=1000,source;const envelope=[];
+  const player=new SfxPlayer({currentTime:20,state:'running',
+    createGain:()=>({gain:{value:0,setValueAtTime:(v,t)=>envelope.push([v,t]),linearRampToValueAtTime:(v,t)=>envelope.push([v,t])},connect(){},disconnect(){}}),
+    createBufferSource:()=>source={playbackRate:{value:1},connect(){},disconnect(){},start(){}}
+  },{}, {now:()=>time,random:()=>0});
+  player.buffers=[{duration:.5}];assert.equal(player.playIngest(),true);
+  const end=20+.5/source.playbackRate.value;
+  const expected=[[0,20],[INGEST_GAIN,20.006],[INGEST_GAIN,end-.02],[0,end]];
+  assert.equal(envelope.length,4);
+  envelope.forEach(([gain,at],i)=>{assert.equal(gain,expected[i][0]);assert.ok(Math.abs(at-expected[i][1])<1e-9);});
+  time+=100;assert.equal(player.playIngest(),false);
+  time+=300;assert.equal(player.playIngest(),true);
+});
+
 test('Repeated recovery attempts are bounded, recover without mute toggles and do not replay stale effects',async()=>{
   let time=0,resumes=0,resolve;
   const context={state:'interrupted',resume:()=>{resumes++;return new Promise(r=>resolve=r);}};

@@ -8,6 +8,22 @@ function fixture(){
  return {player,context,media,get cancelled(){return cancelled}};
 }
 const settle=async()=>{await Promise.resolve();await Promise.resolve();};
+test('Pausing mid-crossfade and resuming never leaves a second song audible',async()=>{
+ const {player:p,context:c}=fixture();c.state='running';
+ p.setState('micro',true);p.unlock();await settle();
+ p.setState('water',true);await settle();assert.ok(p.transition);
+ p.setState('water',false);p.setState('water',true);await settle();
+ const other=p.decks.find(d=>d!==p.current);
+ assert.equal(other.audio.paused,true);assert.equal(other.gain.gain.value,0);
+ assert.equal(p.current.audio.paused,false);p.destroy();
+});
+test('A stale play promise cannot pause the newly resumed active deck',async()=>{
+ const {player:p,context:c}=fixture();c.state='running';p.setState('micro',true);p.unlock();await settle();
+ const pending=[];p.current.audio.play=function(){this.paused=false;return new Promise(r=>pending.push(r));};
+ p.resume();p.setState('micro',false);p.setState('micro',true);
+ pending[0]();await settle();assert.equal(p.current.audio.paused,false);
+ for(const resolve of pending.slice(1))resolve();await settle();p.destroy();
+});
 test('Repeated movement gestures never restart an already running audio deck',async()=>{
  const {player:p,context:c,media}=fixture();c.state='running';let plays=0,resumes=0;
  c.resume=()=>{resumes++;return Promise.resolve();};
@@ -15,6 +31,16 @@ test('Repeated movement gestures never restart an already running audio deck',as
  p.setState('micro',true);p.unlock();await settle();const initial=plays;
  for(let i=0;i<100;i++)p.unlock();await settle();
  assert.equal(plays,initial);assert.equal(resumes,0);p.destroy();
+});
+
+test('A cancelled pending crossfade cannot interrupt its replacement on the same deck',async()=>{
+ const {player:p,context:c}=fixture();c.state='running';p.setState('micro',true);p.unlock();await settle();
+ const next=p.decks.find(d=>d!==p.current),pending=[];
+ next.audio.play=function(){this.paused=false;return new Promise(r=>pending.push(r));};
+ p.setState('water',true);p.setState('water',false);p.setState('water',true);
+ assert.equal(pending.length,2);
+ pending[0]();await settle();assert.equal(next.audio.paused,false);assert.equal(next.pending,true);
+ pending[1]();await settle();assert.equal(p.current,next);assert.equal(next.audio.paused,false);assert.equal(next.pending,false);p.destroy();
 });
 test('Twelve approved tracks cover menu, every stage and the completed survivor',()=>{
  assert.equal(MUSIC.length,12);assert.equal(new Set(MUSIC.map(t=>t.slug)).size,12);

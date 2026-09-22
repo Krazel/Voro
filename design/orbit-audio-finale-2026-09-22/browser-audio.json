@@ -1,0 +1,40 @@
+{
+  "results": {
+    "bite": 0.013543557107654076,
+    "menuGain": 0.054999999701976776,
+    "menuTarget": 0,
+    "menuSignal": 0,
+    "afterMenu": 0.01013088895070002,
+    "recovered": "running",
+    "afterInterruption": 0.010475967987886197,
+    "damage": 0.01798062455594175,
+    "damageCount": 1,
+    "muted": 0,
+    "unmuted": 0.011858069128868096,
+    "muteBlocked": true,
+    "diagnostics": {
+      "attempts": 3,
+      "loadErrors": 0,
+      "readErrors": 0,
+      "decodeErrors": 0,
+      "lastLoadError": null,
+      "resumeErrors": 0,
+      "resumeAttempts": 1,
+      "playErrors": 0,
+      "requested": 5,
+      "played": 4,
+      "notReady": 0,
+      "notRunning": 0,
+      "throttled": 1,
+      "damageRequested": 1,
+      "damagePlayed": 1,
+      "decoded": 3,
+      "pending": false,
+      "voices": 1,
+      "contextState": "running",
+      "voiceGain": 2
+    }
+  },
+  "errors": [],
+  "success": true
+}
