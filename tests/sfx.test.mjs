@@ -10,7 +10,7 @@ test('iOS local media without HTTP status decodes; remote/opaque/HTTP failures s
     let decoded=0;
     const p=new SfxPlayer({state:'running',decodeAudioData:async()=>{decoded++;return {};}},{},{
       baseURL:()=>baseURL,fetcher:async()=>({ok:false,status,type,arrayBuffer:async()=>new ArrayBuffer(44)})});
-    await p.unlock();assert.equal(decoded,allowed?3:0);assert.equal(p.stats().readErrors,allowed?0:3);
+    await p.unlock();assert.equal(decoded,allowed?INGEST_SOUNDS.length:0);assert.equal(p.stats().readErrors,allowed?0:INGEST_SOUNDS.length);
     p.destroy();
   }
 });
@@ -20,7 +20,7 @@ test('Sound diagnostics distinguish local read failures from unsupported/corrupt
     const p=new SfxPlayer({state:'running',decodeAudioData:async()=>{throw new Error('Invalid PCM');}},{},{
       baseURL:()=> 'capacitor://localhost/',fetcher:async()=>({ok:false,status:0,type:'basic',arrayBuffer:async()=>new ArrayBuffer(phase==='read'?0:44)})});
     await p.unlock();assert.equal(p.stats().lastLoadError.phase,phase);
-    assert.equal(p.stats().decodeErrors,phase==='decode'?3:0);assert.equal(p.stats().loadErrors,3);p.destroy();
+    assert.equal(p.stats().decodeErrors,phase==='decode'?INGEST_SOUNDS.length:0);assert.equal(p.stats().loadErrors,INGEST_SOUNDS.length);p.destroy();
   }
 });
 
@@ -92,12 +92,12 @@ test('A failed variant does not silence decoded bites and retries only the missi
   const player=new SfxPlayer(context,{}, {now:()=>time,random:()=>0,fetcher:async url=>{
     requests.push(url);return {ok:!(fail&&url===INGEST_SOUNDS[0]),status:503,arrayBuffer:async()=>new ArrayBuffer(8)};
   }});
-  await player.unlock();assert.equal(player.stats().decoded,2);assert.equal(player.stats().loadErrors,1);
+  await player.unlock();assert.equal(player.stats().decoded,INGEST_SOUNDS.length-1);assert.equal(player.stats().loadErrors,1);
   assert.equal(player.playIngest(),true);
-  await player.unlock();assert.equal(requests.length,3);
+  await player.unlock();assert.equal(requests.length,INGEST_SOUNDS.length);
   time=5001;fail=false;await player.unlock();
-  assert.equal(requests.length,4);assert.equal(requests[3],INGEST_SOUNDS[0]);assert.equal(player.stats().decoded,3);
-  await player.unlock();assert.equal(requests.length,4);player.destroy();
+  assert.equal(requests.length,INGEST_SOUNDS.length+1);assert.equal(requests[INGEST_SOUNDS.length],INGEST_SOUNDS[0]);assert.equal(player.stats().decoded,INGEST_SOUNDS.length);
+  await player.unlock();assert.equal(requests.length,INGEST_SOUNDS.length+1);player.destroy();
 });
 
 test('Interrupted iOS audio is counted and never queues stale bites until a gesture resumes it', async () => {
@@ -105,7 +105,7 @@ test('Interrupted iOS audio is counted and never queues stale bites until a gest
   const context={state:'interrupted',resume:async()=>{resumes++;context.state='running';},
     createGain:()=>({gain:{value:0},connect(){},disconnect(){}}),
     createBufferSource:()=>({playbackRate:{value:1},connect(){},disconnect(){},start(){starts++;},stop(){}})};
-  const player=new SfxPlayer(context,{});player.buffers=[{},{},{}];
+  const player=new SfxPlayer(context,{});player.buffers=INGEST_SOUNDS.map(()=>({}));
   assert.equal(player.playIngest(),false);assert.equal(starts,0);assert.equal(player.stats().notRunning,1);
   await player.unlock();assert.equal(resumes,1);assert.equal(player.playIngest(),true);
   await player.unlock();assert.equal(resumes,1);assert.equal(starts,1);player.destroy();
@@ -113,4 +113,21 @@ test('Interrupted iOS audio is counted and never queues stale bites until a gest
 
 test('Bite gain compensates the quiet sample without pushing the shared master near clipping', () => {
   assert.ok(INGEST_GAIN*.055>.1);assert.ok(INGEST_GAIN*.055<.15);
+});
+
+test('Random rounds cover every distinct gesture and do not repeat at round boundaries', () => {
+  let time=0, seed=17;
+  const sources=[];
+  const player=new SfxPlayer({state:'running',
+    createGain:()=>({gain:{value:0},connect(){},disconnect(){}}),
+    createBufferSource:()=>{const source={playbackRate:{value:1},connect(){},disconnect(){},start(){},stop(){}};sources.push(source);return source;}
+  },{}, {now:()=>time,random:()=>((seed=(seed*1664525+1013904223)>>>0)/2**32)});
+  player.buffers=INGEST_SOUNDS.map((_,id)=>({id,duration:.5}));
+  for(let i=0;i<100;i++){time+=400;assert.equal(player.playIngest(),true);}
+  const ids=sources.map(s=>s.buffer.id);
+  for(let i=0;i<ids.length;i+=INGEST_SOUNDS.length)
+    assert.equal(new Set(ids.slice(i,i+INGEST_SOUNDS.length)).size,INGEST_SOUNDS.length);
+  for(let i=1;i<ids.length;i++)assert.notEqual(ids[i],ids[i-1]);
+  for(const id of new Set(ids))assert.ok(new Set(sources.filter(s=>s.buffer.id===id).map(s=>s.playbackRate.value)).size>1);
+  player.destroy();
 });

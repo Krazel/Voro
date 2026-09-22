@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 // One textured quad. Only the artwork moves; accessible controls stay in the DOM.
-export function LivingMenuArt({ journey, crop }: { journey: boolean; crop?: readonly number[] }) {
+export function LivingMenuArt({ journey, crop, pause = false }: { journey: boolean; crop?: readonly number[]; pause?: boolean }) {
   const ref = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     const canvas = ref.current;
@@ -14,7 +14,7 @@ export function LivingMenuArt({ journey, crop }: { journey: boolean; crop?: read
     const fragment = gl.createShader(gl.FRAGMENT_SHADER)!;
     gl.shaderSource(vertex, 'attribute vec2 p; varying vec2 uv; void main(){uv=vec2((p.x+1.)*.5,(1.-p.y)*.5);gl_Position=vec4(p,0.,1.);}');
     gl.shaderSource(fragment, `precision mediump float;
-      varying vec2 uv; uniform sampler2D art; uniform float t; uniform float journey; uniform vec4 crop;
+      varying vec2 uv; uniform sampler2D art; uniform float t; uniform float journey; uniform vec4 crop; uniform float pause;
       void main(){
         vec2 q=crop.xy+uv*crop.zw;
         float bottom=mix(.69,.79,journey);
@@ -28,6 +28,15 @@ export function LivingMenuArt({ journey, crop }: { journey: boolean; crop?: read
         q.y+=panel*(sin(q.x*19.-t*.27)*.0025+cos(q.x*31.+t*.19)*.0015);
         q.x+=button*sin(q.y*35.+t*.30)*.004;
         q.y+=button*(sin(q.x*24.+t*.35)*.004+cos(q.x*39.-t*.22)*.0015);
+        if(pause>.5){
+          q=crop.xy+uv*crop.zw;
+          float rows=smoothstep(.48,.50,q.y)*(1.-smoothstep(.59,.61,q.y))
+            +smoothstep(.61,.63,q.y)*(1.-smoothstep(.70,.72,q.y))
+            +smoothstep(.72,.74,q.y)*(1.-smoothstep(.81,.83,q.y));
+          float mask=rows*smoothstep(.15,.20,q.x)*(1.-smoothstep(.80,.85,q.x));
+          q.x+=mask*sin(q.y*35.+t*.30)*.004;
+          q.y+=mask*(sin(q.x*24.+t*.35)*.003+cos(q.x*39.-t*.22)*.0015);
+        }
         gl_FragColor=texture2D(art,clamp(q,0.,1.));
       }`);
     gl.compileShader(vertex); gl.compileShader(fragment);
@@ -43,6 +52,7 @@ export function LivingMenuArt({ journey, crop }: { journey: boolean; crop?: read
     gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
     const clock=gl.getUniformLocation(program,'t'); gl.uniform1f(gl.getUniformLocation(program,'journey'),journey?1:0);
     gl.uniform4fv(gl.getUniformLocation(program,'crop'),crop ?? [0,0,1,1]);
+    gl.uniform1f(gl.getUniformLocation(program,'pause'),pause?1:0);
     function draw(now:number){
       frame=0;
       if(disposed || document.hidden || reduced.matches || !ready) return;
@@ -58,10 +68,10 @@ export function LivingMenuArt({ journey, crop }: { journey: boolean; crop?: read
     function resume(){cancelAnimationFrame(frame);last=-100;canvas!.style.opacity=reduced.matches?'0':canvas!.style.opacity;if(!document.hidden&&!reduced.matches&&ready)frame=requestAnimationFrame(draw);}
     const picture=new Image();
     picture.onload=()=>{if(disposed)return;gl!.bindTexture(gl!.TEXTURE_2D,texture);gl!.texImage2D(gl!.TEXTURE_2D,0,gl!.RGBA,gl!.RGBA,gl!.UNSIGNED_BYTE,picture);ready=true;resume();};
-    picture.src=journey?'./ui/approved/journey-plate.png':'./ui/approved/settings-plate.png';
+    picture.src=pause?'./ui/approved/pause-plate-v1.png':journey?'./ui/approved/journey-plate.png':'./ui/approved/settings-plate.png';
     function lost(event:Event){event.preventDefault();ready=false;cancelAnimationFrame(frame);canvas!.style.opacity='0';}
     canvas.addEventListener('webglcontextlost',lost); document.addEventListener('visibilitychange',resume);reduced.addEventListener('change',resume);
     return()=>{disposed=true;cancelAnimationFrame(frame);canvas.style.opacity='0';canvas.removeEventListener('webglcontextlost',lost);document.removeEventListener('visibilitychange',resume);reduced.removeEventListener('change',resume);gl.deleteTexture(texture);gl.deleteBuffer(buffer);gl.deleteProgram(program);gl.deleteShader(vertex);gl.deleteShader(fragment);};
-  },[journey,crop]);
+  },[journey,crop,pause]);
   return <canvas ref={ref} className="living-menu-art" aria-hidden="true" />;
 }

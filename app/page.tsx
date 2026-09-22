@@ -16,6 +16,7 @@ import { ReviewMilestone } from './review-milestone';
 import { Capacitor } from '@capacitor/core';
 import { useBenchmarkAwake } from './benchmark-awake';
 import { FinalSettings } from './final-settings';
+import { ApprovedPause } from './approved-pause';
 import { isTabletDevice, wideScreenEnabled } from './desktop-viewport.mjs';
 import './wide-screen.css';
 import './cristal.css';
@@ -438,7 +439,8 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
           </>
         ))}
         {tr((active || state.complete) && state.paused && !settings && (
-          <div className="pause-panel">
+          finalUI ? <ApprovedPause onContinue={()=>action('pause')} onSettings={()=>changeSettings(true)}
+            onMenu={()=>engine.current?.returnToMenu()} onProtagonist={connectProtagonist}/> : <div className="pause-panel">
             <p className="eyebrow">{tr("EN SUSPENSIÓN")}</p>
             <h2>{tr("Respira.")}</h2>
             <p className="pause-copy">{tr("Tu progreso queda guardado.")}</p>

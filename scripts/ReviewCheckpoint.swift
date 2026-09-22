@@ -17,6 +17,23 @@ final class StoreCapture: XCTestCase {
   prompt.buttons["Continue"].tap()
   XCTAssertTrue(app.staticTexts["review-stage-2"].waitForExistence(timeout:30), app.debugDescription)
   capture("02-third-environment-after-continue")
+  let audio=app.buttons["Check ingest audio"]
+  XCTAssertTrue(audio.waitForExistence(timeout:10)); audio.tap()
+  XCTAssertTrue(app.buttons["ingest-audio-5-5"].waitForExistence(timeout:20),app.debugDescription)
+  // Exercise the actual player pause and settings in the installed WKWebView.
+  let pause=app.buttons["Pause"].firstMatch
+  XCTAssertTrue(pause.waitForExistence(timeout:15)); pause.tap()
+  XCTAssertTrue(app.buttons["Back to menu"].waitForExistence(timeout:15),app.debugDescription)
+  capture("04-new-pause")
+  app.buttons["Settings"].firstMatch.tap()
+  XCTAssertTrue(app.buttons["Back to game"].firstMatch.waitForExistence(timeout:10))
+  capture("05-current-settings")
+  app.buttons["Back to game"].firstMatch.tap()
+  XCTAssertTrue(app.buttons["Back to menu"].waitForExistence(timeout:10))
+  app.buttons["Continue"].firstMatch.tap()
+  XCTAssertTrue(pause.waitForExistence(timeout:10)); pause.tap()
+  app.buttons["Back to menu"].tap()
+  XCTAssertFalse(app.buttons["Back to menu"].exists)
   // Beta must be repeatable, and must ignore the consumed legacy attempt key.
   app.terminate(); app.launch()
   XCTAssertTrue(app.alerts["Rating test · TestFlight"].waitForExistence(timeout:120), app.debugDescription)

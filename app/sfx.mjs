@@ -1,4 +1,5 @@
-export const INGEST_SOUNDS = [1, 2, 3].map(index => `./sfx/ingest-${index}.wav`);
+// Five different wet gestures; runtime pitch varies independently of the sample.
+export const INGEST_SOUNDS = [1, 2, 3, 4, 5].map(index => `./sfx/ingest-${index}.wav`);
 // The effects master is 0.055. The samples already average about -26 dBFS;
 // 0.65 here attenuated bites to roughly -55 dBFS, easily masked on a phone.
 export const INGEST_GAIN = 2;
@@ -18,6 +19,7 @@ export class SfxPlayer {
     this.baseURL = baseURL;
     this.buffers = [];
     this.last = -1;
+    this.remaining = [];
     this.lastPlayedAt = -Infinity;
     this.loading = null;
     this.destroyed = false;
@@ -69,7 +71,11 @@ export class SfxPlayer {
     if (!available.length) { this.diagnostics.notReady++; return false; }
     if (this.context.state && this.context.state !== 'running') { this.diagnostics.notRunning++; return false; }
     if (at - this.lastPlayedAt < 1000 / 3) { this.diagnostics.throttled++; return false; }
-    const choices = available.length > 1 ? available.filter(index => index !== this.last) : available;
+    // Hear the entire bank in random order before starting another round.
+    this.remaining = this.remaining.filter(index => available.includes(index));
+    if (!this.remaining.length) this.remaining = [...available];
+    const different = this.remaining.filter(index => index !== this.last);
+    const choices = different.length ? different : this.remaining;
     const index = choices[Math.min(choices.length - 1, Math.floor(this.random() * choices.length))];
     const source = this.context.createBufferSource();
     source.buffer = this.buffers[index];
@@ -88,6 +94,7 @@ export class SfxPlayer {
     catch { source.onended(); this.diagnostics.playErrors++; return false; }
     this.diagnostics.played++;
     this.last = index;
+    this.remaining = this.remaining.filter(candidate => candidate !== index);
     this.lastPlayedAt = at;
     return true;
   }
@@ -96,5 +103,6 @@ export class SfxPlayer {
     for(const {source,gain} of this.voices){source.onended=null;try{source.stop();}catch{}source.disconnect();gain.disconnect();}
     this.voices.clear();
     this.buffers = [];
+    this.remaining = [];
   }
 }

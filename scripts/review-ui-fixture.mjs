@@ -16,5 +16,14 @@ source=source.replace(anchor,anchor+`
     }, 100);
 `);
 source=source.replace('      <ReviewMilestone held=', `      <span style={{position:"fixed",bottom:0,zIndex:10000}}>{"review-stage-"+state.stage}</span>
+      <button style={{position:"fixed",bottom:24,zIndex:10000}} onClick={async event=>{
+        const button=event.currentTarget,game=engine.current!;
+        game.initAudio();await game.sfx?.unlock();await game.audio?.resume();
+        const wasPaused=game.paused;game.paused=true;
+        const before=game.sfx?.stats().played??0;
+        for(let i=0;i<5;i++){game.sfx?.playIngest();await new Promise(resolve=>setTimeout(resolve,360));}
+        game.paused=wasPaused;game.publish();
+        button.textContent="ingest-audio-"+game.sfx?.stats().decoded+"-"+((game.sfx?.stats().played??0)-before);
+      }}>Check ingest audio</button>
       <ReviewMilestone held=`);
 fs.writeFileSync(file,source);
