@@ -6,6 +6,8 @@ El usuario pidió reducir la duración. Se conservan los 20 escenarios (10 entor
 
 201 tests, tipos y build móvil correctos. Flujo completo 20/20 comprobado de nuevo en WebKit con reloj acelerado, sin errores, campaña restaurada y archivo exportado de 206669 bytes (no son mediciones físicas). Código 8d604ee; CI https://github.com/Krazel/Voro/actions/runs/35733349091 . Pendiente entrega de esta revisión.
 
+Actualización 13:32 UTC: 0.6.1 (1) compilada, firmada y subida correctamente. Consulta API https://github.com/Krazel/Voro/actions/runs/35734013580 confirma upload `52f32357-0604-48fc-8c9e-0a98eabfc3ac` PROCESSING, sin errores/advertencias. Todavía no disponible en TestFlight; última disponible 0.6 (1). CI de entrega espera VALID y confirma el grupo interno. Build PC también correcta. Evidencia `apple-0.6.1-processing.json`. No se afirma verificación física.
+
 La 0.6 (1) anterior ya está VALID / IN_BETA_TESTING, grupo VORO Interno, verificado por API a las 13:24 UTC del 22/09. Evidencia `apple-0.6-final.json` y https://github.com/Krazel/Voro/actions/runs/35733221849 . Su CI original agotó los 50 minutos de espera; una consulta posterior confirmó la build y terminó la asignación interna. La primera relectura de la asignación todavía no la veía; la siguiente sí. Se añade reintento limitado a la verificación de membresía y se conserva el artefacto firmado aunque la espera de Apple falle en futuras builds.
 
 ## Protocolo original 0.6
