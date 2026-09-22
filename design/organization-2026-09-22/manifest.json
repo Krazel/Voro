@@ -1,0 +1,1209 @@
+{
+  "date": "2026-09-22T17:18:40.0935036+02:00",
+  "root": "C:\\Users\\dmkra\\Documents\\Codex Apps",
+  "hub": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Juegos\\Voro",
+  "completed": true,
+  "gitBefore": {
+    "Voro": {
+      "trackedStatus": [],
+      "head": "6dce8306788793317cbd9e9882411f5c376a76e4"
+    },
+    "Voro-pc-demo": {
+      "trackedStatus": [],
+      "head": "55bd685d0ffd91d878776717743905e66f95fc28"
+    },
+    "Voro-camera": {
+      "trackedStatus": [],
+      "head": "ad2c29b6b80d0476ec7b9bcca9a73088d613fa3c"
+    }
+  },
+  "moved": [
+    {
+      "source": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro_Music",
+      "destination": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Juegos\\Voro\\Recursos\\Musica-original",
+      "state": "verified",
+      "files": [
+        {
+          "file": "7e9e99f5-97d0-43ea-a365-4ae0e97aaa7f.png",
+          "bytes": 1948402,
+          "sha256": "4B85B23B5CE5DBDF9AFE7AF1F403242E777C996556E2151B8C431014F94285D7"
+        },
+        {
+          "file": "Galaxy.mp3",
+          "bytes": 6681600,
+          "sha256": "73F747EB228ED019EA1B98ED22244B88C7642E4D85E890CD7187C2232C2427B4"
+        },
+        {
+          "file": "Microscopic Ecosystem.mp3",
+          "bytes": 2982490,
+          "sha256": "8A73B40B7834609E34A7697C142D7ABCA777B2CD3D0264B692BDD471CE094D83"
+        },
+        {
+          "file": "Microscopic Wonders.mp3",
+          "bytes": 5283301,
+          "sha256": "F0A264097F8A4D83FFB88025EE025F0F9D75918EEB929FCACBF2872B3176DE86"
+        },
+        {
+          "file": "Underwater Motif.mp3",
+          "bytes": 5793854,
+          "sha256": "E03BBFD3489484542E6A8204A5CF534367743D15891496BC2218744A9D9C58D9"
+        }
+      ]
+    },
+    {
+      "source": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-background-assets",
+      "destination": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Juegos\\Voro\\Recursos\\Fondos",
+      "state": "verified",
+      "files": [
+        {
+          "file": "city-variants.png",
+          "bytes": 3090398,
+          "sha256": "CA2CD57D7A970DF6B7029C5A4F3955DDDD4A817323B58405E91F8FA07835F508"
+        },
+        {
+          "file": "deep-space-prompts.json",
+          "bytes": 5983,
+          "sha256": "66411B2BF4C6DF37D54A38A4EAB2EB22A19EA8679431A37B121D47F53190BE94"
+        },
+        {
+          "file": "galaxies-variants.png",
+          "bytes": 1816107,
+          "sha256": "6073877A528B097445A7CDC1F59969383AA8624316A1AF9DE96DE8633A3F5B1D"
+        },
+        {
+          "file": "natural-ground-prompts.json",
+          "bytes": 5550,
+          "sha256": "32BDAA39275EDBD2A7622FFC65A3CF783A9237CFBB5F294BF24DA8D5F60F1324"
+        },
+        {
+          "file": "orbit-variants.png",
+          "bytes": 1559990,
+          "sha256": "73C9293BF19FA46F466413FA90234FD6A9EB7A4A212B26D77CA9CB5FCED3604A"
+        },
+        {
+          "file": "planets-variants.png",
+          "bytes": 2339887,
+          "sha256": "65DA39EE5559E5DC6A02A7A745BEFB1235A036E4A2E6BF68F2D1AE1AF405B7A7"
+        },
+        {
+          "file": "pond-variants.png",
+          "bytes": 2745338,
+          "sha256": "5A9AF28139ABEC6E5697BA7849E095EE30018EDC06B87F9C461AE58935066F21"
+        },
+        {
+          "file": "sea-variants.png",
+          "bytes": 2946861,
+          "sha256": "F46E7702D164971B8A18C03C95B4F3AF8206F24E701B1F27F8AF74C68AB121E4"
+        },
+        {
+          "file": "shore-variants.png",
+          "bytes": 2912940,
+          "sha256": "B7BA89E7140ABA11FFA235C6E4CB61504C6A1FE51F2877C710BB0DD4B8E3812A"
+        },
+        {
+          "file": "stars-variants.png",
+          "bytes": 2342995,
+          "sha256": "46738EC4D0FC81106CC65CE56487A21393C386F481DE4190EBE170275A7BCB99"
+        },
+        {
+          "file": "universe-variants.png",
+          "bytes": 2277216,
+          "sha256": "B3929BBC1669C917760B14D8EB920EE8446DE665377A2FF168E0D774BD3EC5BD"
+        },
+        {
+          "file": "urban-orbit-generation.md",
+          "bytes": 3384,
+          "sha256": "47C5B4E76E4A707B458A8FDFDDE2CFBD3A1BC10BCBD986931EFDF3F3736B9823"
+        }
+      ]
+    },
+    {
+      "source": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-campaign-assets",
+      "destination": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Juegos\\Voro\\Recursos\\Campana",
+      "state": "verified",
+      "files": [
+        {
+          "file": "near-atlas-prompt.txt",
+          "bytes": 2190,
+          "sha256": "18DEEBFD5B520F278B68E4F731F9D6CC365A1B823392F033725F9BAA02A3D40E"
+        },
+        {
+          "file": "near-atlas.png",
+          "bytes": 2793021,
+          "sha256": "C062C38E2FA4AB848ED45D626288221A23BE5D5F083649F70BED6D612144799E"
+        },
+        {
+          "file": "space-atlas-prompt.txt",
+          "bytes": 2190,
+          "sha256": "A58A68638D19D73B3B64319B0AD7E70B98C32927D1B58C8391524540C1565009"
+        },
+        {
+          "file": "space-atlas.png",
+          "bytes": 1976167,
+          "sha256": "251D5AE2731AF901877F4C70E653DE1213D99A0FA9BEE11E66D693D94AF90E23"
+        }
+      ]
+    },
+    {
+      "source": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-coast-assets",
+      "destination": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Juegos\\Voro\\Recursos\\Costa",
+      "state": "verified",
+      "files": [
+        {
+          "file": "sea-v2.png",
+          "bytes": 2513088,
+          "sha256": "EB6AD0173F84C641B25789403C219D2D04536AA8CDCC04314E2B3630B1F8EBBF"
+        },
+        {
+          "file": "shore-v2.png",
+          "bytes": 3006045,
+          "sha256": "1855BF1BAB63E65AAAB49D033DA95F4CB7D29A0E1F2C8EB4A1489EC659F33582"
+        }
+      ]
+    },
+    {
+      "source": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-cristal-assets",
+      "destination": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Juegos\\Voro\\Recursos\\Marco-cristal",
+      "state": "verified",
+      "files": [
+        {
+          "file": "membrane-frame.png",
+          "bytes": 602442,
+          "sha256": "BCE18D644E9CA1CF3C6832FADCCC57489398CB7246CD626A57BE8AD5409AEAD4"
+        },
+        {
+          "file": "prompt.md",
+          "bytes": 1711,
+          "sha256": "9B5D49218B4C2EF7417DA1504519BBB1E836B48D726D872A27567A7E84A657FB"
+        }
+      ]
+    },
+    {
+      "source": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-earth-art",
+      "destination": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Juegos\\Voro\\Recursos\\Tierra",
+      "state": "verified",
+      "files": {
+        "file": "earth-orbital-hires.png",
+        "bytes": 2836761,
+        "sha256": "5E35FACCF0522C3612EE7F4663251EC8EAF582DC6A114F77D14FEA15B907D43B"
+      }
+    },
+    {
+      "source": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-female-swimmer-assets",
+      "destination": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Juegos\\Voro\\Recursos\\Nadadora",
+      "state": "verified",
+      "files": [
+        {
+          "file": "female-swimmer-v1.png",
+          "bytes": 704000,
+          "sha256": "BA0A28D9DC5BBEA914062F841E8D46A3B40E75C2584E50C2D1177B8BF9617674"
+        },
+        {
+          "file": "provenance.json",
+          "bytes": 5142,
+          "sha256": "390742272D277374B27FC1721AAA97C65305C1A464C70B52678183AA128683F6"
+        }
+      ]
+    },
+    {
+      "source": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-inhabitants-assets",
+      "destination": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Juegos\\Voro\\Recursos\\Habitantes",
+      "state": "verified",
+      "files": [
+        {
+          "file": "catalog-draft.mjs",
+          "bytes": 10690,
+          "sha256": "F7E3DDF8A7D7316B51DD6547C2E4D0D2713613A70D41E54879F42B1CC06F1A90"
+        },
+        {
+          "file": "city.png",
+          "bytes": 1702942,
+          "sha256": "B25AF089CAF7C99525F33BD0F3B9E93B68F0AFE9FE1DD2A62527CD2964345518"
+        },
+        {
+          "file": "city.prompt.txt",
+          "bytes": 1771,
+          "sha256": "11569C8725FA577B53A159B336FFFD7AD68DB13909089F8A47A9A8CB1B8ADE8E"
+        },
+        {
+          "file": "cosmic-assets.catalog.json",
+          "bytes": 5500,
+          "sha256": "B10F399E3D20E6724933B3BFA1FD4F21840E0A1B797D42B08CA9B461722EE6BB"
+        },
+        {
+          "file": "cosmos-original.png",
+          "bytes": 2801957,
+          "sha256": "D9F9242B7522EF5937F0CE8B72E9795A6C225FC3A484D69AB917ADDA1692C6FA"
+        },
+        {
+          "file": "cosmos.png",
+          "bytes": 2801957,
+          "sha256": "D9F9242B7522EF5937F0CE8B72E9795A6C225FC3A484D69AB917ADDA1692C6FA"
+        },
+        {
+          "file": "cosmos.prompt.txt",
+          "bytes": 2134,
+          "sha256": "2CC0254F2D38BFE9F300201F6402493AA482898980B62EB4138D3DEDFF25974F"
+        },
+        {
+          "file": "environments.png",
+          "bytes": 2043101,
+          "sha256": "F4B02124D5A59786B43A4A84EA50DA5790EE646C683BE3020EC2FE10CC0C4E5A"
+        },
+        {
+          "file": "environments.prompt.txt",
+          "bytes": 2019,
+          "sha256": "AFB306366E780412CA38CC7721EA8773B321E4AF7C487DEEE61D6D51CD0D711A"
+        },
+        {
+          "file": "galaxies.prompt.txt",
+          "bytes": 2184,
+          "sha256": "D5164F2991F65009C16538393EEFE8BB5B2D731813744F9A429BB93FCB477A9F"
+        },
+        {
+          "file": "inspect-micro.cjs",
+          "bytes": 2300,
+          "sha256": "41398FC73A3E92DA249EE14F749055710A77812A31115DF9D36FBAEB267C7412"
+        },
+        {
+          "file": "land.png",
+          "bytes": 1470255,
+          "sha256": "26326AA85CEA997669567E1385F0DACCCAD6017B47B34E3BB065BE512E6FC4A1"
+        },
+        {
+          "file": "land.prompt.txt",
+          "bytes": 1632,
+          "sha256": "3FC2350183011E39FAFE11911C8B7A3216FD168847FC5A888CB96076CB6664E0"
+        },
+        {
+          "file": "measure-crops.cjs",
+          "bytes": 1598,
+          "sha256": "2AD6AA99C08CB72FC67DC521F087FD8E4C7DAE01F63650F51274DF0BD09C1699"
+        },
+        {
+          "file": "micro-alpha-analysis.json",
+          "bytes": 21308,
+          "sha256": "0878C164C67F3D39DBEA0E5927AA14150F2F3363CA6022338A6B7B422EE8C68B"
+        },
+        {
+          "file": "micro-sprite-crops.json",
+          "bytes": 3799,
+          "sha256": "0C21354E1CCBE3147C36953244C5D161D424D2059D0194A9CAB6B1037098664C"
+        },
+        {
+          "file": "micro.png",
+          "bytes": 1485266,
+          "sha256": "28CB4348661128423299FD77712F20591254D87A6BB0EDFF4B1FD0A20D5DBB8B"
+        },
+        {
+          "file": "micro.prompt.txt",
+          "bytes": 1783,
+          "sha256": "9BE59242942A1BDBE47BE019AEDD236143776C979CDC9486564340CA44F79192"
+        },
+        {
+          "file": "orbit.prompt.txt",
+          "bytes": 2260,
+          "sha256": "BB5FC3F832A30D56E9CEB91DE6A177FE5A32E4878D35031B88EB81DE7B78F94E"
+        },
+        {
+          "file": "planets.prompt.txt",
+          "bytes": 2159,
+          "sha256": "2F1AF494CC3485F1A4C251AB6BA9BB95C04A109542706371D5FD2872C91FBC19"
+        },
+        {
+          "file": "stars.prompt.txt",
+          "bytes": 2187,
+          "sha256": "F6D59F88754BD459B099D7EBF3E1F1D6988E3A4C1AD933045427BCE5ECD3F222"
+        },
+        {
+          "file": "universe-original.png",
+          "bytes": 2694221,
+          "sha256": "B7AED6850EFAAD0629B06FC4F336B6F070966CBF25089BE37EA4D06999F766D6"
+        },
+        {
+          "file": "universe.png",
+          "bytes": 2694221,
+          "sha256": "B7AED6850EFAAD0629B06FC4F336B6F070966CBF25089BE37EA4D06999F766D6"
+        },
+        {
+          "file": "universe.prompt.txt",
+          "bytes": 1852,
+          "sha256": "994DBD20A68C657D8F5358F493951F6397A59E229990B9DD391BAA97C39BF95E"
+        },
+        {
+          "file": "water-original.png",
+          "bytes": 2277181,
+          "sha256": "8A91A1842E954D84C3247F1D803CFBB3E198C9CDA7DAC5A807BE9F5FACAF26C7"
+        },
+        {
+          "file": "water-transparent.png",
+          "bytes": 2277181,
+          "sha256": "8A91A1842E954D84C3247F1D803CFBB3E198C9CDA7DAC5A807BE9F5FACAF26C7"
+        },
+        {
+          "file": "water.png",
+          "bytes": 2277181,
+          "sha256": "8A91A1842E954D84C3247F1D803CFBB3E198C9CDA7DAC5A807BE9F5FACAF26C7"
+        },
+        {
+          "file": "water.prompt.txt",
+          "bytes": 1837,
+          "sha256": "38A1D7A6113AB7A2E81C531E67ADC73422F8BB8F6D1C3071CF3C8858AC83CD97"
+        }
+      ]
+    },
+    {
+      "source": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-matter-assets",
+      "destination": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Juegos\\Voro\\Recursos\\Materia",
+      "state": "verified",
+      "files": [
+        {
+          "file": "cosmic-v1.png",
+          "bytes": 2753423,
+          "sha256": "DF970426CBE1F7B70BFEAA386F6A2A5725A039FF66D915B37FEC11D6B2D514B4"
+        },
+        {
+          "file": "natural-v1.png",
+          "bytes": 1673994,
+          "sha256": "0373EC5A8B08E32A05FAAB813B87CC8400C9A4FA4EFF83B3F207B9B16A784CDE"
+        },
+        {
+          "file": "natural-v1.prompt.txt",
+          "bytes": 1984,
+          "sha256": "6D6E91772FFA87DA3BFADDD233D4A909FC10C7AF055ED13D3E3E66E1425B18E9"
+        },
+        {
+          "file": "objects-v1.crops.json",
+          "bytes": 3321,
+          "sha256": "1AC7F37A135FDF8EA4E3D39B25E824D9B6CEF6BB9EC1E504A8438E75D2E48F8B"
+        },
+        {
+          "file": "objects-v1.png",
+          "bytes": 2329373,
+          "sha256": "09550267A676606A4E7BA01CCD1409FD152488D7BD4F95CC203D17BC595946FD"
+        }
+      ]
+    },
+    {
+      "source": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-swimmer-v2-assets",
+      "destination": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Juegos\\Voro\\Recursos\\Nadador",
+      "state": "verified",
+      "files": [
+        {
+          "file": "correction-prompt.txt",
+          "bytes": 2095,
+          "sha256": "60AA6D2249B16D242E2063DC9EDAA44F188DAA8D32AC75D54BE272A3AF927444"
+        },
+        {
+          "file": "prompt.txt",
+          "bytes": 2138,
+          "sha256": "6FF356575036B834CB253879124B2B15C87D61BA97F51634E0CF6E0F7CE633A2"
+        },
+        {
+          "file": "QA.md",
+          "bytes": 1318,
+          "sha256": "6F499C1181543861A683F8E528032384671983191856C398B1A0561F0FA9F305"
+        },
+        {
+          "file": "swimmer-freestyle-8f-original.png",
+          "bytes": 495295,
+          "sha256": "749804785E7C6012A992D74A5547383AA9EDD12C42C62B4DDEC8A955E99C698C"
+        },
+        {
+          "file": "swimmer-freestyle-8f-refined.png",
+          "bytes": 1060998,
+          "sha256": "75AB6EA922BAB3718B1745741B2EC015F7C513DD2768BAC46A2B1519987DB571"
+        },
+        {
+          "file": "swimmer-pose-original-crop.png",
+          "bytes": 80555,
+          "sha256": "2CC77EA56088A5EE24611964CC247C7CD2E8945222F4DD008AC6898021AB708A"
+        }
+      ]
+    },
+    {
+      "source": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-upgrade-assets",
+      "destination": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Juegos\\Voro\\Recursos\\Mejoras",
+      "state": "verified",
+      "files": [
+        {
+          "file": "prompt.txt",
+          "bytes": 2952,
+          "sha256": "B5FA9AC8DF921B59AE4321CDC51A93B74BD3B194314B870729D0C20EA64745E8"
+        },
+        {
+          "file": "voro-upgrades-atlas.png",
+          "bytes": 2087945,
+          "sha256": "261A1DB52C401607D9F96F065D2BB8ACA622E3391FE0D3B725A7961C46DACC96"
+        }
+      ]
+    },
+    {
+      "source": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-animation-review",
+      "destination": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Juegos\\Voro\\Pruebas\\Animaciones",
+      "state": "verified",
+      "files": [
+        {
+          "file": "all-backgrounds-v22.png",
+          "bytes": 3510424,
+          "sha256": "0B8FF201C0B01BF3155D5646B82B69139525E0307F2EB82640E05E2610994091"
+        },
+        {
+          "file": "backgrounds-v22.mjs",
+          "bytes": 3446,
+          "sha256": "04B0D218DC04F78AAFAD7CC5814F3A930AD9E620AE9BBC4039669B6B0CBADEDC"
+        },
+        {
+          "file": "biomasa-recuperable-v14.png",
+          "bytes": 153610,
+          "sha256": "865E87F5F5ADECB343FEAB65001F5E937480B1ABCB7C0E9CCB09B88B2B96935A"
+        },
+        {
+          "file": "coastal-gameplay-v20.png",
+          "bytes": 3999723,
+          "sha256": "8605565B30B36485A3027FBA3949B91D74C9EA9AF525B9C1779AE93CAC1B683B"
+        },
+        {
+          "file": "coastal-gameplay.mjs",
+          "bytes": 2038,
+          "sha256": "6561802B4FB1E070A86FAA445675710B81C555956C35CE15F788443B0F0EB99F"
+        },
+        {
+          "file": "coastal-transition-v20.png",
+          "bytes": 2559742,
+          "sha256": "46FE6DF917DB6DF2C2B49B7D9B9F2398192008A12A232DD47CBC9675A079A90B"
+        },
+        {
+          "file": "comparacion-min-max-v16.png",
+          "bytes": 137753,
+          "sha256": "8B29D1F0AC520C29F982F563560A2558ED4A39EC396BBBEC95ECDC9C7E0C6ABA"
+        },
+        {
+          "file": "convert-v22.mjs",
+          "bytes": 1654,
+          "sha256": "D29099A508160C65C182C2B8113B0D967A5197B61E1B3014D545A419C450D752"
+        },
+        {
+          "file": "escalas-v14.png",
+          "bytes": 330430,
+          "sha256": "6CDBFBA43430789E238810D22C786C15F6DF67E0EA6E6330F2F2A9FC52543260"
+        },
+        {
+          "file": "integrate-membrane.cjs",
+          "bytes": 1672,
+          "sha256": "B53DC12C8EFACD9980C9CC58F615B7FA5AA1146BC7775CDAA47E6A136E2CC51A"
+        },
+        {
+          "file": "matter-cosmic-review.png",
+          "bytes": 1787720,
+          "sha256": "F70B00B5294DAE81FB4FB0EA75BC83298EC9A8DD58123D46454952C0583FA449"
+        },
+        {
+          "file": "matter-ingame-render-v17.png",
+          "bytes": 1096208,
+          "sha256": "8D59B0C07D0E6D4FFF222D09718FB6FDA7C33A9A5F101F35A2FD4BECF7405F26"
+        },
+        {
+          "file": "matter-natural-review.png",
+          "bytes": 1432718,
+          "sha256": "56CFFA6E0C1270EBEEA637603FD3BF6437F4032609B5E8A01C5D6666CC74C799"
+        },
+        {
+          "file": "matter-objects-review.png",
+          "bytes": 1277625,
+          "sha256": "1A31646C6690C8EE8830B7E790170AA8A1CFF3BB1A6CCFEE955037C8F0226B11"
+        },
+        {
+          "file": "matter-review.mjs",
+          "bytes": 583,
+          "sha256": "77F03E1BB6F43D2A6A921D5D85B1A13B5013421B182E52027FE3367C243BCE02"
+        },
+        {
+          "file": "membrana-continua.png",
+          "bytes": 126878,
+          "sha256": "13CF3D094523B9931AB9DAE8BA309C6533F4EFAA92E5FB0633DAF0CBACED3D13"
+        },
+        {
+          "file": "membrane.mjs",
+          "bytes": 875,
+          "sha256": "C3949C67E50FDF413B443AC0EBA3DC6BF8EBC89F09EE46E7ED82F4AB0660DAC2"
+        },
+        {
+          "file": "montage-frame.png",
+          "bytes": 230227,
+          "sha256": "754CED1DBC170FD05C7A59274A3CCBA519F42F4E9F2BCB24FD5B0013044C6DBB"
+        },
+        {
+          "file": "montage.mjs",
+          "bytes": 1775,
+          "sha256": "F0CF526CE1C8173442F99D3B927853C6E87527850B419F171E18B1766198E01B"
+        },
+        {
+          "file": "rebalance.mjs",
+          "bytes": 2154,
+          "sha256": "BF367DCDE73CE1F93E974655717BF67A57EED12F231F8F5D9FCEB6F323380000"
+        },
+        {
+          "file": "render-matter-game.mjs",
+          "bytes": 1239,
+          "sha256": "6532325A9F34CAD0F8E63D780525DF5D176F28EA15936AED174C89224A111328"
+        },
+        {
+          "file": "render.mjs",
+          "bytes": 1656,
+          "sha256": "63269F52EE9786557C2E8DFB866AE486A950F36FAC5EA82E75C33A646A060AA6"
+        },
+        {
+          "file": "revision-frame.png",
+          "bytes": 188261,
+          "sha256": "07B358C86BE73B6FC4EB431BD8A814C902674305F0DFECD9ED5D74C79EAF3248"
+        },
+        {
+          "file": "revision.mjs",
+          "bytes": 1836,
+          "sha256": "A2901EDD73BDAAB6DAB7B442A655724A5652818636F3FEA9236792832A21FC74"
+        },
+        {
+          "file": "sea-travel-v22.png",
+          "bytes": 1889709,
+          "sha256": "104BBC7D7CD0BB75EE466F074BFF2140BC94F3700DDF34D793889F8F42BFAC2B"
+        },
+        {
+          "file": "seam-land-0.65.png",
+          "bytes": 34371,
+          "sha256": "FA5701CE7F34690688677070C1DF541A3E4783AB9FFCF60EDA5EC133C1DBF158"
+        },
+        {
+          "file": "seam-land-1.png",
+          "bytes": 38897,
+          "sha256": "60EE4CF760BA4A4249AB167549FA02EFA1223D193E94678366A8BACC16AB5359"
+        },
+        {
+          "file": "size-review.mjs",
+          "bytes": 1584,
+          "sha256": "74CF50AB602B514935CFD64CB4325FD6CC8BEDA44DFDCD6245FE2F4DD87234E1"
+        },
+        {
+          "file": "stage-0-0.18.png",
+          "bytes": 623318,
+          "sha256": "267304F38A0A094A2F1C9385551FC5435C47F3DFE0C164FE7E392EB364E1EAE7"
+        },
+        {
+          "file": "stage-0-0.3.png",
+          "bytes": 624768,
+          "sha256": "4AC013758AFDDE9885E2FD28780F43872BD8481CAEA4641D990D08FEDC01A4F1"
+        },
+        {
+          "file": "stage-0-0.52.png",
+          "bytes": 616924,
+          "sha256": "98CC862CDE150D55A46E8EE0ADBBFCE9CE61828AE56E1FB452B9AA0C6E401F83"
+        },
+        {
+          "file": "stage-0-0.65.png",
+          "bytes": 612894,
+          "sha256": "E7C5BA2A003EC92D866E6C3BA029B4ABA258B8D6263585B26DF9D03C1964D052"
+        },
+        {
+          "file": "stage-0-0.73.png",
+          "bytes": 612688,
+          "sha256": "114C5DD74C6675C718EA77AEBA02EB460F3F8F0C19D3AEB2A68A17B56B78C475"
+        },
+        {
+          "file": "stage-0-0.png",
+          "bytes": 614359,
+          "sha256": "6CA693DA94476E5FD5EFE925EC46D2A45476F7EE0B46FA63E4242E6431ED0D29"
+        },
+        {
+          "file": "stage-1-0.18.png",
+          "bytes": 588424,
+          "sha256": "4D7F34F97F3CE291A8AC1D7571D0E2F221800B0F1007DD47B0AC3C1940CAC676"
+        },
+        {
+          "file": "stage-1-0.3.png",
+          "bytes": 626568,
+          "sha256": "BFF4D2847A5506B7EE5DDDA05A55172F45D1B659A9FC7135C9263C115944F9C3"
+        },
+        {
+          "file": "stage-1-0.52.png",
+          "bytes": 617614,
+          "sha256": "B71AA70692A3C664DA75558C70E8467851A7E3F635E258C4A4DA6711062133EF"
+        },
+        {
+          "file": "stage-1-0.65.png",
+          "bytes": 603277,
+          "sha256": "DB0A15A974C8ED9CE4C38F500E4B67E5B090A9A6B1CA7FE6B05DCEED02589708"
+        },
+        {
+          "file": "stage-1-0.73.png",
+          "bytes": 570008,
+          "sha256": "1BAF21BCBCD408CA32AC38BA08D6D816C826B1C9A11BBFCCCD397A74A69FCF5A"
+        },
+        {
+          "file": "stage-1-0.png",
+          "bytes": 592182,
+          "sha256": "D6A3F5FA733E45543DB595DF0EBCE2B92A6DA81B3F5255999302CFE416F0B20C"
+        },
+        {
+          "file": "stage-2-0.18.png",
+          "bytes": 461919,
+          "sha256": "2C45B44A60B7AE1F357B1F14CE12AE58C422ED0A40C90D8D083948DDB76F9A6D"
+        },
+        {
+          "file": "stage-2-0.3.png",
+          "bytes": 468416,
+          "sha256": "A5DA45D7013AAEC20DD982E55E4235FF8AAA992BAA5FF33E6F2D4F07EBE4F3C6"
+        },
+        {
+          "file": "stage-2-0.52.png",
+          "bytes": 458990,
+          "sha256": "3CE0ED8CC8E3AF9066BA3E73C817345733AEC4818C77607A946BD7B1FEC4A749"
+        },
+        {
+          "file": "stage-2-0.65.png",
+          "bytes": 460371,
+          "sha256": "AFAF0AFCD935E5EE58F7912DB59AAB8BAE2A65A70C10B3532CA4F510839ED3A8"
+        },
+        {
+          "file": "stage-2-0.73.png",
+          "bytes": 473878,
+          "sha256": "9533A7C1F1B77763FFF35590AB808E83EAE6A14C03E4F99A422A3212F82D7CC2"
+        },
+        {
+          "file": "stage-2-0.png",
+          "bytes": 475218,
+          "sha256": "FD318958B070E5EE3D7EF15839FB085A42A3CC0121A2C5E36A5C975E04A4DC87"
+        },
+        {
+          "file": "stage-3-0.18.png",
+          "bytes": 558136,
+          "sha256": "B052C77BE1BC590FCEDCCD9A031ABBFF4C4CB46424F0039BDC50EAD557127157"
+        },
+        {
+          "file": "stage-3-0.3.png",
+          "bytes": 558388,
+          "sha256": "853A5C87AD3C58DC3F660DF0558842AF7C7398E5CBCF4B7F5BC7FEE97D009B04"
+        },
+        {
+          "file": "stage-3-0.52.png",
+          "bytes": 556876,
+          "sha256": "D20A6D07974EAB4BA7163AB0281A81A298A7A18910C1748041E66772F50CAF36"
+        },
+        {
+          "file": "stage-3-0.65.png",
+          "bytes": 561771,
+          "sha256": "F9F79542A07DB6F945F75CA96BA2A4192E8C4F447AF2D2A18FE894AF5B613B5E"
+        },
+        {
+          "file": "stage-3-0.73.png",
+          "bytes": 561601,
+          "sha256": "1E1CAE805C3CD85B46BB4FD40F0F38C6FBAF587E5CAFE27ABFC9D31D88368369"
+        },
+        {
+          "file": "stage-3-0.png",
+          "bytes": 558726,
+          "sha256": "568EAACB240A0F0F1288BABEE23AF829F6E2D4B760CA3B2A95D6E0DA5836D702"
+        },
+        {
+          "file": "stage-4-0.18.png",
+          "bytes": 272807,
+          "sha256": "BF57848FDBEA3B6A6604424AA00EDDBBB06DA23EB2EFF03E77972DB1BBDC9369"
+        },
+        {
+          "file": "stage-4-0.3.png",
+          "bytes": 274855,
+          "sha256": "49F92A274C2B4E4806C01A282FB695F011BF80707AC92E8706BF567B908F5E74"
+        },
+        {
+          "file": "stage-4-0.52.png",
+          "bytes": 274891,
+          "sha256": "C4042BA7A9B5809A285FE6669463A2CD0F923E35E6054242B70BD1C5D0B15936"
+        },
+        {
+          "file": "stage-4-0.65.png",
+          "bytes": 273984,
+          "sha256": "FEB59D926193538E0277D29B8773F83763A239DD1EF63DFB441B54B3B72A5D44"
+        },
+        {
+          "file": "stage-4-0.73.png",
+          "bytes": 272526,
+          "sha256": "9CAFE3ADBF705B0AC6DEEF1F654DFA1B717C93868D66AEB4777EA272E85A1AF2"
+        },
+        {
+          "file": "stage-4-0.png",
+          "bytes": 273270,
+          "sha256": "7F4EAE2D7526D92437A1EE88E663DB212B8EDBC6624AF6D605421F5B65C2F2E6"
+        },
+        {
+          "file": "stage-5-0.18.png",
+          "bytes": 358500,
+          "sha256": "D1588974B4C276D2D759FF45C10FBD678F107B1AC7AE903D74A8C84DF396D2FE"
+        },
+        {
+          "file": "stage-5-0.3.png",
+          "bytes": 367619,
+          "sha256": "BF310650333FC0313E569EB3CC97A8D5D2E2BFF2EEB8DC924D370F07119CB2AD"
+        },
+        {
+          "file": "stage-5-0.52.png",
+          "bytes": 365652,
+          "sha256": "5B3DDD5CC2F3E35154C4DD15E76461F8E8EC4805ABB48B8B795673AFB4486F22"
+        },
+        {
+          "file": "stage-5-0.65.png",
+          "bytes": 364795,
+          "sha256": "9663FF8445509E1B3F9314373B166467CC05A0D5E1AAB0C5A4E98F1C1F65E2FF"
+        },
+        {
+          "file": "stage-5-0.73.png",
+          "bytes": 362279,
+          "sha256": "4596365ECE7C1B025AD01E5BC80162874F2C6FE4D82D43B6C825499FE894C6A9"
+        },
+        {
+          "file": "stage-5-0.png",
+          "bytes": 360789,
+          "sha256": "86B51421883811E0D922676D1560C57A887343907B516057829334B7FD161154"
+        },
+        {
+          "file": "stage-6-0.18.png",
+          "bytes": 352072,
+          "sha256": "855CE3B31A856B48B05596D3CCC3D479AAC3154963355B2B33C760C51FD16A47"
+        },
+        {
+          "file": "stage-6-0.3.png",
+          "bytes": 360011,
+          "sha256": "8692314DF7A0696BA4D32B11FD9379A2AEA00451FCB607BC8300C08978EC1195"
+        },
+        {
+          "file": "stage-6-0.52.png",
+          "bytes": 358884,
+          "sha256": "808A44CF934C6BC2C66F501783CBC9FFED2704934CAF5360795B83DCD96BD716"
+        },
+        {
+          "file": "stage-6-0.65.png",
+          "bytes": 358303,
+          "sha256": "D5142EF429254BF4F6878AFEF7B6AD1F4363636EA8C971851AE600B1A12E5D58"
+        },
+        {
+          "file": "stage-6-0.73.png",
+          "bytes": 357818,
+          "sha256": "E2A3A56ABD2EAE747EA64FB569C608B8CD37EC4BD9D46CF3510E05D2CB9E9196"
+        },
+        {
+          "file": "stage-6-0.png",
+          "bytes": 358812,
+          "sha256": "F2EDB4144460F0BDE7BF538D82F6285250D22530EA4AC6D8505F66444FF7183C"
+        },
+        {
+          "file": "stage-7-0.18.png",
+          "bytes": 424634,
+          "sha256": "42799F44313A8C122AEEBD67893B0F765997C082049BC35F3EAB75A7F62FD399"
+        },
+        {
+          "file": "stage-7-0.3.png",
+          "bytes": 431464,
+          "sha256": "11E280EE3890FC2BBA829522982C552DA9CCED3CC632ACAB6328E21C3F1A227C"
+        },
+        {
+          "file": "stage-7-0.52.png",
+          "bytes": 435834,
+          "sha256": "EA55A90D6559074B731209A3B58D1E31DF1909142FB1517B7FA54255D290C455"
+        },
+        {
+          "file": "stage-7-0.65.png",
+          "bytes": 436857,
+          "sha256": "F810DBE8B9CD0172AE0F2FDDF87ACCAF34F1022C4DF6346ED06B344FF3B051DB"
+        },
+        {
+          "file": "stage-7-0.73.png",
+          "bytes": 427449,
+          "sha256": "5ADD641160D368C698D3ED87EDA9372B8FC26A8FD0C9FA95DC8C6CA65BC01C03"
+        },
+        {
+          "file": "stage-7-0.png",
+          "bytes": 427748,
+          "sha256": "8261E07AD1BABF795BF7D0932276CDA6AC3D33985519809A5237F2935ED89F6E"
+        },
+        {
+          "file": "stage-8-0.18.png",
+          "bytes": 532325,
+          "sha256": "8BAF998CD2DFFDACE283A189BC664916D406B343A7DE310E7F1D3FC8FF206905"
+        },
+        {
+          "file": "stage-8-0.3.png",
+          "bytes": 531466,
+          "sha256": "2C92870D50EE7BAC71A3C39AB3589F37B2E56A8E23D1C1466A43FDB206B1FD8C"
+        },
+        {
+          "file": "stage-8-0.52.png",
+          "bytes": 528222,
+          "sha256": "C8EF580703E068DDA2F9F6B7BF8DA97937914CAD566AE6122194D90822A13054"
+        },
+        {
+          "file": "stage-8-0.65.png",
+          "bytes": 527790,
+          "sha256": "E41708F72DB4DAF547A791D097AF050DB48A2840931FD6A5A8A789125D997F93"
+        },
+        {
+          "file": "stage-8-0.73.png",
+          "bytes": 526838,
+          "sha256": "2ACC38936D41B2365B50535B053AD6AD4DAC5A5AF21D2F6D89AE35347BF62850"
+        },
+        {
+          "file": "stage-8-0.png",
+          "bytes": 528695,
+          "sha256": "84D9498088CC8346E2AF8453A5E5E746DD343156BDFABC5B87B2A0DE171C7162"
+        },
+        {
+          "file": "ui-backdrops.mjs",
+          "bytes": 1417,
+          "sha256": "06B9E08D9392B38DE602E4E46ACF0D7066D1972FB58E7BDC4E6570DC028DCE51"
+        },
+        {
+          "file": "voro-animaciones-revisadas.gif",
+          "bytes": 5621381,
+          "sha256": "0B1EC07D4E028657C3ED6E574983A9624E2145C5BDD0A1F78FF1471B18E8514E"
+        },
+        {
+          "file": "voro-movimientos.gif",
+          "bytes": 7581630,
+          "sha256": "9F2B0A3274ED77B610229350F35EA6F5B5E2F800BFDA83A96919800C9B319B8E"
+        }
+      ]
+    },
+    {
+      "source": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-fish-preview",
+      "destination": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Juegos\\Voro\\Pruebas\\Sardina",
+      "state": "verified",
+      "files": [
+        {
+          "file": "fish.mjs",
+          "bytes": 5852,
+          "sha256": "0D8B9147F7E622ECBDF584F3EFBE6D35B19E80A523702E3EB38CCCF4C32F5805"
+        },
+        {
+          "file": "fix-timing.cjs",
+          "bytes": 717,
+          "sha256": "F84FC5AC8632049BE12EB1F5E6CEF63763C7605F0EE3AF8C8ED413254657CC01"
+        },
+        {
+          "file": "frame-15.png",
+          "bytes": 185970,
+          "sha256": "D8E228CFD2ABC3EFFDE9EE7C4F9392F8D2CDCE98368DAC606BF8669A0EC5FEC5"
+        },
+        {
+          "file": "frame-71.png",
+          "bytes": 183960,
+          "sha256": "0BE7FB640DCFC3DE15A20F80579A4919D37BD151A64267037D6EADC0E12349CD"
+        },
+        {
+          "file": "index.html",
+          "bytes": 2383,
+          "sha256": "9FD28D37C917C99A2DE015E889BC843A888491BA30870ACF15CE372F1A765B12"
+        },
+        {
+          "file": "README.md",
+          "bytes": 1332,
+          "sha256": "20BE6BBFBC25CEAF1DBC44D70D1893EA0B6BBBDDBAC145F4620D1000CA757410"
+        },
+        {
+          "file": "render.cjs",
+          "bytes": 1341,
+          "sha256": "80EBD951113C1A0446B9E2D7C8D5929D74F2846BE7890E221757785D83CC1032"
+        },
+        {
+          "file": "sardina-animada.gif",
+          "bytes": 5802009,
+          "sha256": "4999725712B7B4AE2369EEC6D919AACBB9352430EE07F5DCFC368314981FC084"
+        },
+        {
+          "file": "serve.cjs",
+          "bytes": 711,
+          "sha256": "929BAD2AC54195D290EFB6ACB715576F367AFB1A396A8DC9ACBE13862EC07141"
+        },
+        {
+          "file": "water.png",
+          "bytes": 2277181,
+          "sha256": "8A91A1842E954D84C3247F1D803CFBB3E198C9CDA7DAC5A807BE9F5FACAF26C7"
+        }
+      ]
+    },
+    {
+      "source": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-asset-delivery",
+      "destination": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Juegos\\Voro\\Archivo\\Paquetes-web-antiguos",
+      "state": "verified",
+      "files": [
+        {
+          "file": "abyssal-background.png",
+          "bytes": 1670237,
+          "sha256": "7657D9EA7666EE2F73CBACCE1AD75643981E3BDB1ECF13EFC77BEF6954B90F68"
+        },
+        {
+          "file": "background-prompt.txt",
+          "bytes": 1365,
+          "sha256": "A9D5552115BF32EB646B3969B93C9B8C2585CBF5DDDB87A9453EAB81FC5B16B0"
+        },
+        {
+          "file": "voro-deploy.tar.gz",
+          "bytes": 2059551,
+          "sha256": "41D1DFDBC16CFC677AB6DFBEC44F71CFCB084AF6C794D76F0A12AC737100E4F7"
+        },
+        {
+          "file": "voro-v10-deploy.tar.gz",
+          "bytes": 23985359,
+          "sha256": "A9B68CBD39CC1BDC32CBB6B9B535D6A4962D967BA37850CE8FDE6451A06B955C"
+        },
+        {
+          "file": "voro-v11-deploy.tar.gz",
+          "bytes": 23985299,
+          "sha256": "D8AC75AABEA863645CFA9E65964FEB99FDF12335272E0AC55DE423D1CBC7CF41"
+        },
+        {
+          "file": "voro-v12-deploy.tar.gz",
+          "bytes": 23985091,
+          "sha256": "A64787F12D38FF7A924B83D9FDB8E46375CABB639E252C29F7BDCC9C4BE3C736"
+        },
+        {
+          "file": "voro-v13-deploy.tar.gz",
+          "bytes": 23985264,
+          "sha256": "B1AC6613954CF43780075CA18D5E8B930112770F250E393D066CBCD3688B32FC"
+        },
+        {
+          "file": "voro-v14-deploy.tar.gz",
+          "bytes": 23988915,
+          "sha256": "25D9A0C7DF0F4632ECFA9D33C5C47CF95644FA8D122FEDC125A5B74041645628"
+        },
+        {
+          "file": "voro-v15-deploy.tar.gz",
+          "bytes": 23991791,
+          "sha256": "0B2520532FA1B988F8A88A42D041DB58D6A201F96EB582E5E66DADC910E48447"
+        },
+        {
+          "file": "voro-v16-deploy.tar.gz",
+          "bytes": 23994962,
+          "sha256": "CCC375B25236A8AE60B7CC1B1B765D33C11A066F12FFC0D082110D299A51DF26"
+        },
+        {
+          "file": "voro-v17-deploy.tar.gz",
+          "bytes": 30718052,
+          "sha256": "4039B9592F5B20B83324E7C45A6BBA3FD7C0DF87402B771846CEFFAA42BDC874"
+        },
+        {
+          "file": "voro-v18-deploy.tar.gz",
+          "bytes": 30719159,
+          "sha256": "E38D1464983E348BF32AA796A01B5FB84CF024C2535EDF8CC4C4E5CA2A018DA0"
+        },
+        {
+          "file": "voro-v19-deploy.tar.gz",
+          "bytes": 30719559,
+          "sha256": "151EA8B03E461AC617F6AD50F983517520D0A474FB74780483740A838435191A"
+        },
+        {
+          "file": "voro-v2-deploy.tar.gz",
+          "bytes": 2064222,
+          "sha256": "71FDA22F1D53ECD52FA2C6C65E76101B28D41A69BC7EDF8B440BC03AD0EE75ED"
+        },
+        {
+          "file": "voro-v20-deploy.tar.gz",
+          "bytes": 36025782,
+          "sha256": "100539AC96D0BA9A2DA5C40E2F972DCDA4DF637C9CA63D863ED5B19C3638B760"
+        },
+        {
+          "file": "voro-v21-deploy.tar.gz",
+          "bytes": 36025649,
+          "sha256": "2216AFA520364A68028DFF9A693CCC9E6A0C737D51844050C1036941ECD8EBE5"
+        },
+        {
+          "file": "voro-v22-deploy.tar.gz",
+          "bytes": 38152235,
+          "sha256": "5BE56F2120E7E057DFE325C6079E497C8F167B17C529249E524C0E49090BEAD4"
+        },
+        {
+          "file": "voro-v23-deploy.tar.gz",
+          "bytes": 38152205,
+          "sha256": "40A803F76952FB52723D9A1513D739F27F45FF7902620929DEB84AE67B045B46"
+        },
+        {
+          "file": "voro-v24-deploy.tar.gz",
+          "bytes": 38286746,
+          "sha256": "FD3E3FE64438491E0ACA90F9A4794596C867F85DC86E589FF3AFDA4A8677711F"
+        },
+        {
+          "file": "voro-v3-deploy.tar.gz",
+          "bytes": 6664819,
+          "sha256": "6A42C6864542FBA40C8562B907FFCDE406658DD0E808AE8C952BCAC8F30603B3"
+        },
+        {
+          "file": "voro-v4-deploy.tar.gz",
+          "bytes": 8136108,
+          "sha256": "01663640E776DE6DD3E6E348430AF93CC85EA2C18520E38C269AD20DE2D17BC3"
+        },
+        {
+          "file": "voro-v5-deploy.tar.gz",
+          "bytes": 21058036,
+          "sha256": "74FFA5F49B1AEBA9EB9DE271EC4FD70C771E7DC70881DAECE4A5F6E7497E3C5D"
+        },
+        {
+          "file": "voro-v6-deploy.tar.gz",
+          "bytes": 21059308,
+          "sha256": "E91684C98460FFFE99F5DBEB1F16629EB3176DBD037ACD3DB0838CFA285CECA6"
+        },
+        {
+          "file": "voro-v7-deploy.tar.gz",
+          "bytes": 23138439,
+          "sha256": "C6771A22B95DE97971CC112822EEE554FFA12C174DB71A92959A41FF698716B2"
+        },
+        {
+          "file": "voro-v8-deploy.tar.gz",
+          "bytes": 23212161,
+          "sha256": "FB8083A1B9C9ECA2F4DE5765E69AB7FDAA856A3D06B8146F5181EAD3428B4268"
+        },
+        {
+          "file": "voro-v9-deploy.tar.gz",
+          "bytes": 23298143,
+          "sha256": "FD8D0FD94A80CB7CDD187BAFB8B94656A0BE9F3AD4F80303335858F7D9EA7E7F"
+        }
+      ]
+    },
+    {
+      "source": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-diseno-validacion",
+      "destination": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Juegos\\Voro\\Archivo\\Disenos-iniciales",
+      "state": "verified",
+      "files": [
+        {
+          "file": "01-microscopio.png",
+          "bytes": 2282507,
+          "sha256": "CC11D15E5E548D030902723F7371AF97ABF48585D178D90DDEF3D481161D8ADE"
+        },
+        {
+          "file": "02-agua.png",
+          "bytes": 2700182,
+          "sha256": "81D3A22CBAFC49D9031EEF5833B07614EF313AAE9401058794ED6465D097F39E"
+        },
+        {
+          "file": "03-tierra.png",
+          "bytes": 2925421,
+          "sha256": "AC30FEFD3A8CA656456668D8B187DEFD9B2143822361AC93D8632C396CD26A02"
+        },
+        {
+          "file": "04-ciudad.png",
+          "bytes": 2765260,
+          "sha256": "AA1367A7FC92A25644BB51321F85BE2B6A91856D3123DA698427CD0ABA9AED6A"
+        },
+        {
+          "file": "05-espacio.png",
+          "bytes": 2507135,
+          "sha256": "4059604A24F3B57606D380A29F60A0C2B29682A2E45A291590EC478F5F3B7FE7"
+        },
+        {
+          "file": "06-transicion.png",
+          "bytes": 2519941,
+          "sha256": "06C68198C51E6865CEB846CC66315D7D01D2D71AA23233FD79C9E0CC747F6B11"
+        },
+        {
+          "file": "prompts.md",
+          "bytes": 10726,
+          "sha256": "E3CFF8396990F8F4842C9BDF66512ECFFB54749B28EB8AF685F40557ED462165"
+        },
+        {
+          "file": "propuesta-voro.md",
+          "bytes": 10011,
+          "sha256": "51CE46FD620949ED36C955D3C790B6E241B772CA9500555887A646C8367FB519"
+        }
+      ]
+    },
+    {
+      "source": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-membrana-variants",
+      "destination": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Juegos\\Voro\\Archivo\\Variantes-membrana",
+      "state": "verified",
+      "files": [
+        {
+          "file": "A1-cristal.png",
+          "bytes": 2025458,
+          "sha256": "DE5F2AC8262BA09AA87F21533E6B97F37C634C8BAE934A50BC25DA2CBC68222F"
+        },
+        {
+          "file": "A2-viva.png",
+          "bytes": 2508546,
+          "sha256": "EE0DF43EB2B1365CC95A87FAD2AE0E925FC239DE220F151E2B762F7EFB3F4BA7"
+        },
+        {
+          "file": "A3-nacar.png",
+          "bytes": 2492254,
+          "sha256": "C0A344E0D555DEC090A418256CE98DA8535C30BEE3A5CE432634F01FCE67E030"
+        },
+        {
+          "file": "inspection.md",
+          "bytes": 1738,
+          "sha256": "063770732E08A82AC2F6A27C3D01149B30220F0A9C40BB47F0F47197BDEF304E"
+        },
+        {
+          "file": "prompts.md",
+          "bytes": 8591,
+          "sha256": "D6B0DD35178D0CCA1F5CF98EC7C77A79CF82E45A838A7B3EF8E2CE7E4B8B5249"
+        }
+      ]
+    },
+    {
+      "source": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-ui-image-assets",
+      "destination": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Juegos\\Voro\\Archivo\\Conceptos-interfaz",
+      "state": "verified",
+      "files": [
+        {
+          "file": "A-membrana.png",
+          "bytes": 2182425,
+          "sha256": "7CF4FB1C86BB97CF8F2B13466793D715FBCEB5DEAFCF77A282A2875EA61134FE"
+        },
+        {
+          "file": "B-nucleo.png",
+          "bytes": 2373267,
+          "sha256": "714AFF13B1E08A52E903469AE4AACD2C85CED934DD0DE7F7AF855F970F2B06E5"
+        },
+        {
+          "file": "C-abismo.png",
+          "bytes": 1852486,
+          "sha256": "CE3767383BB221BC04D75AA3CABBA01A2A0521CE023715770A190E0BB9D7ED3F"
+        },
+        {
+          "file": "prompts.md",
+          "bytes": 9750,
+          "sha256": "3A49A332E86B2D463274C0B48C95B023CE1C659E50721FD73BCEA65899C1A728"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "target": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-camera",
+      "path": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Juegos\\Voro\\Codigo"
+    },
+    {
+      "target": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-pc-demo\\artifact\\itchio\\0.6.2-pc",
+      "path": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Juegos\\Voro\\Entregas\\PC\\0.6.2"
+    },
+    {
+      "target": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-camera\\artifact\\testflight-0.6.2-build-1",
+      "path": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Juegos\\Voro\\Entregas\\iOS\\0.6.2"
+    },
+    {
+      "target": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-pc-demo",
+      "path": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Juegos\\Voro\\Pruebas\\PC"
+    },
+    {
+      "target": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-camera\\design",
+      "path": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Juegos\\Voro\\Pruebas\\Evidencias"
+    },
+    {
+      "target": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-camera\\work",
+      "path": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Juegos\\Voro\\Pruebas\\Temporales"
+    },
+    {
+      "target": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro",
+      "path": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Juegos\\Voro\\Archivo\\Repositorio-original"
+    },
+    {
+      "target": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-camera\\artifact",
+      "path": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Juegos\\Voro\\Archivo\\Compilaciones-anteriores"
+    }
+  ],
+  "gitVerified": true
+}
