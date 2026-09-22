@@ -16,7 +16,7 @@ jobs:
       - name: Preserve capture tools and checkout uploaded candidate source
         run: |
           cp scripts/store-capture-setup.rb scripts/StoreCapture.swift "$RUNNER_TEMP/"
-          git fetch --depth=1 origin aa06953
+          git fetch --depth=1 origin aa0695334e428c03820aa2c5b442235b94189694
           git checkout FETCH_HEAD
           cp "$RUNNER_TEMP/store-capture-setup.rb" "$RUNNER_TEMP/StoreCapture.swift" scripts/
       - uses: actions/setup-node@v4
