@@ -6,6 +6,7 @@
     "node": ">=22.13.0"
   },
   "scripts": {
+    "build:windows": "npm run build:pc && npm --prefix desktop run package",
     "dev:pc": "vite --config vite.pc.config.ts",
     "build:pc": "vite build --config vite.pc.config.ts",
     "dev": "vinext dev",

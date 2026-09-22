@@ -1,0 +1,14 @@
+{
+  "name": "voro-desktop-tools",
+  "version": "0.6.2",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "package": "node package.mjs",
+    "test": "node --test policy.test.mjs"
+  },
+  "devDependencies": {
+    "@electron/packager": "20.3.0",
+    "electron": "44.4.3"
+  }
+}

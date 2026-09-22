@@ -564,6 +564,7 @@ export class VoroEngine {
       opt,
     );
     window.addEventListener('keyup', (e) => this.keys.delete(e.code), opt);
+    if (this.desktop) window.addEventListener('beforeunload', () => this.save(), opt);
     window.addEventListener(
       'blur',
       () => {
