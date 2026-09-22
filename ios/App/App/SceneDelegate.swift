@@ -13,7 +13,7 @@ class VoroBridgeViewController: CAPBridgeViewController {
 public class VoroBenchmarkDisplayPlugin: CAPPlugin, CAPBridgedPlugin {
     public let identifier = "VoroBenchmarkDisplayPlugin"
     public let jsName = "VoroBenchmarkDisplay"
-    public let pluginMethods = [CAPPluginMethod(name: "setActive", returnType: CAPPluginReturnPromise)]
+    public let pluginMethods: [CAPPluginMethod] = [CAPPluginMethod(name: "setActive", returnType: CAPPluginReturnPromise)]
     private var requested = false
     private var previousIdleState = false
 
