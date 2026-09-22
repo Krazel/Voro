@@ -16,6 +16,7 @@ source=source.replace(anchor,anchor+`
     }, 100);
 `);
 source=source.replace('      <ReviewMilestone held=', `      <span style={{position:"fixed",bottom:0,zIndex:10000}}>{"review-stage-"+state.stage}</span>
+      <span style={{position:"fixed",bottom:48,zIndex:10000}}>{state.stage===2 && state.transition===0 ? "native-play-ready" : "native-transition"}</span>
       <button style={{position:"fixed",bottom:24,zIndex:10000}} onClick={async event=>{
         const button=event.currentTarget,game=engine.current!;
         game.initAudio();await game.sfx?.unlock();await game.audio?.resume();
