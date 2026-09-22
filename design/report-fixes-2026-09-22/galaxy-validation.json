@@ -1,0 +1,257 @@
+{
+  "kind": "Original rig above, exported animation below; Skia pixels, no iOS GPU measurement",
+  "samples": [
+    {
+      "id": "galaxies-0",
+      "energy": 1,
+      "frame": 0,
+      "colorMae": 0.6520578377473022,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-0",
+      "energy": 1,
+      "frame": 17,
+      "colorMae": 0.639539611417428,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-0",
+      "energy": 1,
+      "frame": 45,
+      "colorMae": 0.6578911852645545,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-0",
+      "energy": 1.5,
+      "frame": 0,
+      "colorMae": 0.6520578377473022,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-0",
+      "energy": 1.5,
+      "frame": 17,
+      "colorMae": 0.639539611417428,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-0",
+      "energy": 1.5,
+      "frame": 45,
+      "colorMae": 0.6578911852645545,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-1",
+      "energy": 1,
+      "frame": 0,
+      "colorMae": 0.827866356322554,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-1",
+      "energy": 1,
+      "frame": 17,
+      "colorMae": 0.835962853746759,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-1",
+      "energy": 1,
+      "frame": 45,
+      "colorMae": 0.8234076428603191,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-1",
+      "energy": 1.5,
+      "frame": 0,
+      "colorMae": 0.827866356322554,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-1",
+      "energy": 1.5,
+      "frame": 17,
+      "colorMae": 0.835962853746759,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-1",
+      "energy": 1.5,
+      "frame": 45,
+      "colorMae": 0.8234076428603191,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-2",
+      "energy": 1,
+      "frame": 0,
+      "colorMae": 0.4359822147898151,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-2",
+      "energy": 1,
+      "frame": 17,
+      "colorMae": 0.44608984942353014,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-2",
+      "energy": 1,
+      "frame": 45,
+      "colorMae": 0.43691172215410773,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-2",
+      "energy": 1.5,
+      "frame": 0,
+      "colorMae": 0.4359822147898151,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-2",
+      "energy": 1.5,
+      "frame": 17,
+      "colorMae": 0.44608984942353014,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-2",
+      "energy": 1.5,
+      "frame": 45,
+      "colorMae": 0.43691172215410773,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-3",
+      "energy": 1,
+      "frame": 0,
+      "colorMae": 0.7571094388275377,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-3",
+      "energy": 1,
+      "frame": 17,
+      "colorMae": 0.7591820633055741,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-3",
+      "energy": 1,
+      "frame": 45,
+      "colorMae": 0.7502065887117992,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-3",
+      "energy": 1.5,
+      "frame": 0,
+      "colorMae": 0.7571094388275377,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-3",
+      "energy": 1.5,
+      "frame": 17,
+      "colorMae": 0.7591820633055741,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-3",
+      "energy": 1.5,
+      "frame": 45,
+      "colorMae": 0.7502065887117992,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-4",
+      "energy": 1,
+      "frame": 0,
+      "colorMae": 0.6719010274826901,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-4",
+      "energy": 1,
+      "frame": 17,
+      "colorMae": 0.6634945406113195,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-4",
+      "energy": 1,
+      "frame": 45,
+      "colorMae": 0.6554165886550768,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-4",
+      "energy": 1.5,
+      "frame": 0,
+      "colorMae": 0.6719010274826901,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-4",
+      "energy": 1.5,
+      "frame": 17,
+      "colorMae": 0.6634945406113195,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-4",
+      "energy": 1.5,
+      "frame": 45,
+      "colorMae": 0.6554165886550768,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-5",
+      "energy": 1,
+      "frame": 0,
+      "colorMae": 0.4406442546636346,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-5",
+      "energy": 1,
+      "frame": 17,
+      "colorMae": 0.4399864401778853,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-5",
+      "energy": 1,
+      "frame": 45,
+      "colorMae": 0.4448262399577525,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-5",
+      "energy": 1.5,
+      "frame": 0,
+      "colorMae": 0.4406442546636346,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-5",
+      "energy": 1.5,
+      "frame": 17,
+      "colorMae": 0.4399864401778853,
+      "alphaMae": 0
+    },
+    {
+      "id": "galaxies-5",
+      "energy": 1.5,
+      "frame": 45,
+      "colorMae": 0.4448262399577525,
+      "alphaMae": 0
+    }
+  ]
+}

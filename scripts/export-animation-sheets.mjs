@@ -45,7 +45,11 @@ for (const s of Object.values(SPECIES_BY_ID)) {
     x0 = Math.max(0, x0 - 2); y0 = Math.max(0, y0 - 2);
     x1 = Math.min(size - 1, x1 + 2); y1 = Math.min(size - 1, y1 + 2);
     const w = x1 - x0 + 1, h = y1 - y0 + 1;
-    const cols = Math.ceil(Math.sqrt(count * h / w)), rows = Math.ceil(count / cols);
+    // Prefer exact grids: 64 frames in 9x8 reserved eight empty textures.
+    // Packing complete rows preserves every pose and pixel without that cost.
+    const cols = Array.from({length:count},(_,i)=>i+1).filter(n=>count%n===0)
+      .sort((a,b)=>Math.abs(Math.log(a*w/(count/a*h)))-Math.abs(Math.log(b*w/(count/b*h))))[0];
+    const rows = Math.ceil(count / cols);
     const sheet = createCanvas(cols * w, rows * h), ctx = sheet.getContext('2d');
     for (let f = 0; f < count; f++) {
       c.resetTransform(); c.putImageData(frames[f], 0, 0);
@@ -56,7 +60,8 @@ for (const s of Object.values(SPECIES_BY_ID)) {
     const url = `./animation-sheets/${hash}.webp`;
     writeFileSync('public/' + url.slice(2), buffer);
     manifest[s.id][energy] = { url, frames: count, cols, w, h, x: x0, y: y0, size, extent,
-      bytes: cols * w * rows * h * 4, encodedBytes: buffer.length };
+      bytes: cols * w * rows * h * 4, encodedBytes: buffer.length,
+      ...(s.animationCropRevision ? {cropRevision:s.animationCropRevision} : {}) };
     bytes += buffer.length;
   }
   exported++;

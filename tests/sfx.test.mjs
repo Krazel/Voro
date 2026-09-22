@@ -2,6 +2,28 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { INGEST_SOUNDS, INGEST_GAIN, SfxPlayer } from '../app/sfx.mjs';
 
+test('iOS local media without HTTP status decodes; remote/opaque/HTTP failures stay rejected',async()=>{
+  for(const [baseURL,status,type,allowed] of [
+    ['capacitor://localhost/',0,'basic',true],['https://example.com/',0,'basic',false],
+    ['capacitor://localhost/',0,'opaque',false],['capacitor://localhost/',404,'basic',false],
+  ]) {
+    let decoded=0;
+    const p=new SfxPlayer({state:'running',decodeAudioData:async()=>{decoded++;return {};}},{},{
+      baseURL:()=>baseURL,fetcher:async()=>({ok:false,status,type,arrayBuffer:async()=>new ArrayBuffer(44)})});
+    await p.unlock();assert.equal(decoded,allowed?3:0);assert.equal(p.stats().readErrors,allowed?0:3);
+    p.destroy();
+  }
+});
+
+test('Sound diagnostics distinguish local read failures from unsupported/corrupt decoded data',async()=>{
+  for(const phase of ['read','decode']){
+    const p=new SfxPlayer({state:'running',decodeAudioData:async()=>{throw new Error('Invalid PCM');}},{},{
+      baseURL:()=> 'capacitor://localhost/',fetcher:async()=>({ok:false,status:0,type:'basic',arrayBuffer:async()=>new ArrayBuffer(phase==='read'?0:44)})});
+    await p.unlock();assert.equal(p.stats().lastLoadError.phase,phase);
+    assert.equal(p.stats().decodeErrors,phase==='decode'?3:0);assert.equal(p.stats().loadErrors,3);p.destroy();
+  }
+});
+
 test('Approved ingest variants decode, rate-limit and never repeat consecutively', async () => {
   let time = 1000, random = 0, starts = 0;
   const decoded = [];

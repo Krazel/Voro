@@ -4,7 +4,7 @@
   "maxFrames": 64,
   "defaultSize": 192,
   "uniqueFiles": 149,
-  "encodedBytes": 78007346,
-  "sourceHash": "f23d24bc04c2adeb63b2bef44b707bfc742148a46113d6d8fa9593c6f9caa54c",
+  "encodedBytes": 77632552,
+  "sourceHash": "a82d8f919fad96d78c0be8c7073d9c30a31e1de68e6a13f90d35fe833117bf91",
   "format": "WebP quality 94, alpha 100, same rigs; 24–64 poses per cycle, up to 30 poses/s; rigid transforms continuous; tight common crop"
 }

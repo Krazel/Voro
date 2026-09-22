@@ -8,12 +8,14 @@ export class SfxPlayer {
     fetcher = (...args) => fetch(...args),
     random = Math.random,
     now = () => performance.now(),
+    baseURL = () => globalThis.location?.href,
   } = {}) {
     this.context = context;
     this.output = output;
     this.fetcher = fetcher;
     this.random = random;
     this.now = now;
+    this.baseURL = baseURL;
     this.buffers = [];
     this.last = -1;
     this.lastPlayedAt = -Infinity;
@@ -21,7 +23,7 @@ export class SfxPlayer {
     this.destroyed = false;
     this.voices = new Set();
     this.lastAttemptAt = -Infinity;
-    this.diagnostics = { attempts: 0, loadErrors: 0, resumeErrors: 0, playErrors: 0, requested: 0, played: 0, notReady: 0, notRunning: 0, throttled: 0 };
+    this.diagnostics = { attempts: 0, loadErrors: 0, readErrors: 0, decodeErrors: 0, lastLoadError: null, resumeErrors: 0, playErrors: 0, requested: 0, played: 0, notReady: 0, notRunning: 0, throttled: 0 };
   }
   unlock() {
     if (this.destroyed) return Promise.resolve();
@@ -32,12 +34,29 @@ export class SfxPlayer {
     this.loading = Promise.all(INGEST_SOUNDS.map(async (url,index) => {
       if (this.buffers[index]) return;
       this.diagnostics.attempts++;
+      let phase='fetch',status=null;
       try {
         const response = await this.fetcher(url);
-        if (!response.ok) throw new Error(`SFX ${response.status}`);
-        const buffer = await this.context.decodeAudioData(await response.arrayBuffer());
+        status=response.status;phase='response';
+        // Capacitor's iOS media handler returns URLResponse, not HTTPURLResponse.
+        // A readable local WAV can therefore have status 0 / ok false. Do not
+        // extend this exception to remote, opaque or failed HTTP responses.
+        let localMedia=false;
+        try {
+          const base=new URL(this.baseURL()),asset=new URL(url,base);
+          localMedia=base.protocol==='capacitor:' && asset.protocol===base.protocol && asset.host===base.host;
+        } catch {}
+        if (!response.ok && !(localMedia && status===0 && response.type!=='opaque' && response.type!=='opaqueredirect'))
+          throw new Error(`SFX response ${status}`);
+        phase='read';const bytes=await response.arrayBuffer();
+        if(!bytes.byteLength)throw new Error('Empty sound asset');
+        phase='decode';const buffer = await this.context.decodeAudioData(bytes);
         if (!this.destroyed) this.buffers[index] = buffer;
-      } catch { this.diagnostics.loadErrors++; }
+      } catch(error) {
+        this.diagnostics.loadErrors++;
+        if(phase==='decode')this.diagnostics.decodeErrors++;else this.diagnostics.readErrors++;
+        this.diagnostics.lastLoadError={phase,url,status,message:String(error?.message||error).slice(0,160)};
+      }
     })).finally(() => { this.loading = null; });
     return this.loading;
   }

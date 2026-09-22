@@ -1,0 +1,55 @@
+{
+  "kind": "Desktop Chromium real WAV decoding/playback scheduling; does not validate physical iOS output",
+  "results": [
+    {
+      "mode": "HTTP",
+      "attempts": 3,
+      "loadErrors": 0,
+      "readErrors": 0,
+      "decodeErrors": 0,
+      "lastLoadError": null,
+      "resumeErrors": 0,
+      "playErrors": 0,
+      "requested": 6,
+      "played": 6,
+      "notReady": 0,
+      "notRunning": 0,
+      "throttled": 0,
+      "decoded": 3,
+      "pending": false,
+      "voices": 6,
+      "contextState": "running",
+      "voiceGain": 2,
+      "durations": [
+        0.5612244897959183,
+        0.49997732426303854,
+        0.4454421768707483
+      ]
+    },
+    {
+      "mode": "Native response contract emulated",
+      "attempts": 3,
+      "loadErrors": 0,
+      "readErrors": 0,
+      "decodeErrors": 0,
+      "lastLoadError": null,
+      "resumeErrors": 0,
+      "playErrors": 0,
+      "requested": 6,
+      "played": 6,
+      "notReady": 0,
+      "notRunning": 0,
+      "throttled": 0,
+      "decoded": 3,
+      "pending": false,
+      "voices": 6,
+      "contextState": "running",
+      "voiceGain": 2,
+      "durations": [
+        0.5612244897959183,
+        0.49997732426303854,
+        0.4454421768707483
+      ]
+    }
+  ]
+}

@@ -984,9 +984,7 @@ export function drawInhabitant(
     ((((time / profile.period + (seed || 0) / TAU) % 1) + 1) % 1) * TAU;
   c.save();
   if (hurt > 0) c.globalAlpha *= 0.75 + 0.25 * Math.cos(hurt * 12);
-  // Previously exported sheets contain the old clipped galaxy crops. These
-  // six use the same bounded live-pose cache until sheets are regenerated.
-  if (sheets && !detail && cache && !s.animationCropRevision) {
+  if (sheets && !detail && cache) {
     if (simpleAnimation(profile)) {
       drawPose(c, image, s, r, phase, { activity }); c.restore(); return;
     }

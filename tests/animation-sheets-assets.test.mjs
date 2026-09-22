@@ -14,6 +14,7 @@ test('Every deforming inhabitant ships bounded, content-addressed local sheets; 
     assert.ok(manifest[s.id],s.id);
     for(const energy of [1,1.5]) {
       const m=manifest[s.id][energy];
+      assert.equal(m.cropRevision||0,s.animationCropRevision||0,`Stale animation crop for ${s.id}`);
       assert.ok(m.frames>=24 && m.frames<=64);
       // The opening giant uses 256px poses; total micro residency is tested
       // separately and remains inside the existing 64 MiB budget.

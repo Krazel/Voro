@@ -1,0 +1,114 @@
+{
+  "kind": "Desktop WebKit functional test with accelerated rAF clock, NOT performance results",
+  "scenarios": 20,
+  "statuses": [
+    {
+      "id": "micro",
+      "size": "entry",
+      "status": "ok"
+    },
+    {
+      "id": "micro",
+      "size": "grown",
+      "status": "ok"
+    },
+    {
+      "id": "pond",
+      "size": "entry",
+      "status": "ok"
+    },
+    {
+      "id": "pond",
+      "size": "grown",
+      "status": "ok"
+    },
+    {
+      "id": "land",
+      "size": "entry",
+      "status": "ok"
+    },
+    {
+      "id": "land",
+      "size": "grown",
+      "status": "ok"
+    },
+    {
+      "id": "water",
+      "size": "entry",
+      "status": "ok"
+    },
+    {
+      "id": "water",
+      "size": "grown",
+      "status": "ok"
+    },
+    {
+      "id": "city",
+      "size": "entry",
+      "status": "ok"
+    },
+    {
+      "id": "city",
+      "size": "grown",
+      "status": "ok"
+    },
+    {
+      "id": "orbit",
+      "size": "entry",
+      "status": "ok"
+    },
+    {
+      "id": "orbit",
+      "size": "grown",
+      "status": "ok"
+    },
+    {
+      "id": "planets",
+      "size": "entry",
+      "status": "ok"
+    },
+    {
+      "id": "planets",
+      "size": "grown",
+      "status": "ok"
+    },
+    {
+      "id": "stars",
+      "size": "entry",
+      "status": "ok"
+    },
+    {
+      "id": "stars",
+      "size": "grown",
+      "status": "ok"
+    },
+    {
+      "id": "galaxies",
+      "size": "entry",
+      "status": "ok"
+    },
+    {
+      "id": "galaxies",
+      "size": "grown",
+      "status": "ok"
+    },
+    {
+      "id": "universe",
+      "size": "entry",
+      "status": "ok"
+    },
+    {
+      "id": "universe",
+      "size": "grown",
+      "status": "ok"
+    }
+  ],
+  "galaxyPoseBakeSteps": [
+    0,
+    0
+  ],
+  "fileBytes": 209754,
+  "filename": "Voro-rendimiento.txt",
+  "campaignRestored": true,
+  "errors": []
+}

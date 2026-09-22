@@ -80,6 +80,7 @@ export class AnimationSheets {
     if (!this.enabled || this.destroyed) return 'unavailable';
     const versions = this.manifest[s.id];
     if (!versions || activity < 0.65) return 'unavailable';
+    if (Object.values(versions).some(m => (m.cropRevision || 0) !== (s.animationCropRevision || 0))) return 'unavailable';
     // A close view must not switch a decoded animation into hundreds of Canvas
     // clips per frame. Scale the approved cycle like any other sprite. The
     // animation gallery still uses the continuous rig for detailed inspection.
