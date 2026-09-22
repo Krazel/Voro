@@ -1,0 +1,89 @@
+{
+  "kind": "Original rig above, exported animation below; Skia pixels, no iOS GPU measurement",
+  "samples": [
+    {
+      "id": "hunter",
+      "energy": 1,
+      "frame": 0,
+      "colorMae": 0.7274422639335095,
+      "alphaMae": 0
+    },
+    {
+      "id": "hunter",
+      "energy": 1,
+      "frame": 7,
+      "colorMae": 0.7291148067299275,
+      "alphaMae": 0
+    },
+    {
+      "id": "hunter",
+      "energy": 1,
+      "frame": 19,
+      "colorMae": 0.7289997175627511,
+      "alphaMae": 0
+    },
+    {
+      "id": "hunter",
+      "energy": 1.5,
+      "frame": 0,
+      "colorMae": 0.7274422639335095,
+      "alphaMae": 0
+    },
+    {
+      "id": "hunter",
+      "energy": 1.5,
+      "frame": 7,
+      "colorMae": 0.7291148067299275,
+      "alphaMae": 0
+    },
+    {
+      "id": "hunter",
+      "energy": 1.5,
+      "frame": 19,
+      "colorMae": 0.7289997175627511,
+      "alphaMae": 0
+    },
+    {
+      "id": "giant",
+      "energy": 1,
+      "frame": 0,
+      "colorMae": 1.0852787790735556,
+      "alphaMae": 0
+    },
+    {
+      "id": "giant",
+      "energy": 1,
+      "frame": 17,
+      "colorMae": 1.0955501182407408,
+      "alphaMae": 0
+    },
+    {
+      "id": "giant",
+      "energy": 1,
+      "frame": 45,
+      "colorMae": 1.0875204447828082,
+      "alphaMae": 0
+    },
+    {
+      "id": "giant",
+      "energy": 1.5,
+      "frame": 0,
+      "colorMae": 1.1252215616064927,
+      "alphaMae": 0
+    },
+    {
+      "id": "giant",
+      "energy": 1.5,
+      "frame": 17,
+      "colorMae": 1.1408683627260265,
+      "alphaMae": 0
+    },
+    {
+      "id": "giant",
+      "energy": 1.5,
+      "frame": 45,
+      "colorMae": 1.1224819607205754,
+      "alphaMae": 0
+    }
+  ]
+}

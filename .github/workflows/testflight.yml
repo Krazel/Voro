@@ -49,7 +49,7 @@ jobs:
         env:
           APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
           APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
-        run: node scripts/testflight-api.mjs preflight 0.5.4 1 05db8744-bcf3-4c2d-a465-2635012bfeeb
+        run: node scripts/testflight-api.mjs preflight 0.5.5 1 05db8744-bcf3-4c2d-a465-2635012bfeeb
       - name: Install distribution signing identity
         env:
           CERT: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
@@ -108,7 +108,7 @@ jobs:
           import plistlib, os, pathlib, json
           p=plistlib.loads((pathlib.Path(os.environ['RUNNER_TEMP'])/'Voro.xcarchive/Products/Applications/App.app/Info.plist').read_bytes())
           assert p['CFBundleIdentifier']==os.environ['BUNDLE_ID']
-          assert p['CFBundleShortVersionString']=='0.5.4' and p['CFBundleVersion']=='1'
+          assert p['CFBundleShortVersionString']=='0.5.5' and p['CFBundleVersion']=='1'
           assert set(p['UIDeviceFamily'])=={1,2}, 'Archive must support iPhone and iPad'
           assert set(p['UISupportedInterfaceOrientations~ipad'])=={'UIInterfaceOrientationPortrait','UIInterfaceOrientationPortraitUpsideDown','UIInterfaceOrientationLandscapeLeft','UIInterfaceOrientationLandscapeRight'}, 'iPad must rotate in both directions'
           manifest={'version':p['CFBundleShortVersionString'],'build':p['CFBundleVersion'],
@@ -132,7 +132,7 @@ jobs:
           APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
         run: |
           set -o pipefail
-          node scripts/testflight-api.mjs finish 0.5.4 1 05db8744-bcf3-4c2d-a465-2635012bfeeb | tee artifact/testflight/app-store-connect.json
+          node scripts/testflight-api.mjs finish 0.5.5 1 05db8744-bcf3-4c2d-a465-2635012bfeeb | tee artifact/testflight/app-store-connect.json
       - uses: actions/upload-artifact@v4
         if: success()
         with:

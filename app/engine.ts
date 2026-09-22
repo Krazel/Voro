@@ -1110,6 +1110,8 @@ export class VoroEngine {
     if(!this.cameraInputAllowed())this.zoomGesture.reset();
     const frameStart = this.diagnosticsEnabled ? performance.now() : 0;
     const groundBefore = this.worldGround.redraws, uiBefore = this.uiPublishCount;
+    const animationBefore = this.diagnosticsEnabled ? animationCacheStats() : null;
+    const sheetsBefore = this.animationSheets.hits;
     const interval = this.last ? stamp - this.last : 0;
     let measured = false;
     if (this.diagnosticsEnabled) this.frameMonitor.beginFrame();
@@ -1178,6 +1180,9 @@ export class VoroEngine {
         entities: this.food.length, transition: this.transition > 0,
         loading: this.assets.stats().loading + this.animationSheets.stats().pending,
         queuedPoses: animationCacheStats().pending, groundRebuilds: this.worldGround.redraws,
+        sheetDraws: this.animationSheets.hits - sheetsBefore,
+        proceduralDraws: animationCacheStats().direct - (animationBefore?.direct ?? 0),
+        poseBakeSteps: animationCacheStats().bakeSteps - (animationBefore?.bakeSteps ?? 0),
         groundRebuilt: this.worldGround.redraws > groundBefore,
         uiPublished: this.uiPublishCount > uiBefore,
         rafDelay: +Math.max(0, frameStart - stamp).toFixed(2), uiCommitDelay: +this.uiCommitDelay.toFixed(2),

@@ -6,12 +6,15 @@ import { makeEngine } from './engine-fixture.mjs';
 
 test('Correlations attribute delayed cadence to previous work and survive compact sharing', () => {
   const m = new FrameMonitor();
-  m.add(16, 2, { groundRebuilt: true, uiPublished: false, rafDelay: 1, uiCommitDelay: 0 });
+  m.add(16, 2, { groundRebuilt: true, uiPublished: false, rafDelay: 1, uiCommitDelay: 0, proceduralDraws: 3, poseBakeSteps: 8, sheetDraws: 2 });
   m.add(50, 3, { groundRebuilt: false, uiPublished: true, rafDelay: 5, uiCommitDelay: 4 });
   m.add(20, 2, { groundRebuilt: false, uiPublished: false, rafDelay: 2, uiCommitDelay: 0 });
   const full = m.export(), compact = compactPerformanceReport(full);
   assert.deepEqual(compact.diagnostics, full.diagnostics);
   assert.equal(full.diagnostics.correlations.afterGroundRebuild.slowFrames, 1);
+  assert.equal(full.diagnostics.correlations.afterProceduralDraw.slowFrames, 1);
+  assert.equal(full.diagnostics.correlations.afterPoseBake.slowFrames, 1);
+  assert.equal(compact.worstFrames[0].previousFrame.proceduralDraws, 3);
   assert.equal(full.diagnostics.correlations.afterUiPublish.slowFrames, 0);
   assert.equal(full.worstFrames[0].previousFrame.groundRebuilt, true);
   assert.equal(full.diagnostics.rafCallbackDelay.max, 5);

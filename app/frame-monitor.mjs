@@ -83,6 +83,8 @@ export class FrameMonitor {
       const groups = ['all', ...(previous.groundRebuilt ? ['afterGroundRebuild'] : []),
         ...(previous.uiPublished ? ['afterUiPublish'] : []),
         ...(previous.loading > 0 ? ['whileLoading'] : []),
+        ...(previous.proceduralDraws > 0 ? ['afterProceduralDraw'] : []),
+        ...(previous.poseBakeSteps > 0 ? ['afterPoseBake'] : []),
         ...(!previous.groundRebuilt && !previous.uiPublished && !previous.loading ? ['other'] : [])];
       for (const key of groups) {
         const g = correlations[key] ||= { frames: 0, totalMs: 0, slowFrames: 0, peakMs: 0 };
@@ -111,6 +113,8 @@ export class FrameMonitor {
         at: samples[i-1].at, cpu: samples[i-1].cpu, parts: samples[i-1].parts,
         groundRebuilt: samples[i-1].groundRebuilt, uiPublished: samples[i-1].uiPublished,
         loading: samples[i-1].loading, rafDelay: samples[i-1].rafDelay,
+        sheetDraws: samples[i-1].sheetDraws, proceduralDraws: samples[i-1].proceduralDraws,
+        poseBakeSteps: samples[i-1].poseBakeSteps,
       } : null})).sort((a,b)=>b.interval-a.interval).slice(0,30),
       events: [...this.events], samples,
       notes: ['Intervals are requestAnimationFrame cadence, not GPU timings.',

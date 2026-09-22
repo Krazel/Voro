@@ -5,6 +5,7 @@ import assert from 'node:assert/strict';
 import { BACKGROUND_ASSETS } from '../app/background-assets.mjs';
 import { ATLAS_URLS } from '../app/journey-data.mjs';
 import { INGEST_SOUNDS } from '../app/sfx.mjs';
+import animationSheets from '../app/animation-sheets.json' with { type: 'json' };
 const root = path.resolve(process.argv[2] || 'mobile-dist');
 for (const old of ['shore-v2.png', 'sea-v2.png', 'inhabitants/environments.png','backgrounds/city-variants.webp']) {
   assert.ok(!fs.existsSync(path.join(root, old)), `Obsolete background shipped: ${old}`);
@@ -18,7 +19,8 @@ const css = styles.map(p => fs.readFileSync(path.resolve(root, p), 'utf8')).join
 const oldRule = '.micro-upgrade-dialog .mutation-choices button{';
 const newRule = '.cristal-choices.mutation-choices>button{';
 assert.ok(css.lastIndexOf(newRule) > css.lastIndexOf(oldRule), 'Cristal must load after legacy global styles');
-for (const url of [...Object.values(BACKGROUND_ASSETS), ...Object.values(ATLAS_URLS), ...INGEST_SOUNDS, './ui/cristal/membrane-frame.png', './ui/approved/settings-plate.png']) {
+const sheetUrls = new Set(Object.values(animationSheets).flatMap(variants => Object.values(variants).map(m => m.url)));
+for (const url of [...Object.values(BACKGROUND_ASSETS), ...Object.values(ATLAS_URLS), ...INGEST_SOUNDS, ...sheetUrls, './ui/cristal/membrane-frame.png', './ui/approved/settings-plate.png']) {
   const relative = url.split('?')[0].replace(/^\.\//, '');
   const bundled = fs.readFileSync(path.join(root, relative));
   const source = fs.readFileSync(path.join('public', relative));

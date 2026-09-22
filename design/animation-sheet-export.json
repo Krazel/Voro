@@ -2,9 +2,9 @@
   "species": 106,
   "targetFps": 30,
   "maxFrames": 64,
-  "size": 192,
+  "defaultSize": 192,
   "uniqueFiles": 149,
-  "encodedBytes": 76652568,
+  "encodedBytes": 78007346,
   "sourceHash": "f23d24bc04c2adeb63b2bef44b707bfc742148a46113d6d8fa9593c6f9caa54c",
   "format": "WebP quality 94, alpha 100, same rigs; 24–64 poses per cycle, up to 30 poses/s; rigid transforms continuous; tight common crop"
 }

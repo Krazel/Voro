@@ -1,0 +1,113 @@
+{
+  "kind": "Windows Skia close-up raster, loaded textures, 90 frames/species; not iOS or browser FPS",
+  "results": [
+    {
+      "id": "amoeba",
+      "frames": 90,
+      "radiusPixels": 130,
+      "meanMs": 0.021542222222226175,
+      "p95Ms": 0.03680000000002792,
+      "draws": 90,
+      "clips": 0,
+      "sheets": {
+        "bytes": 9586688,
+        "limit": 67108864,
+        "resident": 2,
+        "active": 0,
+        "pending": 0,
+        "hits": 90,
+        "loads": 0,
+        "evictions": 0,
+        "dropped": 0,
+        "errors": 0
+      },
+      "cache": {
+        "entries": 0,
+        "bytes": 0,
+        "limit": 25165824,
+        "hits": 0,
+        "misses": 0,
+        "direct": 0,
+        "pending": 0,
+        "generatedThisFrame": 0,
+        "approximations": 0,
+        "bakeSteps": 0,
+        "evictions": 0,
+        "active": false,
+        "dropped": 0
+      }
+    },
+    {
+      "id": "hunter",
+      "frames": 90,
+      "radiusPixels": 130,
+      "meanMs": 0.019976666666666965,
+      "p95Ms": 0.027200000000050295,
+      "draws": 90,
+      "clips": 0,
+      "sheets": {
+        "bytes": 3013920,
+        "limit": 67108864,
+        "resident": 1,
+        "active": 0,
+        "pending": 0,
+        "hits": 90,
+        "loads": 0,
+        "evictions": 0,
+        "dropped": 0,
+        "errors": 0
+      },
+      "cache": {
+        "entries": 0,
+        "bytes": 0,
+        "limit": 25165824,
+        "hits": 0,
+        "misses": 0,
+        "direct": 0,
+        "pending": 0,
+        "generatedThisFrame": 0,
+        "approximations": 0,
+        "bakeSteps": 0,
+        "evictions": 0,
+        "active": false,
+        "dropped": 0
+      }
+    },
+    {
+      "id": "giant",
+      "frames": 90,
+      "radiusPixels": 130,
+      "meanMs": 0.010372222222218851,
+      "p95Ms": 0.013699999999971624,
+      "draws": 90,
+      "clips": 0,
+      "sheets": {
+        "bytes": 19079168,
+        "limit": 67108864,
+        "resident": 2,
+        "active": 0,
+        "pending": 0,
+        "hits": 90,
+        "loads": 0,
+        "evictions": 0,
+        "dropped": 0,
+        "errors": 0
+      },
+      "cache": {
+        "entries": 0,
+        "bytes": 0,
+        "limit": 25165824,
+        "hits": 0,
+        "misses": 0,
+        "direct": 0,
+        "pending": 0,
+        "generatedThisFrame": 0,
+        "approximations": 0,
+        "bakeSteps": 0,
+        "evictions": 0,
+        "active": false,
+        "dropped": 0
+      }
+    }
+  ]
+}

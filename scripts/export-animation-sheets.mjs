@@ -9,7 +9,7 @@ import { SPECIES_BY_ID, ATLAS_URLS } from '../app/journey-data.mjs';
 const req = createRequire(process.env.VORO_CANVAS_RUNTIME || import.meta.url);
 const { createCanvas, loadImage } = req('@napi-rs/canvas');
 const sharp = req('sharp');
-const size = 192, fps = 30;
+const defaultSize = 192, fps = 30;
 const sourceHash = createHash('sha256').update(readFileSync('app/inhabitant-animation.mjs')).digest('hex');
 const selected = process.env.VORO_EXPORT_IDS?.split(',');
 const images = {}, manifest = selected ? JSON.parse(readFileSync('app/animation-sheets.json','utf8')) : {};
@@ -20,6 +20,9 @@ for (const s of Object.values(SPECIES_BY_ID)) {
   if (selected && !selected.includes(s.id)) continue;
   const profile = ANIMATIONS[s.id];
   if (simpleAnimation(profile)) continue;
+  // These predators are already large in the opening scene. Preserve texture
+  // detail without rebuilding their mesh on the device at close zoom.
+  const size = ['hunter','giant'].includes(s.id) ? 256 : defaultSize;
   const image = images[s.imageAtlas || s.atlas];
   const crop = animationCrop(s, image), extent = 3 * Math.max(1, crop[3] / crop[2]);
   // A 20-second cosmic cycle has only a few pixels of internal flow. Hundreds
@@ -61,7 +64,7 @@ for (const s of Object.values(SPECIES_BY_ID)) {
 }
 writeFileSync('app/animation-sheets.json', JSON.stringify(manifest) + '\n');
 const unique = new Map(Object.values(manifest).flatMap(x => Object.values(x)).map(x => [x.url, x]));
-writeFileSync('design/animation-sheet-export.json', JSON.stringify({ species: Object.keys(manifest).length, targetFps: fps, maxFrames: 64, size,
+writeFileSync('design/animation-sheet-export.json', JSON.stringify({ species: Object.keys(manifest).length, targetFps: fps, maxFrames: 64, defaultSize,
   uniqueFiles: unique.size, encodedBytes: [...unique.values()].reduce((n, x) => n + x.encodedBytes, 0),
   sourceHash,
   format: 'WebP quality 94, alpha 100, same rigs; 24–64 poses per cycle, up to 30 poses/s; rigid transforms continuous; tight common crop' }, null, 2) + '\n');

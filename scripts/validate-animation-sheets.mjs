@@ -21,7 +21,7 @@ for(const s of Object.values(SPECIES_BY_ID)) {
   if(simpleAnimation(profile)){assert.equal(manifest[s.id],undefined);continue;}
   assert.ok(manifest[s.id]);
   for(const [energy,m] of Object.entries(manifest[s.id])) {
-    assert.ok(m.frames>=24&&m.frames<=64);assert.ok(m.bytes<6*1048576);
+    assert.ok(m.frames>=24&&m.frames<=64);assert.ok(m.bytes<(s.id==='giant'?10:6)*1048576);
     const im=await loadImage('public/'+m.url.slice(2));
     assert.equal(im.width,m.cols*m.w);assert.equal(im.height,Math.ceil(m.frames/m.cols)*m.h);
     bytes.set(m.url,m.encodedBytes);
@@ -31,7 +31,8 @@ for(const s of Object.values(SPECIES_BY_ID)) {
       ec.translate(96,96);ac.translate(96,96);
       drawPose(ec,images[s.imageAtlas||s.atlas],s,192/m.extent,phase,{activity:+energy});
       applyPoseTransform(ac,profile,192/m.extent,phase,+energy);
-      ac.drawImage(im,f%m.cols*m.w,Math.floor(f/m.cols)*m.h,m.w,m.h,m.x-96,m.y-96,m.w,m.h);
+      const scale=192/m.size;
+      ac.drawImage(im,f%m.cols*m.w,Math.floor(f/m.cols)*m.h,m.w,m.h,(m.x-m.size/2)*scale,(m.y-m.size/2)*scale,m.w*scale,m.h*scale);
       const x=ec.getImageData(0,0,192,192).data,y=ac.getImageData(0,0,192,192).data;
       let error=0,alpha=0;
       for(let i=0;i<x.length;i+=4) {

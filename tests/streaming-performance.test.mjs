@@ -5,7 +5,8 @@ import { FrameMonitor } from '../app/frame-monitor.mjs';
 import { WorldGround } from '../app/world-ground.mjs';
 import { makeEngine } from './engine-fixture.mjs';
 import { retainAnimationSpecies, drawInhabitant, clearAnimationCache, animationCacheStats } from '../app/inhabitant-animation.mjs';
-import { SPECIES_BY_ID } from '../app/journey-data.mjs';
+import { SPECIES_BY_ID, STAGE_SPECIES } from '../app/journey-data.mjs';
+import sheetManifest from '../app/animation-sheets.json' with {type:'json'};
 
 function sheetsFixture(limit = 300) {
   const images = [];
@@ -19,6 +20,26 @@ function sheetsFixture(limit = 300) {
 }
 const c = new Proxy({globalAlpha:1,getTransform:()=>({a:1,b:0})}, {
   get:(o,k)=>k in o ? o[k] : () => {}, set:(o,k,v)=>{o[k]=v;return true;},
+});
+
+test('Close zoom keeps decoded cycles and does not rebuild a mesh as DPR or radius grows', async () => {
+  const {sheets,images}=sheetsFixture();
+  assert.equal(sheets.draw(c,SPECIES_BY_ID['water-2'],20,0,1),'pending');
+  sheets.beginFrame();images[0].onload();await Promise.resolve();
+  clearAnimationCache();
+  let triangles=0,draws=0;
+  const large=new Proxy({globalAlpha:1,getTransform:()=>({a:3,b:0}),clip:()=>triangles++,drawImage:()=>draws++},
+    {get:(o,k)=>k in o?o[k]:()=>{},set:(o,k,v)=>{o[k]=v;return true;}});
+  for(const radius of [20,80,130,280]) drawInhabitant(large,{complete:true,naturalWidth:192},SPECIES_BY_ID['water-2'],radius,0,1,{sheets});
+  assert.equal(draws,4);assert.equal(triangles,0);
+  assert.equal(animationCacheStats().misses,0);assert.equal(animationCacheStats().direct,0);
+  sheets.destroy();clearAnimationCache();
+});
+
+test('Opening biome including sharper predators fits the sheet memory budget', () => {
+  const files=new Map(STAGE_SPECIES[0].flatMap(s=>Object.values(sheetManifest[s.id]||{})).map(m=>[m.url,m.bytes]));
+  assert.ok([...files.values()].reduce((a,b)=>a+b,0)<=64*1024*1024);
+  for(const id of ['hunter','giant'])assert.equal(sheetManifest[id][1].size,256);
 });
 
 test('Sheets wait for decode, reuse normal during reaction loading, and cap concurrency/memory', async () => {
