@@ -16,11 +16,13 @@ const review = r => r.data ? {id:r.data.id,attributes:{...Object.fromEntries(Obj
 if(process.env.PREPARE_STORE==='true') await prepare();
 if(process.env.UPLOAD_SCREENSHOTS==='true') await uploadScreenshots();
 if(process.env.UPLOAD_PREVIEWS==='true') await uploadPreviews();
+if(process.env.CORRECT_WEAPONS_RATING==='true') await correctWeaponsRating();
 const report = {checkedAt:new Date().toISOString(),app:await api(`/v1/apps/${appId}`)};
 report.infos = await api(`/v1/apps/${appId}/appInfos?include=primaryCategory,primarySubcategoryOne,primarySubcategoryTwo,secondaryCategory`);
 for(const i of report.infos.data??[]) {
  i.localizations = await api(`/v1/appInfos/${i.id}/appInfoLocalizations`);
  i.ageRating = await api(`/v1/appInfos/${i.id}/ageRatingDeclaration`);
+ i.territoryAgeRatings = await api(`/v1/appInfos/${i.id}/territoryAgeRatings?include=territory&limit=200`);
 }
 report.versions = await api(`/v1/apps/${appId}/appStoreVersions?filter[platform]=IOS&limit=20`);
 for(const v of report.versions.data??[]) {
@@ -59,7 +61,7 @@ async function prepare(){
  const categories=(await api('/v1/appCategories?limit=200')).data;
  for(const id of ['GAMES','GAMES_ACTION','GAMES_ADVENTURE'])if(!categories.some(c=>c.id===id))throw new Error('Category not found: '+id);
  await change(`/v1/appInfos/${appInfoId}`,'PATCH',{data:{type:'appInfos',id:appInfoId,relationships:{primaryCategory:relation('appCategories','GAMES'),primarySubcategoryOne:relation('appCategories','GAMES_ACTION'),primarySubcategoryTwo:relation('appCategories','GAMES_ADVENTURE')}}});
- const age={advertising:false,alcoholTobaccoOrDrugUseOrReferences:'NONE',contests:'NONE',gambling:false,gamblingSimulated:'NONE',gunsOrOtherWeapons:'NONE',healthOrWellnessTopics:false,lootBox:false,medicalOrTreatmentInformation:'NONE',messagingAndChat:false,parentalControls:false,profanityOrCrudeHumor:'NONE',ageAssurance:false,sexualContentGraphicAndNudity:'NONE',sexualContentOrNudity:'NONE',socialMedia:false,socialMediaAgeRestricted:false,horrorOrFearThemes:'INFREQUENT_OR_MILD',matureOrSuggestiveThemes:'NONE',unrestrictedWebAccess:false,userGeneratedContent:false,violenceCartoonOrFantasy:'FREQUENT_OR_INTENSE',violenceRealisticProlongedGraphicOrSadistic:'NONE',violenceRealistic:'NONE',ageRatingOverrideV2:'NONE',koreaAgeRatingOverride:'NONE'};
+ const age={advertising:false,alcoholTobaccoOrDrugUseOrReferences:'NONE',contests:'NONE',gambling:false,gamblingSimulated:'NONE',gunsOrOtherWeapons:'FREQUENT',healthOrWellnessTopics:false,lootBox:false,medicalOrTreatmentInformation:'NONE',messagingAndChat:false,parentalControls:false,profanityOrCrudeHumor:'NONE',ageAssurance:false,sexualContentGraphicAndNudity:'NONE',sexualContentOrNudity:'NONE',socialMedia:false,socialMediaAgeRestricted:false,horrorOrFearThemes:'INFREQUENT_OR_MILD',matureOrSuggestiveThemes:'NONE',unrestrictedWebAccess:false,userGeneratedContent:false,violenceCartoonOrFantasy:'FREQUENT_OR_INTENSE',violenceRealisticProlongedGraphicOrSadistic:'NONE',violenceRealistic:'NONE',ageRatingOverrideV2:'NONE',koreaAgeRatingOverride:'NONE'};
  await change(`/v1/ageRatingDeclarations/${appInfoId}`,'PATCH',{data:{type:'ageRatingDeclarations',id:appInfoId,attributes:age}});
  await change(`/v1/appStoreVersions/${versionId}`,'PATCH',{data:{type:'appStoreVersions',id:versionId,attributes:{copyright:'2026 Krazel Games',releaseType:'MANUAL'}}});
  const manifest=JSON.parse(fs.readFileSync('store/app-store-connect-metadata.json','utf8'));
@@ -160,6 +162,23 @@ async function uploadScreenshots(){
   const confirmed=(await api(`/v1/appScreenshotSets/${set.id}/relationships/appScreenshots`)).data;
   if(JSON.stringify(confirmed.map(s=>s.id))!==JSON.stringify(ordered.map(s=>s.id)))throw new Error('Screenshot order verification failed');
  }
+}
+
+async function correctWeaponsRating(){
+ const versionId='86951539-3189-4abd-b333-c400588c1e9d', appInfoId='edb0e880-2be4-4952-9e3a-97962c60cde6';
+ const v=(await api(`/v1/appStoreVersions/${versionId}`)).data;
+ const build=(await api(`/v1/appStoreVersions/${versionId}/build`)).data;
+ if(v?.attributes.appStoreState!=='PREPARE_FOR_SUBMISSION'||build?.id!=='118537c4-7428-4664-a1da-1b96cb35e240')throw new Error('Candidate changed; review content again');
+ const before=await api(`/v1/appInfos/${appInfoId}/ageRatingDeclaration`);
+ if(!before.data)throw new Error('Age declaration unavailable');
+ const id=before.data.id;
+ const result=await api(`/v1/ageRatingDeclarations/${id}`,'PATCH',{data:{type:'ageRatingDeclarations',id,attributes:{gunsOrOtherWeapons:'FREQUENT'}}});
+ if(result.errors)throw new Error(JSON.stringify(result.errors));
+ const after=await api(`/v1/appInfos/${appInfoId}/ageRatingDeclaration`);
+ if(!['FREQUENT','FREQUENT_OR_INTENSE'].includes(after.data?.attributes.gunsOrOtherWeapons))throw new Error('Weapons declaration readback failed');
+ fs.mkdirSync('artifact/store-readiness',{recursive:true});
+ fs.writeFileSync('artifact/store-readiness/weapons-correction.json',JSON.stringify({sourceCommit:'aa0695334e428c03820aa2c5b442235b94189694',before,after},null,2));
+ console.log('Weapons declaration corrected and verified. No review submission.');
 }
 
 async function uploadPreviews(){

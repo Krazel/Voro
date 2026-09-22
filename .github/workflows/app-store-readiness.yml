@@ -14,6 +14,10 @@ on:
         description: Upload approved trailers without submitting review
         type: boolean
         default: false
+      correct_weapons_rating:
+        description: Correct weapons declaration from verified release-candidate content
+        type: boolean
+        default: false
 permissions:
   contents: read
 concurrency:
@@ -32,6 +36,7 @@ jobs:
       PREPARE_STORE: ${{ inputs.prepare }}
       UPLOAD_SCREENSHOTS: ${{ inputs.upload_screenshots }}
       UPLOAD_PREVIEWS: ${{ inputs.upload_previews }}
+      CORRECT_WEAPONS_RATING: ${{ inputs.correct_weapons_rating }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
