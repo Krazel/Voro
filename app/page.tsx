@@ -199,6 +199,7 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
       resume.current = false;
     }
     setConfirmReset(false);
+    engine.current?.setAudio();
     setSettings(open);
   };
   const toggleUiMode=()=>{

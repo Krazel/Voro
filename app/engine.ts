@@ -403,6 +403,8 @@ export class VoroEngine {
   music: MusicPlayer | null = null;
   sfx: SfxPlayer | null = null;
   audioFocus = true;
+  effectsGainTarget: number | null = null;
+  audioHealthAt = -Infinity;
   audio: AudioContext | null = null;
   master: GainNode | null = null;
   hint = '';
@@ -470,10 +472,10 @@ export class VoroEngine {
     this.observer = new ResizeObserver(() => this.resize());
     this.observer.observe(canvas);
     const opt = { signal: this.lifecycle.signal };
-    const unlockMusic = () => { if(this.sound) { this.initAudio(); this.syncMusic(); this.music?.unlock(); } };
+    const unlockMusic = () => { if(this.sound) { this.audioFocus=!document.hidden;this.initAudio(); this.setAudio(); this.music?.unlock(); } };
     window.addEventListener('pointerdown',unlockMusic,opt);
     window.addEventListener('keydown',unlockMusic,opt);
-    window.addEventListener('focus',()=>{this.audioFocus=true;this.setAudio();},opt);
+    window.addEventListener('focus',()=>{this.audioFocus=true;if(this.sound&&this.audioStarted)this.initAudio();this.setAudio();},opt);
     canvas.parentElement?.addEventListener('contextmenu', (event) => event.preventDefault(), opt);
     canvas.parentElement?.addEventListener('dragstart', (event) => event.preventDefault(), opt);
     canvas.addEventListener(
@@ -694,22 +696,31 @@ export class VoroEngine {
     this.publish();
   }
   initAudio() {
+    if(this.audio?.state==='closed') {
+      this.sfx?.destroy();this.music?.destroy();this.master?.disconnect();
+      this.sfx=null;this.music=null;this.audio=null;this.master=null;this.audioStarted=false;
+    }
     if (this.audioStarted) {
-      if(this.audio && this.audio.state !== 'running')this.audio.resume().catch(() => {});
       this.sfx?.unlock();
+      this.setAudio();
       return;
     }
     this.audioStarted = true;
     try {
       this.audio = new AudioContext();
       this.master = this.audio.createGain();
-      this.master.gain.value = this.sound ? 0.055 : 0;
+      this.master.gain.value = 0;
+      this.effectsGainTarget = null;
       this.master.connect(this.audio.destination);
       this.music = new MusicPlayer(this.audio);
       this.sfx = new SfxPlayer(this.audio, this.master);
       this.sfx.unlock();
-      this.syncMusic();
-      this.audio.resume().catch(() => {});
+      this.audio.addEventListener('statechange',()=>{
+        if(this.destroyed)return;
+        this.effectsGainTarget=null;this.setAudio();
+        if(this.effectsAudible())this.sfx?.unlock();
+      },{signal:this.lifecycle.signal});
+      this.setAudio();
     } catch {
       this.sfx?.destroy();this.sfx=null;
       this.music?.destroy();this.music=null;
@@ -722,20 +733,27 @@ export class VoroEngine {
   }
   setAudio() {
     this.syncMusic();
-    if (this.audio && this.master)
-      this.master.gain.setTargetAtTime(
-        this.sound && this.audioFocus && !document.hidden && !this.settingsOpen &&
-          !this.paused &&
-          !this.progress.offer.length &&
-          (!this.progress.completed || this.ending > FINALE_SECONDS * .2)
-          ? 0.055
-          : 0,
-        this.audio.currentTime,
-        0.12,
-      );
+    const target=this.effectsAudible()?0.055:0;
+    if(this.audio && this.master && this.effectsGainTarget!==target){
+      const now=this.audio.currentTime;
+      this.master.gain.cancelScheduledValues(now);
+      this.master.gain.setValueAtTime(this.master.gain.value,now);
+      this.master.gain.setTargetAtTime(target,now,.035);
+      this.effectsGainTarget=target;
+    }
+  }
+  effectsAudible() {
+    return this.sound && this.audioFocus && !document.hidden && !this.settingsOpen &&
+      !this.paused && !this.progress.offer.length &&
+      (!this.progress.completed || this.ending > FINALE_SECONDS * .2);
+  }
+  prepareEffects() {
+    if(!this.effectsAudible())return false;
+    this.initAudio();
+    return this.audio?.state==='running';
   }
   chime(evolve = false) {
-    if (!this.audio || !this.master || !this.sound) return;
+    if (!this.prepareEffects() || !this.audio || !this.master) return;
     const now = this.audio.currentTime;
     for (let i = 0; i < (evolve ? 4 : 1); i++) {
       const o = this.audio.createOscillator(),
@@ -1179,7 +1197,11 @@ export class VoroEngine {
   frame = (stamp: number) => {
     if (this.destroyed) return;
     this.advanceAutomaticBenchmark(stamp);
-    this.syncMusic();
+    // Keep the effects bus in sync even when a UI/test path changes state directly.
+    this.setAudio();
+    if(this.audioStarted && this.effectsAudible() && stamp-this.audioHealthAt>=1000){
+      this.audioHealthAt=stamp;this.initAudio();
+    }
     if (!this.framePacer.accept(stamp)) {
       this.raf = requestAnimationFrame(this.frame);
       return;
@@ -1741,13 +1763,13 @@ export class VoroEngine {
     }
   }
   slurp() {
-    if (this.sound) this.sfx?.playIngest();
+    if (this.prepareEffects()) this.sfx?.playIngest();
   }
   impact() {
-    this.tone(85, 28, 0.5, 0.9);
+    if(this.prepareEffects())this.sfx?.playDamage();
   }
   tone(from: number, to: number, duration: number, gain: number) {
-    if (!this.audio || !this.master || !this.sound) return;
+    if (!this.prepareEffects() || !this.audio || !this.master) return;
     const at = this.audio.currentTime,
       o = this.audio.createOscillator(),
       g = this.audio.createGain();

@@ -1,13 +1,14 @@
 import { createRequire } from 'node:module';
-import { mkdir, writeFile, readdir } from 'node:fs/promises';
+import { mkdir, writeFile, readdir, readFile } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import assert from 'node:assert/strict';
 const runtime = process.env.VORO_PLAYWRIGHT_RUNTIME;
 if (!runtime) throw new Error('Set VORO_PLAYWRIGHT_RUNTIME to a package.json with Playwright installed');
 const { _electron } = createRequire(runtime)('playwright');
-const base = resolve('artifact/windows/0.6.2-preview.1');
+const release = JSON.parse(await readFile('desktop/release.json','utf8'));
+const base = resolve(`artifact/windows/${release.gameVersion}-preview.${release.preview}`);
 const executablePath = resolve(base, 'VORO-win32-x64/VORO.exe');
-const evidence = resolve('design/windows-preview-2026-09-22');
+const evidence = resolve(`design/windows-preview-${release.preview}-2026-09-22`);
 await mkdir(evidence, { recursive: true });
 const profile = resolve('work/windows-package', `qa-profile-${Date.now()}`);
 const errors = [], failed = [], remoteRequests = [];

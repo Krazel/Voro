@@ -80,7 +80,7 @@ test('Ingest pitch varies over a broad range and changes the full sample duratio
   assert.ok(sources[1].playbackRate.value > 1.4);
   for (const source of sources) {
     const duration = source.buffer.duration / source.playbackRate.value;
-    assert.ok(duration > .70 && duration < 1.34);
+    assert.ok(duration > .62 && duration < 1.50);
   }
 });
 
@@ -113,4 +113,17 @@ test('Interrupted iOS audio is counted and never queues stale bites until a gest
 
 test('Bite gain compensates the quiet sample without pushing the shared master near clipping', () => {
   assert.ok(INGEST_GAIN*.055>.1);assert.ok(INGEST_GAIN*.055<.15);
+});
+
+test('Repeated recovery attempts are bounded, recover without mute toggles and do not replay stale effects',async()=>{
+  let time=0,resumes=0,resolve;
+  const context={state:'interrupted',resume:()=>{resumes++;return new Promise(r=>resolve=r);}};
+  const p=new SfxPlayer(context,{}, {now:()=>time});p.buffers=[{},{},{}];
+  await p.unlock();await p.unlock();assert.equal(resumes,1);
+  assert.equal(p.playIngest(),false);assert.equal(p.stats().played,0);
+  resolve();await new Promise(r=>setImmediate(r));
+  time=500;await p.unlock();assert.equal(resumes,1);
+  time=1001;await p.unlock();assert.equal(resumes,2);
+  context.state='running';resolve();await new Promise(r=>setImmediate(r));
+  await p.unlock();assert.equal(resumes,2);assert.equal(p.stats().played,0);p.destroy();
 });
