@@ -18,13 +18,22 @@ final class StoreCapture: XCTestCase {
   sleep(2)
   capture("01-origin")
   wake.tap()
-  sleep(6)
+  let pause = app.buttons["Pause"]
+  XCTAssertTrue(pause.waitForExistence(timeout:60))
+  let gameplay = XCTNSPredicateExpectation(predicate:NSPredicate(format:"isHittable == true"),object:pause)
+  XCTAssertEqual(XCTWaiter.wait(for:[gameplay],timeout:120), .completed)
+  sleep(3)
   capture("02-microscopic-life")
   let from = app.coordinate(withNormalizedOffset:CGVector(dx:0.5,dy:0.6))
   let to = app.coordinate(withNormalizedOffset:CGVector(dx:0.8,dy:0.4))
   from.press(forDuration:0.1,thenDragTo:to,withVelocity:.slow,thenHoldForDuration:1)
   sleep(2)
   capture("03-absorb-and-grow")
+  pause.tap()
+  sleep(2)
+  capture("05-pause")
+  let resume = app.buttons["Continue"]
+  if resume.exists { resume.tap() }
   let settings = app.buttons["Settings"]
   XCTAssertTrue(settings.waitForExistence(timeout:10))
   settings.tap()
