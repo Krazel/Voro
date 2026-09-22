@@ -19,4 +19,8 @@ Pantalla encendida únicamente mientras la prueba está activa: pequeño bridge 
 - WebKit de escritorio, almacenamiento aislado y reloj rAF acelerado solo dentro del test: 20/20 escenarios con muestras, vuelta a la pantalla anterior, descarga Voro-rendimiento.txt (aprox. 230KB), sin errores JS. No son FPS físicos: el test de navegador valida flujo y formato; sus tiempos sintéticos no se publican como informe de rendimiento.
 - UI en español e inglés. Captura de final revisada; botones accesibles en viewport de iPhone.
 
-Pendiente entrega de la build TestFlight y ejecución física del usuario.
+El primer CI (35724713820) pasó las pruebas JS y falló al compilar el bridge de pantalla por inferir [CAPPluginMethod?]. Corregido en fd1b4c5 declarando [CAPPluginMethod], como requiere CAPBridgedPlugin. La build candidata no llegó a Apple en ese intento.
+
+CI de entrega: https://github.com/Krazel/Voro/actions/runs/35725066132 . Código fd1b4c59a39a55237e0da7ff89e223a25110ca28. Pendiente verificación final TestFlight y ejecución física del usuario.
+
+22 septiembre, 12:26 UTC: archive, firma y subida con altool completados. API oficial `/v1/apps/{id}/buildUploads` confirma upload `7670f085-59e7-4396-824a-595057b08454`, versión 0.6 (1), estado PROCESSING sin errores ni advertencias. Todavía no existe recurso Build visible para 0.6; última build disponible 0.5.5 (1). Consulta protegida: https://github.com/Krazel/Voro/actions/runs/35727141724 ; respuesta en `apple-upload-processing.json`. No confundir subida correcta con disponibilidad en TestFlight. El CI de entrega continúa esperando hasta 50 minutos para verificar VALID y asignar VORO Interno. No se ha enviado a revisión ni a grupos externos.
