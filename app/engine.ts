@@ -15,6 +15,7 @@ import { BenchmarkTour, tourReport } from './benchmark-tour.mjs';
 import { compactPerformanceReport } from './performance-report.mjs';
 import { AnimationSheets } from './animation-sheets.mjs';
 import { transitionScene } from './journey-transitions.mjs';
+import { shouldHoldReview } from './review-policy.mjs';
 // Canvas2D rendering and input. The simulation stays independent of frame rendering.
 import {
   clamp,
@@ -99,6 +100,7 @@ export type Snapshot = {
   birth: number;
   storageAvailable: boolean;
   transition: number;
+  reviewHold: boolean;
   deaths: number;
   biomass: number;
   target: number;
@@ -190,6 +192,9 @@ export class VoroEngine {
   menuRun = false;
   birth = 0;
   paused = false;
+  reviewEnabled = false;
+  reviewHold = false;
+  reviewHandled = false;
   sound = true;
   time = 0;
   last = 0;
@@ -672,7 +677,7 @@ export class VoroEngine {
     };
   }
   cameraInputAllowed() {
-    return !this.autoTour && this.started && !this.paused && !this.settingsOpen && !this.life.dead
+    return !this.autoTour && !this.reviewHold && this.started && !this.paused && !this.settingsOpen && !this.life.dead
       && !this.ending && !this.progress.offer.length && !this.transition && !this.birth && !this.earthAbsorption;
   }
   get cameraEntryRadius() {
@@ -717,13 +722,13 @@ export class VoroEngine {
   }
   syncMusic() {
     this.music?.setState(musicScene(this.started,this.progress.completed,stageOf(this.progress).id),
-      this.sound && this.audioFocus && !document.hidden && !this.paused && !this.settingsOpen && !this.progress.offer.length && !this.life.dead, document.hidden || !this.audioFocus);
+      !this.reviewHold && this.sound && this.audioFocus && !document.hidden && !this.paused && !this.settingsOpen && !this.progress.offer.length && !this.life.dead, document.hidden || !this.audioFocus);
   }
   setAudio() {
     this.syncMusic();
     if (this.audio && this.master)
       this.master.gain.setTargetAtTime(
-        this.sound && this.audioFocus && !document.hidden && !this.settingsOpen &&
+        !this.reviewHold && this.sound && this.audioFocus && !document.hidden && !this.settingsOpen &&
           !this.paused &&
           !this.progress.offer.length &&
           (!this.progress.completed || this.ending > FINALE_SECONDS * .2)
@@ -961,6 +966,7 @@ export class VoroEngine {
     automatic = false,
   ) {
     if(this.autoTour && !automatic)return;
+    if(this.reviewHold && name !== 'restart')return;
     if (name === 'start') {
       if (!this.assetsReady) return;
       if (!this.started && !this.saved && !this.menuRun) this.beginBirth();
@@ -972,6 +978,8 @@ export class VoroEngine {
       this.canvas.focus({ preventScroll: true });
     }
     if (name === 'restart' || (name === 'retry' && this.life.dead)) {
+      this.reviewHold = false;
+      if (name === 'restart') this.reviewHandled = false;
       if (name === 'restart') this.progress = newJourney();
       else {
         this.progress.deaths++;
@@ -1113,6 +1121,7 @@ export class VoroEngine {
       storageAvailable: this.storageAvailable,
       transition: this.transition,
       deaths: this.progress.deaths,
+      reviewHold: this.reviewHold,
       biomass: this.life.biomass,
       target: stageOf(this.progress).goal,
       hurt: this.life.hurt,
@@ -1228,6 +1237,7 @@ export class VoroEngine {
       }
       if (
         !this.paused &&
+        !this.reviewHold &&
         !this.settingsOpen &&
         !this.progress.offer.length &&
         (!this.progress.completed || this.ending > 0) &&
@@ -1291,6 +1301,7 @@ export class VoroEngine {
     this.animateMembrane(dt);
   }
   update(dt: number) {
+    if (this.reviewHold) return;
     if (this.earthAbsorption > 0) {
       if (!this.started) return;
       this.earthAbsorption = Math.min(1, this.earthAbsorption + dt / (this.reduced ? 1 : 3.2));
@@ -1603,6 +1614,7 @@ export class VoroEngine {
   }
   beginEvolution() {
     if (
+      this.reviewHold ||
       (this.testMode && !this.testEvolution) ||
       this.transition > 0 ||
       this.progress.stage >= STAGES.length - 1
@@ -1623,6 +1635,14 @@ export class VoroEngine {
     }
     this.progress.pendingEvolution = true;
     this.progress.maturitySeen = true;
+    if (shouldHoldReview({enabled:this.reviewEnabled, handled:this.reviewHandled,
+      stage:this.progress.stage, testMode:this.testMode})) {
+      this.reviewHold = true; this.reviewHandled = true;
+      this.keys.clear(); this.pointer = null; this.padInput = {x:0,y:0};
+      this.life.vx = this.life.vy = 0;
+      this.setAudio(); this.save(); this.publish();
+      return;
+    }
     this.transitionFrom = this.progress.stage;
     this.transitionStartZoom = this.zoom;
     this.transitionAdvanced = false;
@@ -1640,6 +1660,12 @@ export class VoroEngine {
     this.chime(true);
     this.save();
     this.publish();
+  }
+  finishReview() {
+    if (!this.reviewHold) return;
+    this.reviewHold = false; this.paused = false;
+    this.last = 0; this.keys.clear(); this.pointer = null;
+    this.setAudio(); this.beginEvolution();
   }
   receiveHit(
     source: { x: number; y: number },

@@ -1,42 +1,36 @@
 'use client';
-import { useEffect, useRef } from 'react';
-import { Capacitor, registerPlugin } from '@capacitor/core';
-import type { Snapshot } from './engine';
-import { reviewEligible, reviewQuiet } from './review-policy.mjs';
+import { useEffect, useRef, useState } from 'react';
+import { registerPlugin } from '@capacitor/core';
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { getLanguage, t } from './language.mjs';
 
+type ReviewResult = { attempted: boolean; finished: boolean };
 const NativeReview = registerPlugin<{
-  reach(): Promise<void>;
-  request(): Promise<{ attempted: boolean }>;
+  request(options: { language: string }): Promise<ReviewResult>;
 }>('VoroReview');
 
-export function ReviewMilestone({ state, blocked }: { state: Snapshot; blocked: boolean }) {
-  const latest = useRef({ state, blocked });
-  latest.current = { state, blocked };
+export function ReviewMilestone({ held, onContinue }: { held: boolean; onContinue: () => void }) {
+  const [ready, setReady] = useState(false);
+  const pending = useRef<Promise<ReviewResult> | null>(null);
+  const continuation = useRef(onContinue);
+  continuation.current = onContinue;
   useEffect(() => {
-    if (Capacitor.getPlatform() !== 'ios') return;
-    let reached = false, done = false, busy = false, cancelled = false, quietSince = 0;
-    const tick = async () => {
-      const { state: s, blocked: b } = latest.current;
-      if (!reviewQuiet(s, b, document.visibilityState === 'visible')) quietSince = 0;
-      else if (!quietSince) quietSince = performance.now();
-      if (done || busy || !reviewEligible(s)) return;
-      busy = true;
-      try {
-        if (!reached) { await NativeReview.reach(); reached = true; }
-        if (!cancelled && quietSince && performance.now() - quietSince >= 8000) {
-          // Recheck the latest snapshot after the bridge await.
-          const current = latest.current;
-          if (reviewQuiet(current.state, current.blocked, document.visibilityState === 'visible')) {
-            done = (await NativeReview.request()).attempted;
-          }
-        }
-      } catch { /* Retry later if the native bridge/scene is temporarily unavailable. */ }
-      finally { busy = false; }
-    };
-    const interval = window.setInterval(tick, 500);
-    const resetQuiet = () => { quietSince = 0; };
-    document.addEventListener('visibilitychange', resetQuiet);
-    return () => { cancelled = true; clearInterval(interval); document.removeEventListener('visibilitychange', resetQuiet); };
-  }, []);
-  return null;
+    if (!held) { pending.current = null; setReady(false); return; }
+    let cancelled = false;
+    // Keep one request even when React replays an effect in development.
+    pending.current ??= NativeReview.request({language:getLanguage()});
+    pending.current.then(result => {
+      if (cancelled) return;
+      if (result.finished) continuation.current();
+      else setReady(true); // StoreKit gives no dismissal callback; player resumes explicitly.
+    }).catch(() => { if (!cancelled) setReady(true); });
+    return () => { cancelled = true; };
+  }, [held]);
+  return <Dialog open={held} onOpenChange={open => { if (!open && ready) onContinue(); }}>
+    <DialogContent showCloseButton={false}>
+      <DialogTitle>{t('Segundo entorno completado')}</DialogTitle>
+      <DialogDescription>{t('La partida está en pausa. Continúa cuando quieras.')}</DialogDescription>
+      <button className="primary-button" disabled={!ready} onClick={onContinue}>{t('Continuar')}</button>
+    </DialogContent>
+  </Dialog>;
 }
