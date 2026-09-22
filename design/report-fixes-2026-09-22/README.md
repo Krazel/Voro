@@ -1,5 +1,7 @@
 # Correcciones del informe físico — candidata 0.6.2 (1)
 
+**Entregada: 0.6.2 (1) disponible en TestFlight interno.** Apple VALID / IN_BETA_TESTING, grupo VORO Interno, verificado por API14:47:58UTC del22/09. Build118537c4-7428-4664-a1da-1b96cb35e240. CI35741879635 correcto. IPA descargada y SHA256 contrastado; `build-manifest.json`, `app-store-connect.json`, `SHA256SUMS.txt`. Biblioteca PR-009 actualizada y releída en revisión135, versión0.6.2/build1, tracking y marketing preservados. Los estados pendientes inferiores son historial. Falta la medición física del usuario para certificar FPS y audibilidad en su iPhone.
+
 Entrada: análisis `../automatic-benchmark-2026-09-22/device-report-analysis.md` de 0.6.1: Galaxias54.4/51 FPS, 4260 pasos de preparación y80 expulsiones de poses; sonido0/108 reproducciones y66 errores de carga. No se publica el informe original.
 
 ## Corrección
@@ -18,3 +20,5 @@ Entrada: análisis `../automatic-benchmark-2026-09-22/device-report-analysis.md`
 - Build móvil y todos sus assets verificados. Pendientes entrega TestFlight y nuevo informe físico para confirmar mejora real en Galaxias y sonido audible.
 
 Código candidato `aa06953`, CI https://github.com/Krazel/Voro/actions/runs/35741879635 . Build PC correcto. Memoria de todos los sprites/variantes de Galaxias:63.3438MiB/64MiB. Repetición del tour con aserción de versión0.6.2:20/20, pasos de poses0/0, exportación214491bytes. No se han cambiado cámara, engine, progresión ni simulación frente a836d6bf (diff vacío).
+
+14:46UTC: archive firmado y subida correctos. API de Apple confirma upload `118537c4-7428-4664-a1da-1b96cb35e240`, 0.6.2(1), PROCESSING sin errores/advertencias. Consulta https://github.com/Krazel/Voro/actions/runs/35742604375 , `apple-processing.json`. Última build disponible en esta consulta:0.6.1(1). CI de entrega espera VALID/grupo VORO Interno.

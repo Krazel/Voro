@@ -1,0 +1,19 @@
+{
+  "version": "0.6.2",
+  "build": "1",
+  "bundle": "com.dmkr.voro",
+  "commit": "aa0695334e428c03820aa2c5b442235b94189694",
+  "deviceFamilies": [
+    1,
+    2
+  ],
+  "iPadOrientations": [
+    "UIInterfaceOrientationPortrait",
+    "UIInterfaceOrientationPortraitUpsideDown",
+    "UIInterfaceOrientationLandscapeLeft",
+    "UIInterfaceOrientationLandscapeRight"
+  ],
+  "run": "35741879635",
+  "signed": true,
+  "purpose": "TestFlight"
+}
