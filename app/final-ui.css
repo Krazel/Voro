@@ -39,7 +39,7 @@
 /* Approved player settings. The development controls remain mounted underneath,
    but are hidden while the final interface is active. */
 .voro-settings.final-ui {width:min(100vw,620px);max-width:620px;max-height:100dvh;height:100dvh;padding:0;background:radial-gradient(circle at 18% 22%,#32d3d218 0 2px,transparent 3px),radial-gradient(circle at 86% 72%,#f5b93c1c 0 3px,transparent 4px),linear-gradient(#01101bd9,#031a25ed);border:0;border-radius:0;box-shadow:none;overflow-y:auto;overflow-x:hidden;}
-.voro-settings.final-ui > :not(.final-settings-shell) {display:none!important;}
+.voro-settings.final-ui > :not(.final-settings-shell):not(.settings-development-access) {display:none!important;}
 .final-settings-shell {position:relative;display:grid;align-content:center;gap:26px;min-height:100%;padding:max(28px,env(safe-area-inset-top)) clamp(24px,6vw,48px) max(30px,env(safe-area-inset-bottom));color:#edf5ef;isolation:isolate;}
 .final-settings-shell::before,.final-settings-shell::after {content:"";position:absolute;z-index:-1;border-radius:50%;pointer-events:none;opacity:.38;}
 .final-settings-shell::before {width:220px;height:220px;right:-110px;top:90px;background:radial-gradient(circle,#57e1dd24 0 3%,transparent 4% 20%,#57e1dd1a 21% 22%,transparent 23%);}

@@ -549,6 +549,7 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
           className={'voro-settings cristal-dialog'+(finalUI?' final-ui':'')}
           showCloseButton={false}
         >
+          {finalUI && <button className="settings-development-access" onClick={toggleUiMode}>{tr('Modo de desarrollo')}</button>}
           {tr(finalUI && <FinalSettings
             wide={wideSettings}
             stage={state.stage}
@@ -563,7 +564,6 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
             onLeftHanded={() => setControlsSaveError(!writeLeftHanded(!leftHanded))}
             onSound={() => action('sound')}
             onRestart={() => { resume.current = false; action('restart'); changeSettings(false); }}
-            onDevelopment={toggleUiMode}
           />)}
           <DialogClose className="settings-close icon-button" aria-label={tr("Cerrar configuración")}><X size={20}/></DialogClose>
           <p className="eyebrow">{tr("VORO · ABISAL")}</p>

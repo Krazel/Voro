@@ -29,10 +29,10 @@ jobs:
         env:
           APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
           APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
-        run: node scripts/testflight-api.mjs finish 0.5.2 1 05db8744-bcf3-4c2d-a465-2635012bfeeb | tee app-store-connect.json
+        run: node scripts/testflight-api.mjs finish 0.5.3 1 05db8744-bcf3-4c2d-a465-2635012bfeeb | tee app-store-connect.json
       - uses: actions/upload-artifact@v4
         with:
-          name: Voro-TestFlight-0.5.2-1-API-verification
+          name: Voro-TestFlight-0.5.3-1-API-verification
           path: app-store-connect.json
           retention-days: 14
       - name: Remove API key

@@ -58,6 +58,7 @@ Con el dedo|With your finger
 Inclinando el móvil|By tilting your device
 Conectando…|Connecting…
 Volver a UI de desarrollo|Switch to development UI
+Modo de desarrollo|Development mode
 Pasar a UI final|Switch to final UI
 Desarrollo|Development
 VORO: del origen al universo|VORO: from the beginning to the universe

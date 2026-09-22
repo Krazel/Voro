@@ -284,6 +284,8 @@ export class VoroEngine {
       date: new Date().toISOString(), userAgent: typeof navigator === 'undefined' ? '' : navigator.userAgent,
       viewport: { width: this.canvas.width, height: this.canvas.height, pixelRatio: this.pixelRatio },
       rendering: { targetFPS: 60, skippedRefreshes: this.framePacer.skipped,
+        logicalWidth: this.width, logicalHeight: this.height, activeChunks: this.world.chunks.size,
+        chunkRadius: this.world.radius, activeEntities: this.world.entities.length,
         quality: this.rasterBudget.quality, pixels: this.canvas.width * this.canvas.height, zoomFactor: this.zoomFactor, zoom: this.zoom },
       animationSheets: this.animationSheets.stats(), animationCache: animationCacheStats(),
       backgroundRebuilds: this.worldGround.redraws,

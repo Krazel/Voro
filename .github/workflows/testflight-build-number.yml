@@ -25,14 +25,14 @@ jobs:
           printf '%s' "$API_KEY" | base64 --decode > "$HOME/private_keys/AuthKey_${API_ID}.p8"
           chmod 600 "$HOME/private_keys/AuthKey_${API_ID}.p8"
           echo "APP_STORE_CONNECT_API_KEY_PATH=$HOME/private_keys/AuthKey_${API_ID}.p8" >> "$GITHUB_ENV"
-      - name: Read next available 0.5.2 build number
+      - name: Read next available 0.5.3 build number
         env:
           APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
           APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
-        run: node scripts/testflight-api.mjs latest 0.5.2 - 05db8744-bcf3-4c2d-a465-2635012bfeeb | tee build-number.json
+        run: node scripts/testflight-api.mjs latest 0.5.3 - 05db8744-bcf3-4c2d-a465-2635012bfeeb | tee build-number.json
       - uses: actions/upload-artifact@v4
         with:
-          name: Voro-TestFlight-0.5.2-build-number
+          name: Voro-TestFlight-0.5.3-build-number
           path: build-number.json
           retention-days: 14
       - name: Remove API key

@@ -29,7 +29,6 @@ export function FinalSettings({
   onLeftHanded,
   onSound,
   onRestart,
-  onDevelopment,
 }: {
   wide?: boolean;
   stage: number;
@@ -44,7 +43,6 @@ export function FinalSettings({
   onLeftHanded: () => void;
   onSound: () => void;
   onRestart: () => void;
-  onDevelopment: () => void;
 }) {
   const [section, setSection] = useState<Section>('main');
   const [confirmReset, setConfirmReset] = useState(false);
@@ -68,7 +66,6 @@ export function FinalSettings({
         <button aria-current={section === 'credits' ? 'page' : undefined} onClick={() => setSection('credits')}>{tr('Créditos')}</button>
         <a href="https://www.instagram.com/krazelgames/" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
         {!testMode && <button className="landscape-rebirth" onClick={() => {setSection('main');setConfirmReset(true);}}>{tr('Volver a nacer')}</button>}
-        <button className="landscape-development" onClick={onDevelopment}>{tr('Desarrollo')}</button>
       </nav>}
 
       {tr(section === 'main' && <>
@@ -93,7 +90,6 @@ export function FinalSettings({
         <nav className="final-settings-links" aria-label={tr("Más opciones")}>
           <button onClick={() => setSection('journey')}>{tr("Recorrido")}</button>
           <button onClick={() => setSection('credits')}>{tr("Créditos")}</button>
-          <button className="development-access" onClick={onDevelopment}>{tr("Desarrollo")}</button>
           <a href="https://www.instagram.com/krazelgames/" target="_blank" rel="noopener noreferrer">{tr("Instagram")}</a>
           {tr(!testMode && <button className="rebirth-link" onClick={() => setConfirmReset(true)}>{tr("Volver a nacer")}</button>)}
         </nav>

@@ -1,6 +1,9 @@
 /* Landscape only; portrait art and touch controls retain their existing rules. */
-.voro-settings.final-ui .approved-settings[data-wide=false]{min-height:0;height:auto;aspect-ratio:941/1672;}
-.voro-settings.final-ui .approved-settings[data-wide=true]{width:min(1160px,96vw);height:min(680px,96dvh);aspect-ratio:auto;overflow:visible;background:#00111b;}
+.voro-settings.final-ui .approved-settings[data-wide=false]{min-height:0;width:100vw;max-width:941px;height:100dvh;aspect-ratio:auto;}
+.voro-settings.final-ui .approved-settings[data-wide=true]{width:min(1400px,100vw);height:100dvh;aspect-ratio:auto;overflow:visible;background:transparent;}
+.voro-settings.final-ui:has(.approved-settings){isolation:isolate;background:#00111b;}
+.voro-settings.final-ui:has(.approved-settings)::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(#00111b44,#00111b88),url('/abyssal-background.png') center/cover no-repeat;border:0;border-radius:0;opacity:1;transform:none;animation:none;}
+.voro-settings.final-ui .settings-development-access{position:absolute;right:max(16px,env(safe-area-inset-right));bottom:max(12px,env(safe-area-inset-bottom));z-index:10;min-height:44px;padding:10px 16px;border:1px solid #77dce2;border-radius:22px;background:#03242ff2;color:#dff8f7;font:14px/1.2 sans-serif;box-shadow:none;}
 .approved-settings[data-wide=true]>.approved-art{display:none}
 .landscape-surface{position:absolute;pointer-events:none;isolation:isolate;z-index:-1;mask-image:linear-gradient(90deg,transparent,#000 2%,#000 98%,transparent),linear-gradient(transparent,#000 2%,#000 98%,transparent);mask-composite:intersect;}
 .landscape-surface>svg,.landscape-surface>.living-menu-art{position:absolute;inset:0;width:100%;height:100%;}
