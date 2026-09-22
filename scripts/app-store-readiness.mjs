@@ -33,6 +33,7 @@ for(const v of report.versions.data??[]) {
 report.builds = await api(`/v1/builds?filter[app]=${appId}&sort=-uploadedDate&limit=5&include=preReleaseVersion,buildBetaDetail`);
 report.betaReview = review(await api(`/v1/apps/${appId}/betaAppReviewDetail`));
 report.priceSchedule = await api(`/v1/apps/${appId}/appPriceSchedule?include=baseTerritory`);
+report.prices = await api(`/v1/appPriceSchedules/${appId}/manualPrices?include=appPricePoint,territory&limit=50`);
 report.availability = await api(`/v1/apps/${appId}/appAvailabilityV2`);
 if(report.availability.data) report.territories = await api(`/v2/appAvailabilities/${report.availability.data.id}/territoryAvailabilities?limit=200`);
 report.purchases = await api(`/v1/apps/${appId}/inAppPurchasesV2?limit=10`);
@@ -81,4 +82,12 @@ async function prepare(){
  console.log('Review contact copied privately and metadata prepared; no submission created.');
  const selection=await api(`/v1/appStoreVersions/${versionId}`,'PATCH',{data:{type:'appStoreVersions',id:versionId,relationships:{build:relation('builds','118537c4-7428-4664-a1da-1b96cb35e240')}}});
  console.log(JSON.stringify({buildSelection:selection.errors??'selected'}));
+ const availability=await api(`/v1/apps/${appId}/appAvailabilityV2`);
+ if(availability.status===404){
+  const territories=(await api('/v1/territories?limit=200')).data;
+  if(!territories?.some(t=>t.id==='ESP'))throw new Error('Territory list unavailable');
+  const included=territories.map((t,index)=>({type:'territoryAvailabilities',id:`\u0024{territory-${index}}`,attributes:{available:!['CHN','VNM'].includes(t.id),preOrderEnabled:false},relationships:{territory:relation('territories',t.id)}}));
+  await change('/v2/appAvailabilities','POST',{data:{type:'appAvailabilities',attributes:{availableInNewTerritories:false},relationships:{app:relation('apps',appId),territoryAvailabilities:{data:included.map(({type,id})=>({type,id}))}}},included});
+  console.log('Distribution configured; China mainland and Vietnam excluded pending local game licenses.');
+ }
 }
