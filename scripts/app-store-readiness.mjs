@@ -138,7 +138,15 @@ async function uploadScreenshots(){
     await new Promise(r=>setTimeout(r,2000));
    }
    if(!complete)throw new Error('Screenshot processing timed out');
-   console.log(`Verified native screenshot: ${group.locale} ${file.name}`);
+   console.log(`Verified screenshot: ${group.locale} ${file.name}`);
   }
+  const uploaded=(await api(`/v1/appScreenshotSets/${set.id}/appScreenshots`)).data;
+  const desired=group.files.map(file=>uploaded.find(s=>s.attributes.fileName===file.name));
+  if(desired.some(s=>!s || s.attributes.assetDeliveryState?.state!=='COMPLETE'))throw new Error('Incomplete screenshot set');
+  const ordered=[...desired,...uploaded.filter(s=>!desired.some(d=>d.id===s.id))].map(s=>({type:'appScreenshots',id:s.id}));
+  const reorder=await api(`/v1/appScreenshotSets/${set.id}/relationships/appScreenshots`,'PATCH',{data:ordered});
+  if(reorder.errors)throw new Error(JSON.stringify(reorder.errors));
+  const confirmed=(await api(`/v1/appScreenshotSets/${set.id}/relationships/appScreenshots`)).data;
+  if(JSON.stringify(confirmed.map(s=>s.id))!==JSON.stringify(ordered.map(s=>s.id)))throw new Error('Screenshot order verification failed');
  }
 }

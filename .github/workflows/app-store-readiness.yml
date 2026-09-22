@@ -7,7 +7,7 @@ on:
         type: boolean
         default: false
       upload_screenshots:
-        description: Upload visually verified native screenshots
+        description: Upload and order visually verified store images
         type: boolean
         default: false
 permissions:
