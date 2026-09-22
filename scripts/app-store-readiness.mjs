@@ -140,6 +140,16 @@ async function uploadScreenshots(){
    if(!complete)throw new Error('Screenshot processing timed out');
    console.log(`Verified screenshot: ${group.locale} ${file.name}`);
   }
+  // Replace only the explicitly listed superseded assets after new uploads complete.
+  for(const name of group.replaceFileNames??[]){
+   if(group.files.some(f=>f.name===name))throw new Error('Cannot remove a selected screenshot');
+   const stale=existing.find(s=>s.attributes.fileName===name);
+   if(stale){
+    const removed=await api(`/v1/appScreenshots/${stale.id}`,'DELETE');
+    if(removed.errors)throw new Error(JSON.stringify(removed.errors));
+    console.log('Replaced screenshot: '+name);
+   }
+  }
   const uploaded=(await api(`/v1/appScreenshotSets/${set.id}/appScreenshots`)).data;
   const desired=group.files.map(file=>uploaded.find(s=>s.attributes.fileName===file.name));
   if(desired.some(s=>!s || s.attributes.assetDeliveryState?.state!=='COMPLETE'))throw new Error('Incomplete screenshot set');
