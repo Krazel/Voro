@@ -6,6 +6,10 @@ on:
         description: Complete authorized metadata without submitting to review
         type: boolean
         default: false
+      upload_screenshots:
+        description: Upload visually verified native screenshots
+        type: boolean
+        default: false
 permissions:
   contents: read
 concurrency:
@@ -22,6 +26,7 @@ jobs:
       ASC_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
       ASC_KEY_BASE64: ${{ secrets.APP_STORE_CONNECT_API_KEY_BASE64 }}
       PREPARE_STORE: ${{ inputs.prepare }}
+      UPLOAD_SCREENSHOTS: ${{ inputs.upload_screenshots }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

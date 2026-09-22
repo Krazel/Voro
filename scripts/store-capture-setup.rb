@@ -7,6 +7,8 @@ group = project.main_group.new_group('StoreCapture', '../../scripts')
 target.add_file_references([group.new_file('StoreCapture.swift')])
 target.build_configurations.each do |c|
  c.build_settings['TEST_TARGET_NAME'] = 'App'
+ c.build_settings['PRODUCT_NAME'] = 'StoreCapture'
+ c.build_settings['PRODUCT_MODULE_NAME'] = 'StoreCapture'
  c.build_settings['PRODUCT_BUNDLE_IDENTIFIER'] = 'com.dmkr.voro.storecapture'
  c.build_settings['GENERATE_INFOPLIST_FILE'] = 'YES'
  c.build_settings['SWIFT_VERSION'] = '5.0'

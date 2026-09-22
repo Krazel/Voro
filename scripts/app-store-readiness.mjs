@@ -14,6 +14,7 @@ async function api(path,method='GET',body) {
 }
 const review = r => r.data ? {id:r.data.id,attributes:{...Object.fromEntries(Object.entries(r.data.attributes??{}).filter(([k])=>!/^contact|demoAccount(Name|Password)/.test(k))),contactComplete:['contactFirstName','contactLastName','contactPhone','contactEmail'].every(k=>!!r.data.attributes?.[k]),demoCredentialsPresent:!!r.data.attributes?.demoAccountName}} : r;
 if(process.env.PREPARE_STORE==='true') await prepare();
+if(process.env.UPLOAD_SCREENSHOTS==='true') await uploadScreenshots();
 const report = {checkedAt:new Date().toISOString(),app:await api(`/v1/apps/${appId}`)};
 report.infos = await api(`/v1/apps/${appId}/appInfos?include=primaryCategory,primarySubcategoryOne,primarySubcategoryTwo,secondaryCategory`);
 for(const i of report.infos.data??[]) {
@@ -89,5 +90,55 @@ async function prepare(){
   const included=territories.map((t,index)=>({type:'territoryAvailabilities',id:`\u0024{territory-${index}}`,attributes:{available:!['CHN','VNM'].includes(t.id),preOrderEnabled:false},relationships:{territory:relation('territories',t.id)}}));
   await change('/v2/appAvailabilities','POST',{data:{type:'appAvailabilities',attributes:{availableInNewTerritories:false},relationships:{app:relation('apps',appId),territoryAvailabilities:{data:included.map(({type,id})=>({type,id}))}}},included});
   console.log('Distribution configured; China mainland and Vietnam excluded pending local game licenses.');
+ }
+}
+
+async function uploadScreenshots(){
+ const manifest=JSON.parse(fs.readFileSync('store/native-screenshots.json','utf8'));
+ if(manifest.sourceCommit!=='aa0695334e428c03820aa2c5b442235b94189694')throw new Error('Wrong native source');
+ const versionId='86951539-3189-4abd-b333-c400588c1e9d';
+ const version=(await api(`/v1/appStoreVersions/${versionId}`)).data;
+ if(version.attributes.appStoreState!=='PREPARE_FOR_SUBMISSION')throw new Error('Version is not editable');
+ const locs=(await api(`/v1/appStoreVersions/${versionId}/appStoreVersionLocalizations`)).data;
+ for(const group of manifest.groups){
+  const loc=locs.find(l=>l.attributes.locale===group.locale);
+  if(!loc)throw new Error('Localization missing');
+  const sets=(await api(`/v1/appStoreVersionLocalizations/${loc.id}/appScreenshotSets`)).data;
+  let set=sets.find(s=>s.attributes.screenshotDisplayType===group.displayType);
+  if(!set){
+   const result=await api('/v1/appScreenshotSets','POST',{data:{type:'appScreenshotSets',attributes:{screenshotDisplayType:group.displayType},relationships:{appStoreVersionLocalization:{data:{type:'appStoreVersionLocalizations',id:loc.id}}}}});
+   if(result.errors)throw new Error(JSON.stringify(result.errors));
+   set=result.data;
+  }
+  const existing=(await api(`/v1/appScreenshotSets/${set.id}/appScreenshots`)).data;
+  for(const file of group.files){
+   if(!file.path.startsWith('store/screenshots/'))throw new Error('Invalid screenshot path');
+   const bytes=fs.readFileSync(file.path);
+   if(crypto.createHash('sha256').update(bytes).digest('hex')!==file.sha256)throw new Error('Screenshot checksum changed');
+   let screenshot=existing.find(s=>s.attributes.fileName===file.name);
+   if(screenshot?.attributes.assetDeliveryState?.state==='COMPLETE'){console.log(`Already complete: ${group.locale} ${file.name}`);continue;}
+   if(!screenshot){
+    const result=await api('/v1/appScreenshots','POST',{data:{type:'appScreenshots',attributes:{fileName:file.name,fileSize:bytes.length},relationships:{appScreenshotSet:{data:{type:'appScreenshotSets',id:set.id}}}}});
+    if(result.errors)throw new Error(JSON.stringify(result.errors));
+    screenshot=result.data;
+   }
+   for(const operation of screenshot.attributes.uploadOperations??[]){
+    const headers=Object.fromEntries(operation.requestHeaders.map(h=>[h.name,h.value]));
+    const r=await fetch(operation.url,{method:operation.method,headers,body:bytes.subarray(operation.offset,operation.offset+operation.length)});
+    if(!r.ok)throw new Error(`Screenshot binary upload failed: ${r.status}`);
+   }
+   const committed=await api(`/v1/appScreenshots/${screenshot.id}`,'PATCH',{data:{type:'appScreenshots',id:screenshot.id,attributes:{uploaded:true,sourceFileChecksum:crypto.createHash('md5').update(bytes).digest('hex')}}});
+   if(committed.errors)throw new Error(JSON.stringify(committed.errors));
+   let complete=false;
+   for(let attempt=0;attempt<30;attempt++){
+    const fresh=(await api(`/v1/appScreenshots/${screenshot.id}`)).data;
+    const state=fresh.attributes.assetDeliveryState?.state;
+    if(state==='COMPLETE'){complete=true;break;}
+    if(state==='FAILED')throw new Error(`Screenshot processing failed: ${JSON.stringify(fresh.attributes.assetDeliveryState)}`);
+    await new Promise(r=>setTimeout(r,2000));
+   }
+   if(!complete)throw new Error('Screenshot processing timed out');
+   console.log(`Verified native screenshot: ${group.locale} ${file.name}`);
+  }
  }
 }
