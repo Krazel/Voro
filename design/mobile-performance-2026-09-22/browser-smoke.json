@@ -1,0 +1,29 @@
+{
+  "kind": "Desktop WebKit with emulated viewport, isolated storage, not physical iOS FPS",
+  "results": [
+    {
+      "name": "phone",
+      "event": "play",
+      "wide": "false",
+      "canvas": {
+        "width": 959,
+        "height": 2086
+      },
+      "draws": 447,
+      "clips": 13,
+      "errors": []
+    },
+    {
+      "name": "tablet-landscape",
+      "event": "play",
+      "wide": "true",
+      "canvas": {
+        "width": 1692,
+        "height": 1182
+      },
+      "draws": 528,
+      "clips": 12,
+      "errors": []
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+
+> sites-project@0.2.0 build:pc
+> vite build --config vite.pc.config.ts
+
+vite v8.0.13 building client environment for production...
+[2K
+transforming...✓ 2046 modules transformed.
+rendering chunks...
+computing gzip size...
+pc-dist/index.html                   0.41 kB │ gzip:   0.29 kB
+pc-dist/assets/index-PdmwDcjV.css  219.83 kB │ gzip:  38.78 kB
+pc-dist/assets/web-CyF64AOD.js       0.36 kB │ gzip:   0.24 kB
+pc-dist/assets/web-6bl5fedu.js       8.45 kB │ gzip:   2.81 kB
+pc-dist/assets/index-D5ejnvho.js   618.33 kB │ gzip: 205.09 kB
+
+✓ built in 1.94s

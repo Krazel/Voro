@@ -18,4 +18,10 @@ Ahora los ciclos exportados se mantienen al crecer/acercar la cámara. Las anima
 - tests: zoom/DPR altos mantienen ciclos, no generan triángulos ni nuevas poses; memoria del primer bioma bajo límite. Captura incluye sheetDraws, proceduralDraws y poseBakeSteps en cuadros lentos y correlaciones.
 - El verificador de build compara cada hoja de animación del paquete con su fuente, además de fondos, UI, atlas y sonidos.
 
-Pendiente resultado de entrega TestFlight y medición en iPhone/iPad. Esta corrección elimina una ruta costosa demostrada, no certifica fluidez física.
+## Entrega verificada
+
+TestFlight 0.5.5 (1), código 854deadb008064b9d1ca6d77c7eb0c9ae9505003. CI https://github.com/Krazel/Voro/actions/runs/35722277416 completado correctamente. API: build dfb7d9fd-cec8-4274-b7de-ad95a6933fe1, VALID e IN_BETA_TESTING, grupo VORO Interno verificado. IPA descargada y SHA256 coincide. Dispositivos iPhone/iPad; las cuatro orientaciones iPad se verifican en el archive. No se ha enviado a App Review ni publicado en App Store.
+
+196 pruebas correctas en local y CI. Build PC actualizado con el mismo código. WebKit de escritorio en contextos aislados: arranque y partida sin errores de página con viewport de teléfono e iPad horizontal; teléfono wide=false, tablet horizontal wide=true. Las capturas se conservan. No es una prueba de hardware iOS ni de FPS; se espera a que termine el nacimiento en lugar de asumir su duración de reloj bajo emulación.
+
+Biblioteca PR-009 guardada y releída, revisión 124; conservados seguimiento y datos de marketing. Pendiente medición física de 30s en iPhone/iPad y audibilidad del efecto comer. Esta corrección elimina una ruta costosa demostrada, no certifica fluidez física.
