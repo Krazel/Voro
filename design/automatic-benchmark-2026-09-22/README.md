@@ -1,5 +1,15 @@
 # VORO 0.6 (1) — prueba automática desde iPhone/iPad
 
+## Revisión corta 0.6.1 (1)
+
+El usuario pidió reducir la duración. Se conservan los 20 escenarios (10 entornos × 2 tamaños), ahora 5s medidos + 1s de calentamiento: 120s nominales más cargas. El primer impulso se intenta a los 2s de movimiento (durante la medición), y los siguientes cada 9s si fueran necesarios. Cancelación, protección de la campaña, informe compartible y pantalla encendida se mantienen. El informe registra los tiempos del protocolo para distinguirlo del anterior; una muestra más corta detectará peor los tirones poco frecuentes.
+
+201 tests, tipos y build móvil correctos. Flujo completo 20/20 comprobado de nuevo en WebKit con reloj acelerado, sin errores, campaña restaurada y archivo exportado de 206669 bytes (no son mediciones físicas). Código 8d604ee; CI https://github.com/Krazel/Voro/actions/runs/35733349091 . Pendiente entrega de esta revisión.
+
+La 0.6 (1) anterior ya está VALID / IN_BETA_TESTING, grupo VORO Interno, verificado por API a las 13:24 UTC del 22/09. Evidencia `apple-0.6-final.json` y https://github.com/Krazel/Voro/actions/runs/35733221849 . Su CI original agotó los 50 minutos de espera; una consulta posterior confirmó la build y terminó la asignación interna. La primera relectura de la asignación todavía no la veía; la siguiente sí. Se añade reintento limitado a la verificación de membresía y se conserva el artefacto firmado aunque la espera de Apple falle en futuras builds.
+
+## Protocolo original 0.6
+
 Acceso: Configuración → Modo de desarrollo → Probar todos los entornos automáticamente. La prueba utiliza el motor y los assets de la app instalada, con movimiento automático y un intento de impulso cada nueve segundos. No envía informes automáticamente.
 
 Protocolo: los diez entornos, dos tamaños por entorno (masa de entrada y 80% del intervalo logarítmico hacia la meta), 15 segundos medidos por tamaño, dos segundos de calentamiento después de cargar. Unos seis minutos más cargas. Cada escenario conserva FPS, P95/P99, peor intervalo, CPU por sistema, audio, carga de assets, renderizado y cinco peores fotogramas con el anterior. El archivo contiene 20 resultados compactos; no los miles de registros crudos. Se conserva el método manual anterior de 30s.
