@@ -15,6 +15,13 @@ final class StoreCapture: XCTestCase {
   sleep(3)
   XCTAssertTrue(prompt.exists)
   prompt.buttons["Continue"].tap()
+  // Simulator interruption handling can swallow the first synthesized tap.
+  // Retry only while the same native alert remains visible, then require dismissal.
+  let dismissed=NSPredicate(format:"exists == false")
+  if XCTWaiter.wait(for:[XCTNSPredicateExpectation(predicate:dismissed,object:prompt)],timeout:5) != .completed {
+    prompt.buttons["Continue"].coordinate(withNormalizedOffset:CGVector(dx:0.5,dy:0.5)).tap()
+  }
+  XCTAssertEqual(XCTWaiter.wait(for:[XCTNSPredicateExpectation(predicate:dismissed,object:prompt)],timeout:10),.completed)
   XCTAssertTrue(app.staticTexts["review-stage-2"].waitForExistence(timeout:30), app.debugDescription)
   capture("02-third-environment-after-continue")
   let audio=app.buttons["Check ingest audio"]
