@@ -42,8 +42,13 @@ if (mode === 'latest') {
   const recentBuilds = recent.data.map(item=>({id:item.id,build:item.attributes.version,state:item.attributes.processingState,
     version:recent.included?.find(v=>v.type==='preReleaseVersions'&&v.id===item.relationships.preReleaseVersion.data?.id)?.attributes.version,
     uploadedDate:item.attributes.uploadedDate}));
+  const uploads = await api(`/v1/apps/${appId}/buildUploads?limit=20`);
+  const buildUploads = uploads.data.map(item=>({id:item.id,
+    version:item.attributes.cfBundleShortVersionString,build:item.attributes.cfBundleVersion,
+    state:item.attributes.state,createdDate:item.attributes.createdDate,uploadedDate:item.attributes.uploadedDate}))
+    .sort((a,b)=>String(b.createdDate).localeCompare(String(a.createdDate))).slice(0,5);
   console.log(JSON.stringify({appId,bundleId,version,existingBuilds:[...new Set(numbers)].sort((a,b)=>a-b),latestBuild:latest,nextBuild:latest+1,
-    recentBuilds,
+    recentBuilds,buildUploads,
     group:{id:groupId,name:group.data.attributes.name,internal:true}}));
   process.exit(0);
 }
