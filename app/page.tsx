@@ -637,7 +637,7 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
             setReportText('');setReportCopied(false);setShareMessage('');setTourNoticeDismissed(false);
             if(engine.current?.startAutomaticBenchmark()){resume.current=false;changeSettings(false);}
           }}>{tr('Probar todos los entornos automáticamente')}<span>{tr('Iniciar')}</span></button>
-          <p className="save-note">{tr('Unos 6 minutos. Prueba dos tamaños por entorno, moviéndose y usando el impulso. Mantén el juego abierto. Puedes cancelar y recuperar tu partida en cualquier momento.')}</p>
+          <p className="save-note">{tr('Unos 2 minutos más las cargas. Prueba dos tamaños por entorno, moviéndose y usando el impulso. Mantén el juego abierto. Puedes cancelar y recuperar tu partida en cualquier momento.')}</p>
           <button className="settings-row" onClick={async () => {
             const report = engine.current?.performanceReport();
             if (!report) return;

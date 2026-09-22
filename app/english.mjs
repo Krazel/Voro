@@ -5,7 +5,7 @@ export const ENGLISH = Object.fromEntries(`
 Cargando…|Loading…
 Prueba automática de rendimiento|Automatic performance test
 Probar todos los entornos automáticamente|Test all environments automatically
-Unos 6 minutos. Prueba dos tamaños por entorno, moviéndose y usando el impulso. Mantén el juego abierto. Puedes cancelar y recuperar tu partida en cualquier momento.|About 6 minutes. Tests two sizes in every environment with automatic movement and dashes. Keep the game open. You can cancel and restore your run at any time.
+Unos 2 minutos más las cargas. Prueba dos tamaños por entorno, moviéndose y usando el impulso. Mantén el juego abierto. Puedes cancelar y recuperar tu partida en cualquier momento.|About 2 minutes plus loading. Tests two sizes in every environment with automatic movement and dashes. Keep the game open. You can cancel and restore your run at any time.
 Tamaño inicial|Starting size
 Tamaño grande|Larger size
 Prueba en pausa|Test paused

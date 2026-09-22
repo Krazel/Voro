@@ -71,8 +71,14 @@ if (build.attributes.processingState !== 'VALID') throw new Error(`Build process
 await api(`/v1/builds/${build.id}/relationships/betaGroups`,{
   method:'POST',body:JSON.stringify({data:[{type:'betaGroups',id:groupId}]})
 });
-const verified = await api(`/v1/builds/${build.id}?include=preReleaseVersion,betaGroups,buildBetaDetail`);
-const groups = verified.included?.filter(item=>item.type==='betaGroups')||[];
+let verified,groups;
+// Group membership can lag the successful relationship write in Apple's reads.
+for(let attempt=0;attempt<15;attempt++) {
+  verified = await api(`/v1/builds/${build.id}?include=preReleaseVersion,betaGroups,buildBetaDetail`);
+  groups = verified.included?.filter(item=>item.type==='betaGroups')||[];
+  if(groups.some(item=>item.id===groupId)) break;
+  await new Promise(resolve=>setTimeout(resolve,4000));
+}
 const detail = verified.included?.find(item=>item.type==='buildBetaDetails');
 if (!groups.some(item=>item.id===groupId)) throw new Error('Internal beta group assignment was not visible after write');
 console.log(JSON.stringify({appId,buildId:build.id,bundleId,version,build:buildNumber,

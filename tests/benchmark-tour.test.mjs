@@ -5,6 +5,20 @@ import {makeEngine} from './engine-fixture.mjs';
 import {STAGES} from '../app/journey-data.mjs';
 import {compactPerformanceReport,performanceSummaryText,deliverReportFile} from '../app/performance-report.mjs';
 
+test('Short tour covers twenty scenarios in two minutes plus loading, with a measured dash in each',()=>{
+  const tour=new BenchmarkTour(STAGES.flatMap(stage=>[{stage:stage.id},{stage:stage.id}]));
+  assert.equal(tour.plan.length*(tour.seconds*1000+tour.warmupMs),120000);
+  const state={active:true,ready:true,error:false};
+  tour.tick(0,state);tour.tick(10,state);
+  tour.tick(1010,state);assert.equal(tour.state,'recording');
+  assert.equal(tour.dashDue(),false);
+  tour.tick(2010,state);assert.equal(tour.dashDue(),true);
+  assert.equal(tour.dashDue(),false,'One attempt per interval');
+  tour.complete('ok');tour.tick(2020,state);tour.tick(2030,state);
+  assert.equal(tour.dashDue(),false,'New size resets dash timing');
+  tour.tick(3030,state);tour.tick(4030,state);assert.equal(tour.dashDue(),true);
+});
+
 test('Tour separates load/warmup, excludes background time and times out missing resources',()=>{
   const tour=new BenchmarkTour([{stage:0}],{warmupMs:100,loadTimeoutMs:1000});
   const state={active:true,ready:false,error:false};

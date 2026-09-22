@@ -1,6 +1,6 @@
 // Scheduling only: the real engine, renderer and frame monitor do the work.
 export class BenchmarkTour {
-  constructor(plan, {seconds=15, warmupMs=2000, loadTimeoutMs=30000}={}) {
+  constructor(plan, {seconds=5, warmupMs=1000, loadTimeoutMs=30000}={}) {
     this.plan=plan;this.seconds=seconds;this.warmupMs=warmupMs;this.loadTimeoutMs=loadTimeoutMs;
     this.index=-1;this.state='next';this.last=null;this.elapsed=0;this.loadingMs=0;
     this.motionMs=0;this.lastDash=0;this.results=[];this.status='running';
@@ -28,7 +28,7 @@ export class BenchmarkTour {
     return null;
   }
   movement(){const t=this.motionMs/1000;return {x:Math.cos(.4+Math.sin(t*.2)*.65),y:Math.sin(.4+Math.sin(t*.2)*.65)};}
-  dashDue(){const n=Math.floor(this.motionMs/9000);if(n>this.lastDash){this.lastDash=n;return true;}return false;}
+  dashDue(){const n=this.motionMs<2000?0:1+Math.floor((this.motionMs-2000)/9000);if(n>this.lastDash){this.lastDash=n;return true;}return false;}
   /** @param {string} status @param {any} [report] */
   complete(status,report=null){this.results.push({...this.current,status,loadingMs:Math.round(this.loadingMs),report});this.state='next';}
 }
@@ -40,7 +40,7 @@ export function tourReport(tour,metadata,status) {
   const ms=reports.reduce((n,r)=>n+(r.captureMs??r.summary.frames*1000/(r.session.fps||r.summary.fps||1)),0);
   return {...metadata,format:'voro-performance-tour-v1',status,
     protocol:{secondsPerSize:tour.seconds,sizes:['entry','grown'],warmupMs:tour.warmupMs,
-      automaticMovement:true,dashAttemptEverySeconds:9,invulnerable:true,upgrades:[],automaticEvolution:false,
+      automaticMovement:true,firstDashAfterSeconds:2,dashAttemptEverySeconds:9,invulnerable:true,upgrades:[],automaticEvolution:false,
       freshRasterBudgetPerSize:true,loadingTimeoutMs:tour.loadTimeoutMs},
     planned:tour.plan.length,finished:tour.results.length,
     summary:{frames,seconds:Math.round(ms/1000),fps:ms?+(frames*1000/ms).toFixed(1):0,
