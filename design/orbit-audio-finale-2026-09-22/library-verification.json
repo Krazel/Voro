@@ -1,0 +1,12 @@
+{
+  "id": "PR-009",
+  "revision": 148,
+  "next": "Windows0.6.2 prueba3 local(30a36e1): audio, órbita sin planetas, tamaños satélites, gravedad Tierra y final oscuro con movimiento libre.216 tests+EXE OK. Pendiente usuario; TF0.6.2 sin cambios. Evidencia design/orbit-audio-finale-2026-09-22/. Marketing01a096e2-5834-7233-9b36-d034a2d281fb: App Store1.0 preparada por API (EN/ES, contacto privado verificado, categoría/edad13+ verificada (armas frecuentes), privacidad publicada, 3,99 EUR ESP, 173 territorios). Build0.6.2(1), manual, SIN enviar a revisión. Valoración:2 mejoras pendientes(momento/intento). Sin franjas:5 iPhone/4 iPad COMPLETE.2 tráilers EN26s/30fps subidos; Apple COMPLETE sin errores(19:29UTC). Evidencia .studio/marketing/voro/app-store-20260922/. Tráilers móvil+PC EN26s/60fps entregados sin publicar; 5 redes EN+Membrana guardadas. itch5004054 Draft desktop EN; CSS cover solicitado a soporte22/09, pendiente activación; fondo provisional repetible. Evidencia .studio/marketing/voro/itchio/desktop-en-20260922/README.md.",
+  "tracking": {
+    "testflight": "Interno",
+    "appStore": "Creada en App Store Connect",
+    "ads": "Por confirmar",
+    "testflightUrl": "https://appstoreconnect.apple.com/teams/7f069118-9712-49c8-a1f0-fda00b62a281/apps/6809193565/testflight/groups/05db8744-bcf3-4c2d-a465-2635012bfeeb",
+    "appStoreUrl": "https://appstoreconnect.apple.com/apps/6809193565/distribution"
+  }
+}
