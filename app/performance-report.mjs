@@ -12,7 +12,7 @@ export function compactPerformanceReport(report) {
     animationSheets:report.animationSheets,animationCache:report.animationCache,
     background:report.background,backgroundRebuilds:report.backgroundRebuilds,
     backgroundRebuildsDuringCapture:report.backgroundRebuildsDuringCapture,
-    diagnostics:report.diagnostics,rendering:report.rendering,
+    diagnostics:report.diagnostics,rendering:report.rendering,audio:report.audio,
     worstFrames:report.worstFrames.slice(0,5),events,
     coverage:{retainedFrames:report.session.retainedFrames,exportedWorstFrames:Math.min(5,report.worstFrames.length),rawSamplesOmitted:true},
     notes:['Cadencia de frames aceptados (máximo 60 FPS), no tiempo de GPU. CPU del motor; no incluye todo WebKit.',

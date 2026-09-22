@@ -288,6 +288,8 @@ export class VoroEngine {
         chunkRadius: this.world.radius, activeEntities: this.world.entities.length,
         quality: this.rasterBudget.quality, pixels: this.canvas.width * this.canvas.height, zoomFactor: this.zoomFactor, zoom: this.zoom },
       animationSheets: this.animationSheets.stats(), animationCache: animationCacheStats(),
+      audio: { enabled: this.sound, focused: this.audioFocus, contextState: this.audio?.state || 'not-created',
+        masterGain: this.master?.gain.value ?? 0, ingest: this.sfx?.stats() ?? null },
       backgroundRebuilds: this.worldGround.redraws,
       background: this.backgroundStatus(),
       backgroundRebuildsDuringCapture: this.worldGround.redraws - this.groundAtCapture });
@@ -626,6 +628,7 @@ export class VoroEngine {
   initAudio() {
     if (this.audioStarted) {
       if(this.audio && this.audio.state !== 'running')this.audio.resume().catch(() => {});
+      this.sfx?.unlock();
       return;
     }
     this.audioStarted = true;

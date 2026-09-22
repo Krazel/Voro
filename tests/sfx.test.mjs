@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { INGEST_SOUNDS, SfxPlayer } from '../app/sfx.mjs';
+import { INGEST_SOUNDS, INGEST_GAIN, SfxPlayer } from '../app/sfx.mjs';
 
 test('Approved ingest variants decode, rate-limit and never repeat consecutively', async () => {
   let time = 1000, random = 0, starts = 0;
@@ -60,4 +60,35 @@ test('Ingest pitch varies over a broad range and changes the full sample duratio
     const duration = source.buffer.duration / source.playbackRate.value;
     assert.ok(duration > .70 && duration < 1.34);
   }
+});
+
+test('A failed variant does not silence decoded bites and retries only the missing sample on a later gesture', async () => {
+  let time=0, fail=true;const requests=[];
+  const context={state:'running',decodeAudioData:async()=>({duration:.5}),
+    createGain:()=>({gain:{value:0},connect(){},disconnect(){}}),
+    createBufferSource:()=>({playbackRate:{value:1},connect(){},disconnect(){},start(){},stop(){}})};
+  const player=new SfxPlayer(context,{}, {now:()=>time,random:()=>0,fetcher:async url=>{
+    requests.push(url);return {ok:!(fail&&url===INGEST_SOUNDS[0]),status:503,arrayBuffer:async()=>new ArrayBuffer(8)};
+  }});
+  await player.unlock();assert.equal(player.stats().decoded,2);assert.equal(player.stats().loadErrors,1);
+  assert.equal(player.playIngest(),true);
+  await player.unlock();assert.equal(requests.length,3);
+  time=5001;fail=false;await player.unlock();
+  assert.equal(requests.length,4);assert.equal(requests[3],INGEST_SOUNDS[0]);assert.equal(player.stats().decoded,3);
+  await player.unlock();assert.equal(requests.length,4);player.destroy();
+});
+
+test('Interrupted iOS audio is counted and never queues stale bites until a gesture resumes it', async () => {
+  let resumes=0,starts=0;
+  const context={state:'interrupted',resume:async()=>{resumes++;context.state='running';},
+    createGain:()=>({gain:{value:0},connect(){},disconnect(){}}),
+    createBufferSource:()=>({playbackRate:{value:1},connect(){},disconnect(){},start(){starts++;},stop(){}})};
+  const player=new SfxPlayer(context,{});player.buffers=[{},{},{}];
+  assert.equal(player.playIngest(),false);assert.equal(starts,0);assert.equal(player.stats().notRunning,1);
+  await player.unlock();assert.equal(resumes,1);assert.equal(player.playIngest(),true);
+  await player.unlock();assert.equal(resumes,1);assert.equal(starts,1);player.destroy();
+});
+
+test('Bite gain compensates the quiet sample without pushing the shared master near clipping', () => {
+  assert.ok(INGEST_GAIN*.055>.1);assert.ok(INGEST_GAIN*.055<.15);
 });
