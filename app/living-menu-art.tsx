@@ -58,7 +58,7 @@ export function LivingMenuArt({ journey, crop }: { journey: boolean; crop?: read
     function resume(){cancelAnimationFrame(frame);last=-100;canvas!.style.opacity=reduced.matches?'0':canvas!.style.opacity;if(!document.hidden&&!reduced.matches&&ready)frame=requestAnimationFrame(draw);}
     const picture=new Image();
     picture.onload=()=>{if(disposed)return;gl!.bindTexture(gl!.TEXTURE_2D,texture);gl!.texImage2D(gl!.TEXTURE_2D,0,gl!.RGBA,gl!.RGBA,gl!.UNSIGNED_BYTE,picture);ready=true;resume();};
-    picture.src=journey?'/ui/approved/journey-plate.png':'/ui/approved/settings-plate.png';
+    picture.src=journey?'./ui/approved/journey-plate.png':'./ui/approved/settings-plate.png';
     function lost(event:Event){event.preventDefault();ready=false;cancelAnimationFrame(frame);canvas!.style.opacity='0';}
     canvas.addEventListener('webglcontextlost',lost); document.addEventListener('visibilitychange',resume);reduced.addEventListener('change',resume);
     return()=>{disposed=true;cancelAnimationFrame(frame);canvas.style.opacity='0';canvas.removeEventListener('webglcontextlost',lost);document.removeEventListener('visibilitychange',resume);reduced.removeEventListener('change',resume);gl.deleteTexture(texture);gl.deleteBuffer(buffer);gl.deleteProgram(program);gl.deleteShader(vertex);gl.deleteShader(fragment);};
