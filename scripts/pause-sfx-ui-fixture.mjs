@@ -9,8 +9,9 @@ source=source.replace(anchor,anchor+`
     game.paused=true;game.testMode=false;game.progress.offer=[];game.publish();
 `);
 source=source.replace('      <ReviewMilestone held=', `
-      <button style={{position:"fixed",bottom:24,zIndex:10000}} onClick={async event=>{
+      <button style={{position:"fixed",top:"max(12px, env(safe-area-inset-top))",left:12,minHeight:44,padding:12,zIndex:10000,background:"#092631",color:"white"}} onClick={async event=>{
         const button=event.currentTarget,game=engine.current!;
+        button.textContent="Checking ingest audio";
         game.initAudio();await game.sfx?.unlock();await game.audio?.resume();
         const before=game.sfx?.stats().played??0;
         for(let i=0;i<5;i++){game.sfx?.playIngest();await new Promise(resolve=>setTimeout(resolve,360));}

@@ -1,0 +1,22 @@
+{
+  "request": "Use new pause menus, 2026-09-23",
+  "reference": "design/pause-fidelity-2026-09-21/reference.png",
+  "implementation": "app/approved-pause.tsx",
+  "files": [
+    {
+      "path": "public/ui/approved/pause-plate-v1.png",
+      "sha256": "6d191d933448f6f5ef2188ae11fa4d38ce8866bb8d3feab731b758caa6b97deb"
+    },
+    {
+      "path": "design/pause-fidelity-2026-09-21/reference.png",
+      "sha256": "b18b0e80d4c5c08e817cf5bde8e053426a782c30e7be50ca0c7603ca0b4e6715"
+    }
+  ],
+  "captures": [
+    "pause-iphone-es.png",
+    "pause-ipad-portrait.png",
+    "pause-ipad-landscape.png",
+    "pause-iphone-small.png"
+  ],
+  "platform": "Desktop browser of compiled mobile build, ES/EN"
+}
