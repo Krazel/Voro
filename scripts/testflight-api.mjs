@@ -38,7 +38,12 @@ if (mode === 'latest') {
   const builds = await api(`/v1/builds?filter[app]=${appId}&filter[preReleaseVersion.version]=${encodeURIComponent(version)}&include=preReleaseVersion&sort=-uploadedDate&limit=200`);
   const numbers = builds.data.map(item=>Number(item.attributes.version)).filter(Number.isSafeInteger);
   const latest = numbers.length ? Math.max(...numbers) : 0;
+  const recent = await api(`/v1/builds?filter[app]=${appId}&include=preReleaseVersion&sort=-uploadedDate&limit=5`);
+  const recentBuilds = recent.data.map(item=>({id:item.id,build:item.attributes.version,state:item.attributes.processingState,
+    version:recent.included?.find(v=>v.type==='preReleaseVersions'&&v.id===item.relationships.preReleaseVersion.data?.id)?.attributes.version,
+    uploadedDate:item.attributes.uploadedDate}));
   console.log(JSON.stringify({appId,bundleId,version,existingBuilds:[...new Set(numbers)].sort((a,b)=>a-b),latestBuild:latest,nextBuild:latest+1,
+    recentBuilds,
     group:{id:groupId,name:group.data.attributes.name,internal:true}}));
   process.exit(0);
 }
