@@ -1,7 +1,7 @@
 {
   "sourceCommit": "aa0695334e428c03820aa2c5b442235b94189694",
   "captureRun": "https://github.com/Krazel/Voro/actions/runs/35754029285",
-  "provenance": "Two unmodified native XCUITest captures plus three approved English trailer frames per device. iPhone uses the vertical mobile trailer; iPad uses the horizontal trailer (file named PC). Trailer frames are promotional gameplay, not simulator captures. English primary screenshots are inherited by Spanish localization.",
+  "provenance": "User explicitly requested removal of bars and upload of existing approved trailers after discussion of their promotional origin. iPhone retains two native captures and three cropped trailer frames; iPad uses four horizontal trailer frames. No padding or distortion.",
   "groups": [
     {
       "locale": "en-US",
@@ -15,9 +15,9 @@
           "height": 2868
         },
         {
-          "path": "store/screenshots/en-US/iphone/03-trailer-sea.png",
-          "name": "voro-iphone-03-trailer-sea.png",
-          "sha256": "70cf2c85ab01462cc9416254ecd68b1621afba7c894a2a14c3982ed56688720e",
+          "path": "store/screenshots/en-US/iphone/full-sea.png",
+          "name": "voro-iphone-full-sea.png",
+          "sha256": "3920520e88564633c3b374cd6314620d86a2a6700016b07927903592aa391102",
           "width": 1320,
           "height": 2868,
           "provenance": {
@@ -25,18 +25,13 @@
             "source": "VORO-Abyssal-Trailer-Mobile-EN-720x1280-60fps.mp4",
             "sourceSha256": "a8e302c0c214b8c8502dcefaad6b621fe0be0946b8790482e9debe9577ebdfa4",
             "timeSeconds": 7.5,
-            "frameSha256": "e597c9789dce8bb28f88c5925acfd678b91316c316fe0ecae59dc095931b8de7",
-            "originalSize": [
-              720,
-              1280
-            ],
-            "transform": "Proportional Lanczos scaling, plain dark margins. No crop, distortion, or new scene content."
+            "transform": "scale=1320:2868:force_original_aspect_ratio=increase:flags=lanczos,crop=1320:2868,setsar=1,format=rgb24"
           }
         },
         {
-          "path": "store/screenshots/en-US/iphone/04-trailer-city.png",
-          "name": "voro-iphone-04-trailer-city.png",
-          "sha256": "755ef8a138e7b3450b5211f27bbf7b2c26a050beb7690a710c3724a7d9beca78",
+          "path": "store/screenshots/en-US/iphone/full-city.png",
+          "name": "voro-iphone-full-city.png",
+          "sha256": "997b8167cae99d9aed340c55ec3b920042a0bf9796769ca278045c0d00816510",
           "width": 1320,
           "height": 2868,
           "provenance": {
@@ -44,18 +39,13 @@
             "source": "VORO-Abyssal-Trailer-Mobile-EN-720x1280-60fps.mp4",
             "sourceSha256": "a8e302c0c214b8c8502dcefaad6b621fe0be0946b8790482e9debe9577ebdfa4",
             "timeSeconds": 13,
-            "frameSha256": "8f3097846adb6f0e427cea6d1ded6e9406aeb7a3e1550d1252faf20e2082324e",
-            "originalSize": [
-              720,
-              1280
-            ],
-            "transform": "Proportional Lanczos scaling, plain dark margins. No crop, distortion, or new scene content."
+            "transform": "scale=1320:2868:force_original_aspect_ratio=increase:flags=lanczos,crop=1320:2868,setsar=1,format=rgb24"
           }
         },
         {
-          "path": "store/screenshots/en-US/iphone/05-trailer-planets.png",
-          "name": "voro-iphone-05-trailer-planets.png",
-          "sha256": "4bd01c4df78a610769565f93588890b04b84131590f7280940d6861a5b3e6766",
+          "path": "store/screenshots/en-US/iphone/full-planets.png",
+          "name": "voro-iphone-full-planets.png",
+          "sha256": "2bff25bdf98ee3a9414879734c5da819042bdaa3076ea6f7fad5efb47be0514a",
           "width": 1320,
           "height": 2868,
           "provenance": {
@@ -63,12 +53,7 @@
             "source": "VORO-Abyssal-Trailer-Mobile-EN-720x1280-60fps.mp4",
             "sourceSha256": "a8e302c0c214b8c8502dcefaad6b621fe0be0946b8790482e9debe9577ebdfa4",
             "timeSeconds": 18.5,
-            "frameSha256": "be087f5e77149395f34c6712b66ccc29d226f3b30a2398b66a655ce7e69958dd",
-            "originalSize": [
-              720,
-              1280
-            ],
-            "transform": "Proportional Lanczos scaling, plain dark margins. No crop, distortion, or new scene content."
+            "transform": "scale=1320:2868:force_original_aspect_ratio=increase:flags=lanczos,crop=1320:2868,setsar=1,format=rgb24"
           }
         },
         {
@@ -78,6 +63,11 @@
           "width": 1320,
           "height": 2868
         }
+      ],
+      "replaceFileNames": [
+        "voro-iphone-03-trailer-sea.png",
+        "voro-iphone-04-trailer-city.png",
+        "voro-iphone-05-trailer-planets.png"
       ]
     },
     {
@@ -85,16 +75,23 @@
       "displayType": "APP_IPAD_PRO_3GEN_129",
       "files": [
         {
-          "path": "store/screenshots/en-US/ipad/01-gameplay.png",
-          "name": "voro-ipad-01-gameplay.png",
-          "sha256": "ca29bd9a8ce48e400ee0c3070775b9bf36b7ff0ee0a43770424ae02fe4db5bde",
-          "width": 2064,
-          "height": 2752
+          "path": "store/screenshots/en-US/ipad/full-micro.png",
+          "name": "voro-ipad-full-micro.png",
+          "sha256": "1f23cb6a0f593acf22038aac8cffe00b5ec792c2732b7e4b7a5965bbe1c2f86c",
+          "width": 2752,
+          "height": 2064,
+          "provenance": {
+            "kind": "approved-trailer-frame",
+            "source": "VORO-Abyssal-Trailer-PC-EN-1920x1080-60fps.mp4",
+            "sourceSha256": "1a2913c669ed76f96ec25ba3f7be7a913634d047d9dc7c1d615230aadc283d31",
+            "timeSeconds": 2,
+            "transform": "scale=2752:2064:force_original_aspect_ratio=increase:flags=lanczos,crop=2752:2064,setsar=1,format=rgb24"
+          }
         },
         {
-          "path": "store/screenshots/en-US/ipad/03-horizontal-sea.png",
-          "name": "voro-ipad-03-horizontal-sea.png",
-          "sha256": "c810b952c452add541a8956876ccd3da0c7b658665d694717b9e9d7c751804b7",
+          "path": "store/screenshots/en-US/ipad/full-sea.png",
+          "name": "voro-ipad-full-sea.png",
+          "sha256": "e3f65d7f7d63a7dc82668bec79546f9654a9da3a8a02e4d049be9905f2195a20",
           "width": 2752,
           "height": 2064,
           "provenance": {
@@ -102,18 +99,13 @@
             "source": "VORO-Abyssal-Trailer-PC-EN-1920x1080-60fps.mp4",
             "sourceSha256": "1a2913c669ed76f96ec25ba3f7be7a913634d047d9dc7c1d615230aadc283d31",
             "timeSeconds": 7.5,
-            "frameSha256": "4664c0f182cad39e97ffc2043def7caf1ac9588ebcba3f7e1f675b870a2df07d",
-            "originalSize": [
-              1920,
-              1080
-            ],
-            "transform": "Horizontal trailer, proportional Lanczos scaling and plain dark margins to 2752x2064. No crop or distortion."
+            "transform": "scale=2752:2064:force_original_aspect_ratio=increase:flags=lanczos,crop=2752:2064,setsar=1,format=rgb24"
           }
         },
         {
-          "path": "store/screenshots/en-US/ipad/04-horizontal-city.png",
-          "name": "voro-ipad-04-horizontal-city.png",
-          "sha256": "54714f0dadfdd12441831965e5942cf3c8765b7e1478085e87b19b9cd216afba",
+          "path": "store/screenshots/en-US/ipad/full-city.png",
+          "name": "voro-ipad-full-city.png",
+          "sha256": "6b789795a64767531cc0ccf8920772f7ca4916250edf7ecc9eb2c5d60e0adec1",
           "width": 2752,
           "height": 2064,
           "provenance": {
@@ -121,18 +113,13 @@
             "source": "VORO-Abyssal-Trailer-PC-EN-1920x1080-60fps.mp4",
             "sourceSha256": "1a2913c669ed76f96ec25ba3f7be7a913634d047d9dc7c1d615230aadc283d31",
             "timeSeconds": 13,
-            "frameSha256": "aa055edbf71a839d7b8fedf87bb20b8e0c39612122d2ebb2d1220786b54dce21",
-            "originalSize": [
-              1920,
-              1080
-            ],
-            "transform": "Horizontal trailer, proportional Lanczos scaling and plain dark margins to 2752x2064. No crop or distortion."
+            "transform": "scale=2752:2064:force_original_aspect_ratio=increase:flags=lanczos,crop=2752:2064,setsar=1,format=rgb24"
           }
         },
         {
-          "path": "store/screenshots/en-US/ipad/05-horizontal-planets.png",
-          "name": "voro-ipad-05-horizontal-planets.png",
-          "sha256": "a07b2afed172178868ae7559a38b05b92def1853c7fbc47939c3255ac24b1983",
+          "path": "store/screenshots/en-US/ipad/full-planets.png",
+          "name": "voro-ipad-full-planets.png",
+          "sha256": "cea39e32741be80b1d455b97b5aeb8191cf00c80ab47029d9300363ae8f27a9f",
           "width": 2752,
           "height": 2064,
           "provenance": {
@@ -140,26 +127,19 @@
             "source": "VORO-Abyssal-Trailer-PC-EN-1920x1080-60fps.mp4",
             "sourceSha256": "1a2913c669ed76f96ec25ba3f7be7a913634d047d9dc7c1d615230aadc283d31",
             "timeSeconds": 18.5,
-            "frameSha256": "19650d3460d003c5fb9616b7faaba3311dd5d66daa4e18077ec7d7f9eb0fa076",
-            "originalSize": [
-              1920,
-              1080
-            ],
-            "transform": "Horizontal trailer, proportional Lanczos scaling and plain dark margins to 2752x2064. No crop or distortion."
+            "transform": "scale=2752:2064:force_original_aspect_ratio=increase:flags=lanczos,crop=2752:2064,setsar=1,format=rgb24"
           }
-        },
-        {
-          "path": "store/screenshots/en-US/ipad/02-origin.png",
-          "name": "voro-ipad-02-origin.png",
-          "sha256": "15bcd8f27f52fa37cf6a5dd9b6f8688938eef90b1eea52ca64fc7636362084db",
-          "width": 2064,
-          "height": 2752
         }
       ],
       "replaceFileNames": [
         "voro-ipad-03-trailer-sea.png",
         "voro-ipad-04-trailer-city.png",
-        "voro-ipad-05-trailer-planets.png"
+        "voro-ipad-05-trailer-planets.png",
+        "voro-ipad-01-gameplay.png",
+        "voro-ipad-03-horizontal-sea.png",
+        "voro-ipad-04-horizontal-city.png",
+        "voro-ipad-05-horizontal-planets.png",
+        "voro-ipad-02-origin.png"
       ]
     }
   ]

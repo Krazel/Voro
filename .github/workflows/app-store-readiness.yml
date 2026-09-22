@@ -10,6 +10,10 @@ on:
         description: Upload and order visually verified store images
         type: boolean
         default: false
+      upload_previews:
+        description: Upload approved trailers without submitting review
+        type: boolean
+        default: false
 permissions:
   contents: read
 concurrency:
@@ -19,7 +23,7 @@ jobs:
   audit:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     environment: app-store-production
     env:
       ASC_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
@@ -27,6 +31,7 @@ jobs:
       ASC_KEY_BASE64: ${{ secrets.APP_STORE_CONNECT_API_KEY_BASE64 }}
       PREPARE_STORE: ${{ inputs.prepare }}
       UPLOAD_SCREENSHOTS: ${{ inputs.upload_screenshots }}
+      UPLOAD_PREVIEWS: ${{ inputs.upload_previews }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

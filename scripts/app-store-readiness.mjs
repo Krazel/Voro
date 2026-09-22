@@ -15,6 +15,7 @@ async function api(path,method='GET',body) {
 const review = r => r.data ? {id:r.data.id,attributes:{...Object.fromEntries(Object.entries(r.data.attributes??{}).filter(([k])=>!/^contact|demoAccount(Name|Password)/.test(k))),contactComplete:['contactFirstName','contactLastName','contactPhone','contactEmail'].every(k=>!!r.data.attributes?.[k]),demoCredentialsPresent:!!r.data.attributes?.demoAccountName}} : r;
 if(process.env.PREPARE_STORE==='true') await prepare();
 if(process.env.UPLOAD_SCREENSHOTS==='true') await uploadScreenshots();
+if(process.env.UPLOAD_PREVIEWS==='true') await uploadPreviews();
 const report = {checkedAt:new Date().toISOString(),app:await api(`/v1/apps/${appId}`)};
 report.infos = await api(`/v1/apps/${appId}/appInfos?include=primaryCategory,primarySubcategoryOne,primarySubcategoryTwo,secondaryCategory`);
 for(const i of report.infos.data??[]) {
@@ -159,4 +160,60 @@ async function uploadScreenshots(){
   const confirmed=(await api(`/v1/appScreenshotSets/${set.id}/relationships/appScreenshots`)).data;
   if(JSON.stringify(confirmed.map(s=>s.id))!==JSON.stringify(ordered.map(s=>s.id)))throw new Error('Screenshot order verification failed');
  }
+}
+
+async function uploadPreviews(){
+ const versionId='86951539-3189-4abd-b333-c400588c1e9d';
+ const v=(await api(`/v1/appStoreVersions/${versionId}`)).data;
+ if(v?.attributes.appStoreState!=='PREPARE_FOR_SUBMISSION')throw new Error('Version is not editable');
+ const manifest=JSON.parse(fs.readFileSync('store/app-previews.json','utf8'));
+ const locs=(await api(`/v1/appStoreVersions/${versionId}/appStoreVersionLocalizations`)).data;
+ const pending=[];
+ for(const file of manifest.previews){
+  if(!file.path.startsWith('store/previews/'))throw new Error('Invalid video path');
+  const bytes=fs.readFileSync(file.path);
+  if(crypto.createHash('sha256').update(bytes).digest('hex')!==file.sha256)throw new Error('Preview checksum changed');
+  const loc=locs.find(l=>l.attributes.locale===file.locale);
+  if(!loc)throw new Error('Preview locale missing');
+  const sets=(await api(`/v1/appStoreVersionLocalizations/${loc.id}/appPreviewSets`)).data;
+  let set=sets.find(s=>s.attributes.previewType===file.previewType);
+  if(!set){
+   const made=await api('/v1/appPreviewSets','POST',{data:{type:'appPreviewSets',attributes:{previewType:file.previewType},relationships:{appStoreVersionLocalization:{data:{type:'appStoreVersionLocalizations',id:loc.id}}}}});
+   if(made.errors)throw new Error(JSON.stringify(made.errors));set=made.data;
+  }
+  const existing=(await api(`/v1/appPreviewSets/${set.id}/appPreviews`)).data;
+  let video=existing.find(s=>s.attributes.fileName===file.name);
+  if(!video){
+   const made=await api('/v1/appPreviews','POST',{data:{type:'appPreviews',attributes:{fileName:file.name,fileSize:bytes.length,mimeType:'video/mp4',previewFrameTimeCode:file.posterTimeCode},relationships:{appPreviewSet:{data:{type:'appPreviewSets',id:set.id}}}}});
+   if(made.errors)throw new Error(JSON.stringify(made.errors));video=made.data;
+  }
+  const state=video.attributes.videoDeliveryState?.state??video.attributes.assetDeliveryState?.state;
+  if(state==='FAILED')throw new Error('Preview previously failed: '+JSON.stringify(video.attributes.videoDeliveryState));
+  if(state==='AWAITING_UPLOAD'){
+   for(const op of video.attributes.uploadOperations??[]){
+    const r=await fetch(op.url,{method:op.method,headers:Object.fromEntries(op.requestHeaders.map(h=>[h.name,h.value])),body:bytes.subarray(op.offset,op.offset+op.length)});
+    if(!r.ok)throw new Error('Preview binary upload HTTP '+r.status);
+   }
+   const commit=await api(`/v1/appPreviews/${video.id}`,'PATCH',{data:{type:'appPreviews',id:video.id,attributes:{uploaded:true,sourceFileChecksum:crypto.createHash('md5').update(bytes).digest('hex'),previewFrameTimeCode:file.posterTimeCode}}});
+   if(commit.errors)throw new Error(JSON.stringify(commit.errors));
+  }
+  const ordered=[video,...existing.filter(e=>e.id!==video.id)].map(e=>({type:'appPreviews',id:e.id}));
+  const order=await api(`/v1/appPreviewSets/${set.id}/relationships/appPreviews`,'PATCH',{data:ordered});
+  if(order.errors)throw new Error(JSON.stringify(order.errors));
+  pending.push({id:video.id,name:file.name});
+  console.log('Preview uploaded/retained: '+file.name);
+ }
+ for(let attempt=0;attempt<60;attempt++){
+  let complete=true;
+  for(const video of pending){
+   const r=(await api(`/v1/appPreviews/${video.id}`)).data;
+   const state=r.attributes.videoDeliveryState??r.attributes.assetDeliveryState;
+   if(state.state==='FAILED')throw new Error('Preview processing: '+JSON.stringify(state));
+   if(state.state!=='COMPLETE')complete=false;
+   if(attempt%6===0||state.state==='COMPLETE')console.log(JSON.stringify({preview:video.name,state:state.state}));
+  }
+  if(complete){console.log('Both app previews COMPLETE. No review submission.');return;}
+  await new Promise(r=>setTimeout(r,5000));
+ }
+ console.log('Apple continues processing; final audit records current states.');
 }
