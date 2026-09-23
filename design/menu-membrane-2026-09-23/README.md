@@ -33,7 +33,8 @@ mantener iluminación, medusa, composición y rocas macizas sin perforaciones.
 QA web reproducible en scripts/check-membrane-settings.mjs: capturas y controles
 ES/EN, 390×844, 375×667, 1194×834 iPad, 834×1194 iPad, 1280×800 PC. Cambio de idioma,
 sonido/zurdo, navegación, cancelación de reinicio, regreso y enlaces comprobados.
-Capturas web no equivalen a dispositivo. Pendiente prueba nativa y TestFlight.
+Capturas web no equivalen a dispositivo. QA nativa y TestFlight completados:
+consultar DELIVERY.md y native/. Pendiente prueba en dispositivo físico.
 
 Incluye también c0f5583: Tierra ampliada, satélites variados, aviso orbital
 temporal y final continuo de31s. La versión comercial se incrementa por cambios

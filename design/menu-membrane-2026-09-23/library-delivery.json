@@ -1,0 +1,15 @@
+{
+  "id": "PR-009",
+  "revision": 193,
+  "version": "0.6.6",
+  "build": 1,
+  "detail": "TF interno 0.6.6(1),befb2c4,CI35904898763 VALID/IN_BETA_TESTING. Menú C Membrana ligera; QA nativa iPhone/iPad ES/EN y rotación CI35903359242 OK;227 tests. Tierra +45%,satélites variados,aviso orbital 8s,final continuo31s. Conserva D3,Respira,Película viva y4 estructuras cósmicas. Evidencias design/menu-membrane-2026-09-23/DELIVERY.md. Falta QA físico. ASC1.0 sin revisión;Windows prueba5.",
+  "next": "VORO 01a06eb1-17bb-74c1-b4a4-f88225d8e26d: 0.6.6(1) entregada en TestFlight interno, befb2c4;CI35904898763 y API VALID/IN_BETA_TESTING, build aa4e1ebd-3dd1-4d16-ae22-ff225c3f0b6a. Probar físicamente menú C,órbita y final. QA nativa CI35903359242 iPhone/iPad ES/EN OK;227 tests y QA web5vistas. Evidencia design/menu-membrane-2026-09-23. Visuales 01a0cf42-5f64-7cd3-b277-7130b60a4fb5 revisó capturas sin objeciones; no modifica código. Marketing 01a096e2-5834-7233-9b36-d034a2d281fb: ASC1.0 EN/ES,0.6.2(1),manual,SIN revisión;capturas/previews listas;tráilers/redes listos;itch5004054 Draft,CSS pendiente. Conserva D3,Respira y escudo. Detalles .studio/voro-coordinacion-20260923.md;aprobación en carpeta iphone/IMPLEMENTACION-TESTFLIGHT.md.",
+  "tracking": {
+    "testflight": "Interno",
+    "appStore": "Creada en App Store Connect",
+    "ads": "Por confirmar",
+    "testflightUrl": "https://appstoreconnect.apple.com/teams/7f069118-9712-49c8-a1f0-fda00b62a281/apps/6809193565/testflight/groups/05db8744-bcf3-4c2d-a465-2635012bfeeb",
+    "appStoreUrl": "https://appstoreconnect.apple.com/apps/6809193565/distribution"
+  }
+}
