@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { JourneyWorld } from '../app/journey-world.mjs';
 import { SPECIES_BY_ID as S } from '../app/journey-data.mjs';
-import { finaleState, FINALE_SECONDS } from '../app/universe-finale.mjs';
+import { finaleState, FINALE_SECONDS, FINALE_REVEAL_AT } from '../app/universe-finale.mjs';
 import { transitionScene } from '../app/journey-transitions.mjs';
 
 test('Enlarged accretion disks actually fit in generated stellar populations', () => {
@@ -26,10 +26,10 @@ test('Galaxy source crops include the upper arms and remain inside the atlas',()
 });
 test('Survivor reveal takes twelve and a half seconds, after a black pause',()=>{
   const at=t=>finaleState(FINALE_SECONDS-t).survivor;
-  assert.equal(at(10.5),0);
-  assert.ok(Math.abs(at(16.75)-.5)<1e-10);
-  assert.equal(at(23),1);
-  assert.equal(at(24),1);
+  assert.equal(at(FINALE_REVEAL_AT),0);
+  assert.ok(Math.abs(at(FINALE_REVEAL_AT+6.25)-.5)<1e-10);
+  assert.equal(at(FINALE_REVEAL_AT+12.5),1);
+  assert.equal(at(FINALE_SECONDS),1);
   assert.equal(at(100),1);
 });
 test('Scene handoff fades inhabitants continuously and keeps reduced motion stationary',()=>{

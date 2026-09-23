@@ -5,14 +5,8 @@ import { t } from './language.mjs';
 import { STAGES } from './journey-data.mjs';
 import './journey-complete.css';
 
-// Coordinates follow the approved A · Espiral illustration (853 × 1844).
-// The map occupies y=324..1268; labels remain live, translated text.
-const labels = [
-  [46, 60, 'Microscopio'], [59, 54.7, 'Charca'], [52, 33.7, 'Orilla'],
-  [73.7, 42.2, 'Mar'], [90.4, 61.4, 'Ciudad'], [83.5, 83.6, 'Órbita'],
-  [60.8, 93.4, 'Planetas'], [32.4, 89.2, 'Estrellas'], [10.8, 69.5, 'Galaxias'],
-  [15.8, 29.8, 'Universo'],
-] as const;
+const art = ['micro','pond','shore','sea','city','orbit','planets','stars','galaxies','universe'];
+const count = (value: number) => Number.isFinite(value) ? value.toLocaleString() : '—';
 
 export function JourneyComplete({ eaten, elapsed, adaptations, onClose, onRestart }: {
   eaten: number; elapsed: number; adaptations: number; onClose: () => void; onRestart: () => void;
@@ -25,15 +19,18 @@ export function JourneyComplete({ eaten, elapsed, adaptations, onClose, onRestar
         <header className="journey-complete-heading">
           <p className="journey-brand">VORO · <span>{t('ABISAL')}</span></p>
           <DialogTitle>{t('Tu recorrido')}</DialogTitle>
-          <DialogDescription>{STAGES.length} {t('etapas completadas')}</DialogDescription>
+          <DialogDescription className="sr-only">{STAGES.length} {t('etapas completadas')}</DialogDescription>
         </header>
-        <ol className="journey-spiral-map" aria-label={t('Evolución de Voro')}>
-          {labels.map(([x, y, name]) => <li key={name} style={{left: `${x}%`, top: `${y}%`}}>{t(name)}</li>)}
+        <ol className="journey-horizons" aria-label={t('Evolución de Voro')}>
+          {STAGES.map((stage, index) => <li key={stage.id}>
+            <img src={`./ui/journey/d3/${art[index]}.webp`} alt="" aria-hidden="true" draggable={false}/>
+            <span>{t(stage.short)}</span>
+          </li>)}
         </ol>
         <dl className="journey-complete-stats">
-          <div><dt>{t('Absorciones')}</dt><dd>{eaten.toLocaleString()}</dd></div>
-          <div><dt>{t('Tiempo')}</dt><dd>{Math.floor(elapsed / 60)} <small>{t('min')}</small></dd></div>
-          <div><dt>{t('Adaptaciones')}</dt><dd>{adaptations}</dd></div>
+          <div><dt>{t('Absorciones')}</dt><dd>{count(eaten)}</dd></div>
+          <div><dt>{t('Tiempo')}</dt><dd>{count(Math.floor(elapsed / 60))}{Number.isFinite(elapsed) && <small> {t('min')}</small>}</dd></div>
+          <div><dt>{t('Adaptaciones')}</dt><dd>{count(adaptations)}</dd></div>
         </dl>
         <footer className="journey-complete-actions">
           <button className="journey-rebirth-control" onClick={() => setConfirm(true)}>{t('Volver a nacer')}</button>
