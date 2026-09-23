@@ -2,7 +2,7 @@
 .voro-settings.final-ui:has(.membrane-settings){display:flex;align-items:flex-start;justify-content:center;width:100vw;max-width:none;height:100dvh;max-height:none;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);border:0;border-radius:0;overflow:auto;background:#021416 url('/ui/membrane/background.webp') center/cover no-repeat;isolation:isolate;box-shadow:none}
 .voro-settings.final-ui:has(.membrane-settings)::before,.voro-settings.final-ui:has(.membrane-settings)::after{display:none}
 .voro-settings.final-ui:has(.membrane-settings){flex-direction:column;align-items:center;justify-content:flex-start;height:var(--settings-viewport-height,100dvh)}
-.voro-settings.final-ui:has(.membrane-settings)>.settings-development-access{position:relative;inset:auto;order:2;flex:none;margin:0 16px 18px;align-self:center}
+.voro-settings.final-ui:has(.membrane-settings)>.settings-development-access{position:relative;inset:auto;order:2;flex:none;margin:0 16px 18px;align-self:center;min-height:44px;padding:10px 16px;border:1px solid #77dce2;border-radius:22px;background:#03242ff2;color:#dff8f7;font:14px/1.2 sans-serif;box-shadow:none}
 .voro-settings.final-ui .membrane-settings{position:relative;flex:none;container-type:inline-size;display:block;width:min(100%,480px);aspect-ratio:853/1844;min-height:0;padding:0;color:#f5faf9;font-family:Arial,Helvetica,sans-serif;isolation:isolate;background:none}
 .membrane-settings::before,.membrane-settings::after{display:none}
 .membrane-settings :is(button,a,select){font-family:inherit;letter-spacing:0;text-transform:none;cursor:pointer;touch-action:manipulation}
