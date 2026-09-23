@@ -1,0 +1,15 @@
+{
+  "id": "PR-009",
+  "from": 183,
+  "detail": "TF interno0.6.4(1),9381ebc,CI35793229429: VALID/IN_BETA_TESTING. ASC1.0 con0.6.2(1),sin revisión. Windows prueba5 conserva fixes/4estructuras/Película viva/Respira. Fuente1ba53b8: final29s, desaparición inmediata tras absorción; núcleo colapsa, sin estrella externa. Vacío5s y aparición12.5s conservados.7tests/tipos/QA móvil-PC OK. Privacidad EN/ES; Recorrido pendiente elección, espiral rechazada. Sin build/subida ni QA físico. design/finale-timing-2026-09-23.",
+  "to": 184,
+  "next": "VORO 01a06eb1-17bb-74c1-b4a4-f88225d8e26d:1ba53b8 local, final29s sin espera al desaparecer tras absorción. Núcleo se apaga/vacío5s/aparición intactos.7tests/tipos/QA móvil-PC OK. Sin build; falta QA físico. Visuales 01a0ce4b-784d-7460-9c93-f300aed8936b: La huella elegida como dirección; entregadas A1 Silencio/A2 Presencia/A3 Disolución, pendientes de elección, sin integración. Evidencia nueva-exploracion-20260923/variantes-a. Respira/privacidad se conservan. Escudo 01a0cd9f-2753-7da3-b0b6-1a8b2a185712: Película viva implementada local con VORO; QA móvil/PC y vídeo OK; mecánica intacta, sin TF nuevo. Marketing 01a096e2-5834-7233-9b36-d034a2d281fb: ASC1.0 EN/ES,0.6.2(1),manual,SIN revisión;capturas/previews listas;tráilers/redes listos;itch5004054 Draft,CSS pendiente. Detalles .studio/voro-coordinacion-20260923.md;imágenes .studio/design/voro/. QA físico pendiente.",
+  "tracking": {
+    "testflight": "Interno",
+    "appStore": "Creada en App Store Connect",
+    "ads": "Por confirmar",
+    "testflightUrl": "https://appstoreconnect.apple.com/teams/7f069118-9712-49c8-a1f0-fda00b62a281/apps/6809193565/testflight/groups/05db8744-bcf3-4c2d-a465-2635012bfeeb",
+    "appStoreUrl": "https://appstoreconnect.apple.com/apps/6809193565/distribution"
+  },
+  "verified": true
+}
