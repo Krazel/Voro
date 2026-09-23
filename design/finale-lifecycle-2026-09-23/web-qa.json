@@ -4,11 +4,11 @@
     "resumed": {
       "paused": true,
       "resumed": true,
-      "remaining": 22.4439,
+      "remaining": 22.423399999999997,
       "eaten": 47
     },
     "cold": {
-      "remaining": 22.402099999999997,
+      "remaining": 22.402499999999996,
       "complete": true,
       "ending": 0,
       "eaten": 47,
@@ -24,7 +24,7 @@
       "eaten": 47
     },
     "cold": {
-      "remaining": 18.0304,
+      "remaining": 18.0303,
       "complete": true,
       "ending": 0,
       "eaten": 47,
@@ -36,11 +36,11 @@
     "resumed": {
       "paused": true,
       "resumed": true,
-      "remaining": 15.9654,
+      "remaining": 15.965200000000001,
       "eaten": 47
     },
     "cold": {
-      "remaining": 15.9375,
+      "remaining": 15.9442,
       "complete": true,
       "ending": 0,
       "eaten": 47,
@@ -56,7 +56,7 @@
       "eaten": 47
     },
     "cold": {
-      "remaining": 12.830400000000001,
+      "remaining": 12.816500000000001,
       "complete": true,
       "ending": 0,
       "eaten": 47,
@@ -68,11 +68,11 @@
     "resumed": {
       "paused": true,
       "resumed": true,
-      "remaining": 4.9653,
+      "remaining": 4.9514000000000005,
       "eaten": 47
     },
     "cold": {
-      "remaining": 4.9445,
+      "remaining": 4.930700000000001,
       "complete": true,
       "ending": 0,
       "eaten": 47,

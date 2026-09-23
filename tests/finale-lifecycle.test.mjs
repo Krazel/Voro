@@ -36,3 +36,12 @@ test('Normal gameplay still pauses on background; legacy completed saves do not 
  const p=newJourney(2);p.stage=9;p.completed=true;delete p.finaleRemaining;
  const restored=loadJourney(saveJourney(p,journeyLife(p),{journal:new Map()},false));assert.equal(restored.progress.completed,true);assert.equal(restored.progress.finaleRemaining,0);
 });
+
+test('Low frame cadence does not stretch the final darkness; membrane integration remains bounded',()=>{
+ const {game:g}=makeEngine();g.startTest(9,230,false,true,true);g.beginUniverseFinale();
+ g.syncStageAssets=()=>{};Object.defineProperty(g,'assetsReady',{get:()=>true});g.render=()=>{};
+ let maxStep=0;const animate=g.animateMembrane.bind(g);g.animateMembrane=dt=>{maxStep=Math.max(maxStep,dt);animate(dt)};
+ g.last=1000;for(let stamp=1100;stamp<=32100&&g.ending>0;stamp+=100)g.frame(stamp);
+ assert.equal(g.ending,0,'A 31-second cinematic must finish in 31 seconds at 10fps');
+ assert.ok(maxStep<=.035);assert.ok(g.membrane.every(Number.isFinite));g.destroy();
+});

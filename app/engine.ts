@@ -1298,8 +1298,11 @@ export class VoroEngine {
         (!this.progress.completed || (this.ending > 0 && this.started)) &&
         (!this.started || this.assetsReady)
       ) {
-        this.time += dt;
-        this.measured('simulation', () => this.update(dt));
+        // Cinematics follow visible elapsed time even at low FPS. Keep the
+        // gameplay physics cap; a resumed background frame still starts at 16ms.
+        const step=this.ending>0?Math.min(interval>0?interval/1000:dt,.5):dt;
+        this.time += step;
+        this.measured('simulation', () => this.update(step));
         this.renderDirty = true;
         measured = this.started && this.diagnosticsEnabled;
       }
@@ -1424,7 +1427,7 @@ export class VoroEngine {
       const before = this.ending;
       this.ending = Math.max(0, this.ending - dt);
       this.progress.finaleRemaining=this.ending;
-      this.animateMembrane(dt);
+      this.animateMembrane(Math.min(dt,.035));
       if (before > FINALE_SECONDS - FINALE_MUSIC_FADE_AT && this.ending <= FINALE_SECONDS - FINALE_MUSIC_FADE_AT) this.setAudio();
       if (before > FINALE_SECONDS - FINALE_BLACK_AT && this.ending <= FINALE_SECONDS - FINALE_BLACK_AT) this.setAudio();
       if (!this.ending) {
