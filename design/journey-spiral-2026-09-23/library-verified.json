@@ -1,0 +1,16 @@
+{
+  "verified": true,
+  "beforeRevision": 177,
+  "afterRevision": 178,
+  "id": "PR-009",
+  "noBuildOrUpload": true,
+  "detail": "TF interno0.6.4(1),9381ebc,CI35793229429: VALID/IN_BETA_TESTING. App Store1.0 conserva0.6.2(1),sin revisión. Windows0.6.4 prueba5: audio/cámara/balance/Tierra/final24s/4estructuras/Película viva/Respira. Fuente local ae104fe añade Recorrido A Espiral manual y privacidad EN/ES;13tests/tipos/4vistas OK, sin nueva build/subida. TF aún lleva ApprovedPause; Respira candidata verificada en EXE. Evidencia design/journey-spiral-2026-09-23. Falta QA físico iOS.",
+  "tracking": {
+    "testflight": "Interno",
+    "appStore": "Creada en App Store Connect",
+    "ads": "Por confirmar",
+    "testflightUrl": "https://appstoreconnect.apple.com/teams/7f069118-9712-49c8-a1f0-fda00b62a281/apps/6809193565/testflight/groups/05db8744-bcf3-4c2d-a465-2635012bfeeb",
+    "appStoreUrl": "https://appstoreconnect.apple.com/apps/6809193565/distribution"
+  },
+  "next": "VORO 01a06eb1-17bb-74c1-b4a4-f88225d8e26d: ae104fe local, Recorrido A Espiral manual/confirmación y privacidad EN/ES;13tests/tipos/4vistas OK. Windows prueba5 conserva fixes/4estructuras. No nueva build; falta QA físico. UI 01a0b934-3ec1-79f1-8029-de6177fd0228: A Espiral refinada integrada local por VORO; privacidad EN/ES verificada. Respira correcta en EXE, TF aún ApprovedPause; usuario confirma TF. Evidencia journey-finale-20260923/carta-variantes. Escudo 01a0cd9f-2753-7da3-b0b6-1a8b2a185712: Película viva implementada local con VORO; QA móvil/PC y vídeo OK; mecánica intacta, sin TF nuevo. Marketing 01a096e2-5834-7233-9b36-d034a2d281fb: ASC1.0 EN/ES,0.6.2(1),manual,SIN revisión;capturas/previews listas;tráilers/redes listos;itch5004054 Draft,CSS pendiente. Detalles .studio/voro-coordinacion-20260923.md;imágenes .studio/design/voro/. QA físico pendiente."
+}
