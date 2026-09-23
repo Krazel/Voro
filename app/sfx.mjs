@@ -4,6 +4,10 @@ export const INGEST_SOUNDS = [1, 2, 3, 4, 5].map(index => `./sfx/ingest-${index}
 // 0.65 here attenuated bites to roughly -55 dBFS, easily masked on a phone.
 export const INGEST_GAIN = 2;
 export const INGEST_PITCH = Object.freeze({ min: -5, max: 6 });
+export const HIT_SOUNDS = Object.freeze({
+  damage: Object.freeze({type:'triangle',from:320,to:130,gain:.7,attack:.009,duration:.30}),
+  shield: Object.freeze({type:'sine',from:1340,to:360,gain:.48,attack:.006,duration:.38}),
+});
 
 export class SfxPlayer {
   constructor(context, output, {
@@ -28,8 +32,9 @@ export class SfxPlayer {
     this.lastAttemptAt = -Infinity;
     this.lastResumeAt = -Infinity;
     this.resuming = null;
-    this.lastDamageAt = -Infinity;
-    this.diagnostics = { attempts: 0, loadErrors: 0, readErrors: 0, decodeErrors: 0, lastLoadError: null, resumeErrors: 0, resumeAttempts: 0, playErrors: 0, requested: 0, played: 0, notReady: 0, notRunning: 0, throttled: 0, damageRequested: 0, damagePlayed: 0 };
+    this.lastImpactAt = -Infinity;
+    this.impactVoice = null;
+    this.diagnostics = { attempts: 0, loadErrors: 0, readErrors: 0, decodeErrors: 0, lastLoadError: null, resumeErrors: 0, resumeAttempts: 0, playErrors: 0, requested: 0, played: 0, notReady: 0, notRunning: 0, throttled: 0, damageRequested: 0, damagePlayed: 0, shieldRequested:0, shieldPlayed:0, impactThrottled:0 };
   }
   unlock() {
     if (this.destroyed) return Promise.resolve();
@@ -114,30 +119,51 @@ export class SfxPlayer {
     this.lastPlayedAt = at;
     return true;
   }
-  playDamage() {
+  playDamage() { return this.playImpact('damage'); }
+  playShield() { return this.playImpact('shield'); }
+  playImpact(kind) {
     if(this.destroyed)return false;
-    this.diagnostics.damageRequested++;
+    const sound=HIT_SOUNDS[kind];if(!sound)return false;
+    this.diagnostics[`${kind}Requested`]++;
     if(this.context.state && this.context.state!=='running'){this.diagnostics.notRunning++;return false;}
-    if(this.now()-this.lastDamageAt<150)return false;
+    if(this.impactVoice || this.now()-this.lastImpactAt<420){this.diagnostics.impactThrottled++;return false;}
     const at=this.context.currentTime;
-    // Midrange attack stays audible on small speakers, with an organic low tail.
+    // Organic low knock for damage; a higher, softer membrane snap for shield.
+    // One impact voice, no sample loading and no queued/replayed missed events.
     const source=this.context.createOscillator(),gain=this.context.createGain();
-    source.type='triangle';source.frequency.setValueAtTime(320,at);
-    source.frequency.exponentialRampToValueAtTime(105,at+.26);
-    gain.gain.setValueAtTime(0,at);gain.gain.linearRampToValueAtTime(.75,at+.008);
-    gain.gain.exponentialRampToValueAtTime(.001,at+.28);
+    source.type=sound.type;source.frequency.setValueAtTime(sound.from,at);
+    if(kind==='shield')source.frequency.exponentialRampToValueAtTime(1860,at+.035);
+    source.frequency.exponentialRampToValueAtTime(sound.to,at+sound.duration-.035);
+    gain.gain.setValueAtTime(0,at);gain.gain.linearRampToValueAtTime(sound.gain,at+sound.attack);
+    gain.gain.exponentialRampToValueAtTime(.001,at+sound.duration-.018);
+    gain.gain.linearRampToValueAtTime(0,at+sound.duration);
     source.connect(gain);gain.connect(this.output);
-    const voice={source,gain};this.voices.add(voice);
-    source.onended=()=>{source.disconnect();gain.disconnect();this.voices.delete(voice);};
-    try {source.start(at);source.stop(at+.3);}
+    const voice={source,gain};this.voices.add(voice);this.impactVoice=voice;
+    source.onended=()=>{source.disconnect();gain.disconnect();this.voices.delete(voice);if(this.impactVoice===voice)this.impactVoice=null;};
+    try {source.start(at);source.stop(at+sound.duration+.01);}
     catch {source.onended();this.diagnostics.playErrors++;return false;}
-    this.lastDamageAt=this.now();this.diagnostics.damagePlayed++;
+    this.lastImpactAt=this.now();this.diagnostics[`${kind}Played`]++;
     return true;
+  }
+  cancelImpacts() {
+    const voice=this.impactVoice;if(!voice)return;
+    const {source,gain}=voice,at=this.context.currentTime;
+    // A suspended context must never resume an old hit. During normal playback,
+    // use a short release rather than cutting a waveform at an arbitrary sample.
+    if(this.context.state!=='running'){
+      try{source.stop();}catch{}source.onended?.();source.onended=null;return;
+    }
+    if(voice.cancelling)return;voice.cancelling=true;
+    if(gain.gain.cancelAndHoldAtTime)gain.gain.cancelAndHoldAtTime(at);
+    else {gain.gain.cancelScheduledValues(at);gain.gain.setValueAtTime(gain.gain.value,at);}
+    gain.gain.linearRampToValueAtTime(0,at+.012);
+    try{source.stop(at+.016);}catch{}
   }
   destroy() {
     this.destroyed = true;
     for(const {source,gain} of this.voices){source.onended=null;try{source.stop();}catch{}source.disconnect();gain.disconnect();}
     this.voices.clear();
+    this.impactVoice = null;
     this.buffers = [];
     this.remaining = [];
   }

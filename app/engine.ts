@@ -179,6 +179,7 @@ export class VoroEngine {
   transitionAdvanced = false;
   transitionFrame: HTMLCanvasElement | null = null;
   ending = 0;
+  finaleBackgroundPause = false;
   universeFinale: UniverseFinale | null = null;
   comboClock = 0;
   comboMeals = 0;
@@ -472,6 +473,13 @@ export class VoroEngine {
     this.stats = upgradeStats(this.progress.mutations);
     this.seed();
     this.fragments = restoredFragments;
+    if(this.progress.completed && (this.progress.finaleRemaining || 0)>0){
+      // A cold launch cannot restore the captured universe bitmap. If closed
+      // before absorption finished, resume at the cell's fade, never replay rewards.
+      this.ending=Math.min(this.progress.finaleRemaining!,FINALE_SECONDS-FINALE_MUSIC_FADE_AT);
+      this.progress.finaleRemaining=this.ending;
+      this.universeFinale=new UniverseFinale();
+    }
     this.food = [...this.world.entities, ...this.fragments];
     if (this.progress.completed || (stageOf(this.progress).id === 'orbit' && this.progress.earthConsumed)) {
       this.world.entities = []; this.world.projectiles = [];
@@ -486,7 +494,7 @@ export class VoroEngine {
     const unlockMusic = () => { if(this.sound) { this.audioFocus=!document.hidden;this.initAudio(); this.setAudio(); this.music?.unlock(); } };
     window.addEventListener('pointerdown',unlockMusic,opt);
     window.addEventListener('keydown',unlockMusic,opt);
-    window.addEventListener('focus',()=>{this.audioFocus=true;if(this.sound&&this.audioStarted)this.initAudio();this.setAudio();},opt);
+    window.addEventListener('focus',()=>{this.audioFocus=true;this.resumeFinaleFromBackground();if(this.sound&&this.audioStarted)this.initAudio();this.setAudio();},opt);
     canvas.parentElement?.addEventListener('contextmenu', (event) => event.preventDefault(), opt);
     canvas.parentElement?.addEventListener('dragstart', (event) => event.preventDefault(), opt);
     canvas.addEventListener(
@@ -577,10 +585,12 @@ export class VoroEngine {
       opt,
     );
     window.addEventListener('keyup', (e) => this.keys.delete(e.code), opt);
+    window.addEventListener('pagehide', () => this.save(), opt);
     if (this.desktop) window.addEventListener('beforeunload', () => this.save(), opt);
     window.addEventListener(
       'blur',
       () => {
+        if(this.started && this.ending>0 && !this.paused && !this.settingsOpen)this.finaleBackgroundPause=true;
         this.audioFocus=false; this.setAudio();
         this.tilt.read(false);
         this.save();
@@ -599,6 +609,7 @@ export class VoroEngine {
       () => {
         this.tilt.read(false);
         if (document.hidden && this.started) {
+          if(this.ending>0 && !this.paused && !this.settingsOpen)this.finaleBackgroundPause=true;
           this.save();
           this.paused = true;
           this.keys.clear();
@@ -606,6 +617,7 @@ export class VoroEngine {
           this.setAudio();
           this.publish();
         }
+        if(!document.hidden)this.resumeFinaleFromBackground();
         this.setAudio();
         this.last = 0;
       },
@@ -643,6 +655,12 @@ export class VoroEngine {
     this.foodClock = 0;
     this.hitFlash = 0;
     this.heading = -Math.PI / 2;
+  }
+  resumeFinaleFromBackground() {
+    if(document.hidden || !this.finaleBackgroundPause)return;
+    this.finaleBackgroundPause=false;
+    if(this.ending<=0 || !this.started || this.settingsOpen)return;
+    this.paused=false;this.last=0;this.renderDirty=true;this.publish();
   }
   adaptationCanvas: HTMLCanvasElement | null = null;
   setAdaptationCanvas(canvas: HTMLCanvasElement | null) {
@@ -749,6 +767,7 @@ export class VoroEngine {
   setAudio() {
     this.syncMusic();
     const target=this.effectsAudible()?0.055:0;
+    if(!target || (this.audio && this.audio.state!=='running'))this.sfx?.cancelImpacts?.();
     if(this.audio && this.master && this.effectsGainTarget!==target){
       const now=this.audio.currentTime;
       if(this.master.gain.cancelAndHoldAtTime)this.master.gain.cancelAndHoldAtTime(now);
@@ -801,6 +820,7 @@ export class VoroEngine {
   save() {
     this.cancelSaveJob();
     if (this.testMode || (!this.started && !this.saved)) return;
+    if(this.progress.completed)this.progress.finaleRemaining=this.ending;
     const startedAt = this.diagnosticsEnabled ? performance.now() : 0;
     try {
       localStorage.setItem(
@@ -1275,7 +1295,7 @@ export class VoroEngine {
         !this.reviewHold &&
         !this.settingsOpen &&
         !this.progress.offer.length &&
-        (!this.progress.completed || this.ending > 0) &&
+        (!this.progress.completed || (this.ending > 0 && this.started)) &&
         (!this.started || this.assetsReady)
       ) {
         this.time += dt;
@@ -1403,6 +1423,7 @@ export class VoroEngine {
     if (this.ending > 0) {
       const before = this.ending;
       this.ending = Math.max(0, this.ending - dt);
+      this.progress.finaleRemaining=this.ending;
       this.animateMembrane(dt);
       if (before > FINALE_SECONDS - FINALE_MUSIC_FADE_AT && this.ending <= FINALE_SECONDS - FINALE_MUSIC_FADE_AT) this.setAudio();
       if (before > FINALE_SECONDS - FINALE_BLACK_AT && this.ending <= FINALE_SECONDS - FINALE_BLACK_AT) this.setAudio();
@@ -1411,7 +1432,7 @@ export class VoroEngine {
         this.life.vx=0; this.life.vy=0;
         this.food=[]; this.fragments=[]; this.motes=[]; this.world.entities=[]; this.world.projectiles=[];
         this.huntingTentacles.clear();
-        this.universeFinale?.destroy(); this.universeFinale = null; this.setAudio(); }
+        this.universeFinale?.destroy(); this.universeFinale = null; this.setAudio(); this.save(); }
       if (!this.ending || this.time - this.lastEmit > .12) { this.lastEmit=this.time; this.publish(); }
       return;
     }
@@ -1639,6 +1660,8 @@ export class VoroEngine {
     this.life.digestion = []; this.life.hurt = this.life.boost = 0;
     this.huntingTentacles.arms = [];
     this.ending = FINALE_SECONDS; this.hint = ''; this.flash = this.hitFlash = 0;
+    this.progress.finaleRemaining=this.ending;
+    this.finaleBackgroundPause=false;
     this.life.vx = this.life.vy = 0; this.keys.clear(); this.pointer = null;
     this.tilt.read(false); this.paused = false;
     this.tone(100,24,8,.35); this.setAudio(); this.save(); this.publish();
@@ -1713,7 +1736,7 @@ export class VoroEngine {
       p.invulnerable = 0.8;
       this.flash = 0.3;
       this.toast('Tu escudo ha absorbido el golpe.', 2);
-      this.impact();
+      this.impact('shield');
       this.publish();
       return 0;
     }
@@ -1802,8 +1825,10 @@ export class VoroEngine {
   slurp() {
     if (this.prepareEffects()) this.sfx?.playIngest();
   }
-  impact() {
-    if(this.prepareEffects())this.sfx?.playDamage();
+  impact(kind: 'damage' | 'shield' = 'damage') {
+    if(this.prepareEffects()){
+      if(kind==='shield')this.sfx?.playShield();else this.sfx?.playDamage();
+    }
   }
   tone(from: number, to: number, duration: number, gain: number) {
     if (!this.prepareEffects() || !this.audio || !this.master) return;

@@ -1,0 +1,82 @@
+[
+  {
+    "elapsed": 8.5,
+    "resumed": {
+      "paused": true,
+      "resumed": true,
+      "remaining": 22.4439,
+      "eaten": 47
+    },
+    "cold": {
+      "remaining": 22.402099999999997,
+      "complete": true,
+      "ending": 0,
+      "eaten": 47,
+      "saved": 0
+    }
+  },
+  {
+    "elapsed": 12.9,
+    "resumed": {
+      "paused": true,
+      "resumed": true,
+      "remaining": 18.0652,
+      "eaten": 47
+    },
+    "cold": {
+      "remaining": 18.0304,
+      "complete": true,
+      "ending": 0,
+      "eaten": 47,
+      "saved": 0
+    }
+  },
+  {
+    "elapsed": 15,
+    "resumed": {
+      "paused": true,
+      "resumed": true,
+      "remaining": 15.9654,
+      "eaten": 47
+    },
+    "cold": {
+      "remaining": 15.9375,
+      "complete": true,
+      "ending": 0,
+      "eaten": 47,
+      "saved": 0
+    }
+  },
+  {
+    "elapsed": 18.1,
+    "resumed": {
+      "paused": true,
+      "resumed": true,
+      "remaining": 12.8513,
+      "eaten": 47
+    },
+    "cold": {
+      "remaining": 12.830400000000001,
+      "complete": true,
+      "ending": 0,
+      "eaten": 47,
+      "saved": 0
+    }
+  },
+  {
+    "elapsed": 26,
+    "resumed": {
+      "paused": true,
+      "resumed": true,
+      "remaining": 4.9653,
+      "eaten": 47
+    },
+    "cold": {
+      "remaining": 4.9445,
+      "complete": true,
+      "ending": 0,
+      "eaten": 47,
+      "saved": 0
+    }
+  }
+]

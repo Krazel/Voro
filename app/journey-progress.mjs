@@ -1,4 +1,5 @@
 import { restoreOrbitSweep } from './orbital-sweep.mjs';
+import { FINALE_SECONDS } from './universe-finale.mjs';
 import { createLife, radiusForMass, clamp } from './simulation.mjs';
 import { newMicro, loadMicro, MICRO_SAVE } from './micro-progress.mjs';
 import {
@@ -38,6 +39,7 @@ export function newJourney(seed) {
     journeyVersion: 2,
     rerollUsed: false,
     completed: false,
+    finaleRemaining: /** @type {number|null} */ (null),
     pendingEvolution: false,
     finalReady: false,
     earthConsumed: false,
@@ -211,6 +213,8 @@ export function loadJourney(raw) {
       pendingEvolution:
         p.pendingEvolution === true && stage < STAGES.length - 1,
       completed: p.completed === true && stage === STAGES.length - 1,
+      finaleRemaining: p.completed === true && stage === STAGES.length - 1
+        ? (Number.isFinite(p.finaleRemaining) ? clamp(p.finaleRemaining,0,FINALE_SECONDS) : 0) : null,
       finalReady: p.finalReady === true && stage === STAGES.length - 1,
     };
     if (progress.level < p.level) {

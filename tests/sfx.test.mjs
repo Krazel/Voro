@@ -159,3 +159,17 @@ test('Random rounds cover every distinct gesture and do not repeat at round boun
   for(const id of new Set(ids))assert.ok(new Set(sources.filter(s=>s.buffer.id===id).map(s=>s.playbackRate.value)).size>1);
   player.destroy();
 });
+
+test('Impact voices are bounded, release to zero, and never replay interrupted hits',()=>{
+ let time=0;const nodes=[],envelopes=[];
+ const param=()=>({value:0,setValueAtTime(v,t){envelopes.push([v,t])},linearRampToValueAtTime(v,t){envelopes.push([v,t])},exponentialRampToValueAtTime(){},cancelScheduledValues(){}});
+ const c={state:'running',currentTime:0,createGain:()=>({gain:param(),connect(){},disconnect(){}}),createOscillator:()=>{const node={frequency:param(),connect(){},disconnect(){},start(){},stop(){}};nodes.push(node);return node;}};
+ const p=new SfxPlayer(c,{}, {now:()=>time});
+ assert.equal(p.playDamage(),true);
+ for(let i=0;i<100;i++){time+=1;assert.equal(p.playShield(),false)}
+ assert.equal(nodes.length,1);assert.equal(p.voices.size,1);assert.ok(envelopes.some(([v,t])=>v===0&&t===.3));
+ c.state='interrupted';p.cancelImpacts();assert.equal(p.voices.size,0);assert.equal(p.playShield(),false);
+ time=1000;c.state='running';assert.equal(p.stats().shieldPlayed,0);assert.equal(p.playShield(),true);
+ assert.equal(nodes[0].type,'triangle');assert.equal(nodes[1].type,'sine');assert.ok(envelopes.some(([v,t])=>v===0&&t===.38));
+ p.destroy();assert.equal(p.voices.size,0);assert.equal(p.playDamage(),false);
+});
