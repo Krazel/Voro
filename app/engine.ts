@@ -4,7 +4,7 @@ import { t as tr } from './language.mjs';
 import { MusicPlayer, musicScene } from './music.mjs';
 import { SfxPlayer } from './sfx.mjs';
 import { captureOrbit, sweepPosition } from './orbital-sweep.mjs';
-import { UniverseFinale, FINALE_SECONDS, drawVoidSurvivor } from './universe-finale.mjs';
+import { UniverseFinale, FINALE_SECONDS, FINALE_BLACK_AT, FINALE_MUSIC_FADE_AT, drawVoidSurvivor } from './universe-finale.mjs';
 import { WorldGround } from './world-ground.mjs';
 import { RELEASE } from './release.mjs';
 import { TiltControl } from './tilt-control.ts';
@@ -737,8 +737,11 @@ export class VoroEngine {
     }
   }
   syncMusic() {
+    const finalSilence = this.progress.completed && this.ending <= FINALE_SECONDS - FINALE_MUSIC_FADE_AT;
+    const fade = finalSilence && !this.paused && !this.settingsOpen && !document.hidden && this.audioFocus
+      ? FINALE_BLACK_AT - FINALE_MUSIC_FADE_AT : .08;
     this.music?.setState(musicScene(this.started,this.progress.completed,stageOf(this.progress).id),
-      !this.reviewHold && this.sound && this.audioFocus && !document.hidden && !this.paused && !this.settingsOpen && !this.progress.offer.length && !this.life.dead, document.hidden || !this.audioFocus);
+      !finalSilence && !this.reviewHold && this.sound && this.audioFocus && !document.hidden && !this.paused && !this.settingsOpen && !this.progress.offer.length && !this.life.dead, document.hidden || !this.audioFocus, fade);
   }
   setAudio() {
     this.syncMusic();
@@ -754,7 +757,7 @@ export class VoroEngine {
   effectsAudible() {
     return !this.reviewHold && this.sound && this.audioFocus && !document.hidden && !this.settingsOpen &&
       !this.paused && !this.progress.offer.length &&
-      (!this.progress.completed || this.ending > FINALE_SECONDS * .2);
+      (!this.progress.completed || this.ending > FINALE_SECONDS - FINALE_BLACK_AT);
   }
   prepareEffects() {
     if(!this.effectsAudible())return false;
@@ -1398,7 +1401,8 @@ export class VoroEngine {
       const before = this.ending;
       this.ending = Math.max(0, this.ending - dt);
       this.animateMembrane(dt);
-      if (before > FINALE_SECONDS * .2 && this.ending <= FINALE_SECONDS * .2) this.setAudio();
+      if (before > FINALE_SECONDS - FINALE_MUSIC_FADE_AT && this.ending <= FINALE_SECONDS - FINALE_MUSIC_FADE_AT) this.setAudio();
+      if (before > FINALE_SECONDS - FINALE_BLACK_AT && this.ending <= FINALE_SECONDS - FINALE_BLACK_AT) this.setAudio();
       if (!this.ending) {
         this.camera.x=this.life.x; this.camera.y=this.life.y;
         this.life.vx=0; this.life.vy=0;
@@ -1618,7 +1622,7 @@ export class VoroEngine {
       || (this.life.biomass < stageOf(this.progress).goal && !this.life.finalEaten)) return false;
     let frame = null;
     if ('createElement' in document) {
-      this.renderScene();
+      this.renderScene(true);
       frame = document.createElement('canvas');
       frame.width = this.canvas.width; frame.height = this.canvas.height;
       const captured = frame.getContext('2d');

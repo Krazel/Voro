@@ -29,13 +29,14 @@ export class MusicPlayer {
     if(param.cancelAndHoldAtTime)param.cancelAndHoldAtTime(now);
     else {param.cancelScheduledValues(now);param.setValueAtTime(param.value,now);}
     param.linearRampToValueAtTime(value,now+seconds);}
-  setState(id,active,immediate=false){
+  setState(id,active,immediate=false,fadeSeconds=.08){
     if(this.destroyed)return;
     if(MUSIC.some(t=>t.id===id))this.desired=id;
     if(this.active!==active){
       this.active=active;
-      this.ramp(this.bus.gain,active ? .42 : 0,.08);
-      if(!active){this.serial++;this.transition=null;this.pauseAt=this.context.currentTime+.08;this.decks.forEach(d=>{d.pending=false;if(immediate)d.audio.pause();});}
+      const fade=immediate?.08:Math.max(.08,Math.min(3,fadeSeconds));
+      this.ramp(this.bus.gain,active ? .42 : 0,fade);
+      if(!active){this.serial++;this.transition=null;this.pauseAt=this.context.currentTime+fade;this.decks.forEach(d=>{d.pending=false;if(immediate)d.audio.pause();});}
       else if(this.unlocked){this.blocked=false;this.resume();}
     }
     if(!active&&immediate)this.decks.forEach(d=>d.audio.pause());

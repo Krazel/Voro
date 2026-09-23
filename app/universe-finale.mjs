@@ -1,11 +1,31 @@
-export const FINALE_SECONDS = 24;
+export const FINALE_SECONDS = 31;
+export const FINALE_BLACK_AT = 13;
+export const FINALE_MUSIC_FADE_AT = 10;
+export const FINALE_REVEAL_AT = 18;
 const smooth = (a,b,x) => { const t = Math.max(0,Math.min(1,(x-a)/(b-a))); return t*t*(3-2*t); };
 export function finaleState(remaining) {
-  // Darkness closes from the outer universe to its centre, without shrinking it.
   const elapsed = Math.max(0, FINALE_SECONDS - remaining);
-  const u = Math.max(0,Math.min(1,elapsed/12));
-  return { u, growth: 1, darkness: smooth(.03,.8,u),
-    black: elapsed>=9.6, survivor: smooth(10.5,23,elapsed), caption: u<.3 ? 'Ya no hay nada más grande que tú.' : u<.55 ? 'Todo se apaga.' : u<.7 ? 'La última luz.' : '' };
+  const u = Math.max(0,Math.min(1,elapsed/FINALE_BLACK_AT));
+  return { elapsed, u, growth: 1+.22*smooth(0,9,elapsed),
+    contraction: 1-.985*smooth(.5,10.8,elapsed),
+    sceneLight: 1-smooth(7,10.8,elapsed), darkness: smooth(.4,11,elapsed),
+    bodyLight: 1-smooth(10,FINALE_BLACK_AT,elapsed),
+    black: elapsed>=FINALE_BLACK_AT, survivor: smooth(FINALE_REVEAL_AT,30.5,elapsed),
+    caption: elapsed<4 ? 'Ya no hay nada más grande que tú.' : elapsed<8.5 ? 'El universo entra en ti.' : elapsed<12.2 ? 'La última luz.' : '' };
+}
+// Deterministic, bounded paths with no particle spawning. The last
+// star reaches the cell exactly as the universe goes completely dark.
+export function fallingLight(index, elapsed, width, height, reduced = false) {
+  const last = index === 48, end = last ? FINALE_BLACK_AT : 5.5+(index%9)*.57;
+  const start = last ? 8 : .4+(index%7)*.24;
+  const progress=smooth(start,end,elapsed),distance=1-progress;
+  const angle=last ? -.92 : index*2.3999632297;
+  const turn=reduced ? 0 : (last?.22:.38)*progress;
+  const reach=last ? .72 : .26+((index*37)%71)/100;
+  return {x:width/2+Math.cos(angle+turn)*width*.62*reach*distance,
+    y:height*.48+Math.sin(angle+turn)*height*.59*reach*distance,
+    light:smooth(last?7:0,last?8.5:2,elapsed)*(1-smooth(end-.7,end,elapsed)),
+    radius:last?4.5-3*progress:1.1+(index%3)*.6,done:elapsed>=end};
 }
 export function drawVoidSurvivor(c, width, height, time, reduced, drawProtagonist, reveal = 1) {
   if (reveal <= 0) return;
@@ -43,12 +63,41 @@ export class UniverseFinale {
     c.fillStyle='#000'; c.fillRect(0,0,width,height);
     if(s.black) { drawVoidSurvivor(c,width,height,time,reduced,drawProtagonist,s.survivor); return; }
     if(this.frame) {
-      c.drawImage(this.frame,0,0,width,height);
+      c.save();c.translate(x,y);
+      if(!reduced)c.rotate(-.035*smooth(1,10,s.elapsed));
+      c.scale(s.contraction,s.contraction);c.globalAlpha=s.sceneLight;
+      c.drawImage(this.frame,-x,-y,width,height);c.restore();
     }
-    const span=Math.hypot(width/2,Math.max(y,height-y)), edge=span*(1-s.darkness);
-    const feather=span*.23;
-    const shadow=c.createRadialGradient(x,y,Math.max(0,edge-feather),x,y,Math.max(.01,edge));
+    // A feathered boundary removes the rectangle of the captured scene as it
+    // contracts. Its contents visibly converge under the living membrane.
+    const rx=width*.5*s.contraction,ry=height*.52*s.contraction;
+    const edge=1.55-.6*smooth(0,3,s.elapsed);
+    c.save();c.translate(x,y);c.scale(rx,ry);
+    const shadow=c.createRadialGradient(0,0,Math.max(0,edge-.4),0,0,edge);
     shadow.addColorStop(0,'rgba(0,0,0,0)');shadow.addColorStop(1,'#000');
-    c.fillStyle=shadow;c.fillRect(0,0,width,height);
+    c.fillStyle=shadow;c.fillRect(-x/rx,-y/ry,width/rx,height/ry);c.restore();
+    const count=reduced?16:48;
+    c.save();
+    for(let i=0;i<count;i++){
+      const p=fallingLight(i,s.elapsed,width,height,reduced);
+      if(p.done||p.light<=0)continue;
+      const tail=fallingLight(i,Math.max(0,s.elapsed-.35),width,height,reduced);
+      c.globalAlpha=p.light*.46;c.strokeStyle=i%3?'#acdce8':'#e8cfa1';c.lineWidth=.8;
+      c.beginPath();c.moveTo(tail.x,tail.y);c.lineTo(p.x,p.y);c.stroke();
+      c.globalAlpha=p.light*.85;c.fillStyle=i%3?'#c8e8f1':'#ffe9b5';
+      c.beginPath();c.arc(p.x,p.y,p.radius,0,Math.PI*2);c.fill();
+    }
+    c.globalAlpha=s.bodyLight;drawProtagonist(s.growth,false);
+    // The final light follows its own longer path; nothing flashes back on
+    // after it dies, including the protagonist, until the delayed reveal.
+    const star=fallingLight(48,s.elapsed,width,height,reduced);
+    if(star.light>0){
+      c.globalAlpha=star.light;
+      const glow=c.createRadialGradient(star.x,star.y,0,star.x,star.y,star.radius*8);
+      glow.addColorStop(0,'#fff4cf');glow.addColorStop(.14,'#ffd68b');glow.addColorStop(1,'#e39a3700');
+      c.fillStyle=glow;c.fillRect(star.x-star.radius*8,star.y-star.radius*8,star.radius*16,star.radius*16);
+      c.fillStyle='#fff7df';c.beginPath();c.arc(star.x,star.y,star.radius,0,Math.PI*2);c.fill();
+    }
+    c.restore();
   }
 }

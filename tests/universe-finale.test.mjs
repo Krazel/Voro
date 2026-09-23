@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { UniverseFinale, finaleState, FINALE_SECONDS } from '../app/universe-finale.mjs';
+import { UniverseFinale, finaleState, fallingLight, FINALE_SECONDS, FINALE_BLACK_AT, FINALE_REVEAL_AT } from '../app/universe-finale.mjs';
 import { makeEngine } from './engine-fixture.mjs';
 import { loadJourney, saveJourney } from '../app/journey-progress.mjs';
 import { STAGES } from '../app/journey-data.mjs';
@@ -27,18 +27,21 @@ test('Ending respects the final stage, biomass threshold and fixed-biome testing
   }
   game.destroy();
 });
-test('The universe stays full-sized while darkness closes from its edges, then the survivor remains',()=>{
-  assert.equal(finaleState(6).growth,1);
+test('The universe contracts into the cell, then stays completely black for five seconds before the original reveal',()=>{
+  assert.ok(finaleState(FINALE_SECONDS-8).contraction<.3);
   const images=[], survivors=[],fills=[];
   const c=new Proxy({fillStyle:'',fillRect(...args){fills.push([this.fillStyle,...args]);},
     drawImage(...args){images.push(args);},createRadialGradient(){return {addColorStop(){}}}},
     {get:(o,k)=>k in o?o[k]:()=>{}});
   const frame={width:1000,height:1800},scene=new UniverseFinale(frame);
   scene.draw(c,480,850,FINALE_SECONDS-8.16,false,()=>{},0);
-  assert.equal(images[0][3],480,'Captured universe never shrinks into the cell');
+  assert.equal(images[0][3],480,'One captured scene is transformed, without per-frame texture creation');
   assert.equal(images[0][4],850);
   images.length=0;
-  scene.draw(c,480,850,FINALE_SECONDS-9.6,false,()=>assert.fail('A short completely dark pause'),0);
+  for(let t=FINALE_BLACK_AT;t<=FINALE_REVEAL_AT;t+=.25){
+    scene.draw(c,480,850,FINALE_SECONDS-t,false,()=>assert.fail('Five seconds of complete darkness'),0);
+    assert.equal(finaleState(FINALE_SECONDS-t).survivor,0);
+  }
   assert.equal(images.length,0);
   for(const remaining of [1,0,-100]) {
     scene.draw(c,480,850,remaining,false,(size,solitary)=>survivors.push([size,solitary]),4);
@@ -48,6 +51,23 @@ test('The universe stays full-sized while darkness closes from its edges, then t
   assert.equal(images.length,0,'No background, galaxies or particles after absorption');
   assert.equal(fills[0][0],'#000');
   scene.destroy();assert.equal(frame.width,1);assert.equal(frame.height,1);
+});
+
+test('Every light converges toward the protagonist; the final star is the last to extinguish',()=>{
+ for(const reduced of [false,true])for(let index=0;index<=48;index++){
+  let distance=Infinity;
+  for(let elapsed=0;elapsed<=13;elapsed+=.25){
+   const p=fallingLight(index,elapsed,480,850,reduced);
+   const next=Math.hypot((p.x-240)/480,(p.y-408)/850);
+   assert.ok(next<=distance+1e-10,'Every point moves inward, never away');distance=next;
+  }
+  assert.ok(distance<1e-9);assert.equal(fallingLight(index,13,480,850,reduced).light,0);
+ }
+ assert.ok(fallingLight(48,12,480,850).light>0);
+ assert.ok(Array.from({length:48},(_,i)=>fallingLight(i,12,480,850)).every(p=>p.done));
+ const {game}=makeEngine();game.progress.completed=true;game.ending=FINALE_SECONDS-10;
+ const calls=[];game.music={setState:(...a)=>calls.push(a),destroy(){}};game.syncMusic();
+ assert.equal(calls[0][1],false);assert.equal(calls[0][3],3,'Music fades across the last star, then remains silent');game.destroy();
 });
 
 test('Completed movement stays unbounded for sustained motion in every direction',()=>{

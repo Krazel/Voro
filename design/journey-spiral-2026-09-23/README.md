@@ -1,5 +1,9 @@
 # Recorrido final A · Espiral y privacidad — candidata local
 
+**Estado posterior:** el usuario rechazó visualmente A Espiral. Se conserva como
+candidata histórica; no distribuir como aprobada. Nueva exploración visual en
+la tarea01a0ce4b-784d-7460-9c93-f300aed8936b. Privacidad y pausa Respira siguen válidas.
+
 23-09-2026. Encargo coordinado con la tarea UI 01a0b934-3ec1-79f1-8029-de6177fd0228.
 Referencia elegida: `approved.png`, copia intacta de la imagen A Espiral refinada
 en `.studio/design/voro/journey-finale-20260923/carta-variantes/` de Studio.

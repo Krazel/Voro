@@ -6,6 +6,7 @@ Política de privacidad|Privacy policy
 etapas completadas|stages completed
 Adaptaciones|Adaptations
 ABISAL|ABYSSAL
+El universo entra en ti.|The universe flows into you.
 Segundo entorno completado|Second environment completed
 La partida está en pausa. Continúa cuando quieras.|The game is paused. Continue when you're ready.
 Cargando…|Loading…
