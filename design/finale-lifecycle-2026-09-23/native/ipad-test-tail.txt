@@ -1,0 +1,160 @@
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCUnit.framework /Users/runner/Library/Developer/Xcode/DerivedData/App-dlkunlcngirvvbbbeqpgwvdlhlcp/Build/Products/Debug-iphonesimulator/StoreCapture-Runner.app/Frameworks
+
+Copy /Users/runner/Library/Developer/Xcode/DerivedData/App-dlkunlcngirvvbbbeqpgwvdlhlcp/Build/Products/Debug-iphonesimulator/StoreCapture-Runner.app/Frameworks/XCUIAutomation.framework /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCUIAutomation.framework (in target 'StoreCapture' from project 'App')
+    cd /Users/runner/work/Voro/Voro/ios/App
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCUIAutomation.framework /Users/runner/Library/Developer/Xcode/DerivedData/App-dlkunlcngirvvbbbeqpgwvdlhlcp/Build/Products/Debug-iphonesimulator/StoreCapture-Runner.app/Frameworks
+
+Copy /Users/runner/Library/Developer/Xcode/DerivedData/App-dlkunlcngirvvbbbeqpgwvdlhlcp/Build/Products/Debug-iphonesimulator/StoreCapture-Runner.app/Frameworks/XCTestSupport.framework /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestSupport.framework (in target 'StoreCapture' from project 'App')
+    cd /Users/runner/work/Voro/Voro/ios/App
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestSupport.framework /Users/runner/Library/Developer/Xcode/DerivedData/App-dlkunlcngirvvbbbeqpgwvdlhlcp/Build/Products/Debug-iphonesimulator/StoreCapture-Runner.app/Frameworks
+
+Copy /Users/runner/Library/Developer/Xcode/DerivedData/App-dlkunlcngirvvbbbeqpgwvdlhlcp/Build/Products/Debug-iphonesimulator/StoreCapture-Runner.app/Frameworks/XCTestCore.framework /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestCore.framework (in target 'StoreCapture' from project 'App')
+    cd /Users/runner/work/Voro/Voro/ios/App
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestCore.framework /Users/runner/Library/Developer/Xcode/DerivedData/App-dlkunlcngirvvbbbeqpgwvdlhlcp/Build/Products/Debug-iphonesimulator/StoreCapture-Runner.app/Frameworks
+
+Copy /Users/runner/Library/Developer/Xcode/DerivedData/App-dlkunlcngirvvbbbeqpgwvdlhlcp/Build/Products/Debug-iphonesimulator/StoreCapture-Runner.app/Frameworks/XCTest.framework /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCTest.framework (in target 'StoreCapture' from project 'App')
+    cd /Users/runner/work/Voro/Voro/ios/App
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCTest.framework /Users/runner/Library/Developer/Xcode/DerivedData/App-dlkunlcngirvvbbbeqpgwvdlhlcp/Build/Products/Debug-iphonesimulator/StoreCapture-Runner.app/Frameworks
+
+Copy /Users/runner/Library/Developer/Xcode/DerivedData/App-dlkunlcngirvvbbbeqpgwvdlhlcp/Build/Products/Debug-iphonesimulator/StoreCapture-Runner.app/Frameworks/XCTAutomationSupport.framework /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTAutomationSupport.framework (in target 'StoreCapture' from project 'App')
+    cd /Users/runner/work/Voro/Voro/ios/App
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTAutomationSupport.framework /Users/runner/Library/Developer/Xcode/DerivedData/App-dlkunlcngirvvbbbeqpgwvdlhlcp/Build/Products/Debug-iphonesimulator/StoreCapture-Runner.app/Frameworks
+
+Copy /Users/runner/Library/Developer/Xcode/DerivedData/App-dlkunlcngirvvbbbeqpgwvdlhlcp/Build/Products/Debug-iphonesimulator/StoreCapture-Runner.app/Frameworks/Testing.framework /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/Testing.framework (in target 'StoreCapture' from project 'App')
+    cd /Users/runner/work/Voro/Voro/ios/App
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/Testing.framework /Users/runner/Library/Developer/Xcode/DerivedData/App-dlkunlcngirvvbbbeqpgwvdlhlcp/Build/Products/Debug-iphonesimulator/StoreCapture-Runner.app/Frameworks
+
+RegisterExecutionPolicyException /Users/runner/Library/Developer/Xcode/DerivedData/App-dlkunlcngirvvbbbeqpgwvdlhlcp/Build/Products/Debug-iphonesimulator/StoreCapture-Runner.app/PlugIns/StoreCapture.xctest (in target 'StoreCapture' from project 'App')
+    cd /Users/runner/work/Voro/Voro/ios/App
+    builtin-RegisterExecutionPolicyException /Users/runner/Library/Developer/Xcode/DerivedData/App-dlkunlcngirvvbbbeqpgwvdlhlcp/Build/Products/Debug-iphonesimulator/StoreCapture-Runner.app/PlugIns/StoreCapture.xctest
+
+Touch /Users/runner/Library/Developer/Xcode/DerivedData/App-dlkunlcngirvvbbbeqpgwvdlhlcp/Build/Products/Debug-iphonesimulator/StoreCapture-Runner.app/PlugIns/StoreCapture.xctest (in target 'StoreCapture' from project 'App')
+    cd /Users/runner/work/Voro/Voro/ios/App
+    /usr/bin/touch -c /Users/runner/Library/Developer/Xcode/DerivedData/App-dlkunlcngirvvbbbeqpgwvdlhlcp/Build/Products/Debug-iphonesimulator/StoreCapture-Runner.app/PlugIns/StoreCapture.xctest
+
+2026-09-23 22:00:42.996106+0000 StoreCapture-Runner[18226:57095] [Default] Running tests...
+2026-09-23 22:00:43.200755+0000 StoreCapture-Runner[18226:57095] [UIKit App Config] Update the Info.plist: Launch screens will soon be required.
+objc[18226]: Class UIAccessibilityLoaderWebShared is implemented in both /Library/Developer/CoreSimulator/Volumes/iOS_23E254a/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 26.4.simruntime/Contents/Resources/RuntimeRoot/System/Library/AccessibilityBundles/WebCore.axbundle/WebCore (0x102fb8310) and /Library/Developer/CoreSimulator/Volumes/iOS_23E254a/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 26.4.simruntime/Contents/Resources/RuntimeRoot/System/Library/AccessibilityBundles/WebKit.axbundle/WebKit (0x106fc0398). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'All tests' started at 2026-09-23 22:00:53.884.
+Test Suite 'StoreCapture.xctest' started at 2026-09-23 22:00:53.887.
+Test Suite 'StoreCapture' started at 2026-09-23 22:00:53.887.
+Test Case '-[StoreCapture.StoreCapture testDarkFinaleBackgroundAndRelaunch]' started.
+    t =     0.00s Start Test at 2026-09-23 22:00:53.888
+    t =     1.54s Set Up
+    t =     1.56s Open com.dmkr.voro
+    t =     1.56s     Launch com.dmkr.voro
+2026-09-23 22:00:56.858 xcodebuild[6578:26826] [MT] IDELaunchParametersSnapshot: The operation couldn’t be completed. (DebuggerLLDB.DebuggerVersionStore.StoreError error 0.)
+2026-09-23 22:00:56.859 xcodebuild[6578:26826] [MT] IDELaunchParametersSnapshot: no debugger version
+    t =    16.31s         Setting up automation session
+    t =    21.01s         Wait for com.dmkr.voro to idle
+    t =    24.58s Waiting 120.0s for StaticText (First Match) to exist
+    t =    25.59s     Checking `Expect predicate `existsNoRetry == 1` for object StaticText (First Match)`
+    t =    25.59s         Checking existence of `StaticText (First Match)`
+    t =    27.44s         Capturing element debug description
+    t =    27.65s     Checking `Expect predicate `existsNoRetry == 1` for object StaticText (First Match)`
+    t =    27.65s         Checking existence of `StaticText (First Match)`
+    t =    28.17s         Capturing element debug description
+    t =    28.59s     Checking `Expect predicate `existsNoRetry == 1` for object StaticText (First Match)`
+    t =    28.59s         Checking existence of `StaticText (First Match)`
+    t =    28.67s         Capturing element debug description
+    t =    29.62s     Checking `Expect predicate `existsNoRetry == 1` for object StaticText (First Match)`
+    t =    29.62s         Checking existence of `StaticText (First Match)`
+    t =    29.69s         Capturing element debug description
+    t =    30.65s     Checking `Expect predicate `existsNoRetry == 1` for object StaticText (First Match)`
+    t =    30.65s         Checking existence of `StaticText (First Match)`
+    t =    30.71s         Capturing element debug description
+    t =    31.67s     Checking `Expect predicate `existsNoRetry == 1` for object StaticText (First Match)`
+    t =    31.67s         Checking existence of `StaticText (First Match)`
+    t =    31.72s         Capturing element debug description
+    t =    32.65s     Checking `Expect predicate `existsNoRetry == 1` for object StaticText (First Match)`
+    t =    32.66s         Checking existence of `StaticText (First Match)`
+    t =    32.70s         Capturing element debug description
+    t =    33.65s     Checking `Expect predicate `existsNoRetry == 1` for object StaticText (First Match)`
+    t =    33.65s         Checking existence of `StaticText (First Match)`
+    t =    33.87s         Capturing element debug description
+    t =    34.61s     Checking `Expect predicate `existsNoRetry == 1` for object StaticText (First Match)`
+    t =    34.61s         Checking existence of `StaticText (First Match)`
+    t =    34.68s         Capturing element debug description
+    t =    35.63s     Checking `Expect predicate `existsNoRetry == 1` for object StaticText (First Match)`
+    t =    35.63s         Checking existence of `StaticText (First Match)`
+    t =    35.69s         Capturing element debug description
+    t =    36.63s     Checking `Expect predicate `existsNoRetry == 1` for object StaticText (First Match)`
+    t =    36.63s         Checking existence of `StaticText (First Match)`
+    t =    44.29s         Capturing element debug description
+    t =    44.60s     Checking `Expect predicate `existsNoRetry == 1` for object StaticText (First Match)`
+    t =    44.60s         Checking existence of `StaticText (First Match)`
+    t =    48.27s         Capturing element debug description
+    t =    48.59s     Checking `Expect predicate `existsNoRetry == 1` for object StaticText (First Match)`
+    t =    48.59s         Checking existence of `StaticText (First Match)`
+    t =    69.44s         Capturing element debug description
+    t =    69.65s     Checking `Expect predicate `existsNoRetry == 1` for object StaticText (First Match)`
+    t =    69.66s         Checking existence of `StaticText (First Match)`
+    t =    70.19s Find the StaticText (First Match)
+    t =    71.64s Added attachment named '01-dark-before-background'
+    t =    71.66s Pressing Home button
+    t =    74.41s Open com.dmkr.voro
+    t =    74.42s     Activate com.dmkr.voro
+    t =    75.53s         Wait for com.dmkr.voro to idle
+    t =    75.55s Waiting 20.0s for "Finale checkpoint started paused false remaining 17" StaticText to exist
+    t =    76.69s     Checking `Expect predicate `existsNoRetry == 1` for object "Finale checkpoint started paused false remaining 17" StaticText`
+    t =    76.70s         Checking existence of `"Finale checkpoint started paused false remaining 17" StaticText`
+    t =    78.73s Find the "Finale checkpoint started paused false remaining 17" StaticText
+    t =    79.57s Added attachment named '02-resumed-dark'
+    t =    79.57s Terminate com.dmkr.voro:19203
+    t =    81.64s Open com.dmkr.voro
+    t =    81.64s     Launch com.dmkr.voro
+2026-09-23 22:02:15.803 xcodebuild[6578:26826] [MT] IDELaunchParametersSnapshot: The operation couldn’t be completed. (DebuggerLLDB.DebuggerVersionStore.StoreError error 0.)
+2026-09-23 22:02:15.803 xcodebuild[6578:26826] [MT] IDELaunchParametersSnapshot: no debugger version
+    t =    98.87s         Setting up automation session
+    t =   109.59s         Wait for com.dmkr.voro to idle
+    t =   113.14s Waiting 30.0s for "Finale checkpoint started paused false remaining 11" StaticText to exist
+    t =   114.22s     Checking `Expect predicate `existsNoRetry == 1` for object "Finale checkpoint started paused false remaining 11" StaticText`
+    t =   114.27s         Checking existence of `"Finale checkpoint started paused false remaining 11" StaticText`
+    t =   114.90s Find the "Finale checkpoint started paused false remaining 11" StaticText
+    t =   114.98s Waiting 30.0s for "Continuar partida" Button to exist
+    t =   116.03s     Checking `Expect predicate `existsNoRetry == 1` for object "Continuar partida" Button`
+    t =   116.03s         Checking existence of `"Continuar partida" Button`
+    t =   116.13s Tap "Continuar partida" Button
+    t =   116.13s     Wait for com.dmkr.voro to idle
+    t =   116.14s     Find the "Continuar partida" Button
+    t =   116.20s     Check for interrupting elements affecting "Continuar partida" Button
+    t =   116.87s         Wait for com.apple.springboard to idle
+    t =   117.17s     Synthesize event
+    t =   117.54s     Wait for com.dmkr.voro to idle
+    t =   118.13s Find the "Finale checkpoint intro paused false remaining 17" StaticText
+    t =   119.46s Find the "Finale checkpoint started paused false remaining 17" StaticText
+    t =   120.48s Added attachment named '03-restored-sequence'
+    t =   150.61s Find the "Finale checkpoint started paused false remaining 16" StaticText
+    t =   152.51s Added attachment named '04-survivor-after-relaunch'
+    t =   152.52s Checking existence of `"Tu recorrido" StaticText`
+    t =   153.17s Terminate com.dmkr.voro:21960
+    t =   156.19s Open com.dmkr.voro
+    t =   156.19s     Launch com.dmkr.voro
+2026-09-23 22:03:32.592 xcodebuild[6578:26826] [MT] IDELaunchParametersSnapshot: The operation couldn’t be completed. (DebuggerLLDB.DebuggerVersionStore.StoreError error 0.)
+2026-09-23 22:03:32.592 xcodebuild[6578:26826] [MT] IDELaunchParametersSnapshot: no debugger version
+    t =   160.90s         Setting up automation session
+    t =   170.60s         Wait for com.dmkr.voro to idle
+    t =   174.07s Waiting 30.0s for "Finale checkpoint started paused false remaining 0" StaticText to exist
+    t =   175.17s     Checking `Expect predicate `existsNoRetry == 1` for object "Finale checkpoint started paused false remaining 0" StaticText`
+    t =   175.18s         Checking existence of `"Finale checkpoint started paused false remaining 0" StaticText`
+    t =   176.17s Find the "Finale checkpoint started paused false remaining 0" StaticText
+    t =   177.02s Added attachment named '05-completion-persisted'
+    t =   177.05s Tear Down
+Test Case '-[StoreCapture.StoreCapture testDarkFinaleBackgroundAndRelaunch]' passed (178.375 seconds).
+Test Suite 'StoreCapture' passed at 2026-09-23 22:03:52.265.
+	 Executed 1 test, with 0 failures (0 unexpected) in 178.375 (178.378) seconds
+Test Suite 'StoreCapture.xctest' passed at 2026-09-23 22:03:52.267.
+	 Executed 1 test, with 0 failures (0 unexpected) in 178.375 (178.380) seconds
+Test Suite 'All tests' passed at 2026-09-23 22:03:52.267.
+	 Executed 1 test, with 0 failures (0 unexpected) in 178.375 (178.383) seconds
+2026-09-23 22:03:54.364 xcodebuild[6578:26826] [MT] IDETestOperationsObserverDebug: 270.748 elapsed -- Testing started completed.
+2026-09-23 22:03:54.365 xcodebuild[6578:26826] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-09-23 22:03:54.365 xcodebuild[6578:26826] [MT] IDETestOperationsObserverDebug: 270.748 sec, +270.748 sec -- end
+
+Test session results, code coverage, and logs:
+	/Users/runner/work/_temp/capture.xcresult
+
+** TEST SUCCEEDED **
+
+Testing started
