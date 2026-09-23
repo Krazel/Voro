@@ -5,8 +5,8 @@ export const INGEST_SOUNDS = [1, 2, 3, 4, 5].map(index => `./sfx/ingest-${index}
 export const INGEST_GAIN = 2;
 export const INGEST_PITCH = Object.freeze({ min: -5, max: 6 });
 export const HIT_SOUNDS = Object.freeze({
-  damage: Object.freeze({type:'triangle',from:320,to:130,gain:.7,attack:.009,duration:.30}),
-  shield: Object.freeze({type:'sine',from:1340,to:360,gain:.48,attack:.006,duration:.38}),
+  damage: Object.freeze({type:'triangle',from:320,to:130,gain:2.4,attack:.009,duration:.30}),
+  shield: Object.freeze({type:'sine',from:1340,to:360,gain:1.1,attack:.006,duration:.38}),
 });
 
 export class SfxPlayer {

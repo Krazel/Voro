@@ -23,7 +23,7 @@ try {
   const music=await mix.decodeAudioData(await(await fetch('/music/solace.mp3')).arrayBuffer());
   const track=mix.createBufferSource(),level=mix.createGain();track.buffer=music;level.gain.value=.42;track.connect(level);level.connect(mix.destination);track.start(0,45);
   for(const [kind,time] of [['damage',2],['shield',4],['damage',6]]){const src=mix.createBufferSource();src.buffer=buffers[kind];src.connect(mix.destination);src.start(time)}
-  const b=await mix.startRendering();files['music-damage-shield.wav']=wav(b);stats.mix={peak:Math.max(...b.getChannelData(0).filter((_,i)=>i%4===0).map(Math.abs)),duration:8};
+  const b=await mix.startRendering();files['music-damage-shield.wav']=wav(b);stats.mix={peak:b.getChannelData(0).reduce((peak,n)=>Math.max(peak,Math.abs(n)),0),duration:8};
   return {files,stats};
  });
  for(const [name,data] of Object.entries(result.files))await writeFile(`${out}/${name}`,Buffer.from(data,'base64'));
