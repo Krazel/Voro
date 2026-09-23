@@ -2,6 +2,7 @@
 .voro-settings.final-ui:has(.membrane-settings){display:flex;align-items:flex-start;justify-content:center;width:100vw;max-width:none;height:100dvh;max-height:none;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);border:0;border-radius:0;overflow:auto;background:#021416 url('/ui/membrane/background.webp') center/cover no-repeat;isolation:isolate;box-shadow:none}
 .voro-settings.final-ui:has(.membrane-settings)::before,.voro-settings.final-ui:has(.membrane-settings)::after{display:none}
 .voro-settings.final-ui:has(.membrane-settings){flex-direction:column;align-items:center;justify-content:flex-start;height:var(--settings-viewport-height,100dvh)}
+.voro-settings.final-ui:has(.membrane-settings[data-wide=true]){background-image:url('/ui/membrane/background-landscape.webp')}
 .voro-settings.final-ui:has(.membrane-settings)>.settings-development-access{position:relative;inset:auto;order:2;flex:none;margin:0 16px 18px;align-self:center;min-height:44px;padding:10px 16px;border:1px solid #77dce2;border-radius:22px;background:#03242ff2;color:#dff8f7;font:14px/1.2 sans-serif;box-shadow:none}
 .voro-settings.final-ui .membrane-settings{position:relative;flex:none;container-type:inline-size;display:block;width:min(100%,480px);aspect-ratio:853/1844;min-height:0;padding:0;color:#f5faf9;font-family:Arial,Helvetica,sans-serif;isolation:isolate;background:none}
 .membrane-settings::before,.membrane-settings::after{display:none}
@@ -11,9 +12,9 @@
 .membrane-heading{position:absolute;left:4%;right:4%;top:7.7%;text-align:center}
 .membrane-heading p{font-size:2.75cqw;letter-spacing:.24em;color:#b7d0d6;margin:0 0 3cqw}
 .membrane-heading h2{font:700 8.5cqw/1.1 Arial,Helvetica,sans-serif;letter-spacing:-.04em;margin:0}
-.membrane-controls{position:absolute;left:5%;top:17.1%;width:90%;height:38%;isolation:isolate}
+.membrane-controls{position:absolute;left:5%;top:17.1%;width:90%;height:42%;isolation:isolate}
 .membrane-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;z-index:-1;animation:membrane-drift 7s ease-in-out infinite;transform-origin:center}
-.membrane-control-content{position:absolute;left:10%;right:10%;top:14%;bottom:11%;display:grid;grid-template-rows:1.65fr 1fr 1fr 1fr;font-size:3.75cqw;font-weight:600}
+.membrane-control-content{position:absolute;left:15%;right:15%;top:17%;bottom:16%;display:grid;grid-template-rows:1.65fr 1fr 1fr 1fr;font-size:3.75cqw;font-weight:600}
 .membrane-movement{display:flex;flex-direction:column;justify-content:center;gap:1.5cqw;border-bottom:1px solid #91b6b44d;padding-bottom:2.2cqw}
 .membrane-segments{display:grid;grid-template-columns:1fr 1fr;padding:2px;border:1px solid #b9d7d678;border-radius:4.5cqw;background:linear-gradient(130deg,#8ea8a929,#4a686530);box-shadow:inset 0 0 15px #b8d5cf0d}
 .membrane-segments button{padding:2px 6px;border-radius:4cqw;font-size:3.7cqw;font-weight:600}
@@ -28,28 +29,28 @@
 .membrane-settings .language-preference label{font:inherit;color:inherit;letter-spacing:0}
 .membrane-settings .language-preference select{width:53%;height:8.8cqw;min-height:44px;padding:0 2.2cqw;border:1px solid #90b1b25e;border-radius:3.1cqw;background:#8baba421;color:#bfd4dc;font:500 3.45cqw Arial,Helvetica,sans-serif}
 .membrane-settings .language-preference option{background:#082226;color:#effffb}
-.membrane-links{position:absolute;left:5%;top:57.2%;width:90%;height:10%;display:grid;grid-template-columns:1fr 1fr;gap:2.4%}
+.membrane-links{position:absolute;left:5%;top:61%;width:90%;height:10%;display:grid;grid-template-columns:1fr 1fr;gap:2.4%}
 .membrane-links button{position:relative;isolation:isolate;padding:8%;font-size:3.8cqw;font-weight:600;min-width:0}
 .membrane-links button:nth-child(2) .membrane-frame{animation-delay:-3s}
 .membrane-links b{font-size:1.4em;font-weight:400;margin-left:.5em;color:#b7ccd2}
-.membrane-instagram{position:absolute;left:20%;width:60%;top:68.4%;height:6%;display:flex;gap:.4em;align-items:center;justify-content:center;text-decoration:none;font-size:3.65cqw;color:#dcebed;min-height:44px}
-.membrane-actions{position:absolute;left:16.5%;width:67%;top:75.8%;height:11.3%;display:flex;flex-direction:column;gap:2.1cqw}
+.membrane-instagram{position:absolute;left:20%;width:60%;top:72.2%;height:6%;display:flex;gap:.4em;align-items:center;justify-content:center;text-decoration:none;font-size:3.65cqw;color:#dcebed;min-height:44px}
+.membrane-actions{position:absolute;left:16.5%;width:67%;top:79.5%;height:11.3%;display:flex;flex-direction:column;gap:2.1cqw}
 .membrane-actions .membrane-rebirth{flex:1;border:1px solid #a5c4c573;border-radius:5cqw;background:linear-gradient(150deg,#94b7b330,#061b1dd9);color:#bcd1d9;font-size:3.7cqw;font-weight:600;box-shadow:inset 0 0 2cqw #a8d5d72b}
 .membrane-actions .membrane-return{flex:1.3;border:2px solid #d3f9e8;border-radius:7cqw;background:linear-gradient(140deg,#ade8d4,#6dbda7);color:#00160e;font-size:5cqw;font-weight:700;box-shadow:0 0 0 3px #78c0b05e,inset 0 0 12px #e4fff080}
-.membrane-privacy{position:absolute;left:15%;width:70%;top:88%;height:4%;min-height:44px;display:flex;align-items:center;justify-content:center;color:#b8d1d9;text-decoration:none;font-size:2.8cqw;letter-spacing:.025em!important}
+.membrane-privacy{position:absolute;left:15%;width:70%;top:93%;height:4%;min-height:44px;display:flex;align-items:center;justify-content:center;color:#b8d1d9;text-decoration:none;font-size:2.8cqw;letter-spacing:.025em!important}
 @keyframes membrane-drift{0%,100%{transform:scale(1)}50%{transform:scale(1.009,.995)}}
 @media(prefers-reduced-motion:reduce){.membrane-frame{animation:none}}
 .voro-settings.final-ui>.membrane-reset{display:block!important;position:fixed;z-index:50;left:50%;top:50%;transform:translate(-50%,-50%);width:min(88vw,420px);padding:24px;border:1px solid #99d8c6;border-radius:24px;background:#082323;box-shadow:0 0 0 100vmax #000b;color:#effbf6;font:17px/1.5 Arial,Helvetica,sans-serif}
 .membrane-reset button{min-height:44px;padding:10px 16px;margin:12px 8px 0 0;border:1px solid #81bbae;border-radius:18px;background:#274d47;color:#effbf6}
 .membrane-reset button:focus-visible{outline:2px solid #d8fff2;outline-offset:3px}
 .voro-settings.final-ui:has(.membrane-reset)>.settings-development-access{visibility:hidden}
-@media(max-width:360px){.membrane-settings .membrane-control-content{top:12%;bottom:10%}.membrane-settings .language-preference select{font-size:12px}}
+@media(max-width:360px){.membrane-settings .membrane-control-content{top:16%;bottom:15%}.membrane-settings .language-preference select{font-size:12px}}
 .voro-settings.final-ui .membrane-settings[data-wide=true]{width:min(1200px,100%);height:max(640px,calc(var(--settings-viewport-height,100dvh) - env(safe-area-inset-top) - env(safe-area-inset-bottom)));aspect-ratio:auto}
 .membrane-settings[data-wide=true] .membrane-heading{top:7%;left:5%;right:5%}
 .membrane-settings[data-wide=true] .membrane-heading p{font-size:14px;margin-bottom:12px}
 .membrane-settings[data-wide=true] .membrane-heading h2{font-size:36px}
 .membrane-settings[data-wide=true] .membrane-controls{left:5%;top:23%;width:53%;height:65%}
-.membrane-settings[data-wide=true] .membrane-control-content{font-size:20px;top:12%;bottom:10%}
+.membrane-settings[data-wide=true] .membrane-control-content{font-size:20px;top:17%;bottom:16%}
 .membrane-settings[data-wide=true] .membrane-segments button{font-size:19px}
 .membrane-settings[data-wide=true] .membrane-movement{gap:10px;padding-bottom:12px}
 .membrane-settings[data-wide=true] .membrane-switch{width:62px;height:34px}
@@ -67,7 +68,7 @@
 .membrane-detail .membrane-heading h2{font-size:8cqw;outline:none}
 .membrane-back{position:absolute;left:0;top:28%;width:44px;display:grid;place-items:center;border:1px solid #a9dfd577!important;border-radius:50%;background:#12413c66!important}
 .membrane-detail-panel{position:absolute;isolation:isolate;left:5%;top:19%;width:90%;height:51%;padding:0;border:0;border-radius:0;background:none;box-shadow:none;animation:none;overflow:visible}
-.membrane-detail-content{position:absolute;inset:11% 11%;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#83bbad transparent;font-size:3.8cqw;line-height:1.6}
+.membrane-detail-content{position:absolute;inset:16% 16%;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#83bbad transparent;font-size:3.8cqw;line-height:1.6}
 .membrane-detail .membrane-journey{max-height:none;overflow:visible;min-height:18cqw;padding:0 0 3cqw;margin:0;gap:0}
 .membrane-detail .membrane-journey li{min-height:12cqw;grid-template-columns:24px 1fr auto;gap:10px;font:600 4cqw/1.3 Arial,Helvetica,sans-serif;letter-spacing:0;text-transform:none;color:#d4e6e0}
 .membrane-detail .membrane-journey li::before{left:7px;background:#79b7a788}
@@ -93,7 +94,7 @@
 .membrane-detail[data-wide=true] .membrane-heading h2{font-size:36px}
 .membrane-detail[data-wide=true] .membrane-back{left:1%;top:15%}
 .membrane-detail[data-wide=true] .membrane-detail-panel{top:24%;left:15%;width:70%;height:54%}
-.membrane-detail[data-wide=true] .membrane-detail-content{inset:12% 10%;font-size:18px}
+.membrane-detail[data-wide=true] .membrane-detail-content{inset:16% 16%;font-size:18px}
 .membrane-detail[data-wide=true] .membrane-journey{min-height:0;padding:0 0 15px}
 .membrane-detail[data-wide=true] .membrane-journey li{min-height:54px;font-size:21px}
 .membrane-detail[data-wide=true] .membrane-journey small{font-size:14px}

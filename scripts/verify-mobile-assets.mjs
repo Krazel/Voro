@@ -20,7 +20,7 @@ const oldRule = '.micro-upgrade-dialog .mutation-choices button{';
 const newRule = '.cristal-choices.mutation-choices>button{';
 assert.ok(css.lastIndexOf(newRule) > css.lastIndexOf(oldRule), 'Cristal must load after legacy global styles');
 const sheetUrls = new Set(Object.values(animationSheets).flatMap(variants => Object.values(variants).map(m => m.url)));
-const journeyUrls = ['micro','pond','shore','sea','city','orbit','planets','stars','galaxies','universe','background','rebirth'].map(name=>`./ui/journey/d3/${name}.webp`).concat(['./ui/membrane/panel-cutout.webp','./ui/membrane/background.webp']);
+const journeyUrls = ['micro','pond','shore','sea','city','orbit','planets','stars','galaxies','universe','background','rebirth'].map(name=>`./ui/journey/d3/${name}.webp`).concat(['./ui/membrane/panel-cutout.webp','./ui/membrane/background.webp','./ui/membrane/background-landscape.webp']);
 for (const url of [...Object.values(BACKGROUND_ASSETS), ...Object.values(ATLAS_URLS), ...INGEST_SOUNDS, ...sheetUrls, ...journeyUrls, './ui/cristal/membrane-frame.png', './ui/approved/settings-plate.png', './ui/approved/pause-plate-v1.png']) {
   const relative = url.split('?')[0].replace(/^\.\//, '');
   const bundled = fs.readFileSync(path.join(root, relative));

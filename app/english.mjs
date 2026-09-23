@@ -57,6 +57,7 @@ Automático|Automatic
 Más opciones|More options
 Recorrido|Journey
 Créditos|Credits
+Ver licencias|View licenses
 Volver a nacer|Be born again
 Confirmar nueva vida|Confirm a new life
 Se borrará esta partida y sus adaptaciones.|This run and its adaptations will be erased.
