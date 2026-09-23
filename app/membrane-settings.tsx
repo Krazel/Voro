@@ -1,5 +1,6 @@
 'use client';
 import { useLayoutEffect, useRef } from 'react';
+import { ArrowUpRight } from 'lucide-react';
 import { DialogClose } from '@/components/ui/dialog';
 import { LanguagePicker } from './language-picker';
 import { t } from './language.mjs';
@@ -43,7 +44,7 @@ export function MembraneSettings({wide,tilt,leftHanded,sound,testMode,blocked,on
       <button onClick={()=>onSection('journey')}><Frame small/><span>{t('Recorrido')} <b aria-hidden="true">›</b></span></button>
       <button onClick={()=>onSection('credits')}><Frame small/><span>{t('Créditos')} <b aria-hidden="true">›</b></span></button>
     </nav>
-    <a className="membrane-instagram" href="https://www.instagram.com/krazelgames/" target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a>
+    <a className="membrane-instagram" href="https://www.instagram.com/krazelgames/" target="_blank" rel="noopener noreferrer">Instagram <ArrowUpRight aria-hidden="true" size="1.15em"/></a>
     <div className="membrane-actions">
       {!testMode&&<button className="membrane-rebirth" onClick={onRebirth}>{t('Volver a nacer')}</button>}
       <DialogClose className="membrane-return">{t('Volver al juego')}</DialogClose>

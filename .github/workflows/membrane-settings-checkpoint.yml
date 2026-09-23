@@ -20,6 +20,7 @@ jobs:
       - run: npm ci
       - name: Prepare settings UI test
         run: |
+          node scripts/membrane-settings-fixture.mjs
           cp scripts/MembraneSettingsCheckpoint.swift scripts/StoreCapture.swift
       - run: npm run ios:sync
       - name: Add capture-only XCTest target

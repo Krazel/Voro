@@ -9,18 +9,18 @@ final class StoreCapture: XCTestCase {
   let es=language == "es",app=XCUIApplication(bundleIdentifier:"com.dmkr.voro")
   app.launchArguments=["-AppleLanguages","(\(language))","-AppleLocale",es ? "es_ES" : "en_US"]
   app.launch()
-  let wake=app.buttons[es ? "Despertar" : "Awaken"]
-  if wake.waitForExistence(timeout:25) { wake.tap() }
   let settings=app.buttons[es ? "Configuración" : "Settings"].firstMatch
-  XCTAssertTrue(settings.waitForExistence(timeout:90),app.debugDescription);settings.tap()
+  XCTAssertTrue(settings.waitForExistence(timeout:120),app.debugDescription);sleep(3);settings.tap()
   let heading=app.staticTexts[es ? "Configuración" : "Settings"].firstMatch
   XCTAssertTrue(heading.waitForExistence(timeout:20));sleep(2)
   XCTAssertGreaterThanOrEqual(heading.frame.minX,0);XCTAssertLessThanOrEqual(heading.frame.maxX,app.frame.maxX)
   capture("01-membrane-portrait-\(language)")
-  let left=app.buttons[es ? "Modo zurdo" : "Left-handed mode"]
-  XCTAssertTrue(left.isHittable);left.tap();left.tap()
-  let sound=app.buttons[es ? "Sonido" : "Sound"]
-  XCTAssertTrue(sound.isHittable);sound.tap();sound.tap()
+  // WKWebView exposes aria-pressed controls as toggle/switch elements on iOS.
+  let left=app.descendants(matching:.any).matching(NSPredicate(format:"label == %@",es ? "Modo zurdo" : "Left-handed mode")).firstMatch
+  XCTAssertTrue(left.waitForExistence(timeout:15),app.debugDescription)
+  XCTAssertTrue(left.isHittable,app.debugDescription);left.tap();left.tap()
+  let sound=app.descendants(matching:.any).matching(NSPredicate(format:"label == %@",es ? "Sonido" : "Sound")).firstMatch
+  XCTAssertTrue(sound.isHittable,app.debugDescription);sound.tap();sound.tap()
   let journey=app.buttons[es ? "Recorrido" : "Journey"].firstMatch
   for _ in 0..<3 { if journey.isHittable {break};app.swipeUp() }
   XCTAssertTrue(journey.isHittable);journey.tap()
