@@ -2,6 +2,7 @@
 import {createRequire} from 'node:module';
 import {readFileSync,writeFileSync} from 'node:fs';
 import assert from 'node:assert/strict';
+import { INGEST_SOUNDS } from '../app/sfx.mjs';
 const req=createRequire(process.env.VORO_CANVAS_RUNTIME||import.meta.url);
 const {chromium}=req('playwright');
 const source=readFileSync('app/sfx.mjs','utf8').replaceAll('export ','');
@@ -26,7 +27,7 @@ try {
     }
     await context.close();return results;
   },source);
-  for(const r of results){assert.equal(r.decoded,3);assert.equal(r.played,6);assert.equal(r.loadErrors,0);}
+  for(const r of results){assert.equal(r.decoded,INGEST_SOUNDS.length);assert.equal(r.played,6);assert.equal(r.loadErrors,0);}
   writeFileSync('design/report-fixes-2026-09-22/audio-chromium.json',JSON.stringify({kind:'Desktop Chromium real WAV decoding/playback scheduling; does not validate physical iOS output',results},null,2)+'\n');
   console.log(JSON.stringify(results));
 }finally{await browser.close();}

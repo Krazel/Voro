@@ -7,8 +7,8 @@ export const POPULATION_PLANS = {
     note: 'Se conserva la población microscópica: nutrientes y células pequeñas predominan.',
   },
   pond: {
-    slots: [7, 5, 1],
-    note: 'Vida diminuta entre algas y restos; un peligro como máximo por zona.',
+    slots: [13, 10, 1],
+    note: 'Once plazas adicionales de fauna pacífica por zona: seis microcrustáceos y cinco animales variados. Se conserva una sola plaza de peligro.',
   },
   land: {
     slots: [6, 9, 1],
@@ -24,16 +24,16 @@ export const POPULATION_PLANS = {
     note: 'Diez plazas de peatones y una de automóvil sin armas por zona, dentro del mismo límite de población; además de objetos, edificios y defensa.',
   },
   orbit: {
-    slots: [5, 8, 1],
-    note: 'Más escombros, roca y hielo que naves o estaciones.',
+    slots: [4, 4, 1],
+    note: 'Nueve plazas por zona: escombros, satélites y estaciones más espaciados alrededor de la Tierra.',
   },
   planets: {
-    slots: [4, 7, 1],
-    note: 'Mundos pequeños y materia suelta, con gigantes dispersos.',
+    slots: [2, 3, 1],
+    note: 'Seis plazas por zona: mundos variados y materia suelta, con amplios espacios entre gigantes.',
   },
   stars: {
-    slots: [4, 7, 1],
-    note: 'Estrellas pequeñas, polvo y plasma; las estrellas extremas son escasas.',
+    slots: [3, 3, 1],
+    note: 'Siete plazas por zona: estrellas, polvo y plasma más separados, con un extremo como máximo.',
   },
   galaxies: {
     slots: [4, 5, 1],

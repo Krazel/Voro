@@ -1,0 +1,98 @@
+[
+  {
+    "stage": 1,
+    "mass": 0.45,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "frames": 360,
+    "cpuP50": 1.2999999998137355,
+    "cpuP95": 2.0999999998603016,
+    "intervalP95": 20.900000000001455,
+    "slow": 0,
+    "entities": 587,
+    "zoom": 2.3611673195923903,
+    "screenRadius": 26.880000000000003
+  },
+  {
+    "stage": 1,
+    "mass": 120,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "frames": 359,
+    "cpuP50": 1.6000000000931323,
+    "cpuP95": 2.5999999998603016,
+    "intervalP95": 20.900000000001455,
+    "slow": 1,
+    "entities": 572,
+    "zoom": 0.5580626770956045,
+    "screenRadius": 103.74563781749778
+  },
+  {
+    "stage": 2,
+    "mass": 8,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "frames": 359,
+    "cpuP50": 2.199999999953434,
+    "cpuP95": 3,
+    "intervalP95": 20.900000000001455,
+    "slow": 1,
+    "entities": 328,
+    "zoom": 1.526691205035906,
+    "screenRadius": 73.28117784172349
+  },
+  {
+    "stage": 1,
+    "mass": 0.45,
+    "viewport": {
+      "width": 1194,
+      "height": 834
+    },
+    "frames": 361,
+    "cpuP50": 1.2000000001862645,
+    "cpuP95": 1.8999999999068677,
+    "intervalP95": 20.900000000001455,
+    "slow": 0,
+    "entities": 587,
+    "zoom": 2.3611673195923903,
+    "screenRadius": 26.880000000000003
+  },
+  {
+    "stage": 1,
+    "mass": 120,
+    "viewport": {
+      "width": 1194,
+      "height": 834
+    },
+    "frames": 361,
+    "cpuP50": 2.7999999998137355,
+    "cpuP95": 4,
+    "intervalP95": 20.900000000001455,
+    "slow": 0,
+    "entities": 1134,
+    "zoom": 0.5580626770956045,
+    "screenRadius": 103.74563781749778
+  },
+  {
+    "stage": 2,
+    "mass": 8,
+    "viewport": {
+      "width": 1194,
+      "height": 834
+    },
+    "frames": 360,
+    "cpuP50": 2,
+    "cpuP95": 2.699999999953434,
+    "intervalP95": 20.900000000001455,
+    "slow": 1,
+    "entities": 328,
+    "zoom": 1.526691205035906,
+    "screenRadius": 73.28117784172349
+  }
+]

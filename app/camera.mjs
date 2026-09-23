@@ -1,11 +1,12 @@
-// Preserve the original 480-unit framing while small; open up gently as the
-// membrane grows. Mild compensation keeps growth clearly visible on screen.
+// Preserve entry framing. Growth remains visible, but approaches a readable
+// screen radius instead of reaching a zoom floor and covering the viewport.
 export function gameplayZoom(radius = 0, entryRadius = 24) {
   const reference = Number.isFinite(entryRadius) && entryRadius > 0 ? entryRadius : 24;
   const scale = 24 / reference;
   const normalizedRadius = radius * scale;
   if (!Number.isFinite(normalizedRadius) || normalizedRadius <= 34) return 1.12 * scale;
-  return Math.max(0.74, 1.12 * (34 / normalizedRadius) ** 0.24) * scale;
+  const screenRadius = 38.08 + (105 - 38.08) * (1 - Math.exp(-(normalizedRadius - 34) / 90));
+  return screenRadius / normalizedRadius * scale;
 }
 // Keep automatic entry framing from changing perceived travel speed.
 // Manual zoom remains a visual preference and does not alter gameplay speed.

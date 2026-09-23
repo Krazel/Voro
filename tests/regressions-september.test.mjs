@@ -18,8 +18,8 @@ test('TF build 3 adaptation progress migrates once, including an earned pending 
   assert.equal(loadJourney(saveJourney(loaded.progress,loaded.life,w,true)).progress.xp,loaded.progress.xp);
  }
 });
-test('Pond adds only one small-food slot, keeping the danger budget unchanged',()=>{
- assert.deepEqual(POPULATION_PLANS.pond.slots,[7,5,1]);
+test('Pond gains eleven peaceful fauna slots, keeping the danger budget unchanged',()=>{
+ assert.deepEqual(POPULATION_PLANS.pond.slots,[13,10,1]);
  assert.deepEqual(POPULATION_PLANS.water.slots,[5,5,2]);
 });
 test('Pause return to menu keeps the run and resumes without a new birth',()=>{

@@ -13,6 +13,7 @@ import { readLeftHanded, writeLeftHanded, subscribeControls, serverLeftHanded } 
 import Link from 'next/link';
 import { AdaptationChoices, CristalPreview } from './cristal-ui';
 import { ReviewMilestone } from './review-milestone';
+import { Capacitor } from '@capacitor/core';
 import { useBenchmarkAwake } from './benchmark-awake';
 import { FinalSettings } from './final-settings';
 import { isTabletDevice, wideScreenEnabled } from './desktop-viewport.mjs';
@@ -153,6 +154,7 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
     birth: 0,
     storageAvailable: true,
     transition: 0,
+    reviewHold: false,
     deaths: 0,
     biomass: 2,
     target: 150,
@@ -176,6 +178,7 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
   });
   useEffect(() => {
     const game = new VoroEngine(canvas.current!, setState, desktop);
+    game.reviewEnabled = Capacitor.getPlatform() === 'ios';
     engine.current = game;
     return () => {
       game.destroy();
@@ -386,7 +389,6 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
             >
               {tr(state.hint)}
             </output>
-            {tr(state.protected && !state.paused && !state.offer.length && <div className="protection-badge">{tr("MEMBRANA PROTEGIDA · ESCAPA")}</div>)}
             </div>
             {tr(showZoomControls && !state.paused && !state.offer.length && !state.transition && <fieldset className="zoom-controls" aria-label={tr("Zoom de cámara")}>
               <button aria-label={tr("Alejar cámara")} disabled={state.zoomFactor <= .75} onClick={() => engine.current?.setZoom(state.zoomFactor - .1)}>{tr("−")}</button>
@@ -417,7 +419,8 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
                 </span>
               </button>
             </div>
-            <div className="micro-buffs">
+            <div className="micro-buffs" data-dash-side={leftHanded ? 'left' : 'right'}>
+              {tr(state.protected && !state.paused && !state.offer.length && <span>{tr("MEMBRANA PROTEGIDA · ESCAPA")}</span>)}
               {tr(state.shield >= 0 && (
                 <span>
                   <Shield size={12} />
@@ -878,7 +881,7 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
           </DialogClose>
         </DialogContent>
       </Dialog>)}
-      <ReviewMilestone state={state} blocked={settings || testPanel || uiPreview || state.birth > 0 || finale} />
+      <ReviewMilestone held={state.reviewHold} onContinue={() => engine.current?.finishReview()} />
       {tr(!finalUI && !finale && <aside className="desktop-note">
         <span>
           {tr(String(state.stage + 1).padStart(2, '0'))}{tr(" —")}{tr(' ')}

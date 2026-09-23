@@ -8,7 +8,7 @@ const { _electron } = createRequire(runtime)('playwright');
 const release = JSON.parse(await readFile('desktop/release.json','utf8'));
 const base = resolve(`artifact/windows/${release.gameVersion}-preview.${release.preview}`);
 const executablePath = resolve(base, 'VORO-win32-x64/VORO.exe');
-const evidence = resolve(`design/windows-preview-${release.preview}-2026-09-22`);
+const evidence = resolve(`design/windows-preview-${release.preview}-${new Date().toISOString().slice(0,10)}`);
 await mkdir(evidence, { recursive: true });
 const profile = resolve('work/windows-package', `qa-profile-${Date.now()}`);
 const errors = [], failed = [], remoteRequests = [];

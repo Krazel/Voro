@@ -11,6 +11,7 @@ import { STAGE_SPECIES } from '../app/journey-data.mjs';
 import { newJourney, journeyLife } from '../app/journey-progress.mjs';
 import { HuntingTentacles } from '../app/hunting-tentacles.mjs';
 const sizes = {
+  'cosmic-wall':[512,512], 'lensed-crown':[512,512], 'cosmic-confluence':[512,512],
   cityCivilians: [1536,1024],
   ringedPlanet: [640,640],
   cityBuildings: [1536,1024],

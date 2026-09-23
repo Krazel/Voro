@@ -1,0 +1,98 @@
+[
+  {
+    "stage": 1,
+    "mass": 0.45,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "frames": 360,
+    "cpuP50": 1.0999999998603016,
+    "cpuP95": 1.6999999999534339,
+    "intervalP95": 20.900000000001455,
+    "slow": 1,
+    "entities": 326,
+    "zoom": 2.3611673195923903,
+    "screenRadius": 26.880000000000003
+  },
+  {
+    "stage": 1,
+    "mass": 120,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "frames": 361,
+    "cpuP50": 1.1999999999534339,
+    "cpuP95": 1.8000000000465661,
+    "intervalP95": 20.900000000001455,
+    "slow": 0,
+    "entities": 312,
+    "zoom": 1.5600569790164005,
+    "screenRadius": 290.01958554552834
+  },
+  {
+    "stage": 2,
+    "mass": 8,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "frames": 357,
+    "cpuP50": 1.5,
+    "cpuP95": 2.4000000001396984,
+    "intervalP95": 20.900000000001455,
+    "slow": 2,
+    "entities": 328,
+    "zoom": 1.8173798514946138,
+    "screenRadius": 87.23423287174145
+  },
+  {
+    "stage": 1,
+    "mass": 0.45,
+    "viewport": {
+      "width": 1194,
+      "height": 834
+    },
+    "frames": 360,
+    "cpuP50": 1.1000000000931323,
+    "cpuP95": 1.6999999999534339,
+    "intervalP95": 20.900000000001455,
+    "slow": 1,
+    "entities": 326,
+    "zoom": 2.3611673195923903,
+    "screenRadius": 26.880000000000003
+  },
+  {
+    "stage": 1,
+    "mass": 120,
+    "viewport": {
+      "width": 1194,
+      "height": 834
+    },
+    "frames": 361,
+    "cpuP50": 1.1999999999534339,
+    "cpuP95": 1.8000000000465661,
+    "intervalP95": 20.900000000001455,
+    "slow": 0,
+    "entities": 312,
+    "zoom": 1.5600569790164005,
+    "screenRadius": 290.01958554552834
+  },
+  {
+    "stage": 2,
+    "mass": 8,
+    "viewport": {
+      "width": 1194,
+      "height": 834
+    },
+    "frames": 360,
+    "cpuP50": 1.5,
+    "cpuP95": 2.5,
+    "intervalP95": 20.900000000001455,
+    "slow": 1,
+    "entities": 328,
+    "zoom": 1.8173798514946138,
+    "screenRadius": 87.23423287174145
+  }
+]

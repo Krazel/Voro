@@ -75,6 +75,8 @@ test('A shield blocks one hit, then damage and recycling apply during recharge',
   step(g);
   assert.equal(g.life.biomass, 2);
   assert.equal(g.progress.shieldRecharge, 40);
+  assert.equal(g.shieldHitAt,g.time);
+  assert.ok(Number.isFinite(g.shieldHitAngle));
   assert.ok(g.world.entities[0].escape > 0);
   g.life.invulnerable = 0;
   step(g);
@@ -87,6 +89,7 @@ test('A shield blocks one hit, then damage and recycling apply during recharge',
   isolate(g);
   step(g, 2401);
   assert.equal(g.progress.shieldRecharge, 0);
+  g.seed();assert.equal(g.shieldHitAt,-Infinity,'new life or environment clears visual hit');
   g.destroy();
 });
 test('Adaptation choices, pause and settings stop world time; retry retains choices, reset clears them', () => {

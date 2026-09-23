@@ -1,0 +1,42 @@
+{
+  "executablePath": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-camera\\artifact\\windows\\0.6.4-preview.4\\VORO-win32-x64\\VORO.exe",
+  "profile": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-camera\\work\\windows-package\\qa-profile-1790158401632",
+  "errors": [],
+  "failed": [],
+  "remoteRequests": [],
+  "runtime": {
+    "version": "0.6.4",
+    "electron": "44.4.3",
+    "chrome": "152.0.7977.130",
+    "gpu": {
+      "2d_canvas": "enabled",
+      "direct_rendering_display_compositor": "disabled_off_ok",
+      "gpu_compositing": "enabled",
+      "multiple_raster_threads": "enabled_on",
+      "opengl": "enabled_on",
+      "rasterization": "enabled",
+      "raw_draw": "disabled_off_ok",
+      "skia_graphite": "disabled_off",
+      "trees_in_viz": "disabled_off",
+      "video_decode": "enabled",
+      "video_encode": "enabled",
+      "webgl": "enabled",
+      "webgpu": "enabled",
+      "webnn": "disabled_off"
+    }
+  },
+  "origin": "voro://game",
+  "fullscreen": true,
+  "assets": {
+    "count": 213,
+    "bytes": 197945282
+  },
+  "audio": {
+    "state": "running",
+    "duration": 0.5,
+    "channels": 1,
+    "sampleRate": 48000
+  },
+  "saveSurvivesRestart": true,
+  "success": true
+}

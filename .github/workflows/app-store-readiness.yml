@@ -1,0 +1,60 @@
+name: VORO App Store readiness
+on:
+  workflow_dispatch:
+    inputs:
+      prepare:
+        description: Complete authorized metadata without submitting to review
+        type: boolean
+        default: false
+      upload_screenshots:
+        description: Upload and order visually verified store images
+        type: boolean
+        default: false
+      upload_previews:
+        description: Upload approved trailers without submitting review
+        type: boolean
+        default: false
+      correct_weapons_rating:
+        description: Correct weapons declaration from verified release-candidate content
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: voro-store-readiness
+  cancel-in-progress: false
+jobs:
+  audit:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: app-store-production
+    env:
+      ASC_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+      ASC_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+      ASC_KEY_BASE64: ${{ secrets.APP_STORE_CONNECT_API_KEY_BASE64 }}
+      PREPARE_STORE: ${{ inputs.prepare }}
+      UPLOAD_SCREENSHOTS: ${{ inputs.upload_screenshots }}
+      UPLOAD_PREVIEWS: ${{ inputs.upload_previews }}
+      CORRECT_WEAPONS_RATING: ${{ inputs.correct_weapons_rating }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Prepare protected API key
+        run: |
+          set -euo pipefail
+          mkdir -m 700 "$RUNNER_TEMP/asc-readiness"
+          printf '%s' "$ASC_KEY_BASE64" | base64 --decode > "$RUNNER_TEMP/asc-readiness/key.p8"
+          chmod 600 "$RUNNER_TEMP/asc-readiness/key.p8"
+          echo "ASC_PRIVATE_KEY_PATH=$RUNNER_TEMP/asc-readiness/key.p8" >> "$GITHUB_ENV"
+      - run: node scripts/app-store-readiness.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: VORO-store-readiness
+          path: artifact/store-readiness/
+          retention-days: 7
+      - name: Remove temporary key
+        if: always()
+        run: rm -f "$RUNNER_TEMP/asc-readiness/key.p8"

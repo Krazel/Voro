@@ -17,6 +17,10 @@ export function applyScaleAudit(stages, lists, byId) {
   // radius-derived requirement (including each individual's size) as civilians.
   for (const id of ['city-0','city-1','city-2','city-3','city-7','city-8','city-9'])
     set(id, { requiredMass: undefined });
+  // Weapon reach in biomass is independent of whether its owner is edible.
+  // Small arms fall away early; heavy vehicles threaten the middle/late city.
+  for(const [id,threatScale,edibleAt] of [['city-1',2,12],['city-3',2.8,18],['city-7',4,150],['city-8',3.5,230],['city-9',3,270]])
+    Object.assign(byId[id].shot,{threatScale,edibleAt});
   set('orbit-matter-panel', { r: 5 });
   set('orbit-matter-comet', { name: 'Fragmento de cometa' });
   set('planets-matter-comet', { name: 'Núcleo de planetoide helado' });

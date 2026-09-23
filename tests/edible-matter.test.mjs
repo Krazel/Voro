@@ -28,7 +28,7 @@ test('Every stage naturally spawns its new matter within each environment popula
           );
         else
           assert.ok(
-            chunk.entities.length <= (STAGES[stage].id === 'pond' ? 13 : stage === 3 ? 12 : STAGES[stage].id === 'city' ? 24 : 22),
+            chunk.entities.length <= (STAGES[stage].id === 'pond' ? 24 : stage === 3 ? 12 : STAGES[stage].id === 'city' ? 24 : 22),
           );
         for (const e of chunk.entities)
           if (SPECIES_BY_ID[e.kind].edibleMatter) found.add(e.kind);

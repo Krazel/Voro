@@ -1,0 +1,50 @@
+{
+  "attempts": 5,
+  "loadErrors": 0,
+  "readErrors": 0,
+  "decodeErrors": 0,
+  "lastLoadError": null,
+  "resumeErrors": 0,
+  "playErrors": 0,
+  "requested": 10,
+  "played": 10,
+  "notReady": 0,
+  "notRunning": 0,
+  "throttled": 0,
+  "decoded": 5,
+  "pending": false,
+  "voices": 1,
+  "contextState": "running",
+  "voiceGain": 2,
+  "ids": [
+    4,
+    3,
+    0,
+    1,
+    2,
+    0,
+    4,
+    2,
+    3,
+    1
+  ],
+  "rates": [
+    1.0775926113128662,
+    0.9166504144668579,
+    1.0890781879425049,
+    0.9164012670516968,
+    1.055627465248108,
+    0.7789325714111328,
+    0.7580686211585999,
+    0.7596221566200256,
+    1.4062365293502808,
+    1.2000499963760376
+  ],
+  "durations": [
+    0.5,
+    0.52,
+    0.54,
+    0.48,
+    0.58
+  ]
+}

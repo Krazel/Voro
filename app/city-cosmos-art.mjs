@@ -51,5 +51,19 @@ export function applyCityCosmosArt(stages, lists, byId, urls) {
   Object.assign(byId['planets-5'], {imageAtlas:'ringedPlanet', crop:[4,100,632,447]});
   // Ocean worlds are exceptional, not the default model for a planet.
   byId['planets-1'].populationWeight = .35;
+  const universe=stages.findIndex(s=>s.id==='universe');
+  for(const [key,name,r,value,range] of [
+    ['cosmic-wall','Gran muralla galáctica',165,30,[.85,1.18]],
+    ['lensed-crown','Corona de galaxias',175,34,[.86,1.18]],
+    ['cosmic-confluence','Confluencia de supercúmulos',190,39,[.9,1.12]],
+  ]) {
+    urls[key]=`./inhabitants/${key}-v1.webp`;
+    add(byId['universe-9'],`universe-${key}`,name,universe,{
+      r,value,sizeFactors:range,populationWeight:1.1,requiredMass:undefined,
+      kind:'still',speed:0,imageAtlas:key,crop:[0,0,512,512],
+      artProfile:{family:'prop',rigid:true,period:50,revision:1,
+        description:'Gran estructura cósmica con deriva lenta, sin deformación de la silueta.'},
+    });
+  }
 }
 

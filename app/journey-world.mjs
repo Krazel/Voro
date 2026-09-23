@@ -68,6 +68,8 @@ export class JourneyWorld extends MicroWorld {
       danger = list.filter(isDanger);
     const hunters = danger.filter(s => s.kind === 'hunter');
     const hazards = danger.filter(s => s.kind !== 'hunter');
+    const pondSmall = small.filter(s => !s.edibleMatter && s.id !== 'pond-0');
+    const pondLarge = medium.filter(s => !s.edibleMatter && s.id !== 'pond-0');
     const rng = random(
         (this.seed ^
           Math.imul(cx | 0, 73856093) ^
@@ -104,6 +106,10 @@ export class JourneyWorld extends MicroWorld {
     for (const i of slots) {
       let pool =
         i < starters ? small : i < starters + forage ? medium : danger;
+      // Preserve the original thirteen slots and their IDs/RNG sequence. Add
+      // peaceful animals after them; never turn the extra density into weeds
+      // or additional hunters, and keep consumed slots stable across saves.
+      if(stageId==='pond')pool=i<7?small:i<12?medium:i===12?danger:i<19?pondSmall:pondLarge;
       if (stageId === 'water' && i >= starters + forage)
         pool = i === starters + forage ? hunters : hazards;
       // One civilian car replaces a forage slot; never add population on top
@@ -202,9 +208,9 @@ export class JourneyWorld extends MicroWorld {
       if (e.eaten) continue;
       const s = SPECIES_BY_ID[e.kind];
       if (!s) continue;
-      // Keep every orbital entity resident and edible. Only suspend remote
+      // Keep every entity resident and edible. Only suspend remote
       // motion outside the padded view and outside all attack/feeding reach.
-      if (view && STAGES[this.stage].id === 'orbit'
+      if (view && ['orbit','pond'].includes(STAGES[this.stage].id)
         && Math.hypot(e.x-p.x,e.y-p.y)>Math.max(460,p.radius*p.reachFactor+100)
         && (e.x+e.r<view.left || e.x-e.r>view.right || e.y+e.r<view.top || e.y-e.r>view.bottom)) continue;
       if (s.edibleMatter) {
@@ -262,7 +268,7 @@ export class JourneyWorld extends MicroWorld {
             vy: Math.sin(angle) * v,
             life: 4.5,
             damage: s.shot.damage,
-            edibleAt: Math.min(s.shot.edibleAt, projectileThreatMass(e.requiredMass, s.shot.damage)),
+            edibleAt: Math.min(s.shot.edibleAt, projectileThreatMass(e.requiredMass, s.shot.damage, s.shot.threatScale)),
             r: STAGES[this.stage].id === 'city' ? 3 : 6,
             plasma: STAGES[this.stage].id !== 'city',
           });

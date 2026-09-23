@@ -14,9 +14,11 @@ export class MusicPlayer {
   constructor(context,{createAudio=()=>new Audio(),schedule=(fn)=>setInterval(fn,100),cancel=id=>clearInterval(id)}={}) {
     this.context=context;this.cancel=cancel;this.active=false;this.unlocked=false;
     this.desired='menu';this.current=null;this.destroyed=false;this.transition=null;this.serial=0;this.blocked=false;
+    this.diagnostics={switches:0,loops:0,waiting:0,stalled:0,errors:0};
     this.bus=context.createGain();this.bus.gain.value=0;this.bus.connect(context.destination);
     this.decks=Array.from({length:2},()=>{
       const audio=createAudio();audio.preload='auto';audio.setAttribute('playsinline','');
+      for(const type of ['waiting','stalled','error'])audio.addEventListener?.(type,()=>{this.diagnostics[type==='error'?'errors':type]++;});
       const source=context.createMediaElementSource(audio),gain=context.createGain();
       gain.gain.value=0;source.connect(gain);gain.connect(this.bus);
       return {audio,source,gain,id:null,pending:false};
@@ -47,12 +49,16 @@ export class MusicPlayer {
     // gain ramps. Retry only an interrupted context or rejected/paused playback.
     if(this.unlocked&&!this.blocked&&this.context.state==='running'
       &&(!this.active||this.transition||this.current?.audio.paused===false))return;
+    const firstUnlock=!this.unlocked;
     this.unlocked=true;this.blocked=false;
     if(this.context.state!=='running')this.context.resume().catch(()=>{});
     if(!this.current){this.current=this.decks[0];this.current.gain.gain.value=1;}
     for(const d of this.decks){
       if(!d.id){const track=MUSIC.find(t=>t.id===this.desired);d.id=this.desired;d.audio.src=track.url;}
       if(!this.active)continue;
+      // Prime the spare decoder only once. Replaying it on later gestures can
+      // briefly expose the previous biome's song during an interrupted fade.
+      if(!firstUnlock&&d!==this.current&&d!==this.transition?.next)continue;
       if(d!==this.current&&d!==this.transition?.next){d.gain.gain.cancelScheduledValues(this.context.currentTime);d.gain.gain.value=0;}
       d.audio.play().then(()=>{if(this.destroyed||!this.active)d.audio.pause();else if(d!==this.current&&d!==this.transition?.next)d.audio.pause();}).catch(e=>{if(e.name!=='AbortError')this.blocked=true;});
     }
@@ -70,6 +76,7 @@ export class MusicPlayer {
     const old=this.current;
     const next=this.decks.find(d=>d!==old);if(next.pending)return;
     const track=MUSIC.find(t=>t.id===id);if(!track)return;
+    this.diagnostics.switches++;if(loop)this.diagnostics.loops++;
     const token=++this.serial;next.pending=true;
     next.audio.pause();next.gain.gain.cancelScheduledValues(this.context.currentTime);next.gain.gain.value=0;
     if(next.id!==id){next.id=id;next.audio.src=track.url;}next.audio.currentTime=0;
@@ -102,4 +109,7 @@ export class MusicPlayer {
     this.decks.forEach(d=>{d.audio.pause();d.audio.removeAttribute('src');d.audio.load();d.source.disconnect();d.gain.disconnect();});
     this.bus.disconnect();
   }
+  stats(){return {...this.diagnostics,desired:this.desired,current:this.current?.id||null,active:this.active,blocked:this.blocked,transition:!!this.transition,
+    context:this.context.state,sampleRate:this.context.sampleRate,baseLatency:this.context.baseLatency,outputLatency:this.context.outputLatency,
+    decks:this.decks.map(d=>({id:d.id,paused:d.audio.paused,pending:d.pending,readyState:d.audio.readyState,networkState:d.audio.networkState,time:d.audio.currentTime,duration:Number.isFinite(d.audio.duration)?d.audio.duration:null,error:d.audio.error?.code||null}))};}
 }

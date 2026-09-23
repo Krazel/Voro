@@ -1,0 +1,575 @@
+[
+  {
+    "label": "tf064",
+    "decks": [
+      {
+        "id": "micro",
+        "paused": false,
+        "gain": 0.4726719558238983
+      },
+      {
+        "id": "pond",
+        "paused": false,
+        "gain": 1
+      }
+    ],
+    "afterLoop": [
+      {
+        "id": "pond",
+        "paused": false,
+        "gain": 1
+      },
+      {
+        "id": "pond",
+        "paused": true,
+        "gain": 0
+      }
+    ],
+    "afterThird": [
+      {
+        "id": "pond",
+        "paused": true,
+        "gain": 0
+      },
+      {
+        "id": "land",
+        "paused": false,
+        "gain": 1
+      }
+    ],
+    "afterStars": [
+      {
+        "id": "stars",
+        "paused": false,
+        "gain": 1
+      },
+      {
+        "id": "land",
+        "paused": false,
+        "gain": 0.47000524401664734
+      }
+    ],
+    "starsLoop": [
+      {
+        "id": "stars",
+        "paused": true,
+        "gain": 0
+      },
+      {
+        "id": "stars",
+        "paused": false,
+        "gain": 1
+      }
+    ],
+    "finalRest": [
+      {
+        "id": "final",
+        "paused": false,
+        "gain": 1
+      },
+      {
+        "id": "stars",
+        "paused": true,
+        "gain": 0
+      }
+    ],
+    "finalMoving": [
+      {
+        "id": "final",
+        "paused": false,
+        "gain": 1
+      },
+      {
+        "id": "stars",
+        "paused": true,
+        "gain": 0
+      }
+    ],
+    "finalLoop": [
+      {
+        "id": "final",
+        "paused": true,
+        "gain": 0
+      },
+      {
+        "id": "final",
+        "paused": false,
+        "gain": 1
+      }
+    ],
+    "peak": 0.10746128112077713,
+    "clipped": 0,
+    "events": [
+      {
+        "deck": 0,
+        "type": "waiting",
+        "t": 0.021
+      },
+      {
+        "deck": 1,
+        "type": "waiting",
+        "t": 0.021
+      },
+      {
+        "deck": 1,
+        "type": "playing",
+        "t": 0.072
+      },
+      {
+        "deck": 1,
+        "type": "pause",
+        "t": 0.072
+      },
+      {
+        "deck": 0,
+        "type": "playing",
+        "t": 0.072
+      },
+      {
+        "deck": 0,
+        "type": "waiting",
+        "t": 0.72
+      },
+      {
+        "deck": 1,
+        "type": "waiting",
+        "t": 0.72
+      },
+      {
+        "deck": 0,
+        "type": "playing",
+        "t": 0.72
+      },
+      {
+        "deck": 1,
+        "type": "playing",
+        "t": 0.731
+      },
+      {
+        "deck": 1,
+        "type": "waiting",
+        "t": 1.92
+      },
+      {
+        "deck": 1,
+        "type": "playing",
+        "t": 1.92
+      },
+      {
+        "deck": 1,
+        "type": "waiting",
+        "t": 5.341
+      },
+      {
+        "deck": 1,
+        "type": "playing",
+        "t": 5.341
+      },
+      {
+        "deck": 0,
+        "type": "waiting",
+        "t": 5.4
+      },
+      {
+        "deck": 0,
+        "type": "playing",
+        "t": 5.411
+      },
+      {
+        "deck": 1,
+        "type": "pause",
+        "t": 9.512
+      },
+      {
+        "deck": 1,
+        "type": "waiting",
+        "t": 10.24
+      },
+      {
+        "deck": 1,
+        "type": "playing",
+        "t": 10.251
+      },
+      {
+        "deck": 0,
+        "type": "pause",
+        "t": 14.301
+      },
+      {
+        "deck": 0,
+        "type": "waiting",
+        "t": 14.752
+      },
+      {
+        "deck": 0,
+        "type": "playing",
+        "t": 14.752
+      },
+      {
+        "deck": 0,
+        "type": "waiting",
+        "t": 15.952
+      },
+      {
+        "deck": 0,
+        "type": "playing",
+        "t": 15.952
+      },
+      {
+        "deck": 0,
+        "type": "waiting",
+        "t": 16.872
+      },
+      {
+        "deck": 0,
+        "type": "playing",
+        "t": 16.88
+      },
+      {
+        "deck": 1,
+        "type": "waiting",
+        "t": 16.912
+      },
+      {
+        "deck": 1,
+        "type": "playing",
+        "t": 16.912
+      },
+      {
+        "deck": 0,
+        "type": "pause",
+        "t": 21
+      },
+      {
+        "deck": 0,
+        "type": "waiting",
+        "t": 21.771
+      },
+      {
+        "deck": 0,
+        "type": "playing",
+        "t": 21.781
+      },
+      {
+        "deck": 1,
+        "type": "pause",
+        "t": 25.8
+      },
+      {
+        "deck": 0,
+        "type": "waiting",
+        "t": 26.912
+      },
+      {
+        "deck": 1,
+        "type": "waiting",
+        "t": 26.912
+      },
+      {
+        "deck": 1,
+        "type": "playing",
+        "t": 26.92
+      },
+      {
+        "deck": 0,
+        "type": "playing",
+        "t": 26.92
+      },
+      {
+        "deck": 0,
+        "type": "pause",
+        "t": 31
+      }
+    ],
+    "sampleRate": 48000
+  },
+  {
+    "label": "candidate",
+    "decks": [
+      {
+        "id": "micro",
+        "paused": true,
+        "gain": 0
+      },
+      {
+        "id": "pond",
+        "paused": false,
+        "gain": 1
+      }
+    ],
+    "afterLoop": [
+      {
+        "id": "pond",
+        "paused": false,
+        "gain": 1
+      },
+      {
+        "id": "pond",
+        "paused": true,
+        "gain": 0
+      }
+    ],
+    "afterThird": [
+      {
+        "id": "pond",
+        "paused": true,
+        "gain": 0
+      },
+      {
+        "id": "land",
+        "paused": false,
+        "gain": 1
+      }
+    ],
+    "afterStars": [
+      {
+        "id": "stars",
+        "paused": false,
+        "gain": 1
+      },
+      {
+        "id": "land",
+        "paused": true,
+        "gain": 0
+      }
+    ],
+    "starsLoop": [
+      {
+        "id": "stars",
+        "paused": true,
+        "gain": 0
+      },
+      {
+        "id": "stars",
+        "paused": false,
+        "gain": 1
+      }
+    ],
+    "finalRest": [
+      {
+        "id": "final",
+        "paused": false,
+        "gain": 1
+      },
+      {
+        "id": "stars",
+        "paused": true,
+        "gain": 0
+      }
+    ],
+    "finalMoving": [
+      {
+        "id": "final",
+        "paused": false,
+        "gain": 1
+      },
+      {
+        "id": "stars",
+        "paused": true,
+        "gain": 0
+      }
+    ],
+    "finalLoop": [
+      {
+        "id": "final",
+        "paused": true,
+        "gain": 0
+      },
+      {
+        "id": "final",
+        "paused": false,
+        "gain": 1
+      }
+    ],
+    "peak": 0.10748201608657837,
+    "clipped": 0,
+    "events": [
+      {
+        "deck": 0,
+        "type": "waiting",
+        "t": 0.131
+      },
+      {
+        "deck": 1,
+        "type": "waiting",
+        "t": 0.131
+      },
+      {
+        "deck": 1,
+        "type": "pause",
+        "t": 0.131
+      },
+      {
+        "deck": 0,
+        "type": "playing",
+        "t": 0.131
+      },
+      {
+        "deck": 0,
+        "type": "waiting",
+        "t": 0.8
+      },
+      {
+        "deck": 1,
+        "type": "waiting",
+        "t": 0.8
+      },
+      {
+        "deck": 0,
+        "type": "playing",
+        "t": 0.8
+      },
+      {
+        "deck": 1,
+        "type": "playing",
+        "t": 0.811
+      },
+      {
+        "deck": 1,
+        "type": "waiting",
+        "t": 2
+      },
+      {
+        "deck": 1,
+        "type": "playing",
+        "t": 2.011
+      },
+      {
+        "deck": 0,
+        "type": "pause",
+        "t": 2.032
+      },
+      {
+        "deck": 1,
+        "type": "waiting",
+        "t": 5.432
+      },
+      {
+        "deck": 1,
+        "type": "playing",
+        "t": 5.432
+      },
+      {
+        "deck": 0,
+        "type": "waiting",
+        "t": 5.491
+      },
+      {
+        "deck": 0,
+        "type": "playing",
+        "t": 5.491
+      },
+      {
+        "deck": 1,
+        "type": "pause",
+        "t": 9.491
+      },
+      {
+        "deck": 1,
+        "type": "waiting",
+        "t": 10.331
+      },
+      {
+        "deck": 1,
+        "type": "playing",
+        "t": 10.341
+      },
+      {
+        "deck": 0,
+        "type": "pause",
+        "t": 14.392
+      },
+      {
+        "deck": 0,
+        "type": "waiting",
+        "t": 14.832
+      },
+      {
+        "deck": 0,
+        "type": "playing",
+        "t": 14.84
+      },
+      {
+        "deck": 0,
+        "type": "waiting",
+        "t": 16.032
+      },
+      {
+        "deck": 0,
+        "type": "playing",
+        "t": 16.032
+      },
+      {
+        "deck": 1,
+        "type": "pause",
+        "t": 16.051
+      },
+      {
+        "deck": 0,
+        "type": "waiting",
+        "t": 16.96
+      },
+      {
+        "deck": 0,
+        "type": "playing",
+        "t": 16.96
+      },
+      {
+        "deck": 1,
+        "type": "waiting",
+        "t": 16.992
+      },
+      {
+        "deck": 1,
+        "type": "playing",
+        "t": 16.992
+      },
+      {
+        "deck": 0,
+        "type": "pause",
+        "t": 20.992
+      },
+      {
+        "deck": 0,
+        "type": "waiting",
+        "t": 21.861
+      },
+      {
+        "deck": 0,
+        "type": "playing",
+        "t": 21.872
+      },
+      {
+        "deck": 1,
+        "type": "pause",
+        "t": 25.891
+      },
+      {
+        "deck": 0,
+        "type": "waiting",
+        "t": 26.981
+      },
+      {
+        "deck": 1,
+        "type": "waiting",
+        "t": 26.992
+      },
+      {
+        "deck": 0,
+        "type": "playing",
+        "t": 26.992
+      },
+      {
+        "deck": 1,
+        "type": "playing",
+        "t": 26.992
+      },
+      {
+        "deck": 0,
+        "type": "pause",
+        "t": 30.992
+      }
+    ],
+    "sampleRate": 48000
+  }
+]

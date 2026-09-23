@@ -1,0 +1,115 @@
+{
+  "source": "Kenney Sci-Fi Sounds",
+  "license": "CC0 1.0",
+  "sourceUrl": "https://kenney.nl/assets/sci-fi-sounds",
+  "processing": "Distinct passages, DC removal, edge fades and RMS matching. No baked pitch.",
+  "files": [
+    {
+      "file": "ingest-1.wav",
+      "source": "slime_000.ogg",
+      "start": 0,
+      "end": 0.5,
+      "duration": 0.5,
+      "sampleRate": 44100,
+      "rms": 0.04500000239347783,
+      "peak": 0.84576416015625,
+      "sha256": "492a2dfe8b3c65f6d86ed60b6da9aaa7331c05e76f42b0a8ca359133e719a78b"
+    },
+    {
+      "file": "ingest-2.wav",
+      "source": "slime_001.ogg",
+      "start": 0.03,
+      "end": 0.55,
+      "duration": 0.52,
+      "sampleRate": 44100,
+      "rms": 0.04500002095252605,
+      "peak": 0.498016357421875,
+      "sha256": "759ac322fbf882ef5185026b2fbcfa5e060a659b8a0757706b8c0f5981192699"
+    },
+    {
+      "file": "ingest-3.wav",
+      "source": "slime_001.ogg",
+      "start": 1.03,
+      "end": 1.57,
+      "duration": 0.54,
+      "sampleRate": 44100,
+      "rms": 0.04499993573589354,
+      "peak": 0.42840576171875,
+      "sha256": "24a30c7598a8fe82ddd79ac6d682c35476282eaf5c64d53472c8d6961e4dc54c"
+    },
+    {
+      "file": "ingest-4.wav",
+      "source": "slime_001.ogg",
+      "start": 2.18,
+      "end": 2.66,
+      "duration": 0.48,
+      "sampleRate": 44100,
+      "rms": 0.04499992930448678,
+      "peak": 0.510223388671875,
+      "sha256": "94a50678ff0b7b8da5d83f5e27a0c844a730799844cc89fbb864e9fec92cb026"
+    },
+    {
+      "file": "ingest-5.wav",
+      "source": "slime_001.ogg",
+      "start": 3.72,
+      "end": 4.3,
+      "duration": 0.58,
+      "sampleRate": 44100,
+      "rms": 0.04499999305118749,
+      "peak": 0.54974365234375,
+      "sha256": "ac610b9a69733aae5a32c4633f87fc5529cd2cc2148d2c8fa52f1f9edec8bc94"
+    }
+  ],
+  "durationNormalizedCorrelations": [
+    {
+      "a": 2,
+      "b": 1,
+      "correlation": 0.0005261757191134509
+    },
+    {
+      "a": 3,
+      "b": 1,
+      "correlation": 0.0029353828183259936
+    },
+    {
+      "a": 3,
+      "b": 2,
+      "correlation": 0.009417250580183776
+    },
+    {
+      "a": 4,
+      "b": 1,
+      "correlation": 0.023983281204896695
+    },
+    {
+      "a": 4,
+      "b": 2,
+      "correlation": 0.006734190824328399
+    },
+    {
+      "a": 4,
+      "b": 3,
+      "correlation": -0.004583272923748149
+    },
+    {
+      "a": 5,
+      "b": 1,
+      "correlation": 0.0037802902485770643
+    },
+    {
+      "a": 5,
+      "b": 2,
+      "correlation": 0.020434541674276264
+    },
+    {
+      "a": 5,
+      "b": 3,
+      "correlation": -0.040581409841724495
+    },
+    {
+      "a": 5,
+      "b": 4,
+      "correlation": 0.0006689519147676054
+    }
+  ]
+}

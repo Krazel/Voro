@@ -1,0 +1,266 @@
+[
+  {
+    "port": 5208,
+    "width": 375,
+    "height": 667,
+    "boxes": {
+      "buff": {
+        "x": 25,
+        "y": 606,
+        "w": 217,
+        "h": 39
+      },
+      "dash": {
+        "x": 270,
+        "y": 569,
+        "w": 76,
+        "h": 76
+      }
+    },
+    "left": {
+      "buffX": 133,
+      "dashRight": 105
+    },
+    "final": {
+      "distance": 2988.3148202993566,
+      "completed": true,
+      "music": {
+        "switches": 2,
+        "loops": 0,
+        "waiting": 3,
+        "stalled": 0,
+        "errors": 0,
+        "desired": "final",
+        "current": "universe",
+        "active": true,
+        "blocked": false,
+        "transition": true,
+        "context": "running",
+        "sampleRate": 48000,
+        "baseLatency": 0.01,
+        "outputLatency": 0.04,
+        "decks": [
+          {
+            "id": "universe",
+            "paused": false,
+            "pending": false,
+            "readyState": 4,
+            "networkState": 1,
+            "time": 2.139138,
+            "duration": 408.38,
+            "error": null
+          },
+          {
+            "id": "micro",
+            "paused": true,
+            "pending": false,
+            "readyState": 4,
+            "networkState": 1,
+            "time": 2.620952,
+            "duration": 356.355873,
+            "error": null
+          }
+        ]
+      }
+    },
+    "errors": []
+  },
+  {
+    "port": 5208,
+    "width": 390,
+    "height": 844,
+    "boxes": {
+      "buff": {
+        "x": 25,
+        "y": 783,
+        "w": 232,
+        "h": 39
+      },
+      "dash": {
+        "x": 285,
+        "y": 746,
+        "w": 76,
+        "h": 76
+      }
+    },
+    "left": {
+      "buffX": 133,
+      "dashRight": 105
+    },
+    "final": {
+      "distance": 2988.3148202993566,
+      "completed": true,
+      "music": {
+        "switches": 2,
+        "loops": 0,
+        "waiting": 3,
+        "stalled": 0,
+        "errors": 0,
+        "desired": "final",
+        "current": "universe",
+        "active": true,
+        "blocked": false,
+        "transition": true,
+        "context": "running",
+        "sampleRate": 48000,
+        "baseLatency": 0.01,
+        "outputLatency": 0.04,
+        "decks": [
+          {
+            "id": "universe",
+            "paused": false,
+            "pending": false,
+            "readyState": 4,
+            "networkState": 1,
+            "time": 2.191383,
+            "duration": 408.38,
+            "error": null
+          },
+          {
+            "id": "micro",
+            "paused": true,
+            "pending": false,
+            "readyState": 4,
+            "networkState": 1,
+            "time": 2.902494,
+            "duration": 356.355873,
+            "error": null
+          }
+        ]
+      }
+    },
+    "errors": []
+  },
+  {
+    "port": 5208,
+    "width": 1194,
+    "height": 834,
+    "boxes": {
+      "buff": {
+        "x": 342,
+        "y": 773,
+        "w": 402,
+        "h": 39
+      },
+      "dash": {
+        "x": 772,
+        "y": 736,
+        "w": 76,
+        "h": 76
+      }
+    },
+    "left": {
+      "buffX": 450,
+      "dashRight": 422
+    },
+    "final": {
+      "distance": 2988.3148202993566,
+      "completed": true,
+      "music": {
+        "switches": 2,
+        "loops": 0,
+        "waiting": 3,
+        "stalled": 0,
+        "errors": 0,
+        "desired": "final",
+        "current": "universe",
+        "active": true,
+        "blocked": false,
+        "transition": true,
+        "context": "running",
+        "sampleRate": 48000,
+        "baseLatency": 0.01,
+        "outputLatency": 0.04,
+        "decks": [
+          {
+            "id": "universe",
+            "paused": false,
+            "pending": false,
+            "readyState": 4,
+            "networkState": 1,
+            "time": 2.266848,
+            "duration": 408.38,
+            "error": null
+          },
+          {
+            "id": "micro",
+            "paused": true,
+            "pending": false,
+            "readyState": 4,
+            "networkState": 1,
+            "time": 2.981261,
+            "duration": 356.355873,
+            "error": null
+          }
+        ]
+      }
+    },
+    "errors": []
+  },
+  {
+    "port": 5206,
+    "width": 1280,
+    "height": 800,
+    "boxes": {
+      "buff": {
+        "x": 24,
+        "y": 761.5,
+        "w": 1124,
+        "h": 16.5
+      },
+      "dash": {
+        "x": 1176,
+        "y": 702,
+        "w": 76,
+        "h": 76
+      }
+    },
+    "left": {
+      "buffX": 132,
+      "dashRight": 104
+    },
+    "final": {
+      "distance": 2988.3148202993566,
+      "completed": true,
+      "music": {
+        "switches": 2,
+        "loops": 0,
+        "waiting": 3,
+        "stalled": 0,
+        "errors": 0,
+        "desired": "final",
+        "current": "universe",
+        "active": true,
+        "blocked": false,
+        "transition": true,
+        "context": "running",
+        "sampleRate": 48000,
+        "baseLatency": 0.01,
+        "outputLatency": 0.04,
+        "decks": [
+          {
+            "id": "universe",
+            "paused": false,
+            "pending": false,
+            "readyState": 4,
+            "networkState": 1,
+            "time": 2.310385,
+            "duration": 408.38,
+            "error": null
+          },
+          {
+            "id": "micro",
+            "paused": true,
+            "pending": false,
+            "readyState": 4,
+            "networkState": 1,
+            "time": 3.024399,
+            "duration": 356.355873,
+            "error": null
+          }
+        ]
+      }
+    },
+    "errors": []
+  }
+]

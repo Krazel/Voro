@@ -1,0 +1,24 @@
+{
+  "tool": "built-in imagegen",
+  "created": "2026-09-23",
+  "assets": [
+    {
+      "name": "cosmic-wall",
+      "source": "C:\\Users\\dmkra\\.codex\\generated_images\\01a06eb1-17bb-74c1-b4a4-f88225d8e26d\\exec-3b4ff265-c568-48af-9b8f-f464a676416f.png",
+      "prompt": "Create one standalone game sprite for VORO, realistic painterly astrophotography art, luminous fine cyan-blue filaments and warm amber nodes, dimensional detailed cosmic matter. A gigantic curved cosmic wall, broad horizontal arc made of hundreds of tiny distinct golden galaxy cores connected by fine blue-violet filaments, several branching sheets, irregular wide silhouette. Not a nebula with a single star. It must read as a structure containing galaxies, beyond galactic scale. Center the complete object with generous empty margins, single isolated subject, square canvas. TRANSPARENT BACKGROUND with true alpha including the gaps between filaments, no backdrop, no ground, no starfield outside the object, no text, no border, no labels, no UI. Crisp readable large silhouette at 512px game scale; restrained glows fully contained inside canvas.",
+      "asset": "public/inhabitants/cosmic-wall-v1.webp"
+    },
+    {
+      "name": "lensed-crown",
+      "source": "C:\\Users\\dmkra\\.codex\\generated_images\\01a06eb1-17bb-74c1-b4a4-f88225d8e26d\\exec-78b1fe4b-1a7d-4d7b-a646-8738983df2f6.png",
+      "prompt": "Create one standalone game sprite for VORO, realistic painterly astrophotography art, luminous fine cyan-blue filaments and warm amber nodes, dimensional detailed cosmic matter. A gigantic uneven crown of gravitationally lensed galaxies circling a transparent empty cosmic void: broken concentric cyan and amber arcs, elongated tiny galaxies, irregular horseshoe silhouette, no solid central sphere and no central black hole disk. Center the complete object with generous empty margins, single isolated subject, square canvas. TRANSPARENT BACKGROUND with true alpha including the gaps between filaments, no backdrop, no ground, no starfield outside the object, no text, no border, no labels, no UI. Crisp readable large silhouette at 512px game scale; restrained glows fully contained inside canvas.",
+      "asset": "public/inhabitants/lensed-crown-v1.webp"
+    },
+    {
+      "name": "cosmic-confluence",
+      "source": "C:\\Users\\dmkra\\.codex\\generated_images\\01a06eb1-17bb-74c1-b4a4-f88225d8e26d\\exec-0d649fd6-ce6b-438b-b488-afca0a015386.png",
+      "prompt": "Create one standalone game sprite for VORO, realistic painterly astrophotography art, luminous fine cyan-blue filaments and warm amber nodes, dimensional detailed cosmic matter. A gigantic confluence of three supercluster sheets: three asymmetrical lobes of intricate cosmic web with hundreds of minuscule golden galaxy nodes, smoky blue-violet filament bridges converging gently into a network, wide triangular organic silhouette, no individual giant stars. Center the complete object with generous empty margins, single isolated subject, square canvas. TRANSPARENT BACKGROUND with true alpha including the gaps between filaments, no backdrop, no ground, no starfield outside the object, no text, no border, no labels, no UI. Crisp readable large silhouette at 512px game scale; restrained glows fully contained inside canvas.",
+      "asset": "public/inhabitants/cosmic-confluence-v1.webp"
+    }
+  ]
+}

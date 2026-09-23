@@ -1,0 +1,30 @@
+{
+  "previews": [
+    {
+      "locale": "en-US",
+      "previewType": "IPHONE_67",
+      "path": "store/previews/voro-iphone-en-30fps.mp4",
+      "name": "voro-iphone-en-30fps.mp4",
+      "sha256": "9014181c0ad7287d26aafb9cd82e542dbe79f50be2da874cc2e1358f0386f51b",
+      "posterTimeCode": "00:00:07:15",
+      "width": 886,
+      "height": 1920,
+      "source": "VORO-Abyssal-Trailer-Mobile-EN-720x1280-60fps.mp4",
+      "sourceSha256": "a8e302c0c214b8c8502dcefaad6b621fe0be0946b8790482e9debe9577ebdfa4",
+      "provenance": "Existing approved promotional trailer, converted to 30fps with proportional center crop, no padding. Not a new native-device recording."
+    },
+    {
+      "locale": "en-US",
+      "previewType": "IPAD_PRO_3GEN_129",
+      "path": "store/previews/voro-ipad-en-30fps.mp4",
+      "name": "voro-ipad-en-30fps.mp4",
+      "sha256": "6754717c5090f35bcf27c95bb53a34676cfe6a79facc6ef17c8f8e911a7cd700",
+      "posterTimeCode": "00:00:07:15",
+      "width": 1600,
+      "height": 1200,
+      "source": "VORO-Abyssal-Trailer-PC-EN-1920x1080-60fps.mp4",
+      "sourceSha256": "1a2913c669ed76f96ec25ba3f7be7a913634d047d9dc7c1d615230aadc283d31",
+      "provenance": "Existing approved promotional trailer, converted to 30fps with proportional center crop, no padding. Not a new native-device recording."
+    }
+  ]
+}

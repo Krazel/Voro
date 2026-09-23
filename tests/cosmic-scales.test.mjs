@@ -24,12 +24,12 @@ test('Galaxy source crops include the upper arms and remain inside the atlas',()
     assert.ok(s.sizeFactors[1]/s.sizeFactors[0]>=4);
   }
 });
-test('Survivor reveal takes six seconds and remains fully visible after completion',()=>{
+test('Survivor reveal takes twelve and a half seconds, after a black pause',()=>{
   const at=t=>finaleState(FINALE_SECONDS-t).survivor;
-  assert.equal(at(10.2),0);
-  assert.ok(Math.abs(at(13.2)-.5)<1e-10);
-  assert.equal(at(16.2),1);
-  assert.equal(at(17),1);
+  assert.equal(at(10.5),0);
+  assert.ok(Math.abs(at(16.75)-.5)<1e-10);
+  assert.equal(at(23),1);
+  assert.equal(at(24),1);
   assert.equal(at(100),1);
 });
 test('Scene handoff fades inhabitants continuously and keeps reduced motion stationary',()=>{

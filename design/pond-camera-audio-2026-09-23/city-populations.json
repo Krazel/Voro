@@ -1,0 +1,484 @@
+{
+  "runs": [
+    {
+      "seed": 11,
+      "label": "before",
+      "seconds": 80.75,
+      "reached": true,
+      "mass": 212.15349332346284,
+      "eaten": 115,
+      "attemptedHits": 0,
+      "curve": [
+        {
+          "seconds": 0.05,
+          "mass": 2,
+          "eaten": 0
+        },
+        {
+          "seconds": 20.05,
+          "mass": 16.462671123347448,
+          "eaten": 21
+        },
+        {
+          "seconds": 40.05,
+          "mass": 53.68442417647031,
+          "eaten": 48
+        },
+        {
+          "seconds": 60.05,
+          "mass": 151.7666308933642,
+          "eaten": 78
+        },
+        {
+          "seconds": 80.05,
+          "mass": 203.72614394473277,
+          "eaten": 113
+        }
+      ]
+    },
+    {
+      "seed": 11,
+      "label": "after",
+      "seconds": 171.45,
+      "reached": true,
+      "mass": 301.0422937592226,
+      "eaten": 249,
+      "attemptedHits": 11,
+      "curve": [
+        {
+          "seconds": 0.05,
+          "mass": 2,
+          "eaten": 0
+        },
+        {
+          "seconds": 20.05,
+          "mass": 10.79975251127342,
+          "eaten": 20
+        },
+        {
+          "seconds": 40.05,
+          "mass": 24.40584537868771,
+          "eaten": 42
+        },
+        {
+          "seconds": 60.05,
+          "mass": 46.60474898676576,
+          "eaten": 66
+        },
+        {
+          "seconds": 80.05,
+          "mass": 91.55583798206408,
+          "eaten": 94
+        },
+        {
+          "seconds": 100.05,
+          "mass": 137.21331784485642,
+          "eaten": 125
+        },
+        {
+          "seconds": 120.05,
+          "mass": 183.36872118530215,
+          "eaten": 157
+        },
+        {
+          "seconds": 140.05,
+          "mass": 222.92225022686634,
+          "eaten": 193
+        },
+        {
+          "seconds": 160.05,
+          "mass": 266.6570482332736,
+          "eaten": 229
+        }
+      ]
+    },
+    {
+      "seed": 33,
+      "label": "before",
+      "seconds": 83.5,
+      "reached": true,
+      "mass": 213.9426558017614,
+      "eaten": 116,
+      "attemptedHits": 3,
+      "curve": [
+        {
+          "seconds": 0.05,
+          "mass": 2,
+          "eaten": 0
+        },
+        {
+          "seconds": 20.05,
+          "mass": 28.659563048715697,
+          "eaten": 22
+        },
+        {
+          "seconds": 40.05,
+          "mass": 89.14873235388262,
+          "eaten": 45
+        },
+        {
+          "seconds": 60.05,
+          "mass": 162.51092283593886,
+          "eaten": 77
+        },
+        {
+          "seconds": 80.05,
+          "mass": 198.62937809914303,
+          "eaten": 109
+        }
+      ]
+    },
+    {
+      "seed": 33,
+      "label": "after",
+      "seconds": 158.95,
+      "reached": true,
+      "mass": 300.96377618637445,
+      "eaten": 241,
+      "attemptedHits": 24,
+      "curve": [
+        {
+          "seconds": 0.05,
+          "mass": 2,
+          "eaten": 0
+        },
+        {
+          "seconds": 20.05,
+          "mass": 15.737606860238705,
+          "eaten": 20
+        },
+        {
+          "seconds": 40.05,
+          "mass": 45.83484947148169,
+          "eaten": 43
+        },
+        {
+          "seconds": 60.05,
+          "mass": 78.99156517649287,
+          "eaten": 69
+        },
+        {
+          "seconds": 80.05,
+          "mass": 134.23199370237282,
+          "eaten": 103
+        },
+        {
+          "seconds": 100.05,
+          "mass": 173.13439523576812,
+          "eaten": 137
+        },
+        {
+          "seconds": 120.05,
+          "mass": 215.79345479034671,
+          "eaten": 172
+        },
+        {
+          "seconds": 140.05,
+          "mass": 254.76842240528458,
+          "eaten": 207
+        }
+      ]
+    },
+    {
+      "seed": 77,
+      "label": "before",
+      "seconds": 87.5,
+      "reached": true,
+      "mass": 214.19497363842916,
+      "eaten": 116,
+      "attemptedHits": 4,
+      "curve": [
+        {
+          "seconds": 0.05,
+          "mass": 2,
+          "eaten": 0
+        },
+        {
+          "seconds": 20.05,
+          "mass": 22.36709209022108,
+          "eaten": 21
+        },
+        {
+          "seconds": 40.05,
+          "mass": 53.98507143278127,
+          "eaten": 43
+        },
+        {
+          "seconds": 60.05,
+          "mass": 122.08152044409128,
+          "eaten": 69
+        },
+        {
+          "seconds": 80.05,
+          "mass": 189.6740950050394,
+          "eaten": 103
+        }
+      ]
+    },
+    {
+      "seed": 77,
+      "label": "after",
+      "seconds": 178.9,
+      "reached": true,
+      "mass": 303.44685764382945,
+      "eaten": 259,
+      "attemptedHits": 35,
+      "curve": [
+        {
+          "seconds": 0.05,
+          "mass": 2,
+          "eaten": 0
+        },
+        {
+          "seconds": 20.05,
+          "mass": 10.495436160023134,
+          "eaten": 20
+        },
+        {
+          "seconds": 40.05,
+          "mass": 23.24638392331256,
+          "eaten": 47
+        },
+        {
+          "seconds": 60.05,
+          "mass": 40.112045334481245,
+          "eaten": 78
+        },
+        {
+          "seconds": 80.05,
+          "mass": 76.55066862200802,
+          "eaten": 93
+        },
+        {
+          "seconds": 100.05,
+          "mass": 130.058004071033,
+          "eaten": 125
+        },
+        {
+          "seconds": 120.05,
+          "mass": 169.92609365984111,
+          "eaten": 156
+        },
+        {
+          "seconds": 140.05,
+          "mass": 218.55904935443655,
+          "eaten": 191
+        },
+        {
+          "seconds": 160.05,
+          "mass": 255.55827181550336,
+          "eaten": 225
+        }
+      ]
+    }
+  ],
+  "weapons": [
+    {
+      "id": "city-1",
+      "name": "Soldado",
+      "edibleMass": 0.6253418056607979,
+      "before": 1.4070190627367953,
+      "after": 5.628076250947181
+    },
+    {
+      "id": "city-3",
+      "name": "Soldado pesado",
+      "edibleMass": 0.6377713470370812,
+      "before": 1.4349855308334325,
+      "after": 11.250286561734109
+    },
+    {
+      "id": "city-7",
+      "name": "Blindado",
+      "edibleMass": 3.417030916433206,
+      "before": 7.688319561974714,
+      "after": 123.01311299159542
+    },
+    {
+      "id": "city-8",
+      "name": "Tanque",
+      "edibleMass": 4.549301515961368,
+      "before": 19.352302151882537,
+      "after": 230
+    },
+    {
+      "id": "city-9",
+      "name": "Helicóptero",
+      "edibleMass": 11.646211880861104,
+      "before": 26.203976731937487,
+      "after": 235.83579058743734
+    }
+  ],
+  "populations": [
+    {
+      "stage": "pond",
+      "before": {
+        "zones": 400,
+        "total": 5161,
+        "average": 12.9025,
+        "faunaPerZone": 5.5275,
+        "kinds": {
+          "pond-0": 1700,
+          "pond-1": 1100,
+          "pond-matter-algae": 376,
+          "pond-matter-shell": 153,
+          "pond-2": 446,
+          "pond-matter-leaf": 295,
+          "pond-matter-sand": 426,
+          "pond-4": 290,
+          "pond-6": 91,
+          "pond-7": 72,
+          "pond-3": 166,
+          "pond-5": 46
+        }
+      },
+      "after": {
+        "zones": 400,
+        "total": 9410,
+        "average": 23.525,
+        "faunaPerZone": 16.15,
+        "kinds": {
+          "pond-0": 1700,
+          "pond-1": 3500,
+          "pond-matter-algae": 376,
+          "pond-matter-shell": 153,
+          "pond-2": 1580,
+          "pond-matter-leaf": 295,
+          "pond-matter-sand": 426,
+          "pond-4": 290,
+          "pond-6": 239,
+          "pond-3": 605,
+          "pond-5": 174,
+          "pond-7": 72
+        }
+      }
+    },
+    {
+      "stage": "orbit",
+      "before": {
+        "zones": 400,
+        "total": 5332,
+        "average": 13.33,
+        "faunaPerZone": 7.275,
+        "kinds": {
+          "orbit-1": 1005,
+          "orbit-matter-panel": 389,
+          "orbit-matter-scrap": 606,
+          "orbit-matter-comet": 691,
+          "orbit-0": 1234,
+          "orbit-4": 353,
+          "orbit-matter-rock": 736,
+          "orbit-2": 240,
+          "orbit-3": 78
+        }
+      },
+      "after": {
+        "zones": 400,
+        "total": 3588,
+        "average": 8.97,
+        "faunaPerZone": 5.155,
+        "kinds": {
+          "orbit-1": 854,
+          "orbit-matter-panel": 293,
+          "orbit-matter-scrap": 453,
+          "orbit-matter-comet": 422,
+          "orbit-0": 646,
+          "orbit-4": 397,
+          "orbit-matter-rock": 358,
+          "orbit-2": 110,
+          "orbit-3": 55
+        }
+      }
+    },
+    {
+      "stage": "planets",
+      "before": {
+        "zones": 400,
+        "total": 4109,
+        "average": 10.2725,
+        "faunaPerZone": 7.0325,
+        "kinds": {
+          "planets-Fragmento planetario": 1039,
+          "planets-matter-comet": 561,
+          "planets-sulfur": 272,
+          "planets-matter-crust": 367,
+          "planets-Nube protoplanetaria": 263,
+          "planets-desert": 426,
+          "planets-2": 119,
+          "planets-1": 20,
+          "planets-0": 447,
+          "planets-3": 161,
+          "planets-matter-gas": 257,
+          "planets-4": 10,
+          "planets-matter-ring": 111,
+          "planets-ice-giant": 50,
+          "planets-5": 6
+        }
+      },
+      "after": {
+        "zones": 400,
+        "total": 2169,
+        "average": 5.4225,
+        "faunaPerZone": 4.0825,
+        "kinds": {
+          "planets-Fragmento planetario": 611,
+          "planets-matter-comet": 189,
+          "planets-0": 176,
+          "planets-matter-ring": 68,
+          "planets-sulfur": 126,
+          "planets-2": 240,
+          "planets-desert": 202,
+          "planets-1": 10,
+          "planets-Nube protoplanetaria": 116,
+          "planets-matter-gas": 113,
+          "planets-4": 10,
+          "planets-3": 100,
+          "planets-matter-crust": 166,
+          "planets-ice-giant": 38,
+          "planets-5": 4
+        }
+      }
+    },
+    {
+      "stage": "stars",
+      "before": {
+        "zones": 400,
+        "total": 3382,
+        "average": 8.455,
+        "faunaPerZone": 6.5075,
+        "kinds": {
+          "stars-5": 117,
+          "stars-0": 1449,
+          "stars-2": 171,
+          "stars-matter-plasma": 512,
+          "stars-Nube estelar": 125,
+          "stars-1": 448,
+          "stars-3": 206,
+          "stars-matter-dust": 248,
+          "stars-Agujero negro estelar": 77,
+          "stars-matter-ejecta": 19,
+          "stars-4": 10
+        }
+      },
+      "after": {
+        "zones": 400,
+        "total": 2240,
+        "average": 5.6,
+        "faunaPerZone": 4.7275,
+        "kinds": {
+          "stars-5": 117,
+          "stars-0": 1093,
+          "stars-matter-plasma": 212,
+          "stars-2": 85,
+          "stars-3": 206,
+          "stars-matter-dust": 120,
+          "stars-1": 220,
+          "stars-Nube estelar": 89,
+          "stars-Agujero negro estelar": 77,
+          "stars-matter-ejecta": 17,
+          "stars-4": 4
+        }
+      }
+    }
+  ]
+}

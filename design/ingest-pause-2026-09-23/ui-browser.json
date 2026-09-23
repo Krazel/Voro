@@ -1,0 +1,83 @@
+{
+  "navigation": "pause -> settings -> pause -> game; pause -> menu PASS",
+  "cases": [
+    {
+      "name": "ipad-portrait",
+      "width": 834,
+      "height": 1194,
+      "locale": "en-US",
+      "bounds": [
+        {
+          "text": "Continue",
+          "width": 357.109375,
+          "height": 101.125,
+          "visible": true
+        },
+        {
+          "text": "Settings",
+          "width": 357.109375,
+          "height": 101.125,
+          "visible": true
+        },
+        {
+          "text": "Back to menu",
+          "width": 357.109375,
+          "height": 101.125,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "name": "ipad-landscape",
+      "width": 1194,
+      "height": 834,
+      "locale": "en-US",
+      "bounds": [
+        {
+          "text": "Continue",
+          "width": 300.390625,
+          "height": 85.0625,
+          "visible": true
+        },
+        {
+          "text": "Settings",
+          "width": 300.390625,
+          "height": 85.0625,
+          "visible": true
+        },
+        {
+          "text": "Back to menu",
+          "width": 300.390625,
+          "height": 85.0625,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "name": "iphone-small",
+      "width": 375,
+      "height": 667,
+      "locale": "es-ES",
+      "bounds": [
+        {
+          "text": "Continuar",
+          "width": 238.71875,
+          "height": 67.59375,
+          "visible": true
+        },
+        {
+          "text": "Configuración",
+          "width": 238.71875,
+          "height": 67.59375,
+          "visible": true
+        },
+        {
+          "text": "Volver al menú",
+          "width": 238.71875,
+          "height": 67.59375,
+          "visible": true
+        }
+      ]
+    }
+  ]
+}

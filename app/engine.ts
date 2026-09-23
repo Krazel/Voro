@@ -15,6 +15,7 @@ import { BenchmarkTour, tourReport } from './benchmark-tour.mjs';
 import { compactPerformanceReport } from './performance-report.mjs';
 import { AnimationSheets } from './animation-sheets.mjs';
 import { transitionScene } from './journey-transitions.mjs';
+import { shouldHoldReview } from './review-policy.mjs';
 // Canvas2D rendering and input. The simulation stays independent of frame rendering.
 import {
   clamp,
@@ -55,6 +56,7 @@ import {
 } from './biomass-fragments.mjs';
 import { HuntingTentacles } from './hunting-tentacles.mjs';
 import { syncShields, consumeShield } from './shields.mjs';
+import { drawShieldFilm } from './shield-film.mjs';
 import {
   upgradeStats,
   journeyAdaptation as nextAdaptation,
@@ -99,6 +101,7 @@ export type Snapshot = {
   birth: number;
   storageAvailable: boolean;
   transition: number;
+  reviewHold: boolean;
   deaths: number;
   biomass: number;
   target: number;
@@ -190,6 +193,9 @@ export class VoroEngine {
   menuRun = false;
   birth = 0;
   paused = false;
+  reviewEnabled = false;
+  reviewHold = false;
+  reviewHandled = false;
   sound = true;
   time = 0;
   last = 0;
@@ -302,7 +308,7 @@ export class VoroEngine {
         quality: this.rasterBudget.quality, pixels: this.canvas.width * this.canvas.height, zoomFactor: this.zoomFactor, zoom: this.zoom },
       animationSheets: this.animationSheets.stats(), animationCache: animationCacheStats(),
       audio: { enabled: this.sound, focused: this.audioFocus, contextState: this.audio?.state || 'not-created',
-        masterGain: this.master?.gain.value ?? 0, ingest: this.sfx?.stats() ?? null },
+        masterGain: this.master?.gain.value ?? 0, ingest: this.sfx?.stats() ?? null, music: this.music?.stats() ?? null },
       backgroundRebuilds: this.worldGround.redraws,
       background: this.backgroundStatus(),
       backgroundRebuildsDuringCapture: this.worldGround.redraws - this.groundAtCapture });
@@ -412,6 +418,8 @@ export class VoroEngine {
   lastEmit = 0;
   flash = 0;
   hitFlash = 0;
+  shieldHitAt = -Infinity;
+  shieldHitAngle = 0;
   trailClock = 0;
   modeBeforeHide = false;
   membrane = Array(100).fill(1) as number[];
@@ -606,6 +614,7 @@ export class VoroEngine {
     this.raf = requestAnimationFrame(this.frame);
   }
   seed() {
+    this.shieldHitAt = -Infinity;
     this.huntingTentacles.clear();
     this.world.stream(this.life.x, this.life.y, this.life.elapsed, true);
     this.food = this.world.entities;
@@ -675,7 +684,7 @@ export class VoroEngine {
     };
   }
   cameraInputAllowed() {
-    return !this.autoTour && this.started && !this.paused && !this.settingsOpen && !this.life.dead
+    return !this.autoTour && !this.reviewHold && this.started && !this.paused && !this.settingsOpen && !this.life.dead
       && !this.ending && !this.progress.offer.length && !this.transition && !this.birth && !this.earthAbsorption;
   }
   get cameraEntryRadius() {
@@ -729,7 +738,7 @@ export class VoroEngine {
   }
   syncMusic() {
     this.music?.setState(musicScene(this.started,this.progress.completed,stageOf(this.progress).id),
-      this.sound && this.audioFocus && !document.hidden && !this.paused && !this.settingsOpen && !this.progress.offer.length && !this.life.dead, document.hidden || !this.audioFocus);
+      !this.reviewHold && this.sound && this.audioFocus && !document.hidden && !this.paused && !this.settingsOpen && !this.progress.offer.length && !this.life.dead, document.hidden || !this.audioFocus);
   }
   setAudio() {
     this.syncMusic();
@@ -743,7 +752,7 @@ export class VoroEngine {
     }
   }
   effectsAudible() {
-    return this.sound && this.audioFocus && !document.hidden && !this.settingsOpen &&
+    return !this.reviewHold && this.sound && this.audioFocus && !document.hidden && !this.settingsOpen &&
       !this.paused && !this.progress.offer.length &&
       (!this.progress.completed || this.ending > FINALE_SECONDS * .2);
   }
@@ -751,6 +760,7 @@ export class VoroEngine {
     if(!this.effectsAudible())return false;
     this.initAudio();
     return this.audio?.state==='running';
+
   }
   chime(evolve = false) {
     if (!this.prepareEffects() || !this.audio || !this.master) return;
@@ -918,6 +928,7 @@ export class VoroEngine {
     this.universeFinale?.destroy();
     const backup = this.testBackup;
     Object.assign(this, backup);
+    this.shieldHitAt = -Infinity;
     this.testBackup = null;
     this.testMode = false;
     this.testInvulnerable = false;
@@ -980,6 +991,7 @@ export class VoroEngine {
     automatic = false,
   ) {
     if(this.autoTour && !automatic)return;
+    if(this.reviewHold && name !== 'restart')return;
     if (name === 'start') {
       if (!this.assetsReady) return;
       if (!this.started && !this.saved && !this.menuRun) this.beginBirth();
@@ -991,6 +1003,8 @@ export class VoroEngine {
       this.canvas.focus({ preventScroll: true });
     }
     if (name === 'restart' || (name === 'retry' && this.life.dead)) {
+      this.reviewHold = false;
+      if (name === 'restart') this.reviewHandled = false;
       if (name === 'restart') this.progress = newJourney();
       else {
         this.progress.deaths++;
@@ -1132,6 +1146,7 @@ export class VoroEngine {
       storageAvailable: this.storageAvailable,
       transition: this.transition,
       deaths: this.progress.deaths,
+      reviewHold: this.reviewHold,
       biomass: this.life.biomass,
       target: stageOf(this.progress).goal,
       hurt: this.life.hurt,
@@ -1251,6 +1266,7 @@ export class VoroEngine {
       }
       if (
         !this.paused &&
+        !this.reviewHold &&
         !this.settingsOpen &&
         !this.progress.offer.length &&
         (!this.progress.completed || this.ending > 0) &&
@@ -1317,6 +1333,7 @@ export class VoroEngine {
     this.animateMembrane(dt);
   }
   update(dt: number) {
+    if (this.reviewHold) return;
     if (this.earthAbsorption > 0) {
       if (!this.started) return;
       this.earthAbsorption = Math.min(1, this.earthAbsorption + dt / (this.reduced ? 1 : 3.2));
@@ -1431,7 +1448,7 @@ export class VoroEngine {
         ? [...this.world.entities, ...this.fragments] : this.world.entities;
       this.motes = this.world.motes;
       this.world.move(dt, p.elapsed, p, this.stats, this.trail,
-        stageOf(this.progress).id==='orbit' ? {
+        ['orbit','pond'].includes(stageOf(this.progress).id) ? {
           left:this.camera.x-this.width/2/this.zoom-80,right:this.camera.x+this.width/2/this.zoom+80,
           top:this.camera.y-this.height*.48/this.zoom-80,bottom:this.camera.y+this.height*.52/this.zoom+80,
         } : null);
@@ -1622,6 +1639,7 @@ export class VoroEngine {
   }
   beginEvolution() {
     if (
+      this.reviewHold ||
       (this.testMode && !this.testEvolution) ||
       this.transition > 0 ||
       this.progress.stage >= STAGES.length - 1
@@ -1642,6 +1660,14 @@ export class VoroEngine {
     }
     this.progress.pendingEvolution = true;
     this.progress.maturitySeen = true;
+    if (shouldHoldReview({enabled:this.reviewEnabled, handled:this.reviewHandled,
+      stage:this.progress.stage, testMode:this.testMode})) {
+      this.reviewHold = true; this.reviewHandled = true;
+      this.keys.clear(); this.pointer = null; this.padInput = {x:0,y:0};
+      this.life.vx = this.life.vy = 0;
+      this.setAudio(); this.save(); this.publish();
+      return;
+    }
     this.transitionFrom = this.progress.stage;
     this.transitionStartZoom = this.zoom;
     this.transitionAdvanced = false;
@@ -1660,6 +1686,12 @@ export class VoroEngine {
     this.save();
     this.publish();
   }
+  finishReview() {
+    if (!this.reviewHold) return;
+    this.reviewHold = false; this.paused = false;
+    this.last = 0; this.keys.clear(); this.pointer = null;
+    this.setAudio(); this.beginEvolution();
+  }
   receiveHit(
     source: { x: number; y: number },
     fraction: number,
@@ -1669,6 +1701,8 @@ export class VoroEngine {
     if (this.testMode && this.testInvulnerable) return 0;
     if (p.dead || p.invulnerable > 0 || this.progress.completed) return 0;
     if (consumeShield(this.progress, this.stats)) {
+      this.shieldHitAt=this.time;
+      this.shieldHitAngle=Math.atan2(source.y-p.y,source.x-p.x);
       p.invulnerable = 0.8;
       this.flash = 0.3;
       this.toast('Tu escudo ha absorbido el golpe.', 2);
@@ -1933,6 +1967,9 @@ export class VoroEngine {
           : Math.min(this.zoom * growth, 194 / Math.max(.8,p.radius));
         c.save(); c.translate(this.width/2,this.height*.48); c.scale(scale,scale);
         c.translate(-p.x,-p.y); this.drawCell(); c.restore();
+        const unit=this.cameraEntryRadius/24;
+        return {x:this.width/2+(this.nucleus.x+Math.sin(this.time*.6)*2*unit)*scale,
+          y:this.height*.48+(this.nucleus.y+Math.cos(this.time*.65)*2*unit)*scale};
       };
       if (this.ending > 0 && this.universeFinale)
         this.universeFinale.draw(c,this.width,this.height,this.ending,this.reduced,protagonist,this.time);
@@ -2194,17 +2231,10 @@ export class VoroEngine {
     c.scale(unit,unit);
     if (p.dead) c.globalAlpha = Math.min(1, p.radius / 35);
     this.halo(0, 0, r * 1.75, 'rgba(39,173,213,.095)');
-    if (
-      !p.dead &&
-      this.stats.shieldCooldown &&
-      this.progress.shieldRecharge === 0
-    ) {
-      c.beginPath();
-      c.arc(0, 0, r * (1.16 + Math.sin(t * 1.7) * 0.02), 0, TAU);
-      c.strokeStyle = 'rgba(142,219,231,.3)';
-      c.lineWidth = 1.3;
-      c.stroke();
-    }
+    drawShieldFilm(c,{radius:r,points:pts,time:t,
+      ready:!!this.stats.shieldCooldown && this.progress.shieldRecharge===0,
+      hitAge:this.time-this.shieldHitAt,hitAngle:this.shieldHitAngle,
+      reduced:this.reduced,dead:p.dead});
     if (this.stats.spikeFraction && p.hurt > 0) {
       c.strokeStyle = 'rgba(220,206,153,.65)';
       c.lineWidth = 1;
