@@ -1,21 +1,22 @@
-export const FINALE_SECONDS = 31;
-export const FINALE_BLACK_AT = 13;
-export const FINALE_MUSIC_FADE_AT = 10;
-export const FINALE_REVEAL_AT = 18;
+export const FINALE_ABSORBED_AT = 8;
+export const FINALE_SECONDS = 29;
+export const FINALE_BLACK_AT = 11;
+export const FINALE_MUSIC_FADE_AT = FINALE_ABSORBED_AT;
+export const FINALE_REVEAL_AT = 16;
 const smooth = (a,b,x) => { const t = Math.max(0,Math.min(1,(x-a)/(b-a))); return t*t*(3-2*t); };
 export function finaleState(remaining) {
   const elapsed = Math.max(0, FINALE_SECONDS - remaining);
   const u = Math.max(0,Math.min(1,elapsed/FINALE_BLACK_AT));
-  return { elapsed, u, growth: 1+.22*smooth(0,9,elapsed),
+  return { elapsed, u, growth: 1+.22*smooth(0,FINALE_ABSORBED_AT,elapsed),
     contraction: 1-.985*smooth(.5,10.8,elapsed),
-    sceneLight: 1-smooth(7,10.8,elapsed), darkness: smooth(.4,11,elapsed),
-    bodyLight: 1-smooth(10,12.1,elapsed),
-    black: elapsed>=FINALE_BLACK_AT, survivor: smooth(FINALE_REVEAL_AT,30.5,elapsed),
-    caption: elapsed<4 ? 'Ya no hay nada más grande que tú.' : elapsed<8.5 ? 'El universo entra en ti.' : elapsed<12.2 ? 'La última luz.' : '' };
+    sceneLight: 1-smooth(7,FINALE_ABSORBED_AT,elapsed), darkness: smooth(.4,11,elapsed),
+    bodyLight: 1-smooth(FINALE_ABSORBED_AT,FINALE_ABSORBED_AT+2.1,elapsed),
+    black: elapsed>=FINALE_BLACK_AT, survivor: smooth(FINALE_REVEAL_AT,FINALE_REVEAL_AT+12.5,elapsed),
+    caption: elapsed<4 ? 'Ya no hay nada más grande que tú.' : elapsed<FINALE_ABSORBED_AT ? 'El universo entra en ti.' : elapsed<10.2 ? 'La última luz.' : '' };
 }
 // Deterministic, bounded paths for the universe being swallowed.
 export function fallingLight(index, elapsed, width, height, reduced = false) {
-  const end = 5.5+(index%9)*.57;
+  const end = Math.min(FINALE_ABSORBED_AT,5.5+(index%9)*.57);
   const start = .4+(index%7)*.24;
   const progress=smooth(start,end,elapsed),distance=1-progress;
   const angle=index*2.3999632297;
@@ -27,8 +28,8 @@ export function fallingLight(index, elapsed, width, height, reduced = false) {
     radius:1.1+(index%3)*.6,done:elapsed>=end};
 }
 export function dyingCore(elapsed) {
-  const collapse=1-smooth(11.9,FINALE_BLACK_AT,elapsed);
-  return {radius:6*collapse, light:smooth(10.4,11.8,elapsed)*(1-smooth(12.3,FINALE_BLACK_AT,elapsed))};
+  const collapse=1-smooth(FINALE_ABSORBED_AT+1.9,FINALE_BLACK_AT,elapsed);
+  return {radius:6*collapse, light:smooth(FINALE_ABSORBED_AT+.4,FINALE_ABSORBED_AT+1.8,elapsed)*(1-smooth(FINALE_BLACK_AT-.7,FINALE_BLACK_AT,elapsed))};
 }
 export function drawVoidSurvivor(c, width, height, time, reduced, drawProtagonist, reveal = 1) {
   if (reveal <= 0) return;

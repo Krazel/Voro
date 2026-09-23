@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { UniverseFinale, finaleState, fallingLight, dyingCore, FINALE_SECONDS, FINALE_BLACK_AT, FINALE_REVEAL_AT } from '../app/universe-finale.mjs';
+import { UniverseFinale, finaleState, fallingLight, dyingCore, FINALE_SECONDS, FINALE_BLACK_AT, FINALE_REVEAL_AT, FINALE_ABSORBED_AT } from '../app/universe-finale.mjs';
 import { makeEngine } from './engine-fixture.mjs';
 import { loadJourney, saveJourney } from '../app/journey-progress.mjs';
 import { STAGES } from '../app/journey-data.mjs';
@@ -64,16 +64,25 @@ test('Universe lights converge, then the cell fades leaving only its own contrac
   assert.ok(distance<1e-9);assert.equal(fallingLight(index,13,480,850,reduced).light,0);
  }
  assert.ok(Array.from({length:48},(_,i)=>fallingLight(i,12,480,850)).every(p=>p.done));
- assert.equal(finaleState(FINALE_SECONDS-12.2).bodyLight,0);
- assert.ok(dyingCore(12.2).light>0);assert.ok(dyingCore(12.8).radius<dyingCore(12.2).radius);
- assert.deepEqual(dyingCore(13),{radius:0,light:0});
+ assert.equal(finaleState(FINALE_SECONDS-10.2).bodyLight,0);
+ assert.ok(dyingCore(10.2).light>0);assert.ok(dyingCore(10.8).radius<dyingCore(10.2).radius);
+ assert.deepEqual(dyingCore(FINALE_BLACK_AT),{radius:0,light:0});
  const glows=[];
  const c=new Proxy({createRadialGradient(...a){glows.push(a);return {addColorStop(){}};}},{get:(o,k)=>k in o?o[k]:()=>{}});
- new UniverseFinale().draw(c,480,850,FINALE_SECONDS-12.5,false,()=>({x:231,y:401}));
+ new UniverseFinale().draw(c,480,850,FINALE_SECONDS-10.5,false,()=>({x:231,y:401}));
  assert.deepEqual(glows.at(-1).slice(0,5),[231,401,0,231,401],'The final glow is attached to the real nucleus, not an approaching star');
  const {game}=makeEngine();game.progress.completed=true;game.ending=FINALE_SECONDS-10;
  const calls=[];game.music={setState:(...a)=>calls.push(a),destroy(){}};game.syncMusic();
  assert.equal(calls[0][1],false);assert.equal(calls[0][3],3,'Music fades with the nucleus, then remains silent');game.destroy();
+});
+
+test('The cell begins fading immediately when the last universe material is swallowed',()=>{
+ const end=FINALE_ABSORBED_AT;
+ assert.equal(finaleState(FINALE_SECONDS-end).sceneLight,0);
+ assert.ok(Array.from({length:48},(_,i)=>fallingLight(i,end,480,850)).every(p=>p.done));
+ assert.equal(finaleState(FINALE_SECONDS-end).bodyLight,1);
+ assert.ok(finaleState(FINALE_SECONDS-end-.1).bodyLight<1);
+ assert.equal(FINALE_REVEAL_AT-FINALE_BLACK_AT,5,'Approved empty pause remains five seconds');
 });
 
 test('Completed movement stays unbounded for sustained motion in every direction',()=>{
