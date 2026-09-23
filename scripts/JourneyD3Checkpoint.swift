@@ -1,4 +1,5 @@
 import XCTest
+import UIKit
 final class StoreCapture: XCTestCase {
  func capture(_ name: String) {
   let a=XCTAttachment(screenshot:XCUIScreen.main.screenshot())
@@ -15,7 +16,7 @@ final class StoreCapture: XCTestCase {
   XCTAssertFalse(app.staticTexts[title].exists, "Journey must open manually")
   entry.tap()
   XCTAssertTrue(app.staticTexts[title].waitForExistence(timeout:30),app.debugDescription)
-  let heading=app.staticTexts[title].frame, screen=XCUIScreen.main.screenshot().image.size
+  let heading=app.staticTexts[title].frame, screen=app.frame.size
   XCTAssertGreaterThanOrEqual(heading.minX,0,"Journey title must be on screen")
   XCTAssertGreaterThanOrEqual(heading.minY,0,"Journey must open at its top")
   XCTAssertLessThanOrEqual(heading.maxX,screen.width)
@@ -32,6 +33,11 @@ final class StoreCapture: XCTestCase {
   silence.tap(); XCTAssertTrue(entry.waitForExistence(timeout:10)); entry.tap()
   XCUIDevice.shared.orientation = .landscapeLeft
   sleep(2)
+  if UIDevice.current.userInterfaceIdiom == .pad {
+   let universe=app.staticTexts[language == "es" ? "Universo" : "Universe"].firstMatch
+   XCTAssertTrue(universe.isHittable,"The final band must be visible in landscape")
+   XCTAssertLessThanOrEqual(universe.frame.maxY,app.frame.maxY,"All ten bands must fit in landscape")
+  }
   capture("03-d3-landscape-\(language)")
   XCUIDevice.shared.orientation = .portrait
   app.terminate()

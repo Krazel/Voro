@@ -1,5 +1,5 @@
 'use client';
-import { useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { t } from './language.mjs';
 import { STAGES } from './journey-data.mjs';
@@ -13,6 +13,14 @@ export function JourneyComplete({ eaten, elapsed, adaptations, onClose, onRestar
 }) {
   const [confirm, setConfirm] = useState(false);
   const popup = useRef<HTMLDivElement>(null);
+  useLayoutEffect(() => {
+    // WKWebView can retain the portrait dvh while a modal is open on rotation.
+    const fit = () => popup.current?.style.setProperty('--journey-viewport-height', `${window.visualViewport?.height || window.innerHeight}px`);
+    fit();
+    window.addEventListener('resize', fit);
+    window.visualViewport?.addEventListener('resize', fit);
+    return () => { window.removeEventListener('resize', fit); window.visualViewport?.removeEventListener('resize', fit); };
+  }, []);
   return <Dialog open onOpenChange={open => { if (!open) onClose(); }}>
     <DialogContent ref={popup} className="journey-complete-dialog" style={{ translate: 'none', transform: 'none' }} showCloseButton={false} initialFocus={popup}>
       <article className="journey-complete-card">
