@@ -576,6 +576,7 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
             complete={state.complete}
             eaten={state.eaten}
             elapsed={state.elapsed}
+            adaptations={state.level}
             tilt={tilt}
             leftHanded={leftHanded}
             sound={state.sound}

@@ -24,11 +24,14 @@ final class StoreCapture: XCTestCase {
   let journey=app.buttons[es ? "Recorrido" : "Journey"].firstMatch
   for _ in 0..<3 { if journey.isHittable {break};app.swipeUp() }
   XCTAssertTrue(journey.isHittable);journey.tap()
+  XCTAssertTrue(app.staticTexts[es ? "Tu recorrido" : "Your journey"].waitForExistence(timeout:10))
+  XCTAssertFalse(app.staticTexts[es ? "Charca" : "Pond"].exists,"Do not reveal undiscovered stages")
+  capture("05-settings-journey-\(language)")
   let back=app.buttons[es ? "Volver a configuración" : "Back to settings"].firstMatch
   XCTAssertTrue(back.waitForExistence(timeout:10));back.tap()
   let credits=app.buttons[es ? "Créditos" : "Credits"].firstMatch
   for _ in 0..<3 { if credits.isHittable {break};app.swipeUp() }
-  XCTAssertTrue(credits.isHittable);credits.tap();XCTAssertTrue(back.waitForExistence(timeout:10));back.tap()
+  XCTAssertTrue(credits.isHittable);credits.tap();XCTAssertTrue(back.waitForExistence(timeout:10));capture("06-settings-credits-\(language)");back.tap()
   let rebirth=app.buttons[es ? "Volver a nacer" : "Be born again"].firstMatch
   for _ in 0..<4 {if rebirth.isHittable {break};app.swipeUp()}
   XCTAssertTrue(rebirth.isHittable);rebirth.tap()

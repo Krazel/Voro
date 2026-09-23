@@ -8,9 +8,11 @@ import './journey-complete.css';
 const art = ['micro','pond','shore','sea','city','orbit','planets','stars','galaxies','universe'];
 const count = (value: number) => Number.isFinite(value) ? value.toLocaleString() : '—';
 
-export function JourneyComplete({ eaten, elapsed, adaptations, onClose, onRestart }: {
+export function JourneyComplete({ eaten, elapsed, adaptations, onClose, onRestart, stage=STAGES.length-1, complete=true, returnToSettings=false, allowRestart=true }: {
+  stage?: number; complete?: boolean; returnToSettings?: boolean; allowRestart?: boolean;
   eaten: number; elapsed: number; adaptations: number; onClose: () => void; onRestart: () => void;
 }) {
+  const visited=STAGES.slice(0,complete?STAGES.length:Math.max(1,Math.min(STAGES.length,stage+1)));
   const [confirm, setConfirm] = useState(false);
   const popup = useRef<HTMLDivElement>(null);
   useLayoutEffect(() => {
@@ -27,10 +29,10 @@ export function JourneyComplete({ eaten, elapsed, adaptations, onClose, onRestar
         <header className="journey-complete-heading">
           <p className="journey-brand">VORO · <span>{t('ABISAL')}</span></p>
           <DialogTitle>{t('Tu recorrido')}</DialogTitle>
-          <DialogDescription className="sr-only">{STAGES.length} {t('etapas completadas')}</DialogDescription>
+          <DialogDescription className="sr-only">{complete?`${STAGES.length} ${t('etapas completadas')}`:t('Evolución de Voro')}</DialogDescription>
         </header>
         <ol className="journey-horizons" aria-label={t('Evolución de Voro')}>
-          {STAGES.map((stage, index) => <li key={stage.id}>
+          {visited.map((stage, index) => <li key={stage.id} aria-current={!complete&&index===visited.length-1?"step":undefined}>
             <img src={`./ui/journey/d3/${art[index]}.webp`} alt="" aria-hidden="true" draggable={false}/>
             <span>{t(stage.short)}</span>
           </li>)}
@@ -41,8 +43,8 @@ export function JourneyComplete({ eaten, elapsed, adaptations, onClose, onRestar
           <div><dt>{t('Adaptaciones')}</dt><dd>{count(adaptations)}</dd></div>
         </dl>
         <footer className="journey-complete-actions">
-          <button className="journey-rebirth-control" onClick={() => setConfirm(true)}>{t('Volver a nacer')}</button>
-          <button className="journey-silence-control" onClick={onClose}>{t('Volver al silencio')}</button>
+          {allowRestart&&<button className="journey-rebirth-control" onClick={() => setConfirm(true)}>{t('Volver a nacer')}</button>}
+          <button className="journey-silence-control" onClick={onClose}>{t(returnToSettings?'Volver a configuración':'Volver al silencio')}</button>
         </footer>
       </article>
       <Dialog open={confirm} onOpenChange={setConfirm}>
