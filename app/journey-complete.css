@@ -1,6 +1,6 @@
 .journey-complete-dialog[data-slot=dialog-content]{position:fixed;inset:0;transform:none;translate:none;width:100vw;max-width:none;height:100dvh;max-height:none;padding:0;border:0;border-radius:0;display:block;overflow:auto;overscroll-behavior:contain;background:#000c14;color:#e9e9e5;box-shadow:none;animation:none;}
 .journey-complete-card{position:relative;container-type:inline-size;margin:0 auto;width:min(100%,887px);min-height:100%;padding:0 0 max(9cqw,env(safe-area-inset-bottom));background:linear-gradient(to bottom,transparent 12cqw,#000c14 21cqw),url('/ui/journey/d3/background.webp') top/100% auto no-repeat #000c14;font-family:Georgia,serif;font-weight:400;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;}
-.journey-complete-heading{height:21cqw;padding:max(6.3cqw,env(safe-area-inset-top)) 6.8cqw 0;}
+.journey-complete-heading{height:calc(21cqw + max(0px, env(safe-area-inset-top) - 6.3cqw));padding:max(6.3cqw,env(safe-area-inset-top)) 6.8cqw 0;}
 .journey-complete-heading .journey-brand{margin:0 0 1cqw;font:400 2cqw/1.4 Georgia,serif;letter-spacing:.48em;color:#b0becb;}
 .journey-complete-heading h2{margin:0;font:400 9.3cqw/1.16 Georgia,serif;letter-spacing:-.025em;color:#f0eee6;}
 .journey-horizons{list-style:none;margin:0;padding:0;display:grid;gap:1cqw;}
