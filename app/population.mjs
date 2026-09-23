@@ -25,7 +25,8 @@ export const POPULATION_PLANS = {
   },
   orbit: {
     slots: [4, 4, 1],
-    note: 'Nueve plazas por zona: escombros, satélites y estaciones más espaciados alrededor de la Tierra.',
+    extraSmall: 1,
+    note: 'Diez plazas por zona: las nueve anteriores y un resto pequeño visible y comestible; sin más estaciones, satélites grandes ni peligros.',
   },
   planets: {
     slots: [2, 3, 1],

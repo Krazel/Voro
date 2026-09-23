@@ -1,0 +1,74 @@
+{
+  "appearanceHashesUnchanged": {
+    "18": true,
+    "19": true,
+    "20": true,
+    "23": true,
+    "27": true,
+    "30.5": true
+  },
+  "fadeFrames": {
+    "8": {
+      "visiblePixels": 35546,
+      "bounds": [
+        88,
+        299,
+        299,
+        547
+      ]
+    },
+    "9": {
+      "visiblePixels": 33568,
+      "bounds": [
+        91,
+        302,
+        296,
+        544
+      ]
+    },
+    "10": {
+      "visiblePixels": 14938,
+      "bounds": [
+        124,
+        336,
+        261,
+        474
+      ]
+    },
+    "11": {
+      "visiblePixels": 874,
+      "bounds": [
+        177,
+        388,
+        209,
+        420
+      ]
+    },
+    "12": {
+      "visiblePixels": 22,
+      "bounds": [
+        191,
+        402,
+        195,
+        406
+      ]
+    },
+    "12.6": {
+      "visiblePixels": 0,
+      "bounds": null
+    },
+    "12.9": {
+      "visiblePixels": 0,
+      "bounds": null
+    },
+    "13": {
+      "visiblePixels": 0,
+      "bounds": null
+    }
+  },
+  "video": {
+    "fpsMetadata": 30.0,
+    "framesMetadata": 929.0
+  },
+  "limitation": "Browser visual QA; not physical iPhone/iPad FPS"
+}

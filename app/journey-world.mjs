@@ -99,7 +99,8 @@ export class JourneyWorld extends MicroWorld {
       else entities.push(e);
     }
     const recovery = [...small].sort((a, b) => a.r - b.r)[0];
-    const slots = Array.from({length:starters+forage+threats},(_,i)=>i);
+    const originalSlots=starters+forage+threats;
+    const slots = Array.from({length:originalSlots+(plan.extraSmall||0)},(_,i)=>i);
     // Reserve room for the large stellar threat before placing surrounding
     // stars. Otherwise the enlarged accretion disc could never fit anywhere.
     if (stageId === 'stars') slots.unshift(...slots.splice(starters+forage));
@@ -116,7 +117,12 @@ export class JourneyWorld extends MicroWorld {
       // of the existing budget or let random starter picks flood the roads.
       if (stageId === 'city') pool = pool.filter(s => s.id !== 'city-5');
       const pedestrians = plan.pedestrians || 0;
-      const s = i < pedestrians ? SPECIES_BY_ID[i % 7 === 0 ? 'city-0' : 'city-civilian-'+((i + Math.abs(cx*3+cy)) % 6)]
+      // Append one extra small object after the existing slots so old objects,
+      // journal IDs and random placement remain unchanged. Its modest radius
+      // keeps the art readable and its normal size-based eating rule intact.
+      const extraSmall=i>=originalSlots;
+      const s = extraSmall ? {...pick(small),r:12,sizeFactors:[.85,1.15]}
+        : i < pedestrians ? SPECIES_BY_ID[i % 7 === 0 ? 'city-0' : 'city-civilian-'+((i + Math.abs(cx*3+cy)) % 6)]
         : stageId === 'city' && i === starters ? SPECIES_BY_ID['city-5']
         : i === pedestrians ? recovery : pick(pool.length ? pool : list);
       const seed = rng() * 6.28,

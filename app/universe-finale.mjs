@@ -31,6 +31,9 @@ export function dyingCore(elapsed) {
   const collapse=1-smooth(FINALE_ABSORBED_AT,FINALE_BLACK_AT,elapsed);
   return {radius:6*collapse, light:1-smooth(FINALE_ABSORBED_AT+2,FINALE_BLACK_AT,elapsed)};
 }
+export function cellRevealGeometry(body, reveal) {
+  return {front:body*(.13+3.4*Math.pow(reveal,4)),feather:body*(.16+.24*reveal)};
+}
 export function drawVoidSurvivor(c, width, height, time, reduced, drawProtagonist, reveal = 1) {
   if (reveal <= 0) return;
   const pulse = reduced ? 0 : Math.sin(time * .8);
@@ -47,8 +50,7 @@ export function drawVoidSurvivor(c, width, height, time, reduced, drawProtagonis
     // layer (membrane, glow, flagella and nucleus) the same outward reveal.
     // No offscreen texture, full-screen filter or per-frame image allocation.
     const body=Math.min(66,height*.1),span=Math.max(r,body*3.6);
-    const front=body*(.13+3.4*Math.pow(reveal,4));
-    const feather=body*(.16+.24*reveal);
+    const {front,feather}=cellRevealGeometry(body,reveal);
     const nx=nucleus?.x??x,ny=nucleus?.y??y;
     const mask=c.createRadialGradient(nx,ny,Math.max(0,front-feather),nx,ny,front);
     mask.addColorStop(0,'rgba(0,0,0,0)');mask.addColorStop(1,'#000');
@@ -91,11 +93,23 @@ export class UniverseFinale {
       c.globalAlpha=p.light*.85;c.fillStyle=i%3?'#c8e8f1':'#ffe9b5';
       c.beginPath();c.arc(p.x,p.y,p.radius,0,Math.PI*2);c.fill();
     }
-    // Fade the membrane and shrink its actual golden nucleus together. Keeping
-    // the same artwork avoids replacing the cell with a separate bright dot.
+    // Reverse the approved radial reveal AFTER painting all cell layers. This
+    // also erases strokes which set their own alpha inside the cell renderer.
     const core=dyingCore(s.elapsed);
     c.globalAlpha=1;
-    drawProtagonist(s.growth,false,{bodyLight:s.bodyLight,coreScale:core.radius/6,coreLight:core.light});
+    const nucleus=drawProtagonist(s.growth,false,{bodyLight:1,coreScale:core.radius/6,coreLight:1});
+    if(s.elapsed>FINALE_ABSORBED_AT){
+      const reveal=1-smooth(FINALE_ABSORBED_AT,FINALE_BLACK_AT,s.elapsed);
+      const body=nucleus?.radius??Math.min(194,height*.2);
+      const geometry=cellRevealGeometry(body,reveal);
+      // At the very end the original golden nucleus and the mask both close
+      // to a point. No replacement star, residual rim or offscreen allocation.
+      const tail=smooth(0,.3,reveal),front=geometry.front*tail;
+      const nx=nucleus?.x??x,ny=nucleus?.y??y;
+      const mask=c.createRadialGradient(nx,ny,Math.max(0,front-geometry.feather*tail),nx,ny,Math.max(.001,front));
+      mask.addColorStop(0,`rgba(0,0,0,${1-tail})`);mask.addColorStop(1,'#000');
+      c.globalAlpha=1;c.fillStyle=mask;c.fillRect(0,0,width,height);
+    }
     c.restore();
   }
 }

@@ -1976,7 +1976,7 @@ export class VoroEngine {
         c.translate(-p.x,-p.y); this.drawCell(this.time,fade); c.restore();
         const unit=this.cameraEntryRadius/24;
         return {x:this.width/2+(this.nucleus.x+Math.sin(this.time*.6)*2*unit)*scale,
-          y:this.height*.48+(this.nucleus.y+Math.cos(this.time*.65)*2*unit)*scale};
+          y:this.height*.48+(this.nucleus.y+Math.cos(this.time*.65)*2*unit)*scale,radius:p.radius*scale};
       };
       if (this.ending > 0 && this.universeFinale)
         this.universeFinale.draw(c,this.width,this.height,this.ending,this.reduced,protagonist,this.time);

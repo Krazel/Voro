@@ -20,7 +20,11 @@ try{for(const [width,height,locale,port] of [[390,844,'es-ES',5208],[375,667,'en
  await main.locator('select').selectOption(es?'en':'es');assert.equal(await page.locator('.membrane-heading h2').textContent(),es?'Settings':'Configuración');await main.locator('select').selectOption('auto');
  assert.equal(await main.locator('.membrane-instagram').getAttribute('href'),'https://www.instagram.com/krazelgames/');
  assert.ok((await main.locator('.membrane-privacy').getAttribute('href')).endsWith('/privacy/'));
- await main.getByRole('button',{name:word('Recorrido','Journey'),exact:true}).click();await page.locator('.journey-horizons').waitFor();assert.equal(await page.locator('.journey-horizons li').count(),1); await page.screenshot({path:`${out}/journey-${width}-${locale}.png`});assert.equal(await page.locator('.approved-art,.living-menu-art').count(),0);
+ await main.getByRole('button',{name:word('Recorrido','Journey'),exact:true}).click();await page.locator('.journey-horizons').waitFor();assert.equal(await page.locator('.journey-horizons li').count(),1);
+ const row=await page.locator('.journey-horizons li').boundingBox(),label=await page.locator('.journey-horizons span').boundingBox(),number=await page.locator('.journey-stage-count').boundingBox();
+ assert.ok(number.x>label.x+label.width&&number.x+number.width<row.x+row.width,'Counter fits to the right without touching label or edge');
+ assert.match(await page.locator('.journey-stage-count').textContent(),/^\d/);
+ await page.screenshot({path:`${out}/journey-${width}-${locale}.png`});assert.equal(await page.locator('.approved-art,.living-menu-art').count(),0);
  await page.getByRole('button',{name:word('Volver a configuración','Back to settings'),exact:true}).click();
  await main.getByRole('button',{name:word('Créditos','Credits'),exact:true}).click();await page.locator('.credits-panel').waitFor();await page.screenshot({path:`${out}/credits-${width}-${locale}.png`});await page.locator('.membrane-license-button').click();await page.locator('.membrane-licenses').waitFor();assert.ok(await page.locator('.membrane-licenses a').count()>1);await page.screenshot({path:`${out}/licenses-${width}-${locale}.png`});
  await page.getByRole('button',{name:word('Volver a configuración','Back to settings'),exact:true}).click();

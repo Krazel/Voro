@@ -43,7 +43,8 @@ test('Shore creatures stay on dry sand while fleeing along the continuous coastl
 test('Every biome uses bounded populations with rare rabbits/swimmers and populated city sidewalks', () => {
   for (let stage = 1; stage < STAGES.length; stage++) {
     const w = new JourneyWorld(33, [], stage),
-      max = POPULATION_PLANS[STAGES[stage].id].slots.reduce((a, b) => a + b, 0);
+      plan = POPULATION_PLANS[STAGES[stage].id],
+      max = plan.slots.reduce((a, b) => a + b, 0) + (plan.extraSmall || 0);
     for (let x = 5; x < 25; x++)
       assert.ok(w.generate(x, 10, 0).entities.length <= max);
   }
@@ -64,6 +65,22 @@ test('Every biome uses bounded populations with rare rabbits/swimmers and popula
   assert.ok(shore.average < 12);
   assert.ok(sea.average <= 12 && sea.average > 8);
   assert.ok(city.average <= 24 && city.average > 22);
+});
+
+test('Orbit adds only one readable starter per zone while keeping prior slots and consumed IDs stable',()=>{
+ const stage=STAGES.findIndex(s=>s.id==='orbit'),world=new JourneyWorld(453,[],stage),plan=POPULATION_PLANS.orbit;
+ let extras=0;
+ try {
+  for(let x=5;x<105;x++){
+   plan.extraSmall=0;const before=world.generate(x,10,0).entities;
+   plan.extraSmall=1;const after=world.generate(x,10,0).entities;
+   assert.deepEqual(after.filter(e=>before.some(old=>old.id===e.id)),before);
+   const added=after.filter(e=>!before.some(old=>old.id===e.id));assert.ok(added.length<=1);extras+=added.length;
+   for(const e of added){assert.ok(e.r>=10.2&&e.r<=13.8);assert.ok(e.requiredMass<=2);world.journal.set(e.id,100);assert.ok(!world.generate(x,10,0).entities.some(n=>n.id===e.id));world.journal.delete(e.id)}
+  }
+ } finally {plan.extraSmall=1}
+ assert.ok(extras>=90);
+ assert.equal(plan.slots.reduce((a,b)=>a+b)+plan.extraSmall,10);
 });
 test('Transitions connect every successive environment; coastal journeys crossfade without a scale jump', () => {
   for (const stage of STAGES.slice(0, -1)) {
