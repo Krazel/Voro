@@ -565,6 +565,8 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
       {tr(settings && <Dialog open={!uiPreview} onOpenChange={changeSettings}>
         <DialogContent
           className={'voro-settings cristal-dialog'+(finalUI?' final-ui':'')}
+          initialFocus={finalUI?()=>document.querySelector<HTMLElement>('.membrane-heading'):undefined}
+          style={finalUI?{inset:0,translate:'none',transform:'none'}:undefined}
           showCloseButton={false}
         >
           {finalUI && <button className="settings-development-access" onClick={toggleUiMode}>{tr('Modo de desarrollo')}</button>}

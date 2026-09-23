@@ -3,15 +3,14 @@ import { t as tr } from './language.mjs';
 
 
 import { useState } from 'react';
-import { LanguagePicker } from './language-picker';
 import { ChevronLeft } from 'lucide-react';
-import { DialogClose } from '@/components/ui/dialog';
 import { MUSIC } from './music.mjs';
 import { STAGES } from './journey-data.mjs';
 import './approved-settings.css';
 import { LivingMenuArt } from './living-menu-art';
 import { LandscapeMenuArt } from './landscape-menu-art';
 import './landscape-settings.css';
+import { MembraneSettings } from './membrane-settings';
 
 type Section = 'main' | 'journey' | 'credits';
 
@@ -48,59 +47,40 @@ export function FinalSettings({
   const [confirmReset, setConfirmReset] = useState(false);
   const [licenses, setLicenses] = useState(false);
 
+  if (section === 'main') return <>
+    <MembraneSettings wide={wide} tilt={tilt} leftHanded={leftHanded} sound={sound} testMode={testMode} blocked={confirmReset}
+      onMovement={onMovement} onLeftHanded={onLeftHanded} onSound={onSound}
+      onSection={setSection} onRebirth={()=>setConfirmReset(true)} />
+    {confirmReset&&<div className="membrane-reset" role="alertdialog" aria-modal="true" aria-label={tr('Confirmar nueva vida')}
+      onKeyDown={event=>{
+        if(event.key==='Escape'){event.preventDefault();event.stopPropagation();setConfirmReset(false);}
+        if(event.key==='Tab'){
+          const buttons=event.currentTarget.querySelectorAll('button');
+          const next=document.activeElement===buttons[0]?buttons[1]:buttons[0];
+          event.preventDefault();next.focus();
+        }
+      }}>
+      <p>{tr('Se borrará esta partida y sus adaptaciones.')}</p>
+      <button autoFocus onClick={()=>setConfirmReset(false)}>{tr('Cancelar')}</button>
+      <button onClick={onRestart}>{tr('Sí, volver a nacer')}</button>
+    </div>}
+  </>;
+
   return (
     <div className="final-settings-shell approved-settings" data-section={section} data-wide={wide}>
       <div className="approved-art" aria-hidden="true" />
       {wide ? <LandscapeMenuArt /> : <LivingMenuArt journey={section === 'journey'} />}
       <header className="final-settings-heading">
-        {tr(section === 'main' ? (
-          <DialogClose className="living-back" aria-label={tr("Volver al juego")}><ChevronLeft /></DialogClose>
-        ) : (
-          <button className="living-back" aria-label={tr("Volver a configuración")} onClick={() => setSection('main')}><ChevronLeft /></button>
-        ))}
-        <h2>{tr(section === 'main' ? 'Configuración' : section === 'journey' ? 'Recorrido' : 'Créditos')}</h2>
+        <button className="living-back" aria-label={tr("Volver a configuración")} onClick={() => setSection('main')}><ChevronLeft /></button>
+        <h2>{tr(section === 'journey' ? 'Recorrido' : 'Créditos')}</h2>
       </header>
       {wide && <nav className="landscape-tabs" aria-label={tr('Configuración')}>
-        <button aria-current={section === 'main' ? 'page' : undefined} onClick={() => setSection('main')}>{tr('Configuración')}</button>
+        <button onClick={() => setSection('main')}>{tr('Configuración')}</button>
         <button aria-current={section === 'journey' ? 'page' : undefined} onClick={() => setSection('journey')}>{tr('Recorrido')}</button>
         <button aria-current={section === 'credits' ? 'page' : undefined} onClick={() => setSection('credits')}>{tr('Créditos')}</button>
         <a href="https://www.instagram.com/krazelgames/" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
         {!testMode && <button className="landscape-rebirth" onClick={() => {setSection('main');setConfirmReset(true);}}>{tr('Volver a nacer')}</button>}
       </nav>}
-
-      {section === 'main' && <a className="settings-privacy" href="https://krazel.github.io/voro-abisal/privacy/" target="_blank" rel="noopener noreferrer">{tr('Política de privacidad')}</a>}
-
-      {tr(section === 'main' && <>
-        <section className="living-panel final-settings-panel" aria-label={tr("Configuración general")}>
-          <div className="final-setting-row final-movement-row">
-            <span>{tr("Movimiento")}</span>
-            <div className="living-segmented">
-              <button aria-pressed={!tilt} onClick={() => onMovement(false)}>{tr("Dedo")}</button>
-              <button aria-pressed={tilt} onClick={() => onMovement(true)}>{tr("Inclinar")}</button>
-            </div>
-          </div>
-          <button className="final-setting-row" aria-pressed={leftHanded} onClick={onLeftHanded}>
-            <span>{tr("Modo zurdo")}</span><i className="living-toggle" aria-hidden="true" />
-          </button>
-          <button className="final-setting-row" aria-pressed={sound} onClick={onSound}>
-            <span>{tr("Sonido")}</span><i className="living-toggle" aria-hidden="true" />
-          </button>
-          <div className="final-setting-row">
-            <LanguagePicker />
-          </div>
-        </section>
-        <nav className="final-settings-links" aria-label={tr("Más opciones")}>
-          <button onClick={() => setSection('journey')}>{tr("Recorrido")}</button>
-          <button onClick={() => setSection('credits')}>{tr("Créditos")}</button>
-          <a href="https://www.instagram.com/krazelgames/" target="_blank" rel="noopener noreferrer">{tr("Instagram")}</a>
-          {tr(!testMode && <button className="rebirth-link" onClick={() => setConfirmReset(true)}>{tr("Volver a nacer")}</button>)}
-        </nav>
-        {tr(confirmReset && <div className="living-panel reset-sheet" role="alertdialog" aria-label={tr("Confirmar nueva vida")}>
-          <p>{tr("Se borrará esta partida y sus adaptaciones.")}</p>
-          <div><button onClick={() => setConfirmReset(false)}>{tr("Cancelar")}</button><button className="danger" onClick={onRestart}>{tr("Sí, volver a nacer")}</button></div>
-        </div>)}
-        <DialogClose className="living-primary">{tr("Volver al juego")}</DialogClose>
-      </>)}
 
       {tr(section === 'journey' && <>
         <section className="living-panel journey-panel">
