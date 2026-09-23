@@ -1,8 +1,4 @@
 
-> sites-project@0.2.0 ios:sync
-> npm run build:mobile && cap sync ios
-
-
 > sites-project@0.2.0 build:mobile
 > vite build --config vite.mobile.config.ts && node scripts/verify-mobile-assets.mjs
 
@@ -15,25 +11,14 @@ mobile-dist/index.html                          0.42 kB │ gzip:   0.30 kB
 mobile-dist/assets/page-DOeI38q3.css            2.69 kB │ gzip:   1.02 kB
 mobile-dist/assets/page-CFs7LMlZ.css            6.28 kB │ gzip:   1.90 kB
 mobile-dist/assets/page-Dq4JE098.css           23.87 kB │ gzip:   5.67 kB
-mobile-dist/assets/index-CmEGvA11.css         225.30 kB │ gzip:  39.98 kB
-mobile-dist/assets/chevron-right-DQJN_CQJ.js    0.23 kB │ gzip:   0.19 kB
-mobile-dist/assets/web-Dz2YaG-K.js              0.36 kB │ gzip:   0.25 kB
-mobile-dist/assets/page-DYS7Mc__.js             3.69 kB │ gzip:   1.73 kB
-mobile-dist/assets/web-DJazAI_k.js              8.45 kB │ gzip:   2.82 kB
-mobile-dist/assets/page-iVqSRbTA.js            13.11 kB │ gzip:   4.93 kB
-mobile-dist/assets/page-gOTQAPEj.js            15.57 kB │ gzip:   4.40 kB
-mobile-dist/assets/index-D9Gg2CiX.js          646.62 kB │ gzip: 214.17 kB
+mobile-dist/assets/index-YXVQy2IF.css         225.38 kB │ gzip:  40.01 kB
+mobile-dist/assets/chevron-right-BGXLb3Dk.js    0.23 kB │ gzip:   0.19 kB
+mobile-dist/assets/web-h3H88-AG.js              0.36 kB │ gzip:   0.25 kB
+mobile-dist/assets/page-DWAWGr15.js             3.69 kB │ gzip:   1.73 kB
+mobile-dist/assets/web-DHgWuvC6.js              8.45 kB │ gzip:   2.82 kB
+mobile-dist/assets/page-CtEIB9r7.js            13.11 kB │ gzip:   4.92 kB
+mobile-dist/assets/page-Bxss7y0-.js            15.57 kB │ gzip:   4.40 kB
+mobile-dist/assets/index-b4wDtSd5.js          647.02 kB │ gzip: 214.31 kB
 
-✓ built in 2.74s
+✓ built in 2.06s
 Mobile output verified: Cristal precedence, 10 backgrounds, five ingest gestures, four selected cosmic structures and chosen Respira pause.
-√ Copying web assets from mobile-dist to ios\App\App\public in 180.75ms
-√ Creating capacitor.config.json in ios\App\App in 3.90ms
-√ copy ios in 288.50ms
-√ Updating iOS plugins in 17.80ms
-[info] All Capacitor plugins have a Package.swift file and will be included in Package.swift
-[info] Writing Package.swift
-[info] Found 2 Capacitor plugins for ios:
-       @capacitor/filesystem@8.1.3
-       @capacitor/share@8.0.1
-√ update ios in 130.57ms
-[info] Sync finished in 0.532s

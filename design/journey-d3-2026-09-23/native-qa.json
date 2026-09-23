@@ -1,0 +1,51 @@
+{
+  "run": "35876996054",
+  "commit": "17c1d5ee165233463b72f876e1a1c909865aafba",
+  "runtime": "iOS Simulator 26.4.1 WKWebView",
+  "devices": [
+    "iPhone 17 Pro Max",
+    "iPad Pro 13-inch (M5)"
+  ],
+  "tests": 4,
+  "failures": 0,
+  "fixture": true,
+  "physicalDevice": false,
+  "captures": [
+    {
+      "device": "iphone",
+      "source": "84ED0C57-A1EA-4C3E-A858-45B1175C7D16.png",
+      "file": "native-iphone-portrait-en.png",
+      "sha256": "de0d3aba9c406927d91ea8ceea685eba30b70174c7f04275b520f23e0317246d"
+    },
+    {
+      "device": "iphone",
+      "source": "63DC0AC1-F0FC-43C6-8034-D092F969EF64.png",
+      "file": "native-iphone-portrait-es.png",
+      "sha256": "856648ac49134f58de43276e141ca519f1feb04d1e3c49728916d12f2f98baca"
+    },
+    {
+      "device": "ipad",
+      "source": "035C304C-3A64-4F62-9416-14F95D6D695F.png",
+      "file": "native-ipad-landscape-en.png",
+      "sha256": "99dd72b2701248f31e909598e9236f7e127da39ca06f9e53201daa119104fc9e"
+    },
+    {
+      "device": "ipad",
+      "source": "BE5492FB-9CD8-4083-9C56-1413C661DB7D.png",
+      "file": "native-ipad-footer-en.png",
+      "sha256": "16cc2660c065e10363add95436c3aba06d55f0fff138e5bd6ace3730637e3226"
+    },
+    {
+      "device": "ipad",
+      "source": "63AD9C14-F7B7-4AAB-B87D-D41E91F6F572.png",
+      "file": "native-ipad-landscape-es.png",
+      "sha256": "d24dbcf5a33ff5f8ad6ef8e12086706be3f4c5a351b25a856fdb6c1b4b6f89b2"
+    },
+    {
+      "device": "ipad",
+      "source": "B196073F-D06C-4E85-AF87-66CF81387B37.png",
+      "file": "native-ipad-footer-es.png",
+      "sha256": "3776c202dec72cded0862edce527f766ab39d7e74bd8467110f4227ce35594bf"
+    }
+  ]
+}

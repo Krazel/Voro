@@ -1,0 +1,17 @@
+{
+  "detail": "TF interno 0.6.5(3), 17c1d5e, CI35878619305: VALID/IN_BETA_TESTING. Incluye D3 Diez horizontes, Respira, privacidad EN/ES, Película viva, 4 estructuras cósmicas y final29s: fade inmediato tras absorción, núcleo colapsa, vacío5s y aparición12.5s.225 tests/tipos/assets OK; QA web6vistas y nativa documentadas en design/journey-d3-2026-09-23. Falta QA físico. ASC1.0 sigue sin revisión; Windows prueba5 sin nueva entrega.",
+  "beforeRevision": 186,
+  "afterRevision": 187,
+  "tracking": {
+    "testflight": "Interno",
+    "appStore": "Creada en App Store Connect",
+    "ads": "Por confirmar",
+    "testflightUrl": "https://appstoreconnect.apple.com/teams/7f069118-9712-49c8-a1f0-fda00b62a281/apps/6809193565/testflight/groups/05db8744-bcf3-4c2d-a465-2635012bfeeb",
+    "appStoreUrl": "https://appstoreconnect.apple.com/apps/6809193565/distribution"
+  },
+  "version": "0.6.5",
+  "next": "VORO 01a06eb1-17bb-74c1-b4a4-f88225d8e26d: TF interno 0.6.5(3) disponible, CI35878619305, 17c1d5e. Probar físicamente iPhone/iPad: D3, audio, cámara y final29s. Sin envío App Store. Visuales 01a0ce4b-784d-7460-9c93-f300aed8936b: D3 integrada y disponible en TF0.6.5(3). Encargo nueva-exploracion-20260923/APROBACION-D3-TESTFLIGHT.md. Escudo 01a0cd9f-2753-7da3-b0b6-1a8b2a185712: Película viva implementada local con VORO; QA móvil/PC y vídeo OK; mecánica intacta, incluido en TF0.6.5(3). Marketing 01a096e2-5834-7233-9b36-d034a2d281fb: ASC1.0 EN/ES,0.6.2(1),manual,SIN revisión;capturas/previews listas;tráilers/redes listos;itch5004054 Draft,CSS pendiente. Detalles .studio/voro-coordinacion-20260923.md;imágenes .studio/design/voro/. QA físico pendiente.",
+  "build": 3,
+  "id": "PR-009",
+  "verified": true
+}

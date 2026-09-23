@@ -1,4 +1,4 @@
-# D3 · Diez horizontes — candidata 0.6.5 (1)
+# D3 · Diez horizontes — TestFlight 0.6.5 (3)
 
 Usuario aprobó D3 e implementación + TestFlight el 23-09-2026. Contrato conservado
 por Studio en .studio/design/voro/nueva-exploracion-20260923/APROBACION-D3-TESTFLIGHT.md.
@@ -22,6 +22,6 @@ No representa una prueba física ni una medición de rendimiento de dispositivo.
 Candidata incluye también final29s (absorción8s→fade inmediato, negro11–16s,
 reaparición16–28.5s), Respira, privacidad EN/ES, Película viva y los cambios aprobados
 de cámara/audio/población/órbita/cuatro estructuras cósmicas ya presentes en fuente.
-Última build Apple verificada por API:0.6.4(1), run35869783686. Siguiente0.6.5(1).
+Consulta inicial de Apple:0.6.4(1), run35869783686. Entrega final:0.6.5(3), CI35878619305.
 QA nativa específica mediante journey-d3-checkpoint.yml, sin fixture en distribución.
-La entrega TestFlight y sus comprobantes se registran al terminar el procesamiento.
+Entrega verificada: DELIVERY.md, apple-delivery.json, build-manifest.json y native-qa.json.
