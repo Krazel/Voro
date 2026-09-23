@@ -1,7 +1,11 @@
 const path = require('node:path');
 const externalHosts = new Set(['www.instagram.com', 'creativecommons.org', 'www.scottbuckley.com.au']);
 function externalAllowed(input) {
-  try { const u = new URL(input); return u.protocol === 'https:' && !u.username && !u.password && !u.port && externalHosts.has(u.hostname); }
+  try {
+    const u = new URL(input);
+    const privacy = u.hostname === 'krazel.github.io' && u.pathname === '/voro-abisal/privacy/' && !u.search;
+    return u.protocol === 'https:' && !u.username && !u.password && !u.port && (externalHosts.has(u.hostname) || privacy);
+  }
   catch { return false; }
 }
 function assetPath(root, input) {

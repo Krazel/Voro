@@ -69,8 +69,9 @@ Final24s: oscuridad desde bordes hasta9.6s, breve pausa negra, luego núcleo→c
 de10.5 a23s, movimiento libre posterior. El revelado afecta a todo el dibujo con
 una máscara negra local sobre el vacío negro, sin buffers/filtros por fotograma.
 `final-reveal.webm` muestra el render real; respeta movimiento reducido.
-**No se abre automáticamente Recorrido.** Su rediseño sigue pendiente de elección;
-no se ha integrado ninguna propuesta de Recorrido en esta candidata.
+**No se abre automáticamente Recorrido.** Actualización posterior a Windows prueba5:
+A Espiral fue elegida e integrada en fuente local; ver `../journey-spiral-2026-09-23/`.
+No está incluida en aquel ejecutable ni en TestFlight0.6.4(1).
 
 Pausa1 Respira verificada en375×667,390×844,1194×834 y1280×800, incluida entrada
 a Configuración. Avisos de escudo/combo/protección abajo, en el lado contrario

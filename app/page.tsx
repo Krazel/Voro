@@ -16,6 +16,7 @@ import { ReviewMilestone } from './review-milestone';
 import { Capacitor } from '@capacitor/core';
 import { useBenchmarkAwake } from './benchmark-awake';
 import { FinalSettings } from './final-settings';
+import { JourneyComplete } from './journey-complete';
 import { isTabletDevice, wideScreenEnabled } from './desktop-viewport.mjs';
 import './wide-screen.css';
 import './cristal.css';
@@ -506,26 +507,9 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
         </div>)}
         {tr(state.complete && state.ending === 0 && !finalDetails && <button className="universe-survivor-control" aria-label={tr("VORO permanece solo en el vacío. Ver el final y tu recorrido")} onClick={() => setFinalDetails(true)}>{tr("Recorrido")}</button>)}
         {tr(state.complete && finalDetails && (
-          <div className="finish-panel journey-finish" aria-live="polite">
-            <p className="eyebrow">{tr("UNIVERSO ABSORBIDO")}</p>
-            <h2>{tr(" Todo estaba ")}<br />{tr(" dentro de ti. ")}</h2>
-            <p>{tr("De una única célula al último punto de luz.")}</p>
-            <div className="finish-stats">
-              <span>
-                <b>{tr(state.eaten)}</b>{tr("absorciones ")}</span>
-              <span>
-                <b>{tr(Math.floor(state.elapsed / 60))}</b>{tr("minutos ")}</span>
-              <span>
-                <b>{tr(state.level)}</b>{tr("adaptaciones ")}</span>
-            </div>
-            <button
-              className="primary-button"
-              onClick={() => changeSettings(true)}
-            >{tr(" Ver tu recorrido ")}<Sparkles size={18} />
-            </button>
-            <button className="text-button" onClick={() => setFinalDetails(false)}>{tr("Volver al silencio")}</button>
-            <span className="short-note">{tr("FIN · VORO")}</span>
-          </div>
+          <JourneyComplete eaten={state.eaten} elapsed={state.elapsed} adaptations={state.level}
+            onClose={() => setFinalDetails(false)}
+            onRestart={() => { setFinalDetails(false); action('restart'); }} />
         ))}
         {tr(state.automated && (!tourNoticeDismissed || state.automated.running) && <section className="automatic-benchmark" aria-label={tr('Prueba automática de rendimiento')}>
           <strong>{tr(state.automated.running?'Prueba automática de rendimiento':state.automated.status==='completed'?'Prueba terminada':'Prueba cancelada')}</strong>

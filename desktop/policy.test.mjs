@@ -14,6 +14,9 @@ test('reject other origins and encoded path escapes', () => {
 test('only approved HTTPS destinations may open externally', () => {
   assert.equal(policy.externalAllowed('https://www.instagram.com/krazelgames/'), true);
   assert.equal(policy.externalAllowed('https://www.scottbuckley.com.au/library/'), true);
+  assert.equal(policy.externalAllowed('https://krazel.github.io/voro-abisal/privacy/'), true);
+  for (const url of ['https://krazel.github.io/other/', 'https://krazel.github.io/voro-abisal/privacy/?redirect=evil', 'http://krazel.github.io/voro-abisal/privacy/', 'https://krazel.github.io.evil.test/voro-abisal/privacy/'])
+    assert.equal(policy.externalAllowed(url), false, url);
   for (const url of ['file:///C:/Windows', 'javascript:alert(1)', 'https://www.instagram.com.evil.test/', 'https://user@www.instagram.com/', 'http://www.instagram.com/'])
     assert.equal(policy.externalAllowed(url), false, url);
 });

@@ -1,0 +1,80 @@
+{
+  "candidate": "0.6.4 Windows prueba5",
+  "reference": "design/pause-a-2026-09-22/pc-restored.png",
+  "styles": {
+    "font": "24px / 28.8px Georgia, \"Times New Roman\", serif",
+    "width": "300px",
+    "height": "64px",
+    "borderImage": "url(\"voro://game/ui/cristal/membrane-frame.png\")",
+    "borderWidth": "28px",
+    "opacity": "0.364684"
+  },
+  "settingsLinks": [
+    {
+      "text": "Instagram ↗",
+      "url": "https://www.instagram.com/krazelgames/"
+    },
+    {
+      "text": "Instagram",
+      "url": "https://www.instagram.com/krazelgames/"
+    },
+    {
+      "text": "CC BY 4.0",
+      "url": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    {
+      "text": "Life In Silico",
+      "url": "https://www.scottbuckley.com.au/library/life-in-silico/"
+    },
+    {
+      "text": "Solace",
+      "url": "https://www.scottbuckley.com.au/library/solace/"
+    },
+    {
+      "text": "Reverie",
+      "url": "https://www.scottbuckley.com.au/library/reverie/"
+    },
+    {
+      "text": "Ephemera",
+      "url": "https://www.scottbuckley.com.au/library/ephemera/"
+    },
+    {
+      "text": "Sleep",
+      "url": "https://www.scottbuckley.com.au/library/sleep/"
+    },
+    {
+      "text": "Meanwhile",
+      "url": "https://www.scottbuckley.com.au/library/meanwhile/"
+    },
+    {
+      "text": "Cirrus",
+      "url": "https://www.scottbuckley.com.au/library/cirrus/"
+    },
+    {
+      "text": "Hymn To The Dawn",
+      "url": "https://www.scottbuckley.com.au/library/hymn-to-the-dawn/"
+    },
+    {
+      "text": "Permafrost",
+      "url": "https://www.scottbuckley.com.au/library/permafrost/"
+    },
+    {
+      "text": "Hiraeth",
+      "url": "https://www.scottbuckley.com.au/library/hiraeth/"
+    },
+    {
+      "text": "Shadows And Dust",
+      "url": "https://www.scottbuckley.com.au/library/shadows-and-dust/"
+    },
+    {
+      "text": "The Distant Sun",
+      "url": "https://www.scottbuckley.com.au/library/the-distant-sun/"
+    },
+    {
+      "text": "Fuentes y condiciones del autor",
+      "url": "https://www.scottbuckley.com.au/library/using-this-music/"
+    }
+  ],
+  "privacyLinkVisible": false,
+  "respira": true
+}

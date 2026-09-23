@@ -68,6 +68,8 @@ export function FinalSettings({
         {!testMode && <button className="landscape-rebirth" onClick={() => {setSection('main');setConfirmReset(true);}}>{tr('Volver a nacer')}</button>}
       </nav>}
 
+      {section === 'main' && <a className="settings-privacy" href="https://krazel.github.io/voro-abisal/privacy/" target="_blank" rel="noopener noreferrer">{tr('Política de privacidad')}</a>}
+
       {tr(section === 'main' && <>
         <section className="living-panel final-settings-panel" aria-label={tr("Configuración general")}>
           <div className="final-setting-row final-movement-row">

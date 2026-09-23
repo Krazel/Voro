@@ -19,6 +19,7 @@
 .landscape-tabs button[aria-current=page]{color:#ffe2a2;border-color:#d6ae5470;background:#97722c1e;}
 .landscape-tabs .landscape-rebirth{margin-top:14px;color:#8ebac5;font-size:13px;}
 .landscape-tabs .landscape-development{font:11px sans-serif;color:#809b9e;min-height:32px;padding-block:4px;}
+.approved-settings[data-wide=true] .settings-privacy{left:2%;width:19%;top:auto;bottom:7%;font-size:14px;justify-content:flex-start;padding:10px;}
 .approved-settings[data-wide=true] .final-settings-links,.approved-settings[data-wide=true] .journey-rebirth{display:none}
 .approved-settings[data-wide=true] .final-settings-panel{left:31%;top:23%;width:61%;height:49%;}
 .approved-settings[data-wide=true] .final-setting-row{min-height:0;padding:0 12px;font:400 clamp(15px,1.7vw,22px)/1.2 Georgia,serif;gap:20px;letter-spacing:.075em;}

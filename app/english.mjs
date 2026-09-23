@@ -2,6 +2,10 @@ import { STUDIO_ENGLISH } from './english-studio.mjs';
 // Spanish source text is retained in game data and save files. Only presentation
 // is translated, so species keys, upgrade groups and progression stay stable.
 export const ENGLISH = Object.fromEntries(`
+Política de privacidad|Privacy policy
+etapas completadas|stages completed
+Adaptaciones|Adaptations
+ABISAL|ABYSSAL
 Segundo entorno completado|Second environment completed
 La partida está en pausa. Continúa cuando quieras.|The game is paused. Continue when you're ready.
 Cargando…|Loading…

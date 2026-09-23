@@ -1,0 +1,70 @@
+[
+  {
+    "width": 390,
+    "height": 844,
+    "lang": "es",
+    "pc": false,
+    "privacyBounds": {
+      "x": 15.59375,
+      "y": 776.46875,
+      "width": 191.09375,
+      "height": 44
+    },
+    "manual": true,
+    "cancelPreserved": true,
+    "silencePreserved": true,
+    "confirmedRestart": true,
+    "errors": []
+  },
+  {
+    "width": 375,
+    "height": 667,
+    "lang": "en",
+    "pc": false,
+    "privacyBounds": {
+      "x": 15,
+      "y": 613.625,
+      "width": 183.75,
+      "height": 44
+    },
+    "manual": true,
+    "cancelPreserved": true,
+    "silencePreserved": true,
+    "confirmedRestart": true,
+    "errors": []
+  },
+  {
+    "width": 1194,
+    "height": 834,
+    "lang": "es",
+    "pc": false,
+    "privacyBounds": {
+      "x": 23.875,
+      "y": 731.625,
+      "width": 226.859375,
+      "height": 44
+    },
+    "manual": true,
+    "cancelPreserved": true,
+    "silencePreserved": true,
+    "confirmedRestart": true,
+    "errors": []
+  },
+  {
+    "width": 1280,
+    "height": 800,
+    "lang": "en",
+    "pc": true,
+    "privacyBounds": {
+      "x": 25.59375,
+      "y": 700,
+      "width": 243.1875,
+      "height": 44
+    },
+    "manual": true,
+    "cancelPreserved": true,
+    "silencePreserved": true,
+    "confirmedRestart": true,
+    "errors": []
+  }
+]
