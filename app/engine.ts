@@ -1965,12 +1965,12 @@ export class VoroEngine {
     c.setTransform(k, 0, 0, k, 0, 0);
     if (this.progress.completed) {
       c.fillStyle = '#000'; c.fillRect(0,0,this.width,this.height);
-      const protagonist = (growth: number, survivor = false) => {
+      const protagonist = (growth: number, survivor = false, fade = null) => {
         // Keep the solitary cell readable after the universe has gone dark.
         const scale = survivor ? Math.min(66,this.height*.1) / Math.max(.8,p.radius) * growth
           : Math.min(this.zoom * growth, 194 / Math.max(.8,p.radius));
         c.save(); c.translate(this.width/2,this.height*.48); c.scale(scale,scale);
-        c.translate(-p.x,-p.y); this.drawCell(); c.restore();
+        c.translate(-p.x,-p.y); this.drawCell(this.time,fade); c.restore();
         const unit=this.cameraEntryRadius/24;
         return {x:this.width/2+(this.nucleus.x+Math.sin(this.time*.6)*2*unit)*scale,
           y:this.height*.48+(this.nucleus.y+Math.cos(this.time*.65)*2*unit)*scale};
@@ -2221,7 +2221,7 @@ export class VoroEngine {
     }
     c.closePath();
   }
-  drawCell(time = this.time) {
+  drawCell(time = this.time, fade: {bodyLight:number;coreScale:number;coreLight:number}|null = null) {
     const c = this.ctx,
       p = this.life,
       t = time;
@@ -2234,6 +2234,8 @@ export class VoroEngine {
     c.translate(p.x, p.y);
     c.scale(unit,unit);
     if (p.dead) c.globalAlpha = Math.min(1, p.radius / 35);
+    c.save();
+    if (fade) c.globalAlpha *= fade.bodyLight;
     this.halo(0, 0, r * 1.75, 'rgba(39,173,213,.095)');
     drawShieldFilm(c,{radius:r,points:pts,time:t,
       ready:!!this.stats.shieldCooldown && this.progress.shieldRecharge===0,
@@ -2392,9 +2394,14 @@ export class VoroEngine {
       c.lineWidth = 0.75;
       c.stroke();
     }
+    c.restore();
     const nx = this.nucleus.x / unit + Math.sin(t * 0.6) * 2,
       ny = this.nucleus.y / unit + Math.cos(t * 0.65) * 2,
       nr = r * (0.205 + Math.sin(t * 3) * 0.008 + p.feedPulse * 0.025);
+    if (fade) {
+      c.globalAlpha *= fade.coreLight;
+      c.translate(nx,ny); c.scale(fade.coreScale,fade.coreScale); c.translate(-nx,-ny);
+    }
     this.halo(nx, ny, nr * 3.2, 'rgba(242,164,39,.16)');
     const g = c.createRadialGradient(
       nx - nr * 0.3,

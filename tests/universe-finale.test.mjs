@@ -64,16 +64,29 @@ test('Universe lights converge, then the cell fades leaving only its own contrac
   assert.ok(distance<1e-9);assert.equal(fallingLight(index,13,480,850,reduced).light,0);
  }
  assert.ok(Array.from({length:48},(_,i)=>fallingLight(i,12,480,850)).every(p=>p.done));
- assert.equal(finaleState(FINALE_SECONDS-10.2).bodyLight,0);
+ assert.ok(finaleState(FINALE_SECONDS-10.2).bodyLight>0,'The body fades gradually while the original nucleus contracts');
  assert.ok(dyingCore(10.2).light>0);assert.ok(dyingCore(10.8).radius<dyingCore(10.2).radius);
  assert.deepEqual(dyingCore(FINALE_BLACK_AT),{radius:0,light:0});
- const glows=[];
- const c=new Proxy({createRadialGradient(...a){glows.push(a);return {addColorStop(){}};}},{get:(o,k)=>k in o?o[k]:()=>{}});
- new UniverseFinale().draw(c,480,850,FINALE_SECONDS-10.5,false,()=>({x:231,y:401}));
- assert.deepEqual(glows.at(-1).slice(0,5),[231,401,0,231,401],'The final glow is attached to the real nucleus, not an approaching star');
+ const layers=[];
+ const c=new Proxy({createRadialGradient(){return {addColorStop(){}};}},{get:(o,k)=>k in o?o[k]:()=>{}});
+ new UniverseFinale().draw(c,480,850,FINALE_SECONDS-10.5,false,(_growth,_survivor,fade)=>layers.push(fade));
+ assert.ok(layers[0].bodyLight>0&&layers[0].coreScale>0&&layers[0].coreScale<1);
+ assert.ok(layers[0].coreLight>layers[0].bodyLight,'Original gold nucleus remains as the membrane fades');
  const {game}=makeEngine();game.progress.completed=true;game.ending=FINALE_SECONDS-10;
  const calls=[];game.music={setState:(...a)=>calls.push(a),destroy(){}};game.syncMusic();
- assert.equal(calls[0][1],false);assert.equal(calls[0][3],3,'Music fades with the nucleus, then remains silent');game.destroy();
+ assert.equal(calls[0][1],false);assert.equal(calls[0][3],FINALE_BLACK_AT-FINALE_ABSORBED_AT,'Music fades with the nucleus, then remains silent');game.destroy();
+});
+
+test('Body and nucleus fade continuously without a second light appearing or a pause in contraction',()=>{
+ let previous={body:1,radius:6,light:1};
+ for(let t=FINALE_ABSORBED_AT;t<=FINALE_BLACK_AT+.01;t+=1/60){
+  const body=finaleState(FINALE_SECONDS-t).bodyLight,core=dyingCore(t);
+  assert.ok(body<=previous.body+1e-9&&core.radius<=previous.radius+1e-9&&core.light<=previous.light+1e-9);
+  assert.ok(previous.body-body<.012&&previous.radius-core.radius<.031&&previous.light-core.light<.009,'No visible jump between consecutive frames');
+  previous={body,radius:core.radius,light:core.light};
+ }
+ assert.equal(finaleState(FINALE_SECONDS-FINALE_BLACK_AT).bodyLight,0);
+ assert.ok(dyingCore(FINALE_BLACK_AT-.2).radius<.03,'The same nucleus reaches a tiny point before darkness');
 });
 
 test('The cell begins fading immediately when the last universe material is swallowed',()=>{

@@ -26,7 +26,7 @@ export function applyScaleAudit(stages, lists, byId) {
   set('planets-matter-comet', { name: 'Núcleo de planetoide helado' });
   set('orbit-0', { r: 40, requiredMass: undefined, sizeFactors: [0.45, 1.7] });
   set('orbit-1', { r: 4, requiredMass: 0 });
-  set('orbit-2', { r: 24, sizeFactors: [.7, 2.4], requiredMass: undefined });
+  set('orbit-2', { r: 30, sizeFactors: [.55, 3.2], requiredMass: undefined });
   set('orbit-3', { r: 65, sizeFactors: [.8, 1.8], requiredMass: undefined });
   set('orbit-4', { r: 48 });
   set('orbit-5', { name: 'Asteroide craterizado', sizeFactors: [0.55, 1.45] });

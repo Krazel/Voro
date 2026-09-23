@@ -1,8 +1,8 @@
 export const FINALE_ABSORBED_AT = 8;
-export const FINALE_SECONDS = 29;
-export const FINALE_BLACK_AT = 11;
+export const FINALE_SECONDS = 31;
+export const FINALE_BLACK_AT = 13;
 export const FINALE_MUSIC_FADE_AT = FINALE_ABSORBED_AT;
-export const FINALE_REVEAL_AT = 16;
+export const FINALE_REVEAL_AT = 18;
 const smooth = (a,b,x) => { const t = Math.max(0,Math.min(1,(x-a)/(b-a))); return t*t*(3-2*t); };
 export function finaleState(remaining) {
   const elapsed = Math.max(0, FINALE_SECONDS - remaining);
@@ -10,7 +10,7 @@ export function finaleState(remaining) {
   return { elapsed, u, growth: 1+.22*smooth(0,FINALE_ABSORBED_AT,elapsed),
     contraction: 1-.985*smooth(.5,10.8,elapsed),
     sceneLight: 1-smooth(7,FINALE_ABSORBED_AT,elapsed), darkness: smooth(.4,11,elapsed),
-    bodyLight: 1-smooth(FINALE_ABSORBED_AT,FINALE_ABSORBED_AT+2.1,elapsed),
+    bodyLight: 1-smooth(FINALE_ABSORBED_AT,FINALE_BLACK_AT-1.4,elapsed),
     black: elapsed>=FINALE_BLACK_AT, survivor: smooth(FINALE_REVEAL_AT,FINALE_REVEAL_AT+12.5,elapsed),
     caption: elapsed<4 ? 'Ya no hay nada más grande que tú.' : elapsed<FINALE_ABSORBED_AT ? 'El universo entra en ti.' : elapsed<10.2 ? 'La última luz.' : '' };
 }
@@ -28,8 +28,8 @@ export function fallingLight(index, elapsed, width, height, reduced = false) {
     radius:1.1+(index%3)*.6,done:elapsed>=end};
 }
 export function dyingCore(elapsed) {
-  const collapse=1-smooth(FINALE_ABSORBED_AT+1.9,FINALE_BLACK_AT,elapsed);
-  return {radius:6*collapse, light:smooth(FINALE_ABSORBED_AT+.4,FINALE_ABSORBED_AT+1.8,elapsed)*(1-smooth(FINALE_BLACK_AT-.7,FINALE_BLACK_AT,elapsed))};
+  const collapse=1-smooth(FINALE_ABSORBED_AT,FINALE_BLACK_AT,elapsed);
+  return {radius:6*collapse, light:1-smooth(FINALE_ABSORBED_AT+2,FINALE_BLACK_AT,elapsed)};
 }
 export function drawVoidSurvivor(c, width, height, time, reduced, drawProtagonist, reveal = 1) {
   if (reveal <= 0) return;
@@ -91,17 +91,11 @@ export class UniverseFinale {
       c.globalAlpha=p.light*.85;c.fillStyle=i%3?'#c8e8f1':'#ffe9b5';
       c.beginPath();c.arc(p.x,p.y,p.radius,0,Math.PI*2);c.fill();
     }
-    c.globalAlpha=s.bodyLight;const nucleus=drawProtagonist(s.growth,false);
-    // The cell's own nucleus is the last light. It stays in place and contracts
-    // to nothing after the membrane fades; no separate star enters the scene.
-    const core=dyingCore(s.elapsed),nx=nucleus?.x??x,ny=nucleus?.y??y;
-    if(core.light>0&&core.radius>0){
-      c.globalAlpha=core.light;
-      const glow=c.createRadialGradient(nx,ny,0,nx,ny,core.radius*6);
-      glow.addColorStop(0,'#fff4cf');glow.addColorStop(.14,'#ffd68b');glow.addColorStop(1,'#e39a3700');
-      c.fillStyle=glow;c.fillRect(nx-core.radius*6,ny-core.radius*6,core.radius*12,core.radius*12);
-      c.fillStyle='#fff7df';c.beginPath();c.arc(nx,ny,core.radius,0,Math.PI*2);c.fill();
-    }
+    // Fade the membrane and shrink its actual golden nucleus together. Keeping
+    // the same artwork avoids replacing the cell with a separate bright dot.
+    const core=dyingCore(s.elapsed);
+    c.globalAlpha=1;
+    drawProtagonist(s.growth,false,{bodyLight:s.bodyLight,coreScale:core.radius/6,coreLight:core.light});
     c.restore();
   }
 }

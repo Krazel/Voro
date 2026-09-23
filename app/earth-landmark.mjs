@@ -1,7 +1,11 @@
 
 import { t as tr } from './language.mjs';
 // The orbital arena and its painting use the same world coordinates.
-export const ORBITAL_EARTH = { x: 700, y: 1750, radius: 620, softLimit: 1200, limit: 1550 };
+export const ORBITAL_EARTH = { x: 700, y: 1750, radius: 900, softLimit: 1480, limit: 1830 };
+export function orbitHintOpacity(elapsed = 0) {
+  const fade = Math.max(0, Math.min(1, (elapsed - 5) / 3));
+  return 1 - fade * fade * (3 - 2 * fade);
+}
 export function constrainOrbit(p, dt) {
   const e = ORBITAL_EARTH, dx = p.x - e.x, dy = p.y - e.y;
   const d = Math.hypot(dx, dy), nx = d ? dx / d : 0, ny = d ? dy / d : -1;
@@ -21,7 +25,7 @@ export function canAbsorbEarth(p) {
   return p.biomass >= p.goalMass && Math.hypot(p.x - ORBITAL_EARTH.x, p.y - ORBITAL_EARTH.y)
     <= ORBITAL_EARTH.radius + p.radius + 65;
 }
-/** @param {{x:number,y:number,biomass:number,goalMass:number}|null} life */
+/** @param {{x:number,y:number,biomass:number,goalMass:number,elapsed?:number}|null} life */
 export function drawOrbitalEarth(c, image, camera, height, zoom = 1, life = null, absorption = 0, width = 480) {
   if (!image?.naturalWidth) return;
   const t = Math.max(0, Math.min(1, absorption)), ease = t * t * (3 - 2 * t);
@@ -43,6 +47,7 @@ export function drawOrbitalEarth(c, image, camera, height, zoom = 1, life = null
   }
   c.save();
   c.drawImage(image, x - r, y - r, r * 2, r * 2);
+  c.globalAlpha *= t > 0 ? 1 : orbitHintOpacity(life?.elapsed);
   c.fillStyle = '#e0eef4';
   c.textAlign = 'center';
   c.font = '11px Arial';

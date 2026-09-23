@@ -1,0 +1,59 @@
+[
+  {
+    "width": 390,
+    "height": 844,
+    "orbit": {
+      "earth": {
+        "x": 700,
+        "y": 1750,
+        "radius": 900,
+        "softLimit": 1480,
+        "limit": 1830
+      },
+      "zoom": 0.49824275551467917,
+      "viewport": [
+        480,
+        1044.1237113402062
+      ]
+    },
+    "errors": []
+  },
+  {
+    "width": 1194,
+    "height": 834,
+    "orbit": {
+      "earth": {
+        "x": 700,
+        "y": 1750,
+        "radius": 900,
+        "softLimit": 1480,
+        "limit": 1830
+      },
+      "zoom": 0.49824275551467917,
+      "viewport": [
+        480,
+        717.4193548387096
+      ]
+    },
+    "errors": []
+  },
+  {
+    "width": 1280,
+    "height": 800,
+    "orbit": {
+      "earth": {
+        "x": 700,
+        "y": 1750,
+        "radius": 900,
+        "softLimit": 1480,
+        "limit": 1830
+      },
+      "zoom": 0.49824275551467917,
+      "viewport": [
+        1152,
+        720
+      ]
+    },
+    "errors": []
+  }
+]
