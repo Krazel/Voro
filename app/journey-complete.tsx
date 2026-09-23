@@ -14,7 +14,7 @@ export function JourneyComplete({ eaten, elapsed, adaptations, onClose, onRestar
   const [confirm, setConfirm] = useState(false);
   const popup = useRef<HTMLDivElement>(null);
   return <Dialog open onOpenChange={open => { if (!open) onClose(); }}>
-    <DialogContent ref={popup} className="journey-complete-dialog" showCloseButton={false} initialFocus={popup}>
+    <DialogContent ref={popup} className="journey-complete-dialog" style={{ translate: 'none', transform: 'none' }} showCloseButton={false} initialFocus={popup}>
       <article className="journey-complete-card">
         <header className="journey-complete-heading">
           <p className="journey-brand">VORO · <span>{t('ABISAL')}</span></p>

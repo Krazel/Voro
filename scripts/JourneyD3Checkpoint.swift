@@ -15,6 +15,10 @@ final class StoreCapture: XCTestCase {
   XCTAssertFalse(app.staticTexts[title].exists, "Journey must open manually")
   entry.tap()
   XCTAssertTrue(app.staticTexts[title].waitForExistence(timeout:30),app.debugDescription)
+  let heading=app.staticTexts[title].frame, screen=XCUIScreen.main.screenshot().image.size
+  XCTAssertGreaterThanOrEqual(heading.minX,0,"Journey title must be on screen")
+  XCTAssertGreaterThanOrEqual(heading.minY,0,"Journey must open at its top")
+  XCTAssertLessThanOrEqual(heading.maxX,screen.width)
   capture("01-d3-portrait-\(language)")
   let rebirth=app.buttons[language == "es" ? "Volver a nacer" : "Be born again"]
   for _ in 0..<4 { if rebirth.isHittable { break }; app.swipeUp() }

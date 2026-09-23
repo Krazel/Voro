@@ -38,10 +38,12 @@ if (mode === 'latest') {
   const builds = await api(`/v1/builds?filter[app]=${appId}&filter[preReleaseVersion.version]=${encodeURIComponent(version)}&include=preReleaseVersion&sort=-uploadedDate&limit=200`);
   const numbers = builds.data.map(item=>Number(item.attributes.version)).filter(Number.isSafeInteger);
   const latest = numbers.length ? Math.max(...numbers) : 0;
-  const recent = await api(`/v1/builds?filter[app]=${appId}&include=preReleaseVersion&sort=-uploadedDate&limit=5`);
+  const recent = await api(`/v1/builds?filter[app]=${appId}&include=preReleaseVersion,betaGroups,buildBetaDetail&sort=-uploadedDate&limit=5`);
   const recentBuilds = recent.data.map(item=>({id:item.id,build:item.attributes.version,state:item.attributes.processingState,
     version:recent.included?.find(v=>v.type==='preReleaseVersions'&&v.id===item.relationships.preReleaseVersion.data?.id)?.attributes.version,
-    uploadedDate:item.attributes.uploadedDate}));
+    uploadedDate:item.attributes.uploadedDate,expired:item.attributes.expired,
+    groups:item.relationships.betaGroups?.data?.map(group=>group.id)||[],
+    internalBuildState:recent.included?.find(detail=>detail.type==='buildBetaDetails'&&detail.id===item.relationships.buildBetaDetail?.data?.id)?.attributes.internalBuildState}));
   const uploads = await api(`/v1/apps/${appId}/buildUploads?limit=20`);
   const buildUploads = uploads.data.map(item=>({id:item.id,
     version:item.attributes.cfBundleShortVersionString,build:item.attributes.cfBundleVersion,
