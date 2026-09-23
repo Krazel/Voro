@@ -12,7 +12,10 @@ final class StoreCapture: XCTestCase {
   let settings=app.buttons[es ? "Configuración" : "Settings"].firstMatch
   XCTAssertTrue(settings.waitForExistence(timeout:120),app.debugDescription);sleep(3);settings.tap()
   let heading=app.staticTexts[es ? "Configuración" : "Settings"].firstMatch
-  XCTAssertTrue(heading.waitForExistence(timeout:20));sleep(2)
+  // The initial cold WKWebView accessibility snapshot can precede a usable hit target.
+  // Retry the entry action once only when no menu has opened; all menu checks remain strict.
+  if !heading.waitForExistence(timeout:5) && settings.isHittable { settings.tap() }
+  XCTAssertTrue(heading.waitForExistence(timeout:20),app.debugDescription);sleep(2)
   XCTAssertGreaterThanOrEqual(heading.frame.minX,0);XCTAssertLessThanOrEqual(heading.frame.maxX,app.frame.maxX)
   capture("01-membrane-portrait-\(language)")
   // WKWebView exposes aria-pressed controls as toggle/switch elements on iOS.

@@ -1,6 +1,12 @@
 name: VORO native membrane settings
 on:
   workflow_dispatch:
+    inputs:
+      device:
+        description: Devices to check
+        type: choice
+        default: both
+        options: [both, iphone, ipad]
 permissions:
   contents: read
 jobs:
@@ -10,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        device: [iphone, ipad]
+        device: ${{ inputs.device == 'ipad' && fromJSON('["ipad"]') || inputs.device == 'iphone' && fromJSON('["iphone"]') || fromJSON('["iphone","ipad"]') }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
