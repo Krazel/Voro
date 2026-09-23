@@ -1,0 +1,96 @@
+[
+  {
+    "width": 390,
+    "height": 844,
+    "items": [
+      {
+        "name": "Gran muralla galáctica",
+        "requiredMass": 147.20137014747186,
+        "below": false,
+        "at": true,
+        "image": {
+          "loaded": true,
+          "url": "http://127.0.0.1:5208/inhabitants/cosmic-wall-v1.webp"
+        }
+      },
+      {
+        "name": "Corona de galaxias",
+        "requiredMass": 166.65381525774725,
+        "below": false,
+        "at": true,
+        "image": {
+          "loaded": true,
+          "url": "http://127.0.0.1:5208/inhabitants/lensed-crown-v1.webp"
+        }
+      },
+      {
+        "name": "Confluencia de supercúmulos",
+        "requiredMass": 187.1517960327217,
+        "below": false,
+        "at": true,
+        "image": {
+          "loaded": true,
+          "url": "http://127.0.0.1:5208/inhabitants/cosmic-confluence-v1.webp"
+        }
+      },
+      {
+        "name": "Marea cósmica",
+        "requiredMass": 170.89694082204272,
+        "below": false,
+        "at": true,
+        "image": {
+          "loaded": true,
+          "url": "http://127.0.0.1:5208/inhabitants/cosmic-tide-v1.webp"
+        }
+      }
+    ],
+    "errors": []
+  },
+  {
+    "width": 1280,
+    "height": 800,
+    "items": [
+      {
+        "name": "Gran muralla galáctica",
+        "requiredMass": 147.20137014747186,
+        "below": false,
+        "at": true,
+        "image": {
+          "loaded": true,
+          "url": "http://127.0.0.1:5206/inhabitants/cosmic-wall-v1.webp"
+        }
+      },
+      {
+        "name": "Corona de galaxias",
+        "requiredMass": 166.65381525774725,
+        "below": false,
+        "at": true,
+        "image": {
+          "loaded": true,
+          "url": "http://127.0.0.1:5206/inhabitants/lensed-crown-v1.webp"
+        }
+      },
+      {
+        "name": "Confluencia de supercúmulos",
+        "requiredMass": 187.1517960327217,
+        "below": false,
+        "at": true,
+        "image": {
+          "loaded": true,
+          "url": "http://127.0.0.1:5206/inhabitants/cosmic-confluence-v1.webp"
+        }
+      },
+      {
+        "name": "Marea cósmica",
+        "requiredMass": 170.89694082204272,
+        "below": false,
+        "at": true,
+        "image": {
+          "loaded": true,
+          "url": "http://127.0.0.1:5206/inhabitants/cosmic-tide-v1.webp"
+        }
+      }
+    ],
+    "errors": []
+  }
+]

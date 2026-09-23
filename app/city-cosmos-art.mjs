@@ -56,6 +56,7 @@ export function applyCityCosmosArt(stages, lists, byId, urls) {
     ['cosmic-wall','Gran muralla galáctica',165,30,[.85,1.18]],
     ['lensed-crown','Corona de galaxias',175,34,[.86,1.18]],
     ['cosmic-confluence','Confluencia de supercúmulos',190,39,[.9,1.12]],
+    ['cosmic-tide','Marea cósmica',180,36,[.85,1.16]],
   ]) {
     urls[key]=`./inhabitants/${key}-v1.webp`;
     add(byId['universe-9'],`universe-${key}`,name,universe,{

@@ -28,4 +28,4 @@ for (const url of [...Object.values(BACKGROUND_ASSETS), ...Object.values(ATLAS_U
 }
 const scripts=scriptPaths.map(p=>fs.readFileSync(path.join(root,'assets',p),'utf8')).join('\n');
 assert.ok(css.includes('.pause-panel') && scripts.includes('Respira.') && scripts.includes('membrane-control'), 'Player pause must use the chosen Respira panel');
-console.log('Mobile output verified: Cristal precedence, 10 backgrounds, five ingest gestures, three new cosmic structures and chosen Respira pause.');
+console.log('Mobile output verified: Cristal precedence, 10 backgrounds, five ingest gestures, four selected cosmic structures and chosen Respira pause.');

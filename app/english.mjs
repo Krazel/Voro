@@ -561,5 +561,6 @@ Object.assign(ENGLISH,{
   'Gran muralla galáctica':'Great galactic wall',
   'Corona de galaxias':'Crown of galaxies',
   'Confluencia de supercúmulos':'Supercluster confluence',
+  'Marea cósmica':'Cosmic tide',
   'Gran estructura cósmica con deriva lenta, sin deformación de la silueta.':'A vast cosmic structure drifting slowly, with a stable silhouette.',
 });

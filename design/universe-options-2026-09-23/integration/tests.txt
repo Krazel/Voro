@@ -1,0 +1,18 @@
+✔ Every edible element has an explicit animation profile and valid art bounds (608.2715ms)
+✔ Mesh loops meet exactly at their seam, and the sardine skull stays stable while its tail moves (61.7136ms)
+✔ Pseudopods deform the existing cell boundary, without a separate arm surface (1.1984ms)
+✔ Impulse strength depends only on selected ranks, never on stage or biomass (1.7471ms)
+✔ Lazy animation cache stays within 24 MiB and is reusable across instances (443.1357ms)
+✔ Authored limbs keep bone lengths and shells stay rigid throughout the cycle (2.1341ms)
+✔ Butterfly folding stays monotonic across the thorax instead of turning wings inside out (18.5796ms)
+✔ Swimmer variants coexist deterministically without adding encounter slots or changing edible size (100.9351ms)
+✔ Space structures retain rigid geometry and surface flows keep their outer boundary fixed (5.5468ms)
+✔ New cosmic structures fit the final food chain and existing population budget (85.5401ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1527.9748
