@@ -6,12 +6,8 @@ import { LanguagePicker } from './language-picker';
 import { t } from './language.mjs';
 import './membrane-settings.css';
 
-function Frame({ small = false }: { small?: boolean }) {
-  return <svg className="membrane-frame" aria-hidden="true" viewBox={small ? '42 1055 379 192' : '42 316 768 700'} preserveAspectRatio="none">
-    <svg x="42" y={small?1055:316} width={small?379:768} height={small?192:700} viewBox={small?'42 1055 379 192':'42 316 768 700'} style={{overflow:'hidden',borderRadius:small?'12% / 24%':'10% / 12%'}} preserveAspectRatio="none">
-      <image href="/ui/membrane/settings-art.webp" width="853" height="1844" preserveAspectRatio="none" />
-    </svg>
-  </svg>;
+export function MembraneFrame() {
+  return <img className="membrane-frame" src="/ui/membrane/panel-cutout.webp" alt="" aria-hidden="true" draggable={false}/>;
 }
 
 export function MembraneSettings({wide,tilt,leftHanded,sound,testMode,blocked,onMovement,onLeftHanded,onSound,onSection,onRebirth}: {
@@ -30,7 +26,7 @@ export function MembraneSettings({wide,tilt,leftHanded,sound,testMode,blocked,on
   return <div ref={root} className="final-settings-shell membrane-settings" data-wide={wide} inert={blocked}>
     <header className="membrane-heading" tabIndex={-1} style={{outline:'none'}}><p>VORO · ABISAL</p><h2>{t('Configuración')}</h2></header>
     <section className="membrane-controls" aria-label={t('Configuración general')}>
-      <Frame />
+      <MembraneFrame />
       <div className="membrane-control-content">
         <div className="membrane-movement"><span>{t('Movimiento')}</span>
           <div className="membrane-segments"><button aria-pressed={!tilt} onClick={()=>onMovement(false)}>{t('Dedo')}</button><button aria-pressed={tilt} onClick={()=>onMovement(true)}>{t('Inclinar')}</button></div>
@@ -41,8 +37,8 @@ export function MembraneSettings({wide,tilt,leftHanded,sound,testMode,blocked,on
       </div>
     </section>
     <nav className="membrane-links" aria-label={t('Más opciones')}>
-      <button onClick={()=>onSection('journey')}><Frame small/><span>{t('Recorrido')} <b aria-hidden="true">›</b></span></button>
-      <button onClick={()=>onSection('credits')}><Frame small/><span>{t('Créditos')} <b aria-hidden="true">›</b></span></button>
+      <button onClick={()=>onSection('journey')}><MembraneFrame/><span>{t('Recorrido')} <b aria-hidden="true">›</b></span></button>
+      <button onClick={()=>onSection('credits')}><MembraneFrame/><span>{t('Créditos')} <b aria-hidden="true">›</b></span></button>
     </nav>
     <a className="membrane-instagram" href="https://www.instagram.com/krazelgames/" target="_blank" rel="noopener noreferrer">Instagram <ArrowUpRight aria-hidden="true" size="1.15em"/></a>
     <div className="membrane-actions">

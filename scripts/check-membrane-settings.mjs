@@ -1,6 +1,6 @@
 import {createRequire} from 'node:module';import {mkdir,writeFile} from 'node:fs/promises';import assert from 'node:assert/strict';
 const {chromium}=createRequire(process.env.VORO_PLAYWRIGHT_RUNTIME)('playwright');
-const out='design/menu-membrane-2026-09-23';await mkdir(out,{recursive:true});
+const out=process.env.VORO_UI_QA_OUT||'design/menu-membrane-2026-09-23';await mkdir(out,{recursive:true});
 const browser=await chromium.launch({channel:'msedge',headless:true}),reports=[];
 try{for(const [width,height,locale,port] of [[390,844,'es-ES',5208],[375,667,'en-US',5208],[1194,834,'es-ES',5208],[834,1194,'en-US',5208],[1280,800,'en-US',5206]]){
  const ipad=width===1194||width===834;
@@ -20,9 +20,9 @@ try{for(const [width,height,locale,port] of [[390,844,'es-ES',5208],[375,667,'en
  await main.locator('select').selectOption(es?'en':'es');assert.equal(await page.locator('.membrane-heading h2').textContent(),es?'Settings':'Configuración');await main.locator('select').selectOption('auto');
  assert.equal(await main.locator('.membrane-instagram').getAttribute('href'),'https://www.instagram.com/krazelgames/');
  assert.ok((await main.locator('.membrane-privacy').getAttribute('href')).endsWith('/privacy/'));
- await main.getByRole('button',{name:word('Recorrido','Journey'),exact:true}).click();await page.locator('.final-journey').waitFor();assert.equal(await page.locator('.final-journey li').count(),1);
+ await main.getByRole('button',{name:word('Recorrido','Journey'),exact:true}).click();await page.locator('.final-journey').waitFor();assert.equal(await page.locator('.final-journey li').count(),1); await page.screenshot({path:`${out}/journey-${width}-${locale}.png`});assert.equal(await page.locator('.approved-art,.living-menu-art').count(),0);
  await page.getByRole('button',{name:word('Volver a configuración','Back to settings'),exact:true}).click();
- await main.getByRole('button',{name:word('Créditos','Credits'),exact:true}).click();await page.locator('.credits-panel').waitFor();
+ await main.getByRole('button',{name:word('Créditos','Credits'),exact:true}).click();await page.locator('.credits-panel').waitFor();await page.screenshot({path:`${out}/credits-${width}-${locale}.png`});await page.locator('.membrane-license-button').click();await page.locator('.membrane-licenses').waitFor();assert.ok(await page.locator('.membrane-licenses a').count()>1);await page.screenshot({path:`${out}/licenses-${width}-${locale}.png`});
  await page.getByRole('button',{name:word('Volver a configuración','Back to settings'),exact:true}).click();
  await main.getByRole('button',{name:word('Volver a nacer','Be born again'),exact:true}).click();await page.getByRole('alertdialog').waitFor();
  await page.getByRole('button',{name:word('Cancelar','Cancel'),exact:true}).click();await page.getByRole('alertdialog').waitFor({state:'hidden'});

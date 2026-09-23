@@ -2,15 +2,11 @@
 import { t as tr } from './language.mjs';
 
 
-import { useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { ChevronLeft } from 'lucide-react';
 import { MUSIC } from './music.mjs';
 import { STAGES } from './journey-data.mjs';
-import './approved-settings.css';
-import { LivingMenuArt } from './living-menu-art';
-import { LandscapeMenuArt } from './landscape-menu-art';
-import './landscape-settings.css';
-import { MembraneSettings } from './membrane-settings';
+import { MembraneFrame, MembraneSettings } from './membrane-settings';
 
 type Section = 'main' | 'journey' | 'credits';
 
@@ -47,6 +43,17 @@ export function FinalSettings({
   const [confirmReset, setConfirmReset] = useState(false);
   const [licenses, setLicenses] = useState(false);
 
+  const detailRoot=useRef<HTMLDivElement>(null);
+  useLayoutEffect(()=>{
+    if(section==='main') return;
+    const root=detailRoot.current,dialog=root?.closest<HTMLElement>('.voro-settings');
+    const fit=()=>dialog?.style.setProperty('--settings-viewport-height',`${window.visualViewport?.height||window.innerHeight}px`);
+    fit();if(dialog) dialog.scrollTop=0;
+    root?.querySelector<HTMLElement>('h2')?.focus({preventScroll:true});
+    window.addEventListener('resize',fit);window.visualViewport?.addEventListener('resize',fit);
+    return ()=>{window.removeEventListener('resize',fit);window.visualViewport?.removeEventListener('resize',fit);};
+  },[section]);
+
   if (section === 'main') return <>
     <MembraneSettings wide={wide} tilt={tilt} leftHanded={leftHanded} sound={sound} testMode={testMode} blocked={confirmReset}
       onMovement={onMovement} onLeftHanded={onLeftHanded} onSound={onSound}
@@ -67,45 +74,36 @@ export function FinalSettings({
   </>;
 
   return (
-    <div className="final-settings-shell approved-settings" data-section={section} data-wide={wide}>
-      <div className="approved-art" aria-hidden="true" />
-      {wide ? <LandscapeMenuArt /> : <LivingMenuArt journey={section === 'journey'} />}
-      <header className="final-settings-heading">
-        <button className="living-back" aria-label={tr("Volver a configuración")} onClick={() => setSection('main')}><ChevronLeft /></button>
-        <h2>{tr(section === 'journey' ? 'Recorrido' : 'Créditos')}</h2>
+    <div ref={detailRoot} className="final-settings-shell membrane-settings membrane-detail" data-section={section} data-wide={wide}>
+      <header className="membrane-heading">
+        <button className="membrane-back" aria-label={tr('Volver a configuración')} onClick={()=>{setLicenses(false);setSection('main');}}><ChevronLeft/></button>
+        <p>VORO · ABISAL</p>
+        <h2 tabIndex={-1}>{tr(section==='journey'?'Recorrido':'Créditos')}</h2>
       </header>
-      {wide && <nav className="landscape-tabs" aria-label={tr('Configuración')}>
-        <button onClick={() => setSection('main')}>{tr('Configuración')}</button>
-        <button aria-current={section === 'journey' ? 'page' : undefined} onClick={() => setSection('journey')}>{tr('Recorrido')}</button>
-        <button aria-current={section === 'credits' ? 'page' : undefined} onClick={() => setSection('credits')}>{tr('Créditos')}</button>
-        <a href="https://www.instagram.com/krazelgames/" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
-        {!testMode && <button className="landscape-rebirth" onClick={() => {setSection('main');setConfirmReset(true);}}>{tr('Volver a nacer')}</button>}
-      </nav>}
-
-      {tr(section === 'journey' && <>
-        <section className="living-panel journey-panel">
-          <ol className="final-journey" aria-label={tr("Evolución de Voro")}>
-            {tr(STAGES.slice(0, complete ? STAGES.length : stage + 1).map((item, index) => <li key={item.id} className={complete || index < stage ? 'done' : index === stage ? 'current' : 'locked'}>
-              <i aria-hidden="true"/><span>{tr(item.short)}</span>{tr(index === stage && !complete && <small>{tr("Actual")}</small>)}
-            </li>))}
-          </ol>
-          <div className="final-stats"><span>{tr("Absorciones ")}<b>{tr(eaten)}</b></span><span>{tr("Tiempo ")}<b>{tr(Math.floor(elapsed / 60))}{tr(" min")}</b></span></div>
-        </section>
-        {!testMode && <button className="journey-rebirth" onClick={()=>{setSection('main');setConfirmReset(true);}}>{tr('Volver a nacer')}</button>}
-        <button className="living-primary" onClick={() => setSection('main')}>{tr("Volver")}</button>
-      </>)}
-
-      {tr(section === 'credits' && <>
-        <section className="living-panel credits-panel">
-          <h3>{tr("Voro Abisal")}</h3><p>{tr("Un juego de Krazel Games")}</p>
-          <hr/><h4>{tr("Creación y desarrollo")}</h4><p>{tr("Krazel Games")}</p>
-          <hr/><h4>{tr("Música y licencias")}</h4>
-          <button className="license-open" aria-expanded={licenses} onClick={()=>setLicenses(!licenses)}>{tr('Ver licencias')}</button>
-          {licenses && <div className="license-sheet"><button onClick={()=>setLicenses(false)}>{tr('Volver')}</button><p>{tr("Música de Scott Buckley · ")}<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a></p><ul>{MUSIC.map(track => <li key={track.id}><a href={track.source} target="_blank" rel="noopener noreferrer">{track.title}</a> — Scott Buckley</li>)}</ul><p>{tr('Composiciones completas. Volumen normalizado, conversión MP3 y fundidos de entrada, salida y repetición. Sin recortes de secciones.')}</p></div>}
-        </section>
-        <p className="credits-thanks">{tr("Gracias por acompañar a Voro desde el origen.")}</p>
-        <button className="living-primary" onClick={() => setSection('main')}>{tr("Volver")}</button>
-      </>)}
+      <section className={`membrane-detail-panel ${section==='credits'?'credits-panel':'journey-panel'}`}>
+        <MembraneFrame/>
+        <div className="membrane-detail-content">
+          {section==='journey'? <>
+            <ol className="membrane-journey final-journey" aria-label={tr('Evolución de Voro')}>
+              {STAGES.slice(0,complete?STAGES.length:stage+1).map((item,index)=><li key={item.id} className={complete||index<stage?'done':'current'}>
+                <i aria-hidden="true"/><span>{tr(item.short)}</span>{index===stage&&!complete&&<small>{tr('Actual')}</small>}
+              </li>)}
+            </ol>
+            <div className="membrane-stats"><span>{tr('Absorciones ')}<b>{eaten}</b></span><span>{tr('Tiempo ')}<b>{Math.floor(elapsed/60)}{tr(' min')}</b></span></div>
+          </>:<>
+            <h3>{tr('Voro Abisal')}</h3><p>{tr('Un juego de Krazel Games')}</p>
+            <hr/><h4>{tr('Creación y desarrollo')}</h4><p>Krazel Games</p>
+            <hr/><h4>{tr('Música y licencias')}</h4>
+            <button className="membrane-license-button" aria-expanded={licenses} onClick={()=>setLicenses(!licenses)}>{tr(licenses?'Volver':'Ver licencias')}</button>
+            {licenses&&<div className="membrane-licenses"><p>{tr('Música de Scott Buckley · ')}<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a></p><ul>{MUSIC.map(track=><li key={track.id}><a href={track.source} target="_blank" rel="noopener noreferrer">{track.title}</a> — Scott Buckley</li>)}</ul><p>{tr('Composiciones completas. Volumen normalizado, conversión MP3 y fundidos de entrada, salida y repetición. Sin recortes de secciones.')}</p></div>}
+          </>}
+        </div>
+      </section>
+      {section==='credits'&&<p className="membrane-thanks">{tr('Gracias por acompañar a Voro desde el origen.')}</p>}
+      <div className="membrane-actions">
+        {section==='journey'&&!testMode&&<button className="membrane-rebirth" onClick={()=>{setSection('main');setConfirmReset(true);}}>{tr('Volver a nacer')}</button>}
+        <button className="membrane-return" onClick={()=>{setLicenses(false);setSection('main');}}>{tr('Volver')}</button>
+      </div>
     </div>
   );
 }
