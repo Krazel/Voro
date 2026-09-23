@@ -29,6 +29,7 @@ export function newJourney(seed) {
   return {
     ...newMicro(seed),
     stage: 0,
+    absorptionsByStage: STAGES.map(() => /** @type {number|null} */ (0)),
     cameraEntryRadius: null,
     orbitSweep: /** @type {ReturnType<typeof restoreOrbitSweep>} */ (null),
     adaptationVersion: 5,
@@ -59,8 +60,7 @@ export function journeyLife(p) {
 export function advanceJourney(p, life) {
   if (p.stage >= STAGES.length - 1) return life;
   const previousDiameter = physicalDiameter(p.stage, life.biomass);
-  p.totalTime += life.elapsed;
-  p.totalEaten += life.eaten;
+  bankJourneyLife(p, life);
   p.stage++;
   p.pendingEvolution = false;
   p.finalReady = false;
@@ -73,6 +73,28 @@ export function advanceJourney(p, life) {
   p.cameraEntryRadius = next.radius;
   next.invulnerable = 3;
   return next;
+}
+// Bank only when replacing the life, never when saving or opening the menu.
+export function bankJourneyLife(p, life) {
+  p.totalTime += life.elapsed;
+  p.totalEaten += life.eaten;
+  if (p.absorptionsByStage[p.stage] !== null)
+    p.absorptionsByStage[p.stage] += life.eaten;
+}
+export function journeyAbsorptions(p, life) {
+  return p.absorptionsByStage.map((value, index) =>
+    value === null ? null : value + (index === p.stage ? life.eaten : 0));
+}
+function restoreAbsorptions(p, stage) {
+  return STAGES.map((_, index) => {
+    const value = p.absorptionsByStage?.[index];
+    if (Number.isSafeInteger(value) && value >= 0) return value;
+    if (Array.isArray(p.absorptionsByStage) && value === null) return null;
+    if (index > stage) return 0;
+    if (stage === 0 && index === 0) return p.totalEaten;
+    if (index === stage && p.deaths === 0) return 0;
+    return null;
+  });
 }
 export function saveJourney(p, l, w, sound, fragments = []) {
   return JSON.stringify({
@@ -96,6 +118,7 @@ export function migrateMicro(raw) {
   const d = loadMicro(raw);
   if (!d) return null;
   const p = { ...newJourney(d.progress.seed), ...d.progress, stage: 0 };
+  p.absorptionsByStage[0] = p.totalEaten;
   p.xp = migrateAdaptationXp(p.xp, p.level);
   p.mutations = boundedUpgrades(p.mutations);
   p.level = p.mutations.length;
@@ -164,6 +187,7 @@ export function loadJourney(raw) {
     const progress = {
       ...newJourney(p.seed),
       stage,
+      absorptionsByStage: restoreAbsorptions(p, stage),
       orbitSweep: STAGES[stage].id === 'orbit' && !p.earthConsumed && l.biomass >= STAGES[stage].goal
         ? restoreOrbitSweep(p.orbitSweep) : null,
       cameraEntryRadius: Number.isFinite(p.cameraEntryRadius) && p.cameraEntryRadius >= radiusForMass(stageStartMass(stage)) &&

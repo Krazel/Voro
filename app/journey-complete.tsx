@@ -8,7 +8,8 @@ import './journey-complete.css';
 const art = ['micro','pond','shore','sea','city','orbit','planets','stars','galaxies','universe'];
 const count = (value: number) => Number.isFinite(value) ? value.toLocaleString() : '—';
 
-export function JourneyComplete({ eaten, elapsed, adaptations, onClose, onRestart, stage=STAGES.length-1, complete=true, returnToSettings=false, allowRestart=true }: {
+export function JourneyComplete({ eaten, absorptionsByStage, elapsed, adaptations, onClose, onRestart, stage=STAGES.length-1, complete=true, returnToSettings=false, allowRestart=true }: {
+  absorptionsByStage: (number | null)[];
   stage?: number; complete?: boolean; returnToSettings?: boolean; allowRestart?: boolean;
   eaten: number; elapsed: number; adaptations: number; onClose: () => void; onRestart: () => void;
 }) {
@@ -35,6 +36,7 @@ export function JourneyComplete({ eaten, elapsed, adaptations, onClose, onRestar
           {visited.map((stage, index) => <li key={stage.id} aria-current={!complete&&index===visited.length-1?"step":undefined}>
             <img src={`./ui/journey/d3/${art[index]}.webp`} alt="" aria-hidden="true" draggable={false}/>
             <span>{t(stage.short)}</span>
+            <small className="journey-stage-count" aria-label={`${t('Absorciones')}: ${count(absorptionsByStage[index] ?? NaN)}`}>{count(absorptionsByStage[index] ?? NaN)}</small>
           </li>)}
         </ol>
         <dl className="journey-complete-stats">

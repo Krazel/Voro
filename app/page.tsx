@@ -163,6 +163,7 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
     dead: false,
     protected: false,
     eaten: 0,
+    absorptionsByStage: [],
     size: 20,
     elapsed: 0,
     dash: 0,
@@ -507,7 +508,7 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
         </div>)}
         {tr(state.complete && state.ending === 0 && !finalDetails && <button className="universe-survivor-control" aria-label={tr("VORO permanece solo en el vacío. Ver el final y tu recorrido")} onClick={() => setFinalDetails(true)}>{tr("Recorrido")}</button>)}
         {tr(state.complete && finalDetails && (
-          <JourneyComplete eaten={state.eaten} elapsed={state.elapsed} adaptations={state.level}
+          <JourneyComplete eaten={state.eaten} absorptionsByStage={state.absorptionsByStage} elapsed={state.elapsed} adaptations={state.level}
             onClose={() => setFinalDetails(false)}
             onRestart={() => { setFinalDetails(false); action('restart'); }} />
         ))}
@@ -577,6 +578,7 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
             eaten={state.eaten}
             elapsed={state.elapsed}
             adaptations={state.level}
+            absorptionsByStage={state.absorptionsByStage}
             tilt={tilt}
             leftHanded={leftHanded}
             sound={state.sound}

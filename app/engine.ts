@@ -74,6 +74,8 @@ import {
   loadJourney,
   migrateMicro,
   advanceJourney,
+  bankJourneyLife,
+  journeyAbsorptions,
   loseAdaptationProgress,
 } from './journey-progress.mjs';
 
@@ -109,6 +111,7 @@ export type Snapshot = {
   dead: boolean;
   protected: boolean;
   eaten: number;
+  absorptionsByStage: (number | null)[];
   size: number;
   elapsed: number;
   dash: number;
@@ -1011,8 +1014,7 @@ export class VoroEngine {
       if (name === 'restart') this.progress = newJourney();
       else {
         this.progress.deaths++;
-        this.progress.totalEaten += this.life.eaten;
-        this.progress.totalTime += this.life.elapsed;
+        bankJourneyLife(this.progress, this.life);
       }
       this.progress.cameraEntryRadius = null;
       this.progress.orbitSweep = null;
@@ -1156,6 +1158,7 @@ export class VoroEngine {
       dead: this.life.dead,
       protected: this.life.invulnerable > 0,
       eaten: this.progress.totalEaten + this.life.eaten,
+      absorptionsByStage: journeyAbsorptions(this.progress, this.life),
       size: Math.round(40 * Math.sqrt(this.life.biomass / 8)),
       elapsed: this.progress.totalTime + this.life.elapsed,
       dash: this.life.cooldown,

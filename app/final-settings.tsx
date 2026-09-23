@@ -15,6 +15,7 @@ export function FinalSettings({
   stage,
   complete,
   eaten,
+  absorptionsByStage,
   elapsed,
   adaptations,
   tilt,
@@ -30,6 +31,7 @@ export function FinalSettings({
   stage: number;
   complete: boolean;
   eaten: number;
+  absorptionsByStage: (number | null)[];
   elapsed: number;
   adaptations: number;
   tilt: boolean;
@@ -60,7 +62,7 @@ export function FinalSettings({
     <MembraneSettings wide={wide} tilt={tilt} leftHanded={leftHanded} sound={sound} testMode={testMode} blocked={confirmReset}
       onMovement={onMovement} onLeftHanded={onLeftHanded} onSound={onSound}
       onSection={setSection} onRebirth={()=>setConfirmReset(true)} />
-    {section==='journey'&&<JourneyComplete stage={stage} complete={complete} eaten={eaten} elapsed={elapsed} adaptations={adaptations}
+    {section==='journey'&&<JourneyComplete stage={stage} complete={complete} eaten={eaten} absorptionsByStage={absorptionsByStage} elapsed={elapsed} adaptations={adaptations}
       returnToSettings allowRestart={!testMode} onClose={()=>setSection('main')} onRestart={onRestart}/>}
     {confirmReset&&<div className="membrane-reset" role="alertdialog" aria-modal="true" aria-label={tr('Confirmar nueva vida')}
       onKeyDown={event=>{

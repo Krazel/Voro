@@ -7,6 +7,7 @@
 .journey-horizons li{position:relative;height:11.2cqw;overflow:hidden;display:flex;align-items:center;}
 .journey-horizons img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;}
 .journey-horizons span{position:relative;z-index:1;margin-left:7cqw;font:400 clamp(13px,3.1cqw,28px)/1.2 Georgia,serif;color:#b5c2d0;text-shadow:0 1px 6px #000;}
+.journey-stage-count{position:relative;z-index:1;margin-left:auto;margin-right:7%;font:400 clamp(12px,2.6cqw,21px)/1.2 Georgia,serif;font-variant-numeric:tabular-nums;color:#e5e4df;text-shadow:0 1px 5px #000,0 0 10px #000;}
 .journey-complete-stats{margin:8cqw 7cqw 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));text-align:center;font:400 clamp(12px,3cqw,27px)/1.4 Georgia,serif;color:#b5c2d0;}
 .journey-complete-stats>div+div{border-left:1px solid #75849455;}
 .journey-complete-stats dd{margin:1.1cqw 0 0;font-size:3.5cqw;color:#e8e8e2;}
