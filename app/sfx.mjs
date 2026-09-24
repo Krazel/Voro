@@ -1,11 +1,12 @@
 // Five different wet gestures; runtime pitch varies independently of the sample.
 export const INGEST_SOUNDS = [1, 2, 3, 4, 5].map(index => `./sfx/ingest-${index}.wav`);
-// The effects master is 0.055. The samples already average about -26 dBFS;
-// 0.65 here attenuated bites to roughly -55 dBFS, easily masked on a phone.
+// Music has its own output; this bus controls only effects. The quiet WAVs
+// need a higher level to remain audible on phone speakers.
+export const EFFECTS_MASTER_GAIN = 0.11;
 export const INGEST_GAIN = 2;
 export const INGEST_PITCH = Object.freeze({ min: -5, max: 6 });
 export const HIT_SOUNDS = Object.freeze({
-  damage: Object.freeze({type:'triangle',from:320,to:130,gain:2.4,attack:.009,duration:.30}),
+  damage: Object.freeze({type:'triangle',from:460,to:220,gain:3.2,attack:.009,duration:.30}),
   shield: Object.freeze({type:'sine',from:1340,to:360,gain:1.1,attack:.006,duration:.38}),
 });
 

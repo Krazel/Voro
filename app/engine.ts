@@ -2,7 +2,7 @@ import { desktopViewport, visibleChunkRadius, isTabletDevice, wideScreenEnabled 
 
 import { t as tr } from './language.mjs';
 import { MusicPlayer, musicScene } from './music.mjs';
-import { SfxPlayer } from './sfx.mjs';
+import { EFFECTS_MASTER_GAIN, SfxPlayer } from './sfx.mjs';
 import { captureOrbit, sweepPosition } from './orbital-sweep.mjs';
 import { UniverseFinale, FINALE_SECONDS, FINALE_BLACK_AT, FINALE_MUSIC_FADE_AT, drawVoidSurvivor } from './universe-finale.mjs';
 import { WorldGround } from './world-ground.mjs';
@@ -766,7 +766,7 @@ export class VoroEngine {
   }
   setAudio() {
     this.syncMusic();
-    const target=this.effectsAudible()?0.055:0;
+    const target=this.effectsAudible()?EFFECTS_MASTER_GAIN:0;
     if(!target || (this.audio && this.audio.state!=='running'))this.sfx?.cancelImpacts?.();
     if(this.audio && this.master && this.effectsGainTarget!==target){
       const now=this.audio.currentTime;

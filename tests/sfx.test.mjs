@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { INGEST_SOUNDS, INGEST_GAIN, SfxPlayer } from '../app/sfx.mjs';
+import { EFFECTS_MASTER_GAIN, INGEST_SOUNDS, INGEST_GAIN, HIT_SOUNDS, SfxPlayer } from '../app/sfx.mjs';
 
 test('iOS local media without HTTP status decodes; remote/opaque/HTTP failures stay rejected',async()=>{
   for(const [baseURL,status,type,allowed] of [
@@ -111,8 +111,11 @@ test('Interrupted iOS audio is counted and never queues stale bites until a gest
   await player.unlock();assert.equal(resumes,1);assert.equal(starts,1);player.destroy();
 });
 
-test('Bite gain compensates the quiet sample without pushing the shared master near clipping', () => {
-  assert.ok(INGEST_GAIN*.055>.1);assert.ok(INGEST_GAIN*.055<.15);
+test('Effects are audible on phone speakers without pushing a single voice near clipping', () => {
+  assert.ok(INGEST_GAIN*EFFECTS_MASTER_GAIN>=.2);
+  assert.ok(HIT_SOUNDS.damage.gain*EFFECTS_MASTER_GAIN>=.3);
+  assert.ok(HIT_SOUNDS.damage.gain*EFFECTS_MASTER_GAIN<.5);
+  assert.ok(HIT_SOUNDS.damage.to>=200);
 });
 
 test('Pitch-shifted bites fade at both sample boundaries without affecting the wall-clock rate limit', () => {

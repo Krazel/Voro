@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { makeEngine } from './engine-fixture.mjs';
-import { SfxPlayer } from '../app/sfx.mjs';
+import { EFFECTS_MASTER_GAIN, SfxPlayer } from '../app/sfx.mjs';
 import { upgradeStats } from '../app/mutations.mjs';
 import { journeyEntity } from '../app/journey-world.mjs';
 import { SPECIES_BY_ID } from '../app/journey-data.mjs';
@@ -23,7 +23,7 @@ test('Closing settings restores the effects bus before the next bite without tog
   const f=fixture(),g=f.game;
   g.settingsOpen=true;g.setAudio();assert.equal(g.master.gain.value,0);
   g.settingsOpen=false;g.slurp();
-  assert.equal(g.master.gain.value,.055);assert.equal(f.starts,1);g.destroy();
+  assert.equal(g.master.gain.value,EFFECTS_MASTER_GAIN);assert.equal(f.starts,1);g.destroy();
 });
 test('Pause, adaptation offer, focus loss and mute suppress effects; normal play restores them',()=>{
   for(const reason of ['paused','settingsOpen','offer','focus','mute']){
@@ -31,14 +31,14 @@ test('Pause, adaptation offer, focus loss and mute suppress effects; normal play
     if(reason==='offer')g.progress.offer=['speed'];else if(reason==='focus')g.audioFocus=false;else if(reason==='mute')g.sound=false;else g[reason]=true;
     g.setAudio();g.slurp();g.impact();assert.equal(f.starts,0,reason);assert.equal(g.master.gain.value,0);
     g.paused=g.settingsOpen=false;g.progress.offer=[];g.audioFocus=g.sound=true;
-    g.slurp();g.impact();assert.equal(f.starts,2,reason);assert.equal(g.master.gain.value,.055);g.destroy();
+    g.slurp();g.impact();assert.equal(f.starts,2,reason);assert.equal(g.master.gain.value,EFFECTS_MASTER_GAIN);g.destroy();
   }
 });
 test('An interrupted context recovers on the next effect without a mute cycle',async()=>{
   const f=fixture();f.context.state='interrupted';f.game.slurp();
   await new Promise(r=>setImmediate(r));assert.equal(f.resumes,1);
   assert.equal(f.game.sound,true);assert.equal(f.context.state,'running');
-  assert.equal(f.game.master.gain.value,.055);assert.equal(f.starts,1);f.game.destroy();
+  assert.equal(f.game.master.gain.value,EFFECTS_MASTER_GAIN);assert.equal(f.starts,1);f.game.destroy();
 });
 test('Actual damage emits an audible midrange effect; invulnerability and mute do not',()=>{
   const f=fixture(),g=f.game;
