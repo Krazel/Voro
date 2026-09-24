@@ -2,11 +2,12 @@
 import { t as tr } from './language.mjs';
 
 
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { ChevronLeft } from 'lucide-react';
 import { MUSIC } from './music.mjs';
 import { JourneyComplete } from './journey-complete';
 import { MembraneFrame, MembraneSettings } from './membrane-settings';
+import { readMenuTheme, serverMenuTheme, subscribeMenuTheme, writeMenuTheme } from './menu-theme.mjs';
 
 type Section = 'main' | 'journey' | 'credits';
 
@@ -46,6 +47,7 @@ export function FinalSettings({
   const [section, setSection] = useState<Section>('main');
   const [confirmReset, setConfirmReset] = useState(false);
   const [licenses, setLicenses] = useState(false);
+  const menuTheme = useSyncExternalStore(subscribeMenuTheme, readMenuTheme, serverMenuTheme);
 
   const detailRoot=useRef<HTMLDivElement>(null);
   useLayoutEffect(()=>{
@@ -60,6 +62,7 @@ export function FinalSettings({
 
   if (section === 'main' || section === 'journey') return <>
     <MembraneSettings wide={wide} tilt={tilt} leftHanded={leftHanded} sound={sound} testMode={testMode} blocked={confirmReset}
+      menuTheme={menuTheme} onMenuTheme={writeMenuTheme}
       onMovement={onMovement} onLeftHanded={onLeftHanded} onSound={onSound}
       onSection={setSection} onRebirth={()=>setConfirmReset(true)} />
     {section==='journey'&&<JourneyComplete stage={stage} complete={complete} eaten={eaten} absorptionsByStage={absorptionsByStage} elapsed={elapsed} adaptations={adaptations}
@@ -80,7 +83,7 @@ export function FinalSettings({
   </>;
 
   return (
-    <div ref={detailRoot} className="final-settings-shell membrane-settings membrane-detail" data-section={section} data-wide={wide}>
+    <div ref={detailRoot} className="final-settings-shell membrane-settings membrane-detail" data-section={section} data-wide={wide} data-menu-theme={menuTheme}>
       <header className="membrane-heading">
         <button className="membrane-back" aria-label={tr('Volver a configuración')} onClick={()=>{setLicenses(false);setSection('main');}}><ChevronLeft/></button>
         <p>VORO · ABISAL</p>

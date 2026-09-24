@@ -53,6 +53,9 @@ Inclinar|Tilt
 Modo zurdo|Left-handed mode
 Sonido|Sound
 Idioma|Language
+Apariencia|Appearance
+Azul orgánico|Organic blue
+Azul + actual|Blue + current
 Automático|Automatic
 Más opciones|More options
 Recorrido|Journey

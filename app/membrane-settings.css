@@ -109,3 +109,28 @@
 .membrane-detail[data-wide=true] .membrane-thanks{top:79%;font-size:16px}
 .membrane-detail[data-wide=true] .membrane-actions{left:30%;width:40%;top:87%;height:auto;min-height:0;flex-direction:row;gap:16px}
 .membrane-detail[data-wide=true] .membrane-actions button{font-size:18px;padding:10px 20px;min-height:48px}
+
+/* Three approved menu appearances. The current background stays byte-for-byte
+   identical for current and mixed; only organic has a separately tinted layer. */
+.membrane-settings:not(.membrane-detail) .membrane-control-content{top:15%;bottom:14%;grid-template-rows:1.35fr repeat(4,minmax(0,1fr))}
+.membrane-theme-row label{font:inherit;color:inherit}
+.membrane-theme-row select{width:53%;height:8.8cqw;min-height:44px;padding:0 2.2cqw;border:1px solid #90b1b25e;border-radius:3.1cqw;background:#8baba421;color:#bfd4dc;font:500 3.35cqw Arial,Helvetica,sans-serif}
+.membrane-theme-row option{background:#082226;color:#effffb}
+.membrane-settings[data-wide=true] .membrane-theme-row select{height:46px;border-radius:16px;font-size:17px;padding:0 12px}
+@media(max-width:360px){.membrane-settings .membrane-theme-row select{font-size:12px}}
+
+.membrane-settings[data-menu-theme=organic]{--theme-strong:#a7d5ff;--theme-bright:#7db9f2;--theme-outline:#b3d9ff;--theme-text:#d3e9ff;--theme-soft:#3d6ea2}
+.membrane-settings[data-menu-theme=mixed]{--theme-strong:#a6eeff;--theme-bright:#56c7ed;--theme-outline:#8ee5ff;--theme-text:#cfedfa;--theme-soft:#317a9b}
+.voro-settings.final-ui:has(.membrane-settings[data-menu-theme=organic])::before{content:'';display:block;position:fixed;inset:0;z-index:-1;pointer-events:none;background:url('/ui/membrane/background.webp') center/cover no-repeat;filter:hue-rotate(28deg) saturate(1.35) brightness(1.04);opacity:1;transform:none;animation:none}
+.voro-settings.final-ui:has(.membrane-settings[data-menu-theme=organic][data-wide=true])::before{background-image:url('/ui/membrane/background-landscape.webp')}
+.membrane-settings[data-menu-theme=organic] .membrane-frame{filter:grayscale(1) sepia(1) saturate(3.2) hue-rotate(169deg) brightness(1.18)}
+.membrane-settings[data-menu-theme=mixed] .membrane-frame{filter:grayscale(1) sepia(1) saturate(3.4) hue-rotate(161deg) brightness(1.19)}
+.membrane-settings[data-menu-theme=organic] :is(.membrane-frame,.membrane-switch),.membrane-settings[data-menu-theme=mixed] :is(.membrane-frame,.membrane-switch){will-change:auto}
+.membrane-settings[data-menu-theme=organic] :is(.membrane-movement,.membrane-row),.membrane-settings[data-menu-theme=mixed] :is(.membrane-movement,.membrane-row){border-bottom-color:color-mix(in srgb,var(--theme-outline) 34%,transparent)!important}
+.membrane-settings[data-menu-theme=organic] :is(.membrane-segments,.language-preference select,.membrane-theme-row select),.membrane-settings[data-menu-theme=mixed] :is(.membrane-segments,.language-preference select,.membrane-theme-row select){border-color:color-mix(in srgb,var(--theme-outline) 65%,transparent);background:linear-gradient(130deg,#102944ad,var(--theme-soft));color:var(--theme-text)}
+.membrane-settings[data-menu-theme=organic] .membrane-segments button[aria-pressed=true],.membrane-settings[data-menu-theme=mixed] .membrane-segments button[aria-pressed=true]{background:linear-gradient(145deg,var(--theme-strong),var(--theme-bright));color:#071b32;box-shadow:inset 0 1px 3px #ecf8ffa0}
+.membrane-settings[data-menu-theme=organic] .membrane-row[aria-pressed=true] .membrane-switch,.membrane-settings[data-menu-theme=mixed] .membrane-row[aria-pressed=true] .membrane-switch{background:var(--theme-bright);border-color:var(--theme-outline)}
+.membrane-settings[data-menu-theme=organic] .membrane-actions .membrane-return,.membrane-settings[data-menu-theme=mixed] .membrane-actions .membrane-return{border-color:#e2f5ff;background:linear-gradient(140deg,var(--theme-strong),var(--theme-bright));color:#061c36;box-shadow:0 0 0 3px color-mix(in srgb,var(--theme-bright) 40%,transparent),inset 0 0 12px #e5f8ff80}
+.membrane-settings[data-menu-theme=organic] .membrane-actions .membrane-rebirth,.membrane-settings[data-menu-theme=mixed] .membrane-actions .membrane-rebirth{border-color:color-mix(in srgb,var(--theme-outline) 62%,transparent);background:linear-gradient(150deg,color-mix(in srgb,var(--theme-strong) 23%,transparent),#07182cdd);color:var(--theme-text)}
+.membrane-settings[data-menu-theme=organic] :is(.membrane-instagram,.membrane-privacy,.membrane-thanks,.membrane-detail-content p),.membrane-settings[data-menu-theme=mixed] :is(.membrane-instagram,.membrane-privacy,.membrane-thanks,.membrane-detail-content p){color:var(--theme-text)}
+.membrane-settings[data-menu-theme=organic] :is(.membrane-back,.membrane-license-button),.membrane-settings[data-menu-theme=mixed] :is(.membrane-back,.membrane-license-button){border-color:var(--theme-outline)!important;background:color-mix(in srgb,var(--theme-soft) 50%,transparent)!important}
