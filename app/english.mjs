@@ -56,6 +56,7 @@ Idioma|Language
 Apariencia|Appearance
 Azul orgánico|Organic blue
 Azul + actual|Blue + current
+Azul + verde|Blue + green
 Automático|Automatic
 Más opciones|More options
 Recorrido|Journey

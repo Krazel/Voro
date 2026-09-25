@@ -1,5 +1,5 @@
 const KEY = 'voro-menu-theme-v1';
-const THEMES = new Set(['current', 'organic', 'mixed']);
+const THEMES = new Set(['current', 'organic', 'mixed', 'inverse']);
 const listeners = new Set();
 let sessionTheme = null;
 

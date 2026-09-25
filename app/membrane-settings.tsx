@@ -40,6 +40,7 @@ export function MembraneSettings({wide,tilt,leftHanded,sound,testMode,blocked,me
             <option value="current">{t('Actual')}</option>
             <option value="organic">{t('Azul orgánico')}</option>
             <option value="mixed">{t('Azul + actual')}</option>
+            <option value="inverse">{t('Azul + verde')}</option>
           </select>
         </div>
       </div>

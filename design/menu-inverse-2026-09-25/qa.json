@@ -1,0 +1,306 @@
+[
+  {
+    "name": "iphone-es",
+    "theme": "current",
+    "selected": "current",
+    "saved": "current",
+    "background": "url(\"http://127.0.0.1:5208/ui/membrane/background.webp\")",
+    "backgroundLayer": "none",
+    "backgroundFilter": "none",
+    "frameFilter": "none",
+    "panel": {
+      "x": 19.5,
+      "y": 144.15625,
+      "width": 351,
+      "height": 354.09375
+    },
+    "scrollHeight": 919,
+    "clientHeight": 844,
+    "text": "VORO · ABISAL\n\nConfiguración\nMovimiento\nDedo\nInclinar\nModo zurdo\nSonido\nIdioma\nAutomático\nEspañol\nEnglish\nApariencia\nActual\nAzul orgánico\nAzul + actual\nAzul + verde\nRecorrido ›\nCréditos ›\nInstagram\nVolver a nacer\nVolver al juego\nPolítica de privacidad"
+  },
+  {
+    "name": "iphone-es",
+    "theme": "organic",
+    "selected": "organic",
+    "saved": "organic",
+    "background": "url(\"http://127.0.0.1:5208/ui/membrane/background.webp\")",
+    "backgroundLayer": "url(\"http://127.0.0.1:5208/ui/membrane/background.webp\")",
+    "backgroundFilter": "hue-rotate(28deg) saturate(1.35) brightness(1.04)",
+    "frameFilter": "grayscale(1) sepia(1) saturate(3.2) hue-rotate(169deg) brightness(1.18)",
+    "panel": {
+      "x": 19.5,
+      "y": 144.15625,
+      "width": 351,
+      "height": 354.09375
+    },
+    "scrollHeight": 919,
+    "clientHeight": 844,
+    "text": "VORO · ABISAL\n\nConfiguración\nMovimiento\nDedo\nInclinar\nModo zurdo\nSonido\nIdioma\nAutomático\nEspañol\nEnglish\nApariencia\nActual\nAzul orgánico\nAzul + actual\nAzul + verde\nRecorrido ›\nCréditos ›\nInstagram\nVolver a nacer\nVolver al juego\nPolítica de privacidad"
+  },
+  {
+    "name": "iphone-es",
+    "theme": "mixed",
+    "selected": "mixed",
+    "saved": "mixed",
+    "background": "url(\"http://127.0.0.1:5208/ui/membrane/background.webp\")",
+    "backgroundLayer": "none",
+    "backgroundFilter": "none",
+    "frameFilter": "grayscale(1) sepia(1) saturate(3.4) hue-rotate(161deg) brightness(1.19)",
+    "panel": {
+      "x": 19.5,
+      "y": 144.15625,
+      "width": 351,
+      "height": 354.09375
+    },
+    "scrollHeight": 919,
+    "clientHeight": 844,
+    "text": "VORO · ABISAL\n\nConfiguración\nMovimiento\nDedo\nInclinar\nModo zurdo\nSonido\nIdioma\nAutomático\nEspañol\nEnglish\nApariencia\nActual\nAzul orgánico\nAzul + actual\nAzul + verde\nRecorrido ›\nCréditos ›\nInstagram\nVolver a nacer\nVolver al juego\nPolítica de privacidad"
+  },
+  {
+    "name": "iphone-es",
+    "theme": "inverse",
+    "selected": "inverse",
+    "saved": "inverse",
+    "background": "url(\"http://127.0.0.1:5208/ui/membrane/background.webp\")",
+    "backgroundLayer": "url(\"http://127.0.0.1:5208/ui/membrane/background.webp\")",
+    "backgroundFilter": "hue-rotate(28deg) saturate(1.35) brightness(1.04)",
+    "frameFilter": "none",
+    "panel": {
+      "x": 19.5,
+      "y": 144.15625,
+      "width": 351,
+      "height": 354.09375
+    },
+    "scrollHeight": 919,
+    "clientHeight": 844,
+    "text": "VORO · ABISAL\n\nConfiguración\nMovimiento\nDedo\nInclinar\nModo zurdo\nSonido\nIdioma\nAutomático\nEspañol\nEnglish\nApariencia\nActual\nAzul orgánico\nAzul + actual\nAzul + verde\nRecorrido ›\nCréditos ›\nInstagram\nVolver a nacer\nVolver al juego\nPolítica de privacidad"
+  },
+  {
+    "name": "iphone-en",
+    "theme": "current",
+    "selected": "current",
+    "saved": "current",
+    "background": "url(\"http://127.0.0.1:5208/ui/membrane/background.webp\")",
+    "backgroundLayer": "none",
+    "backgroundFilter": "none",
+    "frameFilter": "none",
+    "panel": {
+      "x": 18.75,
+      "y": 138.609375,
+      "width": 337.5,
+      "height": 340.46875
+    },
+    "scrollHeight": 887,
+    "clientHeight": 812,
+    "text": "VORO · ABISAL\n\nSettings\nMovement\nTouch\nTilt\nLeft-handed mode\nSound\nLanguage\nAutomatic\nEspañol\nEnglish\nAppearance\nCurrent\nOrganic blue\nBlue + current\nBlue + green\nJourney ›\nCredits ›\nInstagram\nBe born again\nBack to game\nPrivacy policy"
+  },
+  {
+    "name": "iphone-en",
+    "theme": "organic",
+    "selected": "organic",
+    "saved": "organic",
+    "background": "url(\"http://127.0.0.1:5208/ui/membrane/background.webp\")",
+    "backgroundLayer": "url(\"http://127.0.0.1:5208/ui/membrane/background.webp\")",
+    "backgroundFilter": "hue-rotate(28deg) saturate(1.35) brightness(1.04)",
+    "frameFilter": "grayscale(1) sepia(1) saturate(3.2) hue-rotate(169deg) brightness(1.18)",
+    "panel": {
+      "x": 18.75,
+      "y": 138.609375,
+      "width": 337.5,
+      "height": 340.46875
+    },
+    "scrollHeight": 887,
+    "clientHeight": 812,
+    "text": "VORO · ABISAL\n\nSettings\nMovement\nTouch\nTilt\nLeft-handed mode\nSound\nLanguage\nAutomatic\nEspañol\nEnglish\nAppearance\nCurrent\nOrganic blue\nBlue + current\nBlue + green\nJourney ›\nCredits ›\nInstagram\nBe born again\nBack to game\nPrivacy policy"
+  },
+  {
+    "name": "iphone-en",
+    "theme": "mixed",
+    "selected": "mixed",
+    "saved": "mixed",
+    "background": "url(\"http://127.0.0.1:5208/ui/membrane/background.webp\")",
+    "backgroundLayer": "none",
+    "backgroundFilter": "none",
+    "frameFilter": "grayscale(1) sepia(1) saturate(3.4) hue-rotate(161deg) brightness(1.19)",
+    "panel": {
+      "x": 18.75,
+      "y": 138.609375,
+      "width": 337.5,
+      "height": 340.46875
+    },
+    "scrollHeight": 887,
+    "clientHeight": 812,
+    "text": "VORO · ABISAL\n\nSettings\nMovement\nTouch\nTilt\nLeft-handed mode\nSound\nLanguage\nAutomatic\nEspañol\nEnglish\nAppearance\nCurrent\nOrganic blue\nBlue + current\nBlue + green\nJourney ›\nCredits ›\nInstagram\nBe born again\nBack to game\nPrivacy policy"
+  },
+  {
+    "name": "iphone-en",
+    "theme": "inverse",
+    "selected": "inverse",
+    "saved": "inverse",
+    "background": "url(\"http://127.0.0.1:5208/ui/membrane/background.webp\")",
+    "backgroundLayer": "url(\"http://127.0.0.1:5208/ui/membrane/background.webp\")",
+    "backgroundFilter": "hue-rotate(28deg) saturate(1.35) brightness(1.04)",
+    "frameFilter": "none",
+    "panel": {
+      "x": 18.75,
+      "y": 138.609375,
+      "width": 337.5,
+      "height": 340.46875
+    },
+    "scrollHeight": 887,
+    "clientHeight": 812,
+    "text": "VORO · ABISAL\n\nSettings\nMovement\nTouch\nTilt\nLeft-handed mode\nSound\nLanguage\nAutomatic\nEspañol\nEnglish\nAppearance\nCurrent\nOrganic blue\nBlue + current\nBlue + green\nJourney ›\nCredits ›\nInstagram\nBe born again\nBack to game\nPrivacy policy"
+  },
+  {
+    "name": "ipad-es",
+    "theme": "current",
+    "selected": "current",
+    "saved": "current",
+    "background": "url(\"http://127.0.0.1:5208/ui/membrane/background.webp\")",
+    "backgroundLayer": "none",
+    "backgroundFilter": "none",
+    "frameFilter": "none",
+    "panel": {
+      "x": 201,
+      "y": 177.421875,
+      "width": 432,
+      "height": 435.796875
+    },
+    "scrollHeight": 1194,
+    "clientHeight": 1194,
+    "text": "VORO · ABISAL\n\nConfiguración\nMovimiento\nDedo\nInclinar\nModo zurdo\nSonido\nIdioma\nAutomático\nEspañol\nEnglish\nApariencia\nActual\nAzul orgánico\nAzul + actual\nAzul + verde\nRecorrido ›\nCréditos ›\nInstagram\nVolver a nacer\nVolver al juego\nPolítica de privacidad"
+  },
+  {
+    "name": "ipad-es",
+    "theme": "organic",
+    "selected": "organic",
+    "saved": "organic",
+    "background": "url(\"http://127.0.0.1:5208/ui/membrane/background.webp\")",
+    "backgroundLayer": "url(\"http://127.0.0.1:5208/ui/membrane/background.webp\")",
+    "backgroundFilter": "hue-rotate(28deg) saturate(1.35) brightness(1.04)",
+    "frameFilter": "grayscale(1) sepia(1) saturate(3.2) hue-rotate(169deg) brightness(1.18)",
+    "panel": {
+      "x": 201,
+      "y": 177.421875,
+      "width": 432,
+      "height": 435.796875
+    },
+    "scrollHeight": 1194,
+    "clientHeight": 1194,
+    "text": "VORO · ABISAL\n\nConfiguración\nMovimiento\nDedo\nInclinar\nModo zurdo\nSonido\nIdioma\nAutomático\nEspañol\nEnglish\nApariencia\nActual\nAzul orgánico\nAzul + actual\nAzul + verde\nRecorrido ›\nCréditos ›\nInstagram\nVolver a nacer\nVolver al juego\nPolítica de privacidad"
+  },
+  {
+    "name": "ipad-es",
+    "theme": "mixed",
+    "selected": "mixed",
+    "saved": "mixed",
+    "background": "url(\"http://127.0.0.1:5208/ui/membrane/background.webp\")",
+    "backgroundLayer": "none",
+    "backgroundFilter": "none",
+    "frameFilter": "grayscale(1) sepia(1) saturate(3.4) hue-rotate(161deg) brightness(1.19)",
+    "panel": {
+      "x": 201,
+      "y": 177.421875,
+      "width": 432,
+      "height": 435.796875
+    },
+    "scrollHeight": 1194,
+    "clientHeight": 1194,
+    "text": "VORO · ABISAL\n\nConfiguración\nMovimiento\nDedo\nInclinar\nModo zurdo\nSonido\nIdioma\nAutomático\nEspañol\nEnglish\nApariencia\nActual\nAzul orgánico\nAzul + actual\nAzul + verde\nRecorrido ›\nCréditos ›\nInstagram\nVolver a nacer\nVolver al juego\nPolítica de privacidad"
+  },
+  {
+    "name": "ipad-es",
+    "theme": "inverse",
+    "selected": "inverse",
+    "saved": "inverse",
+    "background": "url(\"http://127.0.0.1:5208/ui/membrane/background.webp\")",
+    "backgroundLayer": "url(\"http://127.0.0.1:5208/ui/membrane/background.webp\")",
+    "backgroundFilter": "hue-rotate(28deg) saturate(1.35) brightness(1.04)",
+    "frameFilter": "none",
+    "panel": {
+      "x": 201,
+      "y": 177.421875,
+      "width": 432,
+      "height": 435.796875
+    },
+    "scrollHeight": 1194,
+    "clientHeight": 1194,
+    "text": "VORO · ABISAL\n\nConfiguración\nMovimiento\nDedo\nInclinar\nModo zurdo\nSonido\nIdioma\nAutomático\nEspañol\nEnglish\nApariencia\nActual\nAzul orgánico\nAzul + actual\nAzul + verde\nRecorrido ›\nCréditos ›\nInstagram\nVolver a nacer\nVolver al juego\nPolítica de privacidad"
+  },
+  {
+    "name": "ipad-en",
+    "theme": "current",
+    "selected": "current",
+    "saved": "current",
+    "background": "url(\"http://127.0.0.1:5208/ui/membrane/background-landscape.webp\")",
+    "backgroundLayer": "none",
+    "backgroundFilter": "none",
+    "frameFilter": "none",
+    "panel": {
+      "x": 59.6875,
+      "y": 191.8125,
+      "width": 632.8125,
+      "height": 542.09375
+    },
+    "scrollHeight": 910,
+    "clientHeight": 834,
+    "text": "VORO · ABISAL\n\nSettings\nMovement\nTouch\nTilt\nLeft-handed mode\nSound\nLanguage\nAutomatic\nEspañol\nEnglish\nAppearance\nCurrent\nOrganic blue\nBlue + current\nBlue + green\nJourney ›\nCredits ›\nInstagram\nBe born again\nBack to game\nPrivacy policy"
+  },
+  {
+    "name": "ipad-en",
+    "theme": "organic",
+    "selected": "organic",
+    "saved": "organic",
+    "background": "url(\"http://127.0.0.1:5208/ui/membrane/background-landscape.webp\")",
+    "backgroundLayer": "url(\"http://127.0.0.1:5208/ui/membrane/background-landscape.webp\")",
+    "backgroundFilter": "hue-rotate(28deg) saturate(1.35) brightness(1.04)",
+    "frameFilter": "grayscale(1) sepia(1) saturate(3.2) hue-rotate(169deg) brightness(1.18)",
+    "panel": {
+      "x": 59.6875,
+      "y": 191.8125,
+      "width": 632.8125,
+      "height": 542.09375
+    },
+    "scrollHeight": 910,
+    "clientHeight": 834,
+    "text": "VORO · ABISAL\n\nSettings\nMovement\nTouch\nTilt\nLeft-handed mode\nSound\nLanguage\nAutomatic\nEspañol\nEnglish\nAppearance\nCurrent\nOrganic blue\nBlue + current\nBlue + green\nJourney ›\nCredits ›\nInstagram\nBe born again\nBack to game\nPrivacy policy"
+  },
+  {
+    "name": "ipad-en",
+    "theme": "mixed",
+    "selected": "mixed",
+    "saved": "mixed",
+    "background": "url(\"http://127.0.0.1:5208/ui/membrane/background-landscape.webp\")",
+    "backgroundLayer": "none",
+    "backgroundFilter": "none",
+    "frameFilter": "grayscale(1) sepia(1) saturate(3.4) hue-rotate(161deg) brightness(1.19)",
+    "panel": {
+      "x": 59.6875,
+      "y": 191.8125,
+      "width": 632.8125,
+      "height": 542.09375
+    },
+    "scrollHeight": 910,
+    "clientHeight": 834,
+    "text": "VORO · ABISAL\n\nSettings\nMovement\nTouch\nTilt\nLeft-handed mode\nSound\nLanguage\nAutomatic\nEspañol\nEnglish\nAppearance\nCurrent\nOrganic blue\nBlue + current\nBlue + green\nJourney ›\nCredits ›\nInstagram\nBe born again\nBack to game\nPrivacy policy"
+  },
+  {
+    "name": "ipad-en",
+    "theme": "inverse",
+    "selected": "inverse",
+    "saved": "inverse",
+    "background": "url(\"http://127.0.0.1:5208/ui/membrane/background-landscape.webp\")",
+    "backgroundLayer": "url(\"http://127.0.0.1:5208/ui/membrane/background-landscape.webp\")",
+    "backgroundFilter": "hue-rotate(28deg) saturate(1.35) brightness(1.04)",
+    "frameFilter": "none",
+    "panel": {
+      "x": 59.6875,
+      "y": 191.8125,
+      "width": 632.8125,
+      "height": 542.09375
+    },
+    "scrollHeight": 910,
+    "clientHeight": 834,
+    "text": "VORO · ABISAL\n\nSettings\nMovement\nTouch\nTilt\nLeft-handed mode\nSound\nLanguage\nAutomatic\nEspañol\nEnglish\nAppearance\nCurrent\nOrganic blue\nBlue + current\nBlue + green\nJourney ›\nCredits ›\nInstagram\nBe born again\nBack to game\nPrivacy policy"
+  }
+]

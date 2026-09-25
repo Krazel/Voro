@@ -110,8 +110,9 @@
 .membrane-detail[data-wide=true] .membrane-actions{left:30%;width:40%;top:87%;height:auto;min-height:0;flex-direction:row;gap:16px}
 .membrane-detail[data-wide=true] .membrane-actions button{font-size:18px;padding:10px 20px;min-height:48px}
 
-/* Three approved menu appearances. The current background stays byte-for-byte
-   identical for current and mixed; only organic has a separately tinted layer. */
+/* Four approved menu appearances. Current and mixed keep the original background.
+   Organic and inverse share only the blue background layer; inverse keeps every
+   green control and membrane frame from Current. */
 .membrane-settings:not(.membrane-detail) .membrane-control-content{top:15%;bottom:14%;grid-template-rows:1.35fr repeat(4,minmax(0,1fr))}
 .membrane-theme-row label{font:inherit;color:inherit}
 .membrane-theme-row select{width:53%;height:8.8cqw;min-height:44px;padding:0 2.2cqw;border:1px solid #90b1b25e;border-radius:3.1cqw;background:#8baba421;color:#bfd4dc;font:500 3.35cqw Arial,Helvetica,sans-serif}
@@ -121,8 +122,8 @@
 
 .membrane-settings[data-menu-theme=organic]{--theme-strong:#a7d5ff;--theme-bright:#7db9f2;--theme-outline:#b3d9ff;--theme-text:#d3e9ff;--theme-soft:#3d6ea2}
 .membrane-settings[data-menu-theme=mixed]{--theme-strong:#a6eeff;--theme-bright:#56c7ed;--theme-outline:#8ee5ff;--theme-text:#cfedfa;--theme-soft:#317a9b}
-.voro-settings.final-ui:has(.membrane-settings[data-menu-theme=organic])::before{content:'';display:block;position:fixed;inset:0;z-index:-1;pointer-events:none;background:url('/ui/membrane/background.webp') center/cover no-repeat;filter:hue-rotate(28deg) saturate(1.35) brightness(1.04);opacity:1;transform:none;animation:none}
-.voro-settings.final-ui:has(.membrane-settings[data-menu-theme=organic][data-wide=true])::before{background-image:url('/ui/membrane/background-landscape.webp')}
+.voro-settings.final-ui:has(.membrane-settings[data-menu-theme=organic],.membrane-settings[data-menu-theme=inverse])::before{content:'';display:block;position:fixed;inset:0;z-index:-1;pointer-events:none;background:url('/ui/membrane/background.webp') center/cover no-repeat;filter:hue-rotate(28deg) saturate(1.35) brightness(1.04);opacity:1;transform:none;animation:none}
+.voro-settings.final-ui:has(.membrane-settings[data-menu-theme=organic][data-wide=true],.membrane-settings[data-menu-theme=inverse][data-wide=true])::before{background-image:url('/ui/membrane/background-landscape.webp')}
 .membrane-settings[data-menu-theme=organic] .membrane-frame{filter:grayscale(1) sepia(1) saturate(3.2) hue-rotate(169deg) brightness(1.18)}
 .membrane-settings[data-menu-theme=mixed] .membrane-frame{filter:grayscale(1) sepia(1) saturate(3.4) hue-rotate(161deg) brightness(1.19)}
 .membrane-settings[data-menu-theme=organic] :is(.membrane-frame,.membrane-switch),.membrane-settings[data-menu-theme=mixed] :is(.membrane-frame,.membrane-switch){will-change:auto}
