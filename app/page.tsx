@@ -19,6 +19,7 @@ import { FinalSettings } from './final-settings';
 import { JourneyComplete } from './journey-complete';
 import { CosmicLab } from './cosmic-lab';
 import { MembraneRim } from './membrane-rim';
+import { OwnedAdaptations } from './owned-adaptations.tsx';
 import { isTabletDevice, wideScreenEnabled } from './desktop-viewport.mjs';
 import './wide-screen.css';
 import './cristal.css';
@@ -72,6 +73,17 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
   const [settings, setSettings] = useState(false),
     [confirmReset, setConfirmReset] = useState(false);
   const [testPanel, setTestPanel] = useState(false);
+  const [ownedOpen, setOwnedOpen] = useState(false);
+  const ownedTrigger = useRef<HTMLButtonElement>(null);
+  const changeOwned = (open: boolean) => {
+    // Treat this as a modal pause screen, including keyboard/gamepad/audio gates.
+    if (engine.current) {
+      engine.current.settingsOpen = open;
+      engine.current.keys.clear();
+      engine.current.setAudio();
+    }
+    setOwnedOpen(open);
+  };
   const [cosmicLab,setCosmicLab]=useState(false);
   const [uiMode,setUiMode]=useState('final');
   const finalUI=uiMode==='final';
@@ -461,6 +473,10 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
               className="primary-button membrane-control has-membrane-rim"
               onClick={() => changeSettings(true)}
             ><MembraneRim />{tr(" Configuración ")}</button>
+            <button ref={ownedTrigger}
+              className="primary-button membrane-control has-membrane-rim"
+              onClick={() => changeOwned(true)}
+            ><MembraneRim />{tr('Tus adaptaciones')}</button>
           </div>
         ))}
         {tr(state.started && state.dead && (
@@ -542,6 +558,7 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
             <br />{tr("Cargas ")}{tr(state.performance.loading)}{tr(" · poses ")}{tr(state.performance.pending)}{tr(" · ")}{tr(state.performance.cacheMB)}{tr(" MB ")}</output>
         ))}
       </section>
+      {ownedOpen && <OwnedAdaptations mutations={state.mutations} onClose={() => changeOwned(false)} returnFocus={ownedTrigger} />}
       {tr(active && state.offer.length > 0 && <Dialog
         open={active && state.offer.length > 0 && !settings}
         onOpenChange={() => {}}

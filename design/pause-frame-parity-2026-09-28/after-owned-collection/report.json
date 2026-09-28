@@ -1,0 +1,428 @@
+[
+  {
+    "engine": "chrome",
+    "device": "pc",
+    "controls": [
+      {
+        "text": "Has perdido biomasa. Recupera tus fragmentos.",
+        "legacyBorder": "rgba(0, 0, 0, 0)",
+        "pseudoDisplay": "none",
+        "image": "url(\"http://127.0.0.1:5213/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "inset": "-4px",
+        "painted": true,
+        "box": {
+          "width": 356.421875,
+          "height": 64
+        }
+      },
+      {
+        "text": " Continuar ",
+        "legacyBorder": "rgba(0, 0, 0, 0)",
+        "pseudoDisplay": "none",
+        "image": "url(\"http://127.0.0.1:5213/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "inset": "-4px",
+        "painted": true,
+        "box": {
+          "width": 300,
+          "height": 64
+        }
+      },
+      {
+        "text": " Configuración ",
+        "legacyBorder": "rgba(0, 0, 0, 0)",
+        "pseudoDisplay": "none",
+        "image": "url(\"http://127.0.0.1:5213/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "inset": "-4px",
+        "painted": true,
+        "box": {
+          "width": 300,
+          "height": 64
+        }
+      },
+      {
+        "text": "Tus adaptaciones",
+        "legacyBorder": "rgba(0, 0, 0, 0)",
+        "pseudoDisplay": "none",
+        "image": "url(\"http://127.0.0.1:5213/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "inset": "-4px",
+        "painted": true,
+        "box": {
+          "width": 300,
+          "height": 64
+        }
+      }
+    ],
+    "errors": []
+  },
+  {
+    "engine": "chrome",
+    "device": "iphone",
+    "controls": [
+      {
+        "text": "Has perdido biomasa. Recupera tus fragmentos.",
+        "legacyBorder": "rgba(0, 0, 0, 0)",
+        "pseudoDisplay": "none",
+        "image": "url(\"http://127.0.0.1:5212/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "inset": "-4px",
+        "painted": true,
+        "box": {
+          "width": 336,
+          "height": 80
+        }
+      },
+      {
+        "text": " Continuar ",
+        "legacyBorder": "rgba(0, 0, 0, 0)",
+        "pseudoDisplay": "none",
+        "image": "url(\"http://127.0.0.1:5212/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "inset": "-4px",
+        "painted": true,
+        "box": {
+          "width": 300,
+          "height": 64
+        }
+      },
+      {
+        "text": " Configuración ",
+        "legacyBorder": "rgba(0, 0, 0, 0)",
+        "pseudoDisplay": "none",
+        "image": "url(\"http://127.0.0.1:5212/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "inset": "-4px",
+        "painted": true,
+        "box": {
+          "width": 300,
+          "height": 64
+        }
+      },
+      {
+        "text": "Tus adaptaciones",
+        "legacyBorder": "rgba(0, 0, 0, 0)",
+        "pseudoDisplay": "none",
+        "image": "url(\"http://127.0.0.1:5212/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "inset": "-4px",
+        "painted": true,
+        "box": {
+          "width": 300,
+          "height": 64
+        }
+      }
+    ],
+    "errors": []
+  },
+  {
+    "engine": "chrome",
+    "device": "ipad-landscape",
+    "controls": [
+      {
+        "text": "Has perdido biomasa. Recupera tus fragmentos.",
+        "legacyBorder": "rgba(0, 0, 0, 0)",
+        "pseudoDisplay": "none",
+        "image": "url(\"http://127.0.0.1:5212/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "inset": "-4px",
+        "painted": true,
+        "box": {
+          "width": 356.421875,
+          "height": 64
+        }
+      },
+      {
+        "text": " Continuar ",
+        "legacyBorder": "rgba(0, 0, 0, 0)",
+        "pseudoDisplay": "none",
+        "image": "url(\"http://127.0.0.1:5212/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "inset": "-4px",
+        "painted": true,
+        "box": {
+          "width": 300,
+          "height": 64
+        }
+      },
+      {
+        "text": " Configuración ",
+        "legacyBorder": "rgba(0, 0, 0, 0)",
+        "pseudoDisplay": "none",
+        "image": "url(\"http://127.0.0.1:5212/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "inset": "-4px",
+        "painted": true,
+        "box": {
+          "width": 300,
+          "height": 64
+        }
+      },
+      {
+        "text": "Tus adaptaciones",
+        "legacyBorder": "rgba(0, 0, 0, 0)",
+        "pseudoDisplay": "none",
+        "image": "url(\"http://127.0.0.1:5212/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "inset": "-4px",
+        "painted": true,
+        "box": {
+          "width": 300,
+          "height": 64
+        }
+      }
+    ],
+    "errors": []
+  },
+  {
+    "engine": "webkit",
+    "device": "pc",
+    "controls": [
+      {
+        "text": "Has perdido biomasa. Recupera tus fragmentos.",
+        "legacyBorder": "rgba(0, 0, 0, 0)",
+        "pseudoDisplay": "none",
+        "image": "url(\"http://127.0.0.1:5213/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "inset": "-4px",
+        "painted": true,
+        "box": {
+          "width": 356.421875,
+          "height": 64
+        }
+      },
+      {
+        "text": " Continuar ",
+        "legacyBorder": "rgba(0, 0, 0, 0)",
+        "pseudoDisplay": "none",
+        "image": "url(\"http://127.0.0.1:5213/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "inset": "-4px",
+        "painted": true,
+        "box": {
+          "width": 300,
+          "height": 64
+        }
+      },
+      {
+        "text": " Configuración ",
+        "legacyBorder": "rgba(0, 0, 0, 0)",
+        "pseudoDisplay": "none",
+        "image": "url(\"http://127.0.0.1:5213/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "inset": "-4px",
+        "painted": true,
+        "box": {
+          "width": 300,
+          "height": 64
+        }
+      },
+      {
+        "text": "Tus adaptaciones",
+        "legacyBorder": "rgba(0, 0, 0, 0)",
+        "pseudoDisplay": "none",
+        "image": "url(\"http://127.0.0.1:5213/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "inset": "-4px",
+        "painted": true,
+        "box": {
+          "width": 300,
+          "height": 64
+        }
+      }
+    ],
+    "errors": []
+  },
+  {
+    "engine": "webkit",
+    "device": "iphone",
+    "controls": [
+      {
+        "text": "Has perdido biomasa. Recupera tus fragmentos.",
+        "legacyBorder": "rgba(0, 0, 0, 0)",
+        "pseudoDisplay": "none",
+        "image": "url(\"http://127.0.0.1:5212/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "inset": "-4px",
+        "painted": true,
+        "box": {
+          "width": 336,
+          "height": 80
+        }
+      },
+      {
+        "text": " Continuar ",
+        "legacyBorder": "rgba(0, 0, 0, 0)",
+        "pseudoDisplay": "none",
+        "image": "url(\"http://127.0.0.1:5212/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "inset": "-4px",
+        "painted": true,
+        "box": {
+          "width": 300,
+          "height": 64
+        }
+      },
+      {
+        "text": " Configuración ",
+        "legacyBorder": "rgba(0, 0, 0, 0)",
+        "pseudoDisplay": "none",
+        "image": "url(\"http://127.0.0.1:5212/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "inset": "-4px",
+        "painted": true,
+        "box": {
+          "width": 300,
+          "height": 64
+        }
+      },
+      {
+        "text": "Tus adaptaciones",
+        "legacyBorder": "rgba(0, 0, 0, 0)",
+        "pseudoDisplay": "none",
+        "image": "url(\"http://127.0.0.1:5212/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "inset": "-4px",
+        "painted": true,
+        "box": {
+          "width": 300,
+          "height": 64
+        }
+      }
+    ],
+    "errors": []
+  },
+  {
+    "engine": "webkit",
+    "device": "ipad-landscape",
+    "controls": [
+      {
+        "text": "Has perdido biomasa. Recupera tus fragmentos.",
+        "legacyBorder": "rgba(0, 0, 0, 0)",
+        "pseudoDisplay": "none",
+        "image": "url(\"http://127.0.0.1:5212/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "inset": "-4px",
+        "painted": true,
+        "box": {
+          "width": 356.421875,
+          "height": 64
+        }
+      },
+      {
+        "text": " Continuar ",
+        "legacyBorder": "rgba(0, 0, 0, 0)",
+        "pseudoDisplay": "none",
+        "image": "url(\"http://127.0.0.1:5212/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "inset": "-4px",
+        "painted": true,
+        "box": {
+          "width": 300,
+          "height": 64
+        }
+      },
+      {
+        "text": " Configuración ",
+        "legacyBorder": "rgba(0, 0, 0, 0)",
+        "pseudoDisplay": "none",
+        "image": "url(\"http://127.0.0.1:5212/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "inset": "-4px",
+        "painted": true,
+        "box": {
+          "width": 300,
+          "height": 64
+        }
+      },
+      {
+        "text": "Tus adaptaciones",
+        "legacyBorder": "rgba(0, 0, 0, 0)",
+        "pseudoDisplay": "none",
+        "image": "url(\"http://127.0.0.1:5212/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "inset": "-4px",
+        "painted": true,
+        "box": {
+          "width": 300,
+          "height": 64
+        }
+      }
+    ],
+    "errors": []
+  }
+]

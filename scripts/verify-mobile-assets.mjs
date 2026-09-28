@@ -21,7 +21,7 @@ const newRule = '.cristal-choices.mutation-choices>button{';
 assert.ok(css.lastIndexOf(newRule) > css.lastIndexOf(oldRule), 'Cristal must load after legacy global styles');
 const sheetUrls = new Set(Object.values(animationSheets).flatMap(variants => Object.values(variants).map(m => m.url)));
 const journeyUrls = ['micro','pond','shore','sea','city','orbit','planets','stars','galaxies','universe','background','rebirth'].map(name=>`./ui/journey/d3/${name}.webp`).concat(['./ui/membrane/panel-cutout.webp','./ui/membrane/background.webp','./ui/membrane/background-landscape.webp']);
-for (const url of [...Object.values(BACKGROUND_ASSETS), ...Object.values(ATLAS_URLS), ...INGEST_SOUNDS, ...sheetUrls, ...journeyUrls, './ui/cristal/membrane-frame.png', './ui/approved/settings-plate.png', './ui/approved/pause-plate-v1.png']) {
+for (const url of [...Object.values(BACKGROUND_ASSETS), ...Object.values(ATLAS_URLS), ...INGEST_SOUNDS, ...sheetUrls, ...journeyUrls, './ui/cristal/membrane-frame.png', './ui/approved/settings-plate.png', './ui/approved/pause-plate-v1.png', './ui/owned-adaptations/organisms.png', './ui/owned-adaptations/background.png']) {
   const relative = url.split('?')[0].replace(/^\.\//, '');
   const bundled = fs.readFileSync(path.join(root, relative));
   const source = fs.readFileSync(path.join('public', relative));
@@ -34,4 +34,5 @@ assert.ok(/\.viewport \.membrane-control\.has-membrane-rim\{border-color:(?:#000
 assert.ok(!/\.cristal-toast:{1,2}before\{opacity:\.?3\}/.test(css), 'Notice rim must not be dimmed relative to pause');
 assert.ok(scripts.includes('journey-horizons') && !scripts.includes('journey-spiral-map'), 'Completed journey must use the approved D3 horizons');
 assert.ok(scripts.includes('membrane-settings')&&css.includes('ui/membrane/background.webp'),'Approved lightweight membrane settings must ship on iOS');
+assert.ok(scripts.includes('owned-capsule') && scripts.includes('Tus adaptaciones') && css.includes('.owned-adaptations'), 'D3 owned collection must ship on iOS');
 console.log('Mobile output verified: Cristal precedence, 10 backgrounds, five ingest gestures, four selected cosmic structures and chosen Respira pause.');

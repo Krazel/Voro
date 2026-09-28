@@ -2,6 +2,7 @@ import { STUDIO_ENGLISH } from './english-studio.mjs';
 // Spanish source text is retained in game data and save files. Only presentation
 // is translated, so species keys, upgrade groups and progression stay stable.
 export const ENGLISH = Object.fromEntries(`
+Tus adaptaciones|Your adaptations
 Pulso suave del núcleo y sus chorros completos, sin recortes.|A gentle pulse of the core and its complete, uncropped jets.
 Planeta en formación|Forming planet
 Planeta gaseoso joven|Young gas planet
