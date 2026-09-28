@@ -16,4 +16,18 @@ archive's bundled assets before upload. Mobile animation sheets retain a
 
 Distribution target: existing internal TestFlight group only. Public website,
 itch.io and App Store review/publication are outside this delivery.
-CI and Apple's processed build verification will be recorded after completion.
+## Delivery verified
+
+- Source commit: `fdf85297ea621a021ad7ccc4ea6090a04fe2744a`.
+- CI: https://github.com/Krazel/Voro/actions/runs/36439032706 — success.
+- Apple API reread: 2026-09-28 15:01:45 UTC.
+- App: `6809193565`; build: `5e13d426-a9eb-4c9e-b892-f136eb62a4fa`.
+- Version/build: **0.8.1 (1)**; `VALID`, `IN_BETA_TESTING`.
+- Existing internal group `05db8744-bcf3-4c2d-a465-2635012bfeeb` verified
+  after assignment (VORO Interno).
+- CI artifact: `Voro-TestFlight-46`, ID `10976709621`.
+- Studio library PR-009 updated and reread at revision 237; public and marketing
+  state preserved. No App Store review or public release performed.
+
+Next: install this exact version on iPhone/iPad, run the existing automatic
+performance tour and share its report as a file. Physical FPS remains unverified.
