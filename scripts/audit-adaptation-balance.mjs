@@ -7,11 +7,18 @@ import {newJourney,journeyLife} from '../app/journey-progress.mjs';
 import {JourneyWorld} from '../app/journey-world.mjs';
 import {STAGES,SPECIES_BY_ID,isDanger} from '../app/journey-data.mjs';
 import {CAMPAIGN_PACING} from '../app/campaign-pacing.mjs';
+import {MAX_UPGRADE_CHOICES} from '../app/mutations.mjs';
 if(process.env.VORO_PACING_COEFFICIENTS)for(const [id,v]of Object.entries(JSON.parse(process.env.VORO_PACING_COEFFICIENTS)))CAMPAIGN_PACING[id].biomass=v;
 function fresh(stage=0,seed=41){const f=makeEngine(),g=f.game;g.progress=newJourney(seed);g.progress.stage=stage;g.life=journeyLife(g.progress);g.world=new JourneyWorld(seed,[],stage);g.seed();g.action('start');while(g.birth>0){let dt=Math.min(g.birth,1/60);g.time+=dt;g.update(dt);}return f;}
 function step(g,n=1,render=false){for(let i=0;i<n;i++){if(process.env.VORO_PACING_ONLY)g.life.invulnerable=2;g.time+=1/30;g.update(1/30);if(render)g.render();}}
 let report;const originalLog=console.log;console.log=(...a)=>{originalLog(...a);if(a[0]==='Journey result')report=JSON.parse(a[1]);};
   const { game: g } = fresh(0, Number(process.argv[3]||41));
+  // Audit-only fixed reward alternative; never edits the live game or save.
+  const xpScale=Number(process.env.VORO_AUDIT_XP_SCALE||1);
+  if(xpScale!==1) {
+    let stats=g.stats;
+    Object.defineProperty(g,'stats',{get:()=>stats,set:value=>{stats={...value,adaptationFactor:value.adaptationFactor*xpScale};}});
+  }
   let target = null,
     previous = -1;
   const timings = [];
@@ -165,4 +172,8 @@ let report;const originalLog=console.log;console.log=(...a)=>{originalLog(...a);
     }),
   );
   g.destroy();
-writeFileSync('design/adaptation-balance-2026-09-28/pilot-'+(process.argv[2]||'candidate')+'.json',JSON.stringify({...report,coefficients:CAMPAIGN_PACING,assumption:'Efficient deterministic pilot, 30Hz simulation, immediate choices; multiply by 30min/16.53min as tentative human reference'},null,2));
+writeFileSync('design/adaptation-balance-2026-09-28/pilot-'+(process.argv[2]||'candidate')+'.json',JSON.stringify({...report,
+ seed:Number(process.argv[3]||41),xpScale,invulnerable:!!process.env.VORO_PACING_ONLY,
+ yieldLast:!!process.env.VORO_YIELD_LAST,defensive:!!process.env.VORO_DEFENSIVE,
+ availableChoices:MAX_UPGRADE_CHOICES,remainingChoices:MAX_UPGRADE_CHOICES-report.upgrades,
+ coefficients:CAMPAIGN_PACING,assumption:'Deterministic 30Hz pilot with immediate choices, not human play duration or physical-device performance.'},null,2));

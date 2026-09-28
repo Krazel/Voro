@@ -1,0 +1,2465 @@
+{
+  "source": "2993110",
+  "available": 74,
+  "assumptions": "No damage, immediate evolution, one meal at a time, no extra feeding. Bonuses above1 apply from the start as sensitivity bounds, not attainable acquisition histories. Negative remaining is unmet demand, not actual extra upgrades.",
+  "summary": [
+    {
+      "coefficient": 0.85,
+      "bonus": 1,
+      "choices": [
+        68,
+        69
+      ],
+      "remaining": [
+        5,
+        6
+      ]
+    },
+    {
+      "coefficient": 0.85,
+      "bonus": 1.1,
+      "choices": [
+        71,
+        72
+      ],
+      "remaining": [
+        2,
+        3
+      ]
+    },
+    {
+      "coefficient": 0.85,
+      "bonus": 1.2,
+      "choices": [
+        74,
+        76
+      ],
+      "remaining": [
+        -2,
+        0
+      ]
+    },
+    {
+      "coefficient": 0.85,
+      "bonus": 1.4,
+      "choices": [
+        80,
+        82
+      ],
+      "remaining": [
+        -8,
+        -6
+      ]
+    },
+    {
+      "coefficient": 0.65,
+      "bonus": 1,
+      "choices": [
+        59,
+        60
+      ],
+      "remaining": [
+        14,
+        15
+      ]
+    },
+    {
+      "coefficient": 0.65,
+      "bonus": 1.1,
+      "choices": [
+        62,
+        63
+      ],
+      "remaining": [
+        11,
+        12
+      ]
+    },
+    {
+      "coefficient": 0.65,
+      "bonus": 1.2,
+      "choices": [
+        65,
+        66
+      ],
+      "remaining": [
+        8,
+        9
+      ]
+    },
+    {
+      "coefficient": 0.65,
+      "bonus": 1.4,
+      "choices": [
+        70,
+        71
+      ],
+      "remaining": [
+        3,
+        4
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "coefficient": 0.85,
+      "bonus": 1,
+      "meal": 1,
+      "demand": 69,
+      "remaining": 5,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 14
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 21
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 30
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 36
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 52
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.18786749999699,
+          "choices": 54
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 58
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 62
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 65
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 69
+        }
+      ]
+    },
+    {
+      "coefficient": 0.85,
+      "bonus": 1,
+      "meal": 5,
+      "demand": 69,
+      "remaining": 5,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 13
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 21
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 30
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 36
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 52
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.187867499999587,
+          "choices": 54
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 58
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 62
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 65
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 69
+        }
+      ]
+    },
+    {
+      "coefficient": 0.85,
+      "bonus": 1,
+      "meal": 10,
+      "demand": 69,
+      "remaining": 5,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 13
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 21
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 30
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 36
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 52
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.191371000000046,
+          "choices": 54
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 58
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 62
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 65
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 69
+        }
+      ]
+    },
+    {
+      "coefficient": 0.85,
+      "bonus": 1,
+      "meal": 20,
+      "demand": 68,
+      "remaining": 6,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 13
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 21
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 29
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 36
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 51
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.198378000000153,
+          "choices": 54
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 58
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 62
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 65
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 68
+        }
+      ]
+    },
+    {
+      "coefficient": 0.85,
+      "bonus": 1,
+      "meal": 40,
+      "demand": 68,
+      "remaining": 6,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 13
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 20
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 29
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 35
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 51
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.19837800000003,
+          "choices": 53
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 57
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 61
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 64
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 68
+        }
+      ]
+    },
+    {
+      "coefficient": 0.85,
+      "bonus": 1.1,
+      "meal": 1,
+      "demand": 72,
+      "remaining": 2,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 14
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 23
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 31
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 38
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 54
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.18786749999699,
+          "choices": 57
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 61
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 65
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 69
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 72
+        }
+      ]
+    },
+    {
+      "coefficient": 0.85,
+      "bonus": 1.1,
+      "meal": 5,
+      "demand": 72,
+      "remaining": 2,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 14
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 22
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 31
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 38
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 54
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.187867499999587,
+          "choices": 57
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 61
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 65
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 69
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 72
+        }
+      ]
+    },
+    {
+      "coefficient": 0.85,
+      "bonus": 1.1,
+      "meal": 10,
+      "demand": 72,
+      "remaining": 2,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 14
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 22
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 31
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 38
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 54
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.191371000000046,
+          "choices": 57
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 61
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 65
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 69
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 72
+        }
+      ]
+    },
+    {
+      "coefficient": 0.85,
+      "bonus": 1.1,
+      "meal": 20,
+      "demand": 72,
+      "remaining": 2,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 14
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 22
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 31
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 38
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 54
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.198378000000153,
+          "choices": 57
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 61
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 65
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 68
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 72
+        }
+      ]
+    },
+    {
+      "coefficient": 0.85,
+      "bonus": 1.1,
+      "meal": 40,
+      "demand": 71,
+      "remaining": 3,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 13
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 21
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 30
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 37
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 53
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.19837800000003,
+          "choices": 56
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 60
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 64
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 68
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 71
+        }
+      ]
+    },
+    {
+      "coefficient": 0.85,
+      "bonus": 1.2,
+      "meal": 1,
+      "demand": 76,
+      "remaining": -2,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 15
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 24
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 33
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 40
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 57
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.18786749999699,
+          "choices": 60
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 64
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 68
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 72
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 76
+        }
+      ]
+    },
+    {
+      "coefficient": 0.85,
+      "bonus": 1.2,
+      "meal": 5,
+      "demand": 76,
+      "remaining": -2,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 15
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 24
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 33
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 40
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 57
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.187867499999587,
+          "choices": 60
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 64
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 68
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 72
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 76
+        }
+      ]
+    },
+    {
+      "coefficient": 0.85,
+      "bonus": 1.2,
+      "meal": 10,
+      "demand": 75,
+      "remaining": -1,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 15
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 23
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 33
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 40
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 57
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.191371000000046,
+          "choices": 60
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 64
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 68
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 72
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 75
+        }
+      ]
+    },
+    {
+      "coefficient": 0.85,
+      "bonus": 1.2,
+      "meal": 20,
+      "demand": 75,
+      "remaining": -1,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 14
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 23
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 32
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 40
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 56
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.198378000000153,
+          "choices": 59
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 64
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 68
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 71
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 75
+        }
+      ]
+    },
+    {
+      "coefficient": 0.85,
+      "bonus": 1.2,
+      "meal": 40,
+      "demand": 74,
+      "remaining": 0,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 14
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 23
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 32
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 39
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 56
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.19837800000003,
+          "choices": 59
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 63
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 67
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 71
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 74
+        }
+      ]
+    },
+    {
+      "coefficient": 0.85,
+      "bonus": 1.4,
+      "meal": 1,
+      "demand": 82,
+      "remaining": -8,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 16
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 26
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 36
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 44
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 62
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.18786749999699,
+          "choices": 65
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 70
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 74
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 78
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 82
+        }
+      ]
+    },
+    {
+      "coefficient": 0.85,
+      "bonus": 1.4,
+      "meal": 5,
+      "demand": 82,
+      "remaining": -8,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 16
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 26
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 36
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 43
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 62
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.187867499999587,
+          "choices": 65
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 69
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 74
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 78
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 82
+        }
+      ]
+    },
+    {
+      "coefficient": 0.85,
+      "bonus": 1.4,
+      "meal": 10,
+      "demand": 82,
+      "remaining": -8,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 16
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 25
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 35
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 43
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 61
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.191371000000046,
+          "choices": 64
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 69
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 74
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 78
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 82
+        }
+      ]
+    },
+    {
+      "coefficient": 0.85,
+      "bonus": 1.4,
+      "meal": 20,
+      "demand": 81,
+      "remaining": -7,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 16
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 25
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 35
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 43
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 61
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.198378000000153,
+          "choices": 64
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 69
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 73
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 77
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 81
+        }
+      ]
+    },
+    {
+      "coefficient": 0.85,
+      "bonus": 1.4,
+      "meal": 40,
+      "demand": 80,
+      "remaining": -6,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 15
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 25
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 34
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 42
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 60
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.19837800000003,
+          "choices": 63
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 68
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 72
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 76
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 80
+        }
+      ]
+    },
+    {
+      "coefficient": 0.65,
+      "bonus": 1,
+      "meal": 1,
+      "demand": 60,
+      "remaining": 14,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 12
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 18
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 26
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 32
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 45
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.18786749999699,
+          "choices": 47
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 51
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 54
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 57
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 60
+        }
+      ]
+    },
+    {
+      "coefficient": 0.65,
+      "bonus": 1,
+      "meal": 5,
+      "demand": 60,
+      "remaining": 14,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 11
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 18
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 26
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 32
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 45
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.187867499999587,
+          "choices": 47
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 51
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 54
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 57
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 60
+        }
+      ]
+    },
+    {
+      "coefficient": 0.65,
+      "bonus": 1,
+      "meal": 10,
+      "demand": 60,
+      "remaining": 14,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 11
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 18
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 26
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 31
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 45
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.191371000000046,
+          "choices": 47
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 51
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 54
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 57
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 60
+        }
+      ]
+    },
+    {
+      "coefficient": 0.65,
+      "bonus": 1,
+      "meal": 20,
+      "demand": 60,
+      "remaining": 14,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 11
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 18
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 26
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 31
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 45
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.198378000000153,
+          "choices": 47
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 50
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 54
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 57
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 60
+        }
+      ]
+    },
+    {
+      "coefficient": 0.65,
+      "bonus": 1,
+      "meal": 40,
+      "demand": 59,
+      "remaining": 15,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 11
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 18
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 25
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 31
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 44
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.19837800000003,
+          "choices": 47
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 50
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 53
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 56
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 59
+        }
+      ]
+    },
+    {
+      "coefficient": 0.65,
+      "bonus": 1.1,
+      "meal": 1,
+      "demand": 63,
+      "remaining": 11,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 12
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 19
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 27
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 33
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 47
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.18786749999699,
+          "choices": 50
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 53
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 57
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 60
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 63
+        }
+      ]
+    },
+    {
+      "coefficient": 0.65,
+      "bonus": 1.1,
+      "meal": 5,
+      "demand": 63,
+      "remaining": 11,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 12
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 19
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 27
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 33
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 47
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.187867499999587,
+          "choices": 50
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 53
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 57
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 60
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 63
+        }
+      ]
+    },
+    {
+      "coefficient": 0.65,
+      "bonus": 1.1,
+      "meal": 10,
+      "demand": 63,
+      "remaining": 11,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 12
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 19
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 27
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 33
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 47
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.191371000000046,
+          "choices": 50
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 53
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 57
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 60
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 63
+        }
+      ]
+    },
+    {
+      "coefficient": 0.65,
+      "bonus": 1.1,
+      "meal": 20,
+      "demand": 63,
+      "remaining": 11,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 12
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 19
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 27
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 33
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 47
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.198378000000153,
+          "choices": 49
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 53
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 56
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 59
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 63
+        }
+      ]
+    },
+    {
+      "coefficient": 0.65,
+      "bonus": 1.1,
+      "meal": 40,
+      "demand": 62,
+      "remaining": 12,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 11
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 19
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 26
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 32
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 46
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.19837800000003,
+          "choices": 49
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 53
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 56
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 59
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 62
+        }
+      ]
+    },
+    {
+      "coefficient": 0.65,
+      "bonus": 1.2,
+      "meal": 1,
+      "demand": 66,
+      "remaining": 8,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 13
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 20
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 28
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 35
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 50
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.18786749999699,
+          "choices": 52
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 56
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 59
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 63
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 66
+        }
+      ]
+    },
+    {
+      "coefficient": 0.65,
+      "bonus": 1.2,
+      "meal": 5,
+      "demand": 66,
+      "remaining": 8,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 13
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 20
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 28
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 35
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 49
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.187867499999587,
+          "choices": 52
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 56
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 59
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 63
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 66
+        }
+      ]
+    },
+    {
+      "coefficient": 0.65,
+      "bonus": 1.2,
+      "meal": 10,
+      "demand": 66,
+      "remaining": 8,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 13
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 20
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 28
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 35
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 49
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.191371000000046,
+          "choices": 52
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 56
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 59
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 62
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 66
+        }
+      ]
+    },
+    {
+      "coefficient": 0.65,
+      "bonus": 1.2,
+      "meal": 20,
+      "demand": 65,
+      "remaining": 9,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 12
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 20
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 28
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 34
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 49
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.198378000000153,
+          "choices": 51
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 55
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 59
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 62
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 65
+        }
+      ]
+    },
+    {
+      "coefficient": 0.65,
+      "bonus": 1.2,
+      "meal": 40,
+      "demand": 65,
+      "remaining": 9,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 12
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 19
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 27
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 34
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 48
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.19837800000003,
+          "choices": 51
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 55
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 58
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 62
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 65
+        }
+      ]
+    },
+    {
+      "coefficient": 0.65,
+      "bonus": 1.4,
+      "meal": 1,
+      "demand": 71,
+      "remaining": 3,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 14
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 22
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 31
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 38
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 54
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.18786749999699,
+          "choices": 56
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 61
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 64
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 68
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 71
+        }
+      ]
+    },
+    {
+      "coefficient": 0.65,
+      "bonus": 1.4,
+      "meal": 5,
+      "demand": 71,
+      "remaining": 3,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 14
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 22
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 31
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 38
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 54
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.187867499999587,
+          "choices": 56
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 60
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 64
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 68
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 71
+        }
+      ]
+    },
+    {
+      "coefficient": 0.65,
+      "bonus": 1.4,
+      "meal": 10,
+      "demand": 71,
+      "remaining": 3,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 14
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 22
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 31
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 38
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 53
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.191371000000046,
+          "choices": 56
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 60
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 64
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 68
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 71
+        }
+      ]
+    },
+    {
+      "coefficient": 0.65,
+      "bonus": 1.4,
+      "meal": 20,
+      "demand": 71,
+      "remaining": 3,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 14
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 22
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 30
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 37
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 53
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.198378000000153,
+          "choices": 56
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 60
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 64
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 67
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 71
+        }
+      ]
+    },
+    {
+      "coefficient": 0.65,
+      "bonus": 1.4,
+      "meal": 40,
+      "demand": 70,
+      "remaining": 4,
+      "stages": [
+        {
+          "stage": "micro",
+          "startMass": 2,
+          "choices": 13
+        },
+        {
+          "stage": "pond",
+          "startMass": 0.45,
+          "choices": 21
+        },
+        {
+          "stage": "land",
+          "startMass": 0.45,
+          "choices": 30
+        },
+        {
+          "stage": "water",
+          "startMass": 0.45,
+          "choices": 37
+        },
+        {
+          "stage": "city",
+          "startMass": 2,
+          "choices": 53
+        },
+        {
+          "stage": "orbit",
+          "startMass": 9.19837800000003,
+          "choices": 55
+        },
+        {
+          "stage": "planets",
+          "startMass": 2,
+          "choices": 59
+        },
+        {
+          "stage": "stars",
+          "startMass": 2,
+          "choices": 63
+        },
+        {
+          "stage": "galaxies",
+          "startMass": 2,
+          "choices": 67
+        },
+        {
+          "stage": "universe",
+          "startMass": 2,
+          "choices": 70
+        }
+      ]
+    }
+  ]
+}

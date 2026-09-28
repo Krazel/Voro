@@ -1,0 +1,284 @@
+[
+  {
+    "name": "surplus-normal-41",
+    "seed": 41,
+    "xpScale": 1,
+    "invulnerable": false,
+    "completed": true,
+    "seconds": 4639,
+    "choices": 73,
+    "remaining": 1,
+    "deaths": 0,
+    "yieldChoices": [
+      {
+        "at": 4497,
+        "stage": "galaxies",
+        "id": "yield"
+      },
+      {
+        "at": 4528,
+        "stage": "galaxies",
+        "id": "yield"
+      },
+      {
+        "at": 4549,
+        "stage": "galaxies",
+        "id": "yield"
+      },
+      {
+        "at": 4589,
+        "stage": "universe",
+        "id": "yield"
+      },
+      {
+        "at": 4609,
+        "stage": "universe",
+        "id": "yield"
+      },
+      {
+        "at": 4626,
+        "stage": "universe",
+        "id": "yield"
+      },
+      {
+        "at": 4637,
+        "stage": "universe",
+        "id": "yield"
+      }
+    ],
+    "remainingByType": {
+      "Adaptación acelerada": 1
+    },
+    "stages": [
+      {
+        "stage": "micro",
+        "upgrades": 0
+      },
+      {
+        "stage": "pond",
+        "upgrades": 15
+      },
+      {
+        "stage": "land",
+        "upgrades": 23
+      },
+      {
+        "stage": "water",
+        "upgrades": 31
+      },
+      {
+        "stage": "city",
+        "upgrades": 37
+      },
+      {
+        "stage": "orbit",
+        "upgrades": 55
+      },
+      {
+        "stage": "planets",
+        "upgrades": 58
+      },
+      {
+        "stage": "stars",
+        "upgrades": 62
+      },
+      {
+        "stage": "galaxies",
+        "upgrades": 65
+      },
+      {
+        "stage": "universe",
+        "upgrades": 69
+      }
+    ]
+  },
+  {
+    "name": "surplus-pacing-73",
+    "seed": 73,
+    "xpScale": 1,
+    "invulnerable": true,
+    "completed": true,
+    "seconds": 3485,
+    "choices": 69,
+    "remaining": 5,
+    "deaths": 0,
+    "yieldChoices": [
+      {
+        "at": 3443,
+        "stage": "universe",
+        "id": "yield"
+      },
+      {
+        "at": 3462,
+        "stage": "universe",
+        "id": "yield"
+      },
+      {
+        "at": 3478,
+        "stage": "universe",
+        "id": "yield"
+      }
+    ],
+    "remainingByType": {
+      "Adaptación acelerada": 5
+    },
+    "stages": [
+      {
+        "stage": "micro",
+        "upgrades": 0
+      },
+      {
+        "stage": "pond",
+        "upgrades": 13
+      },
+      {
+        "stage": "land",
+        "upgrades": 21
+      },
+      {
+        "stage": "water",
+        "upgrades": 30
+      },
+      {
+        "stage": "city",
+        "upgrades": 36
+      },
+      {
+        "stage": "orbit",
+        "upgrades": 52
+      },
+      {
+        "stage": "planets",
+        "upgrades": 54
+      },
+      {
+        "stage": "stars",
+        "upgrades": 58
+      },
+      {
+        "stage": "galaxies",
+        "upgrades": 62
+      },
+      {
+        "stage": "universe",
+        "upgrades": 66
+      }
+    ]
+  },
+  {
+    "name": "surplus-fixed-candidate-73",
+    "seed": 73,
+    "xpScale": 0.7647058823529412,
+    "invulnerable": true,
+    "completed": true,
+    "seconds": 3679,
+    "choices": 60,
+    "remaining": 14,
+    "deaths": 0,
+    "yieldChoices": [],
+    "remainingByType": {
+      "Adaptación acelerada": 8,
+      "Membrana repulsora": 6
+    },
+    "stages": [
+      {
+        "stage": "micro",
+        "upgrades": 0
+      },
+      {
+        "stage": "pond",
+        "upgrades": 11
+      },
+      {
+        "stage": "land",
+        "upgrades": 18
+      },
+      {
+        "stage": "water",
+        "upgrades": 26
+      },
+      {
+        "stage": "city",
+        "upgrades": 32
+      },
+      {
+        "stage": "orbit",
+        "upgrades": 45
+      },
+      {
+        "stage": "planets",
+        "upgrades": 47
+      },
+      {
+        "stage": "stars",
+        "upgrades": 51
+      },
+      {
+        "stage": "galaxies",
+        "upgrades": 54
+      },
+      {
+        "stage": "universe",
+        "upgrades": 57
+      }
+    ]
+  },
+  {
+    "name": "surplus-fixed-normal-41",
+    "seed": 41,
+    "xpScale": 0.7647058823529412,
+    "invulnerable": false,
+    "completed": true,
+    "seconds": 4842,
+    "choices": 63,
+    "remaining": 11,
+    "deaths": 0,
+    "yieldChoices": [],
+    "remainingByType": {
+      "Adaptación acelerada": 8,
+      "Membrana repulsora": 3
+    },
+    "stages": [
+      {
+        "stage": "micro",
+        "upgrades": 0
+      },
+      {
+        "stage": "pond",
+        "upgrades": 12
+      },
+      {
+        "stage": "land",
+        "upgrades": 19
+      },
+      {
+        "stage": "water",
+        "upgrades": 26
+      },
+      {
+        "stage": "city",
+        "upgrades": 32
+      },
+      {
+        "stage": "orbit",
+        "upgrades": 49
+      },
+      {
+        "stage": "planets",
+        "upgrades": 51
+      },
+      {
+        "stage": "stars",
+        "upgrades": 54
+      },
+      {
+        "stage": "galaxies",
+        "upgrades": 58
+      },
+      {
+        "stage": "universe",
+        "upgrades": 61
+      }
+    ]
+  }
+]
