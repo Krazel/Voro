@@ -26,7 +26,7 @@ test('Every repeated choice adds the same concrete bonus', () => {
     pull: ['attraction', 14],
     shield: ['shieldCapacity', 1],
     recycle: ['recycleFraction', 0.125],
-    spikes: ['spikeFraction', 0.06],
+    spikes: ['repulsionFactor', 0.5],
     tentacleReach: ['tentacleReach', 0.15],
     tentacles: ['tentacles', 1],
     combo: ['digestFactor', 0.1],

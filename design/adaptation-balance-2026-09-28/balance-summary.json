@@ -1,0 +1,117 @@
+{
+  "method": "Deterministic 30Hz pilot, seed41, automatic immediate choices; not player duration or causal isolation. Same policy, moves adaptation yield to the end of preference order.",
+  "yieldFirst": {
+    "seconds": 3963,
+    "deaths": 0,
+    "upgrades": 75,
+    "stages": [
+      {
+        "stage": "micro",
+        "at": 0,
+        "upgrades": 0
+      },
+      {
+        "stage": "pond",
+        "at": 624,
+        "upgrades": 17
+      },
+      {
+        "stage": "land",
+        "at": 1186,
+        "upgrades": 28
+      },
+      {
+        "stage": "water",
+        "at": 1786,
+        "upgrades": 40
+      },
+      {
+        "stage": "city",
+        "at": 2379,
+        "upgrades": 49
+      },
+      {
+        "stage": "orbit",
+        "at": 2904,
+        "upgrades": 70
+      },
+      {
+        "stage": "planets",
+        "at": 3289,
+        "upgrades": 74
+      },
+      {
+        "stage": "stars",
+        "at": 3568,
+        "upgrades": 75
+      },
+      {
+        "stage": "galaxies",
+        "at": 3744,
+        "upgrades": 75
+      },
+      {
+        "stage": "universe",
+        "at": 3884,
+        "upgrades": 75
+      }
+    ]
+  },
+  "yieldLast": {
+    "seconds": 4883,
+    "deaths": 0,
+    "upgrades": 68,
+    "stages": [
+      {
+        "stage": "micro",
+        "at": 0,
+        "upgrades": 0
+      },
+      {
+        "stage": "pond",
+        "at": 588,
+        "upgrades": 13
+      },
+      {
+        "stage": "land",
+        "at": 1162,
+        "upgrades": 21
+      },
+      {
+        "stage": "water",
+        "at": 1677,
+        "upgrades": 30
+      },
+      {
+        "stage": "city",
+        "at": 2119,
+        "upgrades": 36
+      },
+      {
+        "stage": "orbit",
+        "at": 2811,
+        "upgrades": 51
+      },
+      {
+        "stage": "planets",
+        "at": 4187,
+        "upgrades": 54
+      },
+      {
+        "stage": "stars",
+        "at": 4476,
+        "upgrades": 58
+      },
+      {
+        "stage": "galaxies",
+        "at": 4667,
+        "upgrades": 62
+      },
+      {
+        "stage": "universe",
+        "at": 4807,
+        "upgrades": 65
+      }
+    ]
+  }
+}

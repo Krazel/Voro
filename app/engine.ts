@@ -56,6 +56,7 @@ import {
   drawBiomassFragment,
 } from './biomass-fragments.mjs';
 import { HuntingTentacles } from './hunting-tentacles.mjs';
+import { repelAttacker } from './contact-repulsion.mjs';
 import { syncShields, consumeShield } from './shields.mjs';
 import { drawShieldFilm } from './shield-film.mjs';
 import {
@@ -1512,7 +1513,7 @@ export class VoroEngine {
         )
           continue;
         const d = Math.hypot(f.x - p.x, f.y - p.y),
-          reach = p.radius * p.reachFactor + 22 + p.attraction;
+          reach = p.radius + 22 + p.attraction;
         if (d < reach) {
           const pull = (1 - d / reach) * 70 * dt;
           f.x += ((p.x - f.x) / Math.max(d, 1)) * pull;
@@ -1572,16 +1573,7 @@ export class VoroEngine {
         if (Math.hypot(p.x - e.x, p.y - e.y) > p.radius * 0.85 + e.r * 0.76)
           continue;
         this.receiveHit(e, 0.22);
-        if (this.stats.spikeFraction) {
-          e.wound += this.stats.spikeFraction;
-          e.escape = 3;
-          e.flash = 1;
-          if (e.wound >= 1) {
-            e.requiredMass = 0;
-            e.value *= 0.5;
-            e.escape = 999;
-          }
-        }
+        repelAttacker(e, spec, p, this.stats.repulsionFactor);
         this.save();
         this.publish();
       }
@@ -2303,20 +2295,12 @@ export class VoroEngine {
       ready:!!this.stats.shieldCooldown && this.progress.shieldRecharge===0,
       hitAge:this.time-this.shieldHitAt,hitAngle:this.shieldHitAngle,
       reduced:this.reduced,dead:p.dead});
-    if (this.stats.spikeFraction && p.hurt > 0) {
-      c.strokeStyle = 'rgba(220,206,153,.65)';
-      c.lineWidth = 1;
-      for (let i = 0; i < 12; i++) {
-        const a = (i * TAU) / 12;
-        const node = pts[Math.floor((i * pts.length) / 12)];
-        c.beginPath();
-        c.moveTo(node.x, node.y);
-        c.lineTo(
-          node.x + Math.cos(a) * r * 0.22 * p.hurt,
-          node.y + Math.sin(a) * r * 0.22 * p.hurt,
-        );
-        c.stroke();
-      }
+    if (this.stats.repulsionFactor && p.hurt > 0) {
+      c.strokeStyle = `rgba(153,231,226,${p.hurt * .65})`;
+      c.lineWidth = 1.5;
+      c.beginPath();
+      c.arc(0, 0, r * (1 + (1 - p.hurt) * .8), p.hitAngle - .8, p.hitAngle + .8);
+      c.stroke();
     }
     // Transparent double membrane with an independently moving cytoplasm.
     this.trace(pts);

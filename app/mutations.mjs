@@ -19,8 +19,8 @@ const CARD_ART = {
 export const UPGRADES = [
   {
     id: 'reach',
-    name: 'Pseudópodos largos',
-    detail: '+7,5 % de alcance',
+    name: 'Absorción amplia',
+    detail: '+7,5 % de distancia para absorber comida cercana',
     max: 6,
     group: 'Comer',
   },
@@ -89,10 +89,10 @@ export const UPGRADES = [
   },
   {
     id: 'spikes',
-    name: 'Espinas retráctiles',
-    detail: '+6 % de daño al atacante cuando te golpea',
+    name: 'Membrana repulsora',
+    detail: 'Repele al atacante al tocarte: +50 % de tu radio de distancia',
     max: 6,
-    group: 'Cazar',
+    group: 'Defenderse',
   },
   {
     id: 'tentacles',
@@ -143,7 +143,7 @@ export function upgradeStats(chosen, combo = false) {
     shieldCooldown: n('shield') ? SHIELD_RECHARGE : 0,
     shieldCapacity: n('shield'),
     recycleFraction: n('recycle') * 0.125,
-    spikeFraction: n('spikes') * 0.06,
+    repulsionFactor: n('spikes') * 0.5,
     trailSlow: 0,
     tentacles: n('tentacles'),
     tentacleReach: n('tentacleReach') * 0.15,

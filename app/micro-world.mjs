@@ -1,5 +1,6 @@
 import { sizeFactors } from './entity-sizes.mjs';
 import { animalTarget } from './animal-steering.mjs';
+import { advanceRepulsion } from './contact-repulsion.mjs';
 import { random, clamp } from './simulation.mjs';
 export const TILE = 600;
 export const SPECIES = [
@@ -266,6 +267,7 @@ export class MicroWorld {
       if (e.eaten) continue;
       const s = SPECIES_BY_ID[e.kind];
       if (!s) continue;
+      if (advanceRepulsion(e, dt)) continue;
       e.escape = Math.max(0, e.escape - dt);
       e.flash = Math.max(0, e.flash - dt * 2);
       const d = Math.hypot(player.x - e.x, player.y - e.y);

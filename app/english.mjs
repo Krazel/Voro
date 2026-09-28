@@ -243,6 +243,8 @@ Defenderse|Defend
 Cazar|Hunt
 Rara|Rare
 Pseudópodos largos|Long pseudopods
+Absorción amplia|Wider absorption
++7,5 % de distancia para absorber comida cercana|+7.5% distance for absorbing nearby food
 +7,5 % de alcance|+7.5% reach
 Vacuolas adicionales|Extra vacuoles
 +1 alimento simultáneo|+1 simultaneous food item
@@ -263,6 +265,8 @@ Bloquea un golpe. Recarga en 40 s.|Blocks one hit. Recharges in 40 s.
 Reciclaje celular|Cellular recycling
 +12,5 % de recuperación de la biomasa perdida|+12.5% recovery of lost biomass
 Espinas retráctiles|Retractable spikes
+Membrana repulsora|Repelling membrane
+Repele al atacante al tocarte: +50 % de tu radio de distancia|Repels attackers on contact: +50% of your radius in distance
 +6 % de daño al atacante cuando te golpea|+6% damage to an attacker when it hits you
 Tentáculos cazadores|Hunting tentacles
 +1 tentáculo que agarra y acerca lentamente presas comestibles|+1 tentacle that grabs edible prey and slowly pulls it closer

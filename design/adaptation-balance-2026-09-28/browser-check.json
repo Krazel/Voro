@@ -1,0 +1,28 @@
+{
+  "positions": [
+    {
+      "x": 755.4,
+      "y": 970,
+      "wound": 0,
+      "requiredMass": 17.083365631486565,
+      "mass": 2
+    },
+    {
+      "x": 772.0125,
+      "y": 970,
+      "wound": 0,
+      "requiredMass": 17.083365631486565,
+      "mass": 1.4
+    },
+    {
+      "x": 795.2,
+      "y": 970,
+      "wound": 0,
+      "requiredMass": 17.083365631486565,
+      "mass": 1.4
+    }
+  ],
+  "errors": [],
+  "passed": true,
+  "method": "Real local PC browser; isolated test-mode scene, no player save."
+}

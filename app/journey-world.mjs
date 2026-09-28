@@ -6,6 +6,7 @@ import {
 } from './population.mjs';
 import { MicroWorld, makeEntity, TILE } from './micro-world.mjs';
 import { animalTarget } from './animal-steering.mjs';
+import { advanceRepulsion } from './contact-repulsion.mjs';
 import { random, clamp } from './simulation.mjs';
 import { projectileThreatMass } from './threat-scale.mjs';
 import { cityLots, cityPlacement, constrainCity } from './city-layout.mjs';
@@ -215,6 +216,9 @@ export class JourneyWorld extends MicroWorld {
       if (e.eaten) continue;
       const s = SPECIES_BY_ID[e.kind];
       if (!s) continue;
+      if (e.repulsion && advanceRepulsion(e, dt, STAGES[this.stage].id === 'land'
+        ? entity => constrainToShore(entity, s)
+        : STAGES[this.stage].id === 'city' ? constrainCity : undefined)) continue;
       // Keep every entity resident and edible. Only suspend remote
       // motion outside the padded view and outside all attack/feeding reach.
       if (view && ['orbit','pond'].includes(STAGES[this.stage].id)

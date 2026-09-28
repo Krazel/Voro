@@ -1,0 +1,24 @@
+✔ Repulsion moves attackers smoothly, clears overlap, preserves their eating threshold and value (3.9915ms)
+✔ Repulsion runs through microscopic and later-world movement and pauses ranged shooting (1.6939ms)
+✔ Absorption reach no longer changes aspiration, but does collect nearer food sooner (109.2106ms)
+Micro-stage progression: [{"seed":41,"seconds":709,"upgrades":15},{"seed":127,"seconds":1008,"upgrades":16},{"seed":930,"seconds":838,"upgrades":15}]
+✔ Bitmap organisms digest, membrane animates, and damage lowers HUD mass and body area (302.6899ms)
+✔ A shield blocks one hit, then damage and recycling apply during recharge (231.5067ms)
+✔ Adaptation choices, pause and settings stop world time; retry retains choices, reset clears them (51.1157ms)
+✔ Movement crosses old boundaries in both directions; touch movement has no effect after releasing (73.2176ms)
+✔ Unassisted world population supports growth to cellular maturity without changing biomes (138407.5187ms)
+✔ Every repeated choice adds the same concrete bonus (5.8137ms)
+✔ Real damage removes the same fraction of unspent adaptation progress and persists it (51.9436ms)
+✔ Shield can be acquired once; consuming and reloading never unlocks it again (15.824ms)
+✔ Shielded hits cost no biomass or adaptation progress (14.0984ms)
+✔ device language and manual override resolve independently (2.2134ms)
+✔ all player upgrades, stages and adaptation captions have English entries (5.7183ms)
+✔ translation keeps data identities, numbers, React nodes and whitespace (17.2063ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 141157.0702
