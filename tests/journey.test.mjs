@@ -47,6 +47,8 @@ function isolate(g) {
 }
 test('Every stage generates stable inhabitants, recoverable food, bounded chunks and valid bitmap crops', () => {
   const dimensions = {
+    'cosmic-wall':[1254,1254], 'lensed-crown':[1254,1254], 'cosmic-confluence':[1254,1254], 'cosmic-tide':[1254,1254],
+    blackHoleDetail:[1254,1254],...Object.fromEntries(Array.from({length:6},(_,i)=>[`galaxyDetail${i}`,[1254,1254]])),
     naturalMatter: [1448, 1086],
     objectMatter: [1536, 1024],
     cosmicMatter: [1536, 1024],
@@ -86,6 +88,7 @@ test('Every stage generates stable inhabitants, recoverable food, bounded chunks
     clip() {},
     transform() {},
     arc() {},
+    ellipse() {},
     rect() {},
     stroke() {},
     drawImage(image, x, y, w, h, ...rest) {

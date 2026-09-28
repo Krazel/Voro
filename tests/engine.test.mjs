@@ -8,6 +8,7 @@ import {
   refreshOffer,
 } from '../app/journey-progress.mjs';
 import { JourneyWorld } from '../app/journey-world.mjs';
+import {biomassYield,CAMPAIGN_PACING} from '../app/campaign-pacing.mjs';
 
 function fresh(seed = 123) {
   const f = makeEngine(),
@@ -46,7 +47,7 @@ test('Bitmap organisms digest, membrane animates, and damage lowers HUD mass and
   assert.ok(
     Math.abs(
       f.snapshot.biomass -
-        (2 + makeEntity(SPECIES_BY_ID.bacillus, 0, 0, 1, 'meal').value * 0.55),
+        (2 + makeEntity(SPECIES_BY_ID.bacillus, 0, 0, 1, 'meal').value * 0.55 * biomassYield('micro')),
     ) < 1e-9,
   );
   assert.ok(f.draws > 1000);
@@ -143,7 +144,7 @@ test('Unassisted world population supports growth to cellular maturity without c
     let target = null;
     for (
       let frame = 0;
-      frame < 60 * 600 && !g.life.dead && !g.progress.maturitySeen;
+      frame < 60 * CAMPAIGN_PACING.micro.minutes * 60 && !g.life.dead && !g.progress.maturitySeen;
       frame++
     ) {
       if (g.progress.offer.length)
@@ -153,13 +154,18 @@ test('Unassisted world population supports growth to cellular maturity without c
           ) || g.progress.offer[0],
         );
       if (!target || target.eaten || frame % 60 === 0) {
+        const enemies=g.world.entities.filter(e=>!e.eaten && e.requiredMass>g.life.biomass && ['hunter','spiny','giant'].includes(e.kind));
+        // A nearest-food pilot otherwise pushes forever towards food guarded by
+        // a predator. Navigate around threats without removing damage or feeding
+        // it synthetic mass; this is the same policy as the campaign audit.
+        const score=e=>{
+          let value=Math.hypot(e.x-g.life.x,e.y-g.life.y);
+          for(const enemy of enemies){const d=Math.hypot(e.x-enemy.x,e.y-enemy.y),safe=g.life.radius+enemy.r+90;if(d<safe)value+=(safe-d)*5;}
+          return value;
+        };
         target = g.world.entities
           .filter((e) => !e.eaten && e.requiredMass <= g.life.biomass)
-          .sort(
-            (a, b) =>
-              Math.hypot(a.x - g.life.x, a.y - g.life.y) -
-              Math.hypot(b.x - g.life.x, b.y - g.life.y),
-          )[0];
+          .sort((a,b)=>score(a)-score(b))[0];
       }
       if (target) {
         const dx = target.x - g.life.x,
@@ -185,6 +191,7 @@ test('Unassisted world population supports growth to cellular maturity without c
             if (d < safe - 65) g.action('dash');
           }
         }
+        if(Math.hypot(x,y)<.4){const a=Math.atan2(dy,dx)+Math.PI/2;x=Math.cos(a);y=Math.sin(a);}
         g.padInput = { x, y };
       }
       step(g);

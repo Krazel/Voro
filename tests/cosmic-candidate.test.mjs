@@ -7,6 +7,7 @@ import {ORBITAL_EARTH,earthConsumptionPose,drawOrbitalEarth} from '../app/earth-
 import {gameplayZoom,visualSpeedFactor} from '../app/camera.mjs';
 import {integrate} from '../app/simulation.mjs';
 import {groundPanels} from '../app/world-ground.mjs';
+import {BACKGROUND_ASSETS} from '../app/background-assets.mjs';
 import {POPULATION_PLANS} from '../app/population.mjs';
 import {captureOrbit,restoreOrbitSweep} from '../app/orbital-sweep.mjs';
 
@@ -47,7 +48,8 @@ test('Large bodies keep readable screen travel with a smoothed automatic camera;
  const normal=visualSpeedFactor(24,100,.5),manual=visualSpeedFactor(24,100,(.5*1.75)/1.75);assert.equal(normal,manual);g.destroy();
 });
 test('Early cosmic habitats exclude spiral ground panels and star crops stop before galactic artwork',()=>{
- assert.ok(!groundPanels('planets').includes(0));assert.ok(!groundPanels('planets').includes(3));
+ assert.match(BACKGROUND_ASSETS.planets,/planets-dust-v2.webp/);
+ assert.deepEqual(groundPanels('planets'),[0,1,2,3]);
  assert.ok(!groundPanels('stars').includes(3));
  for(const [i,top] of [736,740,740,738,754,766].entries()){
   const star=SPECIES_BY_ID['stars-'+i];assert.ok(star.crop[1]+star.crop[3]<top);

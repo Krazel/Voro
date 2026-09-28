@@ -9,9 +9,10 @@ export class AnimationSheets {
     this.limit = limit; this.entries = new Map(); this.allowed = new Set();
     this.frame = 0; this.bytes = 0; this.active = 0; this.hits = 0;
     this.loads = 0; this.evictions = 0; this.dropped = 0; this.errors = 0;
-    this.enabled = true; this.destroyed = false;
+    this.enabled = true; this.destroyed = false; this.highDetail = false; this.selections=new Map();
   }
   setSpecies(species) {
+    this.selections.clear();
     this.allowed = new Set(species.flatMap(s => Object.values(this.manifest[s.id] || {}).map(m => m.url)));
     for (const [url, e] of this.entries) if (!this.allowed.has(url)) this.release(url, e);
   }
@@ -86,12 +87,27 @@ export class AnimationSheets {
     // animation gallery still uses the continuous rig for detailed inspection.
     // Normal motion first, then the reaction variant. A missing reaction never
     // removes the normal swimming cycle from the screen.
-    const normal = this.request(versions[1]);
-    const desired = activity > 1.25 ? this.request(versions[1.5]) : normal;
-    const e = desired?.state === 'ready' ? desired : normal?.state === 'ready' ? normal : null;
-    if (!e) return normal && normal.state !== 'error' ? 'pending' : 'unavailable';
+    const matrix = c.getTransform?.();
+    const pixels = matrix ? Math.hypot(matrix.a, matrix.b) : 1;
+    const close = this.highDetail && r * pixels > 80 && versions.hd1;
+    const energy = activity > 1.25 ? 1.5 : 1;
+    const lowMeta=versions[energy]||versions[1];
+    const preferred = this.request(close ? versions[`hd${energy}`] : lowMeta);
+    // Load only the requested energy, rather than pinning two full cycles for
+    // every species. Optional detail uses an already-ready low cycle as fallback.
+    let e=preferred?.state==='ready'?preferred:null;
+    if(!e) {
+      const exact=this.entries.get(lowMeta.url),normal=this.entries.get(versions[1].url);
+      const low=exact?.state==='ready'?exact:normal?.state==='ready'?normal:null;
+      if(low?.state==='ready'){low.seen=this.frame;e=low;}
+      else if(close)this.request(lowMeta);
+    }
+    // Budget pressure must never switch gameplay back to live mesh generation.
+    if(!e)return preferred?.state==='error'?'unavailable':'pending';
     this.hits++;
     const m = e.meta, f = Math.floor(phase / (Math.PI * 2) * m.frames) % m.frames;
+    this.selections.set(s.id,{id:s.id,seen:this.frame,posesPerSecond:+(m.frames/ANIMATIONS[s.id].period).toFixed(2),
+      bodyPixels:Math.round(m.size*2/m.extent),tier:m.size===384?'close':'standard'});
     const scale = r * m.extent / m.size;
     c.save();
     applyPoseTransform(c, ANIMATIONS[s.id], r, phase, activity);
@@ -103,7 +119,9 @@ export class AnimationSheets {
   stats() {
     return { bytes: this.bytes, limit: this.limit, resident: this.entries.size, active: this.active,
       pending: [...this.entries.values()].filter(e => e.state === 'queued' || e.state === 'loading').length,
-      hits: this.hits, loads: this.loads, evictions: this.evictions, dropped: this.dropped, errors: this.errors };
+      hits: this.hits, loads: this.loads, evictions: this.evictions, dropped: this.dropped, errors: this.errors,
+      quality:this.highDetail?'optional-close-up':'standard',
+      visibleCycles:[...this.selections.values()].filter(s=>this.frame-s.seen<=1).map(({seen,...s})=>s) };
   }
   destroy() {
     this.destroyed = true;

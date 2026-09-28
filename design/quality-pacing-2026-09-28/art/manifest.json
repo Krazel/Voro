@@ -1,0 +1,85 @@
+{
+  "mode": "built-in imagegen; reference-preserving detailed variants, native pixels then WebP conversion",
+  "assets": [
+    {
+      "name": "galaxy-detail-0-v1",
+      "master": "design/quality-pacing-2026-09-28/art/galaxy-detail-0-v1.png",
+      "output": "public/inhabitants/galaxy-detail-0-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha": true,
+      "sha256": "3ce3a6d1b27409d240af5e5ec795e97b2ad9bbcb986b68e6cc4944a918a03b40",
+      "bytes": 848008
+    },
+    {
+      "name": "galaxy-detail-1-v1",
+      "master": "design/quality-pacing-2026-09-28/art/galaxy-detail-1-v1.png",
+      "output": "public/inhabitants/galaxy-detail-1-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha": true,
+      "sha256": "eca8a82d708543ac6079f3b1bb8022ecd7c2335fe413ff6703836bbfb1527c2a",
+      "bytes": 783740
+    },
+    {
+      "name": "galaxy-detail-2-v1",
+      "master": "design/quality-pacing-2026-09-28/art/galaxy-detail-2-v1.png",
+      "output": "public/inhabitants/galaxy-detail-2-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha": true,
+      "sha256": "2c54e211946bae54359e0f77de52f8a44c11827e3c48806c91e218a10683b20e",
+      "bytes": 828734
+    },
+    {
+      "name": "galaxy-detail-3-v1",
+      "master": "design/quality-pacing-2026-09-28/art/galaxy-detail-3-v1.png",
+      "output": "public/inhabitants/galaxy-detail-3-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha": true,
+      "sha256": "d2c3b4e311bf68f16b5e16440a2b55a419edbe4653a49ac42d0e8d719f74fc26",
+      "bytes": 766898
+    },
+    {
+      "name": "galaxy-detail-4-v1",
+      "master": "design/quality-pacing-2026-09-28/art/galaxy-detail-4-v1.png",
+      "output": "public/inhabitants/galaxy-detail-4-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha": true,
+      "sha256": "ff4ec4462de0e5d78697620df3b66cd28d811bdfaa5e911d72d0fc48fa4da4e8",
+      "bytes": 785512
+    },
+    {
+      "name": "galaxy-detail-5-v1",
+      "master": "design/quality-pacing-2026-09-28/art/galaxy-detail-5-v1.png",
+      "output": "public/inhabitants/galaxy-detail-5-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha": true,
+      "sha256": "818113915612822d3ba7cc694aa6414fbc7a40d5377f1600597f6f3a3dbee078",
+      "bytes": 355882
+    },
+    {
+      "name": "black-hole-detail-v1",
+      "master": "design/quality-pacing-2026-09-28/art/black-hole-detail-v1.png",
+      "output": "public/inhabitants/black-hole-detail-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha": true,
+      "sha256": "f7a2dbdd8f0ab4dca7c47a712dfea5f8527d28e1e5be1a881e00d396cdabf166",
+      "bytes": 551528
+    },
+    {
+      "name": "planets-dust-v2",
+      "master": "design/quality-pacing-2026-09-28/art/planets-dust-v2.png",
+      "output": "public/backgrounds/planets-dust-v2.webp",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "sha256": "a58c045ffa12ed0c00cb6328e76488503cb9ceb65d50df53bbc2a5059584ccac",
+      "bytes": 160130
+    }
+  ]
+}

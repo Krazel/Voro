@@ -11,7 +11,8 @@ import { STAGE_SPECIES } from '../app/journey-data.mjs';
 import { newJourney, journeyLife } from '../app/journey-progress.mjs';
 import { HuntingTentacles } from '../app/hunting-tentacles.mjs';
 const sizes = {
-  'cosmic-wall':[512,512], 'lensed-crown':[512,512], 'cosmic-confluence':[512,512], 'cosmic-tide':[512,512],
+  blackHoleDetail:[1254,1254],...Object.fromEntries(Array.from({length:6},(_,i)=>[`galaxyDetail${i}`,[1254,1254]])),
+  'cosmic-wall':[1254,1254], 'lensed-crown':[1254,1254], 'cosmic-confluence':[1254,1254], 'cosmic-tide':[1254,1254],
   cityCivilians: [1536,1024],
   ringedPlanet: [640,640],
   cityBuildings: [1536,1024],

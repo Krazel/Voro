@@ -1,0 +1,140 @@
+{
+  "seeds": [
+    41,
+    73,
+    834
+  ],
+  "baselinePilotSeconds": 992,
+  "humanReferenceMinutes": 30,
+  "humanFactor": 1.814516129032258,
+  "assumption": "A proportional estimate from one reported human baseline; NOT measured human play. Pilots choose instantly and sometimes die. Individual biome durations are not strictly monotonic.",
+  "targetMinutes": 120,
+  "simulatedTotalSeconds": [
+    4082,
+    3675,
+    4298
+  ],
+  "estimatedHumanMinutes": [
+    123.4,
+    111.1,
+    130
+  ],
+  "estimatedMeanMinutes": 121.5,
+  "deaths": [
+    1,
+    0,
+    0
+  ],
+  "stages": [
+    {
+      "id": "micro",
+      "minutesTarget": 19,
+      "biomassCoefficient": 0.13,
+      "seconds": [
+        622,
+        729,
+        715
+      ],
+      "estimatedHumanMeanMinutes": 20.8
+    },
+    {
+      "id": "pond",
+      "minutesTarget": 16,
+      "biomassCoefficient": 0.16,
+      "seconds": [
+        551,
+        503,
+        584
+      ],
+      "estimatedHumanMeanMinutes": 16.5
+    },
+    {
+      "id": "land",
+      "minutesTarget": 18,
+      "biomassCoefficient": 0.16,
+      "seconds": [
+        601,
+        503,
+        550
+      ],
+      "estimatedHumanMeanMinutes": 16.7
+    },
+    {
+      "id": "water",
+      "minutesTarget": 17,
+      "biomassCoefficient": 0.136,
+      "seconds": [
+        575,
+        457,
+        547
+      ],
+      "estimatedHumanMeanMinutes": 15.9
+    },
+    {
+      "id": "city",
+      "minutesTarget": 18,
+      "biomassCoefficient": 0.104,
+      "seconds": [
+        648,
+        498,
+        914
+      ],
+      "estimatedHumanMeanMinutes": 20.8
+    },
+    {
+      "id": "orbit",
+      "minutesTarget": 11,
+      "biomassCoefficient": 0.32,
+      "seconds": [
+        386,
+        267,
+        245
+      ],
+      "estimatedHumanMeanMinutes": 9.1
+    },
+    {
+      "id": "planets",
+      "minutesTarget": 8,
+      "biomassCoefficient": 0.2,
+      "seconds": [
+        302,
+        260,
+        295
+      ],
+      "estimatedHumanMeanMinutes": 8.6
+    },
+    {
+      "id": "stars",
+      "minutesTarget": 7,
+      "biomassCoefficient": 0.23,
+      "seconds": [
+        176,
+        246,
+        222
+      ],
+      "estimatedHumanMeanMinutes": 6.5
+    },
+    {
+      "id": "galaxies",
+      "minutesTarget": 4,
+      "biomassCoefficient": 0.3,
+      "seconds": [
+        141,
+        145,
+        150
+      ],
+      "estimatedHumanMeanMinutes": 4.4
+    },
+    {
+      "id": "universe",
+      "minutesTarget": 2,
+      "biomassCoefficient": 0.3,
+      "seconds": [
+        80,
+        67,
+        76
+      ],
+      "estimatedHumanMeanMinutes": 2.2
+    }
+  ]
+}

@@ -1,0 +1,552 @@
+{
+  "browser": "Edge desktop; mobile viewport emulation, not physical iOS",
+  "scenes": [
+    {
+      "label": "Órbita",
+      "small": {
+        "radius": 24.859500920800283,
+        "zoom": 1.12,
+        "frames": {
+          "fps": 59,
+          "cpu": 1.6,
+          "peak": 97,
+          "p95": 20.9,
+          "seconds": 5,
+          "frames": 269,
+          "slowFrames": 2,
+          "parts": {
+            "simulation": 0.39,
+            "animationPreparation": 0.01,
+            "background": 0.04,
+            "inhabitants": 0.22,
+            "protagonist": 0.64,
+            "render": 1.13
+          }
+        },
+        "sheets": {
+          "bytes": 0,
+          "limit": 67108864,
+          "resident": 0,
+          "active": 0,
+          "pending": 0,
+          "hits": 768,
+          "loads": 9,
+          "evictions": 9,
+          "dropped": 0,
+          "errors": 0,
+          "quality": "standard",
+          "visibleCycles": []
+        },
+        "backgroundCache": 2,
+        "entities": 255
+      },
+      "large": {
+        "radius": 164.1983478607095,
+        "zoom": 0.545346252197173,
+        "frames": {
+          "fps": 60,
+          "cpu": 1.7,
+          "peak": 21,
+          "p95": 20.9,
+          "seconds": 5,
+          "frames": 270,
+          "slowFrames": 0,
+          "parts": {
+            "simulation": 0.49,
+            "animationPreparation": 0,
+            "background": 0.04,
+            "inhabitants": 0.36,
+            "protagonist": 0.5,
+            "render": 1.2
+          }
+        },
+        "sheets": {
+          "bytes": 0,
+          "limit": 67108864,
+          "resident": 0,
+          "active": 0,
+          "pending": 0,
+          "hits": 768,
+          "loads": 9,
+          "evictions": 9,
+          "dropped": 0,
+          "errors": 0,
+          "quality": "standard",
+          "visibleCycles": []
+        },
+        "backgroundCache": 2,
+        "entities": 490
+      }
+    },
+    {
+      "label": "Planetas",
+      "small": {
+        "radius": 24.49413905005447,
+        "zoom": 1.12,
+        "frames": {
+          "fps": 60,
+          "cpu": 1.2,
+          "peak": 21,
+          "p95": 20.9,
+          "seconds": 5,
+          "frames": 277,
+          "slowFrames": 0,
+          "parts": {
+            "simulation": 0.24,
+            "animationPreparation": 0,
+            "background": 0.04,
+            "inhabitants": 0.15,
+            "protagonist": 0.6,
+            "render": 0.92
+          }
+        },
+        "sheets": {
+          "bytes": 0,
+          "limit": 67108864,
+          "resident": 0,
+          "active": 0,
+          "pending": 0,
+          "hits": 768,
+          "loads": 9,
+          "evictions": 9,
+          "dropped": 0,
+          "errors": 0,
+          "quality": "standard",
+          "visibleCycles": []
+        },
+        "backgroundCache": 3,
+        "entities": 143
+      },
+      "large": {
+        "radius": 173.48748962195663,
+        "zoom": 0.5251249334178422,
+        "frames": {
+          "fps": 60,
+          "cpu": 1.6,
+          "peak": 21,
+          "p95": 20.9,
+          "seconds": 4,
+          "frames": 270,
+          "slowFrames": 0,
+          "parts": {
+            "simulation": 0.41,
+            "animationPreparation": 0,
+            "background": 0.04,
+            "inhabitants": 0.26,
+            "protagonist": 0.6,
+            "render": 1.17
+          }
+        },
+        "sheets": {
+          "bytes": 0,
+          "limit": 67108864,
+          "resident": 0,
+          "active": 0,
+          "pending": 0,
+          "hits": 768,
+          "loads": 9,
+          "evictions": 9,
+          "dropped": 0,
+          "errors": 0,
+          "quality": "standard",
+          "visibleCycles": []
+        },
+        "backgroundCache": 3,
+        "entities": 274
+      }
+    },
+    {
+      "label": "Estrellas",
+      "small": {
+        "radius": 25.24643113870474,
+        "zoom": 1.12,
+        "frames": {
+          "fps": 60,
+          "cpu": 1.4,
+          "peak": 35,
+          "p95": 20.9,
+          "seconds": 5,
+          "frames": 274,
+          "slowFrames": 1,
+          "parts": {
+            "simulation": 0.28,
+            "animationPreparation": 0.01,
+            "background": 0.04,
+            "inhabitants": 0.23,
+            "protagonist": 0.66,
+            "render": 1.1
+          }
+        },
+        "sheets": {
+          "bytes": 16661504,
+          "limit": 67108864,
+          "resident": 4,
+          "active": 0,
+          "pending": 0,
+          "hits": 4623,
+          "loads": 13,
+          "evictions": 9,
+          "dropped": 0,
+          "errors": 0,
+          "quality": "standard",
+          "visibleCycles": [
+            {
+              "id": "stars-0",
+              "posesPerSecond": 11.64,
+              "bodyPixels": 128,
+              "tier": "standard"
+            },
+            {
+              "id": "stars-Nube estelar",
+              "posesPerSecond": 4.57,
+              "bodyPixels": 128,
+              "tier": "standard"
+            }
+          ]
+        },
+        "backgroundCache": 3,
+        "entities": 151
+      },
+      "large": {
+        "radius": 177.55343420087328,
+        "zoom": 0.5170775004657284,
+        "frames": {
+          "fps": 59,
+          "cpu": 2.2,
+          "peak": 56,
+          "p95": 20.9,
+          "seconds": 4,
+          "frames": 267,
+          "slowFrames": 1,
+          "parts": {
+            "simulation": 0.5,
+            "animationPreparation": 0.01,
+            "background": 0.03,
+            "inhabitants": 0.82,
+            "protagonist": 0.54,
+            "render": 1.62
+          }
+        },
+        "sheets": {
+          "bytes": 38319616,
+          "limit": 67108864,
+          "resident": 9,
+          "active": 0,
+          "pending": 0,
+          "hits": 15337,
+          "loads": 18,
+          "evictions": 9,
+          "dropped": 0,
+          "errors": 0,
+          "quality": "standard",
+          "visibleCycles": [
+            {
+              "id": "stars-matter-dust",
+              "posesPerSecond": 7.11,
+              "bodyPixels": 128,
+              "tier": "standard"
+            },
+            {
+              "id": "stars-0",
+              "posesPerSecond": 11.64,
+              "bodyPixels": 128,
+              "tier": "standard"
+            },
+            {
+              "id": "stars-1",
+              "posesPerSecond": 14.22,
+              "bodyPixels": 128,
+              "tier": "standard"
+            },
+            {
+              "id": "stars-Nube estelar",
+              "posesPerSecond": 4.57,
+              "bodyPixels": 128,
+              "tier": "standard"
+            },
+            {
+              "id": "stars-2",
+              "posesPerSecond": 17.3,
+              "bodyPixels": 128,
+              "tier": "standard"
+            },
+            {
+              "id": "stars-3",
+              "posesPerSecond": 23.7,
+              "bodyPixels": 128,
+              "tier": "standard"
+            },
+            {
+              "id": "stars-5",
+              "posesPerSecond": 27.83,
+              "bodyPixels": 128,
+              "tier": "standard"
+            },
+            {
+              "id": "stars-matter-plasma",
+              "posesPerSecond": 7.11,
+              "bodyPixels": 128,
+              "tier": "standard"
+            },
+            {
+              "id": "stars-matter-ejecta",
+              "posesPerSecond": 7.11,
+              "bodyPixels": 128,
+              "tier": "standard"
+            }
+          ]
+        },
+        "backgroundCache": 3,
+        "entities": 286
+      }
+    },
+    {
+      "label": "Galaxias",
+      "small": {
+        "radius": 25.262522849455944,
+        "zoom": 1.12,
+        "frames": {
+          "fps": 59,
+          "cpu": 1.9,
+          "peak": 49,
+          "p95": 20.9,
+          "seconds": 5,
+          "frames": 273,
+          "slowFrames": 2,
+          "parts": {
+            "simulation": 0.32,
+            "animationPreparation": 0.01,
+            "background": 0.03,
+            "inhabitants": 0.74,
+            "protagonist": 0.59,
+            "render": 1.52
+          }
+        },
+        "sheets": {
+          "bytes": 16249920,
+          "limit": 67108864,
+          "resident": 4,
+          "active": 0,
+          "pending": 0,
+          "hits": 19425,
+          "loads": 21,
+          "evictions": 17,
+          "dropped": 0,
+          "errors": 0,
+          "quality": "standard",
+          "visibleCycles": [
+            {
+              "id": "galaxies-matter-filament",
+              "posesPerSecond": 7.11,
+              "bodyPixels": 128,
+              "tier": "standard"
+            },
+            {
+              "id": "galaxies-Cúmulo abierto",
+              "posesPerSecond": 5.33,
+              "bodyPixels": 128,
+              "tier": "standard"
+            },
+            {
+              "id": "galaxies-Núcleo activo",
+              "posesPerSecond": 20,
+              "bodyPixels": 128,
+              "tier": "standard"
+            }
+          ]
+        },
+        "backgroundCache": 3,
+        "entities": 211
+      },
+      "large": {
+        "radius": 184.15931750013638,
+        "zoom": 0.5056602958243182,
+        "frames": {
+          "fps": 60,
+          "cpu": 2.4,
+          "peak": 42,
+          "p95": 20.9,
+          "seconds": 5,
+          "frames": 269,
+          "slowFrames": 1,
+          "parts": {
+            "simulation": 0.52,
+            "animationPreparation": 0.01,
+            "background": 0.04,
+            "inhabitants": 0.84,
+            "protagonist": 0.6,
+            "render": 1.79
+          }
+        },
+        "sheets": {
+          "bytes": 30051904,
+          "limit": 67108864,
+          "resident": 7,
+          "active": 0,
+          "pending": 0,
+          "hits": 30499,
+          "loads": 24,
+          "evictions": 17,
+          "dropped": 0,
+          "errors": 0,
+          "quality": "standard",
+          "visibleCycles": [
+            {
+              "id": "galaxies-matter-dust",
+              "posesPerSecond": 7.11,
+              "bodyPixels": 128,
+              "tier": "standard"
+            },
+            {
+              "id": "galaxies-matter-filament",
+              "posesPerSecond": 7.11,
+              "bodyPixels": 128,
+              "tier": "standard"
+            },
+            {
+              "id": "galaxies-Cúmulo abierto",
+              "posesPerSecond": 5.33,
+              "bodyPixels": 128,
+              "tier": "standard"
+            },
+            {
+              "id": "galaxies-matter-gas",
+              "posesPerSecond": 7.11,
+              "bodyPixels": 128,
+              "tier": "standard"
+            },
+            {
+              "id": "galaxies-Colisión galáctica",
+              "posesPerSecond": 3.76,
+              "bodyPixels": 128,
+              "tier": "standard"
+            }
+          ]
+        },
+        "backgroundCache": 3,
+        "entities": 412
+      }
+    }
+  ],
+  "errors": [],
+  "music": {
+    "before": {
+      "switches": 5,
+      "loops": 0,
+      "waiting": 6,
+      "stalled": 0,
+      "errors": 0,
+      "desired": "orbit",
+      "current": "orbit",
+      "active": true,
+      "blocked": false,
+      "transition": true,
+      "volumeTarget": 0.42,
+      "context": "running",
+      "sampleRate": 44100,
+      "baseLatency": 0.01,
+      "outputLatency": 0.192,
+      "decks": [
+        {
+          "id": "galaxies",
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "networkState": 1,
+          "time": 17.258231,
+          "duration": 346.198571,
+          "error": null
+        },
+        {
+          "id": "orbit",
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "networkState": 1,
+          "time": 1.369977,
+          "duration": 418.380023,
+          "error": null
+        }
+      ]
+    },
+    "during": {
+      "switches": 5,
+      "loops": 0,
+      "waiting": 6,
+      "stalled": 0,
+      "errors": 0,
+      "desired": "orbit",
+      "current": "orbit",
+      "active": true,
+      "blocked": false,
+      "transition": true,
+      "volumeTarget": 0.126,
+      "context": "running",
+      "sampleRate": 44100,
+      "baseLatency": 0.01,
+      "outputLatency": 0.192,
+      "decks": [
+        {
+          "id": "galaxies",
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "networkState": 1,
+          "time": 18.468571,
+          "duration": 346.198571,
+          "error": null
+        },
+        {
+          "id": "orbit",
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "networkState": 1,
+          "time": 2.580317,
+          "duration": 418.380023,
+          "error": null
+        }
+      ]
+    },
+    "after": {
+      "switches": 5,
+      "loops": 0,
+      "waiting": 6,
+      "stalled": 0,
+      "errors": 0,
+      "desired": "orbit",
+      "current": "orbit",
+      "active": true,
+      "blocked": false,
+      "transition": true,
+      "volumeTarget": 0.42,
+      "context": "running",
+      "sampleRate": 44100,
+      "baseLatency": 0.01,
+      "outputLatency": 0.192,
+      "decks": [
+        {
+          "id": "galaxies",
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "networkState": 1,
+          "time": 19.620862,
+          "duration": 346.198571,
+          "error": null
+        },
+        {
+          "id": "orbit",
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "networkState": 1,
+          "time": 3.732608,
+          "duration": 418.380023,
+          "error": null
+        }
+      ]
+    }
+  },
+  "campaignRestored": true
+}

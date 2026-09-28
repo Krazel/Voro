@@ -1,0 +1,317 @@
+{
+  "label": "after",
+  "browser": "Edge PC; phone viewport is not physical iOS",
+  "scenes": [
+    {
+      "id": "giant",
+      "r": 117.60000000000001,
+      "zoom": 1.12,
+      "pixelRatio": 1,
+      "canvas": {
+        "w": 1440,
+        "h": 900
+      },
+      "frames": {
+        "fps": 60,
+        "cpu": 1,
+        "peak": 21,
+        "p95": 20.9,
+        "seconds": 3,
+        "frames": 156,
+        "slowFrames": 0,
+        "parts": {
+          "simulation": 0.12,
+          "animationPreparation": 0.01,
+          "background": 0.04,
+          "inhabitants": 0.12,
+          "protagonist": 0.54,
+          "render": 0.79
+        }
+      },
+      "sheets": {
+        "bytes": 116768376,
+        "limit": 134217728,
+        "resident": 13,
+        "active": 0,
+        "pending": 0,
+        "hits": 1166,
+        "loads": 13,
+        "evictions": 0,
+        "dropped": 0,
+        "errors": 0
+      },
+      "profile": {
+        "family": "amoeba",
+        "description": "Lóbulos amplios que se estiran y vuelven al citoplasma.",
+        "period": 4.2,
+        "amount": 0.09,
+        "id": "giant",
+        "rigId": "giant",
+        "revised": false,
+        "assetKey": "micro:10"
+      }
+    },
+    {
+      "id": "spiny",
+      "r": 96.32000000000001,
+      "zoom": 1.12,
+      "pixelRatio": 1,
+      "canvas": {
+        "w": 1440,
+        "h": 900
+      },
+      "frames": {
+        "fps": 60,
+        "cpu": 0.9,
+        "peak": 21,
+        "p95": 20.9,
+        "seconds": 3,
+        "frames": 156,
+        "slowFrames": 0,
+        "parts": {
+          "simulation": 0.11,
+          "animationPreparation": 0,
+          "background": 0.04,
+          "inhabitants": 0.05,
+          "protagonist": 0.58,
+          "render": 0.77
+        }
+      },
+      "sheets": {
+        "bytes": 116768376,
+        "limit": 134217728,
+        "resident": 13,
+        "active": 0,
+        "pending": 0,
+        "hits": 2723,
+        "loads": 13,
+        "evictions": 0,
+        "dropped": 0,
+        "errors": 0
+      },
+      "profile": {
+        "family": "spines",
+        "description": "Las espinas se abren al reaccionar; el centro se mantiene estable.",
+        "period": 2.8,
+        "id": "spiny",
+        "rigId": "spiny",
+        "revised": false,
+        "assetKey": "micro:9"
+      }
+    },
+    {
+      "id": "hunter",
+      "r": 73.92,
+      "zoom": 1.12,
+      "pixelRatio": 1,
+      "canvas": {
+        "w": 1440,
+        "h": 900
+      },
+      "frames": {
+        "fps": 60,
+        "cpu": 0.9,
+        "peak": 21,
+        "p95": 20.9,
+        "seconds": 3,
+        "frames": 156,
+        "slowFrames": 0,
+        "parts": {
+          "simulation": 0.1,
+          "animationPreparation": 0.01,
+          "background": 0.03,
+          "inhabitants": 0.06,
+          "protagonist": 0.54,
+          "render": 0.73
+        }
+      },
+      "sheets": {
+        "bytes": 116768376,
+        "limit": 134217728,
+        "resident": 13,
+        "active": 0,
+        "pending": 0,
+        "hits": 2986,
+        "loads": 13,
+        "evictions": 0,
+        "dropped": 0,
+        "errors": 0
+      },
+      "profile": {
+        "family": "cilia",
+        "description": "Cilios rápidos y contracción del extremo de ataque.",
+        "period": 0.9,
+        "amount": 0.035,
+        "id": "hunter",
+        "rigId": "hunter",
+        "revised": false,
+        "assetKey": "micro:8"
+      }
+    },
+    {
+      "id": "planets-Nube protoplanetaria",
+      "r": 34.720000000000006,
+      "zoom": 1.12,
+      "pixelRatio": 1,
+      "canvas": {
+        "w": 1440,
+        "h": 900
+      },
+      "frames": {
+        "fps": 60,
+        "cpu": 0.8,
+        "peak": 21,
+        "p95": 20.9,
+        "seconds": 3,
+        "frames": 157,
+        "slowFrames": 0,
+        "parts": {
+          "simulation": 0.09,
+          "animationPreparation": 0,
+          "background": 0.04,
+          "inhabitants": 0.03,
+          "protagonist": 0.55,
+          "render": 0.71
+        }
+      },
+      "sheets": {
+        "bytes": 0,
+        "limit": 134217728,
+        "resident": 0,
+        "active": 0,
+        "pending": 0,
+        "hits": 2988,
+        "loads": 13,
+        "evictions": 13,
+        "dropped": 0,
+        "errors": 0
+      },
+      "profile": {
+        "family": "prop",
+        "rigid": true,
+        "period": 40,
+        "precession": 0.012,
+        "revision": 3,
+        "description": "Globo planetario estable con una deriva lenta.",
+        "id": "planets-Nube protoplanetaria",
+        "rigId": "planets-Nube protoplanetaria",
+        "revised": true,
+        "assetKey": "planetDiversity:planets-Nube protoplanetaria"
+      }
+    },
+    {
+      "id": "stars-Agujero negro estelar",
+      "r": 406,
+      "zoom": 1.12,
+      "pixelRatio": 1,
+      "canvas": {
+        "w": 1440,
+        "h": 900
+      },
+      "frames": {
+        "fps": 60,
+        "cpu": 0.8,
+        "peak": 21,
+        "p95": 20.9,
+        "seconds": 3,
+        "frames": 156,
+        "slowFrames": 0,
+        "parts": {
+          "simulation": 0.08,
+          "animationPreparation": 0.01,
+          "background": 0.04,
+          "inhabitants": 0.08,
+          "protagonist": 0.5,
+          "render": 0.71
+        }
+      },
+      "sheets": {
+        "bytes": 0,
+        "limit": 134217728,
+        "resident": 0,
+        "active": 0,
+        "pending": 0,
+        "hits": 2988,
+        "loads": 13,
+        "evictions": 13,
+        "dropped": 0,
+        "errors": 0
+      },
+      "profile": {
+        "family": "blackhole",
+        "period": 9,
+        "rigid": true,
+        "precession": 0,
+        "revision": 3,
+        "highDetailFlow": {
+          "rx": 0.38,
+          "ry": 0.2,
+          "angle": -0.58,
+          "hole": 0.12
+        },
+        "description": "Horizonte negro nítido y filamentos del disco que circulan suavemente.",
+        "id": "stars-Agujero negro estelar",
+        "rigId": "stars-Agujero negro estelar",
+        "revised": true,
+        "assetKey": "blackHoleDetail:stars-Agujero negro estelar"
+      }
+    },
+    {
+      "id": "galaxies-1",
+      "r": 144.9,
+      "zoom": 1.12,
+      "pixelRatio": 1,
+      "canvas": {
+        "w": 1440,
+        "h": 900
+      },
+      "frames": {
+        "fps": 60,
+        "cpu": 0.8,
+        "peak": 21,
+        "p95": 21,
+        "seconds": 3,
+        "frames": 156,
+        "slowFrames": 0,
+        "parts": {
+          "simulation": 0.07,
+          "animationPreparation": 0,
+          "background": 0.04,
+          "inhabitants": 0.05,
+          "protagonist": 0.51,
+          "render": 0.68
+        }
+      },
+      "sheets": {
+        "bytes": 0,
+        "limit": 134217728,
+        "resident": 0,
+        "active": 0,
+        "pending": 0,
+        "hits": 2988,
+        "loads": 13,
+        "evictions": 13,
+        "dropped": 0,
+        "errors": 0
+      },
+      "profile": {
+        "family": "galaxy",
+        "period": 20,
+        "rigid": true,
+        "precession": 0,
+        "revision": 3,
+        "highDetailFlow": {
+          "rx": 0.34,
+          "ry": 0.32,
+          "angle": 0
+        },
+        "description": "Materia estelar con detalle completo y circulación continua dentro del disco.",
+        "id": "galaxies-1",
+        "rigId": "galaxies-1",
+        "revised": true,
+        "assetKey": "galaxyDetail1:galaxies-1"
+      }
+    }
+  ],
+  "errors": []
+}

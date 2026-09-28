@@ -1,0 +1,73 @@
+✔ Approaching Earth never clamps position or cancels inward velocity, including its centre (2.181ms)
+✔ City buildings occupy aligned persistent lots; eating one leaves a vacant lot (15.8439ms)
+✔ City background reuses bounded aligned district tiles while scrolling (87.0863ms)
+✖ Planet ecology offers eleven world types with rare ocean worlds and unchanged encounter slots (80.8616ms)
+✔ City sidewalks consistently receive a substantial civilian population without replacing buildings (5.3108ms)
+✔ Enlarged accretion disks actually fit in generated stellar populations (100.9631ms)
+✔ Galaxy detail crops retain the whole standalone source including upper arms (0.5052ms)
+✔ Survivor reveal takes twelve and a half seconds, after a black pause (0.7215ms)
+✔ Scene handoff fades inhabitants continuously and keeps reduced motion stationary (3.4863ms)
+✔ Bitmap organisms digest, membrane animates, and damage lowers HUD mass and body area (254.3575ms)
+✔ A shield blocks one hit, then damage and recycling apply during recharge (175.015ms)
+✔ Adaptation choices, pause and settings stop world time; retry retains choices, reset clears them (47.5803ms)
+✔ Movement crosses old boundaries in both directions; touch movement has no effect after releasing (83.3385ms)
+✖ Unassisted world population supports growth to cellular maturity without changing biomes (25770.404ms)
+✔ device language and manual override resolve independently (1.6542ms)
+✔ all player upgrades, stages and adaptation captions have English entries (0.7294ms)
+✔ translation keeps data identities, numbers, React nodes and whitespace (11.247ms)
+✔ Completed captures survive toggling the overlay and only a new capture resets them (82.7365ms)
+✔ Reports refuse empty data, preserve statistics and produce a small shareable file (31.2815ms)
+✔ Native share writes one UTF-8 cache file before presenting its URI; web shares a real text file (1.8179ms)
+✔ Nucleus choices now boost adaptation additively, preserve saved choices and no longer boost mass (42.1654ms)
+✔ Biome cinematics no longer shrink the outgoing world to a tiny island (20.7789ms)
+✔ Close zoom keeps decoded cycles and does not rebuild a mesh as DPR or radius grows (4.8023ms)
+✔ Each active opening-biome energy fits the phone budget; PC close-up variants are separate optional resources (0.5564ms)
+✔ Sheets wait for decode, reuse normal during reaction loading, and cap concurrency/memory (2.016ms)
+✔ Cancelled decodes retain reservation until settled and failures release memory exactly once (0.5576ms)
+✔ Offscreen queued sheets expire while visible cache entries are never evicted to thrash (0.5024ms)
+✔ Crossfade reuses two distinct grounds and bounds retained surfaces (13.2909ms)
+✔ Shared species retain prepared poses across stages, unwanted ones are released (6.1415ms)
+✔ Diagnostics retain bounded samples, correct session percentiles, section means and worst frames (29.8234ms)
+✔ 30-second capture excludes pause/hidden time, auto-stops and freezes complete-session results (63.3069ms)
+✔ Autosaves coalesce, flush latest state and a checkpoint cancels the deferred write (4.8946ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 30
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 26850.0578
+
+✖ failing tests:
+
+test at tests\city-cosmos.test.mjs:46:1
+✖ Planet ecology offers eleven world types with rare ocean worlds and unchanged encounter slots (80.8616ms)
+  TypeError: Cannot read properties of undefined (reading 'join')
+      at file:///C:/Users/dmkra/Documents/Codex%20Apps/Voro-camera/tests/city-cosmos.test.mjs:54:49
+      at Array.map (<anonymous>)
+      at TestContext.<anonymous> (file:///C:/Users/dmkra/Documents/Codex%20Apps/Voro-camera/tests/city-cosmos.test.mjs:54:28)
+      at Test.runInAsyncScope (node:async_hooks:228:14)
+      at Test.run (node:internal/test_runner/test:1118:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:787:18)
+      at Test.postRun (node:internal/test_runner/test:1247:19)
+      at Test.run (node:internal/test_runner/test:1175:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:787:7)
+
+test at tests\engine.test.mjs:140:1
+✖ Unassisted world population supports growth to cellular maturity without changing biomes (25770.404ms)
+  AssertionError [ERR_ASSERTION]: maturity seed 41
+      at TestContext.<anonymous> (file:///C:/Users/dmkra/Documents/Codex%20Apps/Voro-camera/tests/engine.test.mjs:194:12)
+      at Test.runInAsyncScope (node:async_hooks:228:14)
+      at Test.run (node:internal/test_runner/test:1118:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:787:18)
+      at Test.postRun (node:internal/test_runner/test:1247:19)
+      at Test.run (node:internal/test_runner/test:1175:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:787:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

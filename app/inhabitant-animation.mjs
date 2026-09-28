@@ -658,6 +658,18 @@ function* paintPose(
     part(c, image, crop, w, h, 0.56, 0.455, 0.04, 0);
   } else if (profile.rigid || (rigidFamilies.has(f) && !profile.surface)) {
     c.drawImage(image, ...crop, -w / 2, -h / 2, w, h);
+    if (profile.highDetailFlow) {
+      // Full-resolution art stays in place. A small, clipped moving layer gives
+      // the inner dust/accretion disc continuous flow with two texture draws,
+      // rather than hundreds of live mesh clips or huge decoded pose sheets.
+      const flow=profile.highDetailFlow;
+      c.save();c.beginPath();
+      c.ellipse(0,0,w*flow.rx,h*flow.ry,flow.angle||0,0,TAU);
+      if(flow.hole)c.ellipse(0,0,w*flow.hole,h*flow.hole,0,0,TAU);
+      c.clip('evenodd');c.globalAlpha*=.24;
+      c.rotate(Math.sin(phase)*.035);
+      c.drawImage(image,...crop,-w/2,-h/2,w,h);c.restore();
+    }
   } else {
     const mesh = poseMesh(
         profile,
@@ -984,6 +996,21 @@ export function drawInhabitant(
     ((((time / profile.period + (seed || 0) / TAU) % 1) + 1) % 1) * TAU;
   c.save();
   if (hurt > 0) c.globalAlpha *= 0.75 + 0.25 * Math.cos(hurt * 12);
+  const transform = typeof c.getTransform === 'function' ? c.getTransform() : null;
+  const screenR = transform ? Math.hypot(transform.a, transform.b) * r : r;
+  if(sheets && !detail && cache && s.stage>=6 && !simpleAnimation(profile) && screenR>90 &&
+    (profile.surface || ['star','pulsar','nebula','cluster','quasar','collision','web','filament','void','universe','matterCloud'].includes(profile.family))) {
+    // Other magnified cosmic bodies retain all pixels of their approved master.
+    // Their slow internal flow needs two draws, not a enlarged 128px baked body
+    // nor the expensive triangle mesh. No extra textures are decoded here.
+    const crop=animationCrop(s,image),w=r*2,h=w*crop[3]/crop[2],flow=profile.surface||{};
+    applyPoseTransform(c,profile,r,phase,activity);
+    c.drawImage(image,...crop,-w/2,-h/2,w,h);
+    c.save();c.beginPath();c.ellipse(0,0,w*(flow.rx||.33),h*(flow.ry||.33),flow.angle||0,0,TAU);
+    if(flow.hole)c.ellipse(0,0,w*flow.hole,h*flow.hole,0,0,TAU);
+    c.clip('evenodd');c.globalAlpha*=.2;c.rotate(Math.sin(phase)*.035);
+    c.drawImage(image,...crop,-w/2,-h/2,w,h);c.restore();c.restore();return;
+  }
   if (sheets && !detail && cache) {
     if (simpleAnimation(profile)) {
       drawPose(c, image, s, r, phase, { activity }); c.restore(); return;
@@ -996,9 +1023,6 @@ export function drawInhabitant(
       c.restore(); return;
     }
   }
-  const transform =
-    typeof c.getTransform === 'function' ? c.getTransform() : null;
-  const screenR = transform ? Math.hypot(transform.a, transform.b) * r : r;
   if (
     !detail &&
     cache &&

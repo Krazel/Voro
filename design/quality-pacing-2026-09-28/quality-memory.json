@@ -1,0 +1,412 @@
+{
+  "browser": "Edge desktop; touch emulation is not physical iPhone/iPad",
+  "scenes": [
+    {
+      "touch": false,
+      "stage": 0,
+      "id": "Microscopio",
+      "frames": {
+        "fps": 59,
+        "cpu": 2.5,
+        "peak": 77,
+        "p95": 20.9,
+        "seconds": 5,
+        "frames": 265,
+        "slowFrames": 3,
+        "parts": {
+          "simulation": 0.49,
+          "animationPreparation": 0.01,
+          "background": 0.05,
+          "inhabitants": 1.09,
+          "protagonist": 0.58,
+          "render": 1.95
+        }
+      },
+      "sheets": {
+        "bytes": 116768376,
+        "limit": 134217728,
+        "resident": 13,
+        "active": 0,
+        "pending": 0,
+        "hits": 7451,
+        "loads": 13,
+        "evictions": 0,
+        "dropped": 0,
+        "errors": 0,
+        "quality": "optional-close-up",
+        "visibleCycles": [
+          {
+            "id": "cocci",
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "bacillus",
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "spiral",
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "flagellate",
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "chain",
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "giant",
+            "posesPerSecond": 30,
+            "bodyPixels": 256,
+            "tier": "close"
+          },
+          {
+            "id": "amoeba",
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "paramecium",
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "spiny",
+            "posesPerSecond": 30,
+            "bodyPixels": 256,
+            "tier": "close"
+          },
+          {
+            "id": "hunter",
+            "posesPerSecond": 30,
+            "bodyPixels": 256,
+            "tier": "close"
+          }
+        ]
+      },
+      "cache": 1,
+      "assets": {
+        "images": 3,
+        "loading": 0
+      },
+      "zoom": 1.12
+    },
+    {
+      "touch": false,
+      "stage": 6,
+      "id": "Planetas",
+      "frames": {
+        "fps": 60,
+        "cpu": 1.5,
+        "peak": 21,
+        "p95": 20.9,
+        "seconds": 5,
+        "frames": 271,
+        "slowFrames": 0,
+        "parts": {
+          "simulation": 0.28,
+          "animationPreparation": 0.01,
+          "background": 0.04,
+          "inhabitants": 0.35,
+          "protagonist": 0.58,
+          "render": 1.12
+        }
+      },
+      "sheets": {
+        "bytes": 0,
+        "limit": 134217728,
+        "resident": 0,
+        "active": 0,
+        "pending": 0,
+        "hits": 7971,
+        "loads": 13,
+        "evictions": 13,
+        "dropped": 0,
+        "errors": 0,
+        "quality": "optional-close-up",
+        "visibleCycles": []
+      },
+      "cache": 2,
+      "assets": {
+        "images": 6,
+        "loading": 0
+      },
+      "zoom": 1.12
+    },
+    {
+      "touch": false,
+      "stage": 9,
+      "id": "Universo",
+      "frames": {
+        "fps": 60,
+        "cpu": 1.7,
+        "peak": 28,
+        "p95": 20.9,
+        "seconds": 5,
+        "frames": 271,
+        "slowFrames": 0,
+        "parts": {
+          "simulation": 0.36,
+          "animationPreparation": 0,
+          "background": 0.05,
+          "inhabitants": 0.53,
+          "protagonist": 0.58,
+          "render": 1.34
+        }
+      },
+      "sheets": {
+        "bytes": 24794688,
+        "limit": 134217728,
+        "resident": 6,
+        "active": 0,
+        "pending": 0,
+        "hits": 17464,
+        "loads": 19,
+        "evictions": 13,
+        "dropped": 0,
+        "errors": 0,
+        "quality": "optional-close-up",
+        "visibleCycles": [
+          {
+            "id": "universe-matter-knot",
+            "posesPerSecond": 7.11,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "universe-7",
+            "posesPerSecond": 3.2,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "universe-0",
+            "posesPerSecond": 5.33,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "universe-2",
+            "posesPerSecond": 4.57,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "universe-matter-filament",
+            "posesPerSecond": 7.11,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        ]
+      },
+      "cache": 3,
+      "assets": {
+        "images": 8,
+        "loading": 0
+      },
+      "zoom": 1.12
+    },
+    {
+      "touch": true,
+      "stage": 0,
+      "id": "Microscopio",
+      "frames": {
+        "fps": 59,
+        "cpu": 2.3,
+        "peak": 84,
+        "p95": 20.9,
+        "seconds": 5,
+        "frames": 266,
+        "slowFrames": 1,
+        "parts": {
+          "simulation": 0.51,
+          "animationPreparation": 0,
+          "background": 0.05,
+          "inhabitants": 0.92,
+          "protagonist": 0.57,
+          "render": 1.7
+        }
+      },
+      "sheets": {
+        "bytes": 47935320,
+        "limit": 67108864,
+        "resident": 9,
+        "active": 0,
+        "pending": 0,
+        "hits": 6897,
+        "loads": 9,
+        "evictions": 0,
+        "dropped": 0,
+        "errors": 0,
+        "quality": "standard",
+        "visibleCycles": [
+          {
+            "id": "chain",
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "giant",
+            "posesPerSecond": 30,
+            "bodyPixels": 171,
+            "tier": "standard"
+          },
+          {
+            "id": "cocci",
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "bacillus",
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "hunter",
+            "posesPerSecond": 30,
+            "bodyPixels": 171,
+            "tier": "standard"
+          },
+          {
+            "id": "spiny",
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "amoeba",
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        ]
+      },
+      "cache": 1,
+      "assets": {
+        "images": 3,
+        "loading": 0
+      },
+      "zoom": 1.12
+    },
+    {
+      "touch": true,
+      "stage": 6,
+      "id": "Planetas",
+      "frames": {
+        "fps": 60,
+        "cpu": 1.8,
+        "peak": 21,
+        "p95": 20.9,
+        "seconds": 5,
+        "frames": 271,
+        "slowFrames": 0,
+        "parts": {
+          "simulation": 0.33,
+          "animationPreparation": 0.01,
+          "background": 0.05,
+          "inhabitants": 0.29,
+          "protagonist": 0.87,
+          "render": 1.4
+        }
+      },
+      "sheets": {
+        "bytes": 3778560,
+        "limit": 67108864,
+        "resident": 1,
+        "active": 0,
+        "pending": 0,
+        "hits": 7219,
+        "loads": 10,
+        "evictions": 9,
+        "dropped": 0,
+        "errors": 0,
+        "quality": "standard",
+        "visibleCycles": []
+      },
+      "cache": 2,
+      "assets": {
+        "images": 6,
+        "loading": 0
+      },
+      "zoom": 1.12
+    },
+    {
+      "touch": true,
+      "stage": 9,
+      "id": "Universo",
+      "frames": {
+        "fps": 59,
+        "cpu": 1.4,
+        "peak": 42,
+        "p95": 20.9,
+        "seconds": 4,
+        "frames": 267,
+        "slowFrames": 2,
+        "parts": {
+          "simulation": 0.3,
+          "animationPreparation": 0.01,
+          "background": 0.04,
+          "inhabitants": 0.34,
+          "protagonist": 0.55,
+          "render": 1.08
+        }
+      },
+      "sheets": {
+        "bytes": 20404288,
+        "limit": 67108864,
+        "resident": 5,
+        "active": 0,
+        "pending": 0,
+        "hits": 12448,
+        "loads": 15,
+        "evictions": 10,
+        "dropped": 0,
+        "errors": 0,
+        "quality": "standard",
+        "visibleCycles": [
+          {
+            "id": "universe-0",
+            "posesPerSecond": 5.33,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "universe-7",
+            "posesPerSecond": 3.2,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "universe-3",
+            "posesPerSecond": 10.67,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        ]
+      },
+      "cache": 3,
+      "assets": {
+        "images": 8,
+        "loading": 0
+      },
+      "zoom": 1.12
+    }
+  ],
+  "errors": []
+}

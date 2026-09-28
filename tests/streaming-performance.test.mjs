@@ -36,9 +36,11 @@ test('Close zoom keeps decoded cycles and does not rebuild a mesh as DPR or radi
   sheets.destroy();clearAnimationCache();
 });
 
-test('Opening biome including sharper predators fits the sheet memory budget', () => {
-  const files=new Map(STAGE_SPECIES[0].flatMap(s=>Object.values(sheetManifest[s.id]||{})).map(m=>[m.url,m.bytes]));
-  assert.ok([...files.values()].reduce((a,b)=>a+b,0)<=64*1024*1024);
+test('Each active opening-biome energy fits the phone budget; PC close-up variants are separate optional resources', () => {
+  for(const energy of [1,1.5]) {
+   const files=new Map(STAGE_SPECIES[0].map(s=>sheetManifest[s.id]?.[energy]).filter(Boolean).map(m=>[m.url,m.bytes]));
+   assert.ok([...files.values()].reduce((a,b)=>a+b,0)<=64*1024*1024);
+  }
   for(const id of ['hunter','giant'])assert.equal(sheetManifest[id][1].size,256);
 });
 

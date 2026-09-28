@@ -2,6 +2,8 @@ import { STUDIO_ENGLISH } from './english-studio.mjs';
 // Spanish source text is retained in game data and save files. Only presentation
 // is translated, so species keys, upgrade groups and progression stay stable.
 export const ENGLISH = Object.fromEntries(`
+Planeta en formación|Forming planet
+Planeta gaseoso joven|Young gas planet
 Política de privacidad|Privacy policy
 etapas completadas|stages completed
 Adaptaciones|Adaptations
@@ -568,6 +570,9 @@ Object.assign(ENGLISH, {
 });
 Object.assign(ENGLISH, STUDIO_ENGLISH);
 Object.assign(ENGLISH,{
+  'Materia estelar con detalle completo y circulación continua dentro del disco.':'Detailed stellar matter flowing smoothly within the disc.',
+  'Horizonte negro nítido y filamentos del disco que circulan suavemente.':'A sharp dark horizon surrounded by gently flowing disc filaments.',
+  'Globo planetario estable con una deriva lenta.':'A stable planetary globe drifting slowly.',
   'Gran muralla galáctica':'Great galactic wall',
   'Corona de galaxias':'Crown of galaxies',
   'Confluencia de supercúmulos':'Supercluster confluence',

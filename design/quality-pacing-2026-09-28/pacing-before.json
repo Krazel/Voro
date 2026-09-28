@@ -1,0 +1,48 @@
+{
+  "timings": [
+    {
+      "stage": "micro",
+      "at": 0
+    },
+    {
+      "stage": "pond",
+      "at": 85
+    },
+    {
+      "stage": "land",
+      "at": 216
+    },
+    {
+      "stage": "water",
+      "at": 341
+    },
+    {
+      "stage": "city",
+      "at": 430
+    },
+    {
+      "stage": "orbit",
+      "at": 494
+    },
+    {
+      "stage": "planets",
+      "at": 585
+    },
+    {
+      "stage": "stars",
+      "at": 683
+    },
+    {
+      "stage": "galaxies",
+      "at": 913
+    },
+    {
+      "stage": "universe",
+      "at": 966
+    }
+  ],
+  "seconds": 992,
+  "deaths": 0,
+  "upgrades": 59,
+  "source": "a35afaa, full campaign integration pilot seed41"
+}

@@ -38,7 +38,7 @@ export function CosmicLab({game}:{game:VoroEngine}) {
   <button onClick={()=>setFolded(!folded)}>{folded?'Mostrar pruebas':'Ocultar pruebas'} · solo local</button>
   {!folded&&<>
    <p>Escenas temporales. Tu partida queda guardada aparte.</p>
-   <div>{['orbit','planets','stars','galaxies'].map((id,i)=><button key={id} onClick={()=>scene(id)}>{['Órbita','Planetas','Estrellas','Galaxias'][i]}</button>)}</div>
+   <div>{STAGES.map(s=><button key={s.id} onClick={()=>scene(s.id)}>{s.short}</button>)}</div>
    <div><button onClick={earth}>Comer Tierra</button><button onClick={hole}>Ver agujero negro</button></div>
    <div><button onClick={()=>game.boostTest('biomass')}>Crecer</button><button onClick={()=>game.boostTest('adaptation')}>Adaptación</button></div>
    <div><button onClick={()=>effect('damage')}>Oír daño</button><button onClick={()=>effect('ingest')}>Oír comer</button><button onClick={()=>game.exitTest()}>Volver a partida</button></div>

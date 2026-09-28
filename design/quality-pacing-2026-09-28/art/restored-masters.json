@@ -1,0 +1,38 @@
+[
+  {
+    "name": "cosmic-wall",
+    "master": "design/quality-pacing-2026-09-28/art/cosmic-wall-approved.png",
+    "output": "public/inhabitants/cosmic-wall-detail-v2.webp",
+    "width": 1254,
+    "height": 1254,
+    "previousPixels": 512,
+    "unchangedApprovedArtwork": true
+  },
+  {
+    "name": "lensed-crown",
+    "master": "design/quality-pacing-2026-09-28/art/lensed-crown-approved.png",
+    "output": "public/inhabitants/lensed-crown-detail-v2.webp",
+    "width": 1254,
+    "height": 1254,
+    "previousPixels": 512,
+    "unchangedApprovedArtwork": true
+  },
+  {
+    "name": "cosmic-confluence",
+    "master": "design/quality-pacing-2026-09-28/art/cosmic-confluence-approved.png",
+    "output": "public/inhabitants/cosmic-confluence-detail-v2.webp",
+    "width": 1254,
+    "height": 1254,
+    "previousPixels": 512,
+    "unchangedApprovedArtwork": true
+  },
+  {
+    "name": "cosmic-tide",
+    "master": "design/quality-pacing-2026-09-28/art/cosmic-tide-approved.png",
+    "output": "public/inhabitants/cosmic-tide-detail-v2.webp",
+    "width": 1254,
+    "height": 1254,
+    "previousPixels": 512,
+    "unchangedApprovedArtwork": true
+  }
+]

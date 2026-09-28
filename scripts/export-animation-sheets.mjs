@@ -19,17 +19,18 @@ let exported = 0, bytes = 0;
 for (const s of Object.values(SPECIES_BY_ID)) {
   if (selected && !selected.includes(s.id)) continue;
   const profile = ANIMATIONS[s.id];
-  if (simpleAnimation(profile)) continue;
+  if (simpleAnimation(profile)) { delete manifest[s.id]; continue; }
   // These predators are already large in the opening scene. Preserve texture
   // detail without rebuilding their mesh on the device at close zoom.
-  const size = ['hunter','giant'].includes(s.id) ? 256 : defaultSize;
   const image = images[s.imageAtlas || s.atlas];
   const crop = animationCrop(s, image), extent = 3 * Math.max(1, crop[3] / crop[2]);
   // A 20-second cosmic cycle has only a few pixels of internal flow. Hundreds
   // of almost identical textures waste memory; rigid motion stays continuous.
-  const count = Math.max(24, Math.min(64, Math.ceil(profile.period * fps)));
+  const count = Math.max(24, Math.min(s.atlas==='micro'?128:64, Math.ceil(profile.period * fps)));
   manifest[s.id] = {};
-  for (const energy of [1, 1.5]) {
+  const tiers=['hunter','giant','spiny'].includes(s.id)?['normal','hd']:['normal'];
+  for (const tier of tiers) for (const energy of [1, 1.5]) {
+    const size = tier==='hd'?384:['hunter','giant'].includes(s.id)?256:defaultSize;
     const frames = [], canvas = createCanvas(size, size), c = canvas.getContext('2d');
     let x0 = size, y0 = size, x1 = 0, y1 = 0;
     for (let f = 0; f < count; f++) {
@@ -59,7 +60,7 @@ for (const s of Object.values(SPECIES_BY_ID)) {
     const hash = createHash('sha256').update(buffer).digest('hex').slice(0, 16);
     const url = `./animation-sheets/${hash}.webp`;
     writeFileSync('public/' + url.slice(2), buffer);
-    manifest[s.id][energy] = { url, frames: count, cols, w, h, x: x0, y: y0, size, extent,
+    manifest[s.id][tier==='hd'?`hd${energy}`:energy] = { url, frames: count, cols, w, h, x: x0, y: y0, size, extent,
       bytes: cols * w * rows * h * 4, encodedBytes: buffer.length,
       ...(s.animationCropRevision ? {cropRevision:s.animationCropRevision} : {}) };
     bytes += buffer.length;
@@ -69,8 +70,8 @@ for (const s of Object.values(SPECIES_BY_ID)) {
 }
 writeFileSync('app/animation-sheets.json', JSON.stringify(manifest) + '\n');
 const unique = new Map(Object.values(manifest).flatMap(x => Object.values(x)).map(x => [x.url, x]));
-writeFileSync('design/animation-sheet-export.json', JSON.stringify({ species: Object.keys(manifest).length, targetFps: fps, maxFrames: 64, defaultSize,
+writeFileSync('design/animation-sheet-export.json', JSON.stringify({ species: Object.keys(manifest).length, targetFps: fps, maxFrames: 128, defaultSize,
   uniqueFiles: unique.size, encodedBytes: [...unique.values()].reduce((n, x) => n + x.encodedBytes, 0),
   sourceHash,
-  format: 'WebP quality 94, alpha 100, same rigs; 24–64 poses per cycle, up to 30 poses/s; rigid transforms continuous; tight common crop' }, null, 2) + '\n');
+  format: 'WebP quality 94, alpha 100, same rigs; 24–128 micro poses, 24–64 other poses; micro 30 poses/s; optional 384px PC close-ups; rigid transforms continuous; tight common crop' }, null, 2) + '\n');
 console.log(JSON.stringify({ exported, bytes }));

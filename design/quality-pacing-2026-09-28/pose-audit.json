@@ -1,0 +1,325 @@
+{
+  "TF": "c319c18",
+  "candidateBefore": "a35afaa",
+  "legacyCloseCutoff": "854dead^ chooses live rigs if extent on screen >1.25x sheet size; removed to avoid mobile mesh stalls",
+  "species": [
+    {
+      "id": "hunter",
+      "identicalTF": true,
+      "before": {
+        "1": {
+          "url": "./animation-sheets/995d587365ac97a5.webp",
+          "frames": 27,
+          "cols": 5,
+          "w": 182,
+          "h": 138,
+          "x": 37,
+          "y": 59,
+          "size": 256,
+          "extent": 3,
+          "bytes": 3013920,
+          "encodedBytes": 670910
+        },
+        "1.5": {
+          "url": "./animation-sheets/995d587365ac97a5.webp",
+          "frames": 27,
+          "cols": 5,
+          "w": 182,
+          "h": 138,
+          "x": 37,
+          "y": 59,
+          "size": 256,
+          "extent": 3,
+          "bytes": 3013920,
+          "encodedBytes": 670910
+        }
+      },
+      "after": {
+        "1": {
+          "url": "./animation-sheets/21703e3e7f95e350.webp",
+          "frames": 27,
+          "cols": 3,
+          "w": 182,
+          "h": 138,
+          "x": 37,
+          "y": 59,
+          "size": 256,
+          "extent": 3,
+          "bytes": 2712528,
+          "encodedBytes": 674296
+        },
+        "1.5": {
+          "url": "./animation-sheets/21703e3e7f95e350.webp",
+          "frames": 27,
+          "cols": 3,
+          "w": 182,
+          "h": 138,
+          "x": 37,
+          "y": 59,
+          "size": 256,
+          "extent": 3,
+          "bytes": 2712528,
+          "encodedBytes": 674296
+        },
+        "hd1": {
+          "url": "./animation-sheets/84f80da41bc065c3.webp",
+          "frames": 27,
+          "cols": 3,
+          "w": 270,
+          "h": 204,
+          "x": 57,
+          "y": 90,
+          "size": 384,
+          "extent": 3,
+          "bytes": 5948640,
+          "encodedBytes": 1355330
+        },
+        "hd1.5": {
+          "url": "./animation-sheets/84f80da41bc065c3.webp",
+          "frames": 27,
+          "cols": 3,
+          "w": 270,
+          "h": 204,
+          "x": 57,
+          "y": 90,
+          "size": 384,
+          "extent": 3,
+          "bytes": 5948640,
+          "encodedBytes": 1355330
+        }
+      }
+    },
+    {
+      "id": "spiny",
+      "identicalTF": true,
+      "before": {
+        "1": {
+          "url": "./animation-sheets/53f4b2a6b4bddeb9.webp",
+          "frames": 64,
+          "cols": 8,
+          "w": 144,
+          "h": 112,
+          "x": 24,
+          "y": 40,
+          "size": 192,
+          "extent": 3,
+          "bytes": 4128768,
+          "encodedBytes": 549062
+        },
+        "1.5": {
+          "url": "./animation-sheets/2cb38b3029ef37ee.webp",
+          "frames": 64,
+          "cols": 8,
+          "w": 148,
+          "h": 116,
+          "x": 22,
+          "y": 38,
+          "size": 192,
+          "extent": 3,
+          "bytes": 4395008,
+          "encodedBytes": 568290
+        }
+      },
+      "after": {
+        "1": {
+          "url": "./animation-sheets/c41a82bfb620dd72.webp",
+          "frames": 84,
+          "cols": 7,
+          "w": 144,
+          "h": 112,
+          "x": 24,
+          "y": 40,
+          "size": 192,
+          "extent": 3,
+          "bytes": 5419008,
+          "encodedBytes": 720014
+        },
+        "1.5": {
+          "url": "./animation-sheets/0b78d974799aef15.webp",
+          "frames": 84,
+          "cols": 7,
+          "w": 148,
+          "h": 116,
+          "x": 22,
+          "y": 38,
+          "size": 192,
+          "extent": 3,
+          "bytes": 5768448,
+          "encodedBytes": 751784
+        },
+        "hd1": {
+          "url": "./animation-sheets/df5a38bf1eb0c2e6.webp",
+          "frames": 84,
+          "cols": 7,
+          "w": 282,
+          "h": 220,
+          "x": 51,
+          "y": 82,
+          "size": 384,
+          "extent": 3,
+          "bytes": 20845440,
+          "encodedBytes": 2258708
+        },
+        "hd1.5": {
+          "url": "./animation-sheets/563d7a3d22feb535.webp",
+          "frames": 84,
+          "cols": 7,
+          "w": 292,
+          "h": 228,
+          "x": 46,
+          "y": 78,
+          "size": 384,
+          "extent": 3,
+          "bytes": 22369536,
+          "encodedBytes": 2319376
+        }
+      }
+    },
+    {
+      "id": "giant",
+      "identicalTF": true,
+      "before": {
+        "1": {
+          "url": "./animation-sheets/17598104aab5ebb3.webp",
+          "frames": 64,
+          "cols": 8,
+          "w": 190,
+          "h": 188,
+          "x": 33,
+          "y": 34,
+          "size": 256,
+          "extent": 3,
+          "bytes": 9144320,
+          "encodedBytes": 1481358
+        },
+        "1.5": {
+          "url": "./animation-sheets/c3170df575af9c33.webp",
+          "frames": 64,
+          "cols": 8,
+          "w": 198,
+          "h": 196,
+          "x": 29,
+          "y": 30,
+          "size": 256,
+          "extent": 3,
+          "bytes": 9934848,
+          "encodedBytes": 1480974
+        }
+      },
+      "after": {
+        "1": {
+          "url": "./animation-sheets/ebdb496371354213.webp",
+          "frames": 126,
+          "cols": 9,
+          "w": 190,
+          "h": 188,
+          "x": 33,
+          "y": 34,
+          "size": 256,
+          "extent": 3,
+          "bytes": 18002880,
+          "encodedBytes": 2843480
+        },
+        "1.5": {
+          "url": "./animation-sheets/dd8b976ad3aac3d3.webp",
+          "frames": 126,
+          "cols": 9,
+          "w": 198,
+          "h": 196,
+          "x": 29,
+          "y": 30,
+          "size": 256,
+          "extent": 3,
+          "bytes": 19559232,
+          "encodedBytes": 2854506
+        },
+        "hd1": {
+          "url": "./animation-sheets/c3dc4a4fffca4644.webp",
+          "frames": 126,
+          "cols": 9,
+          "w": 283,
+          "h": 280,
+          "x": 50,
+          "y": 52,
+          "size": 384,
+          "extent": 3,
+          "bytes": 39936960,
+          "encodedBytes": 5700130
+        },
+        "hd1.5": {
+          "url": "./animation-sheets/6442cd90a76574c8.webp",
+          "frames": 126,
+          "cols": 9,
+          "w": 294,
+          "h": 292,
+          "x": 45,
+          "y": 46,
+          "size": 384,
+          "extent": 3,
+          "bytes": 43267392,
+          "encodedBytes": 5774474
+        }
+      }
+    },
+    {
+      "id": "amoeba",
+      "identicalTF": true,
+      "before": {
+        "1": {
+          "url": "./animation-sheets/b0d58af2ae3467e0.webp",
+          "frames": 64,
+          "cols": 8,
+          "w": 142,
+          "h": 128,
+          "x": 25,
+          "y": 32,
+          "size": 192,
+          "extent": 3,
+          "bytes": 4653056,
+          "encodedBytes": 750470
+        },
+        "1.5": {
+          "url": "./animation-sheets/75959c46389d5aae.webp",
+          "frames": 64,
+          "cols": 8,
+          "w": 146,
+          "h": 132,
+          "x": 23,
+          "y": 30,
+          "size": 192,
+          "extent": 3,
+          "bytes": 4933632,
+          "encodedBytes": 760138
+        }
+      },
+      "after": {
+        "1": {
+          "url": "./animation-sheets/6a3934a12a2f6af4.webp",
+          "frames": 105,
+          "cols": 7,
+          "w": 142,
+          "h": 128,
+          "x": 25,
+          "y": 32,
+          "size": 192,
+          "extent": 3,
+          "bytes": 7633920,
+          "encodedBytes": 1217410
+        },
+        "1.5": {
+          "url": "./animation-sheets/ebf045847c550d7b.webp",
+          "frames": 105,
+          "cols": 7,
+          "w": 146,
+          "h": 132,
+          "x": 23,
+          "y": 30,
+          "size": 192,
+          "extent": 3,
+          "bytes": 8094240,
+          "encodedBytes": 1233204
+        }
+      }
+    }
+  ]
+}

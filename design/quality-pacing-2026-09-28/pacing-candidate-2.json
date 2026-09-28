@@ -1,0 +1,90 @@
+{
+  "timings": [
+    {
+      "stage": "micro",
+      "at": 0
+    },
+    {
+      "stage": "pond",
+      "at": 1719
+    },
+    {
+      "stage": "land",
+      "at": 2218
+    },
+    {
+      "stage": "water",
+      "at": 2797
+    },
+    {
+      "stage": "city",
+      "at": 3293
+    },
+    {
+      "stage": "orbit",
+      "at": 3875
+    },
+    {
+      "stage": "planets",
+      "at": 3924
+    },
+    {
+      "stage": "stars",
+      "at": 4203
+    },
+    {
+      "stage": "galaxies",
+      "at": 4444
+    },
+    {
+      "stage": "universe",
+      "at": 4581
+    }
+  ],
+  "seconds": 4661,
+  "deaths": 0,
+  "upgrades": 75,
+  "coefficients": {
+    "micro": {
+      "minutes": 22,
+      "biomass": 0.1
+    },
+    "pond": {
+      "minutes": 22,
+      "biomass": 0.16
+    },
+    "land": {
+      "minutes": 20,
+      "biomass": 0.16
+    },
+    "water": {
+      "minutes": 18,
+      "biomass": 0.136
+    },
+    "city": {
+      "minutes": 15,
+      "biomass": 0.104
+    },
+    "orbit": {
+      "minutes": 8,
+      "biomass": 0.7
+    },
+    "planets": {
+      "minutes": 6,
+      "biomass": 0.2
+    },
+    "stars": {
+      "minutes": 4,
+      "biomass": 0.2
+    },
+    "galaxies": {
+      "minutes": 3,
+      "biomass": 0.3
+    },
+    "universe": {
+      "minutes": 2,
+      "biomass": 0.3
+    }
+  },
+  "assumption": "Efficient deterministic pilot, 30Hz simulation, immediate choices; multiply by 30min/16.53min as tentative human reference"
+}

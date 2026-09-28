@@ -1,10 +1,10 @@
 {
-  "species": 106,
+  "species": 96,
   "targetFps": 30,
-  "maxFrames": 64,
+  "maxFrames": 128,
   "defaultSize": 192,
-  "uniqueFiles": 149,
-  "encodedBytes": 77822604,
-  "sourceHash": "a82d8f919fad96d78c0be8c7073d9c30a31e1de68e6a13f90d35fe833117bf91",
-  "format": "WebP quality 94, alpha 100, same rigs; 24–64 poses per cycle, up to 30 poses/s; rigid transforms continuous; tight common crop"
+  "uniqueFiles": 146,
+  "encodedBytes": 94677016,
+  "sourceHash": "f22279f8dad7e358b7dc6c71823684c73ddbad2658c859b27f374f3ee13fb664",
+  "format": "WebP quality 94, alpha 100, same rigs; 24–128 micro poses, 24–64 other poses; micro 30 poses/s; optional 384px PC close-ups; rigid transforms continuous; tight common crop"
 }

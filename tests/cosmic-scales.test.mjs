@@ -16,10 +16,11 @@ test('Enlarged accretion disks actually fit in generated stellar populations', (
   assert.ok(Math.min(...disks.map(e=>e.r))>=252);
   assert.ok(Math.max(...disks.map(e=>e.r))>390);
 });
-test('Galaxy source crops include the upper arms and remain inside the atlas',()=>{
+test('Galaxy detail crops retain the whole standalone source including upper arms',()=>{
   for(let i=0;i<6;i++) {
     const s=S[`galaxies-${i}`], [x,y,w,h]=s.crop;
-    assert.ok(y<768 && y+h===1024 && x+w<=1536);
+    assert.deepEqual([x,y,w,h],[0,0,1254,1254]);
+    assert.equal(s.imageAtlas,`galaxyDetail${i}`);
     assert.equal(s.animationCropRevision,1);
     assert.ok(s.sizeFactors[1]/s.sizeFactors[0]>=4);
   }

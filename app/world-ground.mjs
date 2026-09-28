@@ -33,8 +33,7 @@ export function groundPatch(stage, x, y, seed = 834) {
 
 // These atlases include painted spiral galaxies. Reserve those panels for
 // Galaxies; early cosmic habitats use clouds and dust, with the same cache budget.
-export const groundPanels = stage => stage==='planets' ? [1,2,1,2]
-  : stage==='stars' ? [0,1,2,1] : [0,1,2,3];
+export const groundPanels = stage => stage==='stars' ? [0,1,2,1] : [0,1,2,3];
 
 export class WorldGround {
   constructor(createCanvas = () => document.createElement('canvas')) {

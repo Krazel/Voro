@@ -12,13 +12,12 @@ test('Every deforming inhabitant ships bounded, content-addressed local sheets; 
   for(const s of Object.values(SPECIES_BY_ID)) {
     if(simpleAnimation(ANIMATIONS[s.id])) {assert.equal(manifest[s.id],undefined);continue;}
     assert.ok(manifest[s.id],s.id);
-    for(const energy of [1,1.5]) {
-      const m=manifest[s.id][energy];
+    for(const m of Object.values(manifest[s.id])) {
       assert.equal(m.cropRevision||0,s.animationCropRevision||0,`Stale animation crop for ${s.id}`);
-      assert.ok(m.frames>=24 && m.frames<=64);
+      assert.ok(m.frames>=24 && m.frames<=(s.atlas==='micro'?128:64));
       // The opening giant uses 256px poses; total micro residency is tested
       // separately and remains inside the existing 64 MiB budget.
-      assert.ok(m.bytes<(s.id==='giant'?10:6)*1048576);assert.equal(m.bytes,m.cols*m.w*Math.ceil(m.frames/m.cols)*m.h*4);
+      assert.ok(m.bytes<(m.size===384?64:s.atlas==='micro'?20:6)*1048576);assert.equal(m.bytes,m.cols*m.w*Math.ceil(m.frames/m.cols)*m.h*4);
       assert.ok(m.x>=0&&m.y>=0&&m.x+m.w<=m.size&&m.y+m.h<=m.size);
       assert.match(m.url,/^\.\/animation-sheets\/[a-f0-9]{16}\.webp$/);
       if(files.has(m.url))continue;

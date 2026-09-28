@@ -1,4 +1,5 @@
 import { restoreOrbitSweep } from './orbital-sweep.mjs';
+import { biomassYield } from './campaign-pacing.mjs';
 import { FINALE_SECONDS } from './universe-finale.mjs';
 import { createLife, radiusForMass, clamp } from './simulation.mjs';
 import { newMicro, loadMicro, MICRO_SAVE } from './micro-progress.mjs';
@@ -51,7 +52,7 @@ export function journeyLife(p) {
     unbounded: true,
     goalMass: s.goal,
     maxMass: s.goal * 1.5,
-    growthFactor: s.growth,
+    growthFactor: s.growth * biomassYield(s.id),
     ...upgradeStats(p.mutations),
   });
   life.biomass = stageStartMass(p.stage || 0);

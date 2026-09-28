@@ -1,0 +1,17 @@
+[
+  {
+    "file": "design\\quality-pacing-2026-09-28\\before-micro.webm",
+    "exitCode": 0,
+    "decoderOutput": "Input #0, matroska,webm, from 'design\\quality-pacing-2026-09-28\\before-micro.webm':\n  Metadata:\n    encoder         : Chrome\n  Duration: 00:00:04.96, start: 0.000000, bitrate: 6770 kb/s\n  Stream #0:0(eng): Video: vp9 (Profile 0), yuv420p(tv, bt709), 1440x900, SAR 1:1 DAR 8:5, 1k tbr, 1k tbn (default)\n      Metadata:\n        alpha_mode      : 1\nStream mapping:\n  Stream #0:0 -> #0:0 (vp9 (native) -> wrapped_avframe (native))\nPress [q] to stop, [?] for help\nOutput #0, null, to 'pipe:':\n  Metadata:\n    encoder         : Lavf61.7.100\n  Stream #0:0(eng): Video: wrapped_avframe, yuv420p(tv, bt709, progressive), 1440x900 [SAR 1:1 DAR 8:5], q=2-31, 200 kb/s, 1k fps, 1k tbn (default)\n      Metadata:\n        alpha_mode      : 1\n        encoder         : Lavc61.19.100 wrapped_avframe\n[out#0/null @ 000001eddaf84880] video:111KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown\nframe=  259 fps=0.0 q=-0.0 Lsize=N/A time=00:00:04.96 bitrate=N/A speed=15.5x    \n"
+  },
+  {
+    "file": "design\\quality-pacing-2026-09-28\\after-micro.webm",
+    "exitCode": 0,
+    "decoderOutput": "Input #0, matroska,webm, from 'design\\quality-pacing-2026-09-28\\after-micro.webm':\n  Metadata:\n    encoder         : Chrome\n  Duration: 00:00:04.97, start: 0.000000, bitrate: 6888 kb/s\n  Stream #0:0(eng): Video: vp9 (Profile 0), yuv420p(tv, bt709), 1440x900, SAR 1:1 DAR 8:5, 1k tbr, 1k tbn (default)\n      Metadata:\n        alpha_mode      : 1\nStream mapping:\n  Stream #0:0 -> #0:0 (vp9 (native) -> wrapped_avframe (native))\nPress [q] to stop, [?] for help\nOutput #0, null, to 'pipe:':\n  Metadata:\n    encoder         : Lavf61.7.100\n  Stream #0:0(eng): Video: wrapped_avframe, yuv420p(tv, bt709, progressive), 1440x900 [SAR 1:1 DAR 8:5], q=2-31, 200 kb/s, 1k fps, 1k tbn (default)\n      Metadata:\n        alpha_mode      : 1\n        encoder         : Lavc61.19.100 wrapped_avframe\n[out#0/null @ 0000021cd6b36f00] video:122KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown\nframe=  285 fps=0.0 q=-0.0 Lsize=N/A time=00:00:04.96 bitrate=N/A speed=15.6x    \n"
+  },
+  {
+    "file": "design\\quality-pacing-2026-09-28\\final-micro.webm",
+    "exitCode": 0,
+    "decoderOutput": "Input #0, matroska,webm, from 'design\\quality-pacing-2026-09-28\\final-micro.webm':\n  Metadata:\n    encoder         : Chrome\n  Duration: 00:00:04.97, start: 0.000000, bitrate: 6936 kb/s\n  Stream #0:0(eng): Video: vp9 (Profile 0), yuv420p(tv, bt709), 1440x900, SAR 1:1 DAR 8:5, 1k tbr, 1k tbn (default)\n      Metadata:\n        alpha_mode      : 1\nStream mapping:\n  Stream #0:0 -> #0:0 (vp9 (native) -> wrapped_avframe (native))\nPress [q] to stop, [?] for help\nOutput #0, null, to 'pipe:':\n  Metadata:\n    encoder         : Lavf61.7.100\n  Stream #0:0(eng): Video: wrapped_avframe, yuv420p(tv, bt709, progressive), 1440x900 [SAR 1:1 DAR 8:5], q=2-31, 200 kb/s, 1k fps, 1k tbn (default)\n      Metadata:\n        alpha_mode      : 1\n        encoder         : Lavc61.19.100 wrapped_avframe\n[out#0/null @ 000001d10f5c6f00] video:114KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown\nframe=  265 fps=0.0 q=-0.0 Lsize=N/A time=00:00:04.97 bitrate=N/A speed=15.9x    \n"
+  }
+]

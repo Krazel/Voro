@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {adaptationYield} from '../app/campaign-pacing.mjs';
 import assert from 'node:assert/strict';
 import {compactPerformanceReport,performanceSummaryText,deliverReportFile} from '../app/performance-report.mjs';
 import {makeEngine} from './engine-fixture.mjs';
@@ -57,7 +58,7 @@ test('Nucleus choices now boost adaptation additively, preserve saved choices an
    game.stats=upgradeStats(game.progress.mutations);Object.assign(game.life,game.stats);
    game.life.digestion=[{progress:0.99,value:10,r:1,dx:0,dy:0,rotation:0,kind:'pond-0'}];
    const xp=game.progress.xp;game.update(.1);
-   assert.ok(Math.abs(game.progress.xp-xp-8.5*(1+count*.1))<1e-8);
+   assert.ok(Math.abs(game.progress.xp-xp-8.5*(1+count*.1)*adaptationYield('pond'))<1e-8);
  }
  game.destroy();
 });

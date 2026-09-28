@@ -14,6 +14,7 @@ import { FrameMonitor } from './frame-monitor.mjs';
 import { BenchmarkTour, tourReport } from './benchmark-tour.mjs';
 import { compactPerformanceReport } from './performance-report.mjs';
 import { AnimationSheets } from './animation-sheets.mjs';
+import { adaptationYield } from './campaign-pacing.mjs';
 import { transitionScene } from './journey-transitions.mjs';
 import { shouldHoldReview } from './review-policy.mjs';
 // Canvas2D rendering and input. The simulation stays independent of frame rendering.
@@ -446,6 +447,10 @@ export class VoroEngine {
   readonly desktop: boolean;
   constructor(canvas: HTMLCanvasElement, emit: (s: Snapshot) => void, desktop = false) {
     this.desktop = desktop;
+    // Detailed close-up cycles are opt-in for pointer/PC views. Phones retain
+    // the 64 MiB limit and the denser standard cycles, without live mesh baking.
+    this.animationSheets.highDetail = !matchMedia('(pointer: coarse)').matches;
+    this.animationSheets.limit = this.animationSheets.highDetail ? 128 * 1048576 : 64 * 1048576;
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d', { alpha: false })!;
     this.emit = emit;
@@ -1382,7 +1387,7 @@ export class VoroEngine {
         // finish only meals already earned before the orbital sweep began.
         const xpBefore = this.life.adaptationGained;
         digest(this.life, 100);
-        this.progress.xp += (this.life.adaptationGained - xpBefore) * .85 * this.stats.adaptationFactor;
+        this.progress.xp += (this.life.adaptationGained - xpBefore) * .85 * this.stats.adaptationFactor * adaptationYield(stageOf(this.progress).id);
         for (const e of this.world.entities) e.eaten = true;
         this.world.entities = []; this.world.projectiles = [];
         this.food = []; this.fragments = []; this.motes = [];
@@ -1523,7 +1528,7 @@ export class VoroEngine {
         xpBefore = p.adaptationGained,
         finished = digest(p, dt);
       if (finished) {
-        this.progress.xp += (p.adaptationGained - xpBefore) * 0.85 * this.stats.adaptationFactor;
+        this.progress.xp += (p.adaptationGained - xpBefore) * 0.85 * this.stats.adaptationFactor * adaptationYield(stageOf(this.progress).id);
         this.comboMeals =
           p.elapsed - this.lastMeal < 4 ? this.comboMeals + finished : finished;
         this.lastMeal = p.elapsed;
