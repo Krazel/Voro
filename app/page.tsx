@@ -18,6 +18,7 @@ import { useBenchmarkAwake } from './benchmark-awake';
 import { FinalSettings } from './final-settings';
 import { JourneyComplete } from './journey-complete';
 import { CosmicLab } from './cosmic-lab';
+import { MembraneRim } from './membrane-rim';
 import { isTabletDevice, wideScreenEnabled } from './desktop-viewport.mjs';
 import './wide-screen.css';
 import './cristal.css';
@@ -392,11 +393,11 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
             <div className="notice-region">
             <output
               className={
-                'hint micro-hint cristal-toast membrane-control ' +
+                'hint micro-hint cristal-toast membrane-control has-membrane-rim ' +
                 (state.hint ? 'show' : '')
               }
             >
-              {tr(state.hint)}
+              <MembraneRim />{tr(state.hint)}
             </output>
             </div>
             {tr(showZoomControls && !state.paused && !state.offer.length && !state.transition && <fieldset className="zoom-controls" aria-label={tr("Zoom de cámara")}>
@@ -453,13 +454,13 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
             <h2>{tr("Respira.")}</h2>
             <p className="pause-copy">{tr("Tu progreso queda guardado.")}</p>
             <button
-              className="primary-button membrane-control"
+              className="primary-button membrane-control has-membrane-rim"
               onClick={() => action('pause')}
-            >{tr(" Continuar ")}</button>
+            ><MembraneRim />{tr(" Continuar ")}</button>
             <button
-              className="primary-button membrane-control"
+              className="primary-button membrane-control has-membrane-rim"
               onClick={() => changeSettings(true)}
-            >{tr(" Configuración ")}</button>
+            ><MembraneRim />{tr(" Configuración ")}</button>
           </div>
         ))}
         {tr(state.started && state.dead && (

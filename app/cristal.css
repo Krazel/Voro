@@ -73,6 +73,10 @@
   animation: cristal-sheen 11s ease-in-out infinite;
   opacity: 0.7;
 }
+.has-membrane-rim::before {display:none;}
+.membrane-rim {position:absolute;inset:-4px;width:calc(100% + 8px);height:calc(100% + 8px);pointer-events:none;z-index:0;opacity:.58;animation:cristal-breathe 7s ease-in-out infinite;}
+.cristal-toast:not(.show) .membrane-rim {animation:none;}
+@media(prefers-reduced-motion:reduce){.membrane-rim{animation:none;}}
 button.membrane-control {
   transition:
     background 0.25s,

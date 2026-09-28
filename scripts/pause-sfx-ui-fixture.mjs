@@ -10,6 +10,11 @@ source=source.replace(anchor,anchor+`
     game.toast('Has perdido biomasa. Recupera tus fragmentos.',999);game.publish();
 `);
 source=source.replace('      <ReviewMilestone held=', `
+      <button style={{position:"fixed",bottom:12,left:12,minHeight:44,padding:12,zIndex:10000,background:"#092631",color:"white"}} onClick={event=>{
+        const rims=[...document.querySelectorAll<HTMLCanvasElement>('.membrane-rim')];
+        const painted=rims.filter(c=>c.dataset.ready==='true'&&c.getContext('2d')?.getImageData(0,0,c.width,c.height).data.some((v,i)=>i%4===3&&v>0)).length;
+        event.currentTarget.textContent="membrane-frames-ready-"+painted;
+      }}>Check membrane frames</button>
       <button style={{position:"fixed",top:"max(12px, env(safe-area-inset-top))",left:12,minHeight:44,padding:12,zIndex:10000,background:"#092631",color:"white"}} onClick={async event=>{
         const button=event.currentTarget,game=engine.current!;
         button.textContent="Checking ingest audio";

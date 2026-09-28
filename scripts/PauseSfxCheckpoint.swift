@@ -12,6 +12,9 @@ final class StoreCapture: XCTestCase {
   app.launch()
   let resume=app.buttons.matching(NSPredicate(format:"label ==[c] %@","Continue")).firstMatch
   XCTAssertTrue(resume.waitForExistence(timeout:120),app.debugDescription)
+  sleep(3)
+  app.buttons["Check membrane frames"].tap()
+  XCTAssertTrue(app.buttons["membrane-frames-ready-3"].waitForExistence(timeout:30),app.debugDescription)
   capture("01-new-native-pause")
   if UIDevice.current.userInterfaceIdiom == .pad {
    XCUIDevice.shared.orientation = .landscapeLeft
