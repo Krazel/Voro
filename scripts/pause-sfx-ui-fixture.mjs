@@ -6,7 +6,8 @@ const anchor='    engine.current = game;';
 if(!source.includes(anchor))throw Error('Fixture anchor missing');
 source=source.replace(anchor,anchor+`
     game.startTest(0, 20, false, true, false);
-    game.paused=true;game.testMode=false;game.progress.offer=[];game.publish();
+    game.paused=true;game.testMode=false;game.progress.offer=[];
+    game.toast('Has perdido biomasa. Recupera tus fragmentos.',999);game.publish();
 `);
 source=source.replace('      <ReviewMilestone held=', `
       <button style={{position:"fixed",top:"max(12px, env(safe-area-inset-top))",left:12,minHeight:44,padding:12,zIndex:10000,background:"#092631",color:"white"}} onClick={async event=>{

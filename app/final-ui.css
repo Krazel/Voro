@@ -11,8 +11,7 @@
 .voro-shell[data-ui-mode='final'] .growth-label {font-size:11px;letter-spacing:.08em;}
 .voro-shell[data-ui-mode='final'] .micro-adaptation {font-size:11px;letter-spacing:.08em;margin-top:0;}
 .voro-shell[data-ui-mode='final'] .notice-region {top:max(169px,calc(env(safe-area-inset-top) + 155px));left:26px;right:26px;}
-.voro-shell[data-ui-mode='final'] .notice-region .cristal-toast {font:14px/1.5 Georgia,serif;padding:10px 16px;background:#071d29d9;}
-.voro-shell[data-ui-mode='final'] .notice-region .cristal-toast::before {opacity:.3;}
+.voro-shell[data-ui-mode='final'] .notice-region .cristal-toast {font:14px/1.5 Georgia,serif;padding:18px 22px;background:#071d29d9;}
 .voro-shell[data-ui-mode='final'] .bottom-controls {bottom:max(22px,calc(env(safe-area-inset-bottom) + 12px));}
 .voro-shell[data-ui-mode='final'] .intro {bottom:max(40px,calc(env(safe-area-inset-bottom) + 24px));}
 .voro-shell[data-ui-mode='final'] .intro .movement-choice {display:none;}

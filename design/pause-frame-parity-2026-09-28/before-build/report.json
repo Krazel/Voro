@@ -1,0 +1,174 @@
+[
+  {
+    "engine": "chrome",
+    "device": "pc",
+    "controls": [
+      {
+        "text": "Has perdido biomasa. Recupera tus fragmentos.",
+        "image": "url(\"http://127.0.0.1:5213/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.3",
+        "animation": "none",
+        "box": {
+          "width": 344.421875,
+          "height": 44
+        }
+      },
+      {
+        "text": " Continuar ",
+        "image": "url(\"http://127.0.0.1:5213/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "box": {
+          "width": 300,
+          "height": 64
+        }
+      },
+      {
+        "text": " Configuración ",
+        "image": "url(\"http://127.0.0.1:5213/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "box": {
+          "width": 300,
+          "height": 64
+        }
+      }
+    ],
+    "errors": []
+  },
+  {
+    "engine": "chrome",
+    "device": "iphone",
+    "controls": [
+      {
+        "text": "Has perdido biomasa. Recupera tus fragmentos.",
+        "image": "url(\"http://127.0.0.1:5212/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.3",
+        "animation": "none",
+        "box": {
+          "width": 336,
+          "height": 64
+        }
+      },
+      {
+        "text": " Continuar ",
+        "image": "url(\"http://127.0.0.1:5212/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "box": {
+          "width": 300,
+          "height": 64
+        }
+      },
+      {
+        "text": " Configuración ",
+        "image": "url(\"http://127.0.0.1:5212/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "box": {
+          "width": 300,
+          "height": 64
+        }
+      }
+    ],
+    "errors": []
+  },
+  {
+    "engine": "webkit",
+    "device": "pc",
+    "controls": [
+      {
+        "text": "Has perdido biomasa. Recupera tus fragmentos.",
+        "image": "url(\"http://127.0.0.1:5213/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.3",
+        "animation": "none",
+        "box": {
+          "width": 344.421875,
+          "height": 44
+        }
+      },
+      {
+        "text": " Continuar ",
+        "image": "url(\"http://127.0.0.1:5213/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "box": {
+          "width": 300,
+          "height": 64
+        }
+      },
+      {
+        "text": " Configuración ",
+        "image": "url(\"http://127.0.0.1:5213/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "box": {
+          "width": 300,
+          "height": 64
+        }
+      }
+    ],
+    "errors": []
+  },
+  {
+    "engine": "webkit",
+    "device": "iphone",
+    "controls": [
+      {
+        "text": "Has perdido biomasa. Recupera tus fragmentos.",
+        "image": "url(\"http://127.0.0.1:5212/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.3",
+        "animation": "none",
+        "box": {
+          "width": 336,
+          "height": 64
+        }
+      },
+      {
+        "text": " Continuar ",
+        "image": "url(\"http://127.0.0.1:5212/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "box": {
+          "width": 300,
+          "height": 64
+        }
+      },
+      {
+        "text": " Configuración ",
+        "image": "url(\"http://127.0.0.1:5212/ui/cristal/membrane-frame.png\")",
+        "slice": "200",
+        "width": "28px",
+        "opacity": "0.58",
+        "animation": "none",
+        "box": {
+          "width": 300,
+          "height": 64
+        }
+      }
+    ],
+    "errors": []
+  }
+]

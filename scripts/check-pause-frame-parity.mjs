@@ -1,0 +1,34 @@
+import {createRequire} from 'node:module';
+import {mkdir,writeFile} from 'node:fs/promises';
+import assert from 'node:assert/strict';
+const {chromium,webkit}=createRequire(process.env.VORO_PLAYWRIGHT_RUNTIME)('playwright');
+const out='design/pause-frame-parity-2026-09-28/'+(process.env.VORO_QA_PHASE||'before');await mkdir(out,{recursive:true});
+const results=[];
+for(const [engine,type,options]of [['chrome',chromium,{channel:'msedge'}],['webkit',webkit,{}]]) {
+ const browser=await type.launch({headless:true,...options});
+ try {
+  for(const [device,width,height,port]of [['pc',1280,800,process.env.VORO_QA_BUILD?5213:5211],['iphone',390,844,process.env.VORO_QA_BUILD?5212:5210],['ipad-landscape',1194,834,process.env.VORO_QA_BUILD?5212:5210]]) {
+   const page=await browser.newPage({viewport:{width,height},locale:'es-ES',reducedMotion:'reduce'}),errors=[];
+   page.on('pageerror',e=>errors.push(String(e)));
+   await page.goto(`http://127.0.0.1:${port}/?ui=final&lab=cosmos`);
+   await page.waitForFunction(()=>window.__voroLab?.assetsReady);
+   await page.evaluate(()=>{const g=window.__voroLab;g.startTest(0,20,false,true,false);g.paused=true;g.toast('Has perdido biomasa. Recupera tus fragmentos.',999);g.publish();});
+   await page.locator('.pause-panel').waitFor();
+   await page.screenshot({path:`${out}/${engine}-${device}.png`});
+   const controls=await page.evaluate(()=>[...document.querySelectorAll('.pause-panel .membrane-control,.cristal-toast')].map(e=>{
+    const s=getComputedStyle(e,'::before'),r=e.getBoundingClientRect();
+    return {text:e.textContent,image:s.borderImageSource,slice:s.borderImageSlice,width:s.borderImageWidth,opacity:s.opacity,animation:s.animationName,box:{width:r.width,height:r.height}};
+   }));
+   if(process.env.VORO_QA_PHASE?.startsWith('after')) {
+    assert.equal(controls.length,3);
+    for(const control of controls){assert.ok(control.image.includes('/ui/cristal/membrane-frame.png'));assert.equal(control.opacity,'0.58');assert.equal(control.width,'28px');assert.ok(control.box.height>=64);}
+    await page.emulateMedia({reducedMotion:'no-preference'});
+    const animation=await page.evaluate(()=>[...document.querySelectorAll('.pause-panel .membrane-control,.cristal-toast')].map(e=>getComputedStyle(e,'::before').animationName));
+    assert.deepEqual(animation,['cristal-breathe','cristal-breathe','cristal-breathe']);
+    assert.deepEqual(errors,[]);
+   }
+   results.push({engine,device,controls,errors});await page.close();
+  }
+ }finally{await browser.close();}
+}
+await writeFile(`${out}/report.json`,JSON.stringify(results,null,2));console.log(JSON.stringify(results));

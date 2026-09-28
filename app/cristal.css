@@ -266,8 +266,10 @@ body:has(.cristal-dialog) [data-slot='dialog-overlay'] {
   width: fit-content;
   max-width: calc(100% - 56px);
   padding: 12px 22px;
-  min-height: 44px;
-  border-radius: 35px;
+  /* Match the desktop pause rim. A 44px toast squeezed the two 28px
+     border-image slices together and changed the shape on narrow screens. */
+  min-height: 64px;
+  border-radius: 38px;
   background-color: #05202bdd;
   color: #dce9e3;
   font: 400 15px/1.4 var(--cristal-serif);
