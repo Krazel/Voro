@@ -10,7 +10,7 @@ export function finaleState(remaining) {
   return { elapsed, u, growth: 1+.22*smooth(0,FINALE_ABSORBED_AT,elapsed),
     contraction: 1-.985*smooth(.5,10.8,elapsed),
     sceneLight: 1-smooth(7,FINALE_ABSORBED_AT,elapsed), darkness: smooth(.4,11,elapsed),
-    bodyLight: 1-smooth(FINALE_ABSORBED_AT,FINALE_BLACK_AT-1.4,elapsed),
+    bodyLight: 1-Math.max(0,Math.min(1,(elapsed-FINALE_ABSORBED_AT)/(FINALE_BLACK_AT-1.4-FINALE_ABSORBED_AT))),
     black: elapsed>=FINALE_BLACK_AT, survivor: smooth(FINALE_REVEAL_AT,FINALE_REVEAL_AT+12.5,elapsed),
     caption: elapsed<4 ? 'Ya no hay nada más grande que tú.' : elapsed<FINALE_ABSORBED_AT ? 'El universo entra en ti.' : elapsed<10.2 ? 'La última luz.' : '' };
 }
@@ -106,6 +106,13 @@ export class UniverseFinale {
       // to a point. No replacement star, residual rim or offscreen allocation.
       const tail=smooth(0,.3,reveal),front=geometry.front*tail;
       const nx=nucleus?.x??x,ny=nucleus?.y??y;
+      // The outer mask starts beyond the visible membrane. Fade the painted
+      // body too, from the end of absorption, so that travel is not a pause.
+      // Preserve the original core and its existing contraction to a point.
+      const bodyFade=c.createRadialGradient(nx,ny,Math.max(.001,body*.12*core.radius/6),nx,ny,Math.max(.002,body*.8));
+      bodyFade.addColorStop(0,'rgba(0,0,0,0)');
+      bodyFade.addColorStop(1,`rgba(0,0,0,${1-s.bodyLight})`);
+      c.globalAlpha=1;c.fillStyle=bodyFade;c.fillRect(0,0,width,height);
       const mask=c.createRadialGradient(nx,ny,Math.max(0,front-geometry.feather*tail),nx,ny,Math.max(.001,front));
       mask.addColorStop(0,`rgba(0,0,0,${1-tail})`);mask.addColorStop(1,'#000');
       c.globalAlpha=1;c.fillStyle=mask;c.fillRect(0,0,width,height);

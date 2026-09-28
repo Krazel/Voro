@@ -82,7 +82,20 @@ test('The reverse reveal masks every cell layer after drawing, even strokes over
  const c=new Proxy({globalAlpha:1,fillRect(...rect){calls.push({type:'fill',rect,alpha:this.globalAlpha})},createRadialGradient(){return {addColorStop(){}}}}, {get:(o,k)=>k in o?o[k]:()=>{}});
  new UniverseFinale().draw(c,390,844,FINALE_SECONDS-11,false,()=>{c.globalAlpha=.9;calls.push({type:'cell'});return{x:195,y:405,radius:100}});
  const last=calls.at(-1);assert.equal(last.type,'fill');assert.deepEqual(last.rect,[0,0,390,844]);assert.equal(last.alpha,1);
- assert.equal(calls.at(-2).type,'cell','No cell layer may be drawn over the final inward mask');
+ assert.equal(calls.at(-3).type,'cell','Both fade masks must cover every painted cell layer');
+});
+
+test('Visible membrane fades immediately, without waiting for the outer mask to reach it',()=>{
+ for(const reduced of [false,true]) {
+  const gradients=[];
+  const c=new Proxy({createRadialGradient(...radii){const stops=[];gradients.push({radii,stops});return {addColorStop:(...stop)=>stops.push(stop)};}},{get:(o,k)=>k in o?o[k]:()=>{}});
+  new UniverseFinale().draw(c,390,844,FINALE_SECONDS-FINALE_ABSORBED_AT-.1,reduced,()=>({x:195,y:405,radius:100}));
+  const fade=gradients.find(g=>g.radii[5]===80);
+  assert.ok(fade,'Fade reaches inside the visible membrane within the first 100ms');
+  assert.equal(fade.stops[0][1],'rgba(0,0,0,0)','Original nucleus remains visible');
+  const alpha=Number(fade.stops[1][1].slice(11,-1));
+  assert.ok(alpha>.02&&alpha<.04,'Fading is already visible after 100ms without an abrupt cut');
+ }
 });
 
 test('Body and nucleus fade continuously without a second light appearing or a pause in contraction',()=>{
