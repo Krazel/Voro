@@ -3,11 +3,11 @@ export const INGEST_SOUNDS = [1, 2, 3, 4, 5].map(index => `./sfx/ingest-${index}
 // Music has its own output; this bus controls only effects. The quiet WAVs
 // need a higher level to remain audible on phone speakers.
 export const EFFECTS_MASTER_GAIN = 0.11;
-export const INGEST_GAIN = 2;
+export const INGEST_GAIN = 3;
 export const INGEST_PITCH = Object.freeze({ min: -5, max: 6 });
 export const HIT_SOUNDS = Object.freeze({
-  damage: Object.freeze({type:'triangle',from:460,to:220,gain:3.2,attack:.009,duration:.30}),
-  shield: Object.freeze({type:'sine',from:1340,to:360,gain:1.1,attack:.006,duration:.38}),
+  damage: Object.freeze({type:'triangle',from:460,to:220,gain:4.2,attack:.009,hold:.045,duration:.30}),
+  shield: Object.freeze({type:'sine',from:1340,to:360,gain:1.5,attack:.006,duration:.38}),
 });
 
 export class SfxPlayer {
@@ -136,6 +136,8 @@ export class SfxPlayer {
     if(kind==='shield')source.frequency.exponentialRampToValueAtTime(1860,at+.035);
     source.frequency.exponentialRampToValueAtTime(sound.to,at+sound.duration-.035);
     gain.gain.setValueAtTime(0,at);gain.gain.linearRampToValueAtTime(sound.gain,at+sound.attack);
+    // Give damage a short audible body before the decay, especially on phones.
+    if(sound.hold)gain.gain.setValueAtTime(sound.gain,at+sound.hold);
     gain.gain.exponentialRampToValueAtTime(.001,at+sound.duration-.018);
     gain.gain.linearRampToValueAtTime(0,at+sound.duration);
     source.connect(gain);gain.connect(this.output);
