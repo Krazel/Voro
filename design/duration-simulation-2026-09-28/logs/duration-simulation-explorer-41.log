@@ -1,0 +1,11 @@
+explorer/41/30Hz: micro at 0.0 min
+explorer/41/30Hz: pond at 28.5 min
+explorer/41/30Hz: land at 41.0 min
+explorer/41/30Hz: water at 54.8 min
+explorer/41/30Hz: city at 66.3 min
+explorer/41/30Hz: orbit at 99.9 min
+explorer/41/30Hz: planets at 138.7 min
+explorer/41/30Hz: stars at 146.6 min
+explorer/41/30Hz: galaxies at 158.0 min
+explorer/41/30Hz: universe at 162.0 min
+{"profile":"explorer","seed":41,"hz":30,"completed":true,"minutes":174.976111111525,"deaths":0,"wallSeconds":215.70986870000002,"speedup":45.702900502908236}

@@ -1,0 +1,11 @@
+direct/109/30Hz: micro at 0.0 min
+direct/109/30Hz: pond at 17.4 min
+direct/109/30Hz: land at 25.9 min
+direct/109/30Hz: water at 36.0 min
+direct/109/30Hz: city at 45.3 min
+direct/109/30Hz: orbit at 66.5 min
+direct/109/30Hz: planets at 77.0 min
+direct/109/30Hz: stars at 82.7 min
+direct/109/30Hz: galaxies at 87.0 min
+direct/109/30Hz: universe at 90.0 min
+{"profile":"direct","seed":109,"hz":30,"completed":true,"minutes":97.43333333358461,"deaths":0,"wallSeconds":117.0394274,"speedup":47.17213782280583}

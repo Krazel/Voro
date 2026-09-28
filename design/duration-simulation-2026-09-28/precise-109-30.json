@@ -1,0 +1,188 @@
+{
+  "version": {
+    "version": "0.9",
+    "build": 2
+  },
+  "source": "0a10901911d7f8e6184b48c90cccd178c1e45d97",
+  "profile": "precise",
+  "seed": 109,
+  "hz": 30,
+  "config": {
+    "reaction": 0,
+    "exploration": 0,
+    "choiceSeconds": 5,
+    "priority": [
+      "yield",
+      "speed",
+      "digest",
+      "slots",
+      "shield",
+      "pull",
+      "tentacleReach",
+      "tentacles",
+      "combo",
+      "decoy",
+      "dash",
+      "turn",
+      "recycle",
+      "spikes"
+    ]
+  },
+  "completed": false,
+  "stoppedReason": "death-limit",
+  "simulationSeconds": 1412.3999999993728,
+  "activeSeconds": 1395.1333333327218,
+  "cinematicSeconds": 17.266666666666683,
+  "menuSeconds": 155,
+  "estimatedSessionSeconds": 1567.3999999993728,
+  "wallSeconds": 35.3809876,
+  "speedup": 39.9197449197086,
+  "finalConsumptionAt": null,
+  "deaths": 10,
+  "upgrades": 21,
+  "remainingChoices": 53,
+  "stages": [
+    {
+      "id": "micro",
+      "start": 0,
+      "choices": 13,
+      "deaths": 0,
+      "end": 557.8666666668166,
+      "seconds": 557.8666666668166,
+      "menuSeconds": 65
+    },
+    {
+      "id": "pond",
+      "start": 557.8666666668166,
+      "choices": 8,
+      "deaths": 0,
+      "end": 1101.8333333329886,
+      "seconds": 543.9666666661719,
+      "menuSeconds": 40
+    },
+    {
+      "id": "land",
+      "start": 1101.8333333329886,
+      "choices": 0,
+      "deaths": 10,
+      "end": 1412.3999999993728,
+      "seconds": 310.5666666663842,
+      "menuSeconds": 50
+    }
+  ],
+  "choices": [
+    {
+      "at": 84.13333333333112,
+      "stage": "micro",
+      "id": "slots"
+    },
+    {
+      "at": 153.5333333333272,
+      "stage": "micro",
+      "id": "digest"
+    },
+    {
+      "at": 230.9333333333228,
+      "stage": "micro",
+      "id": "yield"
+    },
+    {
+      "at": 308.3000000000296,
+      "stage": "micro",
+      "id": "combo"
+    },
+    {
+      "at": 342.4666666667235,
+      "stage": "micro",
+      "id": "digest"
+    },
+    {
+      "at": 373.40000000008143,
+      "stage": "micro",
+      "id": "speed"
+    },
+    {
+      "at": 399.30000000010205,
+      "stage": "micro",
+      "id": "shield"
+    },
+    {
+      "at": 421.96666666678675,
+      "stage": "micro",
+      "id": "yield"
+    },
+    {
+      "at": 447.6666666668072,
+      "stage": "micro",
+      "id": "yield"
+    },
+    {
+      "at": 477.86666666683124,
+      "stage": "micro",
+      "id": "yield"
+    },
+    {
+      "at": 505.7333333335201,
+      "stage": "micro",
+      "id": "slots"
+    },
+    {
+      "at": 528.53333333351,
+      "stage": "micro",
+      "id": "speed"
+    },
+    {
+      "at": 554.2000000001533,
+      "stage": "micro",
+      "id": "slots"
+    },
+    {
+      "at": 770.5666666666232,
+      "stage": "pond",
+      "id": "yield"
+    },
+    {
+      "at": 844.9333333332222,
+      "stage": "pond",
+      "id": "digest"
+    },
+    {
+      "at": 899.2999999998394,
+      "stage": "pond",
+      "id": "speed"
+    },
+    {
+      "at": 944.6333333331315,
+      "stage": "pond",
+      "id": "turn"
+    },
+    {
+      "at": 986.266666666427,
+      "stage": "pond",
+      "id": "digest"
+    },
+    {
+      "at": 1021.9999999997278,
+      "stage": "pond",
+      "id": "yield"
+    },
+    {
+      "at": 1055.0666666663644,
+      "stage": "pond",
+      "id": "pull"
+    },
+    {
+      "at": 1087.7666666663347,
+      "stage": "pond",
+      "id": "pull"
+    }
+  ],
+  "assumptions": [
+    "Real update/feeding/damage/spawn/adaptation logic with fixed small steps; no modified balance or invulnerability.",
+    "Rendering and audio are stubbed; this estimates pacing, never device FPS or loading time.",
+    "Pilot can inspect all loaded entities and their edible thresholds. Profiles are synthetic, not calibrated human skill groups.",
+    "Choice reading time and 5 seconds per retry are explicit added assumptions; breaks, loading and optional menus are excluded.",
+    "Total simulation clock includes birth, evolution, Earth absorption, ending and failed attempts.",
+    "At most three simulated hours / ten deaths. Incomplete runs are censored, never reported as completion times."
+  ]
+}

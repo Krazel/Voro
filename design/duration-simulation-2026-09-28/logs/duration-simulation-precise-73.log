@@ -1,0 +1,11 @@
+precise/73/30Hz: micro at 0.0 min
+precise/73/30Hz: pond at 18.9 min
+precise/73/30Hz: land at 28.7 min
+precise/73/30Hz: water at 38.6 min
+precise/73/30Hz: city at 47.2 min
+precise/73/30Hz: orbit at 63.6 min
+precise/73/30Hz: planets at 71.9 min
+precise/73/30Hz: stars at 76.9 min
+precise/73/30Hz: galaxies at 82.2 min
+precise/73/30Hz: universe at 85.4 min
+{"profile":"precise","seed":73,"hz":30,"completed":true,"minutes":93.63888888908231,"deaths":0,"wallSeconds":115.1477362,"speedup":45.57912735886629}

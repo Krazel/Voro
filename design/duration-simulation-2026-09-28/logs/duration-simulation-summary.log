@@ -1,0 +1,238 @@
+{
+  "runs": 10,
+  "completed": 6,
+  "profiles": {
+    "precise": {
+      "attempted": 3,
+      "completed": 2,
+      "sessionMinutes": {
+        "count": 2,
+        "min": 93.63888888908231,
+        "median": 98.21416666691835,
+        "max": 102.78944444475437
+      },
+      "speedup": {
+        "count": 3,
+        "min": 39.9197449197086,
+        "median": 45.57912735886629,
+        "max": 47.523254757170506
+      }
+    },
+    "direct": {
+      "attempted": 3,
+      "completed": 1,
+      "sessionMinutes": {
+        "count": 1,
+        "min": 97.43333333358461,
+        "median": 97.43333333358461,
+        "max": 97.43333333358461
+      },
+      "speedup": {
+        "count": 3,
+        "min": 40.26810002424164,
+        "median": 47.17213782280583,
+        "max": 51.57617319391804
+      }
+    },
+    "explorer": {
+      "attempted": 3,
+      "completed": 2,
+      "sessionMinutes": {
+        "count": 2,
+        "min": 156.27444444513534,
+        "median": 165.62527777833017,
+        "max": 174.976111111525
+      },
+      "speedup": {
+        "count": 3,
+        "min": 45.702900502908236,
+        "median": 45.869990752364096,
+        "max": 56.86091018258435
+      }
+    }
+  },
+  "stages": {
+    "micro": {
+      "count": 5,
+      "min": 14.022222222221334,
+      "median": 20.09944444443818,
+      "max": 30.80166666665173
+    },
+    "pond": {
+      "count": 5,
+      "min": 9.067222222214506,
+      "median": 10.464999999991088,
+      "max": 13.532222222210828
+    },
+    "land": {
+      "count": 5,
+      "min": 10.661666666657656,
+      "median": 11.671666666656733,
+      "max": 15.146111111098548
+    },
+    "water": {
+      "count": 5,
+      "min": 9.130555555547781,
+      "median": 10.408888888879956,
+      "max": 12.343333333323017
+    },
+    "city": {
+      "count": 5,
+      "min": 18.293888888873994,
+      "median": 32.85722222227953,
+      "max": 36.354444444846
+    },
+    "orbit": {
+      "count": 5,
+      "min": 7.6255555556505294,
+      "median": 10.678333333443083,
+      "max": 39.086666667100964
+    },
+    "planets": {
+      "count": 5,
+      "min": 5.4133333333980165,
+      "median": 5.981666666739647,
+      "max": 8.422222222106939
+    },
+    "stars": {
+      "count": 5,
+      "min": 4.317222222272949,
+      "median": 5.522777777844916,
+      "max": 28.233888889170505
+    },
+    "galaxies": {
+      "count": 5,
+      "min": 3.293333333372084,
+      "median": 3.4561111111519343,
+      "max": 4.580555555496176
+    },
+    "universe": {
+      "count": 5,
+      "min": 1.9683333333583959,
+      "median": 2.2427777778031515,
+      "max": 2.836111111077116
+    }
+  },
+  "rows": [
+    {
+      "profile": "direct",
+      "seed": 109,
+      "hz": 30,
+      "completed": true,
+      "minutes": 97.43333333358461,
+      "deaths": 0,
+      "stage": "universe",
+      "wallSeconds": 117.0394274,
+      "speedup": 47.17213782280583,
+      "file": "direct-109-30.json"
+    },
+    {
+      "profile": "direct",
+      "seed": 41,
+      "hz": 30,
+      "completed": false,
+      "minutes": 84.69055555565095,
+      "deaths": 10,
+      "stage": "orbit",
+      "wallSeconds": 92.80318869999999,
+      "speedup": 51.57617319391804,
+      "file": "direct-41-30.json"
+    },
+    {
+      "profile": "direct",
+      "seed": 73,
+      "hz": 30,
+      "completed": false,
+      "minutes": 89.6077777779379,
+      "deaths": 10,
+      "stage": "orbit",
+      "wallSeconds": 126.4392078,
+      "speedup": 40.26810002424164,
+      "file": "direct-73-30.json"
+    },
+    {
+      "profile": "explorer",
+      "seed": 109,
+      "hz": 30,
+      "completed": true,
+      "minutes": 156.27444444513534,
+      "deaths": 0,
+      "stage": "universe",
+      "wallSeconds": 153.29453289999998,
+      "speedup": 56.86091018258435,
+      "file": "explorer-109-30.json"
+    },
+    {
+      "profile": "explorer",
+      "seed": 41,
+      "hz": 30,
+      "completed": true,
+      "minutes": 174.976111111525,
+      "deaths": 0,
+      "stage": "universe",
+      "wallSeconds": 215.70986870000002,
+      "speedup": 45.702900502908236,
+      "file": "explorer-41-30.json"
+    },
+    {
+      "profile": "explorer",
+      "seed": 73,
+      "hz": 30,
+      "completed": false,
+      "minutes": 186.3333333335189,
+      "deaths": 0,
+      "stage": "city",
+      "wallSeconds": 235.4480527,
+      "speedup": 45.869990752364096,
+      "file": "explorer-73-30.json"
+    },
+    {
+      "profile": "precise",
+      "seed": 109,
+      "hz": 30,
+      "completed": false,
+      "minutes": 26.12333333332288,
+      "deaths": 10,
+      "stage": "land",
+      "wallSeconds": 35.3809876,
+      "speedup": 39.9197449197086,
+      "file": "precise-109-30.json"
+    },
+    {
+      "profile": "precise",
+      "seed": 41,
+      "hz": 30,
+      "completed": true,
+      "minutes": 102.78944444475437,
+      "deaths": 0,
+      "stage": "universe",
+      "wallSeconds": 121.9901014,
+      "speedup": 47.523254757170506,
+      "file": "precise-41-30.json"
+    },
+    {
+      "profile": "precise",
+      "seed": 41,
+      "hz": 60,
+      "completed": true,
+      "minutes": 94.33861111123171,
+      "deaths": 1,
+      "stage": "universe",
+      "wallSeconds": 156.44902740000003,
+      "speedup": 33.78299472045105,
+      "file": "precise-41-60.json"
+    },
+    {
+      "profile": "precise",
+      "seed": 73,
+      "hz": 30,
+      "completed": true,
+      "minutes": 93.63888888908231,
+      "deaths": 0,
+      "stage": "universe",
+      "wallSeconds": 115.1477362,
+      "speedup": 45.57912735886629,
+      "file": "precise-73-30.json"
+    }
+  ]
+}

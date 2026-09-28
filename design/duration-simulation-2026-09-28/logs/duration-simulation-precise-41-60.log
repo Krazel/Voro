@@ -1,0 +1,11 @@
+precise/41/60Hz: micro at 0.0 min
+precise/41/60Hz: pond at 13.8 min
+precise/41/60Hz: land at 24.3 min
+precise/41/60Hz: water at 34.9 min
+precise/41/60Hz: city at 44.6 min
+precise/41/60Hz: orbit at 68.4 min
+precise/41/60Hz: planets at 72.8 min
+precise/41/60Hz: stars at 78.7 min
+precise/41/60Hz: galaxies at 83.1 min
+precise/41/60Hz: universe at 86.0 min
+{"profile":"precise","seed":41,"hz":60,"completed":true,"minutes":94.33861111123171,"deaths":1,"wallSeconds":156.44902740000003,"speedup":33.78299472045105}
