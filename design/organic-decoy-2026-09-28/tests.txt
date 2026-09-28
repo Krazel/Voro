@@ -1,0 +1,44 @@
+✔ Every new stage starts half-size, only the smallest species are edible, and starter food is nearby (109.2782ms)
+✔ Three stable choices survive reload and cannot be rerolled (56.0044ms)
+✔ Final capped choices remain selectable without renewing the offer (0.7225ms)
+✔ Moderated cadence retains old saves, upgrades, body and fractional progress (0.9953ms)
+✔ Choosing freezes world time, consumes one adaptation and survives a first hit (115.0693ms)
+✔ Detection has separate enter/leave boundaries and fear survives small mass oscillations (2.2532ms)
+✔ Ranged creatures settle within a firing band but flee when edible or frightened (0.4801ms)
+✔ Territory edge starts a committed return and movement stays finite instead of clamping in place (3.1488ms)
+✔ Repulsion moves attackers smoothly, clears overlap, preserves their eating threshold and value (4.2095ms)
+✔ Repulsion runs through microscopic and later-world movement and pauses ranged shooting (1.5617ms)
+✔ Retired absorption reach changes neither suction nor eating distance; aspiration still attracts (167.6019ms)
+✔ Every repeated choice adds the same concrete bonus (3.4861ms)
+✔ Real damage removes the same fraction of unspent adaptation progress and persists it (63.056ms)
+✔ Shield can be acquired once; consuming and reloading never unlocks it again (10.3461ms)
+✔ Shielded hits cost no biomass or adaptation progress (2.7205ms)
+✔ device language and manual override resolve independently (1.3028ms)
+✔ all player upgrades, stages and adaptation captions have English entries (2.494ms)
+✔ translation keeps data identities, numbers, React nodes and whitespace (15.6372ms)
+✔ One rare choice survives save/load and cannot be offered twice (10.2379ms)
+✔ Dash releases exactly one decoy, rejects cooldown/paused dashes, ticks in simulation and works again on next dash (71.0084ms)
+✔ Pursuers turn toward copy; edible prey, new enemies and static hazards are not distracted (0.2551ms)
+✔ Ranged enemies aim at the copy without teleporting existing projectiles (0.3974ms)
+✔ Suction scales with body, XP bonus caps at40%, dash base intact and max moderated (0.2702ms)
+✔ Retired adaptations are all refunded without losing stage/body, then the new bar starts empty (7.6021ms)
+✔ Long reach is offered only after hunting tentacles, and each choice extends the same distance (4.1203ms)
+✔ Individual sizes vary deterministically, preserve area-based food requirements, and stay within species ranges (39.7313ms)
+✔ Water is less crowded and sharks occupy under five percent of slots with at most one per chunk (37.4342ms)
+✔ Biomass fragments scatter before collection, survive reload and restore exactly the lost recoverable mass without XP (56.6281ms)
+✔ Removed absorption is never offered or applied; tentacle range and suction remain separate (3.1761ms)
+✔ Saved absorption choices are refunded once and survive save/reload between choices (7.938ms)
+✔ Full legacy saves and oldest microscope saves remain loadable without impossible refunds (3.2409ms)
+✔ Acquired shield is excluded across seeds, later levels, consumption and reload (16.9353ms)
+✔ Legacy four shields migrate once, preserving other choices, body, XP and earliest recharge (1.1419ms)
+✔ Fully upgraded historical saves remain loadable after the shield cap changes (4.2245ms)
+✔ Individual caps govern effects, offers and choices, including rerolls (33.8854ms)
+✔ Previously capped saves keep their progress and can acquire more of the same upgrades (3.8111ms)
+ℹ tests 36
+ℹ suites 0
+ℹ pass 36
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 755.5402

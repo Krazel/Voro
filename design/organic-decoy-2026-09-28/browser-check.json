@@ -1,0 +1,43 @@
+{
+  "frames": [
+    {
+      "label": "departure",
+      "playerX": 722.4416641431682,
+      "decoy": {
+        "x": 700,
+        "remaining": 1.8000000000000007
+      },
+      "imageSize": 512,
+      "hunterX": 559.5999999999995
+    },
+    {
+      "label": "separation",
+      "playerX": 755.6081690625333,
+      "decoy": {
+        "x": 700,
+        "remaining": 1.4000000000000021
+      },
+      "imageSize": 512,
+      "hunterX": 578.7999999999984
+    },
+    {
+      "label": "fade",
+      "playerX": 762.4413595107737,
+      "decoy": {
+        "x": 700,
+        "remaining": 0.3166666666666687
+      },
+      "imageSize": 512,
+      "hunterX": 630.7999999999954
+    },
+    {
+      "label": "gone",
+      "playerX": 762.4935024485859,
+      "decoy": null,
+      "imageSize": 512,
+      "hunterX": 654.335587709993
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

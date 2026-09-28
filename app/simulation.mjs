@@ -43,6 +43,7 @@ export function createLife(options = {}) {
     cooldown: 0,
     boost: 0,
     digestion: /** @type {Digestion[]} */ ([]),
+    decoy: /** @type {{x:number,y:number,radius:number,remaining:number,targets:Set<string>}|null} */ (null),
     evolved: false,
     evolution: 0,
     complete: false,

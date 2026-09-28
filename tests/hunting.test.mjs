@@ -88,12 +88,12 @@ test('Moderated impulse has a seven-second cooldown; every choice increases trav
   }
   assert.equal(
     upgradeStats(['dash', 'dash', 'dash', 'dash']).cooldownFactor * 7,
-    3,
+    5,
   );
 });
 test('Current saved cadence migrates once preserving fraction and existing pending reroll', () => {
   const p = newJourney(7);
-  p.mutations = ['reach'];
+  p.mutations = ['turn'];
   p.level = 1;
   p.adaptationVersion = 2;
   p.xp = (previousJourneyAdaptation(0) + previousJourneyAdaptation(1)) / 2;
@@ -105,7 +105,7 @@ test('Current saved cadence migrates once preserving fraction and existing pendi
     (journeyAdaptation(0) + journeyAdaptation(1)) / 2,
   );
   assert.equal(loaded.progress.adaptationVersion, 5);
-  assert.deepEqual(loaded.progress.mutations, ['reach']);
+  assert.deepEqual(loaded.progress.mutations, ['turn']);
   const again = loadJourney(saveJourney(loaded.progress, loaded.life, w, true));
   assert.equal(again.progress.xp, loaded.progress.xp);
 });

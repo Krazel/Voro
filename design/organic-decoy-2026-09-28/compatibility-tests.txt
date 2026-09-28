@@ -1,0 +1,23 @@
+✔ Tentacles extend before grabbing, haul edible prey and retract when it is eaten (4.0957ms)
+✔ Six arms select distinct prey; shrinking releases every oversized target (0.5987ms)
+✔ Moderated impulse has a seven-second cooldown; every choice increases travel and reduces cooldown (1.9863ms)
+✔ Current saved cadence migrates once preserving fraction and existing pending reroll (2.568ms)
+✔ Actual engine renders tentacle geometry without invalid values and clears arms on reset (73.9603ms)
+✔ Chunks regenerate deterministically at negative coordinates and retain consumed slots (122.3209ms)
+✔ Saved negative position, pending meals, cooldown and adaptation survive reload (3.3711ms)
+✔ 14 upgrades have bounded stats; choices never repeat within a hand or exceed safe selection limits (4.6359ms)
+✔ Recycled mass grants no XP; tiny nutrients allow recovery below initial mass (0.8744ms)
+✔ Illustrated sprite crops stay inside the atlas, and soft bodies deform with time (0.8942ms)
+✔ Completed captures survive toggling the overlay and only a new capture resets them (77.092ms)
+✔ Reports refuse empty data, preserve statistics and produce a small shareable file (58.4731ms)
+✔ Native share writes one UTF-8 cache file before presenting its URI; web shares a real text file (1.9834ms)
+✔ Nucleus choices now boost adaptation additively, preserve saved choices and no longer boost mass (129.4214ms)
+✔ Biome cinematics no longer shrink the outgoing world to a tiny island (23.2626ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 718.6466

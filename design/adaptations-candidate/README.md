@@ -1,11 +1,14 @@
 # Candidata de adaptaciones — 2026-09-28
 
-Respecto a la versión entregada 0.8.1:
-- Eliminada Absorción amplia (antes Pseudópodos largos, ID `reach`). Las partidas antiguas siguen cargando y devuelven esas elecciones para escoger otras, hasta el límite disponible; no se duplican al guardar y cargar.
-- Corriente aspirante explica que atrae comida comestible hacia el protagonista. Cada adquisición añade 14 unidades al alcance; no cambia los tentáculos, la biomasa ni permite comer enemigos demasiado grandes.
-- Se conserva Membrana repulsora de la candidata anterior, en lugar del daño de espinas.
-- Quedan 13 adaptaciones y 69 adquisiciones posibles. No se han cambiado los demás valores.
+Tras 0.8.1 se retiró Absorción amplia con devolución de elecciones guardadas y se sustituyeron las espinas por Membrana repulsora.
 
-Propuesta pendiente, NO implementada: Digestión protegida. Cada adquisición conservaría un alimento en digestión al recibir daño, hasta tres. Mantendría su progreso, priorizando los alimentos más cercanos a terminar. El golpe seguiría quitando biomasa. Aporta protección a una captura conseguida sin duplicar escudo o reciclaje.
+Encargo actual: añadir Señuelo orgánico y ajustar únicamente el reparto de elecciones, la bonificación de Adaptación acelerada, la escala de Corriente aspirante y la mejora de Impulso elástico.
 
-Validación: 28 pruebas de adaptación, límites, idiomas, repulsión y migración correctas; TypeScript, compilaciones móvil y PC correctas. Verificación en navegador local: 13 tarjetas, filtros y repulsión funcionales, sin errores de página. No es una prueba de rendimiento físico ni se ha vuelto a medir la campaña completa con las 69 elecciones. No se ha empaquetado ni subido a TestFlight esta candidata.
+- Señuelo orgánico: rara, una adquisición; cada impulso aceptado deja una copia durante 2 segundos. Usa la recarga del impulso, sin temporizador adicional. Desvía a perseguidores móviles ya cercanos y sus nuevos disparos; no atrae enemigos nuevos, ni hace invulnerable. Snapshot del protagonista limitado a 512×512 una vez por impulso, animación de respiración y desvanecimiento mediante composición. No se recalcula otro protagonista por fotograma.
+- Adaptación acelerada: +5% por elección, máximo ocho (+40%).
+- Corriente aspirante: +15% del radio corporal por elección, con mínimo14 unidades por elección para conservar su efecto al inicio; seis elecciones. Solo comida comestible.
+- Impulso elástico: +0,10 potencia, +0,025s duración, −0,5s recarga por elección. Base sin cambios: ×2,5 /0,42s /7s. Máximo ×2,9 /0,52s /5s.
+- Cadencia: ganancias por entorno en campaign-pacing.mjs; moderación gradual cuando el número de elecciones supera su referencia de etapa, sin bloqueo ni límite duro de entorno. Conserva XP y elecciones guardadas; cada nueva barra sigue empezando en cero. Los objetivos de biomasa y los demás efectos y límites no cambian.
+- 14 tipos, 70 adquisiciones. Digestión protegida descartada; no implementada.
+
+Verificación y límites en ../organic-decoy-2026-09-28/README.md. Candidata local; TestFlight y ejecutable entregados siguen en0.8.1.

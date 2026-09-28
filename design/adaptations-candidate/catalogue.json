@@ -1,6 +1,6 @@
 {
   "version": "0.8.1",
-  "totalChoices": 69,
+  "totalChoices": 70,
   "adaptations": [
     {
       "id": "slots",
@@ -27,13 +27,13 @@
     {
       "id": "yield",
       "name": "Adaptación acelerada",
-      "detail": "+10 % de progreso de adaptación por alimento",
+      "detail": "+5 % de progreso de adaptación por alimento",
       "max": 8,
       "group": "Comer",
       "artIndex": 3,
-      "maximum": "+80 % de progreso por alimento",
+      "maximum": "+40 % de progreso por alimento",
       "behavior": "Llena antes la barra de adaptación. No aumenta la biomasa obtenida ni acelera directamente el cambio de entorno. Tus propios fragmentos no dan progreso de adaptación.",
-      "exact": "Multiplicador de progreso = 1 + 0,10 × adquisiciones, aplicado sobre la ganancia propia del entorno."
+      "exact": "Multiplicador de progreso = 1 + 0,05 × adquisiciones, aplicado sobre la ganancia propia del entorno."
     },
     {
       "id": "speed",
@@ -60,24 +60,24 @@
     {
       "id": "dash",
       "name": "Impulso elástico",
-      "detail": "+0,18 de potencia · +0,05 s de impulso · −1 s de recarga",
+      "detail": "+0,10 de potencia · +0,025 s de impulso · −0,5 s de recarga",
       "max": 4,
       "group": "Moverse",
       "artIndex": 6,
-      "maximum": "×3,22 · 0,62 s · recarga 3 s",
-      "behavior": "De base: potencia ×2,5, duración 0,42 s y recarga 7 s. Cada adquisición suma 0,18 al multiplicador, 0,05 s a la duración y resta 1 s a la recarga.",
-      "exact": "Potencia = 2,5 + 0,18 × n. Duración = 0,42 + 0,05 × n. Recarga = 7 − n segundos. La potencia multiplica la velocidad objetivo; el movimiento conserva su aceleración suave."
+      "maximum": "×2,90 · 0,52 s · recarga 5 s",
+      "behavior": "De base: potencia ×2,5, duración 0,42 s y recarga 7 s. Cada adquisición suma 0,10 al multiplicador, 0,025 s a la duración y resta 0,5 s a la recarga.",
+      "exact": "Potencia = 2,5 + 0,10 × n. Duración = 0,42 + 0,025 × n. Recarga = 7 − 0,5 × n segundos. El impulso inicial se conserva."
     },
     {
       "id": "pull",
       "name": "Corriente aspirante",
-      "detail": "Atrae hacia ti comida que ya puedes comer, desde más lejos. +14 de distancia.",
+      "detail": "Atrae comida comestible hacia ti. +15 % de tu radio de alcance, mínimo +14.",
       "max": 6,
       "group": "Comer",
       "artIndex": 7,
-      "maximum": "+84 unidades de alcance",
-      "behavior": "La comida cercana que ya puedes comer se mueve suavemente hacia ti, sin tocarla ni apuntar. Cada adquisición permite atraerla desde 14 unidades más lejos. No afecta a enemigos demasiado grandes ni aumenta la biomasa de cada alimento. Hay una pequeña atracción de base.",
-      "exact": "Radio de corriente = radio corporal + 22 + 14 × adquisiciones. La fuerza disminuye con la distancia."
+      "maximum": "+90 % de tu radio, mínimo +84 unidades",
+      "behavior": "La comida cercana que ya puedes comer se mueve suavemente hacia ti. Cada adquisición añade un 15 % de tu radio corporal a la distancia de atracción: el alcance crece contigo. Cada elección conserva un mínimo de 14 unidades cuando eres pequeño. No afecta a enemigos demasiado grandes, no aumenta la biomasa ni cambia los tentáculos.",
+      "exact": "Radio de corriente = radio corporal + 22 + máximo(14; 0,15 × radio corporal) × adquisiciones. La fuerza disminuye con la distancia."
     },
     {
       "id": "shield",
@@ -134,6 +134,17 @@
       "maximum": "+60 % de tu radio corporal",
       "behavior": "Solo puede salir cuando ya tienes Tentáculos cazadores. Cada adquisición añade el 15 % de tu radio corporal a su distancia de captura; no es un 15 % de la longitud total anterior.",
       "exact": "Alcance desde tu centro = (1,5 + 0,15 × adquisiciones) × radio corporal + 10. Al máximo: 2,1 × radio + 10."
+    },
+    {
+      "id": "decoy",
+      "name": "Señuelo orgánico",
+      "detail": "Cada impulso deja una copia que distrae a tus perseguidores durante 2 s.",
+      "max": 1,
+      "group": "Rara",
+      "artIndex": 12,
+      "maximum": "Una copia durante 2 s con cada impulso",
+      "behavior": "Dejas una copia gelatinosa en el lugar del que sales. Los enemigos cercanos que ya te perseguían pasan a dirigirse a ella, incluidos sus disparos. No atrae enemigos nuevos, no da invulnerabilidad y no distrae peligros inmóviles. Una sola adquisición.",
+      "exact": "Se activa solo al aceptar un impulso. Comparte su recarga (7 s iniciales; 5 s con Impulso elástico al máximo), sin recarga adicional. La copia dura 2 s y se desvanece suavemente."
     },
     {
       "id": "combo",

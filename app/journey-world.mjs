@@ -6,6 +6,7 @@ import {
 } from './population.mjs';
 import { MicroWorld, makeEntity, TILE } from './micro-world.mjs';
 import { animalTarget } from './animal-steering.mjs';
+import { decoyTarget } from './organic-decoy.mjs';
 import { advanceRepulsion } from './contact-repulsion.mjs';
 import { random, clamp } from './simulation.mjs';
 import { projectileThreatMass } from './threat-scale.mjs';
@@ -265,12 +266,14 @@ export class JourneyWorld extends MicroWorld {
         p.x -= (dx / d) * (1 - d / 320) * 28 * dt;
         p.y -= (dy / d) * (1 - d / 320) * 28 * dt;
       }
-      if (s.shot && e.wound < 1 && d < 410 && d > p.radius * 1.1) {
+      const aim=decoyTarget(e,s,p)||p, shotDx=aim.x-e.x, shotDy=aim.y-e.y,
+        shotDistance=Math.hypot(shotDx,shotDy);
+      if (s.shot && e.wound < 1 && shotDistance < 410 && shotDistance > aim.radius * 1.1) {
         e.shotClock = Math.max(0, (e.shotClock ?? s.shot.interval) - dt);
         if (e.shotClock === 0 && this.projectiles.length < 72) {
           e.shotClock = s.shot.interval;
           e.attack = 1;
-          const angle = Math.atan2(dy, dx),
+          const angle = Math.atan2(shotDy, shotDx),
             v = s.shot.speed;
           this.projectiles.push({
             x: e.x + Math.cos(angle) * e.r * 0.65,

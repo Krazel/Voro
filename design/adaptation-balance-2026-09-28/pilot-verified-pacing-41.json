@@ -1,0 +1,855 @@
+{
+  "timings": [
+    {
+      "stage": "micro",
+      "at": 0,
+      "upgrades": 0,
+      "choices": []
+    },
+    {
+      "stage": "pond",
+      "at": 635,
+      "upgrades": 11,
+      "choices": [
+        "speed",
+        "tentacles",
+        "digest",
+        "speed",
+        "yield",
+        "digest",
+        "speed",
+        "speed",
+        "digest",
+        "pull",
+        "pull"
+      ]
+    },
+    {
+      "stage": "land",
+      "at": 1252,
+      "upgrades": 19,
+      "choices": [
+        "speed",
+        "tentacles",
+        "digest",
+        "speed",
+        "yield",
+        "digest",
+        "speed",
+        "speed",
+        "digest",
+        "pull",
+        "pull",
+        "digest",
+        "slots",
+        "speed",
+        "shield",
+        "yield",
+        "yield",
+        "digest",
+        "digest"
+      ]
+    },
+    {
+      "stage": "water",
+      "at": 1885,
+      "upgrades": 28,
+      "choices": [
+        "speed",
+        "tentacles",
+        "digest",
+        "speed",
+        "yield",
+        "digest",
+        "speed",
+        "speed",
+        "digest",
+        "pull",
+        "pull",
+        "digest",
+        "slots",
+        "speed",
+        "shield",
+        "yield",
+        "yield",
+        "digest",
+        "digest",
+        "speed",
+        "yield",
+        "yield",
+        "tentacleReach",
+        "tentacles",
+        "digest",
+        "pull",
+        "yield",
+        "digest"
+      ]
+    },
+    {
+      "stage": "city",
+      "at": 2432,
+      "upgrades": 36,
+      "choices": [
+        "speed",
+        "tentacles",
+        "digest",
+        "speed",
+        "yield",
+        "digest",
+        "speed",
+        "speed",
+        "digest",
+        "pull",
+        "pull",
+        "digest",
+        "slots",
+        "speed",
+        "shield",
+        "yield",
+        "yield",
+        "digest",
+        "digest",
+        "speed",
+        "yield",
+        "yield",
+        "tentacleReach",
+        "tentacles",
+        "digest",
+        "pull",
+        "yield",
+        "digest",
+        "pull",
+        "slots",
+        "yield",
+        "pull",
+        "tentacleReach",
+        "yield",
+        "slots",
+        "pull"
+      ]
+    },
+    {
+      "stage": "orbit",
+      "at": 2893,
+      "upgrades": 47,
+      "choices": [
+        "speed",
+        "tentacles",
+        "digest",
+        "speed",
+        "yield",
+        "digest",
+        "speed",
+        "speed",
+        "digest",
+        "pull",
+        "pull",
+        "digest",
+        "slots",
+        "speed",
+        "shield",
+        "yield",
+        "yield",
+        "digest",
+        "digest",
+        "speed",
+        "yield",
+        "yield",
+        "tentacleReach",
+        "tentacles",
+        "digest",
+        "pull",
+        "yield",
+        "digest",
+        "pull",
+        "slots",
+        "yield",
+        "pull",
+        "tentacleReach",
+        "yield",
+        "slots",
+        "pull",
+        "tentacleReach",
+        "tentacleReach",
+        "tentacles",
+        "slots",
+        "tentacles",
+        "slots",
+        "tentacles",
+        "tentacles",
+        "slots",
+        "combo",
+        "decoy"
+      ]
+    },
+    {
+      "stage": "planets",
+      "at": 3113,
+      "upgrades": 51,
+      "choices": [
+        "speed",
+        "tentacles",
+        "digest",
+        "speed",
+        "yield",
+        "digest",
+        "speed",
+        "speed",
+        "digest",
+        "pull",
+        "pull",
+        "digest",
+        "slots",
+        "speed",
+        "shield",
+        "yield",
+        "yield",
+        "digest",
+        "digest",
+        "speed",
+        "yield",
+        "yield",
+        "tentacleReach",
+        "tentacles",
+        "digest",
+        "pull",
+        "yield",
+        "digest",
+        "pull",
+        "slots",
+        "yield",
+        "pull",
+        "tentacleReach",
+        "yield",
+        "slots",
+        "pull",
+        "tentacleReach",
+        "tentacleReach",
+        "tentacles",
+        "slots",
+        "tentacles",
+        "slots",
+        "tentacles",
+        "tentacles",
+        "slots",
+        "combo",
+        "decoy",
+        "turn",
+        "combo",
+        "combo",
+        "turn"
+      ]
+    },
+    {
+      "stage": "stars",
+      "at": 3453,
+      "upgrades": 58,
+      "choices": [
+        "speed",
+        "tentacles",
+        "digest",
+        "speed",
+        "yield",
+        "digest",
+        "speed",
+        "speed",
+        "digest",
+        "pull",
+        "pull",
+        "digest",
+        "slots",
+        "speed",
+        "shield",
+        "yield",
+        "yield",
+        "digest",
+        "digest",
+        "speed",
+        "yield",
+        "yield",
+        "tentacleReach",
+        "tentacles",
+        "digest",
+        "pull",
+        "yield",
+        "digest",
+        "pull",
+        "slots",
+        "yield",
+        "pull",
+        "tentacleReach",
+        "yield",
+        "slots",
+        "pull",
+        "tentacleReach",
+        "tentacleReach",
+        "tentacles",
+        "slots",
+        "tentacles",
+        "slots",
+        "tentacles",
+        "tentacles",
+        "slots",
+        "combo",
+        "decoy",
+        "turn",
+        "combo",
+        "combo",
+        "turn",
+        "combo",
+        "dash",
+        "dash",
+        "turn",
+        "dash",
+        "dash",
+        "turn"
+      ]
+    },
+    {
+      "stage": "galaxies",
+      "at": 3745,
+      "upgrades": 64,
+      "choices": [
+        "speed",
+        "tentacles",
+        "digest",
+        "speed",
+        "yield",
+        "digest",
+        "speed",
+        "speed",
+        "digest",
+        "pull",
+        "pull",
+        "digest",
+        "slots",
+        "speed",
+        "shield",
+        "yield",
+        "yield",
+        "digest",
+        "digest",
+        "speed",
+        "yield",
+        "yield",
+        "tentacleReach",
+        "tentacles",
+        "digest",
+        "pull",
+        "yield",
+        "digest",
+        "pull",
+        "slots",
+        "yield",
+        "pull",
+        "tentacleReach",
+        "yield",
+        "slots",
+        "pull",
+        "tentacleReach",
+        "tentacleReach",
+        "tentacles",
+        "slots",
+        "tentacles",
+        "slots",
+        "tentacles",
+        "tentacles",
+        "slots",
+        "combo",
+        "decoy",
+        "turn",
+        "combo",
+        "combo",
+        "turn",
+        "combo",
+        "dash",
+        "dash",
+        "turn",
+        "dash",
+        "dash",
+        "turn",
+        "recycle",
+        "recycle",
+        "recycle",
+        "recycle",
+        "recycle",
+        "recycle"
+      ]
+    },
+    {
+      "stage": "universe",
+      "at": 3912,
+      "upgrades": 69,
+      "choices": [
+        "speed",
+        "tentacles",
+        "digest",
+        "speed",
+        "yield",
+        "digest",
+        "speed",
+        "speed",
+        "digest",
+        "pull",
+        "pull",
+        "digest",
+        "slots",
+        "speed",
+        "shield",
+        "yield",
+        "yield",
+        "digest",
+        "digest",
+        "speed",
+        "yield",
+        "yield",
+        "tentacleReach",
+        "tentacles",
+        "digest",
+        "pull",
+        "yield",
+        "digest",
+        "pull",
+        "slots",
+        "yield",
+        "pull",
+        "tentacleReach",
+        "yield",
+        "slots",
+        "pull",
+        "tentacleReach",
+        "tentacleReach",
+        "tentacles",
+        "slots",
+        "tentacles",
+        "slots",
+        "tentacles",
+        "tentacles",
+        "slots",
+        "combo",
+        "decoy",
+        "turn",
+        "combo",
+        "combo",
+        "turn",
+        "combo",
+        "dash",
+        "dash",
+        "turn",
+        "dash",
+        "dash",
+        "turn",
+        "recycle",
+        "recycle",
+        "recycle",
+        "recycle",
+        "recycle",
+        "recycle",
+        "spikes",
+        "spikes",
+        "spikes",
+        "spikes",
+        "spikes"
+      ]
+    }
+  ],
+  "choices": [
+    {
+      "at": 93,
+      "stage": "micro",
+      "id": "speed"
+    },
+    {
+      "at": 159,
+      "stage": "micro",
+      "id": "tentacles"
+    },
+    {
+      "at": 222,
+      "stage": "micro",
+      "id": "digest"
+    },
+    {
+      "at": 303,
+      "stage": "micro",
+      "id": "speed"
+    },
+    {
+      "at": 369,
+      "stage": "micro",
+      "id": "yield"
+    },
+    {
+      "at": 410,
+      "stage": "micro",
+      "id": "digest"
+    },
+    {
+      "at": 441,
+      "stage": "micro",
+      "id": "speed"
+    },
+    {
+      "at": 482,
+      "stage": "micro",
+      "id": "speed"
+    },
+    {
+      "at": 525,
+      "stage": "micro",
+      "id": "digest"
+    },
+    {
+      "at": 565,
+      "stage": "micro",
+      "id": "pull"
+    },
+    {
+      "at": 602,
+      "stage": "micro",
+      "id": "pull"
+    },
+    {
+      "at": 751,
+      "stage": "pond",
+      "id": "digest"
+    },
+    {
+      "at": 862,
+      "stage": "pond",
+      "id": "slots"
+    },
+    {
+      "at": 941,
+      "stage": "pond",
+      "id": "speed"
+    },
+    {
+      "at": 998,
+      "stage": "pond",
+      "id": "shield"
+    },
+    {
+      "at": 1060,
+      "stage": "pond",
+      "id": "yield"
+    },
+    {
+      "at": 1115,
+      "stage": "pond",
+      "id": "yield"
+    },
+    {
+      "at": 1172,
+      "stage": "pond",
+      "id": "digest"
+    },
+    {
+      "at": 1227,
+      "stage": "pond",
+      "id": "digest"
+    },
+    {
+      "at": 1446,
+      "stage": "land",
+      "id": "speed"
+    },
+    {
+      "at": 1523,
+      "stage": "land",
+      "id": "yield"
+    },
+    {
+      "at": 1582,
+      "stage": "land",
+      "id": "yield"
+    },
+    {
+      "at": 1625,
+      "stage": "land",
+      "id": "tentacleReach"
+    },
+    {
+      "at": 1667,
+      "stage": "land",
+      "id": "tentacles"
+    },
+    {
+      "at": 1717,
+      "stage": "land",
+      "id": "digest"
+    },
+    {
+      "at": 1759,
+      "stage": "land",
+      "id": "pull"
+    },
+    {
+      "at": 1800,
+      "stage": "land",
+      "id": "yield"
+    },
+    {
+      "at": 1842,
+      "stage": "land",
+      "id": "digest"
+    },
+    {
+      "at": 2009,
+      "stage": "water",
+      "id": "pull"
+    },
+    {
+      "at": 2130,
+      "stage": "water",
+      "id": "slots"
+    },
+    {
+      "at": 2207,
+      "stage": "water",
+      "id": "yield"
+    },
+    {
+      "at": 2259,
+      "stage": "water",
+      "id": "pull"
+    },
+    {
+      "at": 2305,
+      "stage": "water",
+      "id": "tentacleReach"
+    },
+    {
+      "at": 2337,
+      "stage": "water",
+      "id": "yield"
+    },
+    {
+      "at": 2370,
+      "stage": "water",
+      "id": "slots"
+    },
+    {
+      "at": 2411,
+      "stage": "water",
+      "id": "pull"
+    },
+    {
+      "at": 2502,
+      "stage": "city",
+      "id": "tentacleReach"
+    },
+    {
+      "at": 2586,
+      "stage": "city",
+      "id": "tentacleReach"
+    },
+    {
+      "at": 2633,
+      "stage": "city",
+      "id": "tentacles"
+    },
+    {
+      "at": 2671,
+      "stage": "city",
+      "id": "slots"
+    },
+    {
+      "at": 2701,
+      "stage": "city",
+      "id": "tentacles"
+    },
+    {
+      "at": 2723,
+      "stage": "city",
+      "id": "slots"
+    },
+    {
+      "at": 2748,
+      "stage": "city",
+      "id": "tentacles"
+    },
+    {
+      "at": 2770,
+      "stage": "city",
+      "id": "tentacles"
+    },
+    {
+      "at": 2791,
+      "stage": "city",
+      "id": "slots"
+    },
+    {
+      "at": 2818,
+      "stage": "city",
+      "id": "combo"
+    },
+    {
+      "at": 2854,
+      "stage": "city",
+      "id": "decoy"
+    },
+    {
+      "at": 2915,
+      "stage": "orbit",
+      "id": "turn"
+    },
+    {
+      "at": 2980,
+      "stage": "orbit",
+      "id": "combo"
+    },
+    {
+      "at": 3010,
+      "stage": "orbit",
+      "id": "combo"
+    },
+    {
+      "at": 3067,
+      "stage": "orbit",
+      "id": "turn"
+    },
+    {
+      "at": 3237,
+      "stage": "planets",
+      "id": "combo"
+    },
+    {
+      "at": 3308,
+      "stage": "planets",
+      "id": "dash"
+    },
+    {
+      "at": 3352,
+      "stage": "planets",
+      "id": "dash"
+    },
+    {
+      "at": 3379,
+      "stage": "planets",
+      "id": "turn"
+    },
+    {
+      "at": 3398,
+      "stage": "planets",
+      "id": "dash"
+    },
+    {
+      "at": 3420,
+      "stage": "planets",
+      "id": "dash"
+    },
+    {
+      "at": 3446,
+      "stage": "planets",
+      "id": "turn"
+    },
+    {
+      "at": 3538,
+      "stage": "stars",
+      "id": "recycle"
+    },
+    {
+      "at": 3596,
+      "stage": "stars",
+      "id": "recycle"
+    },
+    {
+      "at": 3642,
+      "stage": "stars",
+      "id": "recycle"
+    },
+    {
+      "at": 3688,
+      "stage": "stars",
+      "id": "recycle"
+    },
+    {
+      "at": 3710,
+      "stage": "stars",
+      "id": "recycle"
+    },
+    {
+      "at": 3741,
+      "stage": "stars",
+      "id": "recycle"
+    },
+    {
+      "at": 3797,
+      "stage": "galaxies",
+      "id": "spikes"
+    },
+    {
+      "at": 3833,
+      "stage": "galaxies",
+      "id": "spikes"
+    },
+    {
+      "at": 3854,
+      "stage": "galaxies",
+      "id": "spikes"
+    },
+    {
+      "at": 3876,
+      "stage": "galaxies",
+      "id": "spikes"
+    },
+    {
+      "at": 3898,
+      "stage": "galaxies",
+      "id": "spikes"
+    },
+    {
+      "at": 3921,
+      "stage": "universe",
+      "id": "spikes"
+    }
+  ],
+  "seconds": 3996,
+  "deaths": 0,
+  "upgrades": 70,
+  "coefficients": {
+    "micro": {
+      "minutes": 19,
+      "biomass": 0.13
+    },
+    "pond": {
+      "minutes": 16,
+      "biomass": 0.16
+    },
+    "land": {
+      "minutes": 18,
+      "biomass": 0.16
+    },
+    "water": {
+      "minutes": 17,
+      "biomass": 0.136
+    },
+    "city": {
+      "minutes": 18,
+      "biomass": 0.104
+    },
+    "orbit": {
+      "minutes": 11,
+      "biomass": 0.32
+    },
+    "planets": {
+      "minutes": 8,
+      "biomass": 0.2
+    },
+    "stars": {
+      "minutes": 7,
+      "biomass": 0.23
+    },
+    "galaxies": {
+      "minutes": 4,
+      "biomass": 0.3
+    },
+    "universe": {
+      "minutes": 2,
+      "biomass": 0.3
+    }
+  },
+  "assumption": "Deterministic 30Hz autopilot, immediate choices. Not human duration or a physical-device performance test.",
+  "mode": "invulnerable pacing-only, yield prioritized"
+}

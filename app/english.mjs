@@ -251,14 +251,20 @@ Vacuolas adicionales|Extra vacuoles
 Enzimas rápidas|Fast enzymes
 +12,5 % de velocidad de digestión|+12.5% digestion speed
 Adaptación acelerada|Accelerated adaptation
++5 % de progreso de adaptación por alimento|+5% adaptation progress per food item
 +10 % de progreso de adaptación por alimento|+10% adaptation progress per food item
 Flagelos potentes|Powerful flagella
 +7,5 % de velocidad|+7.5% speed
 Cuerpo flexible|Flexible body
 +15 % de agilidad|+15% agility
 Impulso elástico|Elastic dash
++0,10 de potencia · +0,025 s de impulso · −0,5 s de recarga|+0.10 power · +0.025 s dash duration · −0.5 s cooldown
 +0,18 de potencia · +0,05 s de impulso · −1 s de recarga|+0.18 power · +0.05 s dash duration · −1 s cooldown
 Corriente aspirante|Suction current
+Atrae comida comestible hacia ti. +15 % de tu radio corporal de alcance.|Pulls edible food towards you. +15% of your body radius added to reach.
+Atrae comida comestible hacia ti. +15 % de tu radio de alcance, mínimo +14.|Pulls edible food towards you. +15% of your radius added to reach, at least +14.
+Señuelo orgánico|Organic decoy
+Cada impulso deja una copia que distrae a tus perseguidores durante 2 s.|Every dash leaves a copy that distracts your pursuers for 2 s.
 Atrae hacia ti comida que ya puedes comer, desde más lejos. +14 de distancia.|Pulls food you can already eat towards you from farther away. +14 distance.
 +14 de alcance de la corriente aspirante|+14 suction current reach
 Escudo gelatinoso|Gelatinous shield

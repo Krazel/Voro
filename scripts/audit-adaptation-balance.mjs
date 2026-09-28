@@ -9,7 +9,7 @@ import {STAGES,SPECIES_BY_ID,isDanger} from '../app/journey-data.mjs';
 import {CAMPAIGN_PACING} from '../app/campaign-pacing.mjs';
 if(process.env.VORO_PACING_COEFFICIENTS)for(const [id,v]of Object.entries(JSON.parse(process.env.VORO_PACING_COEFFICIENTS)))CAMPAIGN_PACING[id].biomass=v;
 function fresh(stage=0,seed=41){const f=makeEngine(),g=f.game;g.progress=newJourney(seed);g.progress.stage=stage;g.life=journeyLife(g.progress);g.world=new JourneyWorld(seed,[],stage);g.seed();g.action('start');while(g.birth>0){let dt=Math.min(g.birth,1/60);g.time+=dt;g.update(dt);}return f;}
-function step(g,n=1,render=false){for(let i=0;i<n;i++){g.time+=1/30;g.update(1/30);if(render)g.render();}}
+function step(g,n=1,render=false){for(let i=0;i<n;i++){if(process.env.VORO_PACING_ONLY)g.life.invulnerable=2;g.time+=1/30;g.update(1/30);if(render)g.render();}}
 let report;const originalLog=console.log;console.log=(...a)=>{originalLog(...a);if(a[0]==='Journey result')report=JSON.parse(a[1]);};
   const { game: g } = fresh(0, Number(process.argv[3]||41));
   let target = null,
@@ -57,13 +57,15 @@ let report;const originalLog=console.log;console.log=(...a)=>{originalLog(...a);
         'tentacleReach',
         'tentacles',
         'combo',
-        'reach',
+        'decoy',
         'dash',
         'turn',
         'recycle',
         'spikes',
       ];
       if(process.env.VORO_YIELD_LAST) order.push(...order.splice(order.indexOf('yield'),1));
+      if(process.env.VORO_DEFENSIVE) order.splice(0,order.length,
+        'shield','decoy','speed','dash','recycle','spikes','digest','slots','tentacles','tentacleReach','combo','turn','pull','yield');
       choices.push({at:Math.round(g.progress.totalTime+g.life.elapsed),stage:STAGES[g.progress.stage].id,
         id:order.find(id=>g.progress.offer.includes(id))||g.progress.offer[0]});
       g.choose(

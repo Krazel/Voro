@@ -1,6 +1,8 @@
+import { decoyTarget } from './organic-decoy.mjs';
 // Enter and leave at different distances; eating eligibility itself is unchanged.
 export function animalTarget(e, species, player, time, range, leash, roam) {
-  const dx = player.x - e.x, dy = player.y - e.y, d = Math.hypot(dx, dy);
+  const aim = decoyTarget(e,species,player) || player;
+  const dx = aim.x - e.x, dy = aim.y - e.y, d = Math.hypot(dx, dy);
   const homeDistance = Math.hypot(e.x - e.homeX, e.y - e.homeY);
   if (e.aiReturning && homeDistance < roam && time >= e.aiReturnUntil)
     e.aiReturning = false;

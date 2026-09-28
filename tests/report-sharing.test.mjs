@@ -51,14 +51,14 @@ test('Nucleus choices now boost adaptation additively, preserve saved choices an
  const loaded=loadJourney(saveJourney(game.progress,game.life,game.world,true));
  assert.deepEqual(loaded.progress.mutations,['yield','yield']);assert.equal(loaded.progress.xp,35);
  assert.equal(upgradeStats(['yield','yield']).yieldFactor,1);
- assert.equal(upgradeStats(['yield','yield']).adaptationFactor,1.2);
+ assert.equal(upgradeStats(['yield','yield']).adaptationFactor,1.1);
  assert.equal(UPGRADES.find(u=>u.id==='yield').max,8);
  for(const count of [0,1,8]) {
    game.startTest(1,10,false,true);game.progress.mutations=Array(count).fill('yield');game.progress.level=count;
    game.stats=upgradeStats(game.progress.mutations);Object.assign(game.life,game.stats);
    game.life.digestion=[{progress:0.99,value:10,r:1,dx:0,dy:0,rotation:0,kind:'pond-0'}];
    const xp=game.progress.xp;game.update(.1);
-   assert.ok(Math.abs(game.progress.xp-xp-8.5*(1+count*.1)*adaptationYield('pond'))<1e-8);
+   assert.ok(Math.abs(game.progress.xp-xp-8.5*(1+count*.05)*adaptationYield('pond',count))<1e-8);
  }
  game.destroy();
 });

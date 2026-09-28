@@ -47,5 +47,5 @@ test('Retired absorption reach changes neither suction nor eating distance; aspi
  assert.equal(wide.distance,base.distance,'same attraction radius and force');
  assert.equal(wide.eaten,false);
  assert.equal(run([],34).eaten,false);assert.equal(run(Array(6).fill('reach'),34).eaten,false);
- assert.ok(run(['pull'],55).distance<55,'aspiration still extends with its own choice');
+ assert.ok(run(['pull'],48).distance<48,'aspiration still extends with its own choice');
 });

@@ -57,6 +57,7 @@ import {
 } from './biomass-fragments.mjs';
 import { HuntingTentacles } from './hunting-tentacles.mjs';
 import { repelAttacker } from './contact-repulsion.mjs';
+import { releaseDecoy, tickDecoy, aspirationReach, DECOY_SECONDS } from './organic-decoy.mjs';
 import { syncShields, consumeShield } from './shields.mjs';
 import { drawShieldFilm } from './shield-film.mjs';
 import {
@@ -173,6 +174,7 @@ export class VoroEngine {
   world = new JourneyWorld(this.progress.seed, [], this.progress.stage);
   stats = upgradeStats([]);
   huntingTentacles = new HuntingTentacles();
+  decoyImage: HTMLCanvasElement | null = null;
   spriteAtlas = new Image();
   atlasImages: Record<string, HTMLImageElement> = {};
   environments = new Image();
@@ -636,6 +638,7 @@ export class VoroEngine {
     this.raf = requestAnimationFrame(this.frame);
   }
   seed() {
+    this.life.decoy=null;this.decoyImage=null;
     this.shieldHitAt = -Infinity;
     this.huntingTentacles.clear();
     this.world.stream(this.life.x, this.life.y, this.life.elapsed, true);
@@ -1106,6 +1109,10 @@ export class VoroEngine {
       this.transition === 0 &&
       impulse(this.life)
     ) {
+      if(levelOf(this.progress.mutations,'decoy')) {
+        releaseDecoy(this.life,this.world.entities,SPECIES_BY_ID,this.progress.stage===0?240:340);
+        this.captureDecoy();
+      }
       if (Math.hypot(this.life.vx, this.life.vy) < 10) {
         this.life.vx = Math.cos(this.heading) * 180;
         this.life.vy = Math.sin(this.heading) * 180;
@@ -1388,7 +1395,7 @@ export class VoroEngine {
         // finish only meals already earned before the orbital sweep began.
         const xpBefore = this.life.adaptationGained;
         digest(this.life, 100);
-        this.progress.xp += (this.life.adaptationGained - xpBefore) * .85 * this.stats.adaptationFactor * adaptationYield(stageOf(this.progress).id);
+        this.progress.xp += (this.life.adaptationGained - xpBefore) * .85 * this.stats.adaptationFactor * adaptationYield(stageOf(this.progress).id,this.progress.level);
         for (const e of this.world.entities) e.eaten = true;
         this.world.entities = []; this.world.projectiles = [];
         this.food = []; this.fragments = []; this.motes = [];
@@ -1468,6 +1475,7 @@ export class VoroEngine {
       this.comboClock = Math.max(0, this.comboClock - dt);
       this.stats = upgradeStats(this.progress.mutations, this.comboClock > 0);
       Object.assign(p, this.stats);
+      tickDecoy(p,dt);
       syncShields(this.progress, this.stats, dt);
       integrate(p, dt, this.input(), this.uniformVisualSpeed ? visualSpeedFactor(this.cameraEntryRadius,p.radius,this.zoom/this.zoomFactor) : 1);
       if (stageOf(this.progress).id === 'orbit') constrainOrbit(p, dt);
@@ -1513,7 +1521,7 @@ export class VoroEngine {
         )
           continue;
         const d = Math.hypot(f.x - p.x, f.y - p.y),
-          reach = p.radius + 22 + p.attraction;
+          reach = aspirationReach(p);
         if (d < reach) {
           const pull = (1 - d / reach) * 70 * dt;
           f.x += ((p.x - f.x) / Math.max(d, 1)) * pull;
@@ -1529,7 +1537,7 @@ export class VoroEngine {
         xpBefore = p.adaptationGained,
         finished = digest(p, dt);
       if (finished) {
-        this.progress.xp += (p.adaptationGained - xpBefore) * 0.85 * this.stats.adaptationFactor * adaptationYield(stageOf(this.progress).id);
+        this.progress.xp += (p.adaptationGained - xpBefore) * 0.85 * this.stats.adaptationFactor * adaptationYield(stageOf(this.progress).id,this.progress.level);
         this.comboMeals =
           p.elapsed - this.lastMeal < 4 ? this.comboMeals + finished : finished;
         this.lastMeal = p.elapsed;
@@ -1666,6 +1674,7 @@ export class VoroEngine {
     }
     this.universeFinale?.destroy(); this.universeFinale = new UniverseFinale(frame);
     this.progress.completed = true; this.progress.finalReady = true;
+    this.life.decoy=null;this.decoyImage=null;
     this.progress.offer = []; this.life.finalEaten = true;
     this.life.digestion = []; this.life.hurt = this.life.boost = 0;
     this.huntingTentacles.arms = [];
@@ -1690,6 +1699,7 @@ export class VoroEngine {
       if (!this.earthAbsorption && canAbsorbEarth(this.life)) {
         this.progress.orbitSweep = captureOrbit(this.world, this.fragments, this.life.elapsed);
         this.earthAbsorption = .001;
+        this.life.decoy=null;this.decoyImage=null;
         this.save();
         this.keys.clear(); this.pointer = null;
         this.life.vx = this.life.vy = 0;
@@ -1720,6 +1730,7 @@ export class VoroEngine {
       this.transitionFrame = frame;
     }
     this.transition = 7.2;
+    this.life.decoy=null;this.decoyImage=null;
     this.keys.clear();
     this.pointer = null;
     this.chime(true);
@@ -2160,6 +2171,7 @@ export class VoroEngine {
       const {scale}=earthConsumptionPose(p,this.earthAbsorption);
       c.translate(p.x,p.y);c.scale(scale,scale);c.translate(-p.x,-p.y);
     }
+    this.drawDecoy();
     if (!skipProtagonist && !this.adaptationCanvas) this.measured('protagonist', () => this.drawCell());
     c.restore();
     for (const f of this.floating) {
@@ -2274,6 +2286,30 @@ export class VoroEngine {
       );
     }
     c.closePath();
+  }
+  captureDecoy() {
+    this.decoyImage=null;
+    if(typeof document.createElement!=='function')return;
+    const canvas=document.createElement('canvas'), radius=this.life.radius;
+    // A single bounded snapshot per dash, not another procedural cell each frame.
+    canvas.width=canvas.height=512;
+    const context=canvas.getContext('2d'); if(!context)return;
+    const previous=this.ctx;
+    try {
+      this.ctx=context;
+      context.translate(256,256);context.scale(512/(radius*6),512/(radius*6));
+      context.translate(-this.life.x,-this.life.y);
+      this.drawCell(); this.decoyImage=canvas;
+    } finally {this.ctx=previous;}
+  }
+  drawDecoy() {
+    const d=this.life.decoy;if(!d || !this.decoyImage || this.life.dead)return;
+    const c=this.ctx,age=DECOY_SECONDS-d.remaining;
+    const pulse=this.reduced?1:1+Math.sin(age*5)*.025;
+    c.save();c.translate(d.x,d.y);c.scale(pulse,pulse);
+    c.globalAlpha=.7*Math.min(1,d.remaining/.65);
+    c.drawImage(this.decoyImage,-d.radius*3,-d.radius*3,d.radius*6,d.radius*6);
+    c.restore();
   }
   drawCell(time = this.time, fade: {bodyLight:number;coreScale:number;coreLight:number}|null = null) {
     const c = this.ctx,
