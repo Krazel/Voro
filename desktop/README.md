@@ -14,7 +14,7 @@ npm run build:windows
 python desktop/archive.py
 ```
 
-Output for the current `desktop/release.json`: `artifact/windows/0.8.1-preview.1/VORO-win32-x64/VORO.exe` and `VORO-0.8.1-Windows-x64-prueba1.zip`. Extract the complete ZIP; the executable needs the accompanying Electron files. Do not overwrite a delivered preview; advance `preview` in `desktop/release.json` for a subsequent package. The icon is a format conversion of the existing approved iOS app icon.
+Output for the current `desktop/release.json`: `artifact/windows/0.9-preview.1/VORO-win32-x64/VORO.exe` and `VORO-0.9-Windows-x64-prueba1.zip`. These are the next package paths; the latest delivered Windows package remains 0.8.1 preview 1. Extract the complete ZIP; the executable needs the accompanying Electron files. Do not overwrite a delivered preview; advance `preview` in `desktop/release.json` for a subsequent package. The icon is a format conversion of the existing approved iOS app icon.
 
 For automated testing, set `VORO_PLAYWRIGHT_RUNTIME` to the package.json of an installed Playwright runtime and run `node desktop/check-package.mjs`. The test uses its own `VORO_QA_PROFILE` and does not touch the player's save. Native Electron input is used to verify F11; CDP keyboard injection bypasses the main-process handler.
 

@@ -16,4 +16,12 @@ Run36475064908 pasó la interacción nativa en iPhone17ProMax e iPadPro13M5, per
 
 MembraneRim reutiliza la imagen aprobada mediante las mismas9 secciones (corte200px, borde28px), en un canvas explícito sobre el fondo del control. Se pinta al cargar/redimensionar; la animación7s solo transforma la capa. DPR limitado a2. Sin generar arte nuevo ni trabajo en el bucle de juego. Se evita el antiguo pseudo-elemento en los3controles. El segundo checkpoint nativo comprueba además que los3canvas contienen píxeles y espera antes de capturar.
 
-Paridad de esta solución en after-canvas/ y after-canvas-build/. Pendientes: inspección de capturas nativas del segundo run36476681828, firma/subida y confirmación API de TestFlight. No se declara entregada hasta verificar esos resultados.
+Paridad de esta solución en after-canvas/ y after-canvas-build/. El segundo checkpoint nativo [36476681828](https://github.com/Krazel/Voro/actions/runs/36476681828) ha terminado correctamente en iPhone 17 Pro Max e iPad Pro 13 (M5). Revisadas las capturas de ambos: los tres marcos muestran la textura aprobada. Evidencia en `native-after/`, con iPad en vertical y horizontal. Son simuladores con la app Capacitor y WKWebView, no mediciones de rendimiento en dispositivos físicos.
+
+Las capturas nativas corresponden a d457540. La corrección posterior 683983d solo aumenta la especificidad CSS para conservar los límites del marco (−4 px) frente a la regla general del canvas del juego. Comprobado en los builds de Chrome y WebKit de `after-canvas-build/`.
+
+La build firmada parte de 238c2ab. [36478097404](https://github.com/Krazel/Voro/actions/runs/36478097404) terminó correctamente. Apple confirma **0.9 (1), VALID / IN_BETA_TESTING**, build `158414ba-f36b-4ee3-982c-69c6d0e5161b`, asignada y releída en **VORO Interno**. Manifiesto y respuesta API en `testflight/`. App Store sigue sin publicar; no se ha modificado su versión 1.0 ni solicitado revisión.
+
+Biblioteca PR-009 actualizada y releída, revisión 253: 0.9 (1) como TestFlight interno entregado. Windows sigue en 0.8.1. Pendiente probar rendimiento y sensaciones en los dispositivos físicos del usuario.
+
+Verificación del IPA descargado: 345184403 bytes, SHA-256 `e08accb91715d1abc5ffda97d62dfa0780736c2187488b4d8f7ad38b97bf01a1`, coincide con CI; CRC ZIP completo correcto, Info.plist 0.9 (1), familias iPhone/iPad, imagen aprobada idéntica y código de los marcos presentes. Fixture de pruebas ausente. La primera descarga local sufrió corrupción en una hoja de animación; se repitió y se sustituyó por la copia que pasó checksum y CRC. No fue necesario reconstruir ni volver a subir a Apple. Resultado en `testflight/local-verification.json`.
