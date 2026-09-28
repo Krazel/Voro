@@ -9,8 +9,8 @@ rendering chunks...
 computing gzip size...
 pc-dist/index.html                   0.41 kB │ gzip:   0.29 kB
 pc-dist/assets/index-Cx0o9b01.css  234.15 kB │ gzip:  41.76 kB
-pc-dist/assets/web-06Aih_MJ.js       0.36 kB │ gzip:   0.25 kB
-pc-dist/assets/web-CxFMFwgS.js       8.45 kB │ gzip:   2.82 kB
-pc-dist/assets/index-HNfBMFHq.js   686.04 kB │ gzip: 226.39 kB
+pc-dist/assets/web-C10WlsjS.js       0.36 kB │ gzip:   0.24 kB
+pc-dist/assets/web-DFRWxv57.js       8.45 kB │ gzip:   2.81 kB
+pc-dist/assets/index-B6RoLvpc.js   686.29 kB │ gzip: 226.52 kB
 
-✓ built in 2.89s
+✓ built in 3.76s

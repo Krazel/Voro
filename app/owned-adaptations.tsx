@@ -8,6 +8,13 @@ import './owned-adaptations.css';
 
 // Reuse the same 5 × 3 atlas and artIndex as the adaptation choice screen.
 const artBounds = (index: number) => [(index % 5) * 1619 / 5, Math.floor(index / 5) * 324, 1619 / 5, 324];
+// Optical offsets in atlas pixels: center the visible painted subject, not its
+// square source cell. Keep image and edge fade together; no scaling or new art.
+const ART_OFFSETS = [
+  [-11.2,-18.2],[-15.9,-6.4],[-18,-10.7],[-1.6,-3.8],[-22.4,-4.4],
+  [9.2,2.3],[39.1,3.1],[14.8,1.4],[14.9,13.8],[18.5,8.3],
+  [-15.7,18.9],[14,37.9],[28.7,31],[6,26.8],[21.9,37.4],
+];
 
 // Painted silhouettes, clipped at their actual contours so the sheet background
 // never forms a rectangle around the approved organic frames.
@@ -63,7 +70,9 @@ export function OwnedAdaptations({ mutations, onClose, returnFocus }: {
                   <rect x={artBounds(item.artIndex)[0]} y={artBounds(item.artIndex)[1]} width={1619 / 5} height="324" fill={`url(#owned-fade-${item.id})`} />
                 </mask>
               </defs>
-              <image href="/upgrades/biological-adaptations.png" width="1619" height="972" mask={`url(#owned-art-${item.id})`} />
+              <g transform={`translate(${ART_OFFSETS[item.artIndex].join(' ')})`}>
+                <image href="/upgrades/biological-adaptations.png" width="1619" height="972" mask={`url(#owned-art-${item.id})`} />
+              </g>
             </svg>
             <span className="owned-name">{t(item.name).split(' ').map((word: string,i: number) => <span key={i}>{word}{' '}</span>)}</span>
           </button>)}

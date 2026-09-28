@@ -26,3 +26,7 @@ Se verificó también la correspondencia de los 14 iconos con el atlas original 
 Capturas finales actualizadas tras las correcciones de ilustraciones, fondo y marcos: `*-build.png`. `review.html` compara referencia y capturas reales. Las capturas usan una partida aislada de prueba, no modifican la del usuario.
 
 Esto acredita los bundles web móvil/PC y WebKit de escritorio, **no una ejecución física en iPhone/iPad**. TestFlight sigue en **0.9 (2)**; no se ha subido una nueva build ni empaquetado otro ejecutable Windows por este encargo.
+
+## Centrado óptico — 29-09-2026
+
+Revisadas las 14 ilustraciones dentro de sus celdas originales. Se midió el centro del contenido visible, ponderado por luminancia sobre el fondo y el desvanecimiento radial existente. `ART_OFFSETS` corrige cada celda mediante traslación SVG del dibujo junto a su máscara. Los desplazamientos máximos de la fuente son 39,1 px horizontal y 37,9 px vertical (aproximadamente 8 px en el icono móvil). No cambia el tamaño, el atlas, los marcos, los contadores ni el balance. Comprobadas visualmente las capturas actualizadas de móvil/PC y los 48 escenarios existentes sobre las dos compilaciones.
