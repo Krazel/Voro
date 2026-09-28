@@ -36,6 +36,19 @@ export function CosmicLab({game}:{game:VoroEngine}) {
   try {await game.audio?.resume();await game.sfx?.unlock();}catch{return;}
   if(game.prepareEffects())kind==='damage'?game.sfx?.playDamage():game.sfx?.playIngest();
  };
+ const decoy=()=>{
+  // Always grant inside a disposable test scene, never the saved campaign.
+  if(!game.testMode || game.life.dead || game.transition || game.earthAbsorption || game.progress.completed)
+   scene(STAGES[game.progress.stage].id);
+  game.settingsOpen=false;game.paused=false;
+  if(!game.progress.mutations.includes('decoy')) {
+   game.progress.offer=['decoy'];game.choose('decoy');
+  }
+  game.progress.offer=[];game.life.cooldown=0;
+  game.toast('Señuelo activado. Muévete y usa el impulso para verlo.',6);
+  game.publish();
+  game.canvas.focus({preventScroll:true});
+ };
  return <aside className="cosmic-lab" aria-label="Pruebas locales">
   <button onClick={()=>setFolded(!folded)}>{folded?'Mostrar pruebas':'Ocultar pruebas'} · solo local</button>
   {!folded&&<>
@@ -46,7 +59,7 @@ export function CosmicLab({game}:{game:VoroEngine}) {
    </div>
    <div>{STAGES.map(s=><button key={s.id} onClick={()=>scene(s.id)}>{s.short}</button>)}</div>
    <div><button onClick={earth}>Comer Tierra</button><button onClick={hole}>Ver agujero negro</button></div>
-   <div><button onClick={()=>game.boostTest('biomass')}>Crecer</button><button onClick={()=>game.boostTest('adaptation')}>Adaptación</button></div>
+   <div><button onClick={()=>game.boostTest('biomass')}>Crecer</button><button onClick={()=>game.boostTest('adaptation')}>Adaptación</button><button onClick={decoy}>Probar señuelo</button></div>
    <div><button onClick={()=>effect('damage')}>Oír daño</button><button onClick={()=>effect('ingest')}>Oír comer</button><button onClick={()=>game.exitTest()}>Volver a partida</button></div>
   </>}
  </aside>;

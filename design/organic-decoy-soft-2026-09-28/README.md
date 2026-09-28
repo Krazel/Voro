@@ -7,3 +7,5 @@ La copia real conserva la forma capturada al impulsar. Núcleo al45% en la captu
 Comparación: approved-B.png es el concepto; separation.png es captura del juego web real a780×844, español. Revisados bordes suaves, interior apagado y núcleo tenue; protagonista nítido. departure/fade/gone documentan el ciclo; mobile-offer.png comprueba tarjeta móvil390×844. No es una captura de iOS ni una medición de FPS físicos.
 
 Verificación:5 tests de señuelo correctos, TypeScript sin errores, builds móvil/PC correctos, navegador sin errores; sigue separándose del protagonista y desaparece a2s. browser-check.json registra estados. No subida TestFlight ni nuevo ejecutable. Ajuste fijo de XP−20% intacto.
+
+Control local añadido: botón Probar señuelo concede la adaptación una sola vez en una escena temporal y deja listo el impulso. Pulsarlo otra vez recarga el impulso para repetir. Verificación de navegador scripts/check-decoy-control.mjs: dos pulsaciones sin duplicado, aparición real tras dash y restauración exacta del progreso de campaña al salir; tipos correctos. test-control.png muestra el botón.
