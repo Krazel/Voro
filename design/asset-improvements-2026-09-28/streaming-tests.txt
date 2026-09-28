@@ -1,0 +1,21 @@
+✔ Campaign rewards slow feeding without changing stage sizes/goals, and legacy saves keep mass, XP, choices and pending food (4.0942ms)
+✔ Micro cycles advance at 30 poses/s; high resolution is optional and budget exhaustion never requests a live mesh (0.8763ms)
+✔ Giant cosmic bodies preserve physical ranges and use detailed alpha artwork; Planet clouds use real planet bitmaps (26.0221ms)
+✔ Close zoom keeps decoded cycles and does not rebuild a mesh as DPR or radius grows (3.2639ms)
+✔ Each active opening-biome energy fits the phone budget; PC close-up variants are separate optional resources (0.2988ms)
+✔ Sheets wait for decode, reuse normal during reaction loading, and cap concurrency/memory (0.4861ms)
+✔ Cancelled decodes retain reservation until settled and failures release memory exactly once (0.3011ms)
+✔ Offscreen queued sheets expire while visible cache entries are never evicted to thrash (0.3201ms)
+✔ Crossfade reuses two distinct grounds and bounds retained surfaces (8.4177ms)
+✔ Shared species retain prepared poses across stages, unwanted ones are released (4.8753ms)
+✔ Diagnostics retain bounded samples, correct session percentiles, section means and worst frames (21.1341ms)
+✔ 30-second capture excludes pause/hidden time, auto-stops and freezes complete-session results (41.083ms)
+✔ Autosaves coalesce, flush latest state and a checkpoint cancels the deferred write (3.8576ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 431.1579

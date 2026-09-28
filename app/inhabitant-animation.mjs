@@ -80,7 +80,10 @@ export function poseMesh(
       const u = i / cols,
         v = j / rows;
       let p = { x: u, y: v };
-      if (anatomy) {
+      if (profile.rigid) {
+        // Native-detail rigid artwork is animated by transforms/inner flow,
+        // including in gallery inspection. Never deform its outer geometry.
+      } else if (anatomy) {
         p = anatomy(u, v);
       } else if (profile.surface) {
         // Flow stays inside the painted sphere/disc. Its rim and lighting axis
@@ -523,6 +526,7 @@ export function simpleAnimation(profile) {
 // Cheap rigid motion remains continuous between exported deformation poses.
 export function applyPoseTransform(c, profile, r, phase, activity) {
   const f = profile.family;
+  if(profile.detailPulse){const pulse=1+profile.detailPulse*Math.sin(phase*2);c.scale(pulse,pulse);}
   if (f === 'pulsar' && profile.rigid) {
     const pulse = 1 + .014 * Math.sin(phase * 2);
     c.scale(pulse, pulse);

@@ -6,6 +6,7 @@ import { createHash } from 'node:crypto';
 import { drawPose, simpleAnimation } from '../app/inhabitant-animation.mjs';
 import { ANIMATIONS, animationCrop } from '../app/animation-catalog.mjs';
 import { SPECIES_BY_ID, ATLAS_URLS } from '../app/journey-data.mjs';
+import { exportDetailTiers } from '../app/animation-detail.mjs';
 const req = createRequire(process.env.VORO_CANVAS_RUNTIME || import.meta.url);
 const { createCanvas, loadImage } = req('@napi-rs/canvas');
 const sharp = req('sharp');
@@ -28,9 +29,7 @@ for (const s of Object.values(SPECIES_BY_ID)) {
   // of almost identical textures waste memory; rigid motion stays continuous.
   const count = Math.max(24, Math.min(s.atlas==='micro'?128:64, Math.ceil(profile.period * fps)));
   manifest[s.id] = {};
-  const tiers=['hunter','giant','spiny'].includes(s.id)?['normal','hd']:['normal'];
-  for (const tier of tiers) for (const energy of [1, 1.5]) {
-    const size = tier==='hd'?384:['hunter','giant'].includes(s.id)?256:defaultSize;
+  for (const [tier,size] of Object.entries(exportDetailTiers(s,crop))) for (const energy of [1, 1.5]) {
     const frames = [], canvas = createCanvas(size, size), c = canvas.getContext('2d');
     let x0 = size, y0 = size, x1 = 0, y1 = 0;
     for (let f = 0; f < count; f++) {
@@ -48,8 +47,12 @@ for (const s of Object.values(SPECIES_BY_ID)) {
     const w = x1 - x0 + 1, h = y1 - y0 + 1;
     // Prefer exact grids: 64 frames in 9x8 reserved eight empty textures.
     // Packing complete rows preserves every pose and pixel without that cost.
-    const cols = Array.from({length:count},(_,i)=>i+1).filter(n=>count%n===0)
-      .sort((a,b)=>Math.abs(Math.log(a*w/(count/a*h)))-Math.abs(Math.log(b*w/(count/b*h))))[0];
+    const choices=Array.from({length:count},(_,i)=>i+1)
+      .filter(n=>n*w<=4096&&Math.ceil(count/n)*h<=4096);
+    const exact=choices.filter(n=>count%n===0);
+    const cols = (exact.length?exact:choices)
+      .sort((a,b)=>Math.abs(Math.log(a*w/(Math.ceil(count/a)*h)))-Math.abs(Math.log(b*w/(Math.ceil(count/b)*h))))[0];
+    if(!cols)throw new Error(`Animation too large for 4096px texture: ${s.id} ${tier}`);
     const rows = Math.ceil(count / cols);
     const sheet = createCanvas(cols * w, rows * h), ctx = sheet.getContext('2d');
     for (let f = 0; f < count; f++) {
@@ -60,7 +63,7 @@ for (const s of Object.values(SPECIES_BY_ID)) {
     const hash = createHash('sha256').update(buffer).digest('hex').slice(0, 16);
     const url = `./animation-sheets/${hash}.webp`;
     writeFileSync('public/' + url.slice(2), buffer);
-    manifest[s.id][tier==='hd'?`hd${energy}`:energy] = { url, frames: count, cols, w, h, x: x0, y: y0, size, extent,
+    manifest[s.id][tier==='normal'?energy:`${tier}${energy}`] = { url, frames: count, cols, w, h, x: x0, y: y0, size, extent,
       bytes: cols * w * rows * h * 4, encodedBytes: buffer.length,
       ...(s.animationCropRevision ? {cropRevision:s.animationCropRevision} : {}) };
     bytes += buffer.length;
@@ -73,5 +76,5 @@ const unique = new Map(Object.values(manifest).flatMap(x => Object.values(x)).ma
 writeFileSync('design/animation-sheet-export.json', JSON.stringify({ species: Object.keys(manifest).length, targetFps: fps, maxFrames: 128, defaultSize,
   uniqueFiles: unique.size, encodedBytes: [...unique.values()].reduce((n, x) => n + x.encodedBytes, 0),
   sourceHash,
-  format: 'WebP quality 94, alpha 100, same rigs; 24–128 micro poses, 24–64 other poses; micro 30 poses/s; optional 384px PC close-ups; rigid transforms continuous; tight common crop' }, null, 2) + '\n');
+  format: 'WebP quality 94, alpha 100, same rigs and cycle timings; 24–128 micro poses, 24–64 other poses; micro 30 poses/s; optional medium and close-up tiers within device memory budget; rigid transforms continuous; tight common crop' }, null, 2) + '\n');
 console.log(JSON.stringify({ exported, bytes }));

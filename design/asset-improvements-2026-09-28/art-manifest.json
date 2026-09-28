@@ -1,0 +1,378 @@
+[
+  {
+    "number": 41,
+    "ids": [
+      "land-matter-scallop"
+    ],
+    "master": "design/asset-improvements-2026-09-28/art/41.png",
+    "width": 1254,
+    "height": 1254,
+    "alpha": true,
+    "sha256": "dcbb10d1c45d93fa9482f629f5a353159f6026bb565af568468566b61406ac3e",
+    "shipped": [
+      1254,
+      1241
+    ],
+    "decodedBytes": 6224856,
+    "encodedBytes": 625326
+  },
+  {
+    "number": 45,
+    "ids": [
+      "land-matter-twig"
+    ],
+    "master": "design/asset-improvements-2026-09-28/art/45.png",
+    "width": 1273,
+    "height": 1236,
+    "alpha": true,
+    "sha256": "20325cca461414062dc1d0f5e5f4ebf104d2c68c9a6049cfdeda3e5f0c42db3b",
+    "shipped": [
+      1254,
+      1217
+    ],
+    "decodedBytes": 6104472,
+    "encodedBytes": 347556
+  },
+  {
+    "number": 68,
+    "ids": [
+      "water-matter-wreck"
+    ],
+    "master": "design/asset-improvements-2026-09-28/art/68.png",
+    "width": 1229,
+    "height": 1280,
+    "alpha": true,
+    "sha256": "ea05afdd11bc797c6a9009e91c3632de9d7d29abe6a12a88313f3929e358b51f",
+    "shipped": [
+      1254,
+      1262
+    ],
+    "decodedBytes": 6330192,
+    "encodedBytes": 574126
+  },
+  {
+    "number": 69,
+    "ids": [
+      "water-matter-boulder"
+    ],
+    "master": "design/asset-improvements-2026-09-28/art/69.png",
+    "width": 1334,
+    "height": 1179,
+    "alpha": true,
+    "sha256": "6774c41d505f99773bd471cc0c67828a7be1749f014f3c6f0962113096433a55",
+    "shipped": [
+      1254,
+      1109
+    ],
+    "decodedBytes": 5562744,
+    "encodedBytes": 617702
+  },
+  {
+    "number": 100,
+    "ids": [
+      "orbit-0"
+    ],
+    "master": "design/asset-improvements-2026-09-28/art/100.png",
+    "width": 1254,
+    "height": 1254,
+    "alpha": true,
+    "sha256": "b11652b79373bcf86e3946ef4dc202381f64bf38d94aab70cf03b6e62fe4974a",
+    "shipped": [
+      1254,
+      1254
+    ],
+    "decodedBytes": 6290064,
+    "encodedBytes": 375624
+  },
+  {
+    "number": 102,
+    "ids": [
+      "orbit-2"
+    ],
+    "master": "design/asset-improvements-2026-09-28/art/102.png",
+    "width": 1254,
+    "height": 1254,
+    "alpha": true,
+    "sha256": "a05d99cab1d5a96c62e87e84b1e6190c5e83a2c93fc2e5c01cd530168b7de307",
+    "shipped": [
+      1254,
+      1254
+    ],
+    "decodedBytes": 6290064,
+    "encodedBytes": 314674
+  },
+  {
+    "number": 103,
+    "ids": [
+      "orbit-3"
+    ],
+    "master": "design/asset-improvements-2026-09-28/art/103.png",
+    "width": 1230,
+    "height": 1278,
+    "alpha": true,
+    "sha256": "6ff9d49e8bdddab01ee84c8f9aa783ae7f5d039cae76bac1588d8ebd488b83e7",
+    "shipped": [
+      1254,
+      1303
+    ],
+    "decodedBytes": 6535848,
+    "encodedBytes": 447106
+  },
+  {
+    "number": 110,
+    "ids": [
+      "planets-1"
+    ],
+    "master": "design/asset-improvements-2026-09-28/art/110.png",
+    "width": 1303,
+    "height": 1207,
+    "alpha": true,
+    "sha256": "9da3727c6fcdc0a22755930ecc8ca3bc85e5204977ad09b79fa0170572888a6a",
+    "shipped": [
+      1254,
+      1161
+    ],
+    "decodedBytes": 5823576,
+    "encodedBytes": 485912
+  },
+  {
+    "number": 111,
+    "ids": [
+      "planets-2"
+    ],
+    "master": "design/asset-improvements-2026-09-28/art/111.png",
+    "width": 1270,
+    "height": 1239,
+    "alpha": true,
+    "sha256": "25924f6029f0777a6b82d32ef70980c6f95eb0869a852203ecb0f3d645b1d26a",
+    "shipped": [
+      1254,
+      1243
+    ],
+    "decodedBytes": 6234888,
+    "encodedBytes": 605222
+  },
+  {
+    "number": 113,
+    "ids": [
+      "planets-4"
+    ],
+    "master": "design/asset-improvements-2026-09-28/art/113.png",
+    "width": 1265,
+    "height": 1244,
+    "alpha": true,
+    "sha256": "103dfecc565d134e15439700744ef26b6e6692d40730dc7abc2052d230890586",
+    "shipped": [
+      1254,
+      1233
+    ],
+    "decodedBytes": 6184728,
+    "encodedBytes": 382024
+  },
+  {
+    "number": 124,
+    "ids": [
+      "planets-ice-giant"
+    ],
+    "master": "design/asset-improvements-2026-09-28/art/124.png",
+    "width": 1254,
+    "height": 1254,
+    "alpha": true,
+    "sha256": "67a4ffe09bb629a17c42a0f466a806df59ec93527235424e89d405e2447cfea6",
+    "shipped": [
+      1254,
+      1247
+    ],
+    "decodedBytes": 6254952,
+    "encodedBytes": 310114
+  },
+  {
+    "number": 126,
+    "ids": [
+      "stars-1"
+    ],
+    "master": "design/asset-improvements-2026-09-28/art/126.png",
+    "width": 1254,
+    "height": 1254,
+    "alpha": true,
+    "sha256": "c222504f423a1ec7174cc58323537a3e2266493f4dd3d5f8b59cec2a376f1a67",
+    "shipped": [
+      1254,
+      1210
+    ],
+    "decodedBytes": 6069360,
+    "encodedBytes": 460616
+  },
+  {
+    "number": 127,
+    "ids": [
+      "stars-2"
+    ],
+    "master": "design/asset-improvements-2026-09-28/art/127.png",
+    "width": 1254,
+    "height": 1254,
+    "alpha": true,
+    "sha256": "f2c6193f0404cce758aa4496f7b9dd6c2376997895fce9beff55cf8ef9bead2f",
+    "shipped": [
+      1254,
+      1205
+    ],
+    "decodedBytes": 6044280,
+    "encodedBytes": 570696
+  },
+  {
+    "number": 128,
+    "ids": [
+      "stars-3"
+    ],
+    "master": "design/asset-improvements-2026-09-28/art/128.png",
+    "width": 1254,
+    "height": 1254,
+    "alpha": true,
+    "sha256": "883a81ff54a1eba5317a4ef80064113d9c245abb5b93e2faa6acf562f40bb758",
+    "shipped": [
+      1254,
+      1181
+    ],
+    "decodedBytes": 5923896,
+    "encodedBytes": 575594
+  },
+  {
+    "number": 129,
+    "ids": [
+      "stars-4"
+    ],
+    "master": "design/asset-improvements-2026-09-28/art/129.png",
+    "width": 1254,
+    "height": 1254,
+    "alpha": true,
+    "sha256": "c7fae5905e993b135f3a3bae6575cd801e4b3e19e0bc935d67f1067869725835",
+    "shipped": [
+      1254,
+      1215
+    ],
+    "decodedBytes": 6094440,
+    "encodedBytes": 444074
+  },
+  {
+    "number": 143,
+    "ids": [
+      "galaxies-Núcleo activo",
+      "universe-5"
+    ],
+    "master": "design/asset-improvements-2026-09-28/art/143.png",
+    "width": 1287,
+    "height": 1222,
+    "alpha": true,
+    "sha256": "369b6dcd9bd5f363080855c9298d64a42e1b7a3523f2a035ec936b9760c734c1",
+    "shipped": [
+      1254,
+      1190
+    ],
+    "decodedBytes": 5969040,
+    "encodedBytes": 508366
+  },
+  {
+    "number": 144,
+    "ids": [
+      "galaxies-Colisión galáctica",
+      "universe-6"
+    ],
+    "master": "design/asset-improvements-2026-09-28/art/144.png",
+    "width": 1332,
+    "height": 1181,
+    "alpha": true,
+    "sha256": "e25d818e580a44945a84d653433744db7cd100d7d4c54cc5a4b087a33c6ea3b2",
+    "shipped": [
+      1254,
+      1112
+    ],
+    "decodedBytes": 5577792,
+    "encodedBytes": 563920
+  },
+  {
+    "number": 145,
+    "ids": [
+      "galaxies-Grupo galáctico"
+    ],
+    "master": "design/asset-improvements-2026-09-28/art/145.png",
+    "width": 1367,
+    "height": 1150,
+    "alpha": true,
+    "sha256": "dbe612d44cbefe30027fdc8b296cfd85efb70be0ef43ec29207eb1fb36548ffd",
+    "shipped": [
+      1254,
+      1055
+    ],
+    "decodedBytes": 5291880,
+    "encodedBytes": 546502
+  },
+  {
+    "number": 159,
+    "ids": [
+      "universe-9"
+    ],
+    "master": "design/asset-improvements-2026-09-28/art/159.png",
+    "width": 1287,
+    "height": 1222,
+    "alpha": true,
+    "sha256": "f7d323e0eba7fa5413524d4bd4e6bdfffb0de33ba5e9c5fe36089bf003015374",
+    "shipped": [
+      1254,
+      1191
+    ],
+    "decodedBytes": 5974056,
+    "encodedBytes": 637806
+  },
+  {
+    "number": 160,
+    "ids": [
+      "universe-10"
+    ],
+    "master": "design/asset-improvements-2026-09-28/art/160.png",
+    "width": 1332,
+    "height": 1181,
+    "alpha": true,
+    "sha256": "8fa0f7ba92966ac8906681af8a6165383eafc6b1b60c11c395264bdf304fde4c",
+    "shipped": [
+      1254,
+      1112
+    ],
+    "decodedBytes": 5577792,
+    "encodedBytes": 629614
+  },
+  {
+    "number": 161,
+    "ids": [
+      "universe-11"
+    ],
+    "master": "design/asset-improvements-2026-09-28/art/161.png",
+    "width": 1314,
+    "height": 1197,
+    "alpha": true,
+    "sha256": "daf3273a8af713297d9f4799b24e18ba6b1411661fca612a4971830de720e066",
+    "shipped": [
+      1254,
+      1142
+    ],
+    "decodedBytes": 5728272,
+    "encodedBytes": 607506
+  },
+  {
+    "number": 164,
+    "ids": [
+      "universe-matter-web"
+    ],
+    "master": "design/asset-improvements-2026-09-28/art/164.png",
+    "width": 1213,
+    "height": 1296,
+    "alpha": true,
+    "sha256": "5f3a03f112b392b3ba91462cfc38f22e12949ab539faa3a6b81db1d63d95c19f",
+    "shipped": [
+      1254,
+      1340
+    ],
+    "decodedBytes": 6721440,
+    "encodedBytes": 549660
+  }
+]

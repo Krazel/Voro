@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { FINALE_SECONDS } from '../app/universe-finale.mjs';
+import CLEAR_ART from '../app/clear-art.json' with {type:'json'};
 import { makeEngine } from './engine-fixture.mjs';
 import {
   newJourney,
@@ -47,6 +48,7 @@ function isolate(g) {
 }
 test('Every stage generates stable inhabitants, recoverable food, bounded chunks and valid bitmap crops', () => {
   const dimensions = {
+    ...Object.fromEntries(CLEAR_ART.map(a=>[`clearDetail${a.number}`,a.crop.slice(2)])),
     earth: [4096,4096], pulsarDetail: [1254,1254],
     'cosmic-wall':[1254,1254], 'lensed-crown':[1254,1254], 'cosmic-confluence':[1254,1254], 'cosmic-tide':[1254,1254],
     blackHoleDetail:[1254,1254],...Object.fromEntries(Array.from({length:6},(_,i)=>[`galaxyDetail${i}`,[1254,1254]])),

@@ -1,0 +1,601 @@
+[
+  {
+    "number": 41,
+    "id": "land-matter-scallop",
+    "name": "Concha de playa",
+    "source": "./inhabitants/natural-matter-v1.png",
+    "crop": [
+      1120,
+      396,
+      288,
+      285
+    ],
+    "file": "design/asset-improvements-2026-09-28/references/41.png",
+    "profile": {
+      "family": "prop",
+      "rigid": true,
+      "period": 9,
+      "amount": 0.025,
+      "precession": 0,
+      "description": "Permanece en su lugar y conserva su forma al ser absorbido.",
+      "revision": 1,
+      "id": "land-matter-scallop",
+      "rigId": "land-matter-scallop",
+      "revised": true,
+      "assetKey": "naturalMatter:7"
+    },
+    "aliases": []
+  },
+  {
+    "number": 45,
+    "id": "land-matter-twig",
+    "name": "Rama caída",
+    "source": "./inhabitants/natural-matter-v1.png",
+    "crop": [
+      765,
+      758,
+      273,
+      265
+    ],
+    "file": "design/asset-improvements-2026-09-28/references/45.png",
+    "profile": {
+      "family": "prop",
+      "rigid": true,
+      "period": 9,
+      "amount": 0.025,
+      "precession": 0,
+      "description": "Permanece en su lugar y conserva su forma al ser absorbido.",
+      "revision": 1,
+      "id": "land-matter-twig",
+      "rigId": "land-matter-twig",
+      "revised": true,
+      "assetKey": "naturalMatter:10"
+    },
+    "aliases": []
+  },
+  {
+    "number": 68,
+    "id": "water-matter-wreck",
+    "name": "Restos de naufragio",
+    "source": "./inhabitants/objects-matter-v1.png",
+    "crop": [
+      1192,
+      23,
+      303,
+      305
+    ],
+    "file": "design/asset-improvements-2026-09-28/references/68.png",
+    "profile": {
+      "family": "prop",
+      "rigid": true,
+      "period": 9,
+      "amount": 0.025,
+      "precession": 0,
+      "description": "Permanece en su lugar y conserva su forma al ser absorbido.",
+      "revision": 1,
+      "id": "water-matter-wreck",
+      "rigId": "water-matter-wreck",
+      "revised": true,
+      "assetKey": "objectMatter:3"
+    },
+    "aliases": []
+  },
+  {
+    "number": 69,
+    "id": "water-matter-boulder",
+    "name": "Roca del fondo",
+    "source": "./inhabitants/objects-matter-v1.png",
+    "crop": [
+      431,
+      695,
+      302,
+      267
+    ],
+    "file": "design/asset-improvements-2026-09-28/references/69.png",
+    "profile": {
+      "family": "prop",
+      "rigid": true,
+      "period": 9,
+      "amount": 0.025,
+      "precession": 0,
+      "description": "Permanece en su lugar y conserva su forma al ser absorbido.",
+      "revision": 1,
+      "id": "water-matter-boulder",
+      "rigId": "water-matter-boulder",
+      "revised": true,
+      "assetKey": "objectMatter:9"
+    },
+    "aliases": []
+  },
+  {
+    "number": 100,
+    "id": "orbit-0",
+    "name": "Asteroide",
+    "source": "./inhabitants/cosmos.png",
+    "crop": [
+      3,
+      3,
+      250,
+      250
+    ],
+    "file": "design/asset-improvements-2026-09-28/references/100.png",
+    "profile": {
+      "family": "tumble",
+      "description": "Rotación de un asteroide rígido y deriva de sus fragmentos.",
+      "period": 12,
+      "turn": 0.4,
+      "id": "orbit-0",
+      "rigId": "orbit-0",
+      "revised": false,
+      "assetKey": "cosmos:0"
+    },
+    "aliases": []
+  },
+  {
+    "number": 102,
+    "id": "orbit-2",
+    "name": "Satélite",
+    "source": "./inhabitants/cosmos.png",
+    "crop": [
+      515,
+      3,
+      250,
+      250
+    ],
+    "file": "design/asset-improvements-2026-09-28/references/102.png",
+    "profile": {
+      "family": "satellite",
+      "description": "Orientación suave del satélite, con paneles solares rígidos.",
+      "period": 9,
+      "rigid": true,
+      "precession": 0.07,
+      "revision": 2,
+      "id": "orbit-2",
+      "rigId": "orbit-2",
+      "revised": true,
+      "assetKey": "cosmos:2"
+    },
+    "aliases": []
+  },
+  {
+    "number": 103,
+    "id": "orbit-3",
+    "name": "Estación espacial",
+    "source": "./inhabitants/cosmos.png",
+    "crop": [
+      769,
+      0,
+      255,
+      265
+    ],
+    "file": "design/asset-improvements-2026-09-28/references/103.png",
+    "profile": {
+      "family": "station",
+      "description": "Orientación lenta de la estación, sin doblar sus módulos.",
+      "period": 14,
+      "rigid": true,
+      "precession": 0.045,
+      "revision": 2,
+      "id": "orbit-3",
+      "rigId": "orbit-3",
+      "revised": true,
+      "assetKey": "cosmos:3"
+    },
+    "aliases": []
+  },
+  {
+    "number": 110,
+    "id": "planets-1",
+    "name": "Mundo oceánico",
+    "source": "./inhabitants/cosmos.png",
+    "crop": [
+      256,
+      269,
+      256,
+      237
+    ],
+    "file": "design/asset-improvements-2026-09-28/references/110.png",
+    "profile": {
+      "family": "ocean",
+      "description": "Movimiento suave de la superficie, conservando el contorno y la iluminación.",
+      "period": 18,
+      "turn": 0.06,
+      "surface": {
+        "amount": 0.024,
+        "rx": 0.43,
+        "ry": 0.43
+      },
+      "precession": 0,
+      "revision": 2,
+      "id": "planets-1",
+      "rigId": "planets-1",
+      "revised": true,
+      "assetKey": "cosmos:7"
+    },
+    "aliases": []
+  },
+  {
+    "number": 111,
+    "id": "planets-2",
+    "name": "Mundo volcánico",
+    "source": "./inhabitants/planet-diversity-v2.webp",
+    "crop": [
+      396,
+      571,
+      355,
+      352
+    ],
+    "file": "design/asset-improvements-2026-09-28/references/111.png",
+    "profile": {
+      "family": "prop",
+      "rigid": true,
+      "period": 40,
+      "revision": 3,
+      "description": "Globo estable con iluminación coherente; deriva orbital lenta.",
+      "id": "planets-2",
+      "rigId": "planets-2",
+      "revised": true,
+      "assetKey": "planetDiversity:planets-2"
+    },
+    "aliases": []
+  },
+  {
+    "number": 113,
+    "id": "planets-4",
+    "name": "Gigante gaseoso",
+    "source": "./inhabitants/planet-diversity-v2.webp",
+    "crop": [
+      14,
+      572,
+      358,
+      352
+    ],
+    "file": "design/asset-improvements-2026-09-28/references/113.png",
+    "profile": {
+      "family": "prop",
+      "rigid": true,
+      "period": 40,
+      "revision": 3,
+      "description": "Globo estable con iluminación coherente; deriva orbital lenta.",
+      "id": "planets-4",
+      "rigId": "planets-4",
+      "revised": true,
+      "assetKey": "planetDiversity:planets-4"
+    },
+    "aliases": []
+  },
+  {
+    "number": 124,
+    "id": "planets-ice-giant",
+    "name": "Gigante de hielo",
+    "source": "./inhabitants/planet-diversity-v2.webp",
+    "crop": [
+      1169,
+      103,
+      352,
+      350
+    ],
+    "file": "design/asset-improvements-2026-09-28/references/124.png",
+    "profile": {
+      "family": "prop",
+      "rigid": true,
+      "period": 40,
+      "revision": 3,
+      "description": "Globo estable con iluminación coherente; deriva orbital lenta.",
+      "id": "planets-ice-giant",
+      "rigId": "planets-ice-giant",
+      "revised": true,
+      "assetKey": "planetDiversity:planets-ice-giant"
+    },
+    "aliases": []
+  },
+  {
+    "number": 126,
+    "id": "stars-1",
+    "name": "Enana roja",
+    "source": "./inhabitants/cosmos.png",
+    "crop": [
+      256,
+      502,
+      256,
+      247
+    ],
+    "file": "design/asset-improvements-2026-09-28/references/126.png",
+    "profile": {
+      "family": "star",
+      "description": "Pulsos de la corona roja y pequeñas erupciones.",
+      "period": 4.5,
+      "amount": 0.027,
+      "crop": [
+        256,
+        502,
+        256,
+        247
+      ],
+      "id": "stars-1",
+      "rigId": "stars-1",
+      "revised": false,
+      "assetKey": "cosmos:13"
+    },
+    "aliases": []
+  },
+  {
+    "number": 127,
+    "id": "stars-2",
+    "name": "Estrella amarilla",
+    "source": "./inhabitants/cosmos.png",
+    "crop": [
+      512,
+      500,
+      256,
+      246
+    ],
+    "file": "design/asset-improvements-2026-09-28/references/127.png",
+    "profile": {
+      "family": "star",
+      "description": "La fotosfera circula y la corona lanza llamaradas.",
+      "period": 3.7,
+      "amount": 0.03,
+      "crop": [
+        512,
+        500,
+        256,
+        246
+      ],
+      "id": "stars-2",
+      "rigId": "stars-2",
+      "revised": false,
+      "assetKey": "cosmos:14"
+    },
+    "aliases": []
+  },
+  {
+    "number": 128,
+    "id": "stars-3",
+    "name": "Estrella azul",
+    "source": "./inhabitants/cosmos.png",
+    "crop": [
+      768,
+      509,
+      256,
+      241
+    ],
+    "file": "design/asset-improvements-2026-09-28/references/128.png",
+    "profile": {
+      "family": "star",
+      "description": "Corona azul más rápida e intensa al reaccionar.",
+      "period": 2.7,
+      "amount": 0.035,
+      "crop": [
+        768,
+        509,
+        256,
+        241
+      ],
+      "id": "stars-3",
+      "rigId": "stars-3",
+      "revised": false,
+      "assetKey": "cosmos:15"
+    },
+    "aliases": []
+  },
+  {
+    "number": 129,
+    "id": "stars-4",
+    "name": "Gigante roja",
+    "source": "./inhabitants/cosmos.png",
+    "crop": [
+      1024,
+      505,
+      256,
+      248
+    ],
+    "file": "design/asset-improvements-2026-09-28/references/129.png",
+    "profile": {
+      "family": "star",
+      "description": "Pulsación lenta de una gigante y expansión de su corona.",
+      "period": 6,
+      "amount": 0.05,
+      "crop": [
+        1024,
+        505,
+        256,
+        248
+      ],
+      "id": "stars-4",
+      "rigId": "stars-4",
+      "revised": false,
+      "assetKey": "cosmos:16"
+    },
+    "aliases": []
+  },
+  {
+    "number": 143,
+    "id": "galaxies-Núcleo activo",
+    "name": "Núcleo activo",
+    "source": "./inhabitants/universe.png",
+    "crop": [
+      399,
+      326,
+      355,
+      337
+    ],
+    "file": "design/asset-improvements-2026-09-28/references/143.png",
+    "profile": {
+      "family": "quasar",
+      "description": "Chorros pulsantes sobre un disco de acreción en movimiento.",
+      "period": 3.2,
+      "id": "galaxies-Núcleo activo",
+      "rigId": "galaxies-Núcleo activo",
+      "revised": false,
+      "assetKey": "universe:5"
+    },
+    "aliases": [
+      "universe-5"
+    ]
+  },
+  {
+    "number": 144,
+    "id": "galaxies-Colisión galáctica",
+    "name": "Colisión galáctica",
+    "source": "./inhabitants/universe.png",
+    "crop": [
+      771,
+      344.3333333333333,
+      378,
+      335.3333333333333
+    ],
+    "file": "design/asset-improvements-2026-09-28/references/144.png",
+    "profile": {
+      "family": "collision",
+      "description": "Dos núcleos orbitan y arrastran sus brazos estelares.",
+      "period": 17,
+      "id": "galaxies-Colisión galáctica",
+      "rigId": "galaxies-Colisión galáctica",
+      "revised": false,
+      "assetKey": "universe:6"
+    },
+    "aliases": [
+      "universe-6"
+    ]
+  },
+  {
+    "number": 145,
+    "id": "galaxies-Grupo galáctico",
+    "name": "Grupo galáctico",
+    "source": "./inhabitants/universe.png",
+    "crop": [
+      1155,
+      344,
+      378,
+      318
+    ],
+    "file": "design/asset-improvements-2026-09-28/references/145.png",
+    "profile": {
+      "family": "cluster",
+      "description": "Pequeñas galaxias orbitan dentro del cúmulo.",
+      "period": 20,
+      "amount": 0.025,
+      "crop": [
+        1155,
+        344,
+        378,
+        318
+      ],
+      "id": "galaxies-Grupo galáctico",
+      "rigId": "galaxies-Grupo galáctico",
+      "revised": false,
+      "assetKey": "universe:7"
+    },
+    "aliases": []
+  },
+  {
+    "number": 159,
+    "id": "universe-9",
+    "name": "Filamento cósmico",
+    "source": "./inhabitants/universe.png",
+    "crop": [
+      386,
+      662,
+      381,
+      362
+    ],
+    "file": "design/asset-improvements-2026-09-28/references/159.png",
+    "profile": {
+      "family": "filament",
+      "description": "Pulsos que recorren los filamentos entre sus nudos.",
+      "period": 12,
+      "amount": 0.025,
+      "crop": [
+        386,
+        662,
+        381,
+        362
+      ],
+      "id": "universe-9",
+      "rigId": "universe-9",
+      "revised": false,
+      "assetKey": "universe:9"
+    },
+    "aliases": []
+  },
+  {
+    "number": 160,
+    "id": "universe-10",
+    "name": "Borde del vacío",
+    "source": "./inhabitants/universe.png",
+    "crop": [
+      771,
+      685.6666666666666,
+      378,
+      335.3333333333333
+    ],
+    "file": "design/asset-improvements-2026-09-28/references/160.png",
+    "profile": {
+      "family": "void",
+      "description": "Materia que circula por el borde de un vacío estable.",
+      "period": 18,
+      "id": "universe-10",
+      "rigId": "universe-10",
+      "revised": false,
+      "assetKey": "universe:10"
+    },
+    "aliases": []
+  },
+  {
+    "number": 161,
+    "id": "universe-11",
+    "name": "Universo",
+    "source": "./inhabitants/universe.png",
+    "crop": [
+      1154,
+      676,
+      382,
+      348
+    ],
+    "file": "design/asset-improvements-2026-09-28/references/161.png",
+    "profile": {
+      "family": "universe",
+      "description": "La red se ilumina por sectores y converge al reaccionar.",
+      "period": 20,
+      "crop": [
+        1154,
+        676,
+        382,
+        348
+      ],
+      "id": "universe-11",
+      "rigId": "universe-11",
+      "revised": false,
+      "assetKey": "universe:11"
+    },
+    "aliases": []
+  },
+  {
+    "number": 164,
+    "id": "universe-matter-web",
+    "name": "Rama de la red cósmica",
+    "source": "./inhabitants/cosmic-matter-v1.png",
+    "crop": [
+      1188,
+      652,
+      337,
+      360
+    ],
+    "file": "design/asset-improvements-2026-09-28/references/164.png",
+    "profile": {
+      "family": "matterCloud",
+      "rigid": false,
+      "period": 9,
+      "amount": 0.025,
+      "precession": 0,
+      "description": "Flujo lento de gas y polvo dentro de su silueta.",
+      "revision": 1,
+      "id": "universe-matter-web",
+      "rigId": "universe-matter-web",
+      "revised": true,
+      "assetKey": "cosmicMatter:11"
+    },
+    "aliases": []
+  }
+]

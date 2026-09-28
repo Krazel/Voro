@@ -1,0 +1,7622 @@
+[
+  {
+    "before": {
+      "number": 10,
+      "id": "spiny",
+      "name": "Protista espinoso",
+      "stage": 0,
+      "stageName": "Microscopio",
+      "crop": [
+        364,
+        746,
+        354,
+        275
+      ],
+      "range": {
+        "min": 75.68,
+        "max": 96.32000000000001
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 75.68,
+          "diameterCSS": 137.73760000000001,
+          "sheet": {
+            "id": "spiny",
+            "seen": 2,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 86,
+          "diameterCSS": 156.52,
+          "sheet": {
+            "id": "spiny",
+            "seen": 3,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 96.32000000000001,
+          "diameterCSS": 175.30240000000003,
+          "sheet": {
+            "id": "spiny",
+            "seen": 4,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 75.68,
+          "diameterCSS": 211.90400000000005,
+          "sheet": {
+            "id": "spiny",
+            "seen": 2,
+            "posesPerSecond": 30,
+            "bodyPixels": 256,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 86,
+          "diameterCSS": 240.8,
+          "sheet": {
+            "id": "spiny",
+            "seen": 3,
+            "posesPerSecond": 30,
+            "bodyPixels": 256,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 96.32000000000001,
+          "diameterCSS": 269.696,
+          "sheet": {
+            "id": "spiny",
+            "seen": 4,
+            "posesPerSecond": 30,
+            "bodyPixels": 256,
+            "tier": "close"
+          }
+        }
+      ],
+      "file": "cards/010.png",
+      "assessment": "Claro",
+      "cause": "Revisar resolución de la animación primero",
+      "note": "Las puntas y la membrana pierden definición. En móvil la animación usa 128 px; el original tiene 354 px. Probar primero más resolución de animación."
+    },
+    "after": {
+      "number": 10,
+      "id": "spiny",
+      "name": "Protista espinoso",
+      "stage": 0,
+      "stageName": "Microscopio",
+      "crop": [
+        364,
+        746,
+        354,
+        275
+      ],
+      "range": {
+        "min": 75.68,
+        "max": 96.32000000000001
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 75.68,
+          "diameterCSS": 137.73760000000001,
+          "sheet": {
+            "id": "spiny",
+            "seen": 8,
+            "posesPerSecond": 30,
+            "bodyPixels": 192,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 86,
+          "diameterCSS": 156.52,
+          "sheet": {
+            "id": "spiny",
+            "seen": 10,
+            "posesPerSecond": 30,
+            "bodyPixels": 256,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 96.32000000000001,
+          "diameterCSS": 175.30240000000003,
+          "sheet": {
+            "id": "spiny",
+            "seen": 11,
+            "posesPerSecond": 30,
+            "bodyPixels": 256,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 75.68,
+          "diameterCSS": 211.90400000000005,
+          "sheet": {
+            "id": "spiny",
+            "seen": 2,
+            "posesPerSecond": 30,
+            "bodyPixels": 192,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 86,
+          "diameterCSS": 240.8,
+          "sheet": {
+            "id": "spiny",
+            "seen": 4,
+            "posesPerSecond": 30,
+            "bodyPixels": 256,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 96.32000000000001,
+          "diameterCSS": 269.696,
+          "sheet": {
+            "id": "spiny",
+            "seen": 5,
+            "posesPerSecond": 30,
+            "bodyPixels": 256,
+            "tier": "close"
+          }
+        }
+      ],
+      "file": "cards/010.png"
+    }
+  },
+  {
+    "before": {
+      "number": 11,
+      "id": "giant",
+      "name": "Ameba gigante",
+      "stage": 0,
+      "stageName": "Microscopio",
+      "crop": [
+        745,
+        692,
+        355,
+        351
+      ],
+      "range": {
+        "min": 92.4,
+        "max": 117.60000000000001
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 92.4,
+          "diameterCSS": 168.16800000000003,
+          "sheet": {
+            "id": "giant",
+            "seen": 2,
+            "posesPerSecond": 30,
+            "bodyPixels": 171,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 105,
+          "diameterCSS": 191.10000000000002,
+          "sheet": {
+            "id": "giant",
+            "seen": 3,
+            "posesPerSecond": 30,
+            "bodyPixels": 171,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 117.60000000000001,
+          "diameterCSS": 214.03200000000004,
+          "sheet": {
+            "id": "giant",
+            "seen": 4,
+            "posesPerSecond": 30,
+            "bodyPixels": 171,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 92.4,
+          "diameterCSS": 258.72,
+          "sheet": {
+            "id": "giant",
+            "seen": 2,
+            "posesPerSecond": 30,
+            "bodyPixels": 256,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 105,
+          "diameterCSS": 294,
+          "sheet": {
+            "id": "giant",
+            "seen": 3,
+            "posesPerSecond": 30,
+            "bodyPixels": 256,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 117.60000000000001,
+          "diameterCSS": 329.28000000000003,
+          "sheet": {
+            "id": "giant",
+            "seen": 4,
+            "posesPerSecond": 30,
+            "bodyPixels": 256,
+            "tier": "close"
+          }
+        }
+      ],
+      "file": "cards/011.png",
+      "assessment": "Claro",
+      "cause": "Revisar resolución de la animación primero",
+      "note": "La membrana y los orgánulos se suavizan al aumentar. La animación reduce el detalle del original."
+    },
+    "after": {
+      "number": 11,
+      "id": "giant",
+      "name": "Ameba gigante",
+      "stage": 0,
+      "stageName": "Microscopio",
+      "crop": [
+        745,
+        692,
+        355,
+        351
+      ],
+      "range": {
+        "min": 92.4,
+        "max": 117.60000000000001
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 92.4,
+          "diameterCSS": 168.16800000000003,
+          "sheet": {
+            "id": "giant",
+            "seen": 31,
+            "posesPerSecond": 30,
+            "bodyPixels": 224,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 105,
+          "diameterCSS": 191.10000000000002,
+          "sheet": {
+            "id": "giant",
+            "seen": 32,
+            "posesPerSecond": 30,
+            "bodyPixels": 224,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 117.60000000000001,
+          "diameterCSS": 214.03200000000004,
+          "sheet": {
+            "id": "giant",
+            "seen": 33,
+            "posesPerSecond": 30,
+            "bodyPixels": 224,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 92.4,
+          "diameterCSS": 258.72,
+          "sheet": {
+            "id": "giant",
+            "seen": 2,
+            "posesPerSecond": 30,
+            "bodyPixels": 224,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 105,
+          "diameterCSS": 294,
+          "sheet": {
+            "id": "giant",
+            "seen": 4,
+            "posesPerSecond": 30,
+            "bodyPixels": 256,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 117.60000000000001,
+          "diameterCSS": 329.28000000000003,
+          "sheet": {
+            "id": "giant",
+            "seen": 5,
+            "posesPerSecond": 30,
+            "bodyPixels": 256,
+            "tier": "close"
+          }
+        }
+      ],
+      "file": "cards/011.png"
+    }
+  },
+  {
+    "before": {
+      "number": 20,
+      "id": "pond-3",
+      "name": "Hidromedusa",
+      "stage": 1,
+      "stageName": "Charca",
+      "crop": [
+        1172,
+        221,
+        364,
+        289
+      ],
+      "range": {
+        "min": 22.5,
+        "max": 37.5
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 22.5,
+          "diameterCSS": 86.33018012259677,
+          "sheet": {
+            "id": "pond-3",
+            "seen": 5,
+            "posesPerSecond": 29.09,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 30,
+          "diameterCSS": 115.10690683012903,
+          "sheet": {
+            "id": "pond-3",
+            "seen": 6,
+            "posesPerSecond": 29.09,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 37.5,
+          "diameterCSS": 143.88363353766127,
+          "sheet": {
+            "id": "pond-3",
+            "seen": 7,
+            "posesPerSecond": 29.09,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 22.5,
+          "diameterCSS": 132.81566172707196,
+          "sheet": {
+            "id": "pond-3",
+            "seen": 2,
+            "posesPerSecond": 29.09,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 30,
+          "diameterCSS": 177.0875489694293,
+          "sheet": {
+            "id": "pond-3",
+            "seen": 3,
+            "posesPerSecond": 29.09,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 37.5,
+          "diameterCSS": 221.35943621178657,
+          "sheet": {
+            "id": "pond-3",
+            "seen": 4,
+            "posesPerSecond": 29.09,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        }
+      ],
+      "file": "cards/020.png",
+      "assessment": "Claro",
+      "cause": "Revisar resolución de la animación primero",
+      "note": "La animación usa 128 px de cuerpo y suaviza bordes/textura. La imagen fuente tiene 364 px; conviene probarla antes de rehacer el dibujo."
+    },
+    "after": {
+      "number": 20,
+      "id": "pond-3",
+      "name": "Hidromedusa",
+      "stage": 1,
+      "stageName": "Charca",
+      "crop": [
+        1172,
+        221,
+        364,
+        289
+      ],
+      "range": {
+        "min": 22.5,
+        "max": 37.5
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 22.5,
+          "diameterCSS": 86.33018012259677,
+          "sheet": {
+            "id": "pond-3",
+            "seen": 5,
+            "posesPerSecond": 29.09,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 30,
+          "diameterCSS": 115.10690683012903,
+          "sheet": {
+            "id": "pond-3",
+            "seen": 13,
+            "posesPerSecond": 29.09,
+            "bodyPixels": 192,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 37.5,
+          "diameterCSS": 143.88363353766127,
+          "sheet": {
+            "id": "pond-3",
+            "seen": 14,
+            "posesPerSecond": 29.09,
+            "bodyPixels": 192,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 22.5,
+          "diameterCSS": 132.81566172707196,
+          "sheet": {
+            "id": "pond-3",
+            "seen": 2,
+            "posesPerSecond": 29.09,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 30,
+          "diameterCSS": 177.0875489694293,
+          "sheet": {
+            "id": "pond-3",
+            "seen": 4,
+            "posesPerSecond": 29.09,
+            "bodyPixels": 192,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 37.5,
+          "diameterCSS": 221.35943621178657,
+          "sheet": {
+            "id": "pond-3",
+            "seen": 5,
+            "posesPerSecond": 29.09,
+            "bodyPixels": 192,
+            "tier": "medium"
+          }
+        }
+      ],
+      "file": "cards/020.png"
+    }
+  },
+  {
+    "before": {
+      "number": 21,
+      "id": "pond-4",
+      "name": "Hidromedusa urticante",
+      "stage": 1,
+      "stageName": "Charca",
+      "crop": [
+        0,
+        508,
+        377,
+        250
+      ],
+      "range": {
+        "min": 36,
+        "max": 60
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 36,
+          "diameterCSS": 138.12828819615484,
+          "sheet": {
+            "id": "pond-4",
+            "seen": 5,
+            "posesPerSecond": 22.07,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 48,
+          "diameterCSS": 184.17105092820645,
+          "sheet": {
+            "id": "pond-4",
+            "seen": 6,
+            "posesPerSecond": 22.07,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 60,
+          "diameterCSS": 230.21381366025807,
+          "sheet": {
+            "id": "pond-4",
+            "seen": 7,
+            "posesPerSecond": 22.07,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 36,
+          "diameterCSS": 212.50505876331513,
+          "sheet": {
+            "id": "pond-4",
+            "seen": 2,
+            "posesPerSecond": 22.07,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 48,
+          "diameterCSS": 283.34007835108685,
+          "sheet": {
+            "id": "pond-4",
+            "seen": 3,
+            "posesPerSecond": 22.07,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 60,
+          "diameterCSS": 354.1750979388586,
+          "sheet": {
+            "id": "pond-4",
+            "seen": 4,
+            "posesPerSecond": 22.07,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        }
+      ],
+      "file": "cards/021.png",
+      "assessment": "Claro",
+      "cause": "Revisar resolución de la animación primero",
+      "note": "La animación usa 128 px de cuerpo y suaviza bordes/textura. La imagen fuente tiene 377 px; conviene probarla antes de rehacer el dibujo."
+    },
+    "after": {
+      "number": 21,
+      "id": "pond-4",
+      "name": "Hidromedusa urticante",
+      "stage": 1,
+      "stageName": "Charca",
+      "crop": [
+        0,
+        508,
+        377,
+        250
+      ],
+      "range": {
+        "min": 36,
+        "max": 60
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 36,
+          "diameterCSS": 138.12828819615484,
+          "sheet": {
+            "id": "pond-4",
+            "seen": 10,
+            "posesPerSecond": 22.07,
+            "bodyPixels": 192,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 48,
+          "diameterCSS": 184.17105092820645,
+          "sheet": {
+            "id": "pond-4",
+            "seen": 32,
+            "posesPerSecond": 22.07,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 60,
+          "diameterCSS": 230.21381366025807,
+          "sheet": {
+            "id": "pond-4",
+            "seen": 33,
+            "posesPerSecond": 22.07,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 36,
+          "diameterCSS": 212.50505876331513,
+          "sheet": {
+            "id": "pond-4",
+            "seen": 2,
+            "posesPerSecond": 22.07,
+            "bodyPixels": 192,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 48,
+          "diameterCSS": 283.34007835108685,
+          "sheet": {
+            "id": "pond-4",
+            "seen": 4,
+            "posesPerSecond": 22.07,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 60,
+          "diameterCSS": 354.1750979388586,
+          "sheet": {
+            "id": "pond-4",
+            "seen": 5,
+            "posesPerSecond": 22.07,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        }
+      ],
+      "file": "cards/021.png"
+    }
+  },
+  {
+    "before": {
+      "number": 22,
+      "id": "pond-5",
+      "name": "Larva de cefalópodo",
+      "stage": 1,
+      "stageName": "Charca",
+      "crop": [
+        391,
+        516,
+        428,
+        225
+      ],
+      "range": {
+        "min": 48.4,
+        "max": 61.60000000000001
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 48.4,
+          "diameterCSS": 185.7058096859415,
+          "sheet": {
+            "id": "pond-5",
+            "seen": 3,
+            "posesPerSecond": 30.43,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 55,
+          "diameterCSS": 211.02932918856987,
+          "sheet": {
+            "id": "pond-5",
+            "seen": 4,
+            "posesPerSecond": 30.43,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 61.60000000000001,
+          "diameterCSS": 236.35284869119832,
+          "sheet": {
+            "id": "pond-5",
+            "seen": 5,
+            "posesPerSecond": 30.43,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 48.4,
+          "diameterCSS": 285.7012456706792,
+          "sheet": {
+            "id": "pond-5",
+            "seen": 2,
+            "posesPerSecond": 30.43,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 55,
+          "diameterCSS": 324.66050644395364,
+          "sheet": {
+            "id": "pond-5",
+            "seen": 3,
+            "posesPerSecond": 30.43,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 61.60000000000001,
+          "diameterCSS": 363.6197672172282,
+          "sheet": {
+            "id": "pond-5",
+            "seen": 4,
+            "posesPerSecond": 30.43,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        }
+      ],
+      "file": "cards/022.png",
+      "assessment": "Claro",
+      "cause": "Revisar resolución de la animación primero",
+      "note": "La animación usa 128 px de cuerpo y suaviza bordes/textura. La imagen fuente tiene 428 px; conviene probarla antes de rehacer el dibujo."
+    },
+    "after": {
+      "number": 22,
+      "id": "pond-5",
+      "name": "Larva de cefalópodo",
+      "stage": 1,
+      "stageName": "Charca",
+      "crop": [
+        391,
+        516,
+        428,
+        225
+      ],
+      "range": {
+        "min": 48.4,
+        "max": 61.60000000000001
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 48.4,
+          "diameterCSS": 185.7058096859415,
+          "sheet": {
+            "id": "pond-5",
+            "seen": 9,
+            "posesPerSecond": 30.43,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 55,
+          "diameterCSS": 211.02932918856987,
+          "sheet": {
+            "id": "pond-5",
+            "seen": 10,
+            "posesPerSecond": 30.43,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 61.60000000000001,
+          "diameterCSS": 236.35284869119832,
+          "sheet": {
+            "id": "pond-5",
+            "seen": 11,
+            "posesPerSecond": 30.43,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 48.4,
+          "diameterCSS": 285.7012456706792,
+          "sheet": {
+            "id": "pond-5",
+            "seen": 2,
+            "posesPerSecond": 30.43,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 55,
+          "diameterCSS": 324.66050644395364,
+          "sheet": {
+            "id": "pond-5",
+            "seen": 3,
+            "posesPerSecond": 30.43,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 61.60000000000001,
+          "diameterCSS": 363.6197672172282,
+          "sheet": {
+            "id": "pond-5",
+            "seen": 4,
+            "posesPerSecond": 30.43,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        }
+      ],
+      "file": "cards/022.png"
+    }
+  },
+  {
+    "before": {
+      "number": 23,
+      "id": "pond-6",
+      "name": "Alevín",
+      "stage": 1,
+      "stageName": "Charca",
+      "crop": [
+        419,
+        73,
+        325,
+        126
+      ],
+      "range": {
+        "min": 56,
+        "max": 84
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 56,
+          "diameterCSS": 214.86622608290753,
+          "sheet": {
+            "id": "pond-6",
+            "seen": 2,
+            "posesPerSecond": 46.15,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 70,
+          "diameterCSS": 268.5827826036344,
+          "sheet": {
+            "id": "pond-6",
+            "seen": 3,
+            "posesPerSecond": 46.15,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 84,
+          "diameterCSS": 322.29933912436127,
+          "sheet": {
+            "id": "pond-6",
+            "seen": 4,
+            "posesPerSecond": 46.15,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 56,
+          "diameterCSS": 330.56342474293467,
+          "sheet": {
+            "id": "pond-6",
+            "seen": 2,
+            "posesPerSecond": 46.15,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 70,
+          "diameterCSS": 413.20428092866837,
+          "sheet": {
+            "id": "pond-6",
+            "seen": 3,
+            "posesPerSecond": 46.15,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 84,
+          "diameterCSS": 495.84513711440195,
+          "sheet": {
+            "id": "pond-6",
+            "seen": 4,
+            "posesPerSecond": 46.15,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        }
+      ],
+      "file": "cards/023.png",
+      "assessment": "Claro",
+      "cause": "Revisar resolución de la animación primero",
+      "note": "La animación usa 128 px de cuerpo y suaviza bordes/textura. La imagen fuente tiene 325 px; conviene probarla antes de rehacer el dibujo."
+    },
+    "after": {
+      "number": 23,
+      "id": "pond-6",
+      "name": "Alevín",
+      "stage": 1,
+      "stageName": "Charca",
+      "crop": [
+        419,
+        73,
+        325,
+        126
+      ],
+      "range": {
+        "min": 56,
+        "max": 84
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 56,
+          "diameterCSS": 214.86622608290753,
+          "sheet": {
+            "id": "pond-6",
+            "seen": 6,
+            "posesPerSecond": 46.15,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 70,
+          "diameterCSS": 268.5827826036344,
+          "sheet": {
+            "id": "pond-6",
+            "seen": 7,
+            "posesPerSecond": 46.15,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 84,
+          "diameterCSS": 322.29933912436127,
+          "sheet": {
+            "id": "pond-6",
+            "seen": 8,
+            "posesPerSecond": 46.15,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 56,
+          "diameterCSS": 330.56342474293467,
+          "sheet": {
+            "id": "pond-6",
+            "seen": 2,
+            "posesPerSecond": 46.15,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 70,
+          "diameterCSS": 413.20428092866837,
+          "sheet": {
+            "id": "pond-6",
+            "seen": 3,
+            "posesPerSecond": 46.15,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 84,
+          "diameterCSS": 495.84513711440195,
+          "sheet": {
+            "id": "pond-6",
+            "seen": 4,
+            "posesPerSecond": 46.15,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        }
+      ],
+      "file": "cards/023.png"
+    }
+  },
+  {
+    "before": {
+      "number": 24,
+      "id": "pond-7",
+      "name": "Alevín cazador",
+      "stage": 1,
+      "stageName": "Charca",
+      "crop": [
+        419,
+        73,
+        325,
+        126
+      ],
+      "range": {
+        "min": 76,
+        "max": 114
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 76,
+          "diameterCSS": 291.6041639696602,
+          "sheet": {
+            "id": "pond-7",
+            "seen": 2,
+            "posesPerSecond": 46.15,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 95,
+          "diameterCSS": 364.50520496207525,
+          "sheet": {
+            "id": "pond-7",
+            "seen": 3,
+            "posesPerSecond": 46.15,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 114,
+          "diameterCSS": 437.4062459544904,
+          "sheet": {
+            "id": "pond-7",
+            "seen": 4,
+            "posesPerSecond": 46.15,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 76,
+          "diameterCSS": 448.6217907225541,
+          "sheet": {
+            "id": "pond-7",
+            "seen": 2,
+            "posesPerSecond": 46.15,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 95,
+          "diameterCSS": 560.7772384031928,
+          "sheet": {
+            "id": "pond-7",
+            "seen": 3,
+            "posesPerSecond": 46.15,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 114,
+          "diameterCSS": 672.9326860838313,
+          "sheet": {
+            "id": "pond-7",
+            "seen": 4,
+            "posesPerSecond": 46.15,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        }
+      ],
+      "file": "cards/024.png",
+      "assessment": "Claro",
+      "cause": "Revisar resolución de la animación primero",
+      "note": "La animación usa 128 px de cuerpo y suaviza bordes/textura. La imagen fuente tiene 325 px; conviene probarla antes de rehacer el dibujo."
+    },
+    "after": {
+      "number": 24,
+      "id": "pond-7",
+      "name": "Alevín cazador",
+      "stage": 1,
+      "stageName": "Charca",
+      "crop": [
+        419,
+        73,
+        325,
+        126
+      ],
+      "range": {
+        "min": 76,
+        "max": 114
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 76,
+          "diameterCSS": 291.6041639696602,
+          "sheet": {
+            "id": "pond-7",
+            "seen": 2,
+            "posesPerSecond": 46.15,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 95,
+          "diameterCSS": 364.50520496207525,
+          "sheet": {
+            "id": "pond-7",
+            "seen": 3,
+            "posesPerSecond": 46.15,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 114,
+          "diameterCSS": 437.4062459544904,
+          "sheet": {
+            "id": "pond-7",
+            "seen": 4,
+            "posesPerSecond": 46.15,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 76,
+          "diameterCSS": 448.6217907225541,
+          "sheet": {
+            "id": "pond-7",
+            "seen": 2,
+            "posesPerSecond": 46.15,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 95,
+          "diameterCSS": 560.7772384031928,
+          "sheet": {
+            "id": "pond-7",
+            "seen": 3,
+            "posesPerSecond": 46.15,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 114,
+          "diameterCSS": 672.9326860838313,
+          "sheet": {
+            "id": "pond-7",
+            "seen": 4,
+            "posesPerSecond": 46.15,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        }
+      ],
+      "file": "cards/024.png"
+    }
+  },
+  {
+    "before": {
+      "number": 34,
+      "id": "land-5",
+      "name": "Mariposa",
+      "stage": 2,
+      "stageName": "Orilla",
+      "crop": [
+        378,
+        354,
+        338,
+        355
+      ],
+      "range": {
+        "min": 22,
+        "max": 28.000000000000004
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 22,
+          "diameterCSS": 84.41173167542794,
+          "sheet": {
+            "id": "land-5",
+            "seen": 3,
+            "posesPerSecond": 30,
+            "bodyPixels": 122,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 25,
+          "diameterCSS": 95.92242235844087,
+          "sheet": {
+            "id": "land-5",
+            "seen": 4,
+            "posesPerSecond": 30,
+            "bodyPixels": 122,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 28.000000000000004,
+          "diameterCSS": 107.43311304145377,
+          "sheet": {
+            "id": "land-5",
+            "seen": 5,
+            "posesPerSecond": 30,
+            "bodyPixels": 122,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 22,
+          "diameterCSS": 129.86420257758147,
+          "sheet": {
+            "id": "land-5",
+            "seen": 2,
+            "posesPerSecond": 30,
+            "bodyPixels": 122,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 25,
+          "diameterCSS": 147.5729574745244,
+          "sheet": {
+            "id": "land-5",
+            "seen": 3,
+            "posesPerSecond": 30,
+            "bodyPixels": 122,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 28.000000000000004,
+          "diameterCSS": 165.28171237146734,
+          "sheet": {
+            "id": "land-5",
+            "seen": 4,
+            "posesPerSecond": 30,
+            "bodyPixels": 122,
+            "tier": "standard"
+          }
+        }
+      ],
+      "file": "cards/034.png",
+      "assessment": "Claro",
+      "cause": "Revisar resolución de la animación primero",
+      "note": "La animación usa 122 px de cuerpo y suaviza bordes/textura. La imagen fuente tiene 338 px; conviene probarla antes de rehacer el dibujo."
+    },
+    "after": {
+      "number": 34,
+      "id": "land-5",
+      "name": "Mariposa",
+      "stage": 2,
+      "stageName": "Orilla",
+      "crop": [
+        378,
+        354,
+        338,
+        355
+      ],
+      "range": {
+        "min": 22,
+        "max": 28.000000000000004
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 22,
+          "diameterCSS": 84.41173167542794,
+          "sheet": {
+            "id": "land-5",
+            "seen": 3,
+            "posesPerSecond": 30,
+            "bodyPixels": 122,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 25,
+          "diameterCSS": 95.92242235844087,
+          "sheet": {
+            "id": "land-5",
+            "seen": 9,
+            "posesPerSecond": 30,
+            "bodyPixels": 192,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 28.000000000000004,
+          "diameterCSS": 107.43311304145377,
+          "sheet": {
+            "id": "land-5",
+            "seen": 10,
+            "posesPerSecond": 30,
+            "bodyPixels": 192,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 22,
+          "diameterCSS": 129.86420257758147,
+          "sheet": {
+            "id": "land-5",
+            "seen": 2,
+            "posesPerSecond": 30,
+            "bodyPixels": 122,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 25,
+          "diameterCSS": 147.5729574745244,
+          "sheet": {
+            "id": "land-5",
+            "seen": 4,
+            "posesPerSecond": 30,
+            "bodyPixels": 192,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 28.000000000000004,
+          "diameterCSS": 165.28171237146734,
+          "sheet": {
+            "id": "land-5",
+            "seen": 5,
+            "posesPerSecond": 30,
+            "bodyPixels": 192,
+            "tier": "medium"
+          }
+        }
+      ],
+      "file": "cards/034.png"
+    }
+  },
+  {
+    "before": {
+      "number": 36,
+      "id": "land-7",
+      "name": "Escorpión",
+      "stage": 2,
+      "stageName": "Orilla",
+      "crop": [
+        1111,
+        350,
+        324,
+        341
+      ],
+      "range": {
+        "min": 23.8,
+        "max": 32.199999999999996
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 23.8,
+          "diameterCSS": 91.3181460852357,
+          "sheet": {
+            "id": "land-7",
+            "seen": 4,
+            "posesPerSecond": 30,
+            "bodyPixels": 122,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 28,
+          "diameterCSS": 107.43311304145377,
+          "sheet": {
+            "id": "land-7",
+            "seen": 5,
+            "posesPerSecond": 30,
+            "bodyPixels": 122,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 32.199999999999996,
+          "diameterCSS": 123.5480799976718,
+          "sheet": {
+            "id": "land-7",
+            "seen": 6,
+            "posesPerSecond": 30,
+            "bodyPixels": 122,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 23.8,
+          "diameterCSS": 140.48945551574724,
+          "sheet": {
+            "id": "land-7",
+            "seen": 2,
+            "posesPerSecond": 30,
+            "bodyPixels": 122,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 28,
+          "diameterCSS": 165.28171237146734,
+          "sheet": {
+            "id": "land-7",
+            "seen": 3,
+            "posesPerSecond": 30,
+            "bodyPixels": 122,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 32.199999999999996,
+          "diameterCSS": 190.0739692271874,
+          "sheet": {
+            "id": "land-7",
+            "seen": 4,
+            "posesPerSecond": 30,
+            "bodyPixels": 122,
+            "tier": "standard"
+          }
+        }
+      ],
+      "file": "cards/036.png",
+      "assessment": "Claro",
+      "cause": "Revisar resolución de la animación primero",
+      "note": "La animación usa 122 px de cuerpo y suaviza bordes/textura. La imagen fuente tiene 324 px; conviene probarla antes de rehacer el dibujo."
+    },
+    "after": {
+      "number": 36,
+      "id": "land-7",
+      "name": "Escorpión",
+      "stage": 2,
+      "stageName": "Orilla",
+      "crop": [
+        1111,
+        350,
+        324,
+        341
+      ],
+      "range": {
+        "min": 23.8,
+        "max": 32.199999999999996
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 23.8,
+          "diameterCSS": 91.3181460852357,
+          "sheet": {
+            "id": "land-7",
+            "seen": 4,
+            "posesPerSecond": 30,
+            "bodyPixels": 122,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 28,
+          "diameterCSS": 107.43311304145377,
+          "sheet": {
+            "id": "land-7",
+            "seen": 12,
+            "posesPerSecond": 30,
+            "bodyPixels": 193,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 32.199999999999996,
+          "diameterCSS": 123.5480799976718,
+          "sheet": {
+            "id": "land-7",
+            "seen": 13,
+            "posesPerSecond": 30,
+            "bodyPixels": 193,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 23.8,
+          "diameterCSS": 140.48945551574724,
+          "sheet": {
+            "id": "land-7",
+            "seen": 2,
+            "posesPerSecond": 30,
+            "bodyPixels": 122,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 28,
+          "diameterCSS": 165.28171237146734,
+          "sheet": {
+            "id": "land-7",
+            "seen": 4,
+            "posesPerSecond": 30,
+            "bodyPixels": 193,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 32.199999999999996,
+          "diameterCSS": 190.0739692271874,
+          "sheet": {
+            "id": "land-7",
+            "seen": 5,
+            "posesPerSecond": 30,
+            "bodyPixels": 193,
+            "tier": "medium"
+          }
+        }
+      ],
+      "file": "cards/036.png"
+    }
+  },
+  {
+    "before": {
+      "number": 37,
+      "id": "land-8",
+      "name": "Rana",
+      "stage": 2,
+      "stageName": "Orilla",
+      "crop": [
+        18,
+        722,
+        322,
+        303
+      ],
+      "range": {
+        "min": 35.699999999999996,
+        "max": 49.559999999999995
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 35.699999999999996,
+          "diameterCSS": 136.97721912785352,
+          "sheet": {
+            "id": "land-8",
+            "seen": 5,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 42,
+          "diameterCSS": 161.14966956218063,
+          "sheet": {
+            "id": "land-8",
+            "seen": 6,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 49.559999999999995,
+          "diameterCSS": 190.15661008337312,
+          "sheet": {
+            "id": "land-8",
+            "seen": 7,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 35.699999999999996,
+          "diameterCSS": 210.7341832736208,
+          "sheet": {
+            "id": "land-8",
+            "seen": 2,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 42,
+          "diameterCSS": 247.92256855720098,
+          "sheet": {
+            "id": "land-8",
+            "seen": 3,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 49.559999999999995,
+          "diameterCSS": 292.5486308974971,
+          "sheet": {
+            "id": "land-8",
+            "seen": 4,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        }
+      ],
+      "file": "cards/037.png",
+      "assessment": "Claro",
+      "cause": "Revisar resolución de la animación primero",
+      "note": "La animación usa 128 px de cuerpo y suaviza bordes/textura. La imagen fuente tiene 322 px; conviene probarla antes de rehacer el dibujo."
+    },
+    "after": {
+      "number": 37,
+      "id": "land-8",
+      "name": "Rana",
+      "stage": 2,
+      "stageName": "Orilla",
+      "crop": [
+        18,
+        722,
+        322,
+        303
+      ],
+      "range": {
+        "min": 35.699999999999996,
+        "max": 49.559999999999995
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 35.699999999999996,
+          "diameterCSS": 136.97721912785352,
+          "sheet": {
+            "id": "land-8",
+            "seen": 11,
+            "posesPerSecond": 30,
+            "bodyPixels": 192,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 42,
+          "diameterCSS": 161.14966956218063,
+          "sheet": {
+            "id": "land-8",
+            "seen": 30,
+            "posesPerSecond": 30,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 49.559999999999995,
+          "diameterCSS": 190.15661008337312,
+          "sheet": {
+            "id": "land-8",
+            "seen": 31,
+            "posesPerSecond": 30,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 35.699999999999996,
+          "diameterCSS": 210.7341832736208,
+          "sheet": {
+            "id": "land-8",
+            "seen": 2,
+            "posesPerSecond": 30,
+            "bodyPixels": 192,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 42,
+          "diameterCSS": 247.92256855720098,
+          "sheet": {
+            "id": "land-8",
+            "seen": 4,
+            "posesPerSecond": 30,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 49.559999999999995,
+          "diameterCSS": 292.5486308974971,
+          "sheet": {
+            "id": "land-8",
+            "seen": 5,
+            "posesPerSecond": 30,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        }
+      ],
+      "file": "cards/037.png"
+    }
+  },
+  {
+    "before": {
+      "number": 38,
+      "id": "land-9",
+      "name": "Lagartija",
+      "stage": 2,
+      "stageName": "Orilla",
+      "crop": [
+        365,
+        751,
+        369,
+        269
+      ],
+      "range": {
+        "min": 55.25,
+        "max": 76.7
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 55.25,
+          "diameterCSS": 211.9885534121543,
+          "sheet": {
+            "id": "land-9",
+            "seen": 3,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 65,
+          "diameterCSS": 249.39829813194623,
+          "sheet": {
+            "id": "land-9",
+            "seen": 4,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 76.7,
+          "diameterCSS": 294.2899917956966,
+          "sheet": {
+            "id": "land-9",
+            "seen": 5,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 55.25,
+          "diameterCSS": 326.1362360186989,
+          "sheet": {
+            "id": "land-9",
+            "seen": 2,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 65,
+          "diameterCSS": 383.6896894337634,
+          "sheet": {
+            "id": "land-9",
+            "seen": 3,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 76.7,
+          "diameterCSS": 452.7538335318409,
+          "sheet": {
+            "id": "land-9",
+            "seen": 4,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        }
+      ],
+      "file": "cards/038.png",
+      "assessment": "Claro",
+      "cause": "Revisar resolución de la animación primero",
+      "note": "La animación usa 128 px de cuerpo y suaviza bordes/textura. La imagen fuente tiene 369 px; conviene probarla antes de rehacer el dibujo."
+    },
+    "after": {
+      "number": 38,
+      "id": "land-9",
+      "name": "Lagartija",
+      "stage": 2,
+      "stageName": "Orilla",
+      "crop": [
+        365,
+        751,
+        369,
+        269
+      ],
+      "range": {
+        "min": 55.25,
+        "max": 76.7
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 55.25,
+          "diameterCSS": 211.9885534121543,
+          "sheet": {
+            "id": "land-9",
+            "seen": 12,
+            "posesPerSecond": 30,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 65,
+          "diameterCSS": 249.39829813194623,
+          "sheet": {
+            "id": "land-9",
+            "seen": 13,
+            "posesPerSecond": 30,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 76.7,
+          "diameterCSS": 294.2899917956966,
+          "sheet": {
+            "id": "land-9",
+            "seen": 14,
+            "posesPerSecond": 30,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 55.25,
+          "diameterCSS": 326.1362360186989,
+          "sheet": {
+            "id": "land-9",
+            "seen": 2,
+            "posesPerSecond": 30,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 65,
+          "diameterCSS": 383.6896894337634,
+          "sheet": {
+            "id": "land-9",
+            "seen": 3,
+            "posesPerSecond": 30,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 76.7,
+          "diameterCSS": 452.7538335318409,
+          "sheet": {
+            "id": "land-9",
+            "seen": 4,
+            "posesPerSecond": 30,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        }
+      ],
+      "file": "cards/038.png"
+    }
+  },
+  {
+    "before": {
+      "number": 39,
+      "id": "land-10",
+      "name": "Ratón",
+      "stage": 2,
+      "stageName": "Orilla",
+      "crop": [
+        750,
+        788,
+        342,
+        237
+      ],
+      "range": {
+        "min": 51,
+        "max": 70.8
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 51,
+          "diameterCSS": 195.68174161121934,
+          "sheet": {
+            "id": "land-10",
+            "seen": 3,
+            "posesPerSecond": 32,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 60,
+          "diameterCSS": 230.21381366025807,
+          "sheet": {
+            "id": "land-10",
+            "seen": 4,
+            "posesPerSecond": 32,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 70.8,
+          "diameterCSS": 271.6523001191045,
+          "sheet": {
+            "id": "land-10",
+            "seen": 5,
+            "posesPerSecond": 32,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 51,
+          "diameterCSS": 301.0488332480298,
+          "sheet": {
+            "id": "land-10",
+            "seen": 2,
+            "posesPerSecond": 32,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 60,
+          "diameterCSS": 354.1750979388586,
+          "sheet": {
+            "id": "land-10",
+            "seen": 3,
+            "posesPerSecond": 32,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 70.8,
+          "diameterCSS": 417.92661556785305,
+          "sheet": {
+            "id": "land-10",
+            "seen": 4,
+            "posesPerSecond": 32,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        }
+      ],
+      "file": "cards/039.png",
+      "assessment": "Claro",
+      "cause": "Revisar resolución de la animación primero",
+      "note": "La animación usa 128 px de cuerpo y suaviza bordes/textura. La imagen fuente tiene 342 px; conviene probarla antes de rehacer el dibujo."
+    },
+    "after": {
+      "number": 39,
+      "id": "land-10",
+      "name": "Ratón",
+      "stage": 2,
+      "stageName": "Orilla",
+      "crop": [
+        750,
+        788,
+        342,
+        237
+      ],
+      "range": {
+        "min": 51,
+        "max": 70.8
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 51,
+          "diameterCSS": 195.68174161121934,
+          "sheet": {
+            "id": "land-10",
+            "seen": 8,
+            "posesPerSecond": 32,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 60,
+          "diameterCSS": 230.21381366025807,
+          "sheet": {
+            "id": "land-10",
+            "seen": 9,
+            "posesPerSecond": 32,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 70.8,
+          "diameterCSS": 271.6523001191045,
+          "sheet": {
+            "id": "land-10",
+            "seen": 10,
+            "posesPerSecond": 32,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 51,
+          "diameterCSS": 301.0488332480298,
+          "sheet": {
+            "id": "land-10",
+            "seen": 2,
+            "posesPerSecond": 32,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 60,
+          "diameterCSS": 354.1750979388586,
+          "sheet": {
+            "id": "land-10",
+            "seen": 3,
+            "posesPerSecond": 32,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 70.8,
+          "diameterCSS": 417.92661556785305,
+          "sheet": {
+            "id": "land-10",
+            "seen": 4,
+            "posesPerSecond": 32,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        }
+      ],
+      "file": "cards/039.png"
+    }
+  },
+  {
+    "before": {
+      "number": 40,
+      "id": "land-11",
+      "name": "Conejo",
+      "stage": 2,
+      "stageName": "Orilla",
+      "crop": [
+        1112,
+        731,
+        322,
+        279
+      ],
+      "range": {
+        "min": 114.75,
+        "max": 159.29999999999998
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 114.75,
+          "diameterCSS": 440.28391862524353,
+          "sheet": {
+            "id": "land-11",
+            "seen": 4,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 135,
+          "diameterCSS": 517.9810807355807,
+          "sheet": {
+            "id": "land-11",
+            "seen": 5,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 159.29999999999998,
+          "diameterCSS": 611.217675267985,
+          "sheet": {
+            "id": "land-11",
+            "seen": 6,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 114.75,
+          "diameterCSS": 677.3598748080669,
+          "sheet": {
+            "id": "land-11",
+            "seen": 2,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 135,
+          "diameterCSS": 796.8939703624318,
+          "sheet": {
+            "id": "land-11",
+            "seen": 3,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 159.29999999999998,
+          "diameterCSS": 940.3348850276693,
+          "sheet": {
+            "id": "land-11",
+            "seen": 4,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        }
+      ],
+      "file": "cards/040.png",
+      "assessment": "Claro",
+      "cause": "Revisar resolución de la animación primero",
+      "note": "El pelo queda convertido en manchas en la vista cercana. Animación de 128 px para hasta 940 px en PC; también habría que valorar la resolución original."
+    },
+    "after": {
+      "number": 40,
+      "id": "land-11",
+      "name": "Conejo",
+      "stage": 2,
+      "stageName": "Orilla",
+      "crop": [
+        1112,
+        731,
+        322,
+        279
+      ],
+      "range": {
+        "min": 114.75,
+        "max": 159.29999999999998
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 114.75,
+          "diameterCSS": 440.28391862524353,
+          "sheet": {
+            "id": "land-11",
+            "seen": 18,
+            "posesPerSecond": 30,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 135,
+          "diameterCSS": 517.9810807355807,
+          "sheet": {
+            "id": "land-11",
+            "seen": 19,
+            "posesPerSecond": 30,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 159.29999999999998,
+          "diameterCSS": 611.217675267985,
+          "sheet": {
+            "id": "land-11",
+            "seen": 20,
+            "posesPerSecond": 30,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 114.75,
+          "diameterCSS": 677.3598748080669,
+          "sheet": {
+            "id": "land-11",
+            "seen": 2,
+            "posesPerSecond": 30,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 135,
+          "diameterCSS": 796.8939703624318,
+          "sheet": {
+            "id": "land-11",
+            "seen": 3,
+            "posesPerSecond": 30,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 159.29999999999998,
+          "diameterCSS": 940.3348850276693,
+          "sheet": {
+            "id": "land-11",
+            "seen": 4,
+            "posesPerSecond": 30,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        }
+      ],
+      "file": "cards/040.png"
+    }
+  },
+  {
+    "before": {
+      "number": 41,
+      "id": "land-matter-scallop",
+      "name": "Concha de playa",
+      "stage": 2,
+      "stageName": "Orilla",
+      "crop": [
+        1120,
+        396,
+        288,
+        285
+      ],
+      "range": {
+        "min": 45.5,
+        "max": 98
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 45.5,
+          "diameterCSS": 174.57880869236237,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 70,
+          "diameterCSS": 268.5827826036344,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 98,
+          "diameterCSS": 376.01589564508816,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 45.5,
+          "diameterCSS": 268.5827826036344,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 70,
+          "diameterCSS": 413.20428092866837,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 98,
+          "diameterCSS": 578.4859933001356,
+          "sheet": null
+        }
+      ],
+      "file": "cards/041.png",
+      "assessment": "Claro",
+      "cause": "Revisar imagen fuente si se decide mejorar",
+      "note": "Veo pérdida de textura o bordes en la vista cercana; el original se queda justo para el tamaño de pantalla."
+    },
+    "after": {
+      "number": 41,
+      "id": "land-matter-scallop",
+      "name": "Concha de playa",
+      "stage": 2,
+      "stageName": "Orilla",
+      "crop": [
+        0,
+        0,
+        1254,
+        1241
+      ],
+      "range": {
+        "min": 45.5,
+        "max": 98
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 45.5,
+          "diameterCSS": 174.57880869236237,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 70,
+          "diameterCSS": 268.5827826036344,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 98,
+          "diameterCSS": 376.01589564508816,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 45.5,
+          "diameterCSS": 268.5827826036344,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 70,
+          "diameterCSS": 413.20428092866837,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 98,
+          "diameterCSS": 578.4859933001356,
+          "sheet": null
+        }
+      ],
+      "file": "cards/041.png"
+    }
+  },
+  {
+    "before": {
+      "number": 43,
+      "id": "land-matter-grass",
+      "name": "Hierba de la orilla",
+      "stage": 2,
+      "stageName": "Orilla",
+      "crop": [
+        23,
+        718,
+        351,
+        325
+      ],
+      "range": {
+        "min": 27.3,
+        "max": 58.8
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 27.3,
+          "diameterCSS": 104.74728521541742,
+          "sheet": {
+            "id": "land-matter-grass",
+            "seen": 6,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 42,
+          "diameterCSS": 161.14966956218063,
+          "sheet": {
+            "id": "land-matter-grass",
+            "seen": 7,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 58.8,
+          "diameterCSS": 225.60953738705288,
+          "sheet": {
+            "id": "land-matter-grass",
+            "seen": 8,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 27.3,
+          "diameterCSS": 161.14966956218066,
+          "sheet": {
+            "id": "land-matter-grass",
+            "seen": 2,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 42,
+          "diameterCSS": 247.92256855720098,
+          "sheet": {
+            "id": "land-matter-grass",
+            "seen": 3,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 58.8,
+          "diameterCSS": 347.09159598008137,
+          "sheet": {
+            "id": "land-matter-grass",
+            "seen": 4,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        }
+      ],
+      "file": "cards/043.png",
+      "assessment": "Claro",
+      "cause": "Revisar resolución de la animación primero",
+      "note": "La animación usa 128 px de cuerpo y suaviza bordes/textura. La imagen fuente tiene 351 px; conviene probarla antes de rehacer el dibujo."
+    },
+    "after": {
+      "number": 43,
+      "id": "land-matter-grass",
+      "name": "Hierba de la orilla",
+      "stage": 2,
+      "stageName": "Orilla",
+      "crop": [
+        23,
+        718,
+        351,
+        325
+      ],
+      "range": {
+        "min": 27.3,
+        "max": 58.8
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 27.3,
+          "diameterCSS": 104.74728521541742,
+          "sheet": {
+            "id": "land-matter-grass",
+            "seen": 14,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 192,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 42,
+          "diameterCSS": 161.14966956218063,
+          "sheet": {
+            "id": "land-matter-grass",
+            "seen": 46,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 58.8,
+          "diameterCSS": 225.60953738705288,
+          "sheet": {
+            "id": "land-matter-grass",
+            "seen": 47,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 27.3,
+          "diameterCSS": 161.14966956218066,
+          "sheet": {
+            "id": "land-matter-grass",
+            "seen": 2,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 192,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 42,
+          "diameterCSS": 247.92256855720098,
+          "sheet": {
+            "id": "land-matter-grass",
+            "seen": 4,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 58.8,
+          "diameterCSS": 347.09159598008137,
+          "sheet": {
+            "id": "land-matter-grass",
+            "seen": 5,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        }
+      ],
+      "file": "cards/043.png"
+    }
+  },
+  {
+    "before": {
+      "number": 45,
+      "id": "land-matter-twig",
+      "name": "Rama caída",
+      "stage": 2,
+      "stageName": "Orilla",
+      "crop": [
+        765,
+        758,
+        273,
+        265
+      ],
+      "range": {
+        "min": 48.75,
+        "max": 105
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 48.75,
+          "diameterCSS": 187.04872359895967,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 75,
+          "diameterCSS": 287.76726707532254,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 105,
+          "diameterCSS": 402.8741739054516,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 48.75,
+          "diameterCSS": 287.7672670753226,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 75,
+          "diameterCSS": 442.71887242357315,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 105,
+          "diameterCSS": 619.8064213930024,
+          "sheet": null
+        }
+      ],
+      "file": "cards/045.png",
+      "assessment": "Claro",
+      "cause": "Revisar imagen fuente si se decide mejorar",
+      "note": "Veo pérdida de textura o bordes en la vista cercana; el original se queda justo para el tamaño de pantalla."
+    },
+    "after": {
+      "number": 45,
+      "id": "land-matter-twig",
+      "name": "Rama caída",
+      "stage": 2,
+      "stageName": "Orilla",
+      "crop": [
+        0,
+        0,
+        1254,
+        1217
+      ],
+      "range": {
+        "min": 48.75,
+        "max": 105
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 48.75,
+          "diameterCSS": 187.04872359895967,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 75,
+          "diameterCSS": 287.76726707532254,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 105,
+          "diameterCSS": 402.8741739054516,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 48.75,
+          "diameterCSS": 287.7672670753226,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 75,
+          "diameterCSS": 442.71887242357315,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 105,
+          "diameterCSS": 619.8064213930024,
+          "sheet": null
+        }
+      ],
+      "file": "cards/045.png"
+    }
+  },
+  {
+    "before": {
+      "number": 56,
+      "id": "water-8",
+      "name": "Medusa de filamentos",
+      "stage": 3,
+      "stageName": "Mar",
+      "crop": [
+        0,
+        508,
+        377,
+        250
+      ],
+      "range": {
+        "min": 22.5,
+        "max": 37.5
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 22.5,
+          "diameterCSS": 86.33018012259677,
+          "sheet": {
+            "id": "water-8",
+            "seen": 5,
+            "posesPerSecond": 22.07,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 30,
+          "diameterCSS": 115.10690683012903,
+          "sheet": {
+            "id": "water-8",
+            "seen": 6,
+            "posesPerSecond": 22.07,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 37.5,
+          "diameterCSS": 143.88363353766127,
+          "sheet": {
+            "id": "water-8",
+            "seen": 7,
+            "posesPerSecond": 22.07,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 22.5,
+          "diameterCSS": 132.81566172707196,
+          "sheet": {
+            "id": "water-8",
+            "seen": 2,
+            "posesPerSecond": 22.07,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 30,
+          "diameterCSS": 177.0875489694293,
+          "sheet": {
+            "id": "water-8",
+            "seen": 3,
+            "posesPerSecond": 22.07,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 37.5,
+          "diameterCSS": 221.35943621178657,
+          "sheet": {
+            "id": "water-8",
+            "seen": 4,
+            "posesPerSecond": 22.07,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        }
+      ],
+      "file": "cards/056.png",
+      "assessment": "Claro",
+      "cause": "Revisar resolución de la animación primero",
+      "note": "La animación usa 128 px de cuerpo y suaviza bordes/textura. La imagen fuente tiene 377 px; conviene probarla antes de rehacer el dibujo."
+    },
+    "after": {
+      "number": 56,
+      "id": "water-8",
+      "name": "Medusa de filamentos",
+      "stage": 3,
+      "stageName": "Mar",
+      "crop": [
+        0,
+        508,
+        377,
+        250
+      ],
+      "range": {
+        "min": 22.5,
+        "max": 37.5
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 22.5,
+          "diameterCSS": 86.33018012259677,
+          "sheet": {
+            "id": "water-8",
+            "seen": 5,
+            "posesPerSecond": 22.07,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 30,
+          "diameterCSS": 115.10690683012903,
+          "sheet": {
+            "id": "water-8",
+            "seen": 13,
+            "posesPerSecond": 22.07,
+            "bodyPixels": 192,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 37.5,
+          "diameterCSS": 143.88363353766127,
+          "sheet": {
+            "id": "water-8",
+            "seen": 14,
+            "posesPerSecond": 22.07,
+            "bodyPixels": 192,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 22.5,
+          "diameterCSS": 132.81566172707196,
+          "sheet": {
+            "id": "water-8",
+            "seen": 2,
+            "posesPerSecond": 22.07,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 30,
+          "diameterCSS": 177.0875489694293,
+          "sheet": {
+            "id": "water-8",
+            "seen": 4,
+            "posesPerSecond": 22.07,
+            "bodyPixels": 192,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 37.5,
+          "diameterCSS": 221.35943621178657,
+          "sheet": {
+            "id": "water-8",
+            "seen": 5,
+            "posesPerSecond": 22.07,
+            "bodyPixels": 192,
+            "tier": "medium"
+          }
+        }
+      ],
+      "file": "cards/056.png"
+    }
+  },
+  {
+    "before": {
+      "number": 58,
+      "id": "water-10",
+      "name": "Pulpo",
+      "stage": 3,
+      "stageName": "Mar",
+      "crop": [
+        845,
+        509,
+        310,
+        253
+      ],
+      "range": {
+        "min": 27,
+        "max": 45
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 27,
+          "diameterCSS": 103.59621614711612,
+          "sheet": {
+            "id": "water-10",
+            "seen": 6,
+            "posesPerSecond": 20.65,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 36,
+          "diameterCSS": 138.12828819615484,
+          "sheet": {
+            "id": "water-10",
+            "seen": 7,
+            "posesPerSecond": 20.65,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 45,
+          "diameterCSS": 172.66036024519354,
+          "sheet": {
+            "id": "water-10",
+            "seen": 8,
+            "posesPerSecond": 20.65,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 27,
+          "diameterCSS": 159.37879407248636,
+          "sheet": {
+            "id": "water-10",
+            "seen": 2,
+            "posesPerSecond": 20.65,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 36,
+          "diameterCSS": 212.50505876331513,
+          "sheet": {
+            "id": "water-10",
+            "seen": 3,
+            "posesPerSecond": 20.65,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 45,
+          "diameterCSS": 265.6313234541439,
+          "sheet": {
+            "id": "water-10",
+            "seen": 4,
+            "posesPerSecond": 20.65,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        }
+      ],
+      "file": "cards/058.png",
+      "assessment": "Claro",
+      "cause": "Revisar resolución de la animación primero",
+      "note": "La animación usa 128 px de cuerpo y suaviza bordes/textura. La imagen fuente tiene 310 px; conviene probarla antes de rehacer el dibujo."
+    },
+    "after": {
+      "number": 58,
+      "id": "water-10",
+      "name": "Pulpo",
+      "stage": 3,
+      "stageName": "Mar",
+      "crop": [
+        845,
+        509,
+        310,
+        253
+      ],
+      "range": {
+        "min": 27,
+        "max": 45
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 27,
+          "diameterCSS": 103.59621614711612,
+          "sheet": {
+            "id": "water-10",
+            "seen": 13,
+            "posesPerSecond": 20.65,
+            "bodyPixels": 192,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 36,
+          "diameterCSS": 138.12828819615484,
+          "sheet": {
+            "id": "water-10",
+            "seen": 14,
+            "posesPerSecond": 20.65,
+            "bodyPixels": 192,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 45,
+          "diameterCSS": 172.66036024519354,
+          "sheet": {
+            "id": "water-10",
+            "seen": 37,
+            "posesPerSecond": 20.65,
+            "bodyPixels": 310,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 27,
+          "diameterCSS": 159.37879407248636,
+          "sheet": {
+            "id": "water-10",
+            "seen": 2,
+            "posesPerSecond": 20.65,
+            "bodyPixels": 192,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 36,
+          "diameterCSS": 212.50505876331513,
+          "sheet": {
+            "id": "water-10",
+            "seen": 3,
+            "posesPerSecond": 20.65,
+            "bodyPixels": 192,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 45,
+          "diameterCSS": 265.6313234541439,
+          "sheet": {
+            "id": "water-10",
+            "seen": 5,
+            "posesPerSecond": 20.65,
+            "bodyPixels": 310,
+            "tier": "close"
+          }
+        }
+      ],
+      "file": "cards/058.png"
+    }
+  },
+  {
+    "before": {
+      "number": 59,
+      "id": "water-11",
+      "name": "Morena",
+      "stage": 3,
+      "stageName": "Mar",
+      "crop": [
+        1150,
+        510,
+        386,
+        234
+      ],
+      "range": {
+        "min": 57.2,
+        "max": 72.80000000000001
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 57.2,
+          "diameterCSS": 219.47050235611272,
+          "sheet": {
+            "id": "water-11",
+            "seen": 7,
+            "posesPerSecond": 30.29,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 65,
+          "diameterCSS": 249.39829813194623,
+          "sheet": {
+            "id": "water-11",
+            "seen": 8,
+            "posesPerSecond": 30.29,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 72.80000000000001,
+          "diameterCSS": 279.3260939077798,
+          "sheet": {
+            "id": "water-11",
+            "seen": 9,
+            "posesPerSecond": 30.29,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 57.2,
+          "diameterCSS": 337.6469267017119,
+          "sheet": {
+            "id": "water-11",
+            "seen": 2,
+            "posesPerSecond": 30.29,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 65,
+          "diameterCSS": 383.6896894337634,
+          "sheet": {
+            "id": "water-11",
+            "seen": 3,
+            "posesPerSecond": 30.29,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 72.80000000000001,
+          "diameterCSS": 429.7324521658151,
+          "sheet": {
+            "id": "water-11",
+            "seen": 4,
+            "posesPerSecond": 30.29,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        }
+      ],
+      "file": "cards/059.png",
+      "assessment": "Claro",
+      "cause": "Revisar resolución de la animación primero",
+      "note": "La animación usa 128 px de cuerpo y suaviza bordes/textura. La imagen fuente tiene 386 px; conviene probarla antes de rehacer el dibujo."
+    },
+    "after": {
+      "number": 59,
+      "id": "water-11",
+      "name": "Morena",
+      "stage": 3,
+      "stageName": "Mar",
+      "crop": [
+        1150,
+        510,
+        386,
+        234
+      ],
+      "range": {
+        "min": 57.2,
+        "max": 72.80000000000001
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 57.2,
+          "diameterCSS": 219.47050235611272,
+          "sheet": {
+            "id": "water-11",
+            "seen": 14,
+            "posesPerSecond": 30.29,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 65,
+          "diameterCSS": 249.39829813194623,
+          "sheet": {
+            "id": "water-11",
+            "seen": 15,
+            "posesPerSecond": 30.29,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 72.80000000000001,
+          "diameterCSS": 279.3260939077798,
+          "sheet": {
+            "id": "water-11",
+            "seen": 16,
+            "posesPerSecond": 30.29,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 57.2,
+          "diameterCSS": 337.6469267017119,
+          "sheet": {
+            "id": "water-11",
+            "seen": 2,
+            "posesPerSecond": 30.29,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 65,
+          "diameterCSS": 383.6896894337634,
+          "sheet": {
+            "id": "water-11",
+            "seen": 3,
+            "posesPerSecond": 30.29,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 72.80000000000001,
+          "diameterCSS": 429.7324521658151,
+          "sheet": {
+            "id": "water-11",
+            "seen": 4,
+            "posesPerSecond": 30.29,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        }
+      ],
+      "file": "cards/059.png"
+    }
+  },
+  {
+    "before": {
+      "number": 60,
+      "id": "water-12",
+      "name": "Tiburón de arrecife",
+      "stage": 3,
+      "stageName": "Mar",
+      "crop": [
+        14,
+        778,
+        408,
+        212
+      ],
+      "range": {
+        "min": 84,
+        "max": 126
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 84,
+          "diameterCSS": 322.29933912436127,
+          "sheet": {
+            "id": "water-12",
+            "seen": 4,
+            "posesPerSecond": 30.4,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 105,
+          "diameterCSS": 402.8741739054516,
+          "sheet": {
+            "id": "water-12",
+            "seen": 5,
+            "posesPerSecond": 30.4,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 126,
+          "diameterCSS": 483.4490086865419,
+          "sheet": {
+            "id": "water-12",
+            "seen": 6,
+            "posesPerSecond": 30.4,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 84,
+          "diameterCSS": 495.84513711440195,
+          "sheet": {
+            "id": "water-12",
+            "seen": 2,
+            "posesPerSecond": 30.4,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 105,
+          "diameterCSS": 619.8064213930024,
+          "sheet": {
+            "id": "water-12",
+            "seen": 3,
+            "posesPerSecond": 30.4,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 126,
+          "diameterCSS": 743.7677056716029,
+          "sheet": {
+            "id": "water-12",
+            "seen": 4,
+            "posesPerSecond": 30.4,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        }
+      ],
+      "file": "cards/060.png",
+      "assessment": "Claro",
+      "cause": "Revisar resolución de la animación primero",
+      "note": "La animación usa 128 px de cuerpo y suaviza bordes/textura. La imagen fuente tiene 408 px; conviene probarla antes de rehacer el dibujo."
+    },
+    "after": {
+      "number": 60,
+      "id": "water-12",
+      "name": "Tiburón de arrecife",
+      "stage": 3,
+      "stageName": "Mar",
+      "crop": [
+        14,
+        778,
+        408,
+        212
+      ],
+      "range": {
+        "min": 84,
+        "max": 126
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 84,
+          "diameterCSS": 322.29933912436127,
+          "sheet": {
+            "id": "water-12",
+            "seen": 9,
+            "posesPerSecond": 30.4,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 105,
+          "diameterCSS": 402.8741739054516,
+          "sheet": {
+            "id": "water-12",
+            "seen": 10,
+            "posesPerSecond": 30.4,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 126,
+          "diameterCSS": 483.4490086865419,
+          "sheet": {
+            "id": "water-12",
+            "seen": 11,
+            "posesPerSecond": 30.4,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 84,
+          "diameterCSS": 495.84513711440195,
+          "sheet": {
+            "id": "water-12",
+            "seen": 2,
+            "posesPerSecond": 30.4,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 105,
+          "diameterCSS": 619.8064213930024,
+          "sheet": {
+            "id": "water-12",
+            "seen": 3,
+            "posesPerSecond": 30.4,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 126,
+          "diameterCSS": 743.7677056716029,
+          "sheet": {
+            "id": "water-12",
+            "seen": 4,
+            "posesPerSecond": 30.4,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        }
+      ],
+      "file": "cards/060.png"
+    }
+  },
+  {
+    "before": {
+      "number": 61,
+      "id": "water-13",
+      "name": "Tiburón martillo",
+      "stage": 3,
+      "stageName": "Mar",
+      "crop": [
+        405,
+        770,
+        412,
+        208
+      ],
+      "range": {
+        "min": 112,
+        "max": 168
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 112,
+          "diameterCSS": 429.73245216581506,
+          "sheet": {
+            "id": "water-13",
+            "seen": 3,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 140,
+          "diameterCSS": 537.1655652072689,
+          "sheet": {
+            "id": "water-13",
+            "seen": 4,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 168,
+          "diameterCSS": 644.5986782487225,
+          "sheet": {
+            "id": "water-13",
+            "seen": 5,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 112,
+          "diameterCSS": 661.1268494858693,
+          "sheet": {
+            "id": "water-13",
+            "seen": 2,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 140,
+          "diameterCSS": 826.4085618573367,
+          "sheet": {
+            "id": "water-13",
+            "seen": 3,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 168,
+          "diameterCSS": 991.6902742288039,
+          "sheet": {
+            "id": "water-13",
+            "seen": 4,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        }
+      ],
+      "file": "cards/061.png",
+      "assessment": "Claro",
+      "cause": "Revisar resolución de la animación primero",
+      "note": "La animación usa 128 px de cuerpo y suaviza bordes/textura. La imagen fuente tiene 412 px; conviene probarla antes de rehacer el dibujo."
+    },
+    "after": {
+      "number": 61,
+      "id": "water-13",
+      "name": "Tiburón martillo",
+      "stage": 3,
+      "stageName": "Mar",
+      "crop": [
+        405,
+        770,
+        412,
+        208
+      ],
+      "range": {
+        "min": 112,
+        "max": 168
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 112,
+          "diameterCSS": 429.73245216581506,
+          "sheet": {
+            "id": "water-13",
+            "seen": 10,
+            "posesPerSecond": 30,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 140,
+          "diameterCSS": 537.1655652072689,
+          "sheet": {
+            "id": "water-13",
+            "seen": 11,
+            "posesPerSecond": 30,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 168,
+          "diameterCSS": 644.5986782487225,
+          "sheet": {
+            "id": "water-13",
+            "seen": 12,
+            "posesPerSecond": 30,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 112,
+          "diameterCSS": 661.1268494858693,
+          "sheet": {
+            "id": "water-13",
+            "seen": 2,
+            "posesPerSecond": 30,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 140,
+          "diameterCSS": 826.4085618573367,
+          "sheet": {
+            "id": "water-13",
+            "seen": 3,
+            "posesPerSecond": 30,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 168,
+          "diameterCSS": 991.6902742288039,
+          "sheet": {
+            "id": "water-13",
+            "seen": 4,
+            "posesPerSecond": 30,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        }
+      ],
+      "file": "cards/061.png"
+    }
+  },
+  {
+    "before": {
+      "number": 62,
+      "id": "water-14",
+      "name": "Nadador",
+      "stage": 3,
+      "stageName": "Mar",
+      "crop": [
+        0,
+        0,
+        425,
+        160
+      ],
+      "range": {
+        "min": 69.84,
+        "max": 74.16
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 69.84,
+          "diameterCSS": 267.9688791005404,
+          "sheet": {
+            "id": "water-14",
+            "seen": 3,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 72,
+          "diameterCSS": 276.2565763923097,
+          "sheet": {
+            "id": "water-14",
+            "seen": 4,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 74.16,
+          "diameterCSS": 284.544273684079,
+          "sheet": {
+            "id": "water-14",
+            "seen": 5,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 69.84,
+          "diameterCSS": 412.25981400083134,
+          "sheet": {
+            "id": "water-14",
+            "seen": 2,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 72,
+          "diameterCSS": 425.01011752663027,
+          "sheet": {
+            "id": "water-14",
+            "seen": 3,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 74.16,
+          "diameterCSS": 437.76042105242914,
+          "sheet": {
+            "id": "water-14",
+            "seen": 4,
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        }
+      ],
+      "file": "cards/062.png",
+      "assessment": "Claro",
+      "cause": "Revisar resolución de la animación primero",
+      "note": "La animación usa 128 px de cuerpo y suaviza bordes/textura. La imagen fuente tiene 425 px; conviene probarla antes de rehacer el dibujo."
+    },
+    "after": {
+      "number": 62,
+      "id": "water-14",
+      "name": "Nadador",
+      "stage": 3,
+      "stageName": "Mar",
+      "crop": [
+        0,
+        0,
+        425,
+        160
+      ],
+      "range": {
+        "min": 69.84,
+        "max": 74.16
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 69.84,
+          "diameterCSS": 267.9688791005404,
+          "sheet": {
+            "id": "water-14",
+            "seen": 10,
+            "posesPerSecond": 30,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 72,
+          "diameterCSS": 276.2565763923097,
+          "sheet": {
+            "id": "water-14",
+            "seen": 11,
+            "posesPerSecond": 30,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 74.16,
+          "diameterCSS": 284.544273684079,
+          "sheet": {
+            "id": "water-14",
+            "seen": 12,
+            "posesPerSecond": 30,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 69.84,
+          "diameterCSS": 412.25981400083134,
+          "sheet": {
+            "id": "water-14",
+            "seen": 2,
+            "posesPerSecond": 30,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 72,
+          "diameterCSS": 425.01011752663027,
+          "sheet": {
+            "id": "water-14",
+            "seen": 3,
+            "posesPerSecond": 30,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 74.16,
+          "diameterCSS": 437.76042105242914,
+          "sheet": {
+            "id": "water-14",
+            "seen": 4,
+            "posesPerSecond": 30,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        }
+      ],
+      "file": "cards/062.png"
+    }
+  },
+  {
+    "before": {
+      "number": 63,
+      "id": "water-15",
+      "name": "Mantarraya",
+      "stage": 3,
+      "stageName": "Mar",
+      "crop": [
+        1138,
+        746,
+        398,
+        272
+      ],
+      "range": {
+        "min": 110,
+        "max": 140
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 110,
+          "diameterCSS": 422.05865837713975,
+          "sheet": {
+            "id": "water-15",
+            "seen": 3,
+            "posesPerSecond": 26.67,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 125,
+          "diameterCSS": 479.6121117922043,
+          "sheet": {
+            "id": "water-15",
+            "seen": 4,
+            "posesPerSecond": 26.67,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 140,
+          "diameterCSS": 537.1655652072689,
+          "sheet": {
+            "id": "water-15",
+            "seen": 5,
+            "posesPerSecond": 26.67,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 110,
+          "diameterCSS": 649.3210128879073,
+          "sheet": {
+            "id": "water-15",
+            "seen": 2,
+            "posesPerSecond": 26.67,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 125,
+          "diameterCSS": 737.864787372622,
+          "sheet": {
+            "id": "water-15",
+            "seen": 3,
+            "posesPerSecond": 26.67,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 140,
+          "diameterCSS": 826.4085618573367,
+          "sheet": {
+            "id": "water-15",
+            "seen": 4,
+            "posesPerSecond": 26.67,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        }
+      ],
+      "file": "cards/063.png",
+      "assessment": "Claro",
+      "cause": "Revisar resolución de la animación primero",
+      "note": "La animación usa 128 px de cuerpo y suaviza bordes/textura. La imagen fuente tiene 398 px; conviene probarla antes de rehacer el dibujo."
+    },
+    "after": {
+      "number": 63,
+      "id": "water-15",
+      "name": "Mantarraya",
+      "stage": 3,
+      "stageName": "Mar",
+      "crop": [
+        1138,
+        746,
+        398,
+        272
+      ],
+      "range": {
+        "min": 110,
+        "max": 140
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 110,
+          "diameterCSS": 422.05865837713975,
+          "sheet": {
+            "id": "water-15",
+            "seen": 9,
+            "posesPerSecond": 26.67,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 125,
+          "diameterCSS": 479.6121117922043,
+          "sheet": {
+            "id": "water-15",
+            "seen": 10,
+            "posesPerSecond": 26.67,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 140,
+          "diameterCSS": 537.1655652072689,
+          "sheet": {
+            "id": "water-15",
+            "seen": 11,
+            "posesPerSecond": 26.67,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 110,
+          "diameterCSS": 649.3210128879073,
+          "sheet": {
+            "id": "water-15",
+            "seen": 2,
+            "posesPerSecond": 26.67,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 125,
+          "diameterCSS": 737.864787372622,
+          "sheet": {
+            "id": "water-15",
+            "seen": 3,
+            "posesPerSecond": 26.67,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 140,
+          "diameterCSS": 826.4085618573367,
+          "sheet": {
+            "id": "water-15",
+            "seen": 4,
+            "posesPerSecond": 26.67,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        }
+      ],
+      "file": "cards/063.png"
+    }
+  },
+  {
+    "before": {
+      "number": 64,
+      "id": "water-16",
+      "name": "Nadadora",
+      "stage": 3,
+      "stageName": "Mar",
+      "crop": [
+        0,
+        0,
+        1774,
+        887
+      ],
+      "range": {
+        "min": 69.84,
+        "max": 74.16
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 69.84,
+          "diameterCSS": 267.9688791005404,
+          "sheet": {
+            "id": "water-16",
+            "seen": 3,
+            "posesPerSecond": 30.3,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 72,
+          "diameterCSS": 276.2565763923097,
+          "sheet": {
+            "id": "water-16",
+            "seen": 4,
+            "posesPerSecond": 30.3,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 74.16,
+          "diameterCSS": 284.544273684079,
+          "sheet": {
+            "id": "water-16",
+            "seen": 5,
+            "posesPerSecond": 30.3,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 69.84,
+          "diameterCSS": 412.25981400083134,
+          "sheet": {
+            "id": "water-16",
+            "seen": 2,
+            "posesPerSecond": 30.3,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 72,
+          "diameterCSS": 425.01011752663027,
+          "sheet": {
+            "id": "water-16",
+            "seen": 3,
+            "posesPerSecond": 30.3,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 74.16,
+          "diameterCSS": 437.76042105242914,
+          "sheet": {
+            "id": "water-16",
+            "seen": 4,
+            "posesPerSecond": 30.3,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        }
+      ],
+      "file": "cards/064.png",
+      "assessment": "Claro",
+      "cause": "Revisar resolución de la animación primero",
+      "note": "Caso claro de animación: original de 1774 px, pero cuerpo exportado de 128 px. Conservar la imagen y revisar la animación antes de regenerar."
+    },
+    "after": {
+      "number": 64,
+      "id": "water-16",
+      "name": "Nadadora",
+      "stage": 3,
+      "stageName": "Mar",
+      "crop": [
+        0,
+        0,
+        1774,
+        887
+      ],
+      "range": {
+        "min": 69.84,
+        "max": 74.16
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 69.84,
+          "diameterCSS": 267.9688791005404,
+          "sheet": {
+            "id": "water-16",
+            "seen": 8,
+            "posesPerSecond": 30.3,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 72,
+          "diameterCSS": 276.2565763923097,
+          "sheet": {
+            "id": "water-16",
+            "seen": 9,
+            "posesPerSecond": 30.3,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 74.16,
+          "diameterCSS": 284.544273684079,
+          "sheet": {
+            "id": "water-16",
+            "seen": 10,
+            "posesPerSecond": 30.3,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 69.84,
+          "diameterCSS": 412.25981400083134,
+          "sheet": {
+            "id": "water-16",
+            "seen": 2,
+            "posesPerSecond": 30.3,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 72,
+          "diameterCSS": 425.01011752663027,
+          "sheet": {
+            "id": "water-16",
+            "seen": 3,
+            "posesPerSecond": 30.3,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 74.16,
+          "diameterCSS": 437.76042105242914,
+          "sheet": {
+            "id": "water-16",
+            "seen": 4,
+            "posesPerSecond": 30.3,
+            "bodyPixels": 320,
+            "tier": "close"
+          }
+        }
+      ],
+      "file": "cards/064.png"
+    }
+  },
+  {
+    "before": {
+      "number": 65,
+      "id": "water-matter-kelp",
+      "name": "Alga marina",
+      "stage": 3,
+      "stageName": "Mar",
+      "crop": [
+        35,
+        18,
+        315,
+        313
+      ],
+      "range": {
+        "min": 18.2,
+        "max": 39.199999999999996
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 18.2,
+          "diameterCSS": 69.83152347694494,
+          "sheet": {
+            "id": "water-matter-kelp",
+            "seen": 7,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 28,
+          "diameterCSS": 107.43311304145377,
+          "sheet": {
+            "id": "water-matter-kelp",
+            "seen": 8,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 39.199999999999996,
+          "diameterCSS": 150.40635825803525,
+          "sheet": {
+            "id": "water-matter-kelp",
+            "seen": 9,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 18.2,
+          "diameterCSS": 107.43311304145377,
+          "sheet": {
+            "id": "water-matter-kelp",
+            "seen": 2,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 28,
+          "diameterCSS": 165.28171237146734,
+          "sheet": {
+            "id": "water-matter-kelp",
+            "seen": 3,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 39.199999999999996,
+          "diameterCSS": 231.39439732005425,
+          "sheet": {
+            "id": "water-matter-kelp",
+            "seen": 4,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        }
+      ],
+      "file": "cards/065.png",
+      "assessment": "Claro",
+      "cause": "Revisar resolución de la animación primero",
+      "note": "La animación usa 128 px de cuerpo y suaviza bordes/textura. La imagen fuente tiene 315 px; conviene probarla antes de rehacer el dibujo."
+    },
+    "after": {
+      "number": 65,
+      "id": "water-matter-kelp",
+      "name": "Alga marina",
+      "stage": 3,
+      "stageName": "Mar",
+      "crop": [
+        35,
+        18,
+        315,
+        313
+      ],
+      "range": {
+        "min": 18.2,
+        "max": 39.199999999999996
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 18.2,
+          "diameterCSS": 69.83152347694494,
+          "sheet": {
+            "id": "water-matter-kelp",
+            "seen": 7,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 28,
+          "diameterCSS": 107.43311304145377,
+          "sheet": {
+            "id": "water-matter-kelp",
+            "seen": 19,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 192,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 39.199999999999996,
+          "diameterCSS": 150.40635825803525,
+          "sheet": {
+            "id": "water-matter-kelp",
+            "seen": 20,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 192,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 18.2,
+          "diameterCSS": 107.43311304145377,
+          "sheet": {
+            "id": "water-matter-kelp",
+            "seen": 2,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 28,
+          "diameterCSS": 165.28171237146734,
+          "sheet": {
+            "id": "water-matter-kelp",
+            "seen": 4,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 192,
+            "tier": "medium"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 39.199999999999996,
+          "diameterCSS": 231.39439732005425,
+          "sheet": {
+            "id": "water-matter-kelp",
+            "seen": 26,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 315,
+            "tier": "close"
+          }
+        }
+      ],
+      "file": "cards/065.png"
+    }
+  },
+  {
+    "before": {
+      "number": 68,
+      "id": "water-matter-wreck",
+      "name": "Restos de naufragio",
+      "stage": 3,
+      "stageName": "Mar",
+      "crop": [
+        1192,
+        23,
+        303,
+        305
+      ],
+      "range": {
+        "min": 107.25,
+        "max": 230.99999999999997
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 107.25,
+          "diameterCSS": 411.5071919177113,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 165,
+          "diameterCSS": 633.0879875657097,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 230.99999999999997,
+          "diameterCSS": 886.3231825919935,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 107.25,
+          "diameterCSS": 633.0879875657097,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 165,
+          "diameterCSS": 973.981519331861,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 230.99999999999997,
+          "diameterCSS": 1363.5741270646054,
+          "sheet": null
+        }
+      ],
+      "file": "cards/068.png",
+      "assessment": "Claro",
+      "cause": "Revisar imagen fuente si se decide mejorar",
+      "note": "Los tablones pierden textura; el original de 303 px se muestra hasta 1364 px en PC."
+    },
+    "after": {
+      "number": 68,
+      "id": "water-matter-wreck",
+      "name": "Restos de naufragio",
+      "stage": 3,
+      "stageName": "Mar",
+      "crop": [
+        0,
+        0,
+        1254,
+        1262
+      ],
+      "range": {
+        "min": 107.25,
+        "max": 230.99999999999997
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 107.25,
+          "diameterCSS": 411.5071919177113,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 165,
+          "diameterCSS": 633.0879875657097,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 230.99999999999997,
+          "diameterCSS": 886.3231825919935,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 107.25,
+          "diameterCSS": 633.0879875657097,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 165,
+          "diameterCSS": 973.981519331861,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 230.99999999999997,
+          "diameterCSS": 1363.5741270646054,
+          "sheet": null
+        }
+      ],
+      "file": "cards/068.png"
+    }
+  },
+  {
+    "before": {
+      "number": 69,
+      "id": "water-matter-boulder",
+      "name": "Roca del fondo",
+      "stage": 3,
+      "stageName": "Mar",
+      "crop": [
+        431,
+        695,
+        302,
+        267
+      ],
+      "range": {
+        "min": 78,
+        "max": 168
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 78,
+          "diameterCSS": 299.2779577583355,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 120,
+          "diameterCSS": 460.42762732051614,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 168,
+          "diameterCSS": 644.5986782487225,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 78,
+          "diameterCSS": 460.42762732051614,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 120,
+          "diameterCSS": 708.3501958777172,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 168,
+          "diameterCSS": 991.6902742288039,
+          "sheet": null
+        }
+      ],
+      "file": "cards/069.png",
+      "assessment": "Claro",
+      "cause": "Revisar imagen fuente si se decide mejorar",
+      "note": "Las grietas se emborronan cuando la roca ocupa gran parte de la pantalla."
+    },
+    "after": {
+      "number": 69,
+      "id": "water-matter-boulder",
+      "name": "Roca del fondo",
+      "stage": 3,
+      "stageName": "Mar",
+      "crop": [
+        0,
+        0,
+        1254,
+        1109
+      ],
+      "range": {
+        "min": 78,
+        "max": 168
+      },
+      "zoom": 2.3611673195923903,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 78,
+          "diameterCSS": 299.2779577583355,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 120,
+          "diameterCSS": 460.42762732051614,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 168,
+          "diameterCSS": 644.5986782487225,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 78,
+          "diameterCSS": 460.42762732051614,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 120,
+          "diameterCSS": 708.3501958777172,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 168,
+          "diameterCSS": 991.6902742288039,
+          "sheet": null
+        }
+      ],
+      "file": "cards/069.png"
+    }
+  },
+  {
+    "before": {
+      "number": 87,
+      "id": "city-matter-palm",
+      "name": "Palmera",
+      "stage": 4,
+      "stageName": "Ciudad",
+      "crop": [
+        44,
+        659,
+        312,
+        329
+      ],
+      "range": {
+        "min": 22.75,
+        "max": 49
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 22.75,
+          "diameterCSS": 41.40500000000001,
+          "sheet": {
+            "id": "city-matter-palm",
+            "seen": 7,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 121,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 35,
+          "diameterCSS": 63.7,
+          "sheet": {
+            "id": "city-matter-palm",
+            "seen": 8,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 121,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 49,
+          "diameterCSS": 89.18,
+          "sheet": {
+            "id": "city-matter-palm",
+            "seen": 9,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 121,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 22.75,
+          "diameterCSS": 63.70000000000001,
+          "sheet": {
+            "id": "city-matter-palm",
+            "seen": 2,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 121,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 35,
+          "diameterCSS": 98,
+          "sheet": {
+            "id": "city-matter-palm",
+            "seen": 3,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 121,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 49,
+          "diameterCSS": 137.20000000000002,
+          "sheet": {
+            "id": "city-matter-palm",
+            "seen": 4,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 121,
+            "tier": "standard"
+          }
+        }
+      ],
+      "file": "cards/087.png",
+      "assessment": "Claro",
+      "cause": "Revisar resolución de la animación primero",
+      "note": "Pérdida más contenida: hojas suaves incluso sin ser un asset grande. Revisar primero la animación."
+    },
+    "after": {
+      "number": 87,
+      "id": "city-matter-palm",
+      "name": "Palmera",
+      "stage": 4,
+      "stageName": "Ciudad",
+      "crop": [
+        44,
+        659,
+        312,
+        329
+      ],
+      "range": {
+        "min": 22.75,
+        "max": 49
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 22.75,
+          "diameterCSS": 41.40500000000001,
+          "sheet": {
+            "id": "city-matter-palm",
+            "seen": 6,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 121,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 35,
+          "diameterCSS": 63.7,
+          "sheet": {
+            "id": "city-matter-palm",
+            "seen": 7,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 121,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 49,
+          "diameterCSS": 89.18,
+          "sheet": {
+            "id": "city-matter-palm",
+            "seen": 8,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 121,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 22.75,
+          "diameterCSS": 63.70000000000001,
+          "sheet": {
+            "id": "city-matter-palm",
+            "seen": 2,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 121,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 35,
+          "diameterCSS": 98,
+          "sheet": {
+            "id": "city-matter-palm",
+            "seen": 3,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 121,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 49,
+          "diameterCSS": 137.20000000000002,
+          "sheet": {
+            "id": "city-matter-palm",
+            "seen": 4,
+            "posesPerSecond": 13.33,
+            "bodyPixels": 121,
+            "tier": "standard"
+          }
+        }
+      ],
+      "file": "cards/087.png"
+    }
+  },
+  {
+    "before": {
+      "number": 100,
+      "id": "orbit-0",
+      "name": "Asteroide",
+      "stage": 5,
+      "stageName": "Órbita",
+      "crop": [
+        3,
+        3,
+        250,
+        250
+      ],
+      "range": {
+        "min": 18,
+        "max": 68
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 18,
+          "diameterCSS": 32.760000000000005,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 40,
+          "diameterCSS": 72.80000000000001,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 68,
+          "diameterCSS": 123.76000000000002,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 18,
+          "diameterCSS": 50.400000000000006,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 40,
+          "diameterCSS": 112.00000000000001,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 68,
+          "diameterCSS": 190.40000000000003,
+          "sheet": null
+        }
+      ],
+      "file": "cards/100.png",
+      "assessment": "Claro",
+      "cause": "Revisar imagen fuente si se decide mejorar",
+      "note": "Cráteres algo blandos en PC; detalle menos definido que el fragmento de asteroide cercano."
+    },
+    "after": {
+      "number": 100,
+      "id": "orbit-0",
+      "name": "Asteroide",
+      "stage": 5,
+      "stageName": "Órbita",
+      "crop": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "range": {
+        "min": 18,
+        "max": 68
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 18,
+          "diameterCSS": 32.760000000000005,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 40,
+          "diameterCSS": 72.80000000000001,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 68,
+          "diameterCSS": 123.76000000000002,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 18,
+          "diameterCSS": 50.400000000000006,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 40,
+          "diameterCSS": 112.00000000000001,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 68,
+          "diameterCSS": 190.40000000000003,
+          "sheet": null
+        }
+      ],
+      "file": "cards/100.png"
+    }
+  },
+  {
+    "before": {
+      "number": 102,
+      "id": "orbit-2",
+      "name": "Satélite",
+      "stage": 5,
+      "stageName": "Órbita",
+      "crop": [
+        515,
+        3,
+        250,
+        250
+      ],
+      "range": {
+        "min": 16.5,
+        "max": 96
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 16.5,
+          "diameterCSS": 30.03,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 30,
+          "diameterCSS": 54.6,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 96,
+          "diameterCSS": 174.72000000000003,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 16.5,
+          "diameterCSS": 46.2,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 30,
+          "diameterCSS": 84,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 96,
+          "diameterCSS": 268.8,
+          "sheet": null
+        }
+      ],
+      "file": "cards/102.png",
+      "assessment": "Claro",
+      "cause": "Revisar imagen fuente si se decide mejorar",
+      "note": "Paneles y cuerpo central ligeramente borrosos en las variantes cercanas más grandes."
+    },
+    "after": {
+      "number": 102,
+      "id": "orbit-2",
+      "name": "Satélite",
+      "stage": 5,
+      "stageName": "Órbita",
+      "crop": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "range": {
+        "min": 16.5,
+        "max": 96
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 16.5,
+          "diameterCSS": 30.03,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 30,
+          "diameterCSS": 54.6,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 96,
+          "diameterCSS": 174.72000000000003,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 16.5,
+          "diameterCSS": 46.2,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 30,
+          "diameterCSS": 84,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 96,
+          "diameterCSS": 268.8,
+          "sheet": null
+        }
+      ],
+      "file": "cards/102.png"
+    }
+  },
+  {
+    "before": {
+      "number": 103,
+      "id": "orbit-3",
+      "name": "Estación espacial",
+      "stage": 5,
+      "stageName": "Órbita",
+      "crop": [
+        769,
+        0,
+        255,
+        265
+      ],
+      "range": {
+        "min": 52,
+        "max": 117
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 52,
+          "diameterCSS": 94.64000000000001,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 65,
+          "diameterCSS": 118.30000000000001,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 117,
+          "diameterCSS": 212.94000000000003,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 52,
+          "diameterCSS": 145.60000000000002,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 65,
+          "diameterCSS": 182.00000000000003,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 117,
+          "diameterCSS": 327.6,
+          "sheet": null
+        }
+      ],
+      "file": "cards/103.png",
+      "assessment": "Claro",
+      "cause": "Revisar imagen fuente si se decide mejorar",
+      "note": "La estructura pierde detalle antes que los fragmentos minerales. Fuente de unos 255 px."
+    },
+    "after": {
+      "number": 103,
+      "id": "orbit-3",
+      "name": "Estación espacial",
+      "stage": 5,
+      "stageName": "Órbita",
+      "crop": [
+        0,
+        0,
+        1254,
+        1303
+      ],
+      "range": {
+        "min": 52,
+        "max": 117
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 52,
+          "diameterCSS": 94.64000000000001,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 65,
+          "diameterCSS": 118.30000000000001,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 117,
+          "diameterCSS": 212.94000000000003,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 52,
+          "diameterCSS": 145.60000000000002,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 65,
+          "diameterCSS": 182.00000000000003,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 117,
+          "diameterCSS": 327.6,
+          "sheet": null
+        }
+      ],
+      "file": "cards/103.png"
+    }
+  },
+  {
+    "before": {
+      "number": 110,
+      "id": "planets-1",
+      "name": "Mundo oceánico",
+      "stage": 6,
+      "stageName": "Planetas",
+      "crop": [
+        256,
+        269,
+        256,
+        237
+      ],
+      "range": {
+        "min": 21.5,
+        "max": 86
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 21.5,
+          "diameterCSS": 39.13,
+          "sheet": {
+            "id": "planets-1",
+            "seen": 6,
+            "posesPerSecond": 3.56,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 43,
+          "diameterCSS": 78.26,
+          "sheet": {
+            "id": "planets-1",
+            "seen": 7,
+            "posesPerSecond": 3.56,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 86,
+          "diameterCSS": 156.52,
+          "sheet": {
+            "id": "planets-1",
+            "seen": 7,
+            "posesPerSecond": 3.56,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 21.5,
+          "diameterCSS": 60.2,
+          "sheet": {
+            "id": "planets-1",
+            "seen": 2,
+            "posesPerSecond": 3.56,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 43,
+          "diameterCSS": 120.4,
+          "sheet": {
+            "id": "planets-1",
+            "seen": 3,
+            "posesPerSecond": 3.56,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 86,
+          "diameterCSS": 240.8,
+          "sheet": {
+            "id": "planets-1",
+            "seen": 3,
+            "posesPerSecond": 3.56,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        }
+      ],
+      "file": "cards/110.png",
+      "assessment": "Claro",
+      "cause": "Revisar resolución de la animación primero",
+      "note": "La animación usa 128 px de cuerpo y suaviza bordes/textura. La imagen fuente tiene 256 px; conviene probarla antes de rehacer el dibujo."
+    },
+    "after": {
+      "number": 110,
+      "id": "planets-1",
+      "name": "Mundo oceánico",
+      "stage": 6,
+      "stageName": "Planetas",
+      "crop": [
+        0,
+        0,
+        1254,
+        1161
+      ],
+      "range": {
+        "min": 21.5,
+        "max": 86
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 21.5,
+          "diameterCSS": 39.13,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 43,
+          "diameterCSS": 78.26,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 86,
+          "diameterCSS": 156.52,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 21.5,
+          "diameterCSS": 60.2,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 43,
+          "diameterCSS": 120.4,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 86,
+          "diameterCSS": 240.8,
+          "sheet": null
+        }
+      ],
+      "file": "cards/110.png"
+    }
+  },
+  {
+    "before": {
+      "number": 111,
+      "id": "planets-2",
+      "name": "Mundo volcánico",
+      "stage": 6,
+      "stageName": "Planetas",
+      "crop": [
+        396,
+        571,
+        355,
+        352
+      ],
+      "range": {
+        "min": 39.6,
+        "max": 176
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 39.6,
+          "diameterCSS": 72.072,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 88,
+          "diameterCSS": 160.16,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 176,
+          "diameterCSS": 320.32,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 39.6,
+          "diameterCSS": 110.88000000000001,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 88,
+          "diameterCSS": 246.4,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 176,
+          "diameterCSS": 492.8,
+          "sheet": null
+        }
+      ],
+      "file": "cards/111.png",
+      "assessment": "Claro",
+      "cause": "Revisar imagen fuente si se decide mejorar",
+      "note": "Veo pérdida de textura o bordes en la vista cercana; el original se queda justo para el tamaño de pantalla."
+    },
+    "after": {
+      "number": 111,
+      "id": "planets-2",
+      "name": "Mundo volcánico",
+      "stage": 6,
+      "stageName": "Planetas",
+      "crop": [
+        0,
+        0,
+        1254,
+        1243
+      ],
+      "range": {
+        "min": 39.6,
+        "max": 176
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 39.6,
+          "diameterCSS": 72.072,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 88,
+          "diameterCSS": 160.16,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 176,
+          "diameterCSS": 320.32,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 39.6,
+          "diameterCSS": 110.88000000000001,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 88,
+          "diameterCSS": 246.4,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 176,
+          "diameterCSS": 492.8,
+          "sheet": null
+        }
+      ],
+      "file": "cards/111.png"
+    }
+  },
+  {
+    "before": {
+      "number": 113,
+      "id": "planets-4",
+      "name": "Gigante gaseoso",
+      "stage": 6,
+      "stageName": "Planetas",
+      "crop": [
+        14,
+        572,
+        358,
+        352
+      ],
+      "range": {
+        "min": 72,
+        "max": 264
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 72,
+          "diameterCSS": 131.04000000000002,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 120,
+          "diameterCSS": 218.4,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 264,
+          "diameterCSS": 480.48,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 72,
+          "diameterCSS": 201.60000000000002,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 120,
+          "diameterCSS": 336,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 264,
+          "diameterCSS": 739.2,
+          "sheet": null
+        }
+      ],
+      "file": "cards/113.png",
+      "assessment": "Claro",
+      "cause": "Revisar imagen fuente si se decide mejorar",
+      "note": "Veo pérdida de textura o bordes en la vista cercana; el original se queda justo para el tamaño de pantalla."
+    },
+    "after": {
+      "number": 113,
+      "id": "planets-4",
+      "name": "Gigante gaseoso",
+      "stage": 6,
+      "stageName": "Planetas",
+      "crop": [
+        0,
+        0,
+        1254,
+        1233
+      ],
+      "range": {
+        "min": 72,
+        "max": 264
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 72,
+          "diameterCSS": 131.04000000000002,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 120,
+          "diameterCSS": 218.4,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 264,
+          "diameterCSS": 480.48,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 72,
+          "diameterCSS": 201.60000000000002,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 120,
+          "diameterCSS": 336,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 264,
+          "diameterCSS": 739.2,
+          "sheet": null
+        }
+      ],
+      "file": "cards/113.png"
+    }
+  },
+  {
+    "before": {
+      "number": 124,
+      "id": "planets-ice-giant",
+      "name": "Gigante de hielo",
+      "stage": 6,
+      "stageName": "Planetas",
+      "crop": [
+        1169,
+        103,
+        352,
+        350
+      ],
+      "range": {
+        "min": 51.5,
+        "max": 257.5
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 51.5,
+          "diameterCSS": 93.73000000000002,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 103,
+          "diameterCSS": 187.46000000000004,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 257.5,
+          "diameterCSS": 468.65000000000003,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 51.5,
+          "diameterCSS": 144.20000000000002,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 103,
+          "diameterCSS": 288.40000000000003,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 257.5,
+          "diameterCSS": 721.0000000000001,
+          "sheet": null
+        }
+      ],
+      "file": "cards/124.png",
+      "assessment": "Claro",
+      "cause": "Revisar imagen fuente si se decide mejorar",
+      "note": "Veo pérdida de textura o bordes en la vista cercana; el original se queda justo para el tamaño de pantalla."
+    },
+    "after": {
+      "number": 124,
+      "id": "planets-ice-giant",
+      "name": "Gigante de hielo",
+      "stage": 6,
+      "stageName": "Planetas",
+      "crop": [
+        0,
+        0,
+        1254,
+        1247
+      ],
+      "range": {
+        "min": 51.5,
+        "max": 257.5
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 51.5,
+          "diameterCSS": 93.73000000000002,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 103,
+          "diameterCSS": 187.46000000000004,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 257.5,
+          "diameterCSS": 468.65000000000003,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 51.5,
+          "diameterCSS": 144.20000000000002,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 103,
+          "diameterCSS": 288.40000000000003,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 257.5,
+          "diameterCSS": 721.0000000000001,
+          "sheet": null
+        }
+      ],
+      "file": "cards/124.png"
+    }
+  },
+  {
+    "before": {
+      "number": 126,
+      "id": "stars-1",
+      "name": "Enana roja",
+      "stage": 7,
+      "stageName": "Estrellas",
+      "crop": [
+        256,
+        502,
+        256,
+        247
+      ],
+      "range": {
+        "min": 13.05,
+        "max": 60.900000000000006
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 13.05,
+          "diameterCSS": 23.751,
+          "sheet": {
+            "id": "stars-1",
+            "seen": 6,
+            "posesPerSecond": 14.22,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 29,
+          "diameterCSS": 52.78000000000001,
+          "sheet": {
+            "id": "stars-1",
+            "seen": 7,
+            "posesPerSecond": 14.22,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 60.900000000000006,
+          "diameterCSS": 110.83800000000002,
+          "sheet": {
+            "id": "stars-1",
+            "seen": 8,
+            "posesPerSecond": 14.22,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 13.05,
+          "diameterCSS": 36.540000000000006,
+          "sheet": {
+            "id": "stars-1",
+            "seen": 2,
+            "posesPerSecond": 14.22,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 29,
+          "diameterCSS": 81.20000000000002,
+          "sheet": {
+            "id": "stars-1",
+            "seen": 3,
+            "posesPerSecond": 14.22,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 60.900000000000006,
+          "diameterCSS": 170.52000000000004,
+          "sheet": {
+            "id": "stars-1",
+            "seen": 4,
+            "posesPerSecond": 14.22,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        }
+      ],
+      "file": "cards/126.png",
+      "assessment": "Claro",
+      "cause": "Revisar resolución de la animación primero",
+      "note": "La animación usa 128 px de cuerpo y suaviza bordes/textura. La imagen fuente tiene 256 px; conviene probarla antes de rehacer el dibujo."
+    },
+    "after": {
+      "number": 126,
+      "id": "stars-1",
+      "name": "Enana roja",
+      "stage": 7,
+      "stageName": "Estrellas",
+      "crop": [
+        0,
+        0,
+        1254,
+        1210
+      ],
+      "range": {
+        "min": 13.05,
+        "max": 60.900000000000006
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 13.05,
+          "diameterCSS": 23.751,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 29,
+          "diameterCSS": 52.78000000000001,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 60.900000000000006,
+          "diameterCSS": 110.83800000000002,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 13.05,
+          "diameterCSS": 36.540000000000006,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 29,
+          "diameterCSS": 81.20000000000002,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 60.900000000000006,
+          "diameterCSS": 170.52000000000004,
+          "sheet": null
+        }
+      ],
+      "file": "cards/126.png"
+    }
+  },
+  {
+    "before": {
+      "number": 127,
+      "id": "stars-2",
+      "name": "Estrella amarilla",
+      "stage": 7,
+      "stageName": "Estrellas",
+      "crop": [
+        512,
+        500,
+        256,
+        246
+      ],
+      "range": {
+        "min": 29.5,
+        "max": 118
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 29.5,
+          "diameterCSS": 53.69000000000001,
+          "sheet": {
+            "id": "stars-2",
+            "seen": 6,
+            "posesPerSecond": 17.3,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 59,
+          "diameterCSS": 107.38000000000002,
+          "sheet": {
+            "id": "stars-2",
+            "seen": 7,
+            "posesPerSecond": 17.3,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 118,
+          "diameterCSS": 214.76000000000005,
+          "sheet": {
+            "id": "stars-2",
+            "seen": 7,
+            "posesPerSecond": 17.3,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 29.5,
+          "diameterCSS": 82.60000000000002,
+          "sheet": {
+            "id": "stars-2",
+            "seen": 2,
+            "posesPerSecond": 17.3,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 59,
+          "diameterCSS": 165.20000000000005,
+          "sheet": {
+            "id": "stars-2",
+            "seen": 3,
+            "posesPerSecond": 17.3,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 118,
+          "diameterCSS": 330.4000000000001,
+          "sheet": {
+            "id": "stars-2",
+            "seen": 3,
+            "posesPerSecond": 17.3,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        }
+      ],
+      "file": "cards/127.png",
+      "assessment": "Claro",
+      "cause": "Revisar resolución de la animación primero",
+      "note": "La animación usa 128 px de cuerpo y suaviza bordes/textura. La imagen fuente tiene 256 px; conviene probarla antes de rehacer el dibujo."
+    },
+    "after": {
+      "number": 127,
+      "id": "stars-2",
+      "name": "Estrella amarilla",
+      "stage": 7,
+      "stageName": "Estrellas",
+      "crop": [
+        0,
+        0,
+        1254,
+        1205
+      ],
+      "range": {
+        "min": 29.5,
+        "max": 118
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 29.5,
+          "diameterCSS": 53.69000000000001,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 59,
+          "diameterCSS": 107.38000000000002,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 118,
+          "diameterCSS": 214.76000000000005,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 29.5,
+          "diameterCSS": 82.60000000000002,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 59,
+          "diameterCSS": 165.20000000000005,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 118,
+          "diameterCSS": 330.4000000000001,
+          "sheet": null
+        }
+      ],
+      "file": "cards/127.png"
+    }
+  },
+  {
+    "before": {
+      "number": 128,
+      "id": "stars-3",
+      "name": "Estrella azul",
+      "stage": 7,
+      "stageName": "Estrellas",
+      "crop": [
+        768,
+        509,
+        256,
+        241
+      ],
+      "range": {
+        "min": 57,
+        "max": 209.00000000000003
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 57,
+          "diameterCSS": 103.74000000000001,
+          "sheet": {
+            "id": "stars-3",
+            "seen": 6,
+            "posesPerSecond": 23.7,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 95,
+          "diameterCSS": 172.9,
+          "sheet": {
+            "id": "stars-3",
+            "seen": 6,
+            "posesPerSecond": 23.7,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 209.00000000000003,
+          "diameterCSS": 380.38000000000005,
+          "sheet": {
+            "id": "stars-3",
+            "seen": 6,
+            "posesPerSecond": 23.7,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 57,
+          "diameterCSS": 159.60000000000002,
+          "sheet": {
+            "id": "stars-3",
+            "seen": 2,
+            "posesPerSecond": 23.7,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 95,
+          "diameterCSS": 266,
+          "sheet": {
+            "id": "stars-3",
+            "seen": 2,
+            "posesPerSecond": 23.7,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 209.00000000000003,
+          "diameterCSS": 585.2,
+          "sheet": {
+            "id": "stars-3",
+            "seen": 2,
+            "posesPerSecond": 23.7,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        }
+      ],
+      "file": "cards/128.png",
+      "assessment": "Claro",
+      "cause": "Revisar resolución de la animación primero",
+      "note": "La animación usa 128 px de cuerpo y suaviza bordes/textura. La imagen fuente tiene 256 px; conviene probarla antes de rehacer el dibujo."
+    },
+    "after": {
+      "number": 128,
+      "id": "stars-3",
+      "name": "Estrella azul",
+      "stage": 7,
+      "stageName": "Estrellas",
+      "crop": [
+        0,
+        0,
+        1254,
+        1181
+      ],
+      "range": {
+        "min": 57,
+        "max": 209.00000000000003
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 57,
+          "diameterCSS": 103.74000000000001,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 95,
+          "diameterCSS": 172.9,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 209.00000000000003,
+          "diameterCSS": 380.38000000000005,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 57,
+          "diameterCSS": 159.60000000000002,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 95,
+          "diameterCSS": 266,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 209.00000000000003,
+          "diameterCSS": 585.2,
+          "sheet": null
+        }
+      ],
+      "file": "cards/128.png"
+    }
+  },
+  {
+    "before": {
+      "number": 129,
+      "id": "stars-4",
+      "name": "Gigante roja",
+      "stage": 7,
+      "stageName": "Estrellas",
+      "crop": [
+        1024,
+        505,
+        256,
+        248
+      ],
+      "range": {
+        "min": 77,
+        "max": 294
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 77,
+          "diameterCSS": 140.14000000000001,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 140,
+          "diameterCSS": 254.8,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 294,
+          "diameterCSS": 535.08,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 77,
+          "diameterCSS": 215.60000000000002,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 140,
+          "diameterCSS": 392,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 294,
+          "diameterCSS": 823.2,
+          "sheet": null
+        }
+      ],
+      "file": "cards/129.png",
+      "assessment": "Claro",
+      "cause": "Revisar imagen fuente si se decide mejorar",
+      "note": "Veo pérdida de textura o bordes en la vista cercana; el original se queda justo para el tamaño de pantalla."
+    },
+    "after": {
+      "number": 129,
+      "id": "stars-4",
+      "name": "Gigante roja",
+      "stage": 7,
+      "stageName": "Estrellas",
+      "crop": [
+        0,
+        0,
+        1254,
+        1215
+      ],
+      "range": {
+        "min": 77,
+        "max": 294
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 77,
+          "diameterCSS": 140.14000000000001,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 140,
+          "diameterCSS": 254.8,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 294,
+          "diameterCSS": 535.08,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 77,
+          "diameterCSS": 215.60000000000002,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 140,
+          "diameterCSS": 392,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 294,
+          "diameterCSS": 823.2,
+          "sheet": null
+        }
+      ],
+      "file": "cards/129.png"
+    }
+  },
+  {
+    "before": {
+      "number": 143,
+      "id": "galaxies-Núcleo activo",
+      "name": "Núcleo activo",
+      "stage": 8,
+      "stageName": "Galaxias",
+      "crop": [
+        399,
+        326,
+        355,
+        337
+      ],
+      "range": {
+        "min": 76.5,
+        "max": 132.6
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 76.5,
+          "diameterCSS": 139.23000000000002,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 102,
+          "diameterCSS": 185.64000000000001,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 132.6,
+          "diameterCSS": 241.332,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 76.5,
+          "diameterCSS": 214.20000000000002,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 102,
+          "diameterCSS": 285.6,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 132.6,
+          "diameterCSS": 371.28,
+          "sheet": null
+        }
+      ],
+      "file": "cards/143.png",
+      "assessment": "Claro",
+      "cause": "Revisar imagen fuente si se decide mejorar",
+      "note": "Veo pérdida de textura o bordes en la vista cercana; el original se queda justo para el tamaño de pantalla."
+    },
+    "after": {
+      "number": 143,
+      "id": "galaxies-Núcleo activo",
+      "name": "Núcleo activo",
+      "stage": 8,
+      "stageName": "Galaxias",
+      "crop": [
+        0,
+        0,
+        1254,
+        1190
+      ],
+      "range": {
+        "min": 76.5,
+        "max": 132.6
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 76.5,
+          "diameterCSS": 139.23000000000002,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 102,
+          "diameterCSS": 185.64000000000001,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 132.6,
+          "diameterCSS": 241.332,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 76.5,
+          "diameterCSS": 214.20000000000002,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 102,
+          "diameterCSS": 285.6,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 132.6,
+          "diameterCSS": 371.28,
+          "sheet": null
+        }
+      ],
+      "file": "cards/143.png"
+    }
+  },
+  {
+    "before": {
+      "number": 144,
+      "id": "galaxies-Colisión galáctica",
+      "name": "Colisión galáctica",
+      "stage": 8,
+      "stageName": "Galaxias",
+      "crop": [
+        771,
+        344.3333333333333,
+        378,
+        335.3333333333333
+      ],
+      "range": {
+        "min": 81.6,
+        "max": 190.39999999999998
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 81.6,
+          "diameterCSS": 148.512,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 136,
+          "diameterCSS": 247.52000000000004,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 190.39999999999998,
+          "diameterCSS": 346.52799999999996,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 81.6,
+          "diameterCSS": 228.48,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 136,
+          "diameterCSS": 380.80000000000007,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 190.39999999999998,
+          "diameterCSS": 533.12,
+          "sheet": null
+        }
+      ],
+      "file": "cards/144.png",
+      "assessment": "Claro",
+      "cause": "Revisar imagen fuente si se decide mejorar",
+      "note": "Veo pérdida de textura o bordes en la vista cercana; el original se queda justo para el tamaño de pantalla."
+    },
+    "after": {
+      "number": 144,
+      "id": "galaxies-Colisión galáctica",
+      "name": "Colisión galáctica",
+      "stage": 8,
+      "stageName": "Galaxias",
+      "crop": [
+        0,
+        0,
+        1254,
+        1112
+      ],
+      "range": {
+        "min": 81.6,
+        "max": 190.39999999999998
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 81.6,
+          "diameterCSS": 148.512,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 136,
+          "diameterCSS": 247.52000000000004,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 190.39999999999998,
+          "diameterCSS": 346.52799999999996,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 81.6,
+          "diameterCSS": 228.48,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 136,
+          "diameterCSS": 380.80000000000007,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 190.39999999999998,
+          "diameterCSS": 533.12,
+          "sheet": null
+        }
+      ],
+      "file": "cards/144.png"
+    }
+  },
+  {
+    "before": {
+      "number": 145,
+      "id": "galaxies-Grupo galáctico",
+      "name": "Grupo galáctico",
+      "stage": 8,
+      "stageName": "Galaxias",
+      "crop": [
+        1155,
+        344,
+        378,
+        318
+      ],
+      "range": {
+        "min": 127.6,
+        "max": 162.4
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 127.6,
+          "diameterCSS": 232.232,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 145,
+          "diameterCSS": 263.90000000000003,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 162.4,
+          "diameterCSS": 295.56800000000004,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 127.6,
+          "diameterCSS": 357.28000000000003,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 145,
+          "diameterCSS": 406,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 162.4,
+          "diameterCSS": 454.7200000000001,
+          "sheet": null
+        }
+      ],
+      "file": "cards/145.png",
+      "assessment": "Claro",
+      "cause": "Revisar imagen fuente si se decide mejorar",
+      "note": "Veo pérdida de textura o bordes en la vista cercana; el original se queda justo para el tamaño de pantalla."
+    },
+    "after": {
+      "number": 145,
+      "id": "galaxies-Grupo galáctico",
+      "name": "Grupo galáctico",
+      "stage": 8,
+      "stageName": "Galaxias",
+      "crop": [
+        0,
+        0,
+        1254,
+        1055
+      ],
+      "range": {
+        "min": 127.6,
+        "max": 162.4
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 127.6,
+          "diameterCSS": 232.232,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 145,
+          "diameterCSS": 263.90000000000003,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 162.4,
+          "diameterCSS": 295.56800000000004,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 127.6,
+          "diameterCSS": 357.28000000000003,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 145,
+          "diameterCSS": 406,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 162.4,
+          "diameterCSS": 454.7200000000001,
+          "sheet": null
+        }
+      ],
+      "file": "cards/145.png"
+    }
+  },
+  {
+    "before": {
+      "number": 155,
+      "id": "universe-5",
+      "name": "Región de núcleos activos",
+      "stage": 9,
+      "stageName": "Universo",
+      "crop": [
+        399,
+        326,
+        355,
+        337
+      ],
+      "range": {
+        "min": 93,
+        "max": 161.20000000000002
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 93,
+          "diameterCSS": 169.26000000000002,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 124,
+          "diameterCSS": 225.68000000000004,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 161.20000000000002,
+          "diameterCSS": 293.38400000000007,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 93,
+          "diameterCSS": 260.40000000000003,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 124,
+          "diameterCSS": 347.20000000000005,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 161.20000000000002,
+          "diameterCSS": 451.3600000000001,
+          "sheet": null
+        }
+      ],
+      "file": "cards/155.png",
+      "assessment": "Claro",
+      "cause": "Revisar imagen fuente si se decide mejorar",
+      "note": "Veo pérdida de textura o bordes en la vista cercana; el original se queda justo para el tamaño de pantalla."
+    },
+    "after": {
+      "number": 155,
+      "id": "universe-5",
+      "name": "Región de núcleos activos",
+      "stage": 9,
+      "stageName": "Universo",
+      "crop": [
+        0,
+        0,
+        1254,
+        1190
+      ],
+      "range": {
+        "min": 93,
+        "max": 161.20000000000002
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 93,
+          "diameterCSS": 169.26000000000002,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 124,
+          "diameterCSS": 225.68000000000004,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 161.20000000000002,
+          "diameterCSS": 293.38400000000007,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 93,
+          "diameterCSS": 260.40000000000003,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 124,
+          "diameterCSS": 347.20000000000005,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 161.20000000000002,
+          "diameterCSS": 451.3600000000001,
+          "sheet": null
+        }
+      ],
+      "file": "cards/155.png"
+    }
+  },
+  {
+    "before": {
+      "number": 156,
+      "id": "universe-6",
+      "name": "Supercúmulos en colisión",
+      "stage": 9,
+      "stageName": "Universo",
+      "crop": [
+        771,
+        344.3333333333333,
+        378,
+        335.3333333333333
+      ],
+      "range": {
+        "min": 57.599999999999994,
+        "max": 134.39999999999998
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 57.599999999999994,
+          "diameterCSS": 104.832,
+          "sheet": {
+            "id": "universe-6",
+            "seen": 5,
+            "posesPerSecond": 3.76,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 96,
+          "diameterCSS": 174.72000000000003,
+          "sheet": {
+            "id": "universe-6",
+            "seen": 5,
+            "posesPerSecond": 3.76,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "MÓVIL",
+          "r": 134.39999999999998,
+          "diameterCSS": 244.60799999999998,
+          "sheet": {
+            "id": "universe-6",
+            "seen": 5,
+            "posesPerSecond": 3.76,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 57.599999999999994,
+          "diameterCSS": 161.28,
+          "sheet": {
+            "id": "universe-6",
+            "seen": 2,
+            "posesPerSecond": 3.76,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 96,
+          "diameterCSS": 268.8,
+          "sheet": {
+            "id": "universe-6",
+            "seen": 2,
+            "posesPerSecond": 3.76,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        },
+        {
+          "view": "PC",
+          "r": 134.39999999999998,
+          "diameterCSS": 376.32,
+          "sheet": {
+            "id": "universe-6",
+            "seen": 2,
+            "posesPerSecond": 3.76,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        }
+      ],
+      "file": "cards/156.png",
+      "assessment": "Claro",
+      "cause": "Revisar resolución de la animación primero",
+      "note": "La animación usa 128 px de cuerpo y suaviza bordes/textura. La imagen fuente tiene 378 px; conviene probarla antes de rehacer el dibujo."
+    },
+    "after": {
+      "number": 156,
+      "id": "universe-6",
+      "name": "Supercúmulos en colisión",
+      "stage": 9,
+      "stageName": "Universo",
+      "crop": [
+        0,
+        0,
+        1254,
+        1112
+      ],
+      "range": {
+        "min": 57.599999999999994,
+        "max": 134.39999999999998
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 57.599999999999994,
+          "diameterCSS": 104.832,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 96,
+          "diameterCSS": 174.72000000000003,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 134.39999999999998,
+          "diameterCSS": 244.60799999999998,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 57.599999999999994,
+          "diameterCSS": 161.28,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 96,
+          "diameterCSS": 268.8,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 134.39999999999998,
+          "diameterCSS": 376.32,
+          "sheet": null
+        }
+      ],
+      "file": "cards/156.png"
+    }
+  },
+  {
+    "before": {
+      "number": 159,
+      "id": "universe-9",
+      "name": "Filamento cósmico",
+      "stage": 9,
+      "stageName": "Universo",
+      "crop": [
+        386,
+        662,
+        381,
+        362
+      ],
+      "range": {
+        "min": 113.52,
+        "max": 144.48000000000002
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 113.52,
+          "diameterCSS": 206.6064,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 129,
+          "diameterCSS": 234.78000000000003,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 144.48000000000002,
+          "diameterCSS": 262.95360000000005,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 113.52,
+          "diameterCSS": 317.856,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 129,
+          "diameterCSS": 361.20000000000005,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 144.48000000000002,
+          "diameterCSS": 404.5440000000001,
+          "sheet": null
+        }
+      ],
+      "file": "cards/159.png",
+      "assessment": "Claro",
+      "cause": "Revisar imagen fuente si se decide mejorar",
+      "note": "Veo pérdida de textura o bordes en la vista cercana; el original se queda justo para el tamaño de pantalla."
+    },
+    "after": {
+      "number": 159,
+      "id": "universe-9",
+      "name": "Filamento cósmico",
+      "stage": 9,
+      "stageName": "Universo",
+      "crop": [
+        0,
+        0,
+        1254,
+        1191
+      ],
+      "range": {
+        "min": 113.52,
+        "max": 144.48000000000002
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 113.52,
+          "diameterCSS": 206.6064,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 129,
+          "diameterCSS": 234.78000000000003,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 144.48000000000002,
+          "diameterCSS": 262.95360000000005,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 113.52,
+          "diameterCSS": 317.856,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 129,
+          "diameterCSS": 361.20000000000005,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 144.48000000000002,
+          "diameterCSS": 404.5440000000001,
+          "sheet": null
+        }
+      ],
+      "file": "cards/159.png"
+    }
+  },
+  {
+    "before": {
+      "number": 160,
+      "id": "universe-10",
+      "name": "Borde del vacío",
+      "stage": 9,
+      "stageName": "Universo",
+      "crop": [
+        771,
+        685.6666666666666,
+        378,
+        335.3333333333333
+      ],
+      "range": {
+        "min": 125.84,
+        "max": 160.16000000000003
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 125.84,
+          "diameterCSS": 229.02880000000005,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 143,
+          "diameterCSS": 260.26000000000005,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 160.16000000000003,
+          "diameterCSS": 291.4912000000001,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 125.84,
+          "diameterCSS": 352.3520000000001,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 143,
+          "diameterCSS": 400.4000000000001,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 160.16000000000003,
+          "diameterCSS": 448.44800000000015,
+          "sheet": null
+        }
+      ],
+      "file": "cards/160.png",
+      "assessment": "Claro",
+      "cause": "Revisar imagen fuente si se decide mejorar",
+      "note": "Veo pérdida de textura o bordes en la vista cercana; el original se queda justo para el tamaño de pantalla."
+    },
+    "after": {
+      "number": 160,
+      "id": "universe-10",
+      "name": "Borde del vacío",
+      "stage": 9,
+      "stageName": "Universo",
+      "crop": [
+        0,
+        0,
+        1254,
+        1112
+      ],
+      "range": {
+        "min": 125.84,
+        "max": 160.16000000000003
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 125.84,
+          "diameterCSS": 229.02880000000005,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 143,
+          "diameterCSS": 260.26000000000005,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 160.16000000000003,
+          "diameterCSS": 291.4912000000001,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 125.84,
+          "diameterCSS": 352.3520000000001,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 143,
+          "diameterCSS": 400.4000000000001,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 160.16000000000003,
+          "diameterCSS": 448.44800000000015,
+          "sheet": null
+        }
+      ],
+      "file": "cards/160.png"
+    }
+  },
+  {
+    "before": {
+      "number": 161,
+      "id": "universe-11",
+      "name": "Universo",
+      "stage": 9,
+      "stageName": "Universo",
+      "crop": [
+        1154,
+        676,
+        382,
+        348
+      ],
+      "range": {
+        "min": 290,
+        "max": 290
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 290,
+          "diameterCSS": 527.8000000000001,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 290,
+          "diameterCSS": 527.8000000000001,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 290,
+          "diameterCSS": 527.8000000000001,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 290,
+          "diameterCSS": 812,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 290,
+          "diameterCSS": 812,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 290,
+          "diameterCSS": 812,
+          "sheet": null
+        }
+      ],
+      "file": "cards/161.png",
+      "assessment": "Claro",
+      "cause": "Revisar imagen fuente si se decide mejorar",
+      "note": "La esfera final del Universo pierde detalle en sus filamentos; la fuente antigua tiene unos 382 px."
+    },
+    "after": {
+      "number": 161,
+      "id": "universe-11",
+      "name": "Universo",
+      "stage": 9,
+      "stageName": "Universo",
+      "crop": [
+        0,
+        0,
+        1254,
+        1142
+      ],
+      "range": {
+        "min": 290,
+        "max": 290
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 290,
+          "diameterCSS": 527.8000000000001,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 290,
+          "diameterCSS": 527.8000000000001,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 290,
+          "diameterCSS": 527.8000000000001,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 290,
+          "diameterCSS": 812,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 290,
+          "diameterCSS": 812,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 290,
+          "diameterCSS": 812,
+          "sheet": null
+        }
+      ],
+      "file": "cards/161.png"
+    }
+  },
+  {
+    "before": {
+      "number": 164,
+      "id": "universe-matter-web",
+      "name": "Rama de la red cósmica",
+      "stage": 9,
+      "stageName": "Universo",
+      "crop": [
+        1188,
+        652,
+        337,
+        360
+      ],
+      "range": {
+        "min": 87.75,
+        "max": 189
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 87.75,
+          "diameterCSS": 159.705,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 135,
+          "diameterCSS": 245.70000000000002,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 189,
+          "diameterCSS": 343.98,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 87.75,
+          "diameterCSS": 245.70000000000005,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 135,
+          "diameterCSS": 378.00000000000006,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 189,
+          "diameterCSS": 529.2,
+          "sheet": null
+        }
+      ],
+      "file": "cards/164.png",
+      "assessment": "Claro",
+      "cause": "Revisar imagen fuente si se decide mejorar",
+      "note": "Veo pérdida de textura o bordes en la vista cercana; el original se queda justo para el tamaño de pantalla."
+    },
+    "after": {
+      "number": 164,
+      "id": "universe-matter-web",
+      "name": "Rama de la red cósmica",
+      "stage": 9,
+      "stageName": "Universo",
+      "crop": [
+        0,
+        0,
+        1254,
+        1340
+      ],
+      "range": {
+        "min": 87.75,
+        "max": 189
+      },
+      "zoom": 1.12,
+      "metrics": [
+        {
+          "view": "MÓVIL",
+          "r": 87.75,
+          "diameterCSS": 159.705,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 135,
+          "diameterCSS": 245.70000000000002,
+          "sheet": null
+        },
+        {
+          "view": "MÓVIL",
+          "r": 189,
+          "diameterCSS": 343.98,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 87.75,
+          "diameterCSS": 245.70000000000005,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 135,
+          "diameterCSS": 378.00000000000006,
+          "sheet": null
+        },
+        {
+          "view": "PC",
+          "r": 189,
+          "diameterCSS": 529.2,
+          "sheet": null
+        }
+      ],
+      "file": "cards/164.png"
+    }
+  }
+]

@@ -57,6 +57,7 @@ test('Early cosmic habitats exclude spiral ground panels and star crops stop bef
  assert.ok(!groundPanels('stars').includes(3));
  for(const [i,top] of [736,740,740,738,754,766].entries()){
   if(i===5){assert.equal(SPECIES_BY_ID['stars-5'].imageAtlas,'pulsarDetail');continue;}
+  if(i>=1){const s=SPECIES_BY_ID['stars-'+i];assert.match(s.imageAtlas,/^clearDetail/);assert.equal(s.crop[0]+s.crop[1],0);continue;}
   const star=SPECIES_BY_ID['stars-'+i];assert.ok(star.crop[1]+star.crop[3]<top);
  }
  for(const id of ['planets','stars'])for(const s of STAGE_SPECIES[STAGES.findIndex(e=>e.id===id)])assert.ok(!/^galaxies-/.test(s.id));

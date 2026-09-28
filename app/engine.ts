@@ -449,8 +449,8 @@ export class VoroEngine {
     this.desktop = desktop;
     // Detailed close-up cycles are opt-in for pointer/PC views. Phones retain
     // the 64 MiB limit and the denser standard cycles, without live mesh baking.
-    this.animationSheets.highDetail = !matchMedia('(pointer: coarse)').matches;
-    this.animationSheets.limit = this.animationSheets.highDetail ? 128 * 1048576 : 64 * 1048576;
+    this.animationSheets.highDetail = true;
+    this.animationSheets.limit = matchMedia('(pointer: coarse)').matches ? 64 * 1048576 : 128 * 1048576;
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d', { alpha: false })!;
     this.emit = emit;

@@ -1,0 +1,1763 @@
+✔ Every new stage starts half-size, only the smallest species are edible, and starter food is nearby (128.228ms)
+✔ Three stable choices survive reload and cannot be rerolled (3.1233ms)
+✔ Final capped choices remain selectable without renewing the offer (2.6057ms)
+✔ Moderated cadence retains old saves, upgrades, body and fractional progress (0.9541ms)
+✔ Choosing freezes world time, consumes one adaptation and survives a first hit (151.5843ms)
+✔ Detection has separate enter/leave boundaries and fear survives small mass oscillations (2.1704ms)
+✔ Ranged creatures settle within a firing band but flee when edible or frightened (0.3869ms)
+✔ Territory edge starts a committed return and movement stays finite instead of clamping in place (1.8225ms)
+✔ Every deforming inhabitant ships bounded, content-addressed local sheets; rigid rigs remain live (1291.0578ms)
+✔ Every edible element has an explicit animation profile and valid art bounds (1080.3124ms)
+✔ Mesh loops meet exactly at their seam, and the sardine skull stays stable while its tail moves (65.6543ms)
+✔ Pseudopods deform the existing cell boundary, without a separate arm surface (1.9955ms)
+✔ Impulse strength depends only on selected ranks, never on stage or biomass (1.7162ms)
+✔ Lazy animation cache stays within 24 MiB and is reusable across instances (720.1967ms)
+✔ Authored limbs keep bone lengths and shells stay rigid throughout the cycle (2.0049ms)
+✔ Butterfly folding stays monotonic across the thorax instead of turning wings inside out (52.2629ms)
+✔ Swimmer variants coexist deterministically without adding encounter slots or changing edible size (409.242ms)
+✖ Space structures retain rigid geometry and surface flows keep their outer boundary fixed (11.005ms)
+✔ Obsolete background atlases cannot ship from public (3.7805ms)
+✔ Every biome loads its approved local background with a matching content revision (26.712ms)
+✔ Gameplay renderer selects the current biome image, including after a stage change (76.4183ms)
+✔ Direct environment tests never cache a background before its decode has finished (122.3152ms)
+✔ Short tour covers twenty scenarios in two minutes plus loading, with a measured dash in each (1.7143ms)
+✔ Tour separates load/warmup, excludes background time and times out missing resources (0.3511ms)
+✔ Automatic tour visits both sizes in every stage and restores the saved campaign and camera (1070.0322ms)
+✔ Cancel during load retains an exportable partial result and restores an interrupted birth (8.058ms)
+✔ Hidden and paused tour frames do not advance measurement, and failure skips to the next scenario (85.2563ms)
+✔ A first birth reveals the existing cell without simulation or dash, then releases the game (88.5887ms)
+✔ Resuming saved progress skips the birth; reduced motion has a short static reveal (84.734ms)
+✔ All entries and real transitions match the microscope, including oversized orbital entry and reload (2164.8424ms)
+✔ Historical saves use the local newborn reference; malformed camera data falls back safely (43.1971ms)
+✔ Newborn framing is closer; growth opens smoothly without hiding body growth (1.836ms)
+✔ Engine eases camera after growth, damage and the end of cinematics (64.7383ms)
+✔ Visual speed compensation cancels every environment entry zoom (0.2608ms)
+✔ Each of the six stages requires feeding; mutations persist through every transition (8.4417ms)
+✔ Food too large cannot be eaten; a large meal contributes its value only after digestion (0.3863ms)
+✔ Saved wounded and completed campaigns resume with correct size, stage and mutations; malformed data is rejected (2.0051ms)
+✔ City armed people and vehicles use their actual size, allow absorption at threshold and refuse below it (753.0961ms)
+✔ Big military vehicles remain inedible to newborns; edible shooters still shoot and capacity still matters (11.2997ms)
+✔ Larger people and one unarmed car slot preserve bounded, deterministic streets and consumed slots (33.8407ms)
+✔ Approaching Earth never clamps position or cancels inward velocity, including its centre (32.734ms)
+✔ City buildings occupy aligned persistent lots; eating one leaves a vacant lot (58.2582ms)
+✔ City background reuses bounded aligned district tiles while scrolling (187.5279ms)
+✔ Planet ecology offers eleven world types with rare ocean worlds and unchanged encounter slots (152.7769ms)
+✔ City sidewalks consistently receive a substantial civilian population without replacing buildings (5.2305ms)
+✔ City heavy shots persist into mid/late growth while small arms and oversized player contact stay harmless (191.2838ms)
+✔ All and only the 48 approved clear cases receive improved art/animation, keeping physical size ranges (6.7045ms)
+✔ Detailed cycles reserve the other residents basic animations and reuse detail for small individuals (1.7497ms)
+✔ Infinite shore mixes sand and tidal water in both axes without old tile seams (91.8723ms)
+✔ Correlations attribute delayed cadence to previous work and survive compact sharing (9.7762ms)
+✔ Identical resize notifications preserve the drawing buffer (91.6836ms)
+✔ Completed capture summary is reused while HUD values keep updating (11.1471ms)
+✔ Earth is enveloped then travels into the moving nucleus; capture stays inside save limits (31.1824ms)
+✔ Asteroids move their collision positions smoothly and preserve deterministic residents and density (97.0968ms)
+✔ Large bodies keep readable screen travel with a smoothed automatic camera; manual zoom never changes simulation speed (33.4ms)
+✔ Early cosmic habitats exclude spiral ground panels and star crops stop before galactic artwork (0.9152ms)
+✔ A recognizable black hole appears occasionally inside the existing galaxy threat budget (111.3011ms)
+✔ Engine keeps music active at reduced level while choices are shown; effects remain silent (2.6758ms)
+✔ Enlarged accretion disks actually fit in generated stellar populations (114.3212ms)
+✔ Galaxy detail crops retain the whole standalone source including upper arms (0.4749ms)
+✔ Survivor reveal takes twelve and a half seconds, after a black pause (0.4723ms)
+✔ Scene handoff fades inhabitants continuously and keeps reduced motion stationary (3.0354ms)
+✔ Marine hunters have a dedicated encounter slot without increasing total density (208.47ms)
+✔ Shore creatures stay on dry sand while fleeing along the continuous coastline (159.8779ms)
+✔ Every biome uses bounded populations with rare rabbits/swimmers and populated city sidewalks (849.8236ms)
+✔ Orbit adds only one readable starter per zone while keeping prior slots and consumed IDs stable (50.2152ms)
+✔ Transitions connect every successive environment; coastal journeys crossfade without a scale jump (24.3898ms)
+✔ Placed food keeps breathing room and consumption never moves neighbouring slots (24.0469ms)
+✔ Every stage naturally spawns its new matter within each environment population limit (913.3218ms)
+✔ All new food respects body size, restores an unfinished meal and rewards digestion exactly once (38.1464ms)
+✔ Scenery stays anchored while floating matter drifts without chasing the player (4.0913ms)
+✖ Plants bend from fixed bases; shells and urban objects never stretch (97.2129ms)
+✔ Consumed matter remains absent when its chunk is restored from the journal (10.9847ms)
+✔ Closing settings restores the effects bus before the next bite without toggling sound (137.0869ms)
+✔ Pause, adaptation offer, focus loss and mute suppress effects; normal play restores them (19.7665ms)
+✔ An interrupted context recovers on the next effect without a mute cycle (25.1915ms)
+✔ Actual damage emits an audible midrange effect; invulnerability and mute do not (5.6699ms)
+✔ A consumed shield sounds once instead of damage, while effective unshielded damage uses its own sound (5.5238ms)
+✔ Harmless or outgrown contacts and projectiles do not emit hit or shield sounds (98.3877ms)
+✔ Mute, menus and focus suppress shield audio as well as damage (31.7ms)
+Micro-stage progression: [{"seed":41,"seconds":696,"upgrades":15},{"seed":127,"seconds":862,"upgrades":16},{"seed":930,"seconds":833,"upgrades":15}]
+✔ Bitmap organisms digest, membrane animates, and damage lowers HUD mass and body area (543.2047ms)
+✔ A shield blocks one hit, then damage and recycling apply during recharge (386.1268ms)
+✔ Adaptation choices, pause and settings stop world time; retry retains choices, reset clears them (60.664ms)
+✔ Movement crosses old boundaries in both directions; touch movement has no effect after releasing (141.9974ms)
+✔ Unassisted world population supports growth to cellular maturity without changing biomes (124081.6124ms)
+✔ Every environment and size can be tested without altering or overwriting the saved campaign (599.5281ms)
+✔ Test controls reject invalid inputs, can disable upgrades and damage, and never trigger evolution (27.2834ms)
+✔ Background/foreground during darkness resumes the cinematic instead of leaving an invisible pause (73.4232ms)
+✔ Cold launch preserves dark/reveal progress and waits for Continue; completed survivors stay complete (132.4946ms)
+✔ Normal gameplay still pauses on background; legacy completed saves do not lose their ending (13.4877ms)
+✔ Low frame cadence does not stretch the final darkness; membrane integration remains bounded (99.2242ms)
+✔ Every repeated choice adds the same concrete bonus (8.8904ms)
+✔ Real damage removes the same fraction of unspent adaptation progress and persists it (61.572ms)
+✔ Shield can be acquired once; consuming and reloading never unlocks it again (9.1616ms)
+✔ Shielded hits cost no biomass or adaptation progress (2.6854ms)
+✔ Cosmic detail remains bounded and all six large galaxies use at most two texture draws, no live mesh baking (123.2848ms)
+✔ Tentacles extend before grabbing, haul edible prey and retract when it is eaten (5.1821ms)
+✔ Six arms select distinct prey; shrinking releases every oversized target (0.6041ms)
+✔ Moderated impulse has a seven-second cooldown; every choice increases travel and reduces cooldown (1.4682ms)
+✔ Current saved cadence migrates once preserving fraction and existing pending reroll (2.7132ms)
+✔ Actual engine renders tentacle geometry without invalid values and clears arms on reset (115.5475ms)
+✔ Stage counts survive evolution, retry and repeated saves without double counting (4.7445ms)
+✔ Legacy saves preserve known current counts without inventing past stage totals (1.0571ms)
+✔ Pond, shore and sea transitions never decrease physical size, even after overshooting the growth target (50.751ms)
+✔ Old stage saves remap once, including the completed universe, without resetting mass or adaptations (9.8052ms)
+Entered micro at 0 s
+Entered pond at 624 s
+Entered land at 1186 s
+Entered water at 1800 s
+Entered city at 2348 s
+Entered orbit at 2938 s
+Entered planets at 3298 s
+Entered stars at 3584 s
+Entered galaxies at 3820 s
+Entered universe at 3961 s
+Journey result {"timings":[{"stage":"micro","at":0},{"stage":"pond","at":624},{"stage":"land","at":1186},{"stage":"water","at":1800},{"stage":"city","at":2348},{"stage":"orbit","at":2938},{"stage":"planets","at":3298},{"stage":"stars","at":3584},{"stage":"galaxies","at":3820},{"stage":"universe","at":3961}],"seconds":4041,"deaths":0,"upgrades":75}
+✔ Every stage generates stable inhabitants, recoverable food, bounded chunks and valid bitmap crops (610.2256ms)
+✔ Ranged attackers fire; small bodies take damage and large ones absorb bullets for tiny growth without XP (183.6035ms)
+✔ Evolution advances once at the midpoint, preserves adaptations and survives reload (434.3497ms)
+✔ Existing microscopic saves migrate, and each later stage preserves wounded mass, cooldown and digestion (4.427ms)
+✔ Final universe remains findable after streaming and can be retried after interrupted digestion (8.2401ms)
+✔ A complete run eats planets, stars, galaxies and the universe in order, with no teleporting or forced growth (93193.0086ms)
+✔ device language and manual override resolve independently (1.4842ms)
+✔ all player upgrades, stages and adaptation captions have English entries (1.8874ms)
+✔ translation keeps data identities, numbers, React nodes and whitespace (11.2476ms)
+✔ Stage loading is limited to two decodes, waits for decode and includes both swimmers (2.053ms)
+✔ Stage changes discard stale arrivals, retain shared images and surface decode failures (0.7603ms)
+✔ Engine loads only microscope art initially and no gameplay asset uses a remote origin (98.2288ms)
+✔ Regrowth does not rebuild intact chunks but depleted slots still return after expiry (3.138ms)
+✔ Frame diagnostics use a bounded rolling window and separate CPU from frame cadence (1.1391ms)
+✔ Consumed slots still regrow after leaving and reloading a chunk in every biome (304.1532ms)
+✔ Chunks regenerate deterministically at negative coordinates and retain consumed slots (189.7053ms)
+✔ Saved negative position, pending meals, cooldown and adaptation survive reload (2.5662ms)
+✔ 14 upgrades have bounded stats; choices never repeat within a hand or exceed safe selection limits (10.1613ms)
+✔ Recycled mass grants no XP; tiny nutrients allow recovery below initial mass (0.8131ms)
+✔ Illustrated sprite crops stay inside the atlas, and soft bodies deform with time (0.8894ms)
+✔ Adaptation ducking keeps the same stream running at the same position, then restores it; mute still wins (6.7147ms)
+✔ Pausing mid-crossfade and resuming never leaves a second song audible (1.0775ms)
+✔ A stale play promise cannot pause the newly resumed active deck (0.7459ms)
+✔ Repeated movement gestures never restart an already running audio deck (0.646ms)
+✔ A cancelled pending crossfade cannot interrupt its replacement on the same deck (0.8884ms)
+✔ Twelve approved tracks cover menu, every stage and the completed survivor (0.6378ms)
+✔ No playback before a gesture; two streams crossfade and loop without restarting on repeated state (0.6538ms)
+✔ Pause fades then freezes playback; hidden state stops immediately and resume preserves position (0.5555ms)
+✔ Rapid stage changes and blocked autoplay keep bounded decks and can retry on a gesture (0.8888ms)
+✔ Orbit has no planet-shaped residents; satellites cover larger, distinct sizes (22.1267ms)
+✔ Orbital introduction fades after five seconds and never becomes a permanent header (0.8641ms)
+✔ No gravity anywhere over the visible planet or its free ring; pull only outside (0.6752ms)
+✔ Choosing an adaptation discards all meal overflow and persists an empty new bar (8.7903ms)
+✔ A depleted finite orbit restores accessible zero-threshold food after severe shrinkage, including reloaded worlds (261.5945ms)
+✔ All black-hole variants damage a smaller cell in ordinary damage mode and honor explicit invulnerability (117.202ms)
+✔ Meeting a biome goal advances without needing a further meal; orbit intentionally waits for Earth contact (156.4483ms)
+✔ Orbital graduation requires approaching and finishing the Earth absorption, then never respawns Earth (266.6337ms)
+✔ Below the goal Earth stays inedible; fixed environment tests never graduate (15.0638ms)
+✔ Orbital gravity contains prolonged fully upgraded outward movement and dash at different frame rates (37.3126ms)
+✔ Quick controls add independent biomass and real selectable adaptations only inside a disposable test (7.3046ms)
+✔ Microscope background follows sustained movement using cached surfaces (63.8086ms)
+✔ Orbital objects occupy and drift above the Earth disc instead of being filtered or pushed off (95.045ms)
+✔ Earth and all remaining orbital objects converge; reload restarts the same capture without rewards or leftovers (155.8318ms)
+✔ Charca appends peaceful fauna while preserving all original slots and every other population (51.5095ms)
+✔ All environments retain identical entry framing and useful vision at goal mass (6.4346ms)
+✔ Campaign rewards slow feeding without changing stage sizes/goals, and legacy saves keep mass, XP, choices and pending food (13.5092ms)
+✔ Micro cycles advance at 30 poses/s; high resolution is optional and budget exhaustion never requests a live mesh (1.7232ms)
+✔ Giant cosmic bodies preserve physical ranges and use detailed alpha artwork; Planet clouds use real planet bitmaps (34.7905ms)
+✔ Retired adaptations are all refunded without losing stage/body, then the new bar starts empty (19.4664ms)
+✔ Long reach is offered only after hunting tentacles, and each choice extends the same distance (4.955ms)
+✔ Individual sizes vary deterministically, preserve area-based food requirements, and stay within species ranges (49.5824ms)
+✔ Water is less crowded and sharks occupy under five percent of slots with at most one per chunk (38.3261ms)
+✔ Biomass fragments scatter before collection, survive reload and restore exactly the lost recoverable mass without XP (92.6004ms)
+✔ TF build 3 adaptation progress migrates once, including an earned pending choice (5.7009ms)
+✔ Pond gains eleven peaceful fauna slots, keeping the danger budget unchanged (15.7592ms)
+✔ Pause return to menu keeps the run and resumes without a new birth (113.5629ms)
+✔ 120 Hz submits sixty frames per second, while 60 and 30 Hz keep their cadence (3.7946ms)
+✔ Raster work has a tablet pixel budget without changing camera or CSS geometry (0.3198ms)
+✔ Zoom controls change the framing, not biomass, and survive biome entry and tests (164.121ms)
+✔ Shared diagnostics preserve render budget and manual zoom settings (22.5976ms)
+✔ Adaptive raster ignores isolated stalls and pauses, reduces sustained load without oscillation (0.8134ms)
+✔ Sustained 10 fps also lowers resolution; severe stalls cannot miss a minimum-frame threshold (0.2009ms)
+✔ A slow device can yield inside one pose instead of painting a whole animal in one frame (25.8024ms)
+✔ Paused scene sleeps but redraws after resize, asset arrival and resume (119.3525ms)
+✔ Touch framebuffer reduces pixels without changing world framing or input (3.2819ms)
+✔ Large DPR sprites reuse poses even without OffscreenCanvas, gallery remains continuous (9.7193ms)
+✔ Ground cache scrolls and scales continuously, invalidating on travel, biome and seed (28.5741ms)
+✔ Evicting atlas textures immediately releases their Canvas backing stores (0.5619ms)
+✔ Cold encounters stay visible without baking inline; queued work is bounded and drains (8.4192ms)
+✔ Completed captures survive toggling the overlay and only a new capture resets them (101.1368ms)
+✔ Reports refuse empty data, preserve statistics and produce a small shareable file (48.5886ms)
+✔ Native share writes one UTF-8 cache file before presenting its URI; web shares a real text file (1.9073ms)
+✔ Nucleus choices now boost adaptation additively, preserve saved choices and no longer boost mass (90.2097ms)
+✔ Biome cinematics no longer shrink the outgoing world to a tiny island (24.7576ms)
+✔ only the end of the second environment holds the real iOS game (2.0397ms)
+✔ checkpoint freezes simulation and inputs before entering the third environment (111.3788ms)
+✔ restarting permits another beta checkpoint, while a later saved stage never triggers it (19.701ms)
+✔ desktop and test/benchmark modes retain uninterrupted environment transitions (7.304ms)
+✔ Tilt uses a comfortable neutral position, dead zone, bounded speed and fresh samples (2.8897ms)
+✔ Tilt follows screen rotation and resets calibration when rotating the device (0.3225ms)
+✔ Earth is unique, initially inedible, and stays consumed across reload and journal pruning (45.056ms)
+✔ Planet populations vary much more than humans; sea sizes and cosmic scales stay ordered (0.894ms)
+✔ iOS local media without HTTP status decodes; remote/opaque/HTTP failures stay rejected (7.8031ms)
+✔ Sound diagnostics distinguish local read failures from unsupported/corrupt decoded data (1.2465ms)
+✔ Approved ingest variants decode, rate-limit and never repeat consecutively (2.3967ms)
+✔ Digest completion no longer calls the legacy chime (70.7264ms)
+✔ Ingest pitch varies over a broad range and changes the full sample duration (0.756ms)
+✔ A failed variant does not silence decoded bites and retries only the missing sample on a later gesture (0.9693ms)
+✔ Interrupted iOS audio is counted and never queues stale bites until a gesture resumes it (0.561ms)
+✔ Effects are audible on phone speakers without pushing a single voice near clipping (0.1922ms)
+✔ Pitch-shifted bites fade at both sample boundaries without affecting the wall-clock rate limit (0.8061ms)
+✔ Repeated recovery attempts are bounded, recover without mute toggles and do not replay stale effects (43.4226ms)
+✔ Random rounds cover every distinct gesture and do not repeat at round boundaries (1.4907ms)
+✔ Impact voices are bounded, release to zero, and never replay interrupted hits (1.0171ms)
+✔ Acquired shield is excluded across seeds, later levels, consumption and reload (15.579ms)
+✔ Legacy four shields migrate once, preserving other choices, body, XP and earliest recharge (1.0855ms)
+✔ Fully upgraded historical saves remain loadable after the shield cap changes (1.5678ms)
+✔ Swimming stays consistent at 30 and 60 fps and inside the world (11ms)
+✔ Food remains whole during engulfing, contributes once after digestion (0.6583ms)
+✔ 18 undamaged meals reach the first evolution; subsequent recoveries do not repeat its modal (1.9769ms)
+✔ Damage removes 25% mass; area and displayed size share the same proportional rule (1.219ms)
+✔ Damage also shrinks the starting cell, interrupts pending meals and has a two-second grace window (0.7089ms)
+✔ Food restores damage using the same growth curve (1.1544ms)
+✔ Zero mass ends life, blocks actions and resets cleanly (17.5926ms)
+✔ Impulse respects cooldown and continuous feeding respects the current stage capacity (1.4733ms)
+✔ Soft membrane settles without NaNs at 30, 60 and 120 fps (1.0271ms)
+✔ Every gallery size range matches generated inhabitants and a single common scale preserves proportions (26.3733ms)
+✔ Starting dash travels slightly less than the original, more than the weak version, and recharges in seven seconds (8.9829ms)
+✔ All city humans have similar visible heights, including civilian variants (9.7896ms)
+✔ Close zoom keeps decoded cycles and does not rebuild a mesh as DPR or radius grows (7.5814ms)
+✔ Each active opening-biome energy fits the phone budget; PC close-up variants are separate optional resources (0.5141ms)
+✔ Sheets wait for decode, reuse normal during reaction loading, and cap concurrency/memory (0.8704ms)
+✔ Cancelled decodes retain reservation until settled and failures release memory exactly once (0.5503ms)
+✔ Offscreen queued sheets expire while visible cache entries are never evicted to thrash (0.578ms)
+✔ Crossfade reuses two distinct grounds and bounds retained surfaces (17.0076ms)
+✔ Shared species retain prepared poses across stages, unwanted ones are released (13.1442ms)
+✔ Diagnostics retain bounded samples, correct session percentiles, section means and worst frames (42.528ms)
+✔ 30-second capture excludes pause/hidden time, auto-stops and freezes complete-session results (108.779ms)
+✔ Autosaves coalesce, flush latest state and a checkpoint cancels the deferred write (5.2693ms)
+✔ Tilt only activates after permission and a valid sample; cancellation removes the sensor listener (6.646ms)
+✔ Normal launch uses approved UI even with an old development preference (1.2307ms)
+✔ UI query override works without preventing later saved changes (0.3816ms)
+✔ Final biomass starts the universe ending without searching for another object, and saves a completed run (246.6049ms)
+✔ Ending respects the final stage, biomass threshold and fixed-biome testing (25.8797ms)
+✔ The universe contracts into the cell, then stays completely black for five seconds before the original reveal (1.9269ms)
+✔ Universe lights converge, then the cell fades leaving only its own contracting nucleus (9.7133ms)
+✔ The reverse reveal masks every cell layer after drawing, even strokes overriding alpha (0.509ms)
+✔ Body and nucleus fade continuously without a second light appearing or a pause in contraction (2.0456ms)
+✔ The cell begins fading immediately when the last universe material is swallowed (0.3893ms)
+✔ Completed movement stays unbounded for sustained motion in every direction (1353.4746ms)
+✔ The completed survivor breathes at most 20 fps without running gameplay; reduced motion stays still (13.0716ms)
+✔ New cosmic structures fit the final food chain and existing population budget (234.9516ms)
+✔ Individual caps govern effects, offers and choices, including rerolls (13.3467ms)
+✔ Previously capped saves keep their progress and can acquire more of the same upgrades (3.4069ms)
+✔ Tall buildings require exceeding their longest visible dimension, without changing people/vehicles (81.1955ms)
+✔ Shots compare live mass at impact: outgrown soldiers are harmless, larger weapons remain dangerous (20.2036ms)
+✔ Earth painting tracks the same world coordinates and radius as gravity at every zoom (0.7051ms)
+✔ Completed survivor moves with every input route, preserves completion and never resumes world rewards (56.9354ms)
+✔ Orbital viewport optimisation keeps all objects and suspends only remote motion (6.7356ms)
+✔ Landscape is enabled on both iPad browser identities, never on portrait iPad or iPhone (1.3218ms)
+✔ PC aspect ratios reveal more world without changing vertical scale; raster is bounded (0.4401ms)
+✔ iPad rotation resizes the same game and preserves progression and camera (52.3062ms)
+✔ All backgrounds render at desktop width and invalidate cached crop after resize (121.7686ms)
+✔ Non-shore atlases stream stable varied regions; every biome has a ground profile (5.7459ms)
+✔ Background streaming remains bounded through every sandbox biome including microscope (168.9436ms)
+✔ Loose plants and coral have sensible proportions next to marine fish (0.4072ms)
+✔ Pinch does not jump on touchdown, clamps, rebases extra fingers and waits for all releases (1.8206ms)
+✔ Canvas pinch suppresses movement, tilt and dash; remaining finger cannot turn into movement (70.6559ms)
+✔ Wheel uses the actual camera scale without publishing every gesture event and ignores menus (6.2344ms)
+✔ Microscope paints an opaque background once, retaining a loading fallback (23.4523ms)
+ℹ tests 255
+ℹ suites 0
+ℹ pass 253
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 127480.0819
+
+✖ failing tests:
+
+test at tests\animation.test.mjs:257:1
+✖ Space structures retain rigid geometry and surface flows keep their outer boundary fixed (11.005ms)
+  AssertionError [ERR_ASSERTION]: universe-matter-web
+      at TestContext.<anonymous> (file:///C:/Users/dmkra/Documents/Codex%20Apps/Voro-camera/tests/animation.test.mjs:265:18)
+      at Test.runInAsyncScope (node:async_hooks:228:14)
+      at Test.run (node:internal/test_runner/test:1118:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:787:18)
+      at Test.postRun (node:internal/test_runner/test:1247:19)
+      at Test.run (node:internal/test_runner/test:1175:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:787:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests\edible-matter.test.mjs:80:1
+✖ Plants bend from fixed bases; shells and urban objects never stretch (97.2129ms)
+  AssertionError [ERR_ASSERTION]: universe-matter-web
+  + actual - expected
+  ... Skipped lines
+
+    {
+      cols: 20,
+      rows: 10,
+      verts: [
+        {
+  ...
+          v: 0.1,
+  +       x: 0.05035714287956153,
+  +       y: 0.10053772853401752
+  -       x: 0.05119844943926525,
+  -       y: 0.10001130895969677
+        },
+        {
+          u: 0.1,
+          v: 0.1,
+  +       x: 0.100705491716139,
+  +       y: 0.10102629831668028
+  -       x: 0.10236738907591014,
+  -       y: 0.09986158501311926
+        },
+        {
+          u: 0.15,
+          v: 0.1,
+  +       x: 0.15103646900527234,
+  +       y: 0.10142114979330472
+  -       x: 0.15347803573659222,
+  -       y: 0.09956504383068351
+        },
+        {
+          u: 0.2,
+          v: 0.1,
+  +       x: 0.2013419249876525,
+  +       y: 0.10168649150530751
+  -       x: 0.20450304161450059,
+  -       y: 0.09914964519630702
+        },
+        {
+          u: 0.25,
+          v: 0.1,
+  +       x: 0.2516143383232429,
+  +       y: 0.1017986486534239
+  -       x: 0.25541716766312167,
+  -       y: 0.09865447710107626
+        },
+        {
+          u: 0.3,
+          v: 0.1,
+  +       x: 0.3018470012916334,
+  +       y: 0.10174827803576125
+  -       x: 0.3061979050653279,
+  -       y: 0.0981260986901505
+        },
+        {
+          u: 0.35,
+          v: 0.1,
+  +       x: 0.35203418495837796,
+  +       y: 0.10154124213281812
+  -       x: 0.35682602947515824,
+  -       y: 0.09761418421393087
+        },
+        {
+          u: 0.4,
+          v: 0.1,
+  +       x: 0.4021712802403745,
+  +       y: 0.10119806056076054
+  -       x: 0.4072860743850172,
+  -       y: 0.09716687553201879
+        },
+        {
+          u: 0.45,
+          v: 0.1,
+  +       x: 0.45225491139678703,
+  +       y: 0.1007519902145611
+  -       x: 0.45756671196242243,
+  -       y: 0.09682627798606046
+        },
+        {
+          u: 0.5,
+          v: 0.1,
+  +       x: 0.5022830191509887,
+  +       y: 0.1002459137213108
+  -       x: 0.5076610319788356,
+  -       y: 0.09662452104409368
+        },
+        {
+          u: 0.55,
+          v: 0.1,
+  +       x: 0.5522549113967871,
+  +       y: 0.09972832731758204
+  -       x: 0.5575667119624225,
+  -       y: 0.09658075227943283
+        },
+        {
+          u: 0.6,
+          v: 0.1,
+  +       x: 0.6021712802403745,
+  +       y: 0.09924880352190314
+  -       x: 0.6072860743850171,
+  -       y: 0.09669934592507813
+        },
+        {
+          u: 0.65,
+          v: 0.1,
+  +       x: 0.652034184958378,
+  +       y: 0.09885335311116336
+  -       x: 0.6568260294751582,
+  -       y: 0.096969493609899
+        },
+        {
+          u: 0.7,
+          v: 0.1,
+  +       x: 0.7018470012916334,
+  +       y: 0.09858012033081291
+  -       x: 0.7061979050653279,
+  -       y: 0.09736621556699464
+        },
+        {
+          u: 0.75,
+          v: 0.1,
+  +       x: 0.7516143383232429,
+  +       y: 0.09845581409162929
+  -       x: 0.7554171676631216,
+  -       y: 0.09785269770636926
+        },
+        {
+          u: 0.8,
+          v: 0.1,
+  +       x: 0.8013419249876526,
+  +       y: 0.09849320904749331
+  -       x: 0.8045030416145006,
+  -       y: 0.09838373589722993
+        },
+        {
+          u: 0.85,
+          v: 0.1,
+  +       x: 0.8510364690052723,
+  +       y: 0.09868995035138738
+  -       x: 0.8534780357365922,
+  -       y: 0.09890996521554887
+        },
+        {
+          u: 0.9,
+          v: 0.1,
+  +       x: 0.900705491716139,
+  +       y: 0.09902877391571333
+  -       x: 0.9023673890759102,
+  -       y: 0.09938247847179525
+        },
+        {
+          u: 0.95,
+          v: 0.1,
+  +       x: 0.9503571428795615,
+  +       y: 0.09947912156954956
+  -       x: 0.9511984494392652,
+  -       y: 0.09975740191299325
+        },
+        {
+          u: 1,
+          v: 0.1,
+          x: 1,
+  ...
+          v: 0.2,
+  +       x: 0.051297970071815746,
+  +       y: 0.2010228204525504
+  -       x: 0.05209024453881825,
+  -       y: 0.20002151091962425
+        },
+        {
+          u: 0.1,
+          v: 0.2,
+  +       x: 0.10256397981274769,
+  +       y: 0.20195213540348306
+  -       x: 0.10412902031996689,
+  -       y: 0.19973671904954832
+        },
+        {
+          u: 0.15,
+          v: 0.2,
+  +       x: 0.15376685586132863,
+  +       y: 0.20270318754310793
+  -       x: 0.15606612591740512,
+  -       y: 0.19917266420173757
+        },
+        {
+          u: 0.2,
+          v: 0.2,
+  +       x: 0.20487697941712582,
+  +       y: 0.20320789747159826
+  -       x: 0.20785386336243922,
+  -       y: 0.1983825290455698
+        },
+        {
+          u: 0.25,
+          v: 0.2,
+  +       x: 0.2558670155539067,
+  +       y: 0.2034212330447286
+  -       x: 0.2594482126260119,
+  -       y: 0.19744066335830848
+        },
+        {
+          u: 0.3,
+          v: 0.2,
+  +       x: 0.306712586296242,
+  +       y: 0.20332542243641286
+  -       x: 0.31080991553791226,
+  -       y: 0.19643562789674723
+        },
+        {
+          u: 0.35,
+          v: 0.2,
+  +       x: 0.3573928708861672,
+  +       y: 0.20293161674721064
+  -       x: 0.3619054424532164,
+  -       y: 0.19546190869995822
+        },
+        {
+          u: 0.4,
+          v: 0.2,
+  +       x: 0.4078911184593432,
+  +       y: 0.20227884660645506
+  -       x: 0.4127078178634242,
+  -       y: 0.19461107702650246
+        },
+        {
+          u: 0.45,
+          v: 0.2,
+  +       x: 0.45819506050692954,
+  +       y: 0.20143037038749706
+  -       x: 0.4631972846230049,
+  -       y: 0.19396322199546684
+        },
+        {
+          u: 0.5,
+          v: 0.2,
+  +       x: 0.5082972129669887,
+  +       y: 0.20046775569419806
+  -       x: 0.5133617904358907,
+  -       y: 0.19357945748673627
+        },
+        {
+          u: 0.55,
+          v: 0.2,
+  +       x: 0.5581950605069296,
+  +       y: 0.19948324785017402
+  -       x: 0.563197284623005,
+  -       y: 0.19349620434905448
+        },
+        {
+          u: 0.6,
+          v: 0.2,
+  +       x: 0.6078911184593432,
+  +       y: 0.19857113938897603
+  -       x: 0.6127078178634241,
+  -       y: 0.1937217828680188
+        },
+        {
+          u: 0.65,
+          v: 0.2,
+  +       x: 0.6573928708861673,
+  +       y: 0.19781894800896468
+  -       x: 0.6619054424532164,
+  -       y: 0.19423563430004068
+        },
+        {
+          u: 0.7,
+          v: 0.2,
+  +       x: 0.706712586296242,
+  +       y: 0.19729922837652922
+  -       x: 0.7108099155379122,
+  -       y: 0.19499024430494705
+        },
+        {
+          u: 0.75,
+          v: 0.2,
+  +       x: 0.7558670155539067,
+  +       y: 0.19706278385894577
+  -       x: 0.7594482126260119,
+  -       y: 0.1959155883223739
+        },
+        {
+          u: 0.8,
+          v: 0.2,
+  +       x: 0.8048769794171259,
+  +       y: 0.19713391329184787
+  -       x: 0.8078538633624393,
+  -       y: 0.19692568298601318
+        },
+        {
+          u: 0.85,
+          v: 0.2,
+  +       x: 0.8537668558613286,
+  +       y: 0.19750813749003357
+  -       x: 0.8560661259174052,
+  -       y: 0.19792663063051877
+        },
+        {
+          u: 0.9,
+          v: 0.2,
+  +       x: 0.9025639798127477,
+  +       y: 0.19815261820748667
+  -       x: 0.9041290203199669,
+  -       y: 0.19882540425329667
+        },
+        {
+          u: 0.95,
+          v: 0.2,
+  +       x: 0.9512979700718157,
+  +       y: 0.19900923034904505
+  -       x: 0.9520902445388182,
+  -       y: 0.19953855101702297
+        },
+        {
+          u: 1,
+          v: 0.2,
+          x: 1,
+  ...
+          v: 0.3,
+  +       x: 0.0524784099315285,
+  +       y: 0.3014077915787785
+  -       x: 0.05235937662952273,
+  -       y: 0.3000296072408635
+        },
+        {
+          u: 0.1,
+          v: 0.3,
+  +       x: 0.10489579318517178,
+  +       y: 0.3026868838756658
+  -       x: 0.1046606575761045,
+  -       y: 0.29963762485979384
+        },
+        {
+          u: 0.15,
+          v: 0.3,
+  +       x: 0.15719262576239007,
+  +       y: 0.3037206184619766
+  -       x: 0.15684717766532688,
+  -       y: 0.298861269965113
+        },
+        {
+          u: 0.2,
+          v: 0.3,
+  +       x: 0.20931235202238205,
+  +       y: 0.304415292082633
+  -       x: 0.20886509751594914,
+  -       y: 0.297773742221435
+        },
+        {
+          u: 0.25,
+          v: 0.3,
+  +       x: 0.26120277726965846,
+  +       y: 0.304708923308483
+  -       x: 0.26066472924415685,
+  -       y: 0.29647737531797635
+        },
+        {
+          u: 0.3,
+          v: 0.3,
+  +       x: 0.3128173529606698,
+  +       y: 0.3045770513194078
+  -       x: 0.31220175994416627,
+  -       y: 0.29509406267925103
+        },
+        {
+          u: 0.35,
+          v: 0.3,
+  +       x: 0.36411632288343376,
+  +       y: 0.3040350242886112
+  -       x: 0.36343834281903076,
+  -       y: 0.293753853181175
+        },
+        {
+          u: 0.4,
+          v: 0.3,
+  +       x: 0.415067702087418,
+  +       y: 0.3031365632686518
+  -       x: 0.41434402909438794,
+  -       y: 0.2925827838484662
+        },
+        {
+          u: 0.45,
+          v: 0.3,
+  +       x: 0.4656480644591737,
+  +       y: 0.30196873594092827
+  -       x: 0.464896517768338,
+  -       y: 0.2916910878966625
+        },
+        {
+          u: 0.5,
+          v: 0.3,
+  +       x: 0.515843119550996,
+  +       y: 0.3006438104806916
+  -       x: 0.5150822047361235,
+  -       y: 0.2911628813651272
+        },
+        {
+          u: 0.55,
+          v: 0.3,
+  +       x: 0.5656480644591737,
+  +       y: 0.29928875168361485
+  -       x: 0.564896517768338,
+  -       y: 0.2910482932515995
+        },
+        {
+          u: 0.6,
+          v: 0.3,
+  +       x: 0.6150677020874179,
+  +       y: 0.29803334208811316
+  -       x: 0.6143440290943879,
+  -       y: 0.2913587754467487
+        },
+        {
+          u: 0.65,
+          v: 0.3,
+  +       x: 0.6641163228834338,
+  +       y: 0.2969980394719313
+  -       x: 0.6634383428190308,
+  -       y: 0.2920660312675918
+        },
+        {
+          u: 0.7,
+          v: 0.3,
+  +       x: 0.7128173529606697,
+  +       y: 0.2962827067661332
+  -       x: 0.7122017599441662,
+  -       y: 0.2931046628353516
+        },
+        {
+          u: 0.75,
+          v: 0.3,
+  +       x: 0.7612027772696585,
+  +       y: 0.29595726880693685
+  -       x: 0.7606647292441568,
+  -       y: 0.2943782896111541
+        },
+        {
+          u: 0.8,
+          v: 0.3,
+  +       x: 0.809312352022382,
+  +       y: 0.2960551700723966
+  -       x: 0.8088650975159491,
+  -       y: 0.29576856564415155
+        },
+        {
+          u: 0.85,
+          v: 0.3,
+  +       x: 0.8571926257623901,
+  +       y: 0.2965702454929823
+  -       x: 0.8568471776653269,
+  -       y: 0.2971462518853873
+        },
+        {
+          u: 0.9,
+          v: 0.3,
+  +       x: 0.9048957931851718,
+  +       y: 0.297457297100577
+  -       x: 0.9046606575761045,
+  -       y: 0.2983833076503752
+        },
+        {
+          u: 0.95,
+          v: 0.3,
+  +       x: 0.9524784099315284,
+  +       y: 0.29863632256507405
+  -       x: 0.9523593766295226,
+  -       y: 0.2993648699626106
+        },
+        {
+          u: 1,
+          v: 0.3,
+          x: 1,
+  ...
+          v: 0.4,
+  +       x: 0.05346667318256479,
+  +       y: 0.4016549582566151
+  -       x: 0.05191738180101566,
+  -       y: 0.4000348053990813
+        },
+        {
+          u: 0.1,
+          v: 0.4,
+  +       x: 0.10684798536614616,
+  +       y: 0.4031586214334776
+  -       x: 0.10378755129866495,
+  -       y: 0.3995740024735788
+        },
+        {
+          u: 0.15,
+          v: 0.4,
+  +       x: 0.16006067742285257,
+  +       y: 0.404373849322714
+  -       x: 0.155564458713179,
+  -       y: 0.3986613425583019
+        },
+        {
+          u: 0.2,
+          v: 0.4,
+  +       x: 0.21302564221193432,
+  +       y: 0.4051904871414709
+  -       x: 0.20720435068679494,
+  -       y: 0.3973828770199162
+        },
+        {
+          u: 0.25,
+          v: 0.4,
+  +       x: 0.2656698724601302,
+  +       y: 0.40553567134980517
+  -       x: 0.25866684763663284,
+  -       y: 0.39585890632509013
+        },
+        {
+          u: 0.3,
+          v: 0.4,
+  +       x: 0.3179282584430325,
+  +       y: 0.40538064652906747
+  -       x: 0.3099159380340386,
+  -       y: 0.39423272478838506
+        },
+        {
+          u: 0.35,
+          v: 0.4,
+  +       x: 0.3697451912025889,
+  +       y: 0.4047434555389752
+  -       x: 0.36092086512793475,
+  -       y: 0.3926572140324822
+        },
+        {
+          u: 0.4,
+          v: 0.4,
+  +       x: 0.4210759318242051,
+  +       y: 0.40368725126439164
+  -       x: 0.41165688427810787,
+  -       y: 0.39128053946612584
+        },
+        {
+          u: 0.45,
+          v: 0.4,
+  +       x: 0.47188771305730176,
+  +       y: 0.40231438790347157
+  -       x: 0.462105872250373,
+  -       y: 0.3902322880061276
+        },
+        {
+          u: 0.5,
+          v: 0.4,
+  +       x: 0.5221605461537727,
+  +       y: 0.40075684461164374
+  -       x: 0.5122567734707474,
+  -       y: 0.3896113439873256
+        },
+        {
+          u: 0.55,
+          v: 0.4,
+  +       x: 0.5718877130573018,
+  +       y: 0.399163877457822
+  -       x: 0.562105872250373,
+  -       y: 0.3894766375808864
+        },
+        {
+          u: 0.6,
+          v: 0.4,
+  +       x: 0.6210759318242051,
+  +       y: 0.39768805496617726
+  -       x: 0.6116568842781078,
+  -       y: 0.3898416312917026
+        },
+        {
+          u: 0.65,
+          v: 0.4,
+  +       x: 0.669745191202589,
+  +       y: 0.39647098374727424
+  -       x: 0.6609208651279348,
+  -       y: 0.3906730603738818
+        },
+        {
+          u: 0.7,
+          v: 0.4,
+  +       x: 0.7179282584430324,
+  +       y: 0.39563005971737303
+  -       x: 0.7099159380340386,
+  -       y: 0.39189404501007097
+        },
+        {
+          u: 0.75,
+          v: 0.4,
+  +       x: 0.7656698724601302,
+  +       y: 0.39524748445146946
+  -       x: 0.7586668476366328,
+  -       y: 0.393391283081554
+        },
+        {
+          u: 0.8,
+          v: 0.4,
+  +       x: 0.8130256422119344,
+  +       y: 0.39536257429150556
+  -       x: 0.807204350686795,
+  -       y: 0.3950256505791772
+        },
+        {
+          u: 0.85,
+          v: 0.4,
+  +       x: 0.8600606774228525,
+  +       y: 0.3959680817635827
+  -       x: 0.855564458713179,
+  -       y: 0.3966452178889464
+        },
+        {
+          u: 0.9,
+          v: 0.4,
+  +       x: 0.9068479853661462,
+  +       y: 0.39701087346951575
+  -       x: 0.903787551298665,
+  -       y: 0.39809946415879294
+        },
+        {
+          u: 0.95,
+          v: 0.4,
+  +       x: 0.9534666731825647,
+  +       y: 0.398396901029733
+  -       x: 0.9519173818010156,
+  -       y: 0.3992533598614691
+        },
+        {
+          u: 1,
+          v: 0.4,
+          x: 1,
+  ...
+          v: 0.5,
+  +       x: 0.05390106486524294,
+  +       y: 0.501740126089522
+  -       x: 0.050935671020670585,
+  -       y: 0.5000365965623336
+        },
+        {
+          u: 0.1,
+          v: 0.5,
+  +       x: 0.10770607256661159,
+  +       y: 0.503321171117971
+  -       x: 0.10184830271549819,
+  -       y: 0.49955207969334914
+        },
+        {
+          u: 0.15,
+          v: 0.5,
+  +       x: 0.16132133118640168,
+  +       y: 0.5045989373373438
+  -       x: 0.15271542306330518,
+  -       y: 0.49859245226885895
+        },
+        {
+          u: 0.2,
+          v: 0.5,
+  +       x: 0.21465782105903855,
+  +       y: 0.505457601154651
+  -       x: 0.20351568068332115,
+  -       y: 0.497248194050256
+        },
+        {
+          u: 0.25,
+          v: 0.5,
+  +       x: 0.26763338673068277,
+  +       y: 0.5058205493101182
+  -       x: 0.2542293705770385,
+  -       y: 0.4956457964338002
+        },
+        {
+          u: 0.3,
+          v: 0.5,
+  +       x: 0.3201747598991623,
+  +       y: 0.5056575465672932
+  -       x: 0.304838919330673,
+  -       y: 0.49393592797820113
+        },
+        {
+          u: 0.35,
+          v: 0.5,
+  +       x: 0.372219363522735,
+  +       y: 0.5049875643115862
+  -       x: 0.3553293178309337,
+  -       y: 0.4922793379344882
+        },
+        {
+          u: 0.4,
+          v: 0.5,
+  +       x: 0.42371685267453835,
+  +       y: 0.5038770054157826
+  -       x: 0.4056884908392051,
+  -       y: 0.4908318166328949
+        },
+        {
+          u: 0.45,
+          v: 0.5,
+  +       x: 0.4746303542017732,
+  +       y: 0.5024334914527343
+  -       x: 0.45590759432399647,
+  -       y: 0.4897296198212041
+        },
+        {
+          u: 0.5,
+          v: 0.5,
+  +       x: 0.5249373746651014,
+  +       y: 0.5007957935187617
+  -       x: 0.5059812332303496,
+  -       y: 0.4890767206420671
+        },
+        {
+          u: 0.55,
+          v: 0.5,
+  +       x: 0.5746303542017732,
+  +       y: 0.49912084873206575
+  -       x: 0.5559075943239965,
+  -       y: 0.4889350819443334
+        },
+        {
+          u: 0.6,
+          v: 0.5,
+  +       x: 0.6237168526745382,
+  +       y: 0.4975690771324201
+  -       x: 0.6056884908392051,
+  -       y: 0.48931885904334116
+        },
+        {
+          u: 0.65,
+          v: 0.5,
+  +       x: 0.672219363522735,
+  +       y: 0.49628937272153595
+  -       x: 0.6553293178309337,
+  -       y: 0.49019307531538564
+        },
+        {
+          u: 0.7,
+          v: 0.5,
+  +       x: 0.7201747598991622,
+  +       y: 0.4954051728706406
+  -       x: 0.7048389193306729,
+  -       y: 0.4914768945367139
+        },
+        {
+          u: 0.75,
+          v: 0.5,
+  +       x: 0.7676333867306828,
+  +       y: 0.4950029094306151
+  -       x: 0.7542293705770385,
+  -       y: 0.4930511838095697
+        },
+        {
+          u: 0.8,
+          v: 0.5,
+  +       x: 0.8146578210590386,
+  +       y: 0.49512392204980665
+  -       x: 0.8035156806833211,
+  -       y: 0.49476965949384333
+        },
+        {
+          u: 0.85,
+          v: 0.5,
+  +       x: 0.8613213311864016,
+  +       y: 0.4957605902831898
+  -       x: 0.8527154230633052,
+  -       y: 0.4964725733396768
+        },
+        {
+          u: 0.9,
+          v: 0.5,
+  +       x: 0.9077060725666116,
+  +       y: 0.4968570463697274
+  -       x: 0.9018483027154982,
+  -       y: 0.49800165835715987
+        },
+        {
+          u: 0.95,
+          v: 0.5,
+  +       x: 0.9539010648652428,
+  +       y: 0.498314401991049
+  -       x: 0.9509356710206706,
+  -       y: 0.49921493609923473
+        },
+        {
+          u: 1,
+          v: 0.5,
+          x: 1,
+  ...
+          v: 0.6,
+  +       x: 0.05362217799306799,
+  +       y: 0.6016549582566151
+  -       x: 0.049782880266909,
+  -       y: 0.6000348053990813
+        },
+        {
+          u: 0.1,
+          v: 0.6,
+  +       x: 0.1071551659426271,
+  +       y: 0.6031586214334775
+  -       x: 0.09957110674222579,
+  -       y: 0.5995740024735787
+        },
+        {
+          u: 0.15,
+          v: 0.6,
+  +       x: 0.1605119699600444,
+  +       y: 0.6043738493227139
+  -       x: 0.14936989399296408,
+  -       y: 0.5986613425583018
+        },
+        {
+          u: 0.2,
+          v: 0.6,
+  +       x: 0.21360993438981732,
+  +       y: 0.6051904871414708
+  -       x: 0.19918419654479758,
+  -       y: 0.5973828770199162
+        },
+        {
+          u: 0.25,
+          v: 0.6,
+  +       x: 0.2663727770661303,
+  +       y: 0.6055356713498051
+  -       x: 0.24901858688519454,
+  -       y: 0.5958589063250901
+        },
+        {
+          u: 0.3,
+          v: 0.6,
+  +       x: 0.3187324676329434,
+  +       y: 0.6053806465290674
+  -       x: 0.29887714287360145,
+  -       y: 0.594232724788385
+        },
+        {
+          u: 0.35,
+          v: 0.6,
+  +       x: 0.37063090267713766,
+  +       y: 0.6047434555389751
+  -       x: 0.3487633473310094,
+  -       y: 0.5926572140324822
+        },
+        {
+          u: 0.4,
+          v: 0.6,
+  +       x: 0.4220213364273805,
+  +       y: 0.6036872512643916
+  -       x: 0.39868000228134287,
+  -       y: 0.5912805394661258
+        },
+        {
+          u: 0.45,
+          v: 0.6,
+  +       x: 0.4728695317901556,
+  +       y: 0.6023143879034716
+  -       x: 0.4486291599563309,
+  -       y: 0.5902322880061276
+        },
+        {
+          u: 0.5,
+          v: 0.6,
+  +       x: 0.5231546033806326,
+  +       y: 0.6007568446116437
+  -       x: 0.49861207226275134,
+  -       y: 0.5896113439873255
+        },
+        {
+          u: 0.55,
+          v: 0.6,
+  +       x: 0.5728695317901557,
+  +       y: 0.599163877457822
+  -       x: 0.5486291599563309,
+  -       y: 0.5894766375808863
+        },
+        {
+          u: 0.6,
+          v: 0.6,
+  +       x: 0.6220213364273804,
+  +       y: 0.5976880549661772
+  -       x: 0.5986800022813428,
+  -       y: 0.5898416312917025
+        },
+        {
+          u: 0.65,
+          v: 0.6,
+  +       x: 0.6706309026771378,
+  +       y: 0.5964709837472741
+  -       x: 0.6487633473310095,
+  -       y: 0.5906730603738817
+        },
+        {
+          u: 0.7,
+          v: 0.6,
+  +       x: 0.7187324676329434,
+  +       y: 0.595630059717373
+  -       x: 0.6988771428736014,
+  -       y: 0.5918940450100709
+        },
+        {
+          u: 0.75,
+          v: 0.6,
+  +       x: 0.7663727770661303,
+  +       y: 0.5952474844514695
+  -       x: 0.7490185868851945,
+  -       y: 0.593391283081554
+        },
+        {
+          u: 0.8,
+          v: 0.6,
+  +       x: 0.8136099343898173,
+  +       y: 0.5953625742915055
+  -       x: 0.7991841965447976,
+  -       y: 0.5950256505791772
+        },
+        {
+          u: 0.85,
+          v: 0.6,
+  +       x: 0.8605119699600444,
+  +       y: 0.5959680817635826
+  -       x: 0.849369893992964,
+  -       y: 0.5966452178889464
+        },
+        {
+          u: 0.9,
+          v: 0.6,
+  +       x: 0.9071551659426271,
+  +       y: 0.5970108734695156
+  -       x: 0.8995711067422258,
+  -       y: 0.5980994641587929
+        },
+        {
+          u: 0.95,
+          v: 0.6,
+  +       x: 0.9536221779930679,
+  +       y: 0.598396901029733
+  -       x: 0.9497828802669089,
+  -       y: 0.5992533598614691
+        },
+        {
+          u: 1,
+          v: 0.6,
+          x: 1,
+  ...
+          v: 0.7,
+  +       x: 0.0527311543124548,
+  +       y: 0.7014077915787784
+  -       x: 0.04889013817266534,
+  -       y: 0.7000296072408635
+        },
+        {
+          u: 0.1,
+          v: 0.7,
+  +       x: 0.10539505854155547,
+  +       y: 0.7026868838756657
+  -       x: 0.09780760482693988,
+  -       y: 0.6996376248597937
+        },
+        {
+          u: 0.15,
+          v: 0.7,
+  +       x: 0.15792611852419028,
+  +       y: 0.7037206184619766
+  -       x: 0.14677905552651757,
+  -       y: 0.6988612699651129
+        },
+        {
+          u: 0.2,
+          v: 0.7,
+  +       x: 0.2102620111634803,
+  +       y: 0.704415292082633
+  -       x: 0.19582981656873427,
+  -       y: 0.697773742221435
+        },
+        {
+          u: 0.25,
+          v: 0.7,
+  +       x: 0.262345219030263,
+  +       y: 0.7047089233084829
+  -       x: 0.24498326136707402,
+  -       y: 0.6964773753179763
+        },
+        {
+          u: 0.3,
+          v: 0.7,
+  +       x: 0.31412444663308764,
+  +       y: 0.7045770513194078
+  -       x: 0.2942602349201574,
+  -       y: 0.695094062679251
+        },
+        {
+          u: 0.35,
+          v: 0.7,
+  +       x: 0.3655558834834548,
+  +       y: 0.7040350242886112
+  -       x: 0.3436785405386946,
+  -       y: 0.6937538531811749
+        },
+        {
+          u: 0.4,
+          v: 0.7,
+  +       x: 0.416604282855442,
+  +       y: 0.7031365632686518
+  -       x: 0.3932525014688904,
+  -       y: 0.6925827838484662
+        },
+        {
+          u: 0.45,
+          v: 0.7,
+  +       x: 0.46724382967707273,
+  +       y: 0.7019687359409282
+  -       x: 0.44299260820658576,
+  -       y: 0.6916910878966624
+        },
+        {
+          u: 0.5,
+          v: 0.7,
+  +       x: 0.5174587761830644,
+  +       y: 0.7006438104806916
+  -       x: 0.49290526018643505,
+  -       y: 0.6911628813651272
+        },
+        {
+          u: 0.55,
+          v: 0.7,
+  +       x: 0.5672438296770728,
+  +       y: 0.6992887516836148
+  -       x: 0.5429926082065858,
+  -       y: 0.6910482932515994
+        },
+        {
+          u: 0.6,
+          v: 0.7,
+  +       x: 0.616604282855442,
+  +       y: 0.6980333420881132
+  -       x: 0.5932525014688903,
+  -       y: 0.6913587754467486
+        },
+        {
+          u: 0.65,
+          v: 0.7,
+  +       x: 0.6655558834834548,
+  +       y: 0.6969980394719313
+  -       x: 0.6436785405386947,
+  -       y: 0.6920660312675918
+        },
+        {
+          u: 0.7,
+          v: 0.7,
+  +       x: 0.7141244466330876,
+  +       y: 0.6962827067661331
+  -       x: 0.6942602349201573,
+  -       y: 0.6931046628353515
+        },
+        {
+          u: 0.75,
+          v: 0.7,
+  +       x: 0.762345219030263,
+  +       y: 0.6959572688069368
+  -       x: 0.744983261367074,
+  -       y: 0.694378289611154
+        },
+        {
+          u: 0.8,
+          v: 0.7,
+  +       x: 0.8102620111634804,
+  +       y: 0.6960551700723966
+  -       x: 0.7958298165687343,
+  -       y: 0.6957685656441516
+        },
+        {
+          u: 0.85,
+          v: 0.7,
+  +       x: 0.8579261185241902,
+  +       y: 0.6965702454929822
+  -       x: 0.8467790555265176,
+  -       y: 0.6971462518853873
+        },
+        {
+          u: 0.9,
+          v: 0.7,
+  +       x: 0.9053950585415554,
+  +       y: 0.697457297100577
+  -       x: 0.8978076048269399,
+  -       y: 0.6983833076503752
+        },
+        {
+          u: 0.95,
+          v: 0.7,
+  +       x: 0.9527311543124548,
+  +       y: 0.698636322565074
+  -       x: 0.9488901381726653,
+  -       y: 0.6993648699626106
+        },
+        {
+          u: 1,
+          v: 0.7,
+          x: 1,
+  ...
+          v: 0.8,
+  +       x: 0.05155271881638186,
+  +       y: 0.8010228204525505
+  -       x: 0.04859349363877498,
+  -       y: 0.8000215109196243
+        },
+        {
+          u: 0.1,
+          v: 0.8,
+  +       x: 0.1030672045423261,
+  +       y: 0.8019521354034831
+  -       x: 0.0972216201320903,
+  -       y: 0.7997367190495484
+        },
+        {
+          u: 0.15,
+          v: 0.8,
+  +       x: 0.15450616551296997,
+  +       y: 0.802703187543108
+  -       x: 0.1459181595586677,
+  -       y: 0.7991726642017376
+        },
+        {
+          u: 0.2,
+          v: 0.8,
+  +       x: 0.20583416973357865,
+  +       y: 0.8032078974715983
+  -       x: 0.19471520744376244,
+  -       y: 0.7983825290455698
+        },
+        {
+          u: 0.25,
+          v: 0.8,
+  +       x: 0.25701851733284736,
+  +       y: 0.8034212330447287
+  -       x: 0.24364238446081266,
+  -       y: 0.7974406633583085
+        },
+        {
+          u: 0.3,
+          v: 0.8,
+  +       x: 0.3080300457422578,
+  +       y: 0.8033254224364129
+  -       x: 0.29272610707215396,
+  -       y: 0.7964356278967473
+        },
+        {
+          u: 0.35,
+          v: 0.8,
+  +       x: 0.3588438477752999,
+  +       y: 0.8029316167472107
+  -       x: 0.3419889370680454,
+  -       y: 0.7954619086999583
+        },
+        {
+          u: 0.4,
+          v: 0.8,
+  +       x: 0.40943988492506617,
+  +       y: 0.8022788466064551
+  -       x: 0.3914490260205152,
+  -       y: 0.7946110770265025
+        },
+        {
+          u: 0.45,
+          v: 0.8,
+  +       x: 0.4598034807787954,
+  +       y: 0.8014303703874971
+  -       x: 0.4411196683314154,
+  -       y: 0.7939632219954669
+        },
+        {
+          u: 0.5,
+          v: 0.8,
+  +       x: 0.5099256823998634,
+  +       y: 0.800467755694198
+  -       x: 0.4910089738801273,
+  -       y: 0.7935794574867363
+        },
+        {
+          u: 0.55,
+          v: 0.8,
+  +       x: 0.5598034807787955,
+  +       y: 0.799483247850174
+  -       x: 0.5411196683314154,
+  -       y: 0.7934962043490545
+        },
+        {
+          u: 0.6,
+          v: 0.8,
+  +       x: 0.6094398849250662,
+  +       y: 0.7985711393889761
+  -       x: 0.5914490260205152,
+  -       y: 0.7937217828680189
+        },
+        {
+          u: 0.65,
+          v: 0.8,
+  +       x: 0.6588438477752999,
+  +       y: 0.7978189480089647
+  -       x: 0.6419889370680455,
+  -       y: 0.7942356343000407
+        },
+        {
+          u: 0.7,
+          v: 0.8,
+  +       x: 0.7080300457422577,
+  +       y: 0.7972992283765292
+  -       x: 0.6927261070721539,
+  -       y: 0.794990244304947
+        },
+        {
+          u: 0.75,
+          v: 0.8,
+  +       x: 0.7570185173328473,
+  +       y: 0.7970627838589458
+  -       x: 0.7436423844608127,
+  -       y: 0.795915588322374
+        },
+        {
+          u: 0.8,
+          v: 0.8,
+  +       x: 0.8058341697335787,
+  +       y: 0.7971339132918479
+  -       x: 0.7947152074437625,
+  -       y: 0.7969256829860132
+        },
+        {
+          u: 0.85,
+          v: 0.8,
+  +       x: 0.85450616551297,
+  +       y: 0.7975081374900336
+  -       x: 0.8459181595586677,
+  -       y: 0.7979266306305188
+        },
+        {
+          u: 0.9,
+          v: 0.8,
+  +       x: 0.9030672045423261,
+  +       y: 0.7981526182074867
+  -       x: 0.8972216201320903,
+  -       y: 0.7988254042532967
+        },
+        {
+          u: 0.95,
+          v: 0.8,
+  +       x: 0.9515527188163818,
+  +       y: 0.7990092303490451
+  -       x: 0.9485934936387749,
+  -       y: 0.799538551017023
+        },
+        {
+          u: 1,
+          v: 0.8,
+          x: 1,
+  ...
+          v: 0.9,
+  +       x: 0.05051649828895893,
+  +       y: 0.9005377285340176
+  -       x: 0.04901109353222761,
+  -       y: 0.9000113089596968
+        },
+        {
+          u: 0.1,
+          v: 0.9,
+  +       x: 0.10102027867588416,
+  +       y: 0.9010262983166804
+  -       x: 0.09804653722368419,
+  -       y: 0.8998615850131193
+        },
+        {
+          u: 0.15,
+          v: 0.9,
+  +       x: 0.1514989364156983,
+  +       y: 0.9014211497933048
+  -       x: 0.1471300816518649,
+  -       y: 0.8995650438306836
+        },
+        {
+          u: 0.2,
+          v: 0.9,
+  +       x: 0.20194068536627324,
+  +       y: 0.9016864915053076
+  -       x: 0.19628429299448963,
+  -       y: 0.899149645196307
+        },
+        {
+          u: 0.25,
+          v: 0.9,
+  +       x: 0.252334648202365,
+  +       y: 0.901798648653424
+  -       x: 0.24552999737531456,
+  -       y: 0.8986544771010763
+        },
+        {
+          u: 0.3,
+          v: 0.9,
+  +       x: 0.3026711242514614,
+  +       y: 0.9017482780357613
+  -       x: 0.29488576805584743,
+  -       y: 0.8981260986901505
+        },
+        {
+          u: 0.35,
+          v: 0.9,
+  +       x: 0.3529418283565337,
+  +       y: 0.9015412421328182
+  -       x: 0.344367468100008,
+  -       y: 0.8976141842139309
+        },
+        {
+          u: 0.4,
+          v: 0.9,
+  +       x: 0.40314009488409963,
+  +       y: 0.9011980605607606
+  -       x: 0.3939878597728481,
+  -       y: 0.8971668755320188
+        },
+        {
+          u: 0.45,
+          v: 0.9,
+  +       x: 0.45326104185424154,
+  +       y: 0.9007519902145611
+  -       x: 0.44375629029123015,
+  -       y: 0.8968262779860605
+        },
+        {
+          u: 0.5,
+          v: 0.9,
+  +       x: 0.5033016911511545,
+  +       y: 0.9002459137213108
+  -       x: 0.4936784616643265,
+  -       y: 0.8966245210440937
+        },
+        {
+          u: 0.55,
+          v: 0.9,
+  +       x: 0.5532610418542415,
+  +       y: 0.899728327317582
+  -       x: 0.5437562902912302,
+  -       y: 0.8965807522794328
+        },
+        {
+          u: 0.6,
+          v: 0.9,
+  +       x: 0.6031400948840996,
+  +       y: 0.8992488035219032
+  -       x: 0.5939878597728481,
+  -       y: 0.8966993459250782
+        },
+        {
+          u: 0.65,
+          v: 0.9,
+  +       x: 0.6529418283565338,
+  +       y: 0.8988533531111633
+  -       x: 0.6443674681000081,
+  -       y: 0.896969493609899
+        },
+        {
+          u: 0.7,
+          v: 0.9,
+  +       x: 0.7026711242514614,
+  +       y: 0.8985801203308129
+  -       x: 0.6948857680558473,
+  -       y: 0.8973662155669947
+        },
+        {
+          u: 0.75,
+          v: 0.9,
+  +       x: 0.7523346482023651,
+  +       y: 0.8984558140916293
+  -       x: 0.7455299973753146,
+  -       y: 0.8978526977063692
+        },
+        {
+          u: 0.8,
+          v: 0.9,
+  +       x: 0.8019406853662733,
+  +       y: 0.8984932090474933
+  -       x: 0.7962842929944897,
+  -       y: 0.89838373589723
+        },
+        {
+          u: 0.85,
+          v: 0.9,
+  +       x: 0.8514989364156983,
+  +       y: 0.8986899503513874
+  -       x: 0.8471300816518649,
+  -       y: 0.8989099652155489
+        },
+        {
+          u: 0.9,
+          v: 0.9,
+  +       x: 0.9010202786758842,
+  +       y: 0.8990287739157133
+  -       x: 0.8980465372236842,
+  -       y: 0.8993824784717953
+        },
+        {
+          u: 0.95,
+          v: 0.9,
+  +       x: 0.9505164982889589,
+  +       y: 0.8994791215695496
+  -       x: 0.9490110935322276,
+  -       y: 0.8997574019129932
+        },
+        {
+          u: 1,
+          v: 0.9,
+          x: 1,
+
+      at TestContext.<anonymous> (file:///C:/Users/dmkra/Documents/Codex%20Apps/Voro-camera/tests/edible-matter.test.mjs:85:31)
+      at Test.runInAsyncScope (node:async_hooks:228:14)
+      at Test.run (node:internal/test_runner/test:1118:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:787:18)
+      at Test.postRun (node:internal/test_runner/test:1247:19)
+      at Test.run (node:internal/test_runner/test:1175:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:787:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: {
+      verts: [
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object],
+        ... 131 more items
+      ],
+      cols: 20,
+      rows: 10
+    },
+    expected: {
+      verts: [
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object], [Object], [Object],
+        [Object], [Object], [Object], [Object],
+        ... 131 more items
+      ],
+      cols: 20,
+      rows: 10
+    },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

@@ -1,0 +1,30 @@
+✔ Every edible element has an explicit animation profile and valid art bounds (593.8838ms)
+✔ Mesh loops meet exactly at their seam, and the sardine skull stays stable while its tail moves (56.6858ms)
+✔ Pseudopods deform the existing cell boundary, without a separate arm surface (2.0954ms)
+✔ Impulse strength depends only on selected ranks, never on stage or biomass (1.5093ms)
+✔ Lazy animation cache stays within 24 MiB and is reusable across instances (366.1002ms)
+✔ Authored limbs keep bone lengths and shells stay rigid throughout the cycle (1.7702ms)
+✔ Butterfly folding stays monotonic across the thorax instead of turning wings inside out (23.8372ms)
+✔ Swimmer variants coexist deterministically without adding encounter slots or changing edible size (125.5763ms)
+✔ Space structures retain rigid geometry and surface flows keep their outer boundary fixed (5.8894ms)
+✔ All and only the 48 approved clear cases receive improved art/animation, keeping physical size ranges (6.6266ms)
+✔ Detailed cycles reserve the other residents basic animations and reuse detail for small individuals (1.5278ms)
+✔ Earth is enveloped then travels into the moving nucleus; capture stays inside save limits (18.2072ms)
+✔ Asteroids move their collision positions smoothly and preserve deterministic residents and density (63.6496ms)
+✔ Large bodies keep readable screen travel with a smoothed automatic camera; manual zoom never changes simulation speed (23.1643ms)
+✔ Early cosmic habitats exclude spiral ground panels and star crops stop before galactic artwork (0.9512ms)
+✔ A recognizable black hole appears occasionally inside the existing galaxy threat budget (91.3372ms)
+✔ Engine keeps music active at reduced level while choices are shown; effects remain silent (3.2854ms)
+✔ Every stage naturally spawns its new matter within each environment population limit (548.7473ms)
+✔ All new food respects body size, restores an unfinished meal and rewards digestion exactly once (14.2677ms)
+✔ Scenery stays anchored while floating matter drifts without chasing the player (4.1065ms)
+✔ Plants bend from fixed bases; shells and urban objects never stretch (17.9241ms)
+✔ Consumed matter remains absent when its chunk is restored from the journal (10.5607ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1479.1141

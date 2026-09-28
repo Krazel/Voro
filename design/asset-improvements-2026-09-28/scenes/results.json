@@ -1,0 +1,600 @@
+{
+  "method": "Edge on PC, mobile viewport/touch emulation. Not physical iPhone FPS.",
+  "errors": [],
+  "scenes": [
+    {
+      "stage": 0,
+      "frames": {
+        "fps": 59,
+        "cpu": 1.9,
+        "peak": 56,
+        "p95": 23.2,
+        "seconds": 2,
+        "frames": 131,
+        "slowFrames": 1,
+        "parts": {
+          "simulation": 0.54,
+          "animationPreparation": 0.01,
+          "background": 0.04,
+          "inhabitants": 0.56,
+          "protagonist": 0.58,
+          "render": 1.29
+        }
+      },
+      "sheets": {
+        "bytes": 60157320,
+        "limit": 67108864,
+        "resident": 10,
+        "active": 0,
+        "pending": 0,
+        "hits": 2785,
+        "loads": 10,
+        "evictions": 0,
+        "dropped": 0,
+        "errors": 0,
+        "quality": "optional-close-up",
+        "visibleCycles": [
+          {
+            "id": "giant",
+            "posesPerSecond": 30,
+            "bodyPixels": 171,
+            "tier": "standard"
+          },
+          {
+            "id": "paramecium",
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "spiny",
+            "posesPerSecond": 30,
+            "bodyPixels": 192,
+            "tier": "medium"
+          },
+          {
+            "id": "cocci",
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "chain",
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "hunter",
+            "posesPerSecond": 30,
+            "bodyPixels": 171,
+            "tier": "standard"
+          },
+          {
+            "id": "amoeba",
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "flagellate",
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        ]
+      },
+      "zoom": 1.12,
+      "entities": 504,
+      "quality": true
+    },
+    {
+      "stage": 1,
+      "frames": {
+        "fps": 59,
+        "cpu": 1.4,
+        "peak": 39,
+        "p95": 22.7,
+        "seconds": 2,
+        "frames": 131,
+        "slowFrames": 1,
+        "parts": {
+          "simulation": 0.42,
+          "animationPreparation": 0,
+          "background": 0.04,
+          "inhabitants": 0.18,
+          "protagonist": 0.57,
+          "render": 0.91
+        }
+      },
+      "sheets": {
+        "bytes": 4740096,
+        "limit": 67108864,
+        "resident": 2,
+        "active": 0,
+        "pending": 0,
+        "hits": 3616,
+        "loads": 12,
+        "evictions": 10,
+        "dropped": 0,
+        "errors": 0,
+        "quality": "optional-close-up",
+        "visibleCycles": [
+          {
+            "id": "pond-1",
+            "posesPerSecond": 34.29,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "pond-2",
+            "posesPerSecond": 25.6,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        ]
+      },
+      "zoom": 2.3611673195923903,
+      "entities": 600,
+      "quality": true
+    },
+    {
+      "stage": 2,
+      "frames": {
+        "fps": 59,
+        "cpu": 1.7,
+        "peak": 48,
+        "p95": 23,
+        "seconds": 2,
+        "frames": 130,
+        "slowFrames": 1,
+        "parts": {
+          "simulation": 0.85,
+          "animationPreparation": 0.01,
+          "background": 0.06,
+          "inhabitants": 0.17,
+          "protagonist": 0.51,
+          "render": 0.82
+        }
+      },
+      "sheets": {
+        "bytes": 21835172,
+        "limit": 67108864,
+        "resident": 6,
+        "active": 0,
+        "pending": 0,
+        "hits": 5245,
+        "loads": 17,
+        "evictions": 11,
+        "dropped": 0,
+        "errors": 0,
+        "quality": "optional-close-up",
+        "visibleCycles": [
+          {
+            "id": "land-1",
+            "posesPerSecond": 25.6,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "land-0",
+            "posesPerSecond": 38.71,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "land-matter-grass",
+            "posesPerSecond": 13.33,
+            "bodyPixels": 192,
+            "tier": "medium"
+          },
+          {
+            "id": "land-2",
+            "posesPerSecond": 30.48,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        ]
+      },
+      "zoom": 2.3611673195923903,
+      "entities": 349,
+      "quality": true
+    },
+    {
+      "stage": 3,
+      "frames": {
+        "fps": 60,
+        "cpu": 1.3,
+        "peak": 26,
+        "p95": 22.6,
+        "seconds": 2,
+        "frames": 133,
+        "slowFrames": 0,
+        "parts": {
+          "simulation": 0.42,
+          "animationPreparation": 0,
+          "background": 0.05,
+          "inhabitants": 0.13,
+          "protagonist": 0.6,
+          "render": 0.87
+        }
+      },
+      "sheets": {
+        "bytes": 5696608,
+        "limit": 67108864,
+        "resident": 4,
+        "active": 0,
+        "pending": 0,
+        "hits": 6258,
+        "loads": 21,
+        "evictions": 17,
+        "dropped": 0,
+        "errors": 0,
+        "quality": "optional-close-up",
+        "visibleCycles": [
+          {
+            "id": "water-0",
+            "posesPerSecond": 34.29,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "water-3",
+            "posesPerSecond": 30.49,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "water-6",
+            "posesPerSecond": 23.7,
+            "bodyPixels": 114,
+            "tier": "standard"
+          }
+        ]
+      },
+      "zoom": 2.3611673195923903,
+      "entities": 295,
+      "quality": true
+    },
+    {
+      "stage": 4,
+      "frames": {
+        "fps": 60,
+        "cpu": 2.3,
+        "peak": 25,
+        "p95": 23.1,
+        "seconds": 2,
+        "frames": 132,
+        "slowFrames": 0,
+        "parts": {
+          "simulation": 0.8,
+          "animationPreparation": 0,
+          "background": 0.04,
+          "inhabitants": 0.71,
+          "protagonist": 0.53,
+          "render": 1.43
+        }
+      },
+      "sheets": {
+        "bytes": 23387688,
+        "limit": 67108864,
+        "resident": 8,
+        "active": 0,
+        "pending": 0,
+        "hits": 10204,
+        "loads": 29,
+        "evictions": 21,
+        "dropped": 0,
+        "errors": 0,
+        "quality": "optional-close-up",
+        "visibleCycles": [
+          {
+            "id": "city-matter-shrub",
+            "posesPerSecond": 13.33,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "city-0",
+            "posesPerSecond": 30,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "city-civilian-0",
+            "posesPerSecond": 30,
+            "bodyPixels": 116,
+            "tier": "standard"
+          },
+          {
+            "id": "city-civilian-4",
+            "posesPerSecond": 30,
+            "bodyPixels": 123,
+            "tier": "standard"
+          },
+          {
+            "id": "city-civilian-5",
+            "posesPerSecond": 30,
+            "bodyPixels": 104,
+            "tier": "standard"
+          },
+          {
+            "id": "city-civilian-1",
+            "posesPerSecond": 30,
+            "bodyPixels": 118,
+            "tier": "standard"
+          },
+          {
+            "id": "city-civilian-2",
+            "posesPerSecond": 30,
+            "bodyPixels": 113,
+            "tier": "standard"
+          }
+        ]
+      },
+      "zoom": 1.12,
+      "entities": 601,
+      "quality": true
+    },
+    {
+      "stage": 5,
+      "frames": {
+        "fps": 60,
+        "cpu": 1.4,
+        "peak": 26,
+        "p95": 22.2,
+        "seconds": 2,
+        "frames": 133,
+        "slowFrames": 0,
+        "parts": {
+          "simulation": 0.37,
+          "animationPreparation": 0,
+          "background": 0.04,
+          "inhabitants": 0.16,
+          "protagonist": 0.59,
+          "render": 1.02
+        }
+      },
+      "sheets": {
+        "bytes": 0,
+        "limit": 67108864,
+        "resident": 0,
+        "active": 0,
+        "pending": 0,
+        "hits": 10304,
+        "loads": 29,
+        "evictions": 29,
+        "dropped": 0,
+        "errors": 0,
+        "quality": "optional-close-up",
+        "visibleCycles": []
+      },
+      "zoom": 1.12,
+      "entities": 255,
+      "quality": true
+    },
+    {
+      "stage": 6,
+      "frames": {
+        "fps": 60,
+        "cpu": 1.3,
+        "peak": 25,
+        "p95": 23,
+        "seconds": 2,
+        "frames": 133,
+        "slowFrames": 0,
+        "parts": {
+          "simulation": 0.3,
+          "animationPreparation": 0,
+          "background": 0.04,
+          "inhabitants": 0.29,
+          "protagonist": 0.58,
+          "render": 1
+        }
+      },
+      "sheets": {
+        "bytes": 0,
+        "limit": 67108864,
+        "resident": 0,
+        "active": 0,
+        "pending": 0,
+        "hits": 10304,
+        "loads": 29,
+        "evictions": 29,
+        "dropped": 0,
+        "errors": 0,
+        "quality": "optional-close-up",
+        "visibleCycles": []
+      },
+      "zoom": 1.12,
+      "entities": 141,
+      "quality": true
+    },
+    {
+      "stage": 7,
+      "frames": {
+        "fps": 59,
+        "cpu": 1.8,
+        "peak": 41,
+        "p95": 22.8,
+        "seconds": 2,
+        "frames": 131,
+        "slowFrames": 1,
+        "parts": {
+          "simulation": 0.33,
+          "animationPreparation": 0.01,
+          "background": 0.04,
+          "inhabitants": 0.77,
+          "protagonist": 0.54,
+          "render": 1.48
+        }
+      },
+      "sheets": {
+        "bytes": 12403712,
+        "limit": 67108864,
+        "resident": 3,
+        "active": 0,
+        "pending": 0,
+        "hits": 12727,
+        "loads": 32,
+        "evictions": 29,
+        "dropped": 0,
+        "errors": 0,
+        "quality": "optional-close-up",
+        "visibleCycles": [
+          {
+            "id": "stars-matter-dust",
+            "posesPerSecond": 7.11,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "stars-0",
+            "posesPerSecond": 11.64,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "stars-Nube estelar",
+            "posesPerSecond": 4.57,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        ]
+      },
+      "zoom": 1.12,
+      "entities": 153,
+      "quality": true
+    },
+    {
+      "stage": 8,
+      "frames": {
+        "fps": 60,
+        "cpu": 1.7,
+        "peak": 29,
+        "p95": 22.7,
+        "seconds": 2,
+        "frames": 133,
+        "slowFrames": 0,
+        "parts": {
+          "simulation": 0.38,
+          "animationPreparation": 0,
+          "background": 0.04,
+          "inhabitants": 0.57,
+          "protagonist": 0.57,
+          "render": 1.28
+        }
+      },
+      "sheets": {
+        "bytes": 11447360,
+        "limit": 67108864,
+        "resident": 3,
+        "active": 0,
+        "pending": 0,
+        "hits": 15370,
+        "loads": 34,
+        "evictions": 31,
+        "dropped": 0,
+        "errors": 0,
+        "quality": "optional-close-up",
+        "visibleCycles": [
+          {
+            "id": "galaxies-matter-dust",
+            "posesPerSecond": 7.11,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "galaxies-Cúmulo abierto",
+            "posesPerSecond": 5.33,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "galaxies-matter-filament",
+            "posesPerSecond": 7.11,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        ]
+      },
+      "zoom": 1.12,
+      "entities": 218,
+      "quality": true
+    },
+    {
+      "stage": 9,
+      "frames": {
+        "fps": 60,
+        "cpu": 1.3,
+        "peak": 26,
+        "p95": 22.6,
+        "seconds": 2,
+        "frames": 133,
+        "slowFrames": 0,
+        "parts": {
+          "simulation": 0.39,
+          "animationPreparation": 0.01,
+          "background": 0.03,
+          "inhabitants": 0.22,
+          "protagonist": 0.54,
+          "render": 0.88
+        }
+      },
+      "sheets": {
+        "bytes": 24794688,
+        "limit": 67108864,
+        "resident": 6,
+        "active": 0,
+        "pending": 0,
+        "hits": 19499,
+        "loads": 38,
+        "evictions": 32,
+        "dropped": 0,
+        "errors": 0,
+        "quality": "optional-close-up",
+        "visibleCycles": [
+          {
+            "id": "universe-0",
+            "posesPerSecond": 5.33,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "universe-matter-knot",
+            "posesPerSecond": 7.11,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "universe-7",
+            "posesPerSecond": 3.2,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "universe-2",
+            "posesPerSecond": 4.57,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "universe-1",
+            "posesPerSecond": 6.4,
+            "bodyPixels": 128,
+            "tier": "standard"
+          },
+          {
+            "id": "universe-matter-filament",
+            "posesPerSecond": 7.11,
+            "bodyPixels": 128,
+            "tier": "standard"
+          }
+        ]
+      },
+      "zoom": 1.12,
+      "entities": 219,
+      "quality": true
+    }
+  ]
+}

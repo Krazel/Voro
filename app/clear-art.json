@@ -1,0 +1,533 @@
+[
+  {
+    "number": 41,
+    "ids": [
+      "land-matter-scallop"
+    ],
+    "url": "./inhabitants/clear-detail-v1/41.webp",
+    "crop": [
+      0,
+      0,
+      1254,
+      1241
+    ],
+    "profile": {
+      "family": "prop",
+      "rigid": true,
+      "period": 9,
+      "amount": 0.025,
+      "precession": 0,
+      "description": "Permanece en su lugar y conserva su forma al ser absorbido.",
+      "revision": 1
+    }
+  },
+  {
+    "number": 45,
+    "ids": [
+      "land-matter-twig"
+    ],
+    "url": "./inhabitants/clear-detail-v1/45.webp",
+    "crop": [
+      0,
+      0,
+      1254,
+      1217
+    ],
+    "profile": {
+      "family": "prop",
+      "rigid": true,
+      "period": 9,
+      "amount": 0.025,
+      "precession": 0,
+      "description": "Permanece en su lugar y conserva su forma al ser absorbido.",
+      "revision": 1
+    }
+  },
+  {
+    "number": 68,
+    "ids": [
+      "water-matter-wreck"
+    ],
+    "url": "./inhabitants/clear-detail-v1/68.webp",
+    "crop": [
+      0,
+      0,
+      1254,
+      1262
+    ],
+    "profile": {
+      "family": "prop",
+      "rigid": true,
+      "period": 9,
+      "amount": 0.025,
+      "precession": 0,
+      "description": "Permanece en su lugar y conserva su forma al ser absorbido.",
+      "revision": 1
+    }
+  },
+  {
+    "number": 69,
+    "ids": [
+      "water-matter-boulder"
+    ],
+    "url": "./inhabitants/clear-detail-v1/69.webp",
+    "crop": [
+      0,
+      0,
+      1254,
+      1109
+    ],
+    "profile": {
+      "family": "prop",
+      "rigid": true,
+      "period": 9,
+      "amount": 0.025,
+      "precession": 0,
+      "description": "Permanece en su lugar y conserva su forma al ser absorbido.",
+      "revision": 1
+    }
+  },
+  {
+    "number": 100,
+    "ids": [
+      "orbit-0"
+    ],
+    "url": "./inhabitants/clear-detail-v1/100.webp",
+    "crop": [
+      0,
+      0,
+      1254,
+      1254
+    ],
+    "profile": {
+      "family": "tumble",
+      "description": "Rotación de un asteroide rígido y deriva de sus fragmentos.",
+      "period": 12,
+      "turn": 0.4
+    }
+  },
+  {
+    "number": 102,
+    "ids": [
+      "orbit-2"
+    ],
+    "url": "./inhabitants/clear-detail-v1/102.webp",
+    "crop": [
+      0,
+      0,
+      1254,
+      1254
+    ],
+    "profile": {
+      "family": "satellite",
+      "description": "Orientación suave del satélite, con paneles solares rígidos.",
+      "period": 9,
+      "rigid": true,
+      "precession": 0.07,
+      "revision": 2
+    }
+  },
+  {
+    "number": 103,
+    "ids": [
+      "orbit-3"
+    ],
+    "url": "./inhabitants/clear-detail-v1/103.webp",
+    "crop": [
+      0,
+      0,
+      1254,
+      1303
+    ],
+    "profile": {
+      "family": "station",
+      "description": "Orientación lenta de la estación, sin doblar sus módulos.",
+      "period": 14,
+      "rigid": true,
+      "precession": 0.045,
+      "revision": 2
+    }
+  },
+  {
+    "number": 110,
+    "ids": [
+      "planets-1"
+    ],
+    "url": "./inhabitants/clear-detail-v1/110.webp",
+    "crop": [
+      0,
+      0,
+      1254,
+      1161
+    ],
+    "profile": {
+      "family": "ocean",
+      "description": "Movimiento suave de la superficie, conservando el contorno y la iluminación.",
+      "period": 18,
+      "turn": 0.06,
+      "precession": 0,
+      "revision": 2,
+      "rigid": true,
+      "highDetailFlow": {
+        "rx": 0.43,
+        "ry": 0.43,
+        "angle": 0
+      }
+    }
+  },
+  {
+    "number": 111,
+    "ids": [
+      "planets-2"
+    ],
+    "url": "./inhabitants/clear-detail-v1/111.webp",
+    "crop": [
+      0,
+      0,
+      1254,
+      1243
+    ],
+    "profile": {
+      "family": "prop",
+      "rigid": true,
+      "period": 40,
+      "revision": 3,
+      "description": "Globo estable con iluminación coherente; deriva orbital lenta.",
+      "precession": 0.01
+    }
+  },
+  {
+    "number": 113,
+    "ids": [
+      "planets-4"
+    ],
+    "url": "./inhabitants/clear-detail-v1/113.webp",
+    "crop": [
+      0,
+      0,
+      1254,
+      1233
+    ],
+    "profile": {
+      "family": "prop",
+      "rigid": true,
+      "period": 40,
+      "revision": 3,
+      "description": "Globo estable con iluminación coherente; deriva orbital lenta.",
+      "precession": 0.01
+    }
+  },
+  {
+    "number": 124,
+    "ids": [
+      "planets-ice-giant"
+    ],
+    "url": "./inhabitants/clear-detail-v1/124.webp",
+    "crop": [
+      0,
+      0,
+      1254,
+      1247
+    ],
+    "profile": {
+      "family": "prop",
+      "rigid": true,
+      "period": 40,
+      "revision": 3,
+      "description": "Globo estable con iluminación coherente; deriva orbital lenta.",
+      "precession": 0.01
+    }
+  },
+  {
+    "number": 126,
+    "ids": [
+      "stars-1"
+    ],
+    "url": "./inhabitants/clear-detail-v1/126.webp",
+    "crop": [
+      0,
+      0,
+      1254,
+      1210
+    ],
+    "profile": {
+      "family": "star",
+      "description": "Pulsos de la corona roja y pequeñas erupciones.",
+      "period": 4.5,
+      "amount": 0.027,
+      "rigid": true,
+      "precession": 0.01,
+      "highDetailFlow": {
+        "rx": 0.33,
+        "ry": 0.3,
+        "angle": 0
+      },
+      "detailPulse": 0.008
+    }
+  },
+  {
+    "number": 127,
+    "ids": [
+      "stars-2"
+    ],
+    "url": "./inhabitants/clear-detail-v1/127.webp",
+    "crop": [
+      0,
+      0,
+      1254,
+      1205
+    ],
+    "profile": {
+      "family": "star",
+      "description": "La fotosfera circula y la corona lanza llamaradas.",
+      "period": 3.7,
+      "amount": 0.03,
+      "rigid": true,
+      "precession": 0.01,
+      "highDetailFlow": {
+        "rx": 0.33,
+        "ry": 0.3,
+        "angle": 0
+      },
+      "detailPulse": 0.008
+    }
+  },
+  {
+    "number": 128,
+    "ids": [
+      "stars-3"
+    ],
+    "url": "./inhabitants/clear-detail-v1/128.webp",
+    "crop": [
+      0,
+      0,
+      1254,
+      1181
+    ],
+    "profile": {
+      "family": "star",
+      "description": "Corona azul más rápida e intensa al reaccionar.",
+      "period": 2.7,
+      "amount": 0.035,
+      "rigid": true,
+      "precession": 0.01,
+      "highDetailFlow": {
+        "rx": 0.33,
+        "ry": 0.3,
+        "angle": 0
+      },
+      "detailPulse": 0.008
+    }
+  },
+  {
+    "number": 129,
+    "ids": [
+      "stars-4"
+    ],
+    "url": "./inhabitants/clear-detail-v1/129.webp",
+    "crop": [
+      0,
+      0,
+      1254,
+      1215
+    ],
+    "profile": {
+      "family": "star",
+      "description": "Pulsación lenta de una gigante y expansión de su corona.",
+      "period": 6,
+      "amount": 0.05,
+      "rigid": true,
+      "precession": 0.01,
+      "highDetailFlow": {
+        "rx": 0.33,
+        "ry": 0.3,
+        "angle": 0
+      },
+      "detailPulse": 0.008
+    }
+  },
+  {
+    "number": 143,
+    "ids": [
+      "galaxies-Núcleo activo",
+      "universe-5"
+    ],
+    "url": "./inhabitants/clear-detail-v1/143.webp",
+    "crop": [
+      0,
+      0,
+      1254,
+      1190
+    ],
+    "profile": {
+      "family": "quasar",
+      "description": "Chorros pulsantes sobre un disco de acreción en movimiento.",
+      "period": 3.2,
+      "rigid": true,
+      "precession": 0.01,
+      "highDetailFlow": {
+        "rx": 0.33,
+        "ry": 0.3,
+        "angle": 0
+      },
+      "detailPulse": 0.008
+    }
+  },
+  {
+    "number": 144,
+    "ids": [
+      "galaxies-Colisión galáctica",
+      "universe-6"
+    ],
+    "url": "./inhabitants/clear-detail-v1/144.webp",
+    "crop": [
+      0,
+      0,
+      1254,
+      1112
+    ],
+    "profile": {
+      "family": "collision",
+      "description": "Dos núcleos orbitan y arrastran sus brazos estelares.",
+      "period": 17,
+      "rigid": true,
+      "precession": 0.01,
+      "highDetailFlow": {
+        "rx": 0.33,
+        "ry": 0.3,
+        "angle": 0
+      }
+    }
+  },
+  {
+    "number": 145,
+    "ids": [
+      "galaxies-Grupo galáctico"
+    ],
+    "url": "./inhabitants/clear-detail-v1/145.webp",
+    "crop": [
+      0,
+      0,
+      1254,
+      1055
+    ],
+    "profile": {
+      "family": "cluster",
+      "description": "Pequeñas galaxias orbitan dentro del cúmulo.",
+      "period": 20,
+      "amount": 0.025,
+      "rigid": true,
+      "precession": 0.01,
+      "highDetailFlow": {
+        "rx": 0.33,
+        "ry": 0.3,
+        "angle": 0
+      }
+    }
+  },
+  {
+    "number": 159,
+    "ids": [
+      "universe-9"
+    ],
+    "url": "./inhabitants/clear-detail-v1/159.webp",
+    "crop": [
+      0,
+      0,
+      1254,
+      1191
+    ],
+    "profile": {
+      "family": "filament",
+      "description": "Pulsos que recorren los filamentos entre sus nudos.",
+      "period": 12,
+      "amount": 0.025,
+      "rigid": true,
+      "precession": 0.01,
+      "highDetailFlow": {
+        "rx": 0.33,
+        "ry": 0.3,
+        "angle": 0
+      },
+      "detailPulse": 0.008
+    }
+  },
+  {
+    "number": 160,
+    "ids": [
+      "universe-10"
+    ],
+    "url": "./inhabitants/clear-detail-v1/160.webp",
+    "crop": [
+      0,
+      0,
+      1254,
+      1112
+    ],
+    "profile": {
+      "family": "void",
+      "description": "Materia que circula por el borde de un vacío estable.",
+      "period": 18,
+      "rigid": true,
+      "precession": 0.01,
+      "highDetailFlow": {
+        "rx": 0.33,
+        "ry": 0.3,
+        "angle": 0
+      }
+    }
+  },
+  {
+    "number": 161,
+    "ids": [
+      "universe-11"
+    ],
+    "url": "./inhabitants/clear-detail-v1/161.webp",
+    "crop": [
+      0,
+      0,
+      1254,
+      1142
+    ],
+    "profile": {
+      "family": "universe",
+      "description": "La red se ilumina por sectores y converge al reaccionar.",
+      "period": 20,
+      "rigid": true,
+      "precession": 0.01,
+      "highDetailFlow": {
+        "rx": 0.33,
+        "ry": 0.3,
+        "angle": 0
+      },
+      "detailPulse": 0.008
+    }
+  },
+  {
+    "number": 164,
+    "ids": [
+      "universe-matter-web"
+    ],
+    "url": "./inhabitants/clear-detail-v1/164.webp",
+    "crop": [
+      0,
+      0,
+      1254,
+      1340
+    ],
+    "profile": {
+      "family": "matterCloud",
+      "rigid": true,
+      "period": 9,
+      "amount": 0.025,
+      "precession": 0,
+      "description": "Flujo lento de gas y polvo dentro de su silueta.",
+      "revision": 1,
+      "highDetailFlow": {
+        "rx": 0.33,
+        "ry": 0.3,
+        "angle": 0
+      }
+    }
+  }
+]
