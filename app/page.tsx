@@ -17,6 +17,7 @@ import { Capacitor } from '@capacitor/core';
 import { useBenchmarkAwake } from './benchmark-awake';
 import { FinalSettings } from './final-settings';
 import { JourneyComplete } from './journey-complete';
+import { CosmicLab } from './cosmic-lab';
 import { isTabletDevice, wideScreenEnabled } from './desktop-viewport.mjs';
 import './wide-screen.css';
 import './cristal.css';
@@ -70,6 +71,7 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
   const [settings, setSettings] = useState(false),
     [confirmReset, setConfirmReset] = useState(false);
   const [testPanel, setTestPanel] = useState(false);
+  const [cosmicLab,setCosmicLab]=useState(false);
   const [uiMode,setUiMode]=useState('final');
   const finalUI=uiMode==='final';
   const [uiModeSaved,setUiModeSaved]=useState(true);
@@ -182,9 +184,14 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
     const game = new VoroEngine(canvas.current!, setState, desktop);
     game.reviewEnabled = Capacitor.getPlatform() === 'ios';
     engine.current = game;
+    const lab=Capacitor.getPlatform()==='web'&&['localhost','127.0.0.1'].includes(window.location.hostname)
+      &&new URLSearchParams(window.location.search).get('lab')==='cosmos';
+    setCosmicLab(lab);
+    if(lab)(window as unknown as {__voroLab?:VoroEngine}).__voroLab=game;
     return () => {
       game.destroy();
       engine.current = null;
+      delete (window as unknown as {__voroLab?:VoroEngine}).__voroLab;
     };
   }, []);
   const action = (
@@ -870,6 +877,7 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
           </DialogClose>
         </DialogContent>
       </Dialog>)}
+      {cosmicLab&&engine.current&&<CosmicLab game={engine.current}/>}
       <ReviewMilestone held={state.reviewHold} onContinue={() => engine.current?.finishReview()} />
       {tr(!finalUI && !finale && <aside className="desktop-note">
         <span>

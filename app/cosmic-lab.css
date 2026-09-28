@@ -1,0 +1,2 @@
+.cosmic-lab{position:fixed;bottom:12px;left:12px;z-index:90;max-width:min(460px,calc(100vw - 24px));padding:10px;border:1px solid #538b9e;border-radius:10px;background:#061923ee;color:#e8f7fa;font:12px system-ui;box-shadow:0 4px 24px #0008}
+.cosmic-lab p{margin:6px 0}.cosmic-lab div{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}.cosmic-lab button{font:inherit;cursor:pointer;padding:6px 10px;color:inherit;border:1px solid #4e7585;border-radius:5px;background:#143340}.cosmic-lab button:hover{background:#245363}

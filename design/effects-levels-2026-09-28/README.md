@@ -4,4 +4,4 @@ Comer: ganancia 2 → 3 (+50 %). Daño: 3,2 → 4,2, con 45 ms de cuerpo antes d
 
 Validación: 19 tests de efectos/recuperación, síntesis real OfflineAudioContext en Edge. Daño RMS 0,0287 → 0,0615; comer 0,00713 → 0,01069. Mezcla con música real, todos los samples, cadencia máxima y tres extremos de pitch: pico máximo 0,5903 (clipping a 1). Archivos WAV y métricas en esta carpeta. No acredita volumen físico de altavoces iPhone; pendiente probar allí. Sin TestFlight ni publicación.
 
-Reproducir con `VORO_PLAYWRIGHT_RUNTIME` y `node scripts/check-effects-levels.mjs` sobre servidor local 5210. La comparación toma `HEAD:app/sfx.mjs`; la evidencia guardada usa fd0381d como estado anterior.
+Reproducir con `VORO_PLAYWRIGHT_RUNTIME` y `node scripts/check-effects-levels.mjs` sobre servidor local 5210. La comparación usa fd0381d como estado anterior.

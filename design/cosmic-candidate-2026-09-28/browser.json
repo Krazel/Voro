@@ -1,0 +1,418 @@
+{
+  "browser": "Edge desktop; mobile viewport emulation, not physical iOS",
+  "scenes": [
+    {
+      "label": "Órbita",
+      "small": {
+        "radius": 30.61208940722395,
+        "zoom": 1.12,
+        "frames": {
+          "fps": 60,
+          "cpu": 1.5,
+          "peak": 35,
+          "p95": 20.9,
+          "seconds": 5,
+          "frames": 276,
+          "slowFrames": 1,
+          "parts": {
+            "simulation": 0.35,
+            "animationPreparation": 0,
+            "background": 0.03,
+            "inhabitants": 0.2,
+            "protagonist": 0.61,
+            "render": 1.09
+          }
+        },
+        "sheets": {
+          "bytes": 0,
+          "limit": 67108864,
+          "resident": 0,
+          "active": 0,
+          "pending": 0,
+          "hits": 600,
+          "loads": 7,
+          "evictions": 7,
+          "dropped": 0,
+          "errors": 0
+        },
+        "backgroundCache": 2,
+        "entities": 257
+      },
+      "large": {
+        "radius": 171.5297983602088,
+        "zoom": 0.5341157841261689,
+        "frames": {
+          "fps": 60,
+          "cpu": 1.9,
+          "peak": 35,
+          "p95": 20.9,
+          "seconds": 5,
+          "frames": 270,
+          "slowFrames": 1,
+          "parts": {
+            "simulation": 0.46,
+            "animationPreparation": 0,
+            "background": 0.04,
+            "inhabitants": 0.36,
+            "protagonist": 0.61,
+            "render": 1.37
+          }
+        },
+        "sheets": {
+          "bytes": 0,
+          "limit": 67108864,
+          "resident": 0,
+          "active": 0,
+          "pending": 0,
+          "hits": 600,
+          "loads": 7,
+          "evictions": 7,
+          "dropped": 0,
+          "errors": 0
+        },
+        "backgroundCache": 2,
+        "entities": 492
+      }
+    },
+    {
+      "label": "Planetas",
+      "small": {
+        "radius": 26.378002458590256,
+        "zoom": 1.12,
+        "frames": {
+          "fps": 60,
+          "cpu": 1.5,
+          "peak": 21,
+          "p95": 20.9,
+          "seconds": 5,
+          "frames": 277,
+          "slowFrames": 0,
+          "parts": {
+            "simulation": 0.3,
+            "animationPreparation": 0,
+            "background": 0.04,
+            "inhabitants": 0.16,
+            "protagonist": 0.77,
+            "render": 1.16
+          }
+        },
+        "sheets": {
+          "bytes": 0,
+          "limit": 67108864,
+          "resident": 0,
+          "active": 0,
+          "pending": 0,
+          "hits": 600,
+          "loads": 7,
+          "evictions": 7,
+          "dropped": 0,
+          "errors": 0
+        },
+        "backgroundCache": 3,
+        "entities": 146
+      },
+      "large": {
+        "radius": 180.72558236349926,
+        "zoom": 0.5185732077345795,
+        "frames": {
+          "fps": 60,
+          "cpu": 1.3,
+          "peak": 21,
+          "p95": 20.9,
+          "seconds": 4,
+          "frames": 270,
+          "slowFrames": 0,
+          "parts": {
+            "simulation": 0.28,
+            "animationPreparation": 0.01,
+            "background": 0.03,
+            "inhabitants": 0.19,
+            "protagonist": 0.52,
+            "render": 0.95
+          }
+        },
+        "sheets": {
+          "bytes": 8251392,
+          "limit": 67108864,
+          "resident": 2,
+          "active": 0,
+          "pending": 0,
+          "hits": 1884,
+          "loads": 9,
+          "evictions": 7,
+          "dropped": 0,
+          "errors": 0
+        },
+        "backgroundCache": 3,
+        "entities": 273
+      }
+    },
+    {
+      "label": "Estrellas",
+      "small": {
+        "radius": 29.031471968899407,
+        "zoom": 1.12,
+        "frames": {
+          "fps": 59,
+          "cpu": 1.4,
+          "peak": 42,
+          "p95": 20.9,
+          "seconds": 5,
+          "frames": 272,
+          "slowFrames": 2,
+          "parts": {
+            "simulation": 0.25,
+            "animationPreparation": 0,
+            "background": 0.03,
+            "inhabitants": 0.46,
+            "protagonist": 0.54,
+            "render": 1.12
+          }
+        },
+        "sheets": {
+          "bytes": 37981696,
+          "limit": 67108864,
+          "resident": 9,
+          "active": 0,
+          "pending": 0,
+          "hits": 7391,
+          "loads": 18,
+          "evictions": 9,
+          "dropped": 0,
+          "errors": 0
+        },
+        "backgroundCache": 3,
+        "entities": 146
+      },
+      "large": {
+        "radius": 190.1173642815332,
+        "zoom": 0.5009814156317671,
+        "frames": {
+          "fps": 59,
+          "cpu": 1.5,
+          "peak": 49,
+          "p95": 20.9,
+          "seconds": 5,
+          "frames": 268,
+          "slowFrames": 1,
+          "parts": {
+            "simulation": 0.3,
+            "animationPreparation": 0,
+            "background": 0.02,
+            "inhabitants": 0.38,
+            "protagonist": 0.51,
+            "render": 1.16
+          }
+        },
+        "sheets": {
+          "bytes": 46576128,
+          "limit": 67108864,
+          "resident": 11,
+          "active": 0,
+          "pending": 0,
+          "hits": 20312,
+          "loads": 20,
+          "evictions": 9,
+          "dropped": 0,
+          "errors": 0
+        },
+        "backgroundCache": 3,
+        "entities": 278
+      }
+    },
+    {
+      "label": "Galaxias",
+      "small": {
+        "radius": 26.39176305671617,
+        "zoom": 1.12,
+        "frames": {
+          "fps": 60,
+          "cpu": 1.1,
+          "peak": 35,
+          "p95": 20.9,
+          "seconds": 5,
+          "frames": 274,
+          "slowFrames": 1,
+          "parts": {
+            "simulation": 0.28,
+            "animationPreparation": 0.01,
+            "background": 0.03,
+            "inhabitants": 0.13,
+            "protagonist": 0.54,
+            "render": 0.82
+          }
+        },
+        "sheets": {
+          "bytes": 31768128,
+          "limit": 67108864,
+          "resident": 8,
+          "active": 0,
+          "pending": 0,
+          "hits": 25797,
+          "loads": 27,
+          "evictions": 19,
+          "dropped": 0,
+          "errors": 0
+        },
+        "backgroundCache": 3,
+        "entities": 215
+      },
+      "large": {
+        "radius": 190.91815146523925,
+        "zoom": 0.49467913955187803,
+        "frames": {
+          "fps": 59,
+          "cpu": 2.2,
+          "peak": 42,
+          "p95": 21,
+          "seconds": 4,
+          "frames": 264,
+          "slowFrames": 4,
+          "parts": {
+            "simulation": 0.38,
+            "animationPreparation": 0.01,
+            "background": 0.03,
+            "inhabitants": 0.94,
+            "protagonist": 0.57,
+            "render": 1.83
+          }
+        },
+        "sheets": {
+          "bytes": 53130816,
+          "limit": 67108864,
+          "resident": 13,
+          "active": 0,
+          "pending": 0,
+          "hits": 42904,
+          "loads": 32,
+          "evictions": 19,
+          "dropped": 0,
+          "errors": 0
+        },
+        "backgroundCache": 3,
+        "entities": 420
+      }
+    }
+  ],
+  "errors": [],
+  "music": {
+    "before": {
+      "switches": 5,
+      "loops": 0,
+      "waiting": 6,
+      "stalled": 0,
+      "errors": 0,
+      "desired": "orbit",
+      "current": "orbit",
+      "active": true,
+      "blocked": false,
+      "transition": true,
+      "volumeTarget": 0.42,
+      "context": "running",
+      "sampleRate": 44100,
+      "baseLatency": 0.01,
+      "outputLatency": 0.192,
+      "decks": [
+        {
+          "id": "galaxies",
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "networkState": 1,
+          "time": 16.626015,
+          "duration": 346.198571,
+          "error": null
+        },
+        {
+          "id": "orbit",
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "networkState": 1,
+          "time": 1.266031,
+          "duration": 418.380023,
+          "error": null
+        }
+      ]
+    },
+    "during": {
+      "switches": 5,
+      "loops": 0,
+      "waiting": 6,
+      "stalled": 0,
+      "errors": 0,
+      "desired": "orbit",
+      "current": "orbit",
+      "active": true,
+      "blocked": false,
+      "transition": true,
+      "volumeTarget": 0.126,
+      "context": "running",
+      "sampleRate": 44100,
+      "baseLatency": 0.01,
+      "outputLatency": 0.192,
+      "decks": [
+        {
+          "id": "galaxies",
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "networkState": 1,
+          "time": 17.827442,
+          "duration": 346.198571,
+          "error": null
+        },
+        {
+          "id": "orbit",
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "networkState": 1,
+          "time": 2.467455,
+          "duration": 418.380023,
+          "error": null
+        }
+      ]
+    },
+    "after": {
+      "switches": 5,
+      "loops": 0,
+      "waiting": 6,
+      "stalled": 0,
+      "errors": 0,
+      "desired": "orbit",
+      "current": "orbit",
+      "active": true,
+      "blocked": false,
+      "transition": true,
+      "volumeTarget": 0.42,
+      "context": "running",
+      "sampleRate": 44100,
+      "baseLatency": 0.01,
+      "outputLatency": 0.192,
+      "decks": [
+        {
+          "id": "galaxies",
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "networkState": 1,
+          "time": 18.950385,
+          "duration": 346.198571,
+          "error": null
+        },
+        {
+          "id": "orbit",
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "networkState": 1,
+          "time": 3.590385,
+          "duration": 418.380023,
+          "error": null
+        }
+      ]
+    }
+  },
+  "campaignRestored": true
+}

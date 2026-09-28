@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 const {chromium}=createRequire(process.env.VORO_PLAYWRIGHT_RUNTIME)('playwright');
 const base=process.env.VORO_QA_BASE||'http://127.0.0.1:5210/';
 const out='design/effects-levels-2026-09-28';await mkdir(out,{recursive:true});
-const previous=execFileSync('git',['show','HEAD:app/sfx.mjs'],{encoding:'utf8'});
+const previous=execFileSync('git',['show','fd0381d:app/sfx.mjs'],{encoding:'utf8'});
 const browser=await chromium.launch({channel:'msedge',headless:true});
 try {
  const page=await browser.newPage();await page.goto(base,{waitUntil:'networkidle'});

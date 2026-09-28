@@ -1,0 +1,45 @@
+{
+  "arrival": {
+    "stage": 5,
+    "entryRadius": 51.43928459844675,
+    "zoom": 0.5225578117937446,
+    "earthScreenRadius": 627.0693741524935,
+    "bodyScreenRadius": 26.880000000000003,
+    "earthRadius": 1200
+  },
+  "cinematic": {
+    "fps": 58,
+    "cpu": 2.9,
+    "peak": 111,
+    "p95": 21,
+    "seconds": 3,
+    "frames": 190,
+    "slowFrames": 2,
+    "parts": {
+      "simulation": 0.13,
+      "animationPreparation": 0.01,
+      "background": 0.09,
+      "inhabitants": 1.85,
+      "protagonist": 0.48,
+      "render": 2.74
+    }
+  },
+  "withoutScreenshots": {
+    "fps": 60,
+    "cpu": 2.8,
+    "peak": 21,
+    "p95": 20.9,
+    "seconds": 3,
+    "frames": 194,
+    "slowFrames": 0,
+    "parts": {
+      "simulation": 0.13,
+      "animationPreparation": 0,
+      "background": 0.08,
+      "render": 2.67,
+      "inhabitants": 1.78,
+      "protagonist": 0.49
+    }
+  },
+  "physicalIOS": false
+}

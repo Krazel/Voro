@@ -15,7 +15,7 @@ function isolated(game) {
 test('Orbital graduation requires approaching and finishing the Earth absorption, then never respawns Earth', () => {
   const {game} = makeEngine();
   game.startTest(orbit, STAGES[orbit].goal, false, true, true); isolated(game);
-  game.life.x = earth.x + 1400; game.life.y = earth.y;
+  game.life.x = earth.x + earth.radius + game.life.radius + 150; game.life.y = earth.y;
   game.update(1/60);
   assert.equal(game.transition, 0); assert.equal(game.earthAbsorption, 0);
   game.life.x = earth.x; game.life.y = earth.y - earth.radius - 20;

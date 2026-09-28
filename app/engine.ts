@@ -8,7 +8,7 @@ import { UniverseFinale, FINALE_SECONDS, FINALE_BLACK_AT, FINALE_MUSIC_FADE_AT, 
 import { WorldGround } from './world-ground.mjs';
 import { RELEASE } from './release.mjs';
 import { TiltControl } from './tilt-control.ts';
-import { drawOrbitalEarth, constrainOrbit, canAbsorbEarth } from './earth-landmark.mjs';
+import { drawOrbitalEarth, constrainOrbit, canAbsorbEarth, earthConsumptionPose } from './earth-landmark.mjs';
 import { StageAssets } from './stage-assets.mjs';
 import { FrameMonitor } from './frame-monitor.mjs';
 import { BenchmarkTour, tourReport } from './benchmark-tour.mjs';
@@ -236,6 +236,7 @@ export class VoroEngine {
     universeFinale: UniverseFinale | null;
     ending: number;
     earthAbsorption: number;
+    birth: number;
   } | null = null;
   camera = { x: 700, y: 970 };
   heading = -Math.PI / 2;
@@ -760,9 +761,9 @@ export class VoroEngine {
   syncMusic() {
     const finalSilence = this.progress.completed && this.ending <= FINALE_SECONDS - FINALE_MUSIC_FADE_AT;
     const fade = finalSilence && !this.paused && !this.settingsOpen && !document.hidden && this.audioFocus
-      ? FINALE_BLACK_AT - FINALE_MUSIC_FADE_AT : .08;
+      ? FINALE_BLACK_AT - FINALE_MUSIC_FADE_AT : this.progress.offer.length ? .45 : this.music?.volumeTarget === .126 ? .65 : .08;
     this.music?.setState(musicScene(this.started,this.progress.completed,stageOf(this.progress).id),
-      !finalSilence && !this.reviewHold && this.sound && this.audioFocus && !document.hidden && !this.paused && !this.settingsOpen && !this.progress.offer.length && !this.life.dead, document.hidden || !this.audioFocus, fade);
+      !finalSilence && !this.reviewHold && this.sound && this.audioFocus && !document.hidden && !this.paused && !this.settingsOpen && !this.life.dead, document.hidden || !this.audioFocus, fade, this.progress.offer.length ? .3 : 1);
   }
   setAudio() {
     this.syncMusic();
@@ -869,7 +870,6 @@ export class VoroEngine {
       biomass <= 0
     )
       return false;
-    this.birth = 0;
     if (!this.testBackup) {
       this.save();
       this.testBackup = {
@@ -887,8 +887,10 @@ export class VoroEngine {
         ending: this.ending,
         universeFinale: this.universeFinale,
         earthAbsorption: this.earthAbsorption,
+        birth: this.birth,
       };
     }
+    this.birth = 0;
     if(this.testMode) this.universeFinale?.destroy();
     this.universeFinale = null;
     this.testMode = true;
@@ -1366,6 +1368,13 @@ export class VoroEngine {
     if (this.earthAbsorption > 0) {
       if (!this.started) return;
       this.earthAbsorption = Math.min(1, this.earthAbsorption + dt / (this.reduced ? 1 : 3.2));
+      const pose=earthConsumptionPose(this.life,this.earthAbsorption);
+      const follow=1-Math.exp(-dt*3);
+      this.camera.x+=(pose.cameraX-this.camera.x)*follow;
+      this.camera.y+=(pose.cameraY-this.camera.y)*follow;
+      // Let the body visibly grow first; open the camera only when it needs room.
+      const zoom=Math.min(this.zoom,Math.min(this.width*.36,this.height*.32)/pose.radius);
+      this.zoom+=(zoom-this.zoom)*follow;
       this.animateMembrane(dt);
       this.life.feedPulse = .8;
       if (this.earthAbsorption >= 1) {
@@ -1454,7 +1463,7 @@ export class VoroEngine {
       this.stats = upgradeStats(this.progress.mutations, this.comboClock > 0);
       Object.assign(p, this.stats);
       syncShields(this.progress, this.stats, dt);
-      integrate(p, dt, this.input(), this.uniformVisualSpeed ? visualSpeedFactor(this.cameraEntryRadius) : 1);
+      integrate(p, dt, this.input(), this.uniformVisualSpeed ? visualSpeedFactor(this.cameraEntryRadius,p.radius,this.zoom/this.zoomFactor) : 1);
       if (stageOf(this.progress).id === 'orbit') constrainOrbit(p, dt);
       const speed = Math.hypot(p.vx, p.vy);
       if (speed > 8) {
@@ -2146,6 +2155,10 @@ export class VoroEngine {
       const size = .06 + .94 * (1 - (1 - t) ** 3) + Math.sin(t * Math.PI * 4) * .06 * Math.sin(t * Math.PI);
       c.translate(p.x, p.y); c.scale(size, size); c.translate(-p.x, -p.y);
       c.globalAlpha = .25 + .75 * t;
+    }
+    if(this.earthAbsorption>0){
+      const {scale}=earthConsumptionPose(p,this.earthAbsorption);
+      c.translate(p.x,p.y);c.scale(scale,scale);c.translate(-p.x,-p.y);
     }
     if (!skipProtagonist && !this.adaptationCanvas) this.measured('protagonist', () => this.drawCell());
     c.restore();

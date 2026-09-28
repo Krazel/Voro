@@ -231,7 +231,7 @@ export class JourneyWorld extends MicroWorld {
         d = Math.hypot(dx, dy);
       if (d > 1100) continue;
       const edible = p.biomass >= e.requiredMass;
-      const { x: tx, y: ty } = animalTarget(e, s, p, time, 340, 280, 80);
+      const { x: tx, y: ty } = animalTarget(e, s, p, time, 340, 280, s.id==='orbit-0'?160:80);
       let speed = e.wound >= 1 ? 0 : s.speed;
       const step = Math.sin(time * (s.motion === 'insect' ? 16 : 8) + e.seed);
       if (s.motion === 'hop') speed *= 0.2 + 1.8 * Math.max(0, step);
@@ -286,8 +286,9 @@ export class JourneyWorld extends MicroWorld {
     e.escape = Math.max(0, (e.escape || 0) - dt);
     e.flash = Math.max(0, e.flash - dt * 2);
     if (!s.speed || e.wound >= 1) return;
-    const tx = e.homeX + Math.sin(time * 0.1 + e.seed) * 35,
-      ty = e.homeY + Math.cos(time * 0.09 + e.seed) * 35,
+    const roam=s.id==='orbit-matter-rock'?120:35;
+    const tx = e.homeX + Math.sin(time * 0.1 + e.seed) * roam,
+      ty = e.homeY + Math.cos(time * 0.09 + e.seed) * roam,
       distance = Math.max(1, Math.hypot(tx - e.x, ty - e.y)),
       step = Math.min(distance, s.speed * dt);
     e.x += ((tx - e.x) / distance) * step;

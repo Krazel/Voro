@@ -12,6 +12,10 @@ export function applyCosmicScales(byId) {
   };
   for(const [id,sizeFactors] of Object.entries(ranges)) byId[id].sizeFactors=sizeFactors;
   Object.assign(byId['stars-Agujero negro estelar'],{r:280,sizeFactors:[.9,1.45],populationWeight:.18});
+  // Prevent the next atlas row's galactic arms from leaking into star sprites.
+  [734,734,739,737,750,754].forEach((bottom,i)=>Object.assign(byId[`stars-${i}`],{
+    crop:[i*256,512,256,bottom-512],animationCropRevision:1,
+  }));
   // The six galaxies are not aligned to the atlas's nominal 256px rows:
   // their upper arms begin above y=768. Retain the complete painted bounds.
   const tops=[736,740,740,738,754,766];

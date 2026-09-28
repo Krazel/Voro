@@ -8,10 +8,10 @@ export function gameplayZoom(radius = 0, entryRadius = 24) {
   const screenRadius = 38.08 + (105 - 38.08) * (1 - Math.exp(-(normalizedRadius - 34) / 90));
   return screenRadius / normalizedRadius * scale;
 }
-// Keep automatic entry framing from changing perceived travel speed.
+// Compensate the actual smoothed automatic camera as the body grows.
 // Manual zoom remains a visual preference and does not alter gameplay speed.
-export function visualSpeedFactor(entryRadius = 24) {
-  const zoom = gameplayZoom(entryRadius, entryRadius);
+export function visualSpeedFactor(entryRadius = 24, radius = entryRadius, automaticZoom = gameplayZoom(radius, entryRadius)) {
+  const zoom = automaticZoom;
   return Number.isFinite(zoom) && zoom > 0 ? 1.12 / zoom : 1;
 }
 export function zoomPreference(value) {

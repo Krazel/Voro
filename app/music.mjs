@@ -29,13 +29,16 @@ export class MusicPlayer {
     if(param.cancelAndHoldAtTime)param.cancelAndHoldAtTime(now);
     else {param.cancelScheduledValues(now);param.setValueAtTime(param.value,now);}
     param.linearRampToValueAtTime(value,now+seconds);}
-  setState(id,active,immediate=false,fadeSeconds=.08){
+  setState(id,active,immediate=false,fadeSeconds=.08,level=1){
     if(this.destroyed)return;
     if(MUSIC.some(t=>t.id===id))this.desired=id;
+    const target=active ? .42*Math.max(0,Math.min(1,Number.isFinite(level)?level:1)) : 0;
+    const fade=immediate?.08:Math.max(.08,Math.min(3,fadeSeconds));
+    if(this.volumeTarget!==target){
+      this.ramp(this.bus.gain,target,fade);this.volumeTarget=target;
+    }
     if(this.active!==active){
       this.active=active;
-      const fade=immediate?.08:Math.max(.08,Math.min(3,fadeSeconds));
-      this.ramp(this.bus.gain,active ? .42 : 0,fade);
       if(!active){this.serial++;this.transition=null;this.pauseAt=this.context.currentTime+fade;this.decks.forEach(d=>{d.pending=false;if(immediate)d.audio.pause();});}
       else if(this.unlocked){this.blocked=false;this.resume();}
     }
@@ -110,7 +113,7 @@ export class MusicPlayer {
     this.decks.forEach(d=>{d.audio.pause();d.audio.removeAttribute('src');d.audio.load();d.source.disconnect();d.gain.disconnect();});
     this.bus.disconnect();
   }
-  stats(){return {...this.diagnostics,desired:this.desired,current:this.current?.id||null,active:this.active,blocked:this.blocked,transition:!!this.transition,
+  stats(){return {...this.diagnostics,desired:this.desired,current:this.current?.id||null,active:this.active,blocked:this.blocked,transition:!!this.transition,volumeTarget:this.volumeTarget??0,
     context:this.context.state,sampleRate:this.context.sampleRate,baseLatency:this.context.baseLatency,outputLatency:this.context.outputLatency,
     decks:this.decks.map(d=>({id:d.id,paused:d.audio.paused,pending:d.pending,readyState:d.audio.readyState,networkState:d.audio.networkState,time:d.audio.currentTime,duration:Number.isFinite(d.audio.duration)?d.audio.duration:null,error:d.audio.error?.code||null}))};}
 }

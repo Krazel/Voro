@@ -8,6 +8,19 @@ function fixture(){
  return {player,context,media,get cancelled(){return cancelled}};
 }
 const settle=async()=>{await Promise.resolve();await Promise.resolve();};
+test('Adaptation ducking keeps the same stream running at the same position, then restores it; mute still wins',async()=>{
+ const {player:p,context:c}=fixture();c.state='running';
+ p.setState('micro',true);p.unlock();await settle();c.currentTime=5;p.tick();
+ const deck=p.current;deck.audio.currentTime=42;let plays=0,pauses=0;
+ const play=deck.audio.play,pause=deck.audio.pause;
+ deck.audio.play=function(){plays++;return play.call(this);};deck.audio.pause=function(){pauses++;return pause.call(this);};
+ p.setState('micro',true,false,.45,.3);
+ assert.equal(p.active,true);assert.equal(p.current,deck);assert.equal(deck.audio.paused,false);
+ assert.equal(p.bus.gain.value,.126);assert.equal(deck.audio.currentTime,42);
+ c.currentTime=7;p.tick();p.setState('micro',true,false,.65,1);
+ assert.equal(p.bus.gain.value,.42);assert.equal(plays,0);assert.equal(pauses,0);assert.equal(deck.audio.currentTime,42);
+ p.setState('micro',false,true,.08,.3);assert.equal(p.bus.gain.value,0);assert.equal(deck.audio.paused,true);p.destroy();
+});
 test('Pausing mid-crossfade and resuming never leaves a second song audible',async()=>{
  const {player:p,context:c}=fixture();c.state='running';
  p.setState('micro',true);p.unlock();await settle();

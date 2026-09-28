@@ -24,7 +24,8 @@ export function applyScaleAudit(stages, lists, byId) {
   set('orbit-matter-panel', { r: 5 });
   set('orbit-matter-comet', { name: 'Fragmento de cometa' });
   set('planets-matter-comet', { name: 'Núcleo de planetoide helado' });
-  set('orbit-0', { r: 40, requiredMass: undefined, sizeFactors: [0.45, 1.7] });
+  set('orbit-0', { r: 40, requiredMass: undefined, sizeFactors: [0.45, 1.7], speed: 28 });
+  set('orbit-matter-rock', { speed: 20 });
   set('orbit-1', { r: 4, requiredMass: 0 });
   set('orbit-2', { r: 30, sizeFactors: [.55, 3.2], requiredMass: undefined });
   set('orbit-3', { r: 65, sizeFactors: [.8, 1.8], requiredMass: undefined });
@@ -46,6 +47,13 @@ export function applyScaleAudit(stages, lists, byId) {
   set('stars-5', { name: 'Envoltura de un púlsar', sizeMeaning: 'Zona de energía alrededor del núcleo compacto' });
   set('stars-Agujero negro estelar', { name: 'Disco de acreción estelar', sizeMeaning: 'Disco de materia, no diámetro del agujero negro' });
   set('galaxies-Cúmulo abierto', { name: 'Cúmulo estelar', r: 2, requiredMass: 0 });
+  const galaxyStage=stages.findIndex(s=>s.id==='galaxies');
+  const blackHole={...byId['universe-4'],id:'galaxies-black-hole',animationId:'universe-4',
+    name:'Agujero negro',stage:galaxyStage,kind:'gravity',motion:'galaxy',r:105,
+    sizeFactors:[.85,1.2],value:18,speed:3,shot:null,requiredMass:undefined,populationWeight:.2,
+    artProfile:{family:'prop',rigid:true,period:50,precession:.015,revision:1,
+      description:'Disco de acreción con núcleo oscuro; deriva y giro lentos sin deformar la imagen.'}};
+  lists[galaxyStage].push(blackHole);byId[blackHole.id]=blackHole;
   const cosmicNames = ['Grupo de galaxias', 'Nudo de la red cósmica', 'Región de formación galáctica',
     'Frente de energía intergaláctico', 'Concentración oscura', 'Región de núcleos activos',
     'Supercúmulos en colisión'];

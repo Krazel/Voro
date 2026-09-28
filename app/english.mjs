@@ -573,4 +573,5 @@ Object.assign(ENGLISH,{
   'Confluencia de supercúmulos':'Supercluster confluence',
   'Marea cósmica':'Cosmic tide',
   'Gran estructura cósmica con deriva lenta, sin deformación de la silueta.':'A vast cosmic structure drifting slowly, with a stable silhouette.',
+  'Disco de acreción con núcleo oscuro; deriva y giro lentos sin deformar la imagen.':'Accretion disk with a dark core; gentle drift and rotation preserve its shape.',
 });

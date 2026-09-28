@@ -17,9 +17,15 @@ export function captureOrbit(world, fragments, time = 0) {
   [...world.entities,...fragments].forEach(add);
   const earth=ORBITAL_EARTH, reach=earth.limit+280;
   for(let x=Math.floor((earth.x-reach)/600);x<=Math.floor((earth.x+reach)/600);x++)
-    for(let y=Math.floor((earth.y-reach)/600);y<=Math.floor((earth.y+reach)/600);y++)
-      for(const e of world.generate(x,y,time).entities)
+    for(let y=Math.floor((earth.y-reach)/600);y<=Math.floor((earth.y+reach)/600);y++){
+      const dx=Math.max(x*600-earth.x,0,earth.x-(x+1)*600);
+      const dy=Math.max(y*600-earth.y,0,earth.y-(y+1)*600);
+      if(Math.hypot(dx,dy)>reach)continue;
+      // Reuse loaded residents instead of reconstructing and discarding them.
+      const chunk=world.chunks.get(`${x}:${y}`)||world.generate(x,y,time);
+      for(const e of chunk.entities)
         if(Math.hypot(e.x-earth.x,e.y-earth.y)<=reach) add(e);
+    }
   return {items:[...items.values()],shots:world.projectiles.map(b=>({x:b.x,y:b.y,r:b.r,vx:b.vx,vy:b.vy,plasma:!!b.plasma}))};
 }
 export function sweepPosition(item, life, t) {
