@@ -27,3 +27,7 @@ Así se obtiene un margen de11–14 elecciones en estas pruebas, frente a1–5. 
 - scripts/audit-adaptation-balance.mjs: piloto del motor real a30Hz, decisiones inmediatas, VORO_YIELD_LAST=1. Alternativa VORO_AUDIT_XP_SCALE=0.7647058823529412. Variante invulnerable VORO_PACING_ONLY=1.
 - JSON detallados ../adaptation-balance-2026-09-28/pilot-surplus-*.json; resumen pilots-summary.json.
 - No demuestra rendimiento físico, duración humana media ni balance perfecto. TestFlight y ejecutable entregados siguen en0.8.1. Juego local conserva2993110.
+
+## Resolución posterior del usuario
+
+Aprobado reducir un20%, en lugar del23,53% ensayado. Aplicado al juego mediante ADAPTATION_FOOD_GAIN=0,68 (=0,85×0,8), en las dos rutas de digestión. La propuesta0,65 queda como evidencia comparativa, no como configuración vigente. No se han vuelto a ejecutar los pilotos de esta auditoría con0,68; no atribuirle sus11–14 elecciones sobrantes.

@@ -14,3 +14,5 @@ Encargo actual: añadir Señuelo orgánico y ajustar únicamente el reparto de e
 Verificación y límites en ../organic-decoy-2026-09-28/README.md. Candidata local; TestFlight y ejecutable entregados siguen en0.8.1.
 
 Corrección posterior a889a091: 32 tests de efectos, ofertas, guardados e idiomas correctos. Los pilotos documentados en organic-decoy-2026-09-28 corresponden a la candidata anterior con moderación dinámica; no acreditan el reparto final de esta versión. No se afirma un equilibrio completo ni se añaden mejoras no elegidas por el usuario.
+
+Aprobación final del ajuste de ritmo: reducción FIJA del20% del progreso por comida respecto a0,85, es decir coeficiente0,68. Afecta digestión normal y comidas pendientes al absorber la Tierra. No reduce XP ya ganada, no cambia biomasa, costes ni efectos de mejoras. La bonificación de Adaptación acelerada sigue siendo+5% por adquisición. Sustituye la propuesta de−23,53% de la auditoría; los resultados de aquella propuesta no son una medición de esta versión.
