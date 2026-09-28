@@ -20,11 +20,11 @@ for(const [engine,type,options]of [['chrome',chromium,{channel:'msedge'}],['webk
     const s=getComputedStyle(e,'::before'),r=e.getBoundingClientRect();
     const canvas=e.querySelector('canvas'),rim=canvas?getComputedStyle(canvas):s;
     const pixels=canvas?.getContext('2d')?.getImageData(0,0,canvas.width,canvas.height).data;
-    return {text:e.textContent,image:s.borderImageSource,slice:s.borderImageSlice,width:s.borderImageWidth,opacity:rim.opacity,animation:rim.animationName,painted:!!pixels?.some((v,i)=>i%4===3&&v>0),box:{width:r.width,height:r.height}};
+    return {text:e.textContent,image:s.borderImageSource,slice:s.borderImageSlice,width:s.borderImageWidth,opacity:rim.opacity,animation:rim.animationName,inset:rim.top,painted:!!pixels?.some((v,i)=>i%4===3&&v>0),box:{width:r.width,height:r.height}};
    }));
    if(process.env.VORO_QA_PHASE?.startsWith('after')) {
     assert.equal(controls.length,3);
-    for(const control of controls){assert.ok(control.painted);assert.ok(control.image.includes('/ui/cristal/membrane-frame.png'));assert.equal(control.opacity,'0.58');assert.equal(control.width,'28px');assert.ok(control.box.height>=64);}
+    for(const control of controls){assert.ok(control.painted);assert.equal(control.inset,'-4px');assert.ok(control.image.includes('/ui/cristal/membrane-frame.png'));assert.equal(control.opacity,'0.58');assert.equal(control.width,'28px');assert.ok(control.box.height>=64);}
     await page.emulateMedia({reducedMotion:'no-preference'});
     const animation=await page.evaluate(()=>[...document.querySelectorAll('.pause-panel .membrane-rim,.cristal-toast .membrane-rim')].map(e=>getComputedStyle(e).animationName));
     assert.deepEqual(animation,['cristal-breathe','cristal-breathe','cristal-breathe']);
