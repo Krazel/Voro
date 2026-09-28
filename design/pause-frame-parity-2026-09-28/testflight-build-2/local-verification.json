@@ -1,0 +1,24 @@
+{
+  "version": "0.9",
+  "build": 2,
+  "bytes": 345184409,
+  "sha256": "907ede4851ca8bb9353a98e4c996e9272f765a0206971ebe2da1b09afbcb5b71",
+  "crcValid": true,
+  "legacyOutlineRemoved": true,
+  "approvedFrameUnchanged": true,
+  "apple": {
+    "appId": "6809193565",
+    "buildId": "98859e62-9461-45a5-b019-df197b6bcb47",
+    "bundleId": "com.dmkr.voro",
+    "version": "0.9",
+    "build": "2",
+    "processingState": "VALID",
+    "uploadedDate": "2026-09-28T13:43:51-07:00",
+    "group": {
+      "id": "05db8744-bcf3-4c2d-a465-2635012bfeeb",
+      "name": "VORO Interno",
+      "internal": true
+    },
+    "internalBuildState": "IN_BETA_TESTING"
+  }
+}
