@@ -56,7 +56,7 @@ export const UPGRADES = [
     id: 'dash',
     name: 'Impulso elástico',
     detail: '+0,10 de potencia · +0,025 s de impulso · −0,5 s de recarga',
-    max: 4,
+    max: 8,
     group: 'Moverse',
   },
   {

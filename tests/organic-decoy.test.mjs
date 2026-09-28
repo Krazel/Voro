@@ -56,12 +56,9 @@ test('Suction scales with body, XP bonus caps at40%, dash base intact and max mo
  p.radius=100;const a=aspirationReach(p)-(p.radius+22);p.radius=1000;
  assert.ok(Math.abs((aspirationReach(p)-(p.radius+22))/a-10)<1e-9);
  assert.equal(upgradeStats(Array(8).fill('yield')).adaptationFactor,1.4);
- const base=upgradeStats([]),max=upgradeStats(Array(4).fill('dash'));
+ const base=upgradeStats([]),max=upgradeStats(Array(8).fill('dash'));
  assert.equal(base.boostStrength,2.5);assert.equal(base.boostDuration,.42);assert.equal(base.cooldownFactor*7,7);
- assert.equal(max.boostStrength,2.9);assert.equal(max.boostDuration,.52);assert.equal(max.cooldownFactor*7,5);
- assert.ok(adaptationYield('city')<Math.sqrt(biomassYield('city')));
- assert.ok(adaptationYield('stars')>Math.sqrt(biomassYield('stars')));
- assert.ok(adaptationYield('city',55)<adaptationYield('city',43));
- assert.ok(adaptationYield('city',69)>0,'soft pacing never locks earning');
- assert.ok(adaptationYield('universe',65)>adaptationYield('city',65));
+ assert.equal(max.boostStrength,3.3);assert.equal(max.boostDuration,.62);assert.equal(max.cooldownFactor*7,3);
+ for(const id of ['micro','city','stars','universe'])
+  for(const level of [0,20,55,74])assert.equal(adaptationYield(id,level),Math.max(.25,Math.sqrt(biomassYield(id))));
 });

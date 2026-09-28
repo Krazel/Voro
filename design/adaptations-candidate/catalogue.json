@@ -1,6 +1,6 @@
 {
   "version": "0.8.1",
-  "totalChoices": 70,
+  "totalChoices": 74,
   "adaptations": [
     {
       "id": "slots",
@@ -61,10 +61,10 @@
       "id": "dash",
       "name": "Impulso elástico",
       "detail": "+0,10 de potencia · +0,025 s de impulso · −0,5 s de recarga",
-      "max": 4,
+      "max": 8,
       "group": "Moverse",
       "artIndex": 6,
-      "maximum": "×2,90 · 0,52 s · recarga 5 s",
+      "maximum": "×3,30 · 0,62 s · recarga 3 s",
       "behavior": "De base: potencia ×2,5, duración 0,42 s y recarga 7 s. Cada adquisición suma 0,10 al multiplicador, 0,025 s a la duración y resta 0,5 s a la recarga.",
       "exact": "Potencia = 2,5 + 0,10 × n. Duración = 0,42 + 0,025 × n. Recarga = 7 − 0,5 × n segundos. El impulso inicial se conserva."
     },
@@ -144,7 +144,7 @@
       "artIndex": 12,
       "maximum": "Una copia durante 2 s con cada impulso",
       "behavior": "Dejas una copia gelatinosa en el lugar del que sales. Los enemigos cercanos que ya te perseguían pasan a dirigirse a ella, incluidos sus disparos. No atrae enemigos nuevos, no da invulnerabilidad y no distrae peligros inmóviles. Una sola adquisición.",
-      "exact": "Se activa solo al aceptar un impulso. Comparte su recarga (7 s iniciales; 5 s con Impulso elástico al máximo), sin recarga adicional. La copia dura 2 s y se desvanece suavemente."
+      "exact": "Se activa solo al aceptar un impulso. Comparte su recarga (7 s iniciales; 3 s con Impulso elástico al máximo), sin recarga adicional. La copia dura 2 s y se desvanece suavemente."
     },
     {
       "id": "combo",

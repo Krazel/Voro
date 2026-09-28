@@ -1395,7 +1395,7 @@ export class VoroEngine {
         // finish only meals already earned before the orbital sweep began.
         const xpBefore = this.life.adaptationGained;
         digest(this.life, 100);
-        this.progress.xp += (this.life.adaptationGained - xpBefore) * .85 * this.stats.adaptationFactor * adaptationYield(stageOf(this.progress).id,this.progress.level);
+        this.progress.xp += (this.life.adaptationGained - xpBefore) * .85 * this.stats.adaptationFactor * adaptationYield(stageOf(this.progress).id);
         for (const e of this.world.entities) e.eaten = true;
         this.world.entities = []; this.world.projectiles = [];
         this.food = []; this.fragments = []; this.motes = [];
@@ -1537,7 +1537,7 @@ export class VoroEngine {
         xpBefore = p.adaptationGained,
         finished = digest(p, dt);
       if (finished) {
-        this.progress.xp += (p.adaptationGained - xpBefore) * 0.85 * this.stats.adaptationFactor * adaptationYield(stageOf(this.progress).id,this.progress.level);
+        this.progress.xp += (p.adaptationGained - xpBefore) * 0.85 * this.stats.adaptationFactor * adaptationYield(stageOf(this.progress).id);
         this.comboMeals =
           p.elapsed - this.lastMeal < 4 ? this.comboMeals + finished : finished;
         this.lastMeal = p.elapsed;
