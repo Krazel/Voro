@@ -1,0 +1,161 @@
+{
+  "version": "0.8.1",
+  "totalChoices": 75,
+  "adaptations": [
+    {
+      "id": "reach",
+      "name": "Pseudópodos largos",
+      "detail": "+7,5 % de alcance",
+      "max": 6,
+      "group": "Comer",
+      "artIndex": 0,
+      "maximum": "+45 % de alcance",
+      "behavior": "Permite iniciar la absorción desde más lejos. También amplía la zona de la corriente aspirante. No permite comer presas que todavía sean demasiado grandes.",
+      "exact": "Distancia de absorción desde tu centro: 1,12 × radio corporal × (1 + 0,075 × adquisiciones)."
+    },
+    {
+      "id": "slots",
+      "name": "Vacuolas adicionales",
+      "detail": "+1 alimento simultáneo",
+      "max": 6,
+      "group": "Comer",
+      "artIndex": 1,
+      "maximum": "9 alimentos simultáneos",
+      "behavior": "Empiezas con 3 huecos de digestión. Cada elección añade uno; no aumenta el tamaño de lo que puedes comer.",
+      "exact": "3 + adquisiciones."
+    },
+    {
+      "id": "digest",
+      "name": "Enzimas rápidas",
+      "detail": "+12,5 % de velocidad de digestión",
+      "max": 8,
+      "group": "Comer",
+      "artIndex": 2,
+      "maximum": "Doble velocidad de digestión",
+      "behavior": "Sin otras mejoras, una digestión pasa de 1,65 s a 0,825 s con las 8 adquisiciones. Acelera el proceso, no la biomasa que da cada alimento.",
+      "exact": "Duración = 1,65 / (1 + 0,125 × adquisiciones + bonificación de Hambre encadenada)."
+    },
+    {
+      "id": "yield",
+      "name": "Adaptación acelerada",
+      "detail": "+10 % de progreso de adaptación por alimento",
+      "max": 8,
+      "group": "Comer",
+      "artIndex": 3,
+      "maximum": "+80 % de progreso por alimento",
+      "behavior": "Llena antes la barra de adaptación. No aumenta la biomasa obtenida ni acelera directamente el cambio de entorno. Tus propios fragmentos no dan progreso de adaptación.",
+      "exact": "Multiplicador de progreso = 1 + 0,10 × adquisiciones, aplicado sobre la ganancia propia del entorno."
+    },
+    {
+      "id": "speed",
+      "name": "Flagelos potentes",
+      "detail": "+7,5 % de velocidad",
+      "max": 6,
+      "group": "Moverse",
+      "artIndex": 4,
+      "maximum": "+45 % de velocidad",
+      "behavior": "Aumenta la velocidad de desplazamiento, también durante el impulso. No cambia por sí sola la recarga.",
+      "exact": "Factor de movimiento = 1 + 0,075 × adquisiciones + bonificación de Hambre encadenada."
+    },
+    {
+      "id": "turn",
+      "name": "Cuerpo flexible",
+      "detail": "+15 % de agilidad",
+      "max": 4,
+      "group": "Moverse",
+      "artIndex": 5,
+      "maximum": "+60 % de respuesta de movimiento",
+      "behavior": "Respondes más rápido al cambiar de dirección, acelerar y frenar. No aumenta la velocidad máxima.",
+      "exact": "Respuesta por fotograma = 1 − exp(−tiempo × 4,4 × (1 + 0,15 × adquisiciones))."
+    },
+    {
+      "id": "dash",
+      "name": "Impulso elástico",
+      "detail": "+0,18 de potencia · +0,05 s de impulso · −1 s de recarga",
+      "max": 4,
+      "group": "Moverse",
+      "artIndex": 6,
+      "maximum": "×3,22 · 0,62 s · recarga 3 s",
+      "behavior": "De base: potencia ×2,5, duración 0,42 s y recarga 7 s. Cada adquisición suma 0,18 al multiplicador, 0,05 s a la duración y resta 1 s a la recarga.",
+      "exact": "Potencia = 2,5 + 0,18 × n. Duración = 0,42 + 0,05 × n. Recarga = 7 − n segundos. La potencia multiplica la velocidad objetivo; el movimiento conserva su aceleración suave."
+    },
+    {
+      "id": "pull",
+      "name": "Corriente aspirante",
+      "detail": "+14 de alcance de la corriente aspirante",
+      "max": 6,
+      "group": "Comer",
+      "artIndex": 7,
+      "maximum": "+84 unidades de alcance",
+      "behavior": "Amplía la zona que atrae alimentos comestibles hacia ti. Son unidades del mundo del juego, no porcentajes ni píxeles fijos de pantalla. Ya existe una pequeña corriente sin esta adaptación.",
+      "exact": "Radio de corriente = radio corporal × factor de Pseudópodos + 22 + 14 × adquisiciones. La fuerza disminuye con la distancia."
+    },
+    {
+      "id": "shield",
+      "name": "Escudo gelatinoso",
+      "detail": "Bloquea un golpe. Recarga en 40 s.",
+      "max": 1,
+      "group": "Defenderse",
+      "artIndex": 9,
+      "maximum": "1 golpe bloqueado cada 40 s",
+      "behavior": "Al adquirirlo queda listo. Bloquea un golpe y después necesita 40 s de juego para recargarse. No se pueden acumular varios escudos.",
+      "exact": "Capacidad: 1. Recarga: 40 s. Al bloquear concede 0,8 s de invulnerabilidad."
+    },
+    {
+      "id": "recycle",
+      "name": "Reciclaje celular",
+      "detail": "+12,5 % de recuperación de la biomasa perdida",
+      "max": 6,
+      "group": "Defenderse",
+      "artIndex": 10,
+      "maximum": "Hasta el 75 % de la biomasa perdida",
+      "behavior": "Si sobrevives al golpe, se desprenden 5 fragmentos. Debes comértelos para recuperar esa biomasa; no vuelve automáticamente ni recupera progreso de adaptación.",
+      "exact": "Biomasa total de los fragmentos = pérdida del golpe × 0,125 × adquisiciones. Se pueden recoger tras 0,85 s."
+    },
+    {
+      "id": "spikes",
+      "name": "Espinas retráctiles",
+      "detail": "+6 % de daño al atacante cuando te golpea",
+      "max": 6,
+      "group": "Cazar",
+      "artIndex": 11,
+      "maximum": "36 % de herida por contacto",
+      "behavior": "Cada contacto dañino suma una herida al atacante y lo hace huir durante 3 s. Al acumular el 100 % queda comestible, aunque todavía fuera demasiado grande, y aporta la mitad de su valor. No refleja proyectiles.",
+      "exact": "Herida por contacto = 0,06 × adquisiciones. Con una adquisición: 17 contactos; con seis: 3 contactos. La herida se acumula en cada enemigo."
+    },
+    {
+      "id": "tentacles",
+      "name": "Tentáculos cazadores",
+      "detail": "+1 tentáculo que agarra y acerca lentamente presas comestibles",
+      "max": 6,
+      "group": "Cazar",
+      "artIndex": 13,
+      "maximum": "6 tentáculos simultáneos",
+      "behavior": "Cada tentáculo busca una presa comestible distinta, la agarra y la acerca lentamente. Añadir tentáculos no amplía su alcance ni permite capturar presas demasiado grandes.",
+      "exact": "Alcance inicial desde tu centro = 1,5 × radio corporal + 10 unidades."
+    },
+    {
+      "id": "tentacleReach",
+      "name": "Tentáculos extensibles",
+      "detail": "+15 % del radio corporal de alcance para tus tentáculos",
+      "requires": "tentacles",
+      "max": 4,
+      "group": "Cazar",
+      "artIndex": 0,
+      "maximum": "+60 % de tu radio corporal",
+      "behavior": "Solo puede salir cuando ya tienes Tentáculos cazadores. Cada adquisición añade el 15 % de tu radio corporal a su distancia de captura; no es un 15 % de la longitud total anterior.",
+      "exact": "Alcance desde tu centro = (1,5 + 0,15 × adquisiciones) × radio corporal + 10. Al máximo: 2,1 × radio + 10."
+    },
+    {
+      "id": "combo",
+      "name": "Hambre encadenada",
+      "detail": "3 comidas seguidas: +10 % de movimiento y digestión durante 4 s",
+      "max": 4,
+      "group": "Rara",
+      "artIndex": 14,
+      "maximum": "+40 % de movimiento y digestión durante 4 s",
+      "behavior": "Se activa al terminar de digerir 3 alimentos seguidos, con menos de 4 s entre comidas. Seguir comiendo a ese ritmo renueva los 4 s. Recibir daño que quite biomasa rompe la cadena. Aparece con menor frecuencia.",
+      "exact": "Cada adquisición suma 0,10 a los factores de velocidad y digestión mientras dura la bonificación. Se suma a Flagelos/Enzimas; no los multiplica. Los fragmentos digeridos también cuentan como comidas."
+    }
+  ]
+}
