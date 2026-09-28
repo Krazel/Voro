@@ -1,1 +1,1 @@
-export const RELEASE = Object.freeze({ version: '0.9', build: 2 });
+export const RELEASE = Object.freeze({ version: '0.10', build: 1 });
