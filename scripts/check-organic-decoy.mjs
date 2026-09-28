@@ -3,7 +3,7 @@ import {mkdir,writeFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 const {chromium}=createRequire(process.env.VORO_PLAYWRIGHT_RUNTIME)('playwright');
 const browser=await chromium.launch({channel:'msedge',headless:true});
-const out='design/organic-decoy-2026-09-28';await mkdir(out,{recursive:true});
+const out=process.env.VORO_DECOY_OUT||'design/organic-decoy-2026-09-28';await mkdir(out,{recursive:true});
 try {
  const page=await browser.newPage({viewport:{width:780,height:844},locale:'es-ES'}),errors=[];
  page.on('pageerror',e=>errors.push(String(e)));

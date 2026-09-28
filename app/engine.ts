@@ -2299,15 +2299,31 @@ export class VoroEngine {
       this.ctx=context;
       context.translate(256,256);context.scale(512/(radius*6),512/(radius*6));
       context.translate(-this.life.x,-this.life.y);
-      this.drawCell(); this.decoyImage=canvas;
+      this.drawCell(this.time,{bodyLight:1,coreScale:1,coreLight:.45});
     } finally {this.ctx=previous;}
+    // Bake a soft ghost once. Downsampling and weighted offsets also work on
+    // older iOS Canvas implementations without filter support. No live blur.
+    const small=document.createElement('canvas');small.width=small.height=64;
+    const soft=small.getContext('2d');if(!soft)return;
+    soft.imageSmoothingEnabled=true;soft.imageSmoothingQuality='high';
+    soft.drawImage(canvas,0,0,64,64);
+    context.setTransform(1,0,0,1,0,0);context.clearRect(0,0,512,512);
+    context.imageSmoothingEnabled=true;context.imageSmoothingQuality='high';
+    context.globalCompositeOperation='lighter';
+    const weights=[.25,.5,.25];
+    for(let y=0;y<3;y++)for(let x=0;x<3;x++) {
+      context.globalAlpha=weights[x]*weights[y];
+      context.drawImage(small,(x-1)*3,(y-1)*3,512,512);
+    }
+    context.globalCompositeOperation='source-over';context.globalAlpha=1;
+    this.decoyImage=canvas;
   }
   drawDecoy() {
     const d=this.life.decoy;if(!d || !this.decoyImage || this.life.dead)return;
     const c=this.ctx,age=DECOY_SECONDS-d.remaining;
     const pulse=this.reduced?1:1+Math.sin(age*5)*.025;
     c.save();c.translate(d.x,d.y);c.scale(pulse,pulse);
-    c.globalAlpha=.7*Math.min(1,d.remaining/.65);
+    c.globalAlpha=.26*Math.min(1,d.remaining/.65);
     c.drawImage(this.decoyImage,-d.radius*3,-d.radius*3,d.radius*6,d.radius*6);
     c.restore();
   }
