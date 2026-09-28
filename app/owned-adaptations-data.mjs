@@ -3,8 +3,8 @@ import { UPGRADES, boundedUpgrades, levelOf, upgradeStats } from './mutations.mj
 // Read-only view of the same bounded selections used by the simulation.
 export function ownedAdaptations(mutations) {
   const chosen = boundedUpgrades(mutations);
-  return UPGRADES.map((upgrade, art) => ({
-    ...upgrade, art, count: levelOf(chosen, upgrade.id),
+  return UPGRADES.map(upgrade => ({
+    ...upgrade, count: levelOf(chosen, upgrade.id),
   })).filter(upgrade => upgrade.count > 0);
 }
 

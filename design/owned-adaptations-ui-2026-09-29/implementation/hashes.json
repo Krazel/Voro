@@ -4,59 +4,71 @@
     "sha256": "f2fa75f41ea1a5789e9ca0df7b55f93b0790353bb261104f129c62c08b5f8269"
   },
   {
-    "file": "public/ui/owned-adaptations/organisms.png",
-    "sha256": "f5dc65ee5aec213cde0ff8901ce139ec73a1fff725264358e1e07a85ddf774c0"
+    "file": "public/upgrades/biological-adaptations.png",
+    "sha256": "261a1db52c401607d9f96f065d2bb8aca622e3391fe0d3b725a7961c46dacc96"
   },
   {
     "file": "public/ui/owned-adaptations/background.png",
     "sha256": "0a9baac882cda84ba378f0e5bc6501e56ce1612d12d003536715e06986393744"
   },
   {
+    "file": "public/ui/owned-adaptations/background-portrait.png",
+    "sha256": "7461affb9bac21ef67d4f240fb28140a50f045b3c56fd1e2142b23f59d9429c1"
+  },
+  {
+    "file": "public/ui/owned-adaptations/capsules.png",
+    "sha256": "3b55d5edcbbe04482447252c38f55f036d8a80ee38c003b834cd7152616b5f18"
+  },
+  {
+    "file": "design/owned-adaptations-ui-2026-09-29/implementation/rejected-organisms.png",
+    "sha256": "f5dc65ee5aec213cde0ff8901ce139ec73a1fff725264358e1e07a85ddf774c0"
+  },
+  {
     "file": "design/owned-adaptations-ui-2026-09-29/implementation/chrome-ipad-build.png",
-    "sha256": "763c9af1d6ccc7615412baa5b0e0aaf601aa8b202dc3debed7e50713fa013f75"
+    "sha256": "71a002f1d4a93085c8aa1fda4c7e499ef325832b31e1f20cec4e62f873ed5e06"
   },
   {
     "file": "design/owned-adaptations-ui-2026-09-29/implementation/chrome-ipad-portrait-build.png",
-    "sha256": "a5301fa300535a5112f23a62d356480df95469a241337eaf2ec61b1171c9cfbc"
+    "sha256": "f4cb75193240b21c255ff342b48811191348a08a6ae425c6861e208a2f5d2672"
   },
   {
     "file": "design/owned-adaptations-ui-2026-09-29/implementation/chrome-iphone-build.png",
-    "sha256": "5ea55ace07193575c721b28b2335c81f4f8dd38d0bbabc0c1e86bc7ca1b10bae"
+    "sha256": "b8e28bcd236570fd91973d783f5bdc54b5fc42935604666d0e5234849256281e"
   },
   {
     "file": "design/owned-adaptations-ui-2026-09-29/implementation/chrome-iphone-safe-build.png",
-    "sha256": "043b4e1461c19f0f1cba272c2b4d28e94624386295827952b8d924968876a51c"
+    "sha256": "660a92c1fb050dc7340d28ef7133aa5e57021dfeb9ad8baf1f75b42bead4cb1a"
   },
   {
     "file": "design/owned-adaptations-ui-2026-09-29/implementation/chrome-pc-build.png",
-    "sha256": "65e852d653f06a0db077bbc9bcb75fb54e322e2631e98ed581863d4a0ac7004a"
+    "sha256": "7e6327625a3e3734201da16783adfeff22616280dd82ba39eb6433f17a8258fe"
   },
   {
     "file": "design/owned-adaptations-ui-2026-09-29/implementation/chrome-small-phone-build.png",
-    "sha256": "6afab1abd2538525ff07860e1d12656d37ff9d6e89d7a0f27e49f49aa06136c6"
+    "sha256": "3f8f35ff853fc0237fea1d61b8163780b3139656fef454cd6f979c6b6669c2a0"
   },
   {
     "file": "design/owned-adaptations-ui-2026-09-29/implementation/webkit-ipad-build.png",
-    "sha256": "1b4c1d80a504e7eb44b7c65908d32bf0344e0e3c3a6646d4c5ca7bcf6ff9775b"
+    "sha256": "1fe70365b0987085b677f89c839d6c257d8966beee83522cc8df9eb80da1ec7f"
   },
   {
     "file": "design/owned-adaptations-ui-2026-09-29/implementation/webkit-ipad-portrait-build.png",
-    "sha256": "c3a463508a9b842c458631667e0b3e47e802f319724b43842cc2d079297265b9"
+    "sha256": "8192482fc8750410e9918e8077f17cf42a3a73e0f106ce048b032663886ba147"
   },
   {
     "file": "design/owned-adaptations-ui-2026-09-29/implementation/webkit-iphone-build.png",
-    "sha256": "345c7b709ca7e5290b18fd0b95165343ef64b142872214bfe3fbed22573df709"
+    "sha256": "7f1dd903d648b97e19b14d961c52f51ad55cc8b616795695f041bc42e36106a3"
   },
   {
     "file": "design/owned-adaptations-ui-2026-09-29/implementation/webkit-iphone-safe-build.png",
-    "sha256": "a0f3f7683fbb158d8d9bdac611356181e6ccf5af8a3947fe23f66e1a7947c2af"
+    "sha256": "a03e9bea1954bf9b46d901c6f6850b5488e443edaf79ba03b1eaafd5cf7493ab"
   },
   {
     "file": "design/owned-adaptations-ui-2026-09-29/implementation/webkit-pc-build.png",
-    "sha256": "76c194ea771962583efa5036ee0886a0894f5ceb30c23b8114d4c00acb44bdf5"
+    "sha256": "3725e0c8916eddc68334edcdf7eb4d5794606d955ae9104795c41cf9d5ac9ece"
   },
   {
     "file": "design/owned-adaptations-ui-2026-09-29/implementation/webkit-small-phone-build.png",
-    "sha256": "c2dc77d662b19fe090bfeeb536887ce109daf5e03872fff69b9a57938d985fba"
+    "sha256": "0ce52d256e456b33b1c1c2385a2d4c6f0ecc387f0aa87e101dd984aacdbfea62"
   }
 ]

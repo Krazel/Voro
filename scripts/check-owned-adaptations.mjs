@@ -39,6 +39,8 @@ for (const [name, type, options] of [['chrome',chromium,{channel:'msedge'}], ['w
         const ownedIds=[...new Set(mutations)];
         assert.equal(await page.locator('.owned-capsule').count(),ownedIds.length);
         assert.deepEqual(await page.locator('.owned-capsule').evaluateAll(els=>els.map(e=>e.dataset.ownedId)), UPGRADES.filter(u=>ownedIds.includes(u.id)).map(u=>u.id));
+        assert.deepEqual(await page.locator('.owned-art').evaluateAll(els=>els.map(e=>Number(e.dataset.artIndex))), UPGRADES.filter(u=>ownedIds.includes(u.id)).map(u=>u.artIndex));
+        assert.ok((await page.locator('.owned-art image').evaluateAll(els=>els.map(e=>e.getAttribute('href')))).every(src=>src==='/upgrades/biological-adaptations.png'));
         assert.ok(await page.evaluate(()=>window.__voroLab.settingsOpen&&window.__voroLab.paused));
         const before=await page.evaluate(()=>JSON.stringify(window.__voroLab.progress));
         if (mutations.includes('shield')) {
@@ -47,9 +49,10 @@ for (const [name, type, options] of [['chrome',chromium,{channel:'msedge'}], ['w
           assert.match(await page.locator('.owned-detail').innerText(),/×1 · M/);
         }
         if (fixture==='full') {
+          assert.ok(new Set(await page.locator('.owned-capsule').evaluateAll(els=>els.map(e=>e.dataset.frame))).size>=5,'Capsules use varied painted silhouettes');
           await page.locator('.owned-scroll').evaluate(e=>e.scrollTop=0);
           // Wait for browser image decoding before visual comparison.
-          await page.evaluate(async()=>Promise.all(['/ui/owned-adaptations/organisms.png','/ui/owned-adaptations/background.png'].map(src=>new Promise((resolve,reject)=>{const i=new Image();i.onload=()=>i.decode().then(resolve);i.onerror=reject;i.src=src;}))));
+          await page.evaluate(async()=>Promise.all(['/upgrades/biological-adaptations.png','/ui/owned-adaptations/background.png','/ui/owned-adaptations/background-portrait.png','/ui/owned-adaptations/capsules.png'].map(src=>new Promise((resolve,reject)=>{const i=new Image();i.onload=()=>i.decode().then(resolve);i.onerror=reject;i.src=src;}))));
           await page.screenshot({path:`${out}/${name}-${device}${process.env.VORO_QA_BUILD?'-build':''}.png`});
         }
         const layout=await page.evaluate(()=>{
