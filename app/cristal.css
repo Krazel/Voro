@@ -74,6 +74,9 @@
   opacity: 0.7;
 }
 .has-membrane-rim::before {display:none;}
+/* The painted artwork is the only resting outline. Keep the transparent 1px
+   box for layout, without the old CSS stroke underneath the moving membrane. */
+.voro-shell[data-ui='cristal'] .viewport .membrane-control.has-membrane-rim {border-color:transparent;}
 .viewport .membrane-rim {position:absolute;inset:-4px;width:calc(100% + 8px);height:calc(100% + 8px);pointer-events:none;z-index:0;opacity:.58;animation:cristal-breathe 7s ease-in-out infinite;}
 .cristal-toast:not(.show) .membrane-rim {animation:none;}
 @media(prefers-reduced-motion:reduce){.viewport .membrane-rim{animation:none;}}

@@ -14,17 +14,18 @@ for(const [engine,type,options]of [['chrome',chromium,{channel:'msedge'}],['webk
    await page.waitForFunction(()=>window.__voroLab?.assetsReady);
    await page.evaluate(()=>{const g=window.__voroLab;g.startTest(0,20,false,true,false);g.paused=true;g.toast('Has perdido biomasa. Recupera tus fragmentos.',999);g.publish();});
    await page.locator('.pause-panel').waitFor();
+   await page.addStyleTag({content:'.cosmic-lab{display:none !important}'});
    if(process.env.VORO_QA_PHASE?.startsWith('after')) await page.waitForFunction(()=>document.querySelectorAll('.membrane-rim[data-ready=true]').length===3);
    await page.screenshot({path:`${out}/${engine}-${device}.png`});
    const controls=await page.evaluate(()=>[...document.querySelectorAll('.pause-panel .membrane-control,.cristal-toast')].map(e=>{
-    const s=getComputedStyle(e,'::before'),r=e.getBoundingClientRect();
+    const s=getComputedStyle(e,'::before'),base=getComputedStyle(e),r=e.getBoundingClientRect();
     const canvas=e.querySelector('canvas'),rim=canvas?getComputedStyle(canvas):s;
     const pixels=canvas?.getContext('2d')?.getImageData(0,0,canvas.width,canvas.height).data;
-    return {text:e.textContent,image:s.borderImageSource,slice:s.borderImageSlice,width:s.borderImageWidth,opacity:rim.opacity,animation:rim.animationName,inset:rim.top,painted:!!pixels?.some((v,i)=>i%4===3&&v>0),box:{width:r.width,height:r.height}};
+    return {text:e.textContent,legacyBorder:base.borderColor,pseudoDisplay:s.display,image:s.borderImageSource,slice:s.borderImageSlice,width:s.borderImageWidth,opacity:rim.opacity,animation:rim.animationName,inset:rim.top,painted:!!pixels?.some((v,i)=>i%4===3&&v>0),box:{width:r.width,height:r.height}};
    }));
    if(process.env.VORO_QA_PHASE?.startsWith('after')) {
     assert.equal(controls.length,3);
-    for(const control of controls){assert.ok(control.painted);assert.equal(control.inset,'-4px');assert.ok(control.image.includes('/ui/cristal/membrane-frame.png'));assert.equal(control.opacity,'0.58');assert.equal(control.width,'28px');assert.ok(control.box.height>=64);}
+    for(const control of controls){assert.equal(control.legacyBorder,'rgba(0, 0, 0, 0)');assert.equal(control.pseudoDisplay,'none');assert.ok(control.painted);assert.equal(control.inset,'-4px');assert.ok(control.image.includes('/ui/cristal/membrane-frame.png'));assert.equal(control.opacity,'0.58');assert.equal(control.width,'28px');assert.ok(control.box.height>=64);}
     await page.emulateMedia({reducedMotion:'no-preference'});
     const animation=await page.evaluate(()=>[...document.querySelectorAll('.pause-panel .membrane-rim,.cristal-toast .membrane-rim')].map(e=>getComputedStyle(e).animationName));
     assert.deepEqual(animation,['cristal-breathe','cristal-breathe','cristal-breathe']);

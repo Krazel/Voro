@@ -25,3 +25,9 @@ La build firmada parte de 238c2ab. [36478097404](https://github.com/Krazel/Voro/
 Biblioteca PR-009 actualizada y releída, revisión 253: 0.9 (1) como TestFlight interno entregado. Windows sigue en 0.8.1. Pendiente probar rendimiento y sensaciones en los dispositivos físicos del usuario.
 
 Verificación del IPA descargado: 345184403 bytes, SHA-256 `e08accb91715d1abc5ffda97d62dfa0780736c2187488b4d8f7ad38b97bf01a1`, coincide con CI; CRC ZIP completo correcto, Info.plist 0.9 (1), familias iPhone/iPad, imagen aprobada idéntica y código de los marcos presentes. Fixture de pruebas ausente. La primera descarga local sufrió corrupción en una hoja de animación; se repitió y se sustituyó por la copia que pasó checksum y CRC. No fue necesario reconstruir ni volver a subir a Apple. Resultado en `testflight/local-verification.json`.
+
+## Corrección del doble contorno · 0.9 (2)
+
+El usuario señaló correctamente que las capturas de 0.9 (1) conservaban el trazo CSS liso debajo de la textura. Ahora `has-membrane-rim` deja ese borde transparente sin alterar las dimensiones; solo se ve el marco pintado. Se conserva el foco de teclado y la animación de 7 segundos.
+
+`after-single-rim-build/` verifica los builds de PC y móvil en Chrome y WebKit, iPhone e iPad horizontal incluidos. Los tres controles tienen borde CSS transparente, pseudo-elemento antiguo oculto y canvas visible. Capturas revisadas. El verificador de assets también exige esta corrección dentro de la app firmada. Candidata 0.9 (2), pendiente de confirmar entrega en TestFlight.
