@@ -29,6 +29,7 @@ for (const url of [...Object.values(BACKGROUND_ASSETS), ...Object.values(ATLAS_U
 }
 const scripts=scriptPaths.map(p=>fs.readFileSync(path.join(root,'assets',p),'utf8')).join('\n');
 assert.ok(css.includes('.pause-panel') && scripts.includes('Respira.') && scripts.includes('membrane-control'), 'Player pause must use the chosen Respira panel');
+assert.ok(css.includes('.viewport .membrane-rim') && scripts.includes('has-membrane-rim'), 'Native pause and notices must ship explicit painted membrane rims');
 assert.ok(!/\.cristal-toast:{1,2}before\{opacity:\.?3\}/.test(css), 'Notice rim must not be dimmed relative to pause');
 assert.ok(scripts.includes('journey-horizons') && !scripts.includes('journey-spiral-map'), 'Completed journey must use the approved D3 horizons');
 assert.ok(scripts.includes('membrane-settings')&&css.includes('ui/membrane/background.webp'),'Approved lightweight membrane settings must ship on iOS');
