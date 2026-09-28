@@ -9,6 +9,7 @@ import { animalTarget } from './animal-steering.mjs';
 import { random, clamp } from './simulation.mjs';
 import { projectileThreatMass } from './threat-scale.mjs';
 import { cityLots, cityPlacement, constrainCity } from './city-layout.mjs';
+import { ORBITAL_EARTH } from './earth-landmark.mjs';
 import {
   STAGE_SPECIES,
   STAGES,
@@ -301,6 +302,30 @@ export class JourneyWorld extends MicroWorld {
     super.stream(x, y, time, force, radius);
     if (this.finalEntity && !this.entities.includes(this.finalEntity))
       this.entities.push(this.finalEntity);
+  }
+  ensureOrbitalForage(p, time) {
+    if (STAGES[this.stage].id !== 'orbit' || p.dead) return 0;
+    const earth=ORBITAL_EARTH;
+    const reachable=e=>Math.hypot(e.x-earth.x,e.y-earth.y)<earth.limit-60 && Math.hypot(e.x-p.x,e.y-p.y)<850;
+    const available=this.entities.filter(e=>!e.eaten && e.requiredMass<=p.biomass && reachable(e));
+    if(available.length>=3)return 0;
+    let restored=0;
+    // Accelerate only exhausted, naturally occurring zero-threshold forage.
+    // The finite orbit can never strand a wounded survivor below every food
+    // threshold. Reuse existing IDs/slots; no extra permanent population.
+    for(const [key,chunk]of this.chunks) {
+      const [cx,cy]=key.split(':').map(Number),alive=new Set(chunk.entities.filter(e=>!e.eaten).map(e=>e.id));
+      for(const e of this.generate(cx,cy,time+151).entities) {
+        if(e.requiredMass!==0 || isDanger(SPECIES_BY_ID[e.kind]) || alive.has(e.id) || !reachable(e) || Math.hypot(e.x-p.x,e.y-p.y)<300)continue;
+        if(!this.journal.has(e.id) && !chunk.entities.some(old=>old.id===e.id&&old.eaten))continue;
+        this.journal.delete(e.id);
+        chunk.entities=chunk.entities.filter(old=>old.id!==e.id);chunk.entities.push(e);alive.add(e.id);restored++;
+        if(available.length+restored>=3)break;
+      }
+      if(available.length+restored>=3)break;
+    }
+    if(restored)this.stream(p.x,p.y,time,true);
+    return restored;
   }
   spawnFinal(p) {
     if (this.stage !== STAGES.length - 1 || p.finalEaten) return;

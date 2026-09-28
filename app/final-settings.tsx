@@ -96,7 +96,7 @@ export function FinalSettings({
             <hr/><h4>{tr('Creación y desarrollo')}</h4><p>Krazel Games</p>
             <hr/><h4>{tr('Música y licencias')}</h4>
             <button className="membrane-license-button" aria-expanded={licenses} onClick={()=>setLicenses(!licenses)}>{tr(licenses?'Volver':'Ver licencias')}</button>
-            {licenses&&<div className="membrane-licenses"><p>{tr('Música de Scott Buckley · ')}<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a></p><ul>{MUSIC.map(track=><li key={track.id}><a href={track.source} target="_blank" rel="noopener noreferrer">{track.title}</a> — Scott Buckley</li>)}</ul><p>{tr('Composiciones completas. Volumen normalizado, conversión MP3 y fundidos de entrada, salida y repetición. Sin recortes de secciones.')}</p></div>}
+            {licenses&&<div className="membrane-licenses"><p>{tr('Música de Scott Buckley · ')}<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a></p><ul>{MUSIC.map(track=><li key={track.id}><a href={track.source} target="_blank" rel="noopener noreferrer">{track.title}</a> — Scott Buckley</li>)}</ul><p>{tr('Composiciones completas. Volumen normalizado, conversión MP3 y fundidos de entrada, salida y repetición. Sin recortes de secciones.')}</p><p>{tr('Imagen de la Tierra: ')}<a href="https://svs.gsfc.nasa.gov/30002/" target="_blank" rel="noopener noreferrer">NASA/NOAA/GSFC/Suomi NPP/VIIRS/Norman Kuring</a></p></div>}
         </div>
       </section>
       {section==='credits'&&<p className="membrane-thanks">{tr('Gracias por acompañar a Voro desde el origen.')}</p>}

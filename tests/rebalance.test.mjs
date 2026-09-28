@@ -23,7 +23,7 @@ import { HuntingTentacles } from '../app/hunting-tentacles.mjs';
 import { shedBiomass, moveFragments } from '../app/biomass-fragments.mjs';
 import { makeEngine } from './engine-fixture.mjs';
 
-test('Retired adaptations are refunded without losing stage, body or fractional progress', () => {
+test('Retired adaptations are all refunded without losing stage/body, then the new bar starts empty', () => {
   const p = newJourney(44);
   p.adaptationVersion = 3;
   p.stage = 1;
@@ -48,7 +48,7 @@ test('Retired adaptations are refunded without losing stage, body or fractional 
   assert.equal(loaded.progress.offer.length, 0);
   assert.equal(
     loaded.progress.xp,
-    (journeyAdaptation(2) + journeyAdaptation(3)) / 2,
+    journeyAdaptation(2),
   );
   assert.equal(
     loadJourney(saveJourney(loaded.progress, loaded.life, w, true)).progress.xp,

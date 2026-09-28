@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {makeEngine} from './engine-fixture.mjs';
 import {STAGES,SPECIES_BY_ID,STAGE_SPECIES,isDanger} from '../app/journey-data.mjs';
 import {JourneyWorld,journeyEntity} from '../app/journey-world.mjs';
-import {ORBITAL_EARTH,earthConsumptionPose,drawOrbitalEarth} from '../app/earth-landmark.mjs';
+import {ORBITAL_EARTH,earthConsumptionPose,earthMealPose,drawOrbitalEarth} from '../app/earth-landmark.mjs';
 import {gameplayZoom,visualSpeedFactor} from '../app/camera.mjs';
 import {integrate} from '../app/simulation.mjs';
 import {groundPanels} from '../app/world-ground.mjs';
@@ -11,7 +11,7 @@ import {BACKGROUND_ASSETS} from '../app/background-assets.mjs';
 import {POPULATION_PLANS} from '../app/population.mjs';
 import {captureOrbit,restoreOrbitSweep} from '../app/orbital-sweep.mjs';
 
-test('Earth remains fixed while VORO grows to cover its farthest edge; capture stays inside save limits',()=>{
+test('Earth is enveloped then travels into the moving nucleus; capture stays inside save limits',()=>{
  const life={x:ORBITAL_EARTH.x,y:ORBITAL_EARTH.y-1300,radius:100,biomass:400,goalMass:400};
  let previous=0;const draws=[];
  const c=new Proxy({globalAlpha:1,drawImage(...args){draws.push(args)}},{get:(o,k)=>o[k]??(()=>{})});
@@ -20,8 +20,12 @@ test('Earth remains fixed while VORO grows to cover its farthest edge; capture s
   drawOrbitalEarth(c,{naturalWidth:1254},{x:life.x,y:life.y},1000,.1,life,t,480);
  }
  assert.ok(previous>ORBITAL_EARTH.radius+1300);
- assert.ok(draws.every(args=>args[3]===ORBITAL_EARTH.radius*.2));
- assert.deepEqual(draws[0].slice(1),draws.at(-1).slice(1));
+ assert.deepEqual(draws[0].slice(-4),draws[1].slice(-4));
+ assert.ok(draws.at(-1).at(-1)<draws[0].at(-1));
+ const nucleus={x:8,y:-5};let last=ORBITAL_EARTH.radius;
+ for(let t=0;t<=1;t+=.01){const meal=earthMealPose(life,t,nucleus);assert.ok(meal.radius<=last);last=meal.radius;}
+ const meal=earthMealPose(life,1,nucleus),growth=earthConsumptionPose(life,1);
+ assert.equal(meal.radius,0);assert.ok(Math.abs(meal.x-life.x-nucleus.x*growth.scale)<1e-8);assert.ok(Math.abs(meal.y-life.y-nucleus.y*growth.scale)<1e-8);
  const w=new JourneyWorld(834,[],STAGES.findIndex(s=>s.id==='orbit')),sweep=captureOrbit(w,[],0);assert.ok(sweep.items.length<=1500);assert.ok(restoreOrbitSweep(sweep));
 });
 test('Asteroids move their collision positions smoothly and preserve deterministic residents and density',()=>{
@@ -52,6 +56,7 @@ test('Early cosmic habitats exclude spiral ground panels and star crops stop bef
  assert.deepEqual(groundPanels('planets'),[0,1,2,3]);
  assert.ok(!groundPanels('stars').includes(3));
  for(const [i,top] of [736,740,740,738,754,766].entries()){
+  if(i===5){assert.equal(SPECIES_BY_ID['stars-5'].imageAtlas,'pulsarDetail');continue;}
   const star=SPECIES_BY_ID['stars-'+i];assert.ok(star.crop[1]+star.crop[3]<top);
  }
  for(const id of ['planets','stars'])for(const s of STAGE_SPECIES[STAGES.findIndex(e=>e.id===id)])assert.ok(!/^galaxies-/.test(s.id));

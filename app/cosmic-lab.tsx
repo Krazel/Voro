@@ -10,10 +10,12 @@ import './cosmic-lab.css';
 // Opt-in localhost tooling, never displayed on the public site or in iOS builds.
 export function CosmicLab({game}:{game:VoroEngine}) {
  const [folded,setFolded]=useState(false);
+ const [invulnerable,setInvulnerable]=useState(false);
+ const [evolution,setEvolution]=useState(true);
  const scene=(id:string)=>{
   game.settingsOpen=false;
   const stage=STAGES.findIndex(s=>s.id===id);
-  game.startTest(stage,stageStartMass(stage),false,true,false);
+  game.startTest(stage,stageStartMass(stage),false,invulnerable,evolution);
   game.setDiagnostics(true);
  };
  const earth=()=>{
@@ -38,6 +40,10 @@ export function CosmicLab({game}:{game:VoroEngine}) {
   <button onClick={()=>setFolded(!folded)}>{folded?'Mostrar pruebas':'Ocultar pruebas'} · solo local</button>
   {!folded&&<>
    <p>Escenas temporales. Tu partida queda guardada aparte.</p>
+   <div>
+    <label><input type="checkbox" checked={invulnerable} onChange={e=>{setInvulnerable(e.target.checked);if(game.testMode)game.testInvulnerable=e.target.checked;}}/> Invulnerabilidad</label>
+    <label><input type="checkbox" checked={evolution} onChange={e=>{setEvolution(e.target.checked);if(game.testMode)game.testEvolution=e.target.checked;}}/> Cambiar de entorno al crecer</label>
+   </div>
    <div>{STAGES.map(s=><button key={s.id} onClick={()=>scene(s.id)}>{s.short}</button>)}</div>
    <div><button onClick={earth}>Comer Tierra</button><button onClick={hole}>Ver agujero negro</button></div>
    <div><button onClick={()=>game.boostTest('biomass')}>Crecer</button><button onClick={()=>game.boostTest('adaptation')}>Adaptación</button></div>

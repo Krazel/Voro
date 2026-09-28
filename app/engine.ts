@@ -1605,6 +1605,7 @@ export class VoroEngine {
       if (this.foodClock > 8) {
         this.foodClock = 0;
         this.world.replenish(p.x, p.y, p.elapsed);
+        this.world.ensureOrbitalForage(p, p.elapsed);
         this.fragments = this.fragments
           .filter((f) => !f.eaten && Math.hypot(f.x - p.x, f.y - p.y) < 1300)
           .slice(-24);
@@ -2056,7 +2057,9 @@ export class VoroEngine {
     if (STAGES[this.progress.stage].id === 'orbit' && !this.progress.earthConsumed) {
       c.save();
       c.globalAlpha = this.transition > 0 ? clamp((3.6 - this.transition) / 1.1, 0, 1) : 1;
-      drawOrbitalEarth(c, this.atlasImages.earth, this.camera, this.height, this.zoom, this.life, this.earthAbsorption, this.width);
+      const unit=this.cameraEntryRadius/24;
+      drawOrbitalEarth(c, this.atlasImages.earth, this.camera, this.height, this.zoom, this.life, this.earthAbsorption, this.width,
+        {x:this.nucleus.x+Math.sin(this.time*.6)*2*unit,y:this.nucleus.y+Math.cos(this.time*.65)*2*unit});
       c.restore();
     }
     const shake = 0,
@@ -2177,6 +2180,16 @@ export class VoroEngine {
       c.restore();
     }
     c.restore();
+    if (this.earthAbsorption > .38 && !skipProtagonist) {
+      // Keep the swallowed globe visible through the cell until it reaches
+      // the nucleus; the opaque nucleus must not hide it prematurely.
+      const unit=this.cameraEntryRadius/24;
+      const u=clamp((this.earthAbsorption-.38)/.17,0,1);
+      c.save();c.globalAlpha=.85*u*u*(3-2*u);
+      drawOrbitalEarth(c,this.atlasImages.earth,this.camera,this.height,this.zoom,p,this.earthAbsorption,this.width,
+        {x:this.nucleus.x+Math.sin(this.time*.6)*2*unit,y:this.nucleus.y+Math.cos(this.time*.65)*2*unit});
+      c.restore();
+    }
     if (this.flash > 0) {
       c.fillStyle = 'rgba(144,226,241,' + this.flash * 0.14 + ')';
       c.fillRect(0, 0, this.width, this.height);

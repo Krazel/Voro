@@ -1,0 +1,76 @@
+[
+  {
+    "label": "pc",
+    "metrics": {
+      "frames": {
+        "fps": 60,
+        "cpu": 1.6,
+        "peak": 21,
+        "p95": 20.9,
+        "seconds": 4,
+        "frames": 211,
+        "slowFrames": 0,
+        "parts": {
+          "simulation": 0.29,
+          "animationPreparation": 0.01,
+          "background": 0.05,
+          "inhabitants": 0.29,
+          "protagonist": 0.62,
+          "render": 1.27
+        }
+      },
+      "sheets": {
+        "bytes": 0,
+        "limit": 134217728,
+        "resident": 0,
+        "active": 0,
+        "pending": 0,
+        "hits": 1149,
+        "loads": 13,
+        "evictions": 13,
+        "dropped": 0,
+        "errors": 0,
+        "quality": "optional-close-up",
+        "visibleCycles": []
+      }
+    },
+    "errors": []
+  },
+  {
+    "label": "phone",
+    "metrics": {
+      "frames": {
+        "fps": 60,
+        "cpu": 1.4,
+        "peak": 21,
+        "p95": 20.9,
+        "seconds": 3,
+        "frames": 210,
+        "slowFrames": 0,
+        "parts": {
+          "simulation": 0.28,
+          "animationPreparation": 0,
+          "background": 0.04,
+          "inhabitants": 0.19,
+          "protagonist": 0.58,
+          "render": 1.08
+        }
+      },
+      "sheets": {
+        "bytes": 0,
+        "limit": 134217728,
+        "resident": 0,
+        "active": 0,
+        "pending": 0,
+        "hits": 790,
+        "loads": 12,
+        "evictions": 12,
+        "dropped": 0,
+        "errors": 0,
+        "quality": "optional-close-up",
+        "visibleCycles": []
+      }
+    },
+    "errors": []
+  }
+]

@@ -2,6 +2,13 @@ import {sizeFactors} from './entity-sizes.mjs';
 // Keep encounter IDs and physical sizes. Only art and its inexpensive painter
 // change; no giant is reduced to disguise a low-resolution texture.
 export function applyCosmicDetail(byId,urls) {
+ urls.earth='./inhabitants/earth-npp-detail-v1.webp';
+ Object.assign(byId.earth,{crop:[299.52,263.68,3496.96,3496.96],artProfile:{family:'prop',rigid:true,period:60,precession:.015,circularClip:true,revision:4,
+  description:'El globo conserva su forma, con un giro lento.'}});
+ urls.pulsarDetail='./inhabitants/pulsar-detail-v1.webp';
+ Object.assign(byId['stars-5'],{imageAtlas:'pulsarDetail',crop:[0,0,1254,1254],animationCropRevision:2,
+  artProfile:{family:'pulsar',rigid:true,period:2.3,precession:0,revision:4,
+   description:'Pulso suave del núcleo y sus chorros completos, sin recortes.'}});
  for(const key of ['cosmic-wall','lensed-crown','cosmic-confluence','cosmic-tide']) {
   urls[key]=`./inhabitants/${key}-detail-v2.webp`;
   byId[`universe-${key}`].crop=[0,0,1254,1254];

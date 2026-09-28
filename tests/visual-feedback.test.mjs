@@ -31,7 +31,7 @@ test('Earth painting tracks the same world coordinates and radius as gravity at 
  const positions=[];const c=new Proxy({drawImage:(_, ...coords)=>positions.push(coords)},{get:(o,k)=>o[k]||(()=>{}),set:(o,k,v)=>(o[k]=v,true)});
  for(const zoom of [.624,1.114,2.3]){
   drawOrbitalEarth(c,{naturalWidth:1254},{x:ORBITAL_EARTH.x+100,y:ORBITAL_EARTH.y+200},844,zoom);
-  const [x,y,w,h]=positions.at(-1);
+  const [x,y,w,h]=positions.at(-1).slice(-4);
   assert.equal(w,ORBITAL_EARTH.radius*2*zoom);assert.equal(h,w);
   assert.ok(Math.abs((x+w/2-240)/zoom+100)<1e-8);
   assert.ok(Math.abs((y+h/2-844*.48)/zoom+200)<1e-8);

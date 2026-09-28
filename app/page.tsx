@@ -660,6 +660,7 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
           >{tr(" Sonido")}<span>{tr(state.sound ? 'Activado' : 'Desactivado')}</span>
           </button>
           <details className="music-credits">
+            <p>{tr('Imagen de la Tierra: ')}<a href="https://svs.gsfc.nasa.gov/30002/" target="_blank" rel="noopener noreferrer">NASA/NOAA/GSFC/Suomi NPP/VIIRS/Norman Kuring</a></p>
             <summary>{tr("Créditos musicales")}</summary>
             <p>{tr("Música de Scott Buckley · ")}<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">{tr("CC BY 4.0")}</a></p>
             <ul>{tr(MUSIC.map(track=><li key={track.id}><a href={track.source} target="_blank" rel="noopener noreferrer">{tr(track.title)}</a>{tr(" — Scott Buckley")}</li>))}</ul>

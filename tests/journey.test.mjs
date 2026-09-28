@@ -47,6 +47,7 @@ function isolate(g) {
 }
 test('Every stage generates stable inhabitants, recoverable food, bounded chunks and valid bitmap crops', () => {
   const dimensions = {
+    earth: [4096,4096], pulsarDetail: [1254,1254],
     'cosmic-wall':[1254,1254], 'lensed-crown':[1254,1254], 'cosmic-confluence':[1254,1254], 'cosmic-tide':[1254,1254],
     blackHoleDetail:[1254,1254],...Object.fromEntries(Array.from({length:6},(_,i)=>[`galaxyDetail${i}`,[1254,1254]])),
     naturalMatter: [1448, 1086],

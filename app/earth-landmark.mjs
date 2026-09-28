@@ -9,6 +9,16 @@ export function earthConsumptionPose(life, absorption=0) {
   return {scale:radius/Math.max(.01,life.radius),radius,
     cameraX:life.x+(e.x-life.x)*ease*.5,cameraY:life.y+(e.y-life.y)*ease*.5};
 }
+// The cell first envelops the planet, then its captured material travels all
+// the way into the same moving nucleus used by the protagonist renderer.
+export function earthMealPose(life, absorption=0, nucleus={x:0,y:0}) {
+  const u=Math.max(0,Math.min(1,(absorption-.38)/.62)),ease=u*u*(3-2*u);
+  const growth=earthConsumptionPose(life,absorption);
+  const targetX=life.x+nucleus.x*growth.scale,targetY=life.y+nucleus.y*growth.scale;
+  return {x:ORBITAL_EARTH.x+(targetX-ORBITAL_EARTH.x)*ease,
+    y:ORBITAL_EARTH.y+(targetY-ORBITAL_EARTH.y)*ease,
+    radius:ORBITAL_EARTH.radius*(1-ease),alpha:1-Math.max(0,(u-.96)/.04)};
+}
 export function orbitHintOpacity(elapsed = 0) {
   const fade = Math.max(0, Math.min(1, (elapsed - 5) / 3));
   return 1 - fade * fade * (3 - 2 * fade);
@@ -33,14 +43,16 @@ export function canAbsorbEarth(p) {
     <= ORBITAL_EARTH.radius + p.radius + 65;
 }
 /** @param {{x:number,y:number,biomass:number,goalMass:number,elapsed?:number}|null} life */
-export function drawOrbitalEarth(c, image, camera, height, zoom = 1, life = null, absorption = 0, width = 480) {
+export function drawOrbitalEarth(c, image, camera, height, zoom = 1, life = null, absorption = 0, width = 480, nucleus={x:0,y:0}) {
   if (!image?.naturalWidth) return;
   const t = Math.max(0, Math.min(1, absorption));
   // Painting, absorption and gravity share one world-space planet.
-  const originX = width/2 + (ORBITAL_EARTH.x - camera.x) * zoom;
-  const originY = height * .48 + (ORBITAL_EARTH.y - camera.y) * zoom;
+  const meal=life && t>0?earthMealPose(life,t,nucleus):{x:ORBITAL_EARTH.x,y:ORBITAL_EARTH.y,radius:ORBITAL_EARTH.radius,alpha:1};
+  const originX = width/2 + (meal.x - camera.x) * zoom;
+  const originY = height * .48 + (meal.y - camera.y) * zoom;
   const x = originX, y = originY;
-  const r = ORBITAL_EARTH.radius * zoom;
+  const r = meal.radius * zoom;
+  if(r<.001)return;
   if (x + r < 0 || x - r > width || y + r < 0 || y - r > height) {
     const dx = x - width/2, dy = y - height * .48;
     const angle = Math.atan2(dy, dx);
@@ -50,8 +62,13 @@ export function drawOrbitalEarth(c, image, camera, height, zoom = 1, life = null
     c.restore(); return;
   }
   c.save();
-  c.globalAlpha *= 1-Math.max(0,Math.min(1,(t-.82)/.18));
-  c.drawImage(image, x - r, y - r, r * 2, r * 2);
+  c.globalAlpha *= meal.alpha;
+  // Use the photographic source's complete globe, avoiding a rectangular
+  // backdrop. The 8000px original supplies real detail at orbital scale.
+  c.beginPath();c.arc(x,y,r,0,Math.PI*2);c.clip();
+  const n=image.naturalWidth;
+  c.drawImage(image,n*.073125,n*.064375,n*.85375,n*.85375,x-r,y-r,r*2,r*2);
+  c.restore();c.save();
   // The framed cinematic caption already announces the absorption.
   if(t>0){c.restore();return;}
   c.globalAlpha *= t > 0 ? 1 : orbitHintOpacity(life?.elapsed);

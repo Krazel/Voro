@@ -35,6 +35,7 @@ export function newJourney(seed) {
     cameraEntryRadius: null,
     orbitSweep: /** @type {ReturnType<typeof restoreOrbitSweep>} */ (null),
     adaptationVersion: 5,
+    refundChoices: 0,
     upgradeLimitsVersion: 1,
     shieldChoiceVersion: 1,
     journeyVersion: 2,
@@ -203,6 +204,8 @@ export function loadJourney(raw) {
       rerollUsed: p.rerollUsed === true,
       // Refund retired choices as ready adaptations, retaining the earned XP floor.
       level: mutations.length,
+      refundChoices: Math.min(MAX_UPGRADE_CHOICES-mutations.length,
+        (Number.isSafeInteger(p.refundChoices)?Math.max(0,p.refundChoices):0)+p.level-mutations.length),
       mutations,
       deaths: p.deaths,
       totalEaten: p.totalEaten,
@@ -332,7 +335,7 @@ export function migrateAdaptationXp(xp, level, version = 1) {
   return newStart + fraction * (journeyAdaptation(level) - newStart);
 }
 export function refreshOffer(p) {
-  if (!p.offer.length && !p.completed && p.xp >= journeyAdaptation(p.level)) {
+  if (!p.offer.length && !p.completed && (p.refundChoices>0 || p.xp >= journeyAdaptation(p.level))) {
     const original = offerUpgrades(p.mutations, p.seed, p.level);
     p.offer = p.rerollUsed
       ? offerUpgrades(p.mutations, p.seed, p.level, original)
@@ -356,6 +359,12 @@ export function chooseUpgrade(p, id) {
     p.shieldRecharge = 0;
   }
   p.level++;
+  // XP is stored cumulatively, but every newly chosen adaptation starts with
+  // an empty bar. Discard overflow from the meal that completed the last one.
+  // Historical removed upgrades are owed choices, not overflow from eating.
+  // Honor every refund, then start the next earned adaptation at zero too.
+  if(p.refundChoices>0)p.refundChoices--;
+  if(!p.refundChoices)p.xp = journeyAdaptation(p.level - 1);
   p.offer = [];
   p.rerollUsed = false;
   refreshOffer(p);

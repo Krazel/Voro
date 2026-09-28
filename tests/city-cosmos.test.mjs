@@ -45,7 +45,7 @@ test('City background reuses bounded aligned district tiles while scrolling',()=
 });
 test('Planet ecology offers eleven world types with rare ocean worlds and unchanged encounter slots',()=>{
   const stage=STAGES.findIndex(s=>s.id==='planets'),list=STAGE_SPECIES[stage];
-  const worlds=list.filter(s=>s.id.match(/^planets-[0-5]$/)||s.artProfile);
+  const worlds=list.filter(s=>s.id!=='earth'&&(s.id.match(/^planets-[0-5]$/)||s.artProfile));
   assert.equal(worlds.length,11);
   const report=populationReport(stage);
   const ocean=report.rows.find(s=>s.id==='planets-1');assert.ok(ocean.count>0&&ocean.per100<2);

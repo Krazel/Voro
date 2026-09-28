@@ -523,6 +523,10 @@ export function simpleAnimation(profile) {
 // Cheap rigid motion remains continuous between exported deformation poses.
 export function applyPoseTransform(c, profile, r, phase, activity) {
   const f = profile.family;
+  if (f === 'pulsar' && profile.rigid) {
+    const pulse = 1 + .014 * Math.sin(phase * 2);
+    c.scale(pulse, pulse);
+  }
   if (f === 'puffer') {
     const inflation =
       1 + 0.009 * Math.sin(phase) + Math.max(0, activity - 1) * 0.12;
@@ -657,6 +661,7 @@ function* paintPose(
     c.restore();
     part(c, image, crop, w, h, 0.56, 0.455, 0.04, 0);
   } else if (profile.rigid || (rigidFamilies.has(f) && !profile.surface)) {
+    if(profile.circularClip){c.beginPath();c.ellipse(0,0,w/2,h/2,0,0,TAU);c.clip();}
     c.drawImage(image, ...crop, -w / 2, -h / 2, w, h);
     if (profile.highDetailFlow) {
       // Full-resolution art stays in place. A small, clipped moving layer gives

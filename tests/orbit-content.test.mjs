@@ -17,7 +17,7 @@ test('Orbital introduction fades after five seconds and never becomes a permanen
  assert.equal(orbitHintOpacity(0),1);assert.ok(orbitHintOpacity(6)>0&&orbitHintOpacity(6)<1);
  for(const elapsed of [8,60,3600]){
   assert.equal(orbitHintOpacity(elapsed),0);
-  const labels=[],c={globalAlpha:1,save(){},restore(){},drawImage(){},fillText(text){labels.push({text,alpha:this.globalAlpha});}};
+  const labels=[],c={globalAlpha:1,save(){},restore(){},beginPath(){},arc(){},clip(){},drawImage(){},fillText(text){labels.push({text,alpha:this.globalAlpha});}};
   drawOrbitalEarth(c,{naturalWidth:1254},e,844,.3,{x:e.x,y:e.y,biomass:10,goalMass:100,elapsed});
   assert.ok(labels.every(l=>l.alpha===0));
  }

@@ -17,7 +17,7 @@ const sizes = {
   ringedPlanet: [640,640],
   cityBuildings: [1536,1024],
   planetDiversity: [1536,1024],
-  earth: [1254, 1254],
+  earth: [4096, 4096], pulsarDetail: [1254, 1254],
   naturalMatter: [1448, 1086],
   objectMatter: [1536, 1024],
   cosmicMatter: [1536, 1024],

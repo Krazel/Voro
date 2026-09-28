@@ -1,0 +1,32 @@
+{
+  "earthSource": "https://svs.gsfc.nasa.gov/30002/",
+  "earthCredit": "NASA/NOAA/GSFC/Suomi NPP/VIIRS/Norman Kuring",
+  "assets": [
+    {
+      "name": "earth-npp-detail-v1",
+      "source": "design/orbit-recovery-2026-09-28/art/nasa-npp-earth-source.jpg",
+      "output": "public/inhabitants/earth-npp-detail-v1.webp",
+      "native": [
+        8000,
+        8000
+      ],
+      "shipped": 4096,
+      "alpha": false,
+      "bytes": 4510630,
+      "sha256": "a4b745d34386f21cffbd9ba1fb370952e6fd5443fd7f1b152911cec5a68eaee4"
+    },
+    {
+      "name": "pulsar-detail-v1",
+      "source": "design/orbit-recovery-2026-09-28/art/pulsar-master.png",
+      "output": "public/inhabitants/pulsar-detail-v1.webp",
+      "native": [
+        1254,
+        1254
+      ],
+      "shipped": 1254,
+      "alpha": true,
+      "bytes": 556344,
+      "sha256": "46f7e30089a5463d104466ff037920d6eeb4557c29dda7ad6c18d0cf05b6dcb8"
+    }
+  ]
+}

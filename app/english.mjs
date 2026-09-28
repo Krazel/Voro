@@ -2,6 +2,7 @@ import { STUDIO_ENGLISH } from './english-studio.mjs';
 // Spanish source text is retained in game data and save files. Only presentation
 // is translated, so species keys, upgrade groups and progression stay stable.
 export const ENGLISH = Object.fromEntries(`
+Pulso suave del núcleo y sus chorros completos, sin recortes.|A gentle pulse of the core and its complete, uncropped jets.
 Planeta en formación|Forming planet
 Planeta gaseoso joven|Young gas planet
 Política de privacidad|Privacy policy
@@ -570,6 +571,7 @@ Object.assign(ENGLISH, {
 });
 Object.assign(ENGLISH, STUDIO_ENGLISH);
 Object.assign(ENGLISH,{
+  'Imagen de la Tierra: ':'Earth image: ',
   'Materia estelar con detalle completo y circulación continua dentro del disco.':'Detailed stellar matter flowing smoothly within the disc.',
   'Horizonte negro nítido y filamentos del disco que circulan suavemente.':'A sharp dark horizon surrounded by gently flowing disc filaments.',
   'Globo planetario estable con una deriva lenta.':'A stable planetary globe drifting slowly.',
