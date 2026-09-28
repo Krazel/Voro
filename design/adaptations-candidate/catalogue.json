@@ -1,18 +1,7 @@
 {
   "version": "0.8.1",
-  "totalChoices": 75,
+  "totalChoices": 69,
   "adaptations": [
-    {
-      "id": "reach",
-      "name": "Absorción amplia",
-      "detail": "+7,5 % de distancia para absorber comida cercana",
-      "max": 6,
-      "group": "Comer",
-      "artIndex": 0,
-      "maximum": "+45 % de alcance",
-      "behavior": "Permite iniciar la absorción desde más lejos. No modifica la corriente aspirante ni la longitud de los tentáculos. No permite comer presas que todavía sean demasiado grandes.",
-      "exact": "Distancia de absorción desde tu centro: 1,12 × radio corporal × (1 + 0,075 × adquisiciones)."
-    },
     {
       "id": "slots",
       "name": "Vacuolas adicionales",
@@ -82,12 +71,12 @@
     {
       "id": "pull",
       "name": "Corriente aspirante",
-      "detail": "+14 de alcance de la corriente aspirante",
+      "detail": "Atrae hacia ti comida que ya puedes comer, desde más lejos. +14 de distancia.",
       "max": 6,
       "group": "Comer",
       "artIndex": 7,
       "maximum": "+84 unidades de alcance",
-      "behavior": "Amplía la zona que atrae alimentos comestibles hacia ti. Son unidades del mundo del juego, no porcentajes ni píxeles fijos de pantalla. Ya existe una pequeña corriente sin esta adaptación.",
+      "behavior": "La comida cercana que ya puedes comer se mueve suavemente hacia ti, sin tocarla ni apuntar. Cada adquisición permite atraerla desde 14 unidades más lejos. No afecta a enemigos demasiado grandes ni aumenta la biomasa de cada alimento. Hay una pequeña atracción de base.",
       "exact": "Radio de corriente = radio corporal + 22 + 14 × adquisiciones. La fuerza disminuye con la distancia."
     },
     {

@@ -30,7 +30,7 @@ try{
  assert.ok(positions.every(p=>p.wound===0&&p.requiredMass===positions[0].requiredMass));
  assert.deepEqual(errors,[]);
  await page.goto('http://127.0.0.1:5211/@fs/C:/Users/dmkra/Documents/Codex%20Apps/Voro-camera/design/adaptations-candidate/index.html');
- assert.equal(await page.locator('article').count(),14);
+ assert.equal(await page.locator('article').count(),13);
  await page.getByRole('button',{name:'Defenderse',exact:true}).click();assert.equal(await page.locator('article:visible').count(),3);
  await page.getByRole('button',{name:'Todas',exact:true}).click();
  await page.screenshot({path:`${out}/catalogue.png`,fullPage:true});

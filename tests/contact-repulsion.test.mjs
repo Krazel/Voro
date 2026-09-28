@@ -35,7 +35,7 @@ test('Repulsion runs through microscopic and later-world movement and pauses ran
  }
 });
 
-test('Absorption reach no longer changes aspiration, but does collect nearer food sooner',()=>{
+test('Retired absorption reach changes neither suction nor eating distance; aspiration still attracts',()=>{
  function run(chosen,distance){
   const {game:g}=makeEngine();g.progress=newJourney(41);g.progress.mutations=chosen;g.life=journeyLife(g.progress);
   g.world=new JourneyWorld(41);g.seed();g.action('start');g.birth=0;
@@ -46,6 +46,6 @@ test('Absorption reach no longer changes aspiration, but does collect nearer foo
  const base=run([],42),wide=run(Array(6).fill('reach'),42);
  assert.equal(wide.distance,base.distance,'same attraction radius and force');
  assert.equal(wide.eaten,false);
- assert.equal(run([],34).eaten,false);assert.equal(run(Array(6).fill('reach'),34).eaten,true);
+ assert.equal(run([],34).eaten,false);assert.equal(run(Array(6).fill('reach'),34).eaten,false);
  assert.ok(run(['pull'],55).distance<55,'aspiration still extends with its own choice');
 });

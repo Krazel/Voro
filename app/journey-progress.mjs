@@ -125,6 +125,7 @@ export function migrateMicro(raw) {
   p.absorptionsByStage[0] = p.totalEaten;
   p.xp = migrateAdaptationXp(p.xp, p.level);
   p.mutations = boundedUpgrades(p.mutations);
+  p.refundChoices = Math.min(MAX_UPGRADE_CHOICES - p.mutations.length, p.level - p.mutations.length);
   p.level = p.mutations.length;
   p.adaptationVersion = 5;
   p.offer = [];
@@ -166,14 +167,15 @@ export function loadJourney(raw) {
       return null;
     if (
       !Array.isArray(p.mutations) ||
-      p.mutations.length > Math.max(45, MAX_UPGRADE_CHOICES + (p.shieldChoiceVersion === 1 ? 0 : 3)) ||
+      p.mutations.length > Math.max(45, MAX_UPGRADE_CHOICES + 6 + (p.shieldChoiceVersion === 1 ? 0 : 3)) ||
       p.level !== p.mutations.length ||
       p.mutations.some(
         (id) =>
           !UPGRADES.some((u) => u.id === id) &&
-          !['armor', 'trail'].includes(id),
+          !['armor', 'trail', 'reach'].includes(id),
       ) ||
       ['armor', 'trail'].some((id) => levelOf(p.mutations, id) > 3) ||
+      levelOf(p.mutations, 'reach') > 6 ||
       UPGRADES.some(
         (u) =>
           levelOf(p.mutations, u.id) >

@@ -165,7 +165,7 @@ test('Ranged attackers fire; small bodies take damage and large ones absorb bull
 });
 test('Evolution advances once at the midpoint, preserves adaptations and survives reload', () => {
   const { game: g } = fresh();
-  g.progress.mutations = ['reach'];
+  g.progress.mutations = ['turn'];
   g.progress.level = 1;
   g.life.biomass = 150;
   step(g);
@@ -175,7 +175,7 @@ test('Evolution advances once at the midpoint, preserves adaptations and survive
   assert.equal(saved.progress.pendingEvolution, true);
   step(g, 110, true);
   assert.equal(g.progress.stage, 1);
-  assert.deepEqual(g.progress.mutations, ['reach']);
+  assert.deepEqual(g.progress.mutations, ['turn']);
   assert.equal(g.progress.pendingEvolution, false);
   assert.ok(g.life.biomass < 10);
   step(g, 110, true);
@@ -286,7 +286,6 @@ test('A complete run eats planets, stars, galaxies and the universe in order, wi
         'tentacleReach',
         'tentacles',
         'combo',
-        'reach',
         'dash',
         'turn',
         'recycle',

@@ -16,7 +16,6 @@ import { makeEngine } from './engine-fixture.mjs';
 
 test('Every repeated choice adds the same concrete bonus', () => {
   const effect = {
-    reach: ['reachFactor', 0.075],
     slots: ['absorptionSlots', 1],
     digest: ['digestFactor', 0.125],
     yield: ['adaptationFactor', 0.1],
@@ -43,7 +42,7 @@ test('Every repeated choice adds the same concrete bonus', () => {
 
 test('Real damage removes the same fraction of unspent adaptation progress and persists it', () => {
   const { game: g } = makeEngine();
-  g.progress.mutations = ['speed', 'reach'];
+  g.progress.mutations = ['speed', 'turn'];
   g.progress.level = 2;
   const floor = journeyAdaptation(1);
   g.progress.xp = floor + 20;
@@ -60,7 +59,7 @@ test('Real damage removes the same fraction of unspent adaptation progress and p
   g.life.invulnerable = 0;
   g.receiveHit(hit, 1, 0);
   assert.equal(g.progress.xp, floor);
-  assert.deepEqual(g.progress.mutations, ['speed', 'reach']);
+  assert.deepEqual(g.progress.mutations, ['speed', 'turn']);
   g.destroy();
 });
 

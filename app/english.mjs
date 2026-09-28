@@ -259,6 +259,7 @@ Cuerpo flexible|Flexible body
 Impulso elástico|Elastic dash
 +0,18 de potencia · +0,05 s de impulso · −1 s de recarga|+0.18 power · +0.05 s dash duration · −1 s cooldown
 Corriente aspirante|Suction current
+Atrae hacia ti comida que ya puedes comer, desde más lejos. +14 de distancia.|Pulls food you can already eat towards you from farther away. +14 distance.
 +14 de alcance de la corriente aspirante|+14 suction current reach
 Escudo gelatinoso|Gelatinous shield
 Bloquea un golpe. Recarga en 40 s.|Blocks one hit. Recharges in 40 s.

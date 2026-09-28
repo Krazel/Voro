@@ -1,7 +1,6 @@
 import { random } from './simulation.mjs';
 import { SHIELD_RECHARGE } from './shields.mjs';
 const CARD_ART = {
-  reach: 0,
   slots: 1,
   digest: 2,
   yield: 3,
@@ -17,13 +16,6 @@ const CARD_ART = {
   combo: 14,
 };
 export const UPGRADES = [
-  {
-    id: 'reach',
-    name: 'Absorción amplia',
-    detail: '+7,5 % de distancia para absorber comida cercana',
-    max: 6,
-    group: 'Comer',
-  },
   {
     id: 'slots',
     name: 'Vacuolas adicionales',
@@ -69,7 +61,7 @@ export const UPGRADES = [
   {
     id: 'pull',
     name: 'Corriente aspirante',
-    detail: '+14 de alcance de la corriente aspirante',
+    detail: 'Atrae hacia ti comida que ya puedes comer, desde más lejos. +14 de distancia.',
     max: 6,
     group: 'Comer',
   },
@@ -127,7 +119,7 @@ export function upgradeStats(chosen, combo = false) {
   const n = (id) =>
     Math.min(UPGRADES.find((u) => u.id === id)?.max ?? 0, levelOf(chosen, id));
   return {
-    reachFactor: 1 + n('reach') * 0.075,
+    reachFactor: 1,
     absorptionSlots: 3 + n('slots'),
     digestFactor: 1 + n('digest') * 0.125 + (combo ? n('combo') * 0.1 : 0),
     yieldFactor: 1,

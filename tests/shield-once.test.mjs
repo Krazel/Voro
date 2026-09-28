@@ -27,13 +27,13 @@ test('Acquired shield is excluded across seeds, later levels, consumption and re
 test('Legacy four shields migrate once, preserving other choices, body, XP and earliest recharge', () => {
   const p = newJourney(72);
   delete p.shieldChoiceVersion;
-  p.mutations = ['speed', 'shield', 'shield', 'reach', 'shield', 'shield'];
+  p.mutations = ['speed', 'shield', 'shield', 'turn', 'shield', 'shield'];
   p.level = 6; p.xp = journeyAdaptation(5) + 7;
   p.shieldTimers = [33, 12, 39, 27];
   const life = journeyLife(p), world = new JourneyWorld(72);
   life.biomass = 40;
   const r = loadJourney(saveJourney(p, life, world, false));
-  assert.deepEqual(r.progress.mutations, ['speed', 'shield', 'reach']);
+  assert.deepEqual(r.progress.mutations, ['speed', 'shield', 'turn']);
   assert.equal(r.progress.level, 3);
   assert.equal(r.progress.xp, p.xp);
   assert.equal(r.life.biomass, 40);
