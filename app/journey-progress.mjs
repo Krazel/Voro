@@ -31,6 +31,8 @@ export function newJourney(seed) {
   return {
     ...newMicro(seed),
     stage: 0,
+    hitsReceived: 0,
+    hitsPartial: false,
     absorptionsByStage: STAGES.map(() => /** @type {number|null} */ (0)),
     cameraEntryRadius: null,
     orbitSweep: /** @type {ReturnType<typeof restoreOrbitSweep>} */ (null),
@@ -122,6 +124,8 @@ export function migrateMicro(raw) {
   const d = loadMicro(raw);
   if (!d) return null;
   const p = { ...newJourney(d.progress.seed), ...d.progress, stage: 0 };
+  p.hitsReceived = 0;
+  p.hitsPartial = true;
   p.absorptionsByStage[0] = p.totalEaten;
   p.xp = migrateAdaptationXp(p.xp, p.level);
   p.mutations = boundedUpgrades(p.mutations);
@@ -194,6 +198,8 @@ export function loadJourney(raw) {
       ...newJourney(p.seed),
       stage,
       absorptionsByStage: restoreAbsorptions(p, stage),
+      hitsReceived: Number.isSafeInteger(p.hitsReceived) && p.hitsReceived >= 0 ? p.hitsReceived : 0,
+      hitsPartial: p.hitsPartial === true || !Number.isSafeInteger(p.hitsReceived) || p.hitsReceived < 0,
       orbitSweep: STAGES[stage].id === 'orbit' && !p.earthConsumed && l.biomass >= STAGES[stage].goal
         ? restoreOrbitSweep(p.orbitSweep) : null,
       cameraEntryRadius: Number.isFinite(p.cameraEntryRadius) && p.cameraEntryRadius >= radiusForMass(stageStartMass(stage)) &&

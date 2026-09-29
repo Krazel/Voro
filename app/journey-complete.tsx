@@ -8,8 +8,9 @@ import './journey-complete.css';
 const art = ['micro','pond','shore','sea','city','orbit','planets','stars','galaxies','universe'];
 const count = (value: number) => Number.isFinite(value) ? value.toLocaleString() : '—';
 
-export function JourneyComplete({ eaten, absorptionsByStage, elapsed, adaptations, onClose, onRestart, stage=STAGES.length-1, complete=true, returnToSettings=false, allowRestart=true }: {
+export function JourneyComplete({ eaten, absorptionsByStage, hitsReceived, hitsPartial, elapsed, adaptations, onClose, onRestart, stage=STAGES.length-1, complete=true, returnToSettings=false, allowRestart=true }: {
   absorptionsByStage: (number | null)[];
+  hitsReceived: number; hitsPartial: boolean;
   stage?: number; complete?: boolean; returnToSettings?: boolean; allowRestart?: boolean;
   eaten: number; elapsed: number; adaptations: number; onClose: () => void; onRestart: () => void;
 }) {
@@ -43,6 +44,7 @@ export function JourneyComplete({ eaten, absorptionsByStage, elapsed, adaptation
           <div><dt>{t('Absorciones')}</dt><dd>{count(eaten)}</dd></div>
           <div><dt>{t('Tiempo')}</dt><dd>{count(Math.floor(elapsed / 60))}{Number.isFinite(elapsed) && <small> {t('min')}</small>}</dd></div>
           <div><dt>{t('Adaptaciones')}</dt><dd>{count(adaptations)}</dd></div>
+          <div><dt>{t('Golpes recibidos')}</dt><dd>{count(hitsReceived)}</dd>{hitsPartial && <small className="journey-hit-note">{t('Desde esta actualización')}</small>}</div>
         </dl>
         <footer className="journey-complete-actions">
           {allowRestart&&<button className="journey-rebirth-control" onClick={() => setConfirm(true)}>{t('Volver a nacer')}</button>}

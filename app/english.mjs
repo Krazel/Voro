@@ -79,6 +79,8 @@ Cancelar|Cancel
 Evolución de Voro|Voro's evolution
 Actual|Current
 Absorciones|Absorptions
+Golpes recibidos|Hits received
+Desde esta actualización|Since this update
 Tiempo|Time
 Volver|Back
 Un juego de Krazel Games|A game by Krazel Games

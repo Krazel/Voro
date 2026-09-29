@@ -117,6 +117,8 @@ export type Snapshot = {
   protected: boolean;
   eaten: number;
   absorptionsByStage: (number | null)[];
+  hitsReceived: number;
+  hitsPartial: boolean;
   size: number;
   elapsed: number;
   dash: number;
@@ -1244,6 +1246,8 @@ export class VoroEngine {
       protected: this.life.invulnerable > 0,
       eaten: this.progress.totalEaten + this.life.eaten,
       absorptionsByStage: journeyAbsorptions(this.progress, this.life),
+      hitsReceived: this.progress.hitsReceived,
+      hitsPartial: this.progress.hitsPartial,
       size: Math.round(40 * Math.sqrt(this.life.biomass / 8)),
       elapsed: this.progress.totalTime + this.life.elapsed,
       dash: this.life.cooldown,
@@ -1804,18 +1808,21 @@ export class VoroEngine {
     if (this.testMode && this.testInvulnerable) return 0;
     if (p.dead || p.invulnerable > 0 || this.progress.completed) return 0;
     if (consumeShield(this.progress, this.stats)) {
+      this.progress.hitsReceived++;
       this.shieldHitAt=this.time;
       this.shieldHitAngle=Math.atan2(source.y-p.y,source.x-p.x);
       p.invulnerable = 0.8;
       this.flash = 0.3;
       this.toast('Tu escudo ha absorbido el golpe.', 2);
       this.impact('shield');
+      this.save();
       this.publish();
       return 0;
     }
     const massBeforeHit = p.biomass;
     const lost = takeDamage(p, source, fraction * INCOMING_DAMAGE_FACTOR, minimum * INCOMING_DAMAGE_FACTOR);
     if (!lost) return 0;
+    this.progress.hitsReceived++;
     loseAdaptationProgress(this.progress, lost / massBeforeHit);
     this.huntingTentacles.clear();
     this.hitFlash = 0.65;
