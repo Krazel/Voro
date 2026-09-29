@@ -34,7 +34,7 @@ export function performanceSummaryText(report) {
 // Delivery adapters allow native sharing to be verified without sending anything.
 export async function deliverReportFile(data, adapters) {
   let name='Voro-rendimiento.txt';
-  try{if(JSON.parse(data).mode==='audio')name='Voro-audio.txt';}catch{}
+  try{const report=JSON.parse(data);if(report.format==='voro-audio-journal-v1')name='Voro-diagnostico-audio.txt';else if(report.mode==='audio')name='Voro-audio.txt';}catch{}
   if (adapters.native) {
     const file=await adapters.write(name,data);
     await adapters.shareNative(file.uri);

@@ -1,11 +1,61 @@
 import UIKit
 import Capacitor
 import StoreKit
+import AVFAudio
 
 class VoroBridgeViewController: CAPBridgeViewController {
     override func capacitorDidLoad() {
         bridge?.registerPluginInstance(VoroReviewPlugin())
         bridge?.registerPluginInstance(VoroBenchmarkDisplayPlugin())
+        bridge?.registerPluginInstance(VoroAudioDiagnosticsPlugin())
+    }
+}
+
+// Observation only: never activates, configures or records the audio session.
+@objc(VoroAudioDiagnosticsPlugin)
+public class VoroAudioDiagnosticsPlugin: CAPPlugin, CAPBridgedPlugin {
+    public let identifier = "VoroAudioDiagnosticsPlugin"
+    public let jsName = "VoroAudioDiagnostics"
+    public let pluginMethods: [CAPPluginMethod] = [CAPPluginMethod(name: "snapshot", returnType: CAPPluginReturnPromise)]
+    private var events: [[String: Any]] = []
+    private var sequence = 0
+    public override func load() {
+        for name in [AVAudioSession.interruptionNotification, AVAudioSession.routeChangeNotification,
+                     AVAudioSession.mediaServicesWereLostNotification, AVAudioSession.mediaServicesWereResetNotification,
+                     UIApplication.willResignActiveNotification, UIApplication.didBecomeActiveNotification] {
+            NotificationCenter.default.addObserver(self, selector: #selector(observe(_:)), name: name, object: nil)
+        }
+        capture("native-load", info: [:])
+    }
+    deinit { NotificationCenter.default.removeObserver(self) }
+    private func state() -> [String: Any] {
+        let s = AVAudioSession.sharedInstance()
+        return ["wallMs": Date().timeIntervalSince1970 * 1000, "uptime": ProcessInfo.processInfo.systemUptime,
+                "sampleRate": s.sampleRate, "ioBufferDuration": s.ioBufferDuration,
+                "outputLatency": s.outputLatency, "outputVolume": s.outputVolume,
+                "category": s.category.rawValue, "mode": s.mode.rawValue,
+                "otherAudioPlaying": s.isOtherAudioPlaying,
+                "secondaryAudioShouldBeSilenced": s.secondaryAudioShouldBeSilencedHint,
+                "outputTypes": s.currentRoute.outputs.map { $0.portType.rawValue },
+                "os": UIDevice.current.systemVersion, "deviceFamily": UIDevice.current.model]
+    }
+    @objc private func observe(_ notification: Notification) {
+        var info: [String: Any] = [:]
+        for key in [AVAudioSessionInterruptionTypeKey, AVAudioSessionInterruptionOptionKey, AVAudioSessionRouteChangeReasonKey] {
+            if let value = notification.userInfo?[key] as? NSNumber { info[key] = value }
+        }
+        // Notifications need not arrive on the main thread. Serialize storage.
+        DispatchQueue.main.async { [weak self] in self?.capture(notification.name.rawValue, info: info) }
+    }
+    private func capture(_ type: String, info: [String: Any]) {
+        sequence += 1
+        let event: [String: Any] = ["sequence": sequence, "type": type, "info": info, "session": state()]
+        events.append(event)
+        if events.count > 40 { events.removeFirst(events.count - 40) }
+        notifyListeners("audioSession", data: event)
+    }
+    @objc func snapshot(_ call: CAPPluginCall) {
+        DispatchQueue.main.async { call.resolve(["session": self.state(), "events": self.events]) }
     }
 }
 

@@ -2,6 +2,16 @@ import { STUDIO_ENGLISH } from './english-studio.mjs';
 // Spanish source text is retained in game data and save files. Only presentation
 // is translated, so species keys, upgrade groups and progression stay stable.
 export const ENGLISH = Object.fromEntries(`
+Diagnóstico de audio|Audio diagnostics
+El audio se registra automáticamente como datos técnicos, sin micrófono. Puedes compartir el registro aunque suene bien.|Technical audio data is logged automatically, without using the microphone. You can share the log even when the sound is fine.
+Lo que escuché|What I heard
+Sin indicar|Not specified
+Sonaba bien|Sound was fine
+Había petardeo|Crackling
+Estaba en silencio|No sound
+Compartir diagnóstico de audio|Share audio diagnostics
+Archivo preparado. Guárdalo y adjúntalo en el chat.|File prepared. Save it and attach it in the chat.
+No se pudo compartir. Puedes volver a intentarlo.|Could not share. Please try again.
 Prueba automática de audio|Automatic audio test
 Música y efectos|Music and sound effects
 He oído un fallo|I heard a glitch

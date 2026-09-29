@@ -11,7 +11,8 @@ export function musicScene(started,completed,stage){return completed?'final':sta
 // Two streaming media decks keep long songs out of the decoded PCM heap.
 // Web Audio gain (rather than HTMLMediaElement.volume) also works on iOS.
 export class MusicPlayer {
-  constructor(context,{createAudio=()=>new Audio(),schedule=(fn)=>setInterval(fn,100),cancel=id=>clearInterval(id)}={}) {
+  constructor(context,{createAudio=()=>new Audio(),schedule=(fn)=>setInterval(fn,100),cancel=id=>clearInterval(id),onDiagnostic=(_kind,_detail)=>{}}={}) {
+    this.onDiagnostic=onDiagnostic;
     this.context=context;this.cancel=cancel;this.active=false;this.unlocked=false;
     this.desired='menu';this.current=null;this.destroyed=false;this.transition=null;this.serial=0;this.blocked=false;
     this.diagnostics={switches:0,loops:0,waiting:0,stalled:0,errors:0};
@@ -66,7 +67,11 @@ export class MusicPlayer {
       &&(!this.active||this.transition||this.current?.audio.paused===false))return;
     const firstUnlock=!this.unlocked;
     this.unlocked=true;this.blocked=false;
-    if(this.context.state!=='running')this.context.resume().catch(()=>{});
+    if(this.context.state!=='running'){
+      this.report('resume-request',{owner:'music',state:this.context.state});
+      this.context.resume().then(()=>this.report('resume-resolved',{owner:'music',state:this.context.state}))
+        .catch(error=>this.report('resume-rejected',{owner:'music',name:error?.name??'Error'}));
+    }
     if(!this.current){this.current=this.decks[0];this.current.gain.gain.value=1;}
     for(const d of this.decks){
       if(!d.id){const track=MUSIC.find(t=>t.id===this.desired);d.id=this.desired;d.audio.src=track.url;}
@@ -75,7 +80,7 @@ export class MusicPlayer {
       // briefly expose the previous biome's song during an interrupted fade.
       if(!firstUnlock&&d!==this.current&&d!==this.transition?.next)continue;
       if(d!==this.current&&d!==this.transition?.next){d.gain.gain.cancelScheduledValues(this.context.currentTime);d.gain.gain.value=0;}
-      d.audio.play().then(()=>{if(this.destroyed||!this.active)d.audio.pause();else if(d!==this.current&&d!==this.transition?.next)d.audio.pause();}).catch(e=>{if(e.name!=='AbortError')this.blocked=true;});
+      d.audio.play().then(()=>{if(this.destroyed||!this.active)d.audio.pause();else if(d!==this.current&&d!==this.transition?.next)d.audio.pause();}).catch(e=>{this.report('play-rejected',{operation:'unlock',name:e.name});if(e.name!=='AbortError')this.blocked=true;});
     }
     if(this.active)this.resume();
   }
@@ -84,7 +89,7 @@ export class MusicPlayer {
     if(!this.current||this.current.id!==this.desired){this.switchTo(this.desired);return;}
     const d=this.current,token=this.serial;
     for(const other of this.decks)if(other!==d&&other!==this.transition?.next){other.audio.pause();other.gain.gain.cancelScheduledValues(this.context.currentTime);other.gain.gain.value=0;}
-    d.audio.play().then(()=>{if(!this.active||this.destroyed){d.audio.pause();return;}if(token!==this.serial)return;this.ramp(d.gain.gain,1,.25);}).catch(()=>{if(token===this.serial)this.blocked=true;});
+    d.audio.play().then(()=>{if(!this.active||this.destroyed){d.audio.pause();return;}if(token!==this.serial)return;this.ramp(d.gain.gain,1,.25);}).catch(error=>{this.report('play-rejected',{operation:'resume',name:error?.name??'Error'});if(token===this.serial)this.blocked=true;});
   }
   switchTo(id,loop=false){
     if(!this.active||this.destroyed||this.blocked||this.transition)return;
@@ -105,7 +110,7 @@ export class MusicPlayer {
       this.current=next;this.ramp(next.gain.gain,1,4);
       if(old)this.ramp(old.gain.gain,0,4);
       this.transition={next,old,token,end:this.context.currentTime+4};
-    }).catch(()=>{if(token===this.serial){next.pending=false;this.transition=null;this.blocked=true;}});
+    }).catch(error=>{this.report('play-rejected',{operation:'switch',name:error?.name??'Error'});if(token===this.serial){next.pending=false;this.transition=null;this.blocked=true;}});
   }
   tick(){
     if(!this.active&&this.pauseAt!=null&&this.context.currentTime>=this.pauseAt){this.decks.forEach(d=>d.audio.pause());this.pauseAt=null;}
@@ -134,6 +139,7 @@ export class MusicPlayer {
     this.decks.forEach(d=>{d.audio.pause();d.audio.removeAttribute('src');d.audio.load();d.source.disconnect();d.gain.disconnect();});
     this.bus.disconnect();
   }
+  report(kind,detail){try{this.onDiagnostic(kind,detail);}catch{/* Diagnostics cannot interrupt playback. */}}
   stats(){return {...this.diagnostics,desired:this.desired,current:this.current?.id||null,active:this.active,blocked:this.blocked,transition:!!this.transition,volumeTarget:this.volumeTarget??0,
     context:this.context.state,sampleRate:this.context.sampleRate,baseLatency:this.context.baseLatency,outputLatency:this.context.outputLatency,events:this.events.slice(),
     decks:this.decks.map(d=>({id:d.id,paused:d.audio.paused,pending:d.pending,readyState:d.audio.readyState,networkState:d.audio.networkState,time:d.audio.currentTime,duration:Number.isFinite(d.audio.duration)?d.audio.duration:null,error:d.audio.error?.code||null}))};}

@@ -4,7 +4,9 @@ import { LanguagePicker, useLanguage } from './language-picker';
 
 import { MUSIC } from './music.mjs';
 import { finaleState } from './universe-finale.mjs';
-import { sharePerformanceFile } from './share-performance';
+import { sharePerformanceFile, shareAudioJournalFile } from './share-performance';
+import { observeNativeAudio } from './audio-session';
+import { AudioDiagnosticSettings } from './audio-diagnostic-settings';
 import { RELEASE } from './release.mjs';
 import { performanceSummaryText } from './performance-report.mjs';
 import { TRANSITION_ROUTES } from './journey-transitions.mjs';
@@ -199,11 +201,13 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
     const game = new VoroEngine(canvas.current!, setState, desktop);
     game.reviewEnabled = Capacitor.getPlatform() === 'ios';
     engine.current = game;
+    const stopAudioObservation=observeNativeAudio((kind,detail)=>game.audioJournal?.event(kind,detail));
     const lab=Capacitor.getPlatform()==='web'&&['localhost','127.0.0.1'].includes(window.location.hostname)
       &&new URLSearchParams(window.location.search).get('lab')==='cosmos';
     setCosmicLab(lab);
     if(lab)(window as unknown as {__voroLab?:VoroEngine}).__voroLab=game;
     return () => {
+      stopAudioObservation();
       game.destroy();
       engine.current = null;
       delete (window as unknown as {__voroLab?:VoroEngine}).__voroLab;
@@ -614,6 +618,11 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
             onSound={() => action('sound')}
             onRestart={() => { resume.current = false; action('restart'); changeSettings(false); }}
           />)}
+          <AudioDiagnosticSettings onShare={async observation=>{
+            const journal=engine.current?.audioJournal;
+            if(!journal)throw new Error('Audio journal unavailable');
+            return shareAudioJournalFile(journal.report(observation));
+          }}/>
           <DialogClose className="settings-close icon-button" aria-label={tr("Cerrar configuración")}><X size={20}/></DialogClose>
           <p className="eyebrow">{tr("VORO · ABISAL")}</p>
           <DialogTitle>{tr("Configuración")}</DialogTitle>

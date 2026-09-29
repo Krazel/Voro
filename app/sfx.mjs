@@ -17,6 +17,7 @@ export class SfxPlayer {
     random = Math.random,
     now = () => performance.now(),
     baseURL = () => globalThis.location?.href,
+    onDiagnostic = (_kind,_detail) => {},
   } = {}) {
     this.context = context;
     this.output = output;
@@ -24,6 +25,7 @@ export class SfxPlayer {
     this.random = random;
     this.now = now;
     this.baseURL = baseURL;
+    this.onDiagnostic=onDiagnostic;
     this.buffers = [];
     this.last = -1;
     this.remaining = [];
@@ -46,13 +48,15 @@ export class SfxPlayer {
     if (this.context.state && !['running','closed'].includes(this.context.state)
       && (retryResume || sinceResume>=1000) && (!this.resuming || retryResume || sinceResume>=1500)) {
       this.lastResumeAt=this.now();this.diagnostics.resumeAttempts++;
+      const resumeId=this.diagnostics.resumeAttempts;
+      this.report('resume-request',{owner:'sfx',resumeId,state:this.context.state});
       const attempt=Promise.resolve().then(()=>{});
       this.resuming=attempt;
       try {
         // Call synchronously to retain the current user activation.
-        Promise.resolve(this.context.resume?.()).catch(()=>{this.diagnostics.resumeErrors++;})
+        Promise.resolve(this.context.resume?.()).then(()=>this.report('resume-resolved',{owner:'sfx',resumeId,state:this.context.state})).catch(error=>{this.diagnostics.resumeErrors++;this.report('resume-rejected',{owner:'sfx',resumeId,name:error?.name??'Error'});})
           .finally(()=>{if(this.resuming===attempt)this.resuming=null;});
-      } catch {this.diagnostics.resumeErrors++;if(this.resuming===attempt)this.resuming=null;}
+      } catch {this.diagnostics.resumeErrors++;this.report('resume-threw',{owner:'sfx',resumeId});if(this.resuming===attempt)this.resuming=null;}
     }
     if (this.loading) return this.loading;
     if (this.buffers.filter(Boolean).length === INGEST_SOUNDS.length || this.now() - this.lastAttemptAt < 5000) return Promise.resolve();
@@ -87,6 +91,7 @@ export class SfxPlayer {
     return this.loading;
   }
   stats() { return { ...this.diagnostics, decoded: this.buffers.filter(Boolean).length, pending: !!this.loading, voices: this.voices.size, contextState: this.context.state || 'unknown', voiceGain: INGEST_GAIN }; }
+  report(kind,detail){try{this.onDiagnostic(kind,detail);}catch{/* Diagnostics cannot interrupt playback. */}}
   /** @param {number|null} sampleIndex Optional diagnostic-only sample selection. */
   playIngest(sampleIndex = null) {
     const at = this.now();

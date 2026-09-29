@@ -1,0 +1,70 @@
+[
+  {
+    "browser": "edge",
+    "device": "iphone",
+    "locale": "es-ES",
+    "errors": [],
+    "audioContextAvailable": true,
+    "bytes": 34848,
+    "samples": 1,
+    "events": 23,
+    "previousRetained": true,
+    "box": {
+      "x": 19.5,
+      "y": 485.09375,
+      "width": 351,
+      "height": 258.5
+    }
+  },
+  {
+    "browser": "edge",
+    "device": "ipad",
+    "locale": "en-US",
+    "errors": [],
+    "audioContextAvailable": true,
+    "bytes": 34838,
+    "samples": 1,
+    "events": 23,
+    "previousRetained": true,
+    "box": {
+      "x": 377,
+      "y": 475.640625,
+      "width": 440,
+      "height": 258.5
+    }
+  },
+  {
+    "browser": "webkit",
+    "device": "iphone",
+    "locale": "es-ES",
+    "errors": [],
+    "audioContextAvailable": false,
+    "bytes": 8146,
+    "samples": 1,
+    "events": 17,
+    "previousRetained": true,
+    "box": {
+      "x": 19.5,
+      "y": 480.09375,
+      "width": 351,
+      "height": 263.5
+    }
+  },
+  {
+    "browser": "webkit",
+    "device": "ipad",
+    "locale": "en-US",
+    "errors": [],
+    "audioContextAvailable": false,
+    "bytes": 8594,
+    "samples": 1,
+    "events": 18,
+    "previousRetained": true,
+    "box": {
+      "x": 377,
+      "y": 470.640625,
+      "width": 440,
+      "height": 263.5
+    }
+  }
+]

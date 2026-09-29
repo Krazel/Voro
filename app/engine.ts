@@ -14,6 +14,7 @@ import { StageAssets } from './stage-assets.mjs';
 import { FrameMonitor } from './frame-monitor.mjs';
 import { BenchmarkTour, tourReport } from './benchmark-tour.mjs';
 import { AudioBenchmark, AudioProbe } from './audio-benchmark.mjs';
+import { AudioJournal, audioSnapshot, JOURNAL_LIMITS } from './audio-journal.mjs';
 import { compactPerformanceReport } from './performance-report.mjs';
 import { AnimationSheets } from './animation-sheets.mjs';
 import { adaptationYield, ADAPTATION_FOOD_GAIN, INCOMING_DAMAGE_FACTOR, CONTACT_BIOMASS_LOSS } from './campaign-pacing.mjs';
@@ -485,6 +486,8 @@ export class VoroEngine {
   }[] = [];
   rng = random(834);
   audioStarted = false;
+  audioJournal: AudioJournal | null = null;
+  audioJournalTimer: number | undefined;
   reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   readonly desktop: boolean;
   constructor(canvas: HTMLCanvasElement, emit: (s: Snapshot) => void, desktop = false) {
@@ -539,7 +542,27 @@ export class VoroEngine {
     this.observer = new ResizeObserver(() => this.resize());
     this.observer.observe(canvas);
     const opt = { signal: this.lifecycle.signal };
-    const unlockMusic = () => { if(this.sound && !document.hidden) { this.audioFocus=true;this.initAudio(true); this.setAudio(); this.music?.unlock(); } };
+    if(typeof window.setInterval==='function'){
+      let storage:Storage|null=null;try{storage=window.localStorage;}catch{}
+      this.audioJournal=new AudioJournal({snapshot:()=>audioSnapshot(this),storage,
+        metadata:{...RELEASE,desktop,userAgent:navigator.userAgent}});
+      this.audioJournalTimer=window.setInterval(()=>this.audioJournal?.sample(),JOURNAL_LIMITS.interval);
+      const lifecycleEvent=(event:Event)=>{
+        this.audioJournal?.event('lifecycle-before',{type:event.type});
+        queueMicrotask(()=>{
+          this.audioJournal?.event('lifecycle-after',{type:event.type});
+          if(document.hidden||event.type==='pagehide'||event.type==='blur')this.audioJournal?.flush();
+        });
+      };
+      for(const name of ['focus','blur','pageshow','pagehide'])window.addEventListener(name,lifecycleEvent,{...opt,capture:true});
+      document.addEventListener('visibilitychange',lifecycleEvent,{...opt,capture:true});
+    }
+    const unlockMusic = () => {
+      const trace=!this.audioStarted||this.audio?.state!=='running'||this.music?.blocked;
+      if(trace)this.audioJournal?.event('gesture-before');
+      if(this.sound && !document.hidden) { this.audioFocus=true;this.initAudio(true); this.setAudio(); this.music?.unlock(); }
+      if(trace)this.audioJournal?.event('gesture-after');
+    };
     window.addEventListener('pointerdown',unlockMusic,opt);
     window.addEventListener('keydown',unlockMusic,opt);
     window.addEventListener('focus',()=>this.restoreForegroundAudio(),opt);
@@ -776,11 +799,13 @@ export class VoroEngine {
     this.publish();
   }
   restoreForegroundAudio() {
+    this.audioJournal?.event('foreground-before');
     if(this.destroyed || document.hidden)return;
     this.audioFocus=true;
     this.resumeFinaleFromBackground();
     if(this.sound && this.audioStarted){this.initAudio(true);this.music?.unlock();}
     this.setAudio();
+    this.audioJournal?.event('foreground-after');
   }
   initAudio(retryResume = false) {
     if(this.audio?.state==='closed') {
@@ -799,8 +824,9 @@ export class VoroEngine {
       this.master.gain.value = 0;
       this.effectsGainTarget = null;
       this.master.connect(this.audio.destination);
-      this.music = new MusicPlayer(this.audio);
-      this.sfx = new SfxPlayer(this.audio, this.master);
+      this.music = new MusicPlayer(this.audio,{onDiagnostic:(kind:string,detail:object)=>this.audioJournal?.event(kind,detail)});
+      this.sfx = new SfxPlayer(this.audio, this.master,{onDiagnostic:(kind:string,detail:object)=>this.audioJournal?.event(kind,detail)});
+      this.audioJournal?.attach(this.audio,this.music.decks);
       this.sfx.unlock();
       this.audio.addEventListener('statechange',()=>{
         if(this.destroyed)return;
@@ -809,7 +835,8 @@ export class VoroEngine {
         if(this.audio?.state==='running')this.music?.tick();
       },{signal:this.lifecycle.signal});
       this.setAudio();
-    } catch {
+    } catch (error) {
+      this.audioJournal?.event('audio-init-error',{name:error instanceof Error?error.name:'Error',message:String(error).slice(0,160)});
       this.sfx?.destroy();this.sfx=null;
       this.music?.destroy();this.music=null;
       this.audio?.close().catch(()=>{});this.audio = null;this.audioStarted=false;
@@ -2750,6 +2777,8 @@ export class VoroEngine {
     }
   }
   destroy() {
+    if(this.audioJournalTimer!==undefined)window.clearInterval(this.audioJournalTimer);
+    this.audioJournal?.destroy();
     this.audioProbe?.destroy();this.audioProbe=null;this.stopAudioTestVoices();
     this.universeFinale?.destroy();
     this.testBackup?.universeFinale?.destroy();
