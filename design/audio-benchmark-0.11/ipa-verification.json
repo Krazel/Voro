@@ -1,0 +1,23 @@
+{
+  "version": "0.11",
+  "build": "1",
+  "bundle": "com.dmkr.voro",
+  "deviceFamilies": [
+    1,
+    2
+  ],
+  "sha256": "cb75466a65dddbd95181ae809b968086ecf227d4a3890ec6b6b77e8b016eab1b",
+  "bytes": 349454903,
+  "crcValid": true,
+  "markers": {
+    "Voro-audio.txt": true,
+    "heard-glitch": true,
+    "audioProbe": true,
+    "underrunEvents": true,
+    "Probar audio": true
+  },
+  "audioFiles": 17,
+  "audioHashesCompared": 17,
+  "physicalDeviceVerified": false,
+  "libraryRevision": 275
+}
