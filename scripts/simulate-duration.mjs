@@ -17,13 +17,15 @@ const profiles={
 };
 const profile=process.argv[2]||'direct',seed=Number(process.argv[3]||41),hz=Number(process.argv[4]||30);
 if(!profiles[profile]||!Number.isSafeInteger(seed)||![30,60].includes(hz))throw new Error('Usage: simulate-duration.mjs precise|direct|explorer SEED [30|60]');
-const config=profiles[profile],out='design/duration-simulation-2026-09-28';mkdirSync(out,{recursive:true});
+const config=profiles[profile],out=process.argv[5]||'design/duration-simulation-2026-09-28';mkdirSync(out,{recursive:true});
 // Freeze ambient randomness as well as the world seed, for repeatable runs.
 let randomState=seed>>>0;
 Math.random=()=>{randomState=(Math.imul(randomState,1664525)+1013904223)>>>0;return randomState/4294967296;};
 const started=performance.now(),dt=1/hz,maxSeconds=3*3600;
-const {game:g}=makeEngine();g.progress=newJourney(seed);g.life=journeyLife(g.progress);g.world=new JourneyWorld(seed,[],0);g.seed();g.action('start');
+const {game:g}=makeEngine();g.sound=false;g.progress=newJourney(seed);g.life=journeyLife(g.progress);g.world=new JourneyWorld(seed,[],0);g.seed();g.action('start');
 const stages=[],choices=[];
+const receiveHit=g.receiveHit.bind(g);
+g.receiveHit=(...args)=>{const lost=receiveHit(...args);if(lost&&stages.length){stages.at(-1).hits++;stages.at(-1).biomassLost+=lost;}return lost;};
 let simulated=0,active=0,cinematic=0,deaths=0,lastStage=-1,target=null,nextDecision=0,nextTarget=0,finishedAt=null;
 
 function steer(){
@@ -60,9 +62,9 @@ function steer(){
 
 for(let frame=0;frame<maxSeconds*hz;frame++){
  if(g.progress.stage!==lastStage){
-  if(stages.length)stages.at(-1).end=simulated;
+  if(stages.length){stages.at(-1).end=simulated;stages.at(-1).completed=true;}
   lastStage=g.progress.stage;target=null;
-  stages.push({id:STAGES[lastStage].id,start:simulated,choices:0,deaths:0});
+  stages.push({id:STAGES[lastStage].id,start:simulated,choices:0,deaths:0,hits:0,biomassLost:0,completed:false,entryUpgrades:g.progress.level,entryMass:g.life.biomass});
   console.log(`${profile}/${seed}/${hz}Hz: ${STAGES[lastStage].id} at ${(simulated/60).toFixed(1)} min`);
  }
  if(g.life.dead){deaths++;stages.at(-1).deaths++;if(deaths>=10)break;g.action('retry');target=null;}
@@ -79,9 +81,11 @@ for(let frame=0;frame<maxSeconds*hz;frame++){
 }
 stages.at(-1).end=simulated;
 const completed=g.progress.completed&&g.ending<=0,wallSeconds=(performance.now()-started)/1000;
+stages.at(-1).completed=completed;
 const menuSeconds=choices.length*config.choiceSeconds+deaths*5;
 const result={
  version:RELEASE,source:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),profile,seed,hz,config,
+ maxSeconds,finalStage:STAGES[g.progress.stage].id,finalMass:g.life.biomass,
  completed,stoppedReason:completed?'completed':deaths>=10?'death-limit':'time-limit',
  simulationSeconds:simulated,activeSeconds:active,cinematicSeconds:cinematic,menuSeconds,
  estimatedSessionSeconds:simulated+menuSeconds,wallSeconds,speedup:simulated/wallSeconds,
