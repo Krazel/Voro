@@ -6,6 +6,6 @@ const native=registerPlugin<{
 }>('VoroAudioDiagnostics');
 
 export function observeNativeAudio(record:(event:string,detail:Record<string,unknown>)=>void,onActivity:(active:boolean)=>void){
-  if(!Capacitor.isNativePlatform())return ()=>{};
+  if(!Capacitor.isNativePlatform())return Object.assign(()=>{},{recheck:()=>false});
   return observeAudioSession(native,record,onActivity);
 }

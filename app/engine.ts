@@ -459,6 +459,8 @@ export class VoroEngine {
   sfx: SfxPlayer | null = null;
   audioFocus = true;
   nativeAudioActive = true;
+  recheckNativeAudio: (()=>boolean) | null = null;
+  nativeInterruptionObserved = false;
   effectsGainTarget: number | null = null;
   audioHealthAt = -Infinity;
   audio: AudioContext | null = null;
@@ -804,8 +806,17 @@ export class VoroEngine {
     this.setAudio();
     this.audioJournal?.event('foreground-after');
   }
+  canResumeAudio() {
+    if((this.audio?.state as string)==='interrupted'&&!this.nativeInterruptionObserved){
+      this.nativeInterruptionObserved=true;
+      // WebKit can report interruption before Capacitor delivers native inactivity.
+      // Close the gate synchronously, then require a fresh native activity read.
+      this.recheckNativeAudio?.();
+    }
+    return !this.destroyed&&this.nativeAudioActive&&!document.hidden;
+  }
   initAudio(retryResume = false) {
-    if(!this.nativeAudioActive||document.hidden)return;
+    if(!this.canResumeAudio())return;
     if(this.audio?.state==='closed') {
       this.sfx?.destroy();this.music?.destroy();this.master?.disconnect();
       this.sfx=null;this.music=null;this.audio=null;this.master=null;this.audioStarted=false;
@@ -818,16 +829,19 @@ export class VoroEngine {
     this.audioStarted = true;
     try {
       this.audio = new AudioContext(AUDIO_CONTEXT_OPTIONS);
+      this.nativeInterruptionObserved=false;
       this.master = this.audio.createGain();
       this.master.gain.value = 0;
       this.effectsGainTarget = null;
       this.master.connect(this.audio.destination);
       this.music = new MusicPlayer(this.audio,{ownsContextResume:false,onDiagnostic:(kind:string,detail:object)=>this.audioJournal?.event(kind,detail)});
-      this.sfx = new SfxPlayer(this.audio, this.master,{onDiagnostic:(kind:string,detail:object)=>this.audioJournal?.event(kind,detail)});
+      this.sfx = new SfxPlayer(this.audio, this.master,{canResume:()=>this.canResumeAudio(),onDiagnostic:(kind:string,detail:object)=>this.audioJournal?.event(kind,detail)});
       this.audioJournal?.attach(this.audio,this.music.decks);
       this.sfx.unlock();
       this.audio.addEventListener('statechange',()=>{
         if(this.destroyed)return;
+        if(this.audio?.state==='running')this.nativeInterruptionObserved=false;
+        this.canResumeAudio();
         this.effectsGainTarget=null;this.setAudio();
         if(this.effectsAudible())this.sfx?.unlock();
         if(this.audio?.state==='running')this.music?.tick();

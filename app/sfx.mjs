@@ -18,6 +18,7 @@ export class SfxPlayer {
     now = () => performance.now(),
     baseURL = () => globalThis.location?.href,
     onDiagnostic = (_kind,_detail) => {},
+    canResume = /** @returns {boolean} */ () => true,
   } = {}) {
     this.context = context;
     this.output = output;
@@ -26,6 +27,7 @@ export class SfxPlayer {
     this.now = now;
     this.baseURL = baseURL;
     this.onDiagnostic=onDiagnostic;
+    this.canResume=canResume;
     this.buffers = [];
     this.last = -1;
     this.remaining = [];
@@ -45,7 +47,7 @@ export class SfxPlayer {
     const sinceResume = this.now()-this.lastResumeAt;
     // A resume requested while iOS is backgrounded can remain pending. A new
     // foreground/gesture attempt must not wait forever for that old promise.
-    if (this.context.state && !['running','closed'].includes(this.context.state)
+    if (this.context.state && !['running','closed'].includes(this.context.state) && this.canResume()
       && (retryResume || sinceResume>=1000) && (!this.resuming || retryResume || sinceResume>=1500)) {
       this.lastResumeAt=this.now();this.diagnostics.resumeAttempts++;
       const resumeId=this.diagnostics.resumeAttempts;

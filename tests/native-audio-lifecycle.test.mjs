@@ -20,7 +20,7 @@ function fixture(){
     destroy(){g.destroy();document.hidden=false;if(oldContext===undefined)delete globalThis.AudioContext;else globalThis.AudioContext=oldContext;if(oldAudio===undefined)delete globalThis.Audio;else globalThis.Audio=oldAudio;}};
 }
 
-test('Recorded iOS order: native inactivity pauses before web visibility and prevents premature resume',async()=>{
+test('Native inactivity before web visibility prevents premature resume',async()=>{
   const f=fixture(),{g,context}=f;
   try{
     await settle();const plays=f.plays;
@@ -40,6 +40,71 @@ test('Recorded iOS order: native inactivity pauses before web visibility and pre
     g.action('pause');await settle();assert.equal(g.paused,false);assert.ok(f.media.some(a=>!a.paused));
     assert.equal(g.music.volumeTarget,.42);
   }finally{f.destroy();}
+});
+
+test('0.12.1 recorded order: interruption before native inactivity blocks every resume path until fresh confirmation',async()=>{
+  const f=fixture(),{g,context}=f,pending=[];let listener;
+  const stop=observeAudioSession({addListener:async(_name,fn)=>{listener=fn;return{remove(){}};},
+    snapshot:()=>new Promise(resolve=>pending.push(resolve))},()=>{},active=>g.setNativeAudioActive(active));
+  g.recheckNativeAudio=stop.recheck;
+  try{
+    await settle();pending.shift()({activity:{sequence:1,allowed:true}});await settle();
+    g.action('pause');assert.equal(g.paused,false);
+    for(let i=0;i<3;i++){
+      const before=f.resumes,seq=2+i*2;
+      context.state='interrupted';context.dispatchEvent(new Event('statechange'));
+      assert.equal(g.nativeAudioActive,false,'Interruption closes the gate before native notification');
+      g.initAudio(true);g.sfx.unlock(true);g.prepareEffects();g.restoreForegroundAudio();window.dispatchEvent(new Event('pointerdown'));
+      context.state='suspended';context.dispatchEvent(new Event('statechange'));await settle();
+      assert.equal(f.resumes,before);assert.ok(f.media.every(a=>a.paused));
+      listener({sequence:seq,activity:{sequence:seq,allowed:false}});
+      // A stale active snapshot must not defeat the newer inactive notification.
+      pending.shift()({activity:{sequence:seq-1,allowed:true}});await settle();
+      assert.equal(f.resumes,before);assert.equal(g.nativeAudioActive,false);
+      listener({sequence:seq+1,activity:{sequence:seq+1,allowed:true}});await settle();
+      assert.equal(f.resumes,before+1);assert.equal(g.paused,true);
+      assert.ok(f.media.every(a=>a.paused));g.action('pause');await settle();
+      assert.equal(g.paused,false);assert.ok(f.media.some(a=>!a.paused));
+    }
+  }finally{stop();f.destroy();}
+});
+
+test('An interrupted native context can recover in foreground with an unchanged, freshly confirmed activity sequence',async()=>{
+  const f=fixture(),{g,context}=f,pending=[];
+  const stop=observeAudioSession({addListener:async()=>({remove(){}}),snapshot:()=>new Promise(resolve=>pending.push(resolve))},()=>{},active=>g.setNativeAudioActive(active));
+  g.recheckNativeAudio=stop.recheck;
+  try{
+    await settle();pending.shift()({activity:{sequence:7,allowed:true}});await settle();g.action('pause');
+    // Exercise the effect/health path before statechange is delivered too.
+    context.state='interrupted';g.initAudio();await settle();
+    assert.equal(f.resumes,0);assert.equal(g.nativeAudioActive,false);
+    pending.shift()({activity:{sequence:7,allowed:true}});await settle();
+    assert.equal(f.resumes,1);assert.equal(context.state,'running');assert.equal(g.paused,true);
+  }finally{stop();f.destroy();}
+});
+
+test('Rechecks hold early active events, preserve mute, and ignore replies after teardown',async()=>{
+  for(const dispose of [false,true]){
+    const f=fixture(),{g,context}=f,pending=[];let listener;
+    const stop=observeAudioSession({addListener:async(_name,fn)=>{listener=fn;return{remove(){}};},snapshot:()=>new Promise(resolve=>pending.push(resolve))},()=>{},active=>g.setNativeAudioActive(active));
+    g.recheckNativeAudio=stop.recheck;
+    try{
+      await settle();pending.shift()({activity:{sequence:1,allowed:true}});await settle();
+      g.sound=false;context.state='interrupted';context.dispatchEvent(new Event('statechange'));await settle();
+      listener({sequence:2,activity:{sequence:2,allowed:true}});assert.equal(g.nativeAudioActive,false);
+      if(dispose)stop();pending.shift()({activity:{sequence:2,allowed:true}});await settle();
+      assert.equal(f.resumes,0);assert.equal(g.sound,false);assert.equal(g.nativeAudioActive,!dispose);
+    }finally{stop();f.destroy();}
+  }
+});
+
+test('A failed interruption check stays closed and retries when the page returns',async()=>{
+  const doc=Object.assign(new EventTarget(),{hidden:false}),states=[],pending=[];
+  const stop=observeAudioSession({addListener:async()=>({remove(){}}),snapshot:()=>new Promise((resolve,reject)=>pending.push({resolve,reject}))},()=>{},active=>states.push(active),doc);
+  await settle();pending.shift().resolve({activity:{sequence:1,allowed:true}});await settle();
+  stop.recheck();await settle();pending.shift().reject(Error('bridge'));await settle();assert.equal(states.at(-1),false);
+  doc.dispatchEvent(new Event('visibilitychange'));await settle();
+  pending.shift().resolve({activity:{sequence:1,allowed:true}});await settle();assert.equal(states.at(-1),true);stop();
 });
 
 test('Native active before visibility waits for the page; muted foreground never starts audio',async()=>{

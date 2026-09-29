@@ -202,6 +202,7 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
     game.reviewEnabled = Capacitor.getPlatform() === 'ios';
     engine.current = game;
     const stopAudioObservation=observeNativeAudio((kind,detail)=>game.audioJournal?.event(kind,detail),active=>game.setNativeAudioActive(active));
+    game.recheckNativeAudio=stopAudioObservation.recheck;
     const lab=Capacitor.getPlatform()==='web'&&['localhost','127.0.0.1'].includes(window.location.hostname)
       &&new URLSearchParams(window.location.search).get('lab')==='cosmos';
     setCosmicLab(lab);
