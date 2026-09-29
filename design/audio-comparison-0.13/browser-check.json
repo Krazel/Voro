@@ -1,0 +1,62 @@
+[
+  {
+    "browser": "edge",
+    "device": "iphone",
+    "locale": "es-ES",
+    "hasContext": true,
+    "errors": [],
+    "box": {
+      "x": 38.5,
+      "y": 81.09375,
+      "width": 313,
+      "height": 505.5
+    },
+    "export": true,
+    "observationsAreSimulated": true
+  },
+  {
+    "browser": "edge",
+    "device": "ipad",
+    "locale": "en-US",
+    "hasContext": true,
+    "errors": [],
+    "box": {
+      "x": 396,
+      "y": 68.640625,
+      "width": 402,
+      "height": 460.5
+    },
+    "export": true,
+    "observationsAreSimulated": true
+  },
+  {
+    "browser": "webkit",
+    "device": "iphone",
+    "locale": "es-ES",
+    "hasContext": false,
+    "errors": [],
+    "box": {
+      "x": 38.5,
+      "y": 119.09375,
+      "width": 313,
+      "height": 362
+    },
+    "export": true,
+    "observationsAreSimulated": true
+  },
+  {
+    "browser": "webkit",
+    "device": "ipad",
+    "locale": "en-US",
+    "hasContext": false,
+    "errors": [],
+    "box": {
+      "x": 396,
+      "y": 154.640625,
+      "width": 402,
+      "height": 317
+    },
+    "export": true,
+    "observationsAreSimulated": true
+  }
+]

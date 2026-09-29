@@ -5,8 +5,10 @@ import assert from 'node:assert/strict';
 import { BACKGROUND_ASSETS } from '../app/background-assets.mjs';
 import { ATLAS_URLS } from '../app/journey-data.mjs';
 import { INGEST_SOUNDS } from '../app/sfx.mjs';
+import { AUDIO_COMPARISON } from '../app/audio-comparison.mjs';
 import animationSheets from '../app/animation-sheets.json' with { type: 'json' };
 const root = path.resolve(process.argv[2] || 'mobile-dist');
+assert.ok(fs.readFileSync(path.join(root,AUDIO_COMPARISON.url)).equals(fs.readFileSync(path.join('public',AUDIO_COMPARISON.url))), 'A/B excerpt missing or stale');
 for (const old of ['shore-v2.png', 'sea-v2.png', 'inhabitants/environments.png','backgrounds/city-variants.webp']) {
   assert.ok(!fs.existsSync(path.join(root, old)), `Obsolete background shipped: ${old}`);
 }

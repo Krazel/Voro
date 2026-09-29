@@ -1,0 +1,8 @@
+{
+  "source": "public/music/solace.mp3",
+  "excerpt": "public\\music\\solace-comparison.mp3",
+  "sha256": "da2dae6d118d9f1c08b62cd7bbb3adbf9a6950a66dfdeafd5eefa78efabfa2e4",
+  "bytes": 281183,
+  "method": "First 14 seconds, MP3 stream copy without re-encoding. A/B plays first 12 seconds.",
+  "credit": "Solace by Scott Buckley, existing game credit and licence retained."
+}

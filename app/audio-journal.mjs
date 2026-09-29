@@ -28,6 +28,7 @@ export class AudioJournal {
   constructor({snapshot=()=>({}),storage=null,now=Date.now,clock=()=>performance.now(),metadata={}}={}) {
     this.snapshot=snapshot;this.storage=storage;this.now=now;this.clock=clock;
     this.closed=false;this.storageStatus=storage?'available':'unavailable';this.previous=null;this.listeners=[];
+    this.comparison=null;
     try{
       const raw=storage?.getItem(AUDIO_JOURNAL_KEY);
       if(raw&&raw.length<=JOURNAL_LIMITS.bytes){const saved=JSON.parse(raw);if(saved.format==='voro-audio-journal-v1')this.previous=saved.current??null;}
@@ -51,7 +52,8 @@ export class AudioJournal {
     this.event('audio-created');
   }
   detach(){this.listeners.forEach(remove=>remove());this.listeners=[];}
-  data(){return {format:'voro-audio-journal-v1',current:this.current,previous:this.previous};}
+  setComparison(report){this.comparison=report;this.flush();}
+  data(){return {format:'voro-audio-journal-v1',current:{...this.current,comparison:this.comparison},previous:this.previous};}
   flush(){
     if(this.closed)return;
     this.lastSave=this.now();

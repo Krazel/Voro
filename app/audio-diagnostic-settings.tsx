@@ -1,7 +1,9 @@
 'use client';
 import {useState} from 'react';
 import {t} from './language.mjs';
-export function AudioDiagnosticSettings({onShare}:{onShare:(observation:string)=>Promise<string>}) {
+import {AudioComparisonSettings} from './audio-comparison-settings';
+import {AudioComparison} from './audio-comparison.mjs';
+export function AudioDiagnosticSettings({onShare,getComparison,sound}:{onShare:(observation:string)=>Promise<string>,getComparison:()=>AudioComparison|null,sound:boolean}) {
   const [observation,setObservation]=useState('unspecified'),[busy,setBusy]=useState(false),[message,setMessage]=useState('');
   const share=async()=>{
     setBusy(true);setMessage('');
@@ -10,6 +12,7 @@ export function AudioDiagnosticSettings({onShare}:{onShare:(observation:string)=
     finally{setBusy(false);}
   };
   return <section className="audio-diagnostics" aria-label={t('Diagnóstico de audio')}>
+    <AudioComparisonSettings getComparison={getComparison} sound={sound}/>
     <p>{t('El audio se registra automáticamente como datos técnicos, sin micrófono. Puedes compartir el registro aunque suene bien.')}</p>
     <label>{t('Lo que escuché')}<select value={observation} onChange={e=>setObservation(e.target.value)}>
       <option value="unspecified">{t('Sin indicar')}</option><option value="good">{t('Sonaba bien')}</option>

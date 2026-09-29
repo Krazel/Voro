@@ -42,6 +42,23 @@ test('Native inactivity before web visibility prevents premature resume',async()
   }finally{f.destroy();}
 });
 
+test('Integrated comparison shares the game context and stops on mute, settings close and native inactivity',async()=>{
+  const f=fixture(),{g,context}=f;
+  try{
+    await settle();assert.equal(g.getAudioComparison(),null,'Available only in Settings');
+    g.settingsOpen=true;g.setAudio();
+    context.decodeAudioData=async()=>({duration:14,length:672000,numberOfChannels:2});
+    context.createBufferSource=()=>({connect(){},disconnect(){},start(){},stop(){}});
+    const c=g.getAudioComparison();c.fetcher=async()=>({ok:true,arrayBuffer:async()=>new ArrayBuffer(4)});
+    assert.equal(c.context,context);await c.prepare();await c.play('A');
+    assert.equal(c.phase,'playing');assert.ok(g.music.decks.every(d=>d.audio.paused));assert.equal(g.effectsAudible(),false);
+    g.sound=false;g.setAudio();assert.equal(c.phase,'stopped');assert.equal(c.audio.paused,true);assert.equal(g.getAudioComparison(),null);
+    g.sound=true;await c.play('B');g.settingsOpen=false;g.setAudio();assert.equal(c.phase,'stopped');
+    g.settingsOpen=true;g.setAudio();await c.play('A');g.setNativeAudioActive(false);assert.equal(c.phase,'stopped');assert.equal(c.audio.paused,true);
+    g.setNativeAudioActive(true);await settle();assert.equal(c.phase,'stopped');assert.equal(c.audio.paused,true);
+  }finally{f.destroy();}
+});
+
 test('0.12.1 recorded order: interruption before native inactivity blocks every resume path until fresh confirmation',async()=>{
   const f=fixture(),{g,context}=f,pending=[];let listener;
   const stop=observeAudioSession({addListener:async(_name,fn)=>{listener=fn;return{remove(){}};},

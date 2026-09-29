@@ -1,0 +1,15 @@
+{
+  "screen": "Existing audio diagnostic card expanded with A/B controls",
+  "platform": "Browser preview of iOS bundle, not physical iOS",
+  "date": "2026-09-30",
+  "screens": [
+    {
+      "file": "design\\audio-comparison-0.13\\edge-iphone.png",
+      "sha256": "59c4955e895dad4b52dd284429877e956b0daab90725edb93b1e252fe4680f74"
+    },
+    {
+      "file": "design\\audio-comparison-0.13\\edge-ipad.png",
+      "sha256": "f7e362807a0bc76921357011be21505c865030a3bf8c2410ae92965ab8143467"
+    }
+  ]
+}

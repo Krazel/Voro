@@ -15,6 +15,7 @@ import { FrameMonitor } from './frame-monitor.mjs';
 import { BenchmarkTour, tourReport } from './benchmark-tour.mjs';
 import { AudioBenchmark, AudioProbe } from './audio-benchmark.mjs';
 import { AudioJournal, audioSnapshot, JOURNAL_LIMITS } from './audio-journal.mjs';
+import { AudioComparison } from './audio-comparison.mjs';
 import { compactPerformanceReport } from './performance-report.mjs';
 import { AnimationSheets } from './animation-sheets.mjs';
 import { adaptationYield, ADAPTATION_FOOD_GAIN, INCOMING_DAMAGE_FACTOR, CONTACT_BIOMASS_LOSS } from './campaign-pacing.mjs';
@@ -459,6 +460,7 @@ export class VoroEngine {
   sfx: SfxPlayer | null = null;
   audioFocus = true;
   nativeAudioActive = true;
+  audioComparison: AudioComparison | null = null;
   recheckNativeAudio: (()=>boolean) | null = null;
   nativeInterruptionObserved = false;
   effectsGainTarget: number | null = null;
@@ -785,6 +787,7 @@ export class VoroEngine {
     this.publish();
   }
   loseAudioFocus() {
+    this.audioComparison?.stop('focus-lost');
     if(this.started && this.ending>0 && !this.paused && !this.settingsOpen)this.finaleBackgroundPause=true;
     this.audioFocus=false;this.setAudio();
     this.tilt.read(false);this.save();this.keys.clear();this.pointer=null;
@@ -814,6 +817,19 @@ export class VoroEngine {
       this.recheckNativeAudio?.();
     }
     return !this.destroyed&&this.nativeAudioActive&&!document.hidden;
+  }
+  getAudioComparison() {
+    if(!this.sound||!this.settingsOpen||!this.canResumeAudio())return null;
+    this.initAudio(true);
+    if(!this.audio)return null;
+    if(this.audioComparison?.context!==this.audio){this.audioComparison?.destroy();this.audioComparison=null;}
+    if(!this.audioComparison)this.audioComparison=new AudioComparison(this.audio,{
+      allowed:()=>this.sound&&this.settingsOpen&&this.audioFocus&&this.canResumeAudio(),
+      record:(kind:string,detail:object,report:object)=>{this.audioJournal?.event(kind,detail);this.audioJournal?.setComparison(report);},
+    });
+    // Configuration pauses gameplay; pause both music decks now, including a fade.
+    this.music?.decks.forEach(d=>d.audio.pause());
+    return this.audioComparison;
   }
   initAudio(retryResume = false) {
     if(!this.canResumeAudio())return;
@@ -862,6 +878,7 @@ export class VoroEngine {
       !finalSilence && !this.reviewHold && this.sound && this.audioFocus && this.nativeAudioActive && !document.hidden && !this.paused && !this.settingsOpen && !this.life.dead, document.hidden || !this.audioFocus || !this.nativeAudioActive, fade, this.progress.offer.length ? .3 : 1);
   }
   setAudio() {
+    if(!this.sound||!this.settingsOpen||!this.audioFocus||!this.nativeAudioActive||document.hidden)this.audioComparison?.stop('game-state');
     this.syncMusic();
     const target=this.effectsAudible()?EFFECTS_MASTER_GAIN:0;
     if(!target || (this.audio && this.audio.state!=='running'))this.sfx?.cancelImpacts?.();
@@ -2789,6 +2806,7 @@ export class VoroEngine {
     }
   }
   destroy() {
+    this.audioComparison?.destroy();this.audioComparison=null;
     if(this.audioJournalTimer!==undefined)window.clearInterval(this.audioJournalTimer);
     this.audioJournal?.destroy();
     this.audioProbe?.destroy();this.audioProbe=null;this.stopAudioTestVoices();
