@@ -1,6 +1,6 @@
 # Pausa nativa y recuperación del audio · 0.12.1 (1)
 
-Implementación autorizada el 29-09-2026, a partir del diagnóstico físico de 0.12 y el relato de música que continúa al salir y petardeo al regresar. Responsable: chat de audio `01a0ee97-7b09-79b0-96d7-1d8a7b1aa465`. La entrega anterior sigue siendo 0.12 (1) hasta verificar TestFlight.
+Implementación autorizada el 29-09-2026, a partir del diagnóstico físico de 0.12 y el relato de música que continúa al salir y petardeo al regresar. Responsable: chat de audio `01a0ee97-7b09-79b0-96d7-1d8a7b1aa465`. **0.12.1 (1) distribuida y verificada en TestFlight interno**.
 
 ## Cambio
 
@@ -15,12 +15,21 @@ La API [setAllMediaPlaybackSuspended](https://developer.apple.com/documentation/
 
 ## Verificación
 
-- **310/310** pruebas locales correctas; TypeScript y build móvil con recursos verificados.
-- Cinco regresiones nuevas: orden nativo-inactivo → interrupted → oculto → foco temprano → permiso nativo; orden inverso de visibilidad/actividad con sonido activado o desactivado; nueva salida con resume pendiente; respuestas e historial antiguos; limpieza/fallo del plugin.
+- **311/311** pruebas correctas en CI sobre el código distribuido. Ejecución completa local inicial de 310 pruebas y las seis regresiones finales dirigidas correctas; TypeScript y build móvil con recursos verificados.
+- Seis regresiones nuevas: orden nativo-inactivo → interrupted → oculto → foco temprano → permiso nativo; orden inverso de visibilidad/actividad con sonido activado o desactivado; nueva salida con resume pendiente; respuestas e historial antiguos; limpieza/fallo del plugin; suscripción fallida sin quedar bloqueado por una instantánea aislada.
 - Pruebas del motor usan AudioContext y elementos de medios simulados, ejecutando los listeners reales. No son mediciones acústicas ni una simulación del código Swift.
 - Navegador: Edge y WebKit, teléfono ES y tableta EN; bloqueo inmediato del motor antes de ocultarse, foco sin permiso, pausa conservada, exportación y sesión anterior. `browser-check.json`. WebKit de Playwright en Windows no dispone de AudioContext; su cobertura es de interfaz y control, no reproducción física.
-- Compilación Swift, firma y distribución pendientes de CI. La desaparición del petardeo y la latencia audible de parada requieren comprobar esta build en el iPhone afectado.
+- Compilación Swift, firma y recursos de la app archivada verificados en CI. La desaparición del petardeo y la latencia audible de parada requieren comprobar esta build en el iPhone afectado.
 
 ## Comprobación del usuario
 
 Instalar 0.12.1 (1), jugar, salir de la app y volver varias veces. La música debe pararse al salir, y la partida debe continuar pausada al regresar hasta pulsar Continuar. Comprobar también con sonido desactivado. Si reaparece el petardeo o el silencio, compartir pronto el diagnóstico desde Configuración; el nuevo registro permitirá comparar el permiso nativo con la reproducción.
+
+## Entrega
+
+- Fuente `127123390dfcfc8589e8a7ec67ede6f14f4f7c33`.
+- [CI 36630894945](https://github.com/Krazel/Voro/actions/runs/36630894945): `success`.
+- Apple: build `2e4a5976-c036-4b8e-93f7-edd826419e64`, app `6809193565`, **0.12.1 (1)**, `VALID / IN_BETA_TESTING` confirmado por API a las 21:17 UTC del 29-09-2026.
+- Grupo existente `VORO Interno`, `05db8744-bcf3-4c2d-a465-2635012bfeeb`; sin distribución externa ni envío a App Review.
+- D1: ficha `PR-009`, revisión **298**, versión/build, estado y siguiente paso releídos y verificados. Conservados los datos de marketing y seguimiento de App Store/anuncios.
+- IPA y manifiestos en `artifact/testflight-0.12.1-build-1/`. `verify-delivery.py` comprueba hash, versión, familias de dispositivo y presencia del bloqueo nativo y del controlador web en la aplicación empaquetada. Evidencia compacta: `verification.json`.
