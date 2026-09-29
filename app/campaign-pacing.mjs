@@ -2,11 +2,11 @@
 // Minutes are design targets, never timers or adaptive throttles. Keep edible
 // sizes, stage goals, movement, cinematics and existing saved progress intact.
 export const CAMPAIGN_PACING = {
- micro: {minutes:12, biomass:.158}, pond:{minutes:10,biomass:.172},
- land:{minutes:10,biomass:.191}, water:{minutes:10,biomass:.145},
- city:{minutes:12,biomass:.128}, orbit:{minutes:7,biomass:.257},
- planets:{minutes:8,biomass:.169}, stars:{minutes:8,biomass:.206},
- galaxies:{minutes:7,biomass:.160}, universe:{minutes:5,biomass:.130},
+ micro: {minutes:12, biomass:.175}, pond:{minutes:10,biomass:.172},
+ land:{minutes:10,biomass:.200}, water:{minutes:10,biomass:.145},
+ city:{minutes:12,biomass:.124}, orbit:{minutes:7,biomass:.310},
+ planets:{minutes:8,biomass:.169}, stars:{minutes:8,biomass:.213},
+ galaxies:{minutes:7,biomass:.160}, universe:{minutes:5,biomass:.125},
 };
 export const biomassYield = id => CAMPAIGN_PACING[id]?.biomass ?? 1;
 // Increase the approved 0.68 food XP reward by 10%, without adaptive pacing.
