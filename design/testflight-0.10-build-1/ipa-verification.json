@@ -1,0 +1,18 @@
+{
+  "version": "0.10",
+  "build": 1,
+  "ipaSha256": "a70b64ce4984e1599086369d773ebdb4bf65866d9175269ec6e5bacaf552cf86",
+  "crcVerified": true,
+  "source": "bb5bf8d9ddc2141e007bc0aff7ca5c4d224c2918",
+  "deviceFamilies": [
+    1,
+    2
+  ],
+  "collectionCodePresent": true,
+  "originalArtAndApprovedFramesVerified": {
+    "ui/owned-adaptations/background.png": "0a9baac882cda84ba378f0e5bc6501e56ce1612d12d003536715e06986393744",
+    "ui/owned-adaptations/background-portrait.png": "7461affb9bac21ef67d4f240fb28140a50f045b3c56fd1e2142b23f59d9429c1",
+    "ui/owned-adaptations/capsules.png": "3b55d5edcbbe04482447252c38f55f036d8a80ee38c003b834cd7152616b5f18",
+    "upgrades/biological-adaptations.png": "261a1db52c401607d9f96f065d2bb8aca622e3391fe0d3b725a7961c46dacc96"
+  }
+}

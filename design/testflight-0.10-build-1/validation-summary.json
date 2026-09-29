@@ -1,0 +1,16 @@
+{
+  "source": "bb5bf8d9ddc2141e007bc0aff7ca5c4d224c2918",
+  "run": 36500811685,
+  "tests": 270,
+  "passed": 270,
+  "failed": 0,
+  "xcode": "26.6",
+  "compiledBrowserScenarios": 48,
+  "archiveMobileAssetsVerified": true,
+  "library": {
+    "id": "PR-009",
+    "revision": 265,
+    "verified": true
+  },
+  "physicalDeviceTest": "pending user TestFlight test"
+}

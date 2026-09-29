@@ -30,3 +30,7 @@ Esto acredita los bundles web móvil/PC y WebKit de escritorio, **no una ejecuci
 ## Centrado óptico — 29-09-2026
 
 Revisadas las 14 ilustraciones dentro de sus celdas originales. Se midió el centro del contenido visible, ponderado por luminancia sobre el fondo y el desvanecimiento radial existente. `ART_OFFSETS` corrige cada celda mediante traslación SVG del dibujo junto a su máscara. Los desplazamientos máximos de la fuente son 39,1 px horizontal y 37,9 px vertical (aproximadamente 8 px en el icono móvil). No cambia el tamaño, el atlas, los marcos, los contadores ni el balance. Comprobadas visualmente las capturas actualizadas de móvil/PC y los 48 escenarios existentes sobre las dos compilaciones.
+
+## Entrega iOS
+
+Tras la aprobación final, la colección se distribuyó en **TestFlight 0.10 (1)** interno. Apple confirmó VALID / IN_BETA_TESTING; IPA y assets verificados. Evidencia: `../../testflight-0.10-build-1/README.md`. La referencia anterior a 0.9 (2) describe el estado previo a esta entrega.
