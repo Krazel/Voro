@@ -1,0 +1,15 @@
+{
+  "appId": "6809193565",
+  "buildId": "a036c644-058a-43a3-be37-9f1d94b6130f",
+  "bundleId": "com.dmkr.voro",
+  "version": "0.10.1",
+  "build": "1",
+  "processingState": "VALID",
+  "uploadedDate": "2026-09-29T05:06:52-07:00",
+  "group": {
+    "id": "05db8744-bcf3-4c2d-a465-2635012bfeeb",
+    "name": "VORO Interno",
+    "internal": true
+  },
+  "internalBuildState": "IN_BETA_TESTING"
+}

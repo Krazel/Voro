@@ -1,0 +1,25 @@
+{
+  "version": "0.10.1",
+  "build": 1,
+  "ipaSha256": "2c96ee4409291815a939495d662fc5150836235a4401ea3f9e61a13c4bfec898",
+  "crcVerified": true,
+  "source": "8816b74b0d4db3056d436d15356e68bcfc399755",
+  "deviceFamilies": [
+    1,
+    2
+  ],
+  "retiredAppearanceAbsent": true,
+  "returnButtonPresent": true,
+  "approvedAssets": {
+    "ui/owned-adaptations/background.png": "0a9baac882cda84ba378f0e5bc6501e56ce1612d12d003536715e06986393744",
+    "ui/owned-adaptations/background-portrait.png": "7461affb9bac21ef67d4f240fb28140a50f045b3c56fd1e2142b23f59d9429c1",
+    "ui/owned-adaptations/capsules.png": "3b55d5edcbbe04482447252c38f55f036d8a80ee38c003b834cd7152616b5f18",
+    "upgrades/biological-adaptations.png": "261a1db52c401607d9f96f065d2bb8aca622e3391fe0d3b725a7961c46dacc96",
+    "ui/membrane/background.webp": "1fde792a6c59222a88471beb5fa39240d2ec9c270bfe16dd66184660280ca9d9",
+    "ui/membrane/background-landscape.webp": "ab8e140d8f5f2af1233366d946d91e2aa100f530d10a86789c39cdc974d49434",
+    "ui/membrane/panel-cutout.webp": "8971124123312846b3feb4140f7cf5f8a26cf5c17b6c7d9d7f2253f2dded3ef4"
+  },
+  "automatedTests": 272,
+  "browserScenarios": 60,
+  "physicalDeviceTest": "pending user TestFlight test"
+}
