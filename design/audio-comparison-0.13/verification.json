@@ -1,0 +1,45 @@
+{
+  "manifest": {
+    "version": "0.13",
+    "build": "1",
+    "bundle": "com.dmkr.voro",
+    "commit": "4d82e30f1614401b34ffeb25ffa84dd4ff7ccce6",
+    "deviceFamilies": [
+      1,
+      2
+    ],
+    "iPadOrientations": [
+      "UIInterfaceOrientationPortrait",
+      "UIInterfaceOrientationPortraitUpsideDown",
+      "UIInterfaceOrientationLandscapeLeft",
+      "UIInterfaceOrientationLandscapeRight"
+    ],
+    "run": "36642414137",
+    "signed": true,
+    "purpose": "TestFlight"
+  },
+  "apple": {
+    "appId": "6809193565",
+    "buildId": "3ab79ba1-4b3e-46d5-a3fa-fdb572b7aa75",
+    "bundleId": "com.dmkr.voro",
+    "version": "0.13",
+    "build": "1",
+    "processingState": "VALID",
+    "uploadedDate": "2026-09-29T16:03:48-07:00",
+    "group": {
+      "id": "05db8744-bcf3-4c2d-a465-2635012bfeeb",
+      "name": "VORO Interno",
+      "internal": true
+    },
+    "internalBuildState": "IN_BETA_TESTING"
+  },
+  "accessVerificationRun": "36643493875",
+  "ipa": "App.ipa",
+  "bytes": 349760979,
+  "sha256": "11949c73ec11b3d83a465310d04deabfd2924c453e85e0aa2e0487edbd7aac7b",
+  "packagedNativeMediaSuspension": true,
+  "packagedController": [
+    "Payload/App.app/public/assets/index-EiE2yFqI.js"
+  ],
+  "physicalDeviceTest": false
+}

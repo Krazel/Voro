@@ -26,6 +26,13 @@ Escuchar A y B, marcar lo oído y repetir si difieren. Repetir A ayuda a disting
 
 ## Entrega
 
-Pendiente de CI, firma, subida y relectura por API de Apple. TestFlight interno, sin envío a revisión ni publicación en tienda.
+- **Disponible en TestFlight interno: 0.13 (1), VALID / IN_BETA_TESTING**, relectura API del 30-09-2026 (hora local).
+- Fuente del binario `4d82e30f1614401b34ffeb25ffa84dd4ff7ccce6`; **323/323 pruebas** correctas en macOS.
+- [Build 36642414137](https://github.com/Krazel/Voro/actions/runs/36642414137): pruebas, compilación, firma y subida correctas; la asignación al grupo falló por HTTP 500 de Apple después de procesar la build como válida.
+- [Recuperación API 36643493875](https://github.com/Krazel/Voro/actions/runs/36643493875): correcta sobre la misma build, sin recompilar ni subir otra. Código de automatización `11842d6`; consulta pertenencia al grupo antes de repetir la escritura y comprueba errores de la tubería.
+- Build Apple `3ab79ba1-4b3e-46d5-a3fa-fdb572b7aa75`, grupo existente `VORO Interno` (`05db8744-bcf3-4c2d-a465-2635012bfeeb`). Sin App Review ni publicación en tienda.
+- IPA `349760979` bytes, SHA-256 `11949c73ec11b3d83a465310d04deabfd2924c453e85e0aa2e0487edbd7aac7b`. `verify-delivery.py` valida versión, fuente, firma declarada, familias, controlador y hash del fragmento dentro del IPA. Resultado: `verification.json`.
+- El recibo de acceso se conserva en `artifact/testflight-0.13-api-recovery/` y junto al paquete `artifact/testflight-0.13-build-1/`; sustituye el recibo vacío de la asignación fallida.
+- Biblioteca D1: misma ficha PR-009, revisión **308**, guardada y releída; marketing, publicación y tracking conservados. Escucha física y causa del petardeo siguen pendientes.
 
 Referencias: [AudioBufferSourceNode](https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode), [App Store Connect Builds](https://developer.apple.com/documentation/appstoreconnectapi/builds).
