@@ -27,13 +27,14 @@ export function compactPerformanceReport(report) {
 }
 export function performanceSummaryText(report) {
   if(report?.format==='voro-performance-tour-v1')return `VORO ${report.version} (${report.build}) · Prueba automática · ${report.status}\n${report.finished}/${report.planned} escenarios · ${report.summary.frames} fotogramas\n`+
-    report.results.map(x=>`${x.name} (${x.size}): ${x.report ? x.report.session.fps+' FPS · P95 '+x.report.summary.p95+' ms' : x.status}`).join('\n');
+    report.results.map(x=>`${x.name} (${x.size}): ${x.report?.session ? x.report.session.fps+' FPS · P95 '+x.report.summary.p95+' ms' : x.status}${x.report?.audioProbe?' · marcas de audio: '+x.report.audioProbe.observations.userMarks:''}`).join('\n');
   const r=compactPerformanceReport(report),s=r.summary;
   return `VORO ${r.version} (${r.build}) · ${s.seconds} s / ${s.frames} fotogramas\nFPS: ${r.session.fps} · P95: ${s.p95} ms · P99: ${r.session.p99} ms · Pico: ${s.peak} ms\nCuadros >33 ms: ${s.slowFrames} · CPU: ${s.cpu} ms\nAnimaciones: ${(r.animationSheets.bytes/1048576).toFixed(1)} MiB · ${r.animationSheets.errors} errores · ${r.animationCache.entries} poses en caché procedural\n${r.userAgent}\nPara analizar los tirones, comparte también el archivo desde Configuración.`;
 }
 // Delivery adapters allow native sharing to be verified without sending anything.
 export async function deliverReportFile(data, adapters) {
-  const name='Voro-rendimiento.txt';
+  let name='Voro-rendimiento.txt';
+  try{if(JSON.parse(data).mode==='audio')name='Voro-audio.txt';}catch{}
   if (adapters.native) {
     const file=await adapters.write(name,data);
     await adapters.shareNative(file.uri);

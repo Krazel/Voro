@@ -34,19 +34,28 @@ export class BenchmarkTour {
 }
 
 export function tourReport(tour,metadata,status) {
-  const reports=tour.results.flatMap(x=>x.report?[x.report]:[]);
+  const reports=tour.results.flatMap(x=>x.report?.summary?[x.report]:[]);
   const frames=reports.reduce((n,r)=>n+r.summary.frames,0);
   // Use measured duration rather than averaging per-scene FPS.
   const ms=reports.reduce((n,r)=>n+(r.captureMs??r.summary.frames*1000/(r.session.fps||r.summary.fps||1)),0);
-  return {...metadata,format:'voro-performance-tour-v1',status,
-    protocol:{secondsPerSize:tour.seconds,sizes:['entry','grown'],warmupMs:tour.warmupMs,
+  return {...metadata,format:'voro-performance-tour-v1',status,mode:tour.mode||'performance',
+    protocol:{secondsPerSize:tour.mode==='audio'?null:tour.seconds,sizes:tour.mode==='audio'?['entry']:['entry','grown'],warmupMs:tour.warmupMs,
       automaticMovement:true,firstDashAfterSeconds:2,dashAttemptEverySeconds:9,invulnerable:true,upgrades:[],automaticEvolution:false,
       freshRasterBudgetPerSize:true,loadingTimeoutMs:tour.loadTimeoutMs},
     planned:tour.plan.length,finished:tour.results.length,
     summary:{frames,seconds:Math.round(ms/1000),fps:ms?+(frames*1000/ms).toFixed(1):0,
       slowFrames:reports.reduce((n,r)=>n+r.summary.slowFrames,0)},
     results:tour.results,
-    notes:['Prueba controlada en el motor real. No mide GPU directamente.',
+    ...(tour.mode==='audio'?{audioProtocol:{version:1,tracks:12,secondsPerTrack:8,finalSeconds:10,sampleIntervalMs:100,
+      effects:['ingest-1','ingest-2','ingest-3','ingest-4','ingest-5','damage','shield','chime','evolve','final'],
+      musicOnlyBaseline:'menu',musicCrossfades:true,manualGlitchMarks:true,
+      limitation:'Diagnostic observations do not guarantee identification of an audible hardware/OS glitch.'}}:{}),
+    notes:tour.mode==='audio'?[
+      'Fragmentos de las doce pistas, crossfades y efectos reales durante movimiento automático. No reproduce canciones enteras ni prueba su bucle final.',
+      'Efectos de comida espontáneos silenciados durante esta prueba para identificar las cinco muestras programadas.',
+      'Unos 104 segundos más cargas, pausas y calentamiento. No modifica la partida ni envía datos automáticamente.',
+      'El muestreo de señal es intermitente y anterior al altavoz; no demuestra por sí solo la causa de un chasquido. No graba el micrófono.'
+    ]:['Prueba controlada en el motor real. No mide GPU directamente.',
       'Cada entorno se prueba al entrar y con mayor biomasa, sin mejoras, sin muerte ni menús de adaptación.',
       'Carga y calentamiento se separan de la medición; pausas y segundo plano no cuentan.',
       'La escena se reinicia entre tamaños. No prueba la animación de transición ni el final del universo.',

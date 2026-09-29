@@ -533,11 +533,12 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
             onRestart={() => { setFinalDetails(false); action('restart'); }} />
         ))}
         {tr(state.automated && (!tourNoticeDismissed || state.automated.running) && <section className="automatic-benchmark" aria-label={tr('Prueba automática de rendimiento')}>
-          <strong>{tr(state.automated.running?'Prueba automática de rendimiento':state.automated.status==='completed'?'Prueba terminada':'Prueba cancelada')}</strong>
+          <strong>{tr(state.automated.running?state.automated.audio?'Prueba automática de audio':'Prueba automática de rendimiento':state.automated.status==='completed'?'Prueba terminada':'Prueba cancelada')}</strong>
           {state.automated.running ? <>
-            <p>{tr(state.automated.stage)} · {tr(state.automated.size==='entry'?'Tamaño inicial':'Tamaño grande')} · {state.automated.step}/{state.automated.total}</p>
+            <p>{tr(state.automated.stage)} · {tr(state.automated.audio?'Música y efectos':state.automated.size==='entry'?'Tamaño inicial':'Tamaño grande')} · {state.automated.step}/{state.automated.total}</p>
             <p>{tr(state.automated.paused?'Prueba en pausa':state.automated.status==='loading'?'Cargando entorno…':state.automated.status==='warmup'?'Preparando escena…':'Midiendo')}{state.automated.status==='recording' && !state.automated.paused?' · '+state.automated.remaining+' s':''}</p>
             <div>{state.automated.paused && <button onClick={()=>engine.current?.resumeAutomaticBenchmark()}>{tr('Continuar prueba')}</button>}
+            {state.automated.audio && <button onClick={()=>engine.current?.markAudioGlitch()}>{tr('He oído un fallo')}{state.automated.audioMarks ? ` · ${state.automated.audioMarks}` : ''}</button>}
             <button onClick={()=>engine.current?.finishAutomaticBenchmark()}>{tr('Cancelar y volver')}</button></div>
           </> : <>
             <p>{state.automated.step}/{state.automated.total} · {tr('Tu partida se ha restaurado.')}</p>
@@ -652,6 +653,11 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
             if(engine.current?.startAutomaticBenchmark()){resume.current=false;changeSettings(false);}
           }}>{tr('Probar todos los entornos automáticamente')}<span>{tr('Iniciar')}</span></button>
           <p className="save-note">{tr('Unos 2 minutos más las cargas. Prueba dos tamaños por entorno, moviéndose y usando el impulso. Mantén el juego abierto. Puedes cancelar y recuperar tu partida en cualquier momento.')}</p>
+          <button className="settings-row" onClick={()=>{
+            setReportText('');setReportCopied(false);setShareMessage('');setTourNoticeDismissed(false);
+            if(engine.current?.startAutomaticBenchmark(true)){resume.current=false;changeSettings(false);}
+          }}>{tr('Probar audio automáticamente')}<span>{tr('Iniciar')}</span></button>
+          <p className="save-note">{tr('Unos 2 minutos más las cargas. Activa temporalmente el sonido y prueba música y efectos. Si oyes un corte, pulsa «He oído un fallo». Al acabar puedes compartir el archivo; tu partida y tu ajuste de sonido se restauran.')}</p>
           <button className="settings-row" onClick={async () => {
             const report = engine.current?.performanceReport();
             if (!report) return;

@@ -2,6 +2,11 @@ import { STUDIO_ENGLISH } from './english-studio.mjs';
 // Spanish source text is retained in game data and save files. Only presentation
 // is translated, so species keys, upgrade groups and progression stay stable.
 export const ENGLISH = Object.fromEntries(`
+Prueba automática de audio|Automatic audio test
+Música y efectos|Music and sound effects
+He oído un fallo|I heard a glitch
+Probar audio automáticamente|Test audio automatically
+Unos 2 minutos más las cargas. Activa temporalmente el sonido y prueba música y efectos. Si oyes un corte, pulsa «He oído un fallo». Al acabar puedes compartir el archivo; tu partida y tu ajuste de sonido se restauran.|About 2 minutes plus loading. Temporarily enables sound to test music and effects. If you hear a glitch, tap “I heard a glitch”. Share the file when finished; your game and sound setting are restored.
 Tus adaptaciones|Your adaptations
 Pulso suave del núcleo y sus chorros completos, sin recortes.|A gentle pulse of the core and its complete, uncropped jets.
 Planeta en formación|Forming planet

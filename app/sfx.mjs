@@ -77,7 +77,8 @@ export class SfxPlayer {
     return this.loading;
   }
   stats() { return { ...this.diagnostics, decoded: this.buffers.filter(Boolean).length, pending: !!this.loading, voices: this.voices.size, contextState: this.context.state || 'unknown', voiceGain: INGEST_GAIN }; }
-  playIngest() {
+  /** @param {number|null} sampleIndex Optional diagnostic-only sample selection. */
+  playIngest(sampleIndex = null) {
     const at = this.now();
     if (this.destroyed) return false;
     this.diagnostics.requested++;
@@ -90,7 +91,8 @@ export class SfxPlayer {
     if (!this.remaining.length) this.remaining = [...available];
     const different = this.remaining.filter(index => index !== this.last);
     const choices = different.length ? different : this.remaining;
-    const index = choices[Math.min(choices.length - 1, Math.floor(this.random() * choices.length))];
+    const index = Number.isInteger(sampleIndex) && available.includes(sampleIndex) ? sampleIndex
+      : choices[Math.min(choices.length - 1, Math.floor(this.random() * choices.length))];
     const source = this.context.createBufferSource();
     source.buffer = this.buffers[index];
     // Resampling changes pitch and duration together, preserving the whole bite.

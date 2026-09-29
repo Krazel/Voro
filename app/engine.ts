@@ -13,6 +13,7 @@ import { drawOrbitalEarth, constrainOrbit, canAbsorbEarth, earthConsumptionPose 
 import { StageAssets } from './stage-assets.mjs';
 import { FrameMonitor } from './frame-monitor.mjs';
 import { BenchmarkTour, tourReport } from './benchmark-tour.mjs';
+import { AudioBenchmark, AudioProbe } from './audio-benchmark.mjs';
 import { compactPerformanceReport } from './performance-report.mjs';
 import { AnimationSheets } from './animation-sheets.mjs';
 import { adaptationYield, ADAPTATION_FOOD_GAIN, INCOMING_DAMAGE_FACTOR } from './campaign-pacing.mjs';
@@ -84,7 +85,7 @@ import {
 } from './journey-progress.mjs';
 
 export type Snapshot = {
-  automated?: {running:boolean;status:string;stage:string;size:string;step:number;total:number;remaining:number;paused:boolean;failed:number};
+  automated?: {running:boolean;status:string;stage:string;size:string;step:number;total:number;remaining:number;paused:boolean;failed:number;audio?:boolean;audioMarks?:number};
   zoomFactor: number;
   uniformVisualSpeed: boolean;
   performance?: ReturnType<FrameMonitor['summary']> & { loading: number; pending: number; cacheMB: number;
@@ -274,9 +275,11 @@ export class VoroEngine {
   uiCommitDelay = 0;
   groundAtCapture = 0;
   autoTour: BenchmarkTour | null = null;
+  audioProbe: AudioProbe | null = null;
+  audioTestVoices = new Map<OscillatorNode,GainNode>();
   lastTourReport: ReturnType<typeof tourReport> | null = null;
   tourBackup: {zoomFactor:number;zoom:number;camera:{x:number;y:number};time:number;lastEmit:number;
-    paused:boolean;birth:number;rasterBudget:RasterBudget;uniformVisualSpeed:boolean} | null = null;
+    paused:boolean;birth:number;rasterBudget:RasterBudget;uniformVisualSpeed:boolean;sound:boolean} | null = null;
   diagnosticSnapshot: ReturnType<FrameMonitor['summary']> | null = null;
   diagnosticSnapshotAt = 0;
   recordUiCommit() {
@@ -323,14 +326,14 @@ export class VoroEngine {
       background: this.backgroundStatus(),
       backgroundRebuildsDuringCapture: this.worldGround.redraws - this.groundAtCapture });
   }
-  startAutomaticBenchmark() {
+  startAutomaticBenchmark(audioTest = false) {
     if(this.autoTour)return false;
     if(this.testMode)this.exitTest();
     this.tourBackup={zoomFactor:this.zoomFactor,zoom:this.zoom,camera:{...this.camera},time:this.time,
-      lastEmit:this.lastEmit,paused:this.paused,birth:this.birth,rasterBudget:this.rasterBudget,uniformVisualSpeed:this.uniformVisualSpeed};
+      lastEmit:this.lastEmit,paused:this.paused,birth:this.birth,rasterBudget:this.rasterBudget,uniformVisualSpeed:this.uniformVisualSpeed,sound:this.sound};
     this.lastTourReport=null;this.lastPerformanceReport=null;this.diagnosticCompleted=false;
     this.diagnosticsEnabled=false;this.benchmarkSeconds=0;this.cancelSaveJob();
-    this.autoTour=new BenchmarkTour(STAGES.flatMap((stage,index)=>[
+    this.autoTour=audioTest ? new AudioBenchmark(STAGES,stageStartMass) : new BenchmarkTour(STAGES.flatMap((stage,index)=>[
       {stage:index,id:stage.id,name:stage.short,size:'entry',biomass:stageStartMass(index)},
       {stage:index,id:stage.id,name:stage.short,size:'grown',biomass:stageStartMass(index)*(stage.goal/stageStartMass(index))**.8},
     ]));
@@ -341,14 +344,22 @@ export class VoroEngine {
   }
   enterAutomaticScene() {
     const tour=this.autoTour;if(!tour)return;
+    this.audioProbe?.destroy();this.audioProbe=null;
+    if(tour instanceof AudioBenchmark)tour.seconds=tour.current.music==='final'?10:8;
     this.diagnosticsEnabled=false;this.lastPerformanceReport=null;this.diagnosticCompleted=false;
     this.frameMonitor.reset();this.diagnosticSnapshot=null;this.measuredLastFrame=false;
     this.zoomFactor=1;this.uniformVisualSpeed=true;this.rasterBudget=new RasterBudget();this.resize();
     this.startTest(tour.current.stage,tour.current.biomass,false,true,false);
+    if(tour instanceof AudioBenchmark){
+      this.sound=true;this.initAudio();this.setAudio();this.music?.unlock();
+      this.audioProbe=new AudioProbe(this.audio,[this.master,this.music?.bus]);
+      this.audioProbe.event('scene-start',{music:this.music?.stats(),sfx:this.sfx?.stats()});
+    }
     this.hint='';this.last=0;this.framePacer=new FramePacer();tour.last=null;
   }
   advanceAutomaticBenchmark(stamp:number) {
     const tour=this.autoTour;if(!tour)return;
+    this.audioProbe?.sample(!document.hidden&&!this.paused&&!this.settingsOpen,tour.state,this.music?.stats());
     const command=tour.tick(stamp,{active:!document.hidden&&!this.paused&&!this.settingsOpen,
       ready:this.assetsReady,error:this.assets.failed(this.progress.stage)});
     if(command==='enter')this.enterAutomaticScene();
@@ -357,18 +368,41 @@ export class VoroEngine {
       this.groundAtCapture=this.worldGround.redraws;this.measuredLastFrame=false;
       this.diagnosticsEnabled=true;this.benchmarkSeconds=tour.seconds;this.publish();
     } else if(command==='asset-error'||command==='load-timeout'){
-      tour.complete(command);this.diagnosticsEnabled=false;this.publish();
+      tour.complete(command,this.audioProbe?{audioProbe:this.audioProbe.report()}:null);this.diagnosticsEnabled=false;this.publish();
     } else if(command==='finish')this.finishAutomaticBenchmark('completed');
-    if(this.autoTour && !this.paused && !document.hidden && this.assetsReady && tour.dashDue())this.action('dash',true);
+    if(this.autoTour && !this.paused && !document.hidden && this.assetsReady){
+      if(tour.dashDue())this.action('dash',true);
+      if(tour instanceof AudioBenchmark && tour.state==='recording')this.audioProbe?.due(this.frameMonitor.elapsed/1000,tour.current.music,(kind:string,index:number|null)=>{
+        if(!this.prepareEffects())return {played:false,reason:'audio-not-running'};
+        let played=true;
+        if(kind==='ingest')played=!!this.sfx?.playIngest(index);
+        else if(kind==='damage')played=!!this.sfx?.playDamage();
+        else if(kind==='shield')played=!!this.sfx?.playShield();
+        else if(kind==='final')this.tone(100,24,8,.35);
+        else this.chime(kind==='evolve');
+        return {played,audioAt:this.audio?.currentTime,sfx:this.sfx?.stats()};
+      });
+    }
+  }
+  markAudioGlitch(){this.audioProbe?.event('heard-glitch',{phase:this.autoTour?.state});this.publish();}
+  stopAudioTestVoices(){
+    for(const [source,gain] of this.audioTestVoices){
+      const at=this.audio?.currentTime||0;
+      try {gain.gain.cancelScheduledValues(at);gain.gain.setTargetAtTime(0,at,.006);source.stop(at+.03);}catch{}
+    }
+    this.audioTestVoices.clear();
   }
   finishAutomaticBenchmark(status='cancelled') {
     const tour=this.autoTour,backup=this.tourBackup;if(!tour||!backup)return;
     if(status==='cancelled' && tour.current && tour.state!=='next'){
-      const report=this.frameMonitor.totalFrames?compactPerformanceReport(this.frameReport()):null;
+      const report=this.frameMonitor.totalFrames?{...compactPerformanceReport(this.frameReport()),...(this.audioProbe?{audioProbe:this.audioProbe.report()}: {})}
+        :this.audioProbe?{audioProbe:this.audioProbe.report()}:null;
       tour.complete('cancelled',report);
     }
     this.lastTourReport=tourReport(tour,{...RELEASE,date:new Date().toISOString(),userAgent:navigator.userAgent,
       seed:this.progress.seed},status);
+    this.audioProbe?.destroy();this.audioProbe=null;
+    this.stopAudioTestVoices();
     this.autoTour=null;this.diagnosticsEnabled=false;this.diagnosticCompleted=false;this.benchmarkSeconds=0;
     this.lastPerformanceReport=null;this.measuredLastFrame=false;this.diagnosticSnapshot=null;
     this.exitTest();Object.assign(this,backup);this.tourBackup=null;
@@ -772,7 +806,7 @@ export class VoroEngine {
     const finalSilence = this.progress.completed && this.ending <= FINALE_SECONDS - FINALE_MUSIC_FADE_AT;
     const fade = finalSilence && !this.paused && !this.settingsOpen && !document.hidden && this.audioFocus
       ? FINALE_BLACK_AT - FINALE_MUSIC_FADE_AT : this.progress.offer.length ? .45 : this.music?.volumeTarget === .126 ? .65 : .08;
-    this.music?.setState(musicScene(this.started,this.progress.completed,stageOf(this.progress).id),
+    this.music?.setState(this.autoTour instanceof AudioBenchmark ? this.autoTour.current.music : musicScene(this.started,this.progress.completed,stageOf(this.progress).id),
       !finalSilence && !this.reviewHold && this.sound && this.audioFocus && !document.hidden && !this.paused && !this.settingsOpen && !this.life.dead, document.hidden || !this.audioFocus, fade, this.progress.offer.length ? .3 : 1);
   }
   setAudio() {
@@ -823,7 +857,8 @@ export class VoroEngine {
       g.gain.exponentialRampToValueAtTime(0.001, now + i * 0.12 + 1);
       o.connect(g);
       g.connect(this.master);
-      o.onended = () => { o.disconnect(); g.disconnect(); };
+      if(this.autoTour instanceof AudioBenchmark)this.audioTestVoices.set(o,g);
+      o.onended = () => { this.audioTestVoices.delete(o);o.disconnect(); g.disconnect(); };
       o.start(now + i * 0.12);
       o.stop(now + i * 0.12 + 1.1);
     }
@@ -1148,11 +1183,13 @@ export class VoroEngine {
       this.diagnosticSnapshotAt = this.time;
     }
     this.emit({
-      automated:this.autoTour ? {running:true,status:this.autoTour.state,stage:this.autoTour.current?.name||'',
+      automated:this.autoTour ? {running:true,audio:this.autoTour instanceof AudioBenchmark,
+        audioMarks:(this.audioProbe?.events.filter(e=>e.type==='heard-glitch').length||0)+this.autoTour.results.reduce((n,r)=>n+(r.report?.audioProbe?.observations.userMarks||0),0),
+        status:this.autoTour.state,stage:this.autoTour.current?.name||'',
         size:this.autoTour.current?.size||'',step:this.autoTour.index+1,total:this.autoTour.plan.length,
         remaining:Math.max(0,Math.ceil(this.autoTour.seconds-this.frameMonitor.elapsed/1000)),paused:this.paused,
         failed:this.autoTour.results.filter(x=>x.status!=='ok').length}
-        : this.lastTourReport ? {running:false,status:this.lastTourReport.status,stage:'',size:'',
+        : this.lastTourReport ? {running:false,audio:this.lastTourReport.mode==='audio',status:this.lastTourReport.status,stage:'',size:'',
           step:this.lastTourReport.finished,total:this.lastTourReport.planned,remaining:0,paused:false,
           failed:this.lastTourReport.results.filter((x:{status:string})=>x.status!=='ok').length}:undefined,
       zoomFactor: this.zoomFactor,
@@ -1351,7 +1388,7 @@ export class VoroEngine {
       });
       if (this.benchmarkSeconds && this.frameMonitor.elapsed >= this.benchmarkSeconds * 1000) {
         if(this.autoTour){
-          this.autoTour.complete('ok',compactPerformanceReport(this.frameReport()));
+          this.autoTour.complete('ok',{...compactPerformanceReport(this.frameReport()),...(this.audioProbe?{audioProbe:this.audioProbe.report()}: {})});
           this.diagnosticsEnabled=false;this.benchmarkSeconds=0;this.measuredLastFrame=false;
         } else {
           this.lastPerformanceReport = this.frameReport();
@@ -1845,6 +1882,7 @@ export class VoroEngine {
     }
   }
   slurp() {
+    if(this.autoTour instanceof AudioBenchmark)return;
     if (this.prepareEffects()) this.sfx?.playIngest();
   }
   impact(kind: 'damage' | 'shield' = 'damage') {
@@ -1865,7 +1903,8 @@ export class VoroEngine {
     g.gain.exponentialRampToValueAtTime(0.001, at + duration);
     o.connect(g);
     g.connect(this.master);
-    o.onended = () => { o.disconnect(); g.disconnect(); };
+    if(this.autoTour instanceof AudioBenchmark)this.audioTestVoices.set(o,g);
+    o.onended = () => { this.audioTestVoices.delete(o);o.disconnect(); g.disconnect(); };
     o.start(at);
     o.stop(at + duration + 0.03);
   }
@@ -2677,6 +2716,7 @@ export class VoroEngine {
     }
   }
   destroy() {
+    this.audioProbe?.destroy();this.audioProbe=null;this.stopAudioTestVoices();
     this.universeFinale?.destroy();
     this.testBackup?.universeFinale?.destroy();
     this.tilt.stop();
