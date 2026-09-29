@@ -30,7 +30,7 @@ public class VoroAudioDiagnosticsPlugin: CAPPlugin, CAPBridgedPlugin {
     deinit { NotificationCenter.default.removeObserver(self) }
     private func state() -> [String: Any] {
         let s = AVAudioSession.sharedInstance()
-        return ["wallMs": Date().timeIntervalSince1970 * 1000, "uptime": ProcessInfo.processInfo.systemUptime,
+        return ["wallMs": Date().timeIntervalSince1970 * 1000,
                 "sampleRate": s.sampleRate, "ioBufferDuration": s.ioBufferDuration,
                 "outputLatency": s.outputLatency, "outputVolume": s.outputVolume,
                 "category": s.category.rawValue, "mode": s.mode.rawValue,
