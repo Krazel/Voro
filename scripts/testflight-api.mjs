@@ -70,9 +70,13 @@ for (let attempt=0; attempt<150; attempt++) {
 if (result?.data?.length !== 1) throw new Error(`Uploaded build ${version} (${buildNumber}) did not appear`);
 const build = result.data[0];
 if (build.attributes.processingState !== 'VALID') throw new Error(`Build processing state: ${build.attributes.processingState}`);
-await api(`/v1/builds/${build.id}/relationships/betaGroups`,{
-  method:'POST',body:JSON.stringify({data:[{type:'betaGroups',id:groupId}]})
-});
+// A prior assignment can succeed server-side even if Apple returns HTTP 500.
+// Read membership before repeating the relationship write on a recovery run.
+if(!build.relationships?.betaGroups?.data?.some(item=>item.id===groupId)){
+  await api(`/v1/builds/${build.id}/relationships/betaGroups`,{
+    method:'POST',body:JSON.stringify({data:[{type:'betaGroups',id:groupId}]})
+  });
+}
 let verified,groups;
 // Group membership can lag the successful relationship write in Apple's reads.
 for(let attempt=0;attempt<15;attempt++) {
