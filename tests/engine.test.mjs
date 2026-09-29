@@ -81,11 +81,11 @@ test('A shield blocks one hit, then damage and recycling apply during recharge',
   assert.ok(g.world.entities[0].escape > 0);
   g.life.invulnerable = 0;
   step(g);
-  assert.ok(Math.abs(g.life.biomass - 1.64) < 1e-9);
+  assert.ok(Math.abs(g.life.biomass - 1.8) < 1e-9);
   assert.equal(g.fragments.length, 5);
   assert.ok(g.progress.shieldRecharge < 40);
   assert.ok(
-    Math.abs(g.fragments.reduce((s, e) => s + e.value, 0) - 0.045) < 1e-8,
+    Math.abs(g.fragments.reduce((s, e) => s + e.value, 0) - 0.025) < 1e-8,
   );
   isolate(g);
   step(g, 2401);

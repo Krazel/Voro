@@ -14,6 +14,9 @@ export const ADAPTATION_FOOD_GAIN = 0.748;
 // Apply once to both proportional and minimum incoming damage. Unspent XP
 // follows the actual fraction of biomass lost, so it receives the same relief.
 export const INCOMING_DAMAGE_FACTOR = 0.60;
+// Actual gameplay loss: contacts cost 10%, projectiles can cost less. Keep
+// this explicit instead of deriving contact damage from an old enemy value.
+export const CONTACT_BIOMASS_LOSS = 0.10;
 // Fixed food reward per biome. Never penalize earned choices, elapsed time
 // or being ahead of a stage target. Existing XP and thresholds stay intact.
 export const adaptationYield = id => Math.max(.25, Math.sqrt(biomassYield(id)));

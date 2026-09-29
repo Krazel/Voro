@@ -16,7 +16,7 @@ import { BenchmarkTour, tourReport } from './benchmark-tour.mjs';
 import { AudioBenchmark, AudioProbe } from './audio-benchmark.mjs';
 import { compactPerformanceReport } from './performance-report.mjs';
 import { AnimationSheets } from './animation-sheets.mjs';
-import { adaptationYield, ADAPTATION_FOOD_GAIN, INCOMING_DAMAGE_FACTOR } from './campaign-pacing.mjs';
+import { adaptationYield, ADAPTATION_FOOD_GAIN, INCOMING_DAMAGE_FACTOR, CONTACT_BIOMASS_LOSS } from './campaign-pacing.mjs';
 import { transitionScene } from './journey-transitions.mjs';
 import { shouldHoldReview } from './review-policy.mjs';
 // Canvas2D rendering and input. The simulation stays independent of frame rendering.
@@ -1630,7 +1630,7 @@ export class VoroEngine {
         if (p.biomass >= e.requiredMass) continue;
         if (Math.hypot(p.x - e.x, p.y - e.y) > p.radius * 0.85 + e.r * 0.76)
           continue;
-        this.receiveHit(e, 0.22);
+        this.receiveHit(e, CONTACT_BIOMASS_LOSS / INCOMING_DAMAGE_FACTOR, 0);
         repelAttacker(e, spec, p, this.stats.repulsionFactor);
         this.save();
         this.publish();
@@ -1645,7 +1645,9 @@ export class VoroEngine {
             p.biomass = Math.min(p.maxMass, p.biomass + 0.025);
             p.feedPulse = Math.max(p.feedPulse, 0.18);
             this.burst(shot.x, shot.y, 2, true);
-          } else this.receiveHit(shot, shot.damage, 0.6);
+          } else this.receiveHit(shot,
+            Math.min(shot.damage, CONTACT_BIOMASS_LOSS / INCOMING_DAMAGE_FACTOR),
+            Math.min(0.6, p.biomass * CONTACT_BIOMASS_LOSS / INCOMING_DAMAGE_FACTOR));
         }
       }
       this.world.projectiles = this.world.projectiles.filter(
