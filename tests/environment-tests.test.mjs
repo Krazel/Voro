@@ -71,7 +71,7 @@ test('Test controls reject invalid inputs, can disable upgrades and damage, and 
   const hit = { x: game.life.x + 30, y: game.life.y };
   assert.equal(game.receiveHit(hit, 0.25, 0), 0);
   assert.ok(game.startTest(4, 20, false, false));
-  assert.equal(game.receiveHit(hit, 0.25, 0), 3.75);
+  assert.equal(game.receiveHit(hit, 0.25, 0), 3);
   game.beginEvolution();
   assert.equal(game.transition, 0);
   game.life.invulnerable = 0;

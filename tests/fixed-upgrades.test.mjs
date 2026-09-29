@@ -50,13 +50,13 @@ test('Real damage removes the same fraction of unspent adaptation progress and p
   g.life.biomass = 100;
   g.life.invulnerable = 0;
   const hit = { x: g.life.x + 20, y: g.life.y };
-  assert.equal(g.receiveHit(hit, 0.25, 0), 18.75);
-  assert.equal(g.progress.xp, floor + 16.25);
+  assert.equal(g.receiveHit(hit, 0.25, 0), 15);
+  assert.equal(g.progress.xp, floor + 17);
   assert.equal(g.progress.level, 2);
   assert.equal(g.receiveHit(hit, 0.25, 0), 0);
-  assert.equal(g.progress.xp, floor + 16.25);
+  assert.equal(g.progress.xp, floor + 17);
   const restored = loadJourney(saveJourney(g.progress, g.life, g.world, true));
-  assert.equal(restored.progress.xp, floor + 16.25);
+  assert.equal(restored.progress.xp, floor + 17);
   g.life.invulnerable = 0;
   g.receiveHit(hit, 1, 200);
   assert.equal(g.progress.xp, floor);

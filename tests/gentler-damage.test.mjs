@@ -4,7 +4,7 @@ import { makeEngine } from './engine-fixture.mjs';
 import { STAGES, stageStartMass } from '../app/journey-data.mjs';
 import { adaptationYield } from '../app/campaign-pacing.mjs';
 
-test('All environments reduce both proportional and minimum damage by 25%, with matching unspent XP loss', () => {
+test('All environments turn a 25% hit into 15%, with equally reduced minimum damage and unspent XP loss', () => {
   const { game } = makeEngine();
   try {
     for (let stage = 0; stage < STAGES.length; stage++) {
@@ -14,7 +14,7 @@ test('All environments reduce both proportional and minimum damage by 25%, with 
         const before = game.life.biomass;
         const oldLoss = Math.max(0.6, before * 0.25);
         const lost = game.receiveHit({ x: game.life.x + 40, y: game.life.y }, 0.25);
-        assert.ok(Math.abs(lost - oldLoss * 0.75) < 1e-9, STAGES[stage].id);
+        assert.ok(Math.abs(lost - oldLoss * 0.60) < 1e-9, STAGES[stage].id);
         assert.ok(Math.abs(game.progress.xp - 20 * (1 - lost / before)) < 1e-9);
         assert.equal(game.receiveHit({ x: 0, y: 0 }, 0.25), 0);
         assert.equal(game.progress.mutations.length, 0);
