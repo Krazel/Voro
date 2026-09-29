@@ -1,0 +1,25 @@
+{
+  "checkedAt": "2026-09-29T15:02:49.762Z",
+  "run": "https://github.com/Krazel/Voro/actions/runs/36587067936",
+  "readOnly": true,
+  "versions": [
+    {
+      "version": "1.0",
+      "state": "PREPARE_FOR_SUBMISSION",
+      "selectedBuildId": "118537c4-7428-4664-a1da-1b96cb35e240",
+      "selectedBuildUploaded": "2026-09-22T16:45:30+02:00",
+      "locales": [
+        {
+          "locale": "es-ES",
+          "screenshotSets": 0,
+          "previewSets": 0
+        },
+        {
+          "locale": "en-US",
+          "screenshotSets": 2,
+          "previewSets": 2
+        }
+      ]
+    }
+  ]
+}
