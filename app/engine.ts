@@ -535,10 +535,11 @@ export class VoroEngine {
     this.observer = new ResizeObserver(() => this.resize());
     this.observer.observe(canvas);
     const opt = { signal: this.lifecycle.signal };
-    const unlockMusic = () => { if(this.sound) { this.audioFocus=!document.hidden;this.initAudio(); this.setAudio(); this.music?.unlock(); } };
+    const unlockMusic = () => { if(this.sound && !document.hidden) { this.audioFocus=true;this.initAudio(true); this.setAudio(); this.music?.unlock(); } };
     window.addEventListener('pointerdown',unlockMusic,opt);
     window.addEventListener('keydown',unlockMusic,opt);
-    window.addEventListener('focus',()=>{this.audioFocus=true;this.resumeFinaleFromBackground();if(this.sound&&this.audioStarted)this.initAudio();this.setAudio();},opt);
+    window.addEventListener('focus',()=>this.restoreForegroundAudio(),opt);
+    window.addEventListener('pageshow',()=>this.restoreForegroundAudio(),opt);
     canvas.parentElement?.addEventListener('contextmenu', (event) => event.preventDefault(), opt);
     canvas.parentElement?.addEventListener('dragstart', (event) => event.preventDefault(), opt);
     canvas.addEventListener(
@@ -661,7 +662,7 @@ export class VoroEngine {
           this.setAudio();
           this.publish();
         }
-        if(!document.hidden)this.resumeFinaleFromBackground();
+        if(!document.hidden)this.restoreForegroundAudio();
         this.setAudio();
         this.last = 0;
       },
@@ -770,13 +771,20 @@ export class VoroEngine {
     catch { /* The current-session choice still works without storage. */ }
     this.publish();
   }
-  initAudio() {
+  restoreForegroundAudio() {
+    if(this.destroyed || document.hidden)return;
+    this.audioFocus=true;
+    this.resumeFinaleFromBackground();
+    if(this.sound && this.audioStarted){this.initAudio(true);this.music?.unlock();}
+    this.setAudio();
+  }
+  initAudio(retryResume = false) {
     if(this.audio?.state==='closed') {
       this.sfx?.destroy();this.music?.destroy();this.master?.disconnect();
       this.sfx=null;this.music=null;this.audio=null;this.master=null;this.audioStarted=false;
     }
     if (this.audioStarted) {
-      this.sfx?.unlock();
+      this.sfx?.unlock(retryResume);
       this.setAudio();
       return;
     }
@@ -794,6 +802,7 @@ export class VoroEngine {
         if(this.destroyed)return;
         this.effectsGainTarget=null;this.setAudio();
         if(this.effectsAudible())this.sfx?.unlock();
+        if(this.audio?.state==='running')this.music?.tick();
       },{signal:this.lifecycle.signal});
       this.setAudio();
     } catch {
@@ -1157,6 +1166,9 @@ export class VoroEngine {
     }
     this.save();
     this.setAudio();
+    if(!automatic && !this.paused && this.sound && !document.hidden){
+      this.audioFocus=true;this.initAudio(true);this.music?.unlock();
+    }
     this.publish();
   }
   toast(text: string, seconds = 3) {

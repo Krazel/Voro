@@ -3,6 +3,18 @@ import { EFFECT_LEAD_SECONDS } from '../app/audio-health.mjs';
 import assert from 'node:assert/strict';
 import { EFFECTS_MASTER_GAIN, INGEST_SOUNDS, INGEST_GAIN, HIT_SOUNDS, SfxPlayer } from '../app/sfx.mjs';
 
+test('Foreground retry escapes a pending background resume; stale completion cannot clear a newer attempt',async()=>{
+ let time=0;const pending=[];
+ const context={state:'interrupted',resume:()=>new Promise(resolve=>pending.push(resolve))};
+ const player=new SfxPlayer(context,{}, {now:()=>time});player.buffers=INGEST_SOUNDS.map(()=>({}));
+ await player.unlock();assert.equal(pending.length,1);
+ await player.unlock();assert.equal(pending.length,1);
+ time=100;await player.unlock(true);assert.equal(pending.length,2);
+ const current=player.resuming;pending[0]();await new Promise(r=>setImmediate(r));assert.equal(player.resuming,current);
+ context.state='running';pending[1]();await new Promise(r=>setImmediate(r));assert.equal(player.resuming,null);
+ await player.unlock(true);assert.equal(pending.length,2);player.destroy();
+});
+
 test('iOS local media without HTTP status decodes; remote/opaque/HTTP failures stay rejected',async()=>{
   for(const [baseURL,status,type,allowed] of [
     ['capacitor://localhost/',0,'basic',true],['https://example.com/',0,'basic',false],

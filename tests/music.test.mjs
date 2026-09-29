@@ -8,6 +8,15 @@ function fixture(){
  return {player,context,media,get cancelled(){return cancelled}};
 }
 const settle=async()=>{await Promise.resolve();await Promise.resolve();};
+
+test('A system-paused active music deck resumes at its saved position without a sound toggle',async()=>{
+ const {player:p,context:c}=fixture();c.state='running';p.setState('micro',true);p.unlock();await settle();c.currentTime=5;p.tick();
+ const a=p.current.audio;a.currentTime=42;a.pause();p.tick();await settle();
+ assert.equal(a.paused,false);assert.equal(a.currentTime,42);
+ let plays=0;const play=a.play;a.play=function(){plays++;return play.call(this);};
+ for(let i=0;i<20;i++){c.currentTime+=.1;p.tick();}assert.equal(plays,0);
+ p.setState('micro',false,true);c.currentTime+=2;p.tick();assert.equal(a.paused,true);p.destroy();
+});
 test('Adaptation ducking keeps the same stream running at the same position, then restores it; mute still wins',async()=>{
  const {player:p,context:c}=fixture();c.state='running';
  p.setState('micro',true);p.unlock();await settle();c.currentTime=5;p.tick();

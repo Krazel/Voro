@@ -116,6 +116,15 @@ export class MusicPlayer {
     if(this.transition||this.blocked)return;
     if(this.current?.id!==this.desired){this.switchTo(this.desired);return;}
     const a=this.current?.audio;
+    // The OS may pause a media element independently of our active flag.
+    // Retry only a stopped deck, with bounded frequency; never restart music
+    // that is already playing or retry rejected autoplay without a gesture.
+    if(a?.paused && this.context.state==='running' && !a.ended){
+      if(this.context.currentTime-(this.lastRecoveryAt??-Infinity)>=1){
+        this.lastRecoveryAt=this.context.currentTime;this.record('resume-paused','foreground');this.resume();
+      }
+      return;
+    }
     if(a&&Number.isFinite(a.duration)&&a.duration>8&&a.currentTime>=a.duration-4.5)this.switchTo(this.desired,true);
     else if(a?.ended)this.switchTo(this.desired,true);
   }

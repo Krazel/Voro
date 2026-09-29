@@ -19,6 +19,31 @@ function fixture(){
   game.started=true;game.birth=0;
   return {game,context,frequencies,get starts(){return starts;},get resumes(){return resumes;}};
 }
+
+test('Returning via visibility without a focus event restores audio on Continue and preserves pause',async()=>{
+ const f=fixture(),g=f.game;
+ window.dispatchEvent(new Event('blur'));
+ document.hidden=true;document.dispatchEvent(new Event('visibilitychange'));
+ assert.equal(g.audioFocus,false);assert.equal(g.paused,true);
+ f.context.state='interrupted';document.hidden=false;document.dispatchEvent(new Event('visibilitychange'));
+ await new Promise(r=>setImmediate(r));
+ assert.equal(g.audioFocus,true);assert.equal(g.paused,true);assert.equal(f.context.state,'running');
+ assert.equal(g.master.gain.value,0);
+ g.action('pause');g.slurp();assert.equal(g.paused,false);assert.equal(f.starts,1);
+ assert.equal(g.master.gain.value,EFFECTS_MASTER_GAIN);g.destroy();
+});
+
+test('Foreground/pageshow and Continue never override a saved mute preference',()=>{
+ const f=fixture(),g=f.game;g.sound=false;g.paused=true;g.audioFocus=false;f.context.state='interrupted';
+ document.dispatchEvent(new Event('visibilitychange'));window.dispatchEvent(new Event('pageshow'));
+ g.action('pause');g.slurp();assert.equal(g.sound,false);assert.equal(f.resumes,0);assert.equal(f.starts,0);g.destroy();
+});
+
+test('Continue retries an interrupted context after pointerdown happened while still paused',async()=>{
+ const f=fixture(),g=f.game;g.paused=true;f.context.state='interrupted';
+ g.action('pause');await new Promise(r=>setImmediate(r));g.slurp();
+ assert.equal(f.resumes,1);assert.equal(f.starts,1);assert.equal(g.sound,true);g.destroy();
+});
 test('Closing settings restores the effects bus before the next bite without toggling sound',()=>{
   const f=fixture(),g=f.game;
   g.settingsOpen=true;g.setAudio();assert.equal(g.master.gain.value,0);

@@ -38,11 +38,21 @@ export class SfxPlayer {
     this.impactVoice = null;
     this.diagnostics = { attempts: 0, loadErrors: 0, readErrors: 0, decodeErrors: 0, lastLoadError: null, resumeErrors: 0, resumeAttempts: 0, playErrors: 0, requested: 0, played: 0, notReady: 0, notRunning: 0, throttled: 0, damageRequested: 0, damagePlayed: 0, shieldRequested:0, shieldPlayed:0, impactThrottled:0 };
   }
-  unlock() {
+  unlock(retryResume = false) {
     if (this.destroyed) return Promise.resolve();
-    if (this.context.state && !['running','closed'].includes(this.context.state) && !this.resuming && this.now()-this.lastResumeAt>=1000) {
+    const sinceResume = this.now()-this.lastResumeAt;
+    // A resume requested while iOS is backgrounded can remain pending. A new
+    // foreground/gesture attempt must not wait forever for that old promise.
+    if (this.context.state && !['running','closed'].includes(this.context.state)
+      && (retryResume || sinceResume>=1000) && (!this.resuming || retryResume || sinceResume>=1500)) {
       this.lastResumeAt=this.now();this.diagnostics.resumeAttempts++;
-      this.resuming=Promise.resolve(this.context.resume?.()).catch(()=>{this.diagnostics.resumeErrors++;}).finally(()=>{this.resuming=null;});
+      const attempt=Promise.resolve().then(()=>{});
+      this.resuming=attempt;
+      try {
+        // Call synchronously to retain the current user activation.
+        Promise.resolve(this.context.resume?.()).catch(()=>{this.diagnostics.resumeErrors++;})
+          .finally(()=>{if(this.resuming===attempt)this.resuming=null;});
+      } catch {this.diagnostics.resumeErrors++;if(this.resuming===attempt)this.resuming=null;}
     }
     if (this.loading) return this.loading;
     if (this.buffers.filter(Boolean).length === INGEST_SOUNDS.length || this.now() - this.lastAttemptAt < 5000) return Promise.resolve();
