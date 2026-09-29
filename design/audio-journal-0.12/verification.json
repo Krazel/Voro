@@ -1,0 +1,44 @@
+{
+  "manifest": {
+    "version": "0.12",
+    "build": "1",
+    "bundle": "com.dmkr.voro",
+    "commit": "2096be58e268914607ba83fdb74dc8158c904ea2",
+    "deviceFamilies": [
+      1,
+      2
+    ],
+    "iPadOrientations": [
+      "UIInterfaceOrientationPortrait",
+      "UIInterfaceOrientationPortraitUpsideDown",
+      "UIInterfaceOrientationLandscapeLeft",
+      "UIInterfaceOrientationLandscapeRight"
+    ],
+    "run": "36623409965",
+    "signed": true,
+    "purpose": "TestFlight"
+  },
+  "apple": {
+    "appId": "6809193565",
+    "buildId": "e9af81dd-7d66-4e0b-955c-e3d4618b7513",
+    "bundleId": "com.dmkr.voro",
+    "version": "0.12",
+    "build": "1",
+    "processingState": "VALID",
+    "uploadedDate": "2026-09-29T13:10:09-07:00",
+    "group": {
+      "id": "05db8744-bcf3-4c2d-a465-2635012bfeeb",
+      "name": "VORO Interno",
+      "internal": true
+    },
+    "internalBuildState": "IN_BETA_TESTING"
+  },
+  "ipa": "App.ipa",
+  "bytes": 349474309,
+  "sha256": "40b81587970f8b07c713fbe5b11c7daa325e97604601e17664b0966eb0e4b0c2",
+  "packagedNativeObserver": true,
+  "packagedJournal": [
+    "Payload/App.app/public/assets/index-DMwaHu5v.js"
+  ],
+  "physicalDeviceTest": false
+}

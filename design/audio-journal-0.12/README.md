@@ -25,6 +25,16 @@ Son datos técnicos locales; no se usa el micrófono, no se graba el sonido ni s
 - TypeScript y build móvil correctos; comprobación de integridad de recursos incluida.
 - `scripts/check-audio-journal.mjs`: interfaz, descarga, contenido y sesión anterior al recargar en Edge y WebKit, teléfono ES y tableta EN. Resultados en `browser-check.json`; capturas adjuntas.
 - El WebKit de Playwright en Windows no implementa AudioContext: valida UI/exportación y registro del error, **no reproducción de iOS**. Edge sí creó el contexto. Se fuerza la ruta de descarga web solo en la prueba; el adaptador nativo Filesystem/Share tiene prueba separada.
-- CI macOS debe compilar el plugin Swift, verificar firma, versión, recursos de la app archivada y procesado/asignación del grupo interno mediante API Apple. El resultado se añadirá tras completar la entrega.
+- CI macOS compiló el plugin Swift, verificó firma, versión y recursos de la app archivada; las 305 pruebas también pasaron allí. El procesado y la asignación del grupo interno se verificaron mediante API Apple.
 
 Antecedentes acústicos: `../audio-independent-audit-2026-09-29/README.md` (auditoría local, sin causa demostrada).
+
+## Entrega verificada · 29-09-2026
+
+- Fuente: `2096be58e268914607ba83fdb74dc8158c904ea2`.
+- [CI 36623409965](https://github.com/Krazel/Voro/actions/runs/36623409965), resultado `success`. Artefacto `Voro-TestFlight-56`.
+- Apple: app `6809193565`, build `e9af81dd-7d66-4e0b-955c-e3d4618b7513`, versión **0.12 (1)**, `VALID / IN_BETA_TESTING` comprobado a las 20:15 UTC.
+- Grupo existente `VORO Interno`, ID `05db8744-bcf3-4c2d-a465-2635012bfeeb`; acceso interno, sin distribución externa ni envío a App Review.
+- Biblioteca D1: misma ficha `PR-009`, revisión **293**, versión/build y siguiente paso releídos y verificados. Conservados seguimiento de App Store/anuncios, marketing y fuente histórica.
+- Archivo firmado descargado en `artifact/testflight-0.12-build-1/`; `verify-delivery.py` verifica hash, versión, familias iPhone/iPad, plugin nativo y diagnóstico/controles dentro de la IPA. Resultado en `verification.json`.
+- Prueba auditiva en dispositivo físico pendiente: el registro se incorpora para investigar el petardeo/silencio, sin afirmar una corrección acústica.
