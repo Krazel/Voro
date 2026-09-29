@@ -28,6 +28,7 @@ import {
   impulse,
   digest,
   beginAbsorb,
+  canBeginAbsorb,
   takeDamage,
   springNode,
 } from './simulation.mjs';
@@ -194,6 +195,7 @@ export class VoroEngine {
   lastMeal = -100;
   trail: { x: number; y: number; r: number; life: number }[] = [];
   fragments: Food[] = [];
+  absorptionCandidates: Food[] = [];
   saved = false;
   storageAvailable = true;
   settingsOpen = false;
@@ -1567,6 +1569,8 @@ export class VoroEngine {
         this.stats.tentacles,
         this.stats.tentacleReach,
       );
+      const candidates = this.absorptionCandidates;
+      candidates.length = 0;
       for (const f of this.food) {
         if (
           f.eaten ||
@@ -1581,12 +1585,21 @@ export class VoroEngine {
           f.x += ((p.x - f.x) / Math.max(d, 1)) * pull;
           f.y += ((p.y - f.y) / Math.max(d, 1)) * pull;
         }
+        if (canBeginAbsorb(p, f)) candidates.push(f);
+      }
+      // Rank only edible food already in reach, leaving ongoing digestion intact.
+      candidates.sort((a, b) =>
+        (b.r || (b.rod ? 7 : 4.5)) - (a.r || (a.rod ? 7 : 4.5)),
+      );
+      for (const f of candidates) {
+        if (p.digestion.length >= p.absorptionSlots) break;
         if (beginAbsorb(p, f)) {
           if (f.id) this.world.eat(f, p.elapsed);
           this.wobbleVelocity += 0.4;
           this.slurp();
         }
       }
+      candidates.length = 0;
       const massBefore = p.biomass,
         xpBefore = p.adaptationGained,
         finished = digest(p, dt);

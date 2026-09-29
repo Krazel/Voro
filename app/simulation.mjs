@@ -143,7 +143,7 @@ export function digest(life, dt) {
   }
   return count;
 }
-export function beginAbsorb(life, food) {
+export function canBeginAbsorb(life, food) {
   if (
     life.dead ||
     food.eaten ||
@@ -155,6 +155,10 @@ export function beginAbsorb(life, food) {
       life.radius * 1.12 * life.reachFactor
   )
     return false;
+  return true;
+}
+export function beginAbsorb(life, food) {
+  if (!canBeginAbsorb(life, food)) return false;
   food.eaten = true;
   life.digestion.push({
     dx: food.x - life.x,
