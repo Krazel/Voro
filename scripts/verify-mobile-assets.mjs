@@ -35,4 +35,5 @@ assert.ok(!/\.cristal-toast:{1,2}before\{opacity:\.?3\}/.test(css), 'Notice rim 
 assert.ok(scripts.includes('journey-horizons') && !scripts.includes('journey-spiral-map'), 'Completed journey must use the approved D3 horizons');
 assert.ok(scripts.includes('membrane-settings')&&css.includes('ui/membrane/background.webp'),'Approved lightweight membrane settings must ship on iOS');
 assert.ok(scripts.includes('owned-capsule') && scripts.includes('Tus adaptaciones') && css.includes('.owned-adaptations'), 'D3 owned collection must ship on iOS');
+assert.ok(!scripts.includes('voro-menu-theme-v1') && !scripts.includes('voro-menu-theme"'), 'Retired appearance selector must not ship on iOS');
 console.log('Mobile output verified: Cristal precedence, 10 backgrounds, five ingest gestures, four selected cosmic structures and chosen Respira pause.');

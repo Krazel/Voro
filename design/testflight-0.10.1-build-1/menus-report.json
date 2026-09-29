@@ -1,0 +1,80 @@
+[
+  {
+    "name": "chrome",
+    "device": "iphone",
+    "fixedAppearance": "inverse",
+    "pauseButtons": 2,
+    "returnButton": {
+      "x": 20,
+      "y": 784,
+      "width": 350,
+      "height": 46
+    },
+    "errors": []
+  },
+  {
+    "name": "chrome",
+    "device": "ipad",
+    "fixedAppearance": "inverse",
+    "pauseButtons": 2,
+    "returnButton": {
+      "x": 819,
+      "y": 747,
+      "width": 250,
+      "height": 52
+    },
+    "errors": []
+  },
+  {
+    "name": "chrome",
+    "device": "pc",
+    "fixedAppearance": "inverse",
+    "pauseButtons": 2,
+    "returnButton": {
+      "x": 862,
+      "y": 713,
+      "width": 250,
+      "height": 52
+    },
+    "errors": []
+  },
+  {
+    "name": "webkit",
+    "device": "iphone",
+    "fixedAppearance": "inverse",
+    "pauseButtons": 2,
+    "returnButton": {
+      "x": 20,
+      "y": 783.984375,
+      "width": 350,
+      "height": 46
+    },
+    "errors": []
+  },
+  {
+    "name": "webkit",
+    "device": "ipad",
+    "fixedAppearance": "inverse",
+    "pauseButtons": 2,
+    "returnButton": {
+      "x": 819,
+      "y": 747,
+      "width": 250,
+      "height": 52
+    },
+    "errors": []
+  },
+  {
+    "name": "webkit",
+    "device": "pc",
+    "fixedAppearance": "inverse",
+    "pauseButtons": 2,
+    "returnButton": {
+      "x": 862,
+      "y": 713,
+      "width": 250,
+      "height": 52
+    },
+    "errors": []
+  }
+]

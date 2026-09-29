@@ -469,10 +469,6 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
               className="primary-button membrane-control has-membrane-rim"
               onClick={() => action('pause')}
             ><MembraneRim />{tr(" Continuar ")}</button>
-            <button
-              className="primary-button membrane-control has-membrane-rim"
-              onClick={() => changeSettings(true)}
-            ><MembraneRim />{tr(" Configuración ")}</button>
             <button ref={ownedTrigger}
               className="primary-button membrane-control has-membrane-rim"
               onClick={() => changeOwned(true)}

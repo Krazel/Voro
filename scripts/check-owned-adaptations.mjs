@@ -3,7 +3,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import { UPGRADES } from '../app/mutations.mjs';
 const { chromium, webkit } = createRequire(process.env.VORO_PLAYWRIGHT_RUNTIME)('playwright');
-const out = 'design/owned-adaptations-ui-2026-09-29/implementation';
+const out = process.env.VORO_QA_OUTPUT || 'design/owned-adaptations-ui-2026-09-29/implementation';
 await mkdir(out, { recursive: true });
 const results = [];
 const counts = [3,4,2,3,2,3,2,1,2,2,3,2,1,2];

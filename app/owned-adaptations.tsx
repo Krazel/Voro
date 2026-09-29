@@ -83,7 +83,10 @@ export function OwnedAdaptations({ mutations, onClose, returnFocus }: {
           <div><h3>{t(selected.name)}</h3><span>×{selected.count}{selected.count === selected.max ? ` · ${en ? 'Max' : 'Máximo'}` : ''}</span></div>
           <p>{ownedEffect(selected.id, selected.count, language)}</p>
         </section>}
-        <button type="button" className="owned-return" onClick={onClose}>{back}</button>
+        <button type="button" className="owned-return" onClick={onClose}>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13 7-5 5 5 5M8 12h10" /></svg>
+          <span>{back}</span>
+        </button>
       </footer>
     </DialogContent>
   </Dialog>;

@@ -44,7 +44,10 @@
 .owned-detail h3 { margin: 0; font-size: 17px; line-height: 1.2; font-weight: 600; }
 .owned-detail div > span { flex: none; font-size: 13px; }
 .owned-detail p { margin: 5px 0 0; color: var(--owned-sage); font-size: 13px; line-height: 1.35; }
-.owned-return { width: 100%; min-height: 46px; padding: 10px 20px; color: #11150e; background: radial-gradient(ellipse at center, #fff8e5, #e7dabd); border: 0; border-radius: 15% 13% 12% 14% / 65% 55% 60% 65%; font-size: 18px; line-height: 1.25; font-weight: 700; }
+.owned-return { position: relative; display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; min-height: 46px; padding: 8px 20px; color: #e8f5dd; background: radial-gradient(ellipse at 30% 0%, #527a665c, transparent 65%), linear-gradient(160deg, #223f35, #112d2b 65%, #243e32); border: 1px solid #b4cf9d; border-radius: 22% 17% 20% 18% / 55% 60% 48% 52%; box-shadow: inset 0 1px 3px #e5f4bc66, inset 0 -3px 7px #061a1bc4, 0 3px 9px #0006; font-size: 17px; line-height: 1.25; font-weight: 600; transition: background-color .2s, box-shadow .2s, transform .2s; }
+.owned-return svg { width: 26px; height: 26px; flex: none; padding: 3px; border: 1px solid #b4cf9d55; border-radius: 46% 54% 49% 51%; background: #b1d2a817; fill: none; stroke: #d3e6b8; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.owned-return:active { transform: scale(.985); box-shadow: inset 0 2px 7px #031512b3; }
+@media (hover: hover) { .owned-return:hover { background-color: #355947; box-shadow: inset 0 1px 5px #e5f4bc80, 0 0 12px #b6cf7e24; } }
 .owned-empty { max-width: 350px; margin: min(20vh, 120px) auto 30px; text-align: center; color: var(--owned-sage); line-height: 1.6; }
 .owned-empty p { color: var(--owned-cream); font-size: 20px; margin-bottom: 8px; }
 @media (min-width: 760px) and (orientation: landscape) {
