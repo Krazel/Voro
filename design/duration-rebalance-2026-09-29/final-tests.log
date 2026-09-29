@@ -1,0 +1,50 @@
+✔ Every new stage starts half-size, only the smallest species are edible, and starter food is nearby (76.4599ms)
+✔ Three stable choices survive reload and cannot be rerolled (3.0249ms)
+✔ Final capped choices remain selectable without renewing the offer (0.7869ms)
+✔ Moderated cadence retains old saves, upgrades, body and fractional progress (0.8212ms)
+✔ Choosing freezes world time, consumes one adaptation and survives a first hit (70.8406ms)
+✔ Unfinished campaigns still contribute completed stages, never censored completion times or 60Hz contrasts (2.2458ms)
+✔ Summary distinguishes arithmetic mean from median without substituting empty means with zero (1.0727ms)
+Micro-stage progression: [{"seed":41,"seconds":451,"upgrades":12},{"seed":127,"seconds":539,"upgrades":12},{"seed":930,"seconds":463,"upgrades":12}]
+✔ Bitmap organisms digest, membrane animates, and damage lowers HUD mass and body area (273.2742ms)
+✔ A shield blocks one hit, then damage and recycling apply during recharge (214.6046ms)
+✔ Adaptation choices, pause and settings stop world time; retry retains choices, reset clears them (33.8053ms)
+✔ Movement crosses old boundaries in both directions; touch movement has no effect after releasing (70.8723ms)
+✔ Unassisted world population supports growth to cellular maturity without changing biomes (79283.3132ms)
+✔ Damage scaling helper preserves proportional unspent XP loss (188.4562ms)
+✔ Real world contacts remove exactly 10% of current biomass and unspent XP, including tiny bodies (136.3291ms)
+✔ Real projectiles retain weaker damage and never exceed 10%, even through minimum damage (27.0728ms)
+✔ Ordinary food earns 10% more adaptation progress in every environment without changing biomass rewards (37.122ms)
+Entered micro at 0 s
+Entered pond at 513 s
+Entered land at 1075 s
+Entered water at 1608 s
+Entered city at 2117 s
+Entered orbit at 2660 s
+Entered planets at 3113 s
+Entered stars at 3493 s
+Entered galaxies at 3843 s
+Entered universe at 4132 s
+Journey result {"timings":[{"stage":"micro","at":0},{"stage":"pond","at":513},{"stage":"land","at":1075},{"stage":"water","at":1608},{"stage":"city","at":2117},{"stage":"orbit","at":2660},{"stage":"planets","at":3113},{"stage":"stars","at":3493},{"stage":"galaxies","at":3843},{"stage":"universe","at":4132}],"seconds":4354,"deaths":0,"upgrades":74}
+✔ Every stage generates stable inhabitants, recoverable food, bounded chunks and valid bitmap crops (408.7093ms)
+✔ Ranged attackers fire; small bodies take damage and large ones absorb bullets for tiny growth without XP (70.4564ms)
+✔ Evolution advances once at the midpoint, preserves adaptations and survives reload (212.9342ms)
+✔ Existing microscopic saves migrate, and each later stage preserves wounded mass, cooldown and digestion (3.419ms)
+✔ Final universe remains findable after streaming and can be retried after interrupted digestion (7.3306ms)
+✔ A complete run eats planets, stars, galaxies and the universe in order, with no teleporting or forced growth (91910.9239ms)
+✔ One rare choice survives save/load and cannot be offered twice (13.5657ms)
+✔ Dash releases exactly one decoy, rejects cooldown/paused dashes, ticks in simulation and works again on next dash (72.9924ms)
+✔ Pursuers turn toward copy; edible prey, new enemies and static hazards are not distracted (0.412ms)
+✔ Ranged enemies aim at the copy without teleporting existing projectiles (0.5876ms)
+✔ Suction scales with body, XP bonus caps at40%, dash base intact and max moderated (0.51ms)
+✔ Campaign rewards slow feeding without changing stage sizes/goals, and legacy saves keep mass, XP, choices and pending food (6.1653ms)
+✔ Micro cycles advance at 30 poses/s; high resolution is optional and budget exhaustion never requests a live mesh (1.399ms)
+✔ Giant cosmic bodies preserve physical ranges and use detailed alpha artwork; Planet clouds use real planet bitmaps (36.4006ms)
+ℹ tests 30
+ℹ suites 0
+ℹ pass 30
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 93127.2268
