@@ -59,7 +59,7 @@ test('Real projectiles retain weaker damage and never exceed 10%, even through m
  }finally{g.destroy();}
 });
 
-test('Ordinary food earns 10% more adaptation progress in every environment without changing biomass rewards', () => {
+test('Ordinary food restores the pre-reduction adaptation reward in every environment without changing biomass rewards', () => {
   const { game } = makeEngine();
   try {
     for (let stage = 0; stage < STAGES.length; stage++) {
@@ -69,7 +69,7 @@ test('Ordinary food earns 10% more adaptation progress in every environment with
       game.life.digestion = [{ progress: .99, value: 1, r: 1, dx: 0, dy: 0, rotation: 0, kind: 'nutrient' }];
       const mass = game.life.biomass, xp = game.progress.xp, growth = game.life.growthFactor;
       game.update(.1);
-      assert.ok(Math.abs(game.progress.xp - xp - 0.68 * 1.1 * adaptationYield(STAGES[stage].id)) < 1e-9, STAGES[stage].id);
+      assert.ok(Math.abs(game.progress.xp - xp - 0.85 * adaptationYield(STAGES[stage].id)) < 1e-9, STAGES[stage].id);
       assert.ok(Math.abs(game.life.biomass - mass - growth) < 1e-9);
     }
   } finally { game.destroy(); }

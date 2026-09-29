@@ -9,14 +9,18 @@ export const CAMPAIGN_PACING = {
  galaxies:{minutes:7,biomass:.160}, universe:{minutes:5,biomass:.125},
 };
 export const biomassYield = id => CAMPAIGN_PACING[id]?.biomass ?? 1;
-// Increase the approved 0.68 food XP reward by 10%, without adaptive pacing.
-export const ADAPTATION_FOOD_GAIN = 0.748;
+// Restore the food XP reward from before the 20% reduction (2993110).
+export const ADAPTATION_FOOD_GAIN = 0.85;
 // Apply once to both proportional and minimum incoming damage. Unspent XP
 // follows the actual fraction of biomass lost, so it receives the same relief.
 export const INCOMING_DAMAGE_FACTOR = 0.60;
 // Actual gameplay loss: contacts cost 10%, projectiles can cost less. Keep
 // this explicit instead of deriving contact damage from an old enemy value.
 export const CONTACT_BIOMASS_LOSS = 0.10;
-// Fixed food reward per biome. Never penalize earned choices, elapsed time
-// or being ahead of a stage target. Existing XP and thresholds stay intact.
-export const adaptationYield = id => Math.max(.25, Math.sqrt(biomassYield(id)));
+// Preserve that version's XP curve independently of biomass calibration.
+// Stage duration changes must not silently change adaptation rewards again.
+const ADAPTATION_REFERENCE = {
+ micro:.13, pond:.16, land:.16, water:.136, city:.104,
+ orbit:.32, planets:.2, stars:.23, galaxies:.3, universe:.3,
+};
+export const adaptationYield = id => Math.max(.25, Math.sqrt(ADAPTATION_REFERENCE[id] ?? 1));

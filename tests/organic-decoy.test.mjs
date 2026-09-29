@@ -7,7 +7,7 @@ import {JourneyWorld,journeyEntity} from '../app/journey-world.mjs';
 import {SPECIES_BY_ID,STAGE_SPECIES} from '../app/journey-data.mjs';
 import {newJourney,journeyLife,chooseUpgrade,saveJourney,loadJourney} from '../app/journey-progress.mjs';
 import {UPGRADES,upgradeStats,offerUpgrades,journeyAdaptation} from '../app/mutations.mjs';
-import {adaptationYield,biomassYield} from '../app/campaign-pacing.mjs';
+import {adaptationYield} from '../app/campaign-pacing.mjs';
 
 test('One rare choice survives save/load and cannot be offered twice',()=>{
  const u=UPGRADES.find(u=>u.id==='decoy');assert.equal(u.group,'Rara');assert.equal(u.max,1);
@@ -59,6 +59,6 @@ test('Suction scales with body, XP bonus caps at40%, dash base intact and max mo
  const base=upgradeStats([]),max=upgradeStats(Array(8).fill('dash'));
  assert.equal(base.boostStrength,2.5);assert.equal(base.boostDuration,.42);assert.equal(base.cooldownFactor*7,7);
  assert.equal(max.boostStrength,3.3);assert.equal(max.boostDuration,.62);assert.equal(max.cooldownFactor*7,3);
- for(const id of ['micro','city','stars','universe'])
-  for(const level of [0,20,55,74])assert.equal(adaptationYield(id,level),Math.max(.25,Math.sqrt(biomassYield(id))));
+ for(const [id,reference] of Object.entries({micro:.13,city:.104,stars:.23,universe:.3}))
+  for(const level of [0,20,55,74])assert.equal(adaptationYield(id,level),Math.sqrt(reference));
 });
