@@ -15,15 +15,26 @@ export class MusicPlayer {
     this.context=context;this.cancel=cancel;this.active=false;this.unlocked=false;
     this.desired='menu';this.current=null;this.destroyed=false;this.transition=null;this.serial=0;this.blocked=false;
     this.diagnostics={switches:0,loops:0,waiting:0,stalled:0,errors:0};
+    this.events=[];this.listeners=[];
+    const observe=(target,type,listener)=>{target.addEventListener?.(type,listener);this.listeners.push(()=>target.removeEventListener?.(type,listener));};
+    observe(context,'statechange',()=>this.record('context',context.state));
     this.bus=context.createGain();this.bus.gain.value=0;this.bus.connect(context.destination);
     this.decks=Array.from({length:2},()=>{
       const audio=createAudio();audio.preload='auto';audio.setAttribute('playsinline','');
-      for(const type of ['waiting','stalled','error'])audio.addEventListener?.(type,()=>{this.diagnostics[type==='error'?'errors':type]++;});
+      for(const type of ['waiting','stalled','error','playing','pause'])observe(audio,type,()=>{
+        if(['waiting','stalled','error'].includes(type))this.diagnostics[type==='error'?'errors':type]++;
+        this.record(type,audio.currentSrc||audio.src,{mediaTime:audio.currentTime,readyState:audio.readyState});
+      });
       const source=context.createMediaElementSource(audio),gain=context.createGain();
       gain.gain.value=0;source.connect(gain);gain.connect(this.bus);
       return {audio,source,gain,id:null,pending:false};
     });
     this.timer=schedule(()=>this.tick());
+  }
+  record(type,detail,extra={}) {
+    if(this.destroyed)return;
+    this.events.push({type,at:Math.round((this.context.currentTime||0)*1000)/1000,detail,...extra});
+    if(this.events.length>24)this.events.shift();
   }
   ramp(param,value,seconds){const now=this.context.currentTime;
     if(param.cancelAndHoldAtTime)param.cancelAndHoldAtTime(now);
@@ -110,10 +121,11 @@ export class MusicPlayer {
   }
   destroy(){
     this.destroyed=true;this.serial++;this.cancel(this.timer);
+    this.listeners.forEach(remove=>remove());this.listeners=[];
     this.decks.forEach(d=>{d.audio.pause();d.audio.removeAttribute('src');d.audio.load();d.source.disconnect();d.gain.disconnect();});
     this.bus.disconnect();
   }
   stats(){return {...this.diagnostics,desired:this.desired,current:this.current?.id||null,active:this.active,blocked:this.blocked,transition:!!this.transition,volumeTarget:this.volumeTarget??0,
-    context:this.context.state,sampleRate:this.context.sampleRate,baseLatency:this.context.baseLatency,outputLatency:this.context.outputLatency,
+    context:this.context.state,sampleRate:this.context.sampleRate,baseLatency:this.context.baseLatency,outputLatency:this.context.outputLatency,events:this.events.slice(),
     decks:this.decks.map(d=>({id:d.id,paused:d.audio.paused,pending:d.pending,readyState:d.audio.readyState,networkState:d.audio.networkState,time:d.audio.currentTime,duration:Number.isFinite(d.audio.duration)?d.audio.duration:null,error:d.audio.error?.code||null}))};}
 }

@@ -1,0 +1,13 @@
+{
+  "mode": "offline Web Audio / Edge",
+  "seconds": 24,
+  "rate": 48000,
+  "channels": 2,
+  "ingests": 69,
+  "impactIntervalSeconds": 0.5,
+  "peak": 0.6376099586486816,
+  "clippedSamples": 0,
+  "rms": 0.06955398511593198,
+  "maxAdjacentDelta": 0.1272861696779728,
+  "limitations": "Not a realtime playback or physical iOS test. Does not detect hardware/decoder underruns."
+}

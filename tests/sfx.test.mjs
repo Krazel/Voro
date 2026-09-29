@@ -1,4 +1,5 @@
 import test from 'node:test';
+import { EFFECT_LEAD_SECONDS } from '../app/audio-health.mjs';
 import assert from 'node:assert/strict';
 import { EFFECTS_MASTER_GAIN, INGEST_SOUNDS, INGEST_GAIN, HIT_SOUNDS, SfxPlayer } from '../app/sfx.mjs';
 
@@ -125,8 +126,8 @@ test('Pitch-shifted bites fade at both sample boundaries without affecting the w
     createBufferSource:()=>source={playbackRate:{value:1},connect(){},disconnect(){},start(){}}
   },{}, {now:()=>time,random:()=>0});
   player.buffers=[{duration:.5}];assert.equal(player.playIngest(),true);
-  const end=20+.5/source.playbackRate.value;
-  const expected=[[0,20],[INGEST_GAIN,20.006],[INGEST_GAIN,end-.02],[0,end]];
+  const start=20+EFFECT_LEAD_SECONDS, end=start+.5/source.playbackRate.value;
+  const expected=[[0,start],[INGEST_GAIN,start+.006],[INGEST_GAIN,end-.02],[0,end]];
   assert.equal(envelope.length,4);
   envelope.forEach(([gain,at],i)=>{assert.equal(gain,expected[i][0]);assert.ok(Math.abs(at-expected[i][1])<1e-9);});
   time+=100;assert.equal(player.playIngest(),false);
@@ -170,9 +171,9 @@ test('Impact voices are bounded, release to zero, and never replay interrupted h
  const p=new SfxPlayer(c,{}, {now:()=>time});
  assert.equal(p.playDamage(),true);
  for(let i=0;i<100;i++){time+=1;assert.equal(p.playShield(),false)}
- assert.equal(nodes.length,1);assert.equal(p.voices.size,1);assert.ok(envelopes.some(([v,t])=>v===0&&t===.3));
+ assert.equal(nodes.length,1);assert.equal(p.voices.size,1);assert.ok(envelopes.some(([v,t])=>v===0&&Math.abs(t-(.3+EFFECT_LEAD_SECONDS))<1e-9));
  c.state='interrupted';p.cancelImpacts();assert.equal(p.voices.size,0);assert.equal(p.playShield(),false);
  time=1000;c.state='running';assert.equal(p.stats().shieldPlayed,0);assert.equal(p.playShield(),true);
- assert.equal(nodes[0].type,'triangle');assert.equal(nodes[1].type,'sine');assert.ok(envelopes.some(([v,t])=>v===0&&t===.38));
+ assert.equal(nodes[0].type,'triangle');assert.equal(nodes[1].type,'sine');assert.ok(envelopes.some(([v,t])=>v===0&&Math.abs(t-(.38+EFFECT_LEAD_SECONDS))<1e-9));
  p.destroy();assert.equal(p.voices.size,0);assert.equal(p.playDamage(),false);
 });

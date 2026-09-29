@@ -1,0 +1,74 @@
+[
+  {
+    "file": "public\\music\\solace.mp3",
+    "seconds": 356.355875,
+    "peak": 0.4231016933917999,
+    "rms": 0.05915148928761482,
+    "first": 1.586309394951968e-07,
+    "last": 1.3386935115988763e-08,
+    "clipped": 0,
+    "maxDelta": 0.04872617870569229,
+    "sha256": "e64d86d54c400c5141c536bb0039400b6c10c6c31f5d11ae0be2ef9b8ae4d516",
+    "decoderErrors": ""
+  },
+  {
+    "file": "public\\sfx\\ingest-1.wav",
+    "seconds": 0.5,
+    "peak": 0.8461540937423706,
+    "rms": 0.04499989375472069,
+    "first": 0.0,
+    "last": -1.176155084436914e-08,
+    "clipped": 0,
+    "maxDelta": 0.2708114683628082,
+    "sha256": "492a2dfe8b3c65f6d86ed60b6da9aaa7331c05e76f42b0a8ca359133e719a78b",
+    "decoderErrors": ""
+  },
+  {
+    "file": "public\\sfx\\ingest-2.wav",
+    "seconds": 0.52,
+    "peak": 0.5009329915046692,
+    "rms": 0.04500013589859009,
+    "first": 0.0,
+    "last": 0.0,
+    "clipped": 0,
+    "maxDelta": 0.12809708714485168,
+    "sha256": "759ac322fbf882ef5185026b2fbcfa5e060a659b8a0757706b8c0f5981192699",
+    "decoderErrors": ""
+  },
+  {
+    "file": "public\\sfx\\ingest-3.wav",
+    "seconds": 0.54,
+    "peak": 0.4276784360408783,
+    "rms": 0.04500001296401024,
+    "first": 0.0,
+    "last": 2.1501948594959686e-06,
+    "clipped": 0,
+    "maxDelta": 0.10682354867458344,
+    "sha256": "24a30c7598a8fe82ddd79ac6d682c35476282eaf5c64d53472c8d6961e4dc54c",
+    "decoderErrors": ""
+  },
+  {
+    "file": "public\\sfx\\ingest-4.wav",
+    "seconds": 0.48,
+    "peak": 0.5103686451911926,
+    "rms": 0.04500007629394531,
+    "first": 0.0,
+    "last": 2.397249545538216e-06,
+    "clipped": 0,
+    "maxDelta": 0.12847161293029785,
+    "sha256": "94a50678ff0b7b8da5d83f5e27a0c844a730799844cc89fbb864e9fec92cb026",
+    "decoderErrors": ""
+  },
+  {
+    "file": "public\\sfx\\ingest-5.wav",
+    "seconds": 0.58,
+    "peak": 0.5466297268867493,
+    "rms": 0.04500023275613785,
+    "first": 0.0,
+    "last": 2.301301037732628e-06,
+    "clipped": 0,
+    "maxDelta": 0.13300999999046326,
+    "sha256": "ac610b9a69733aae5a32c4633f87fc5529cd2cc2148d2c8fa52f1f9edec8bc94",
+    "decoderErrors": ""
+  }
+]

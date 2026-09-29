@@ -1,3 +1,4 @@
+import { EFFECT_LEAD_SECONDS } from './audio-health.mjs';
 // Five different wet gestures; runtime pitch varies independently of the sample.
 export const INGEST_SOUNDS = [1, 2, 3, 4, 5].map(index => `./sfx/ingest-${index}.wav`);
 // Music has its own output; this bus controls only effects. The quiet WAVs
@@ -98,7 +99,7 @@ export class SfxPlayer {
     source.playbackRate.value = 2 ** (semitones / 12);
     const gain = this.context.createGain();
     gain.gain.value = INGEST_GAIN;
-    const audioAt=this.context.currentTime || 0;
+    const audioAt=(this.context.currentTime || 0) + EFFECT_LEAD_SECONDS;
     const duration=source.buffer.duration/source.playbackRate.value;
     // De-click both ends, including pitch-shifted samples; preserve the full bite.
     if(Number.isFinite(duration)&&gain.gain.setValueAtTime){
@@ -112,7 +113,7 @@ export class SfxPlayer {
     const voice = { source, gain };
     this.voices.add(voice);
     source.onended = () => { source.disconnect(); gain.disconnect(); this.voices.delete(voice); };
-    try { source.start(); }
+    try { source.start(audioAt); }
     catch { source.onended(); this.diagnostics.playErrors++; return false; }
     this.diagnostics.played++;
     this.last = index;
@@ -128,7 +129,7 @@ export class SfxPlayer {
     this.diagnostics[`${kind}Requested`]++;
     if(this.context.state && this.context.state!=='running'){this.diagnostics.notRunning++;return false;}
     if(this.impactVoice || this.now()-this.lastImpactAt<420){this.diagnostics.impactThrottled++;return false;}
-    const at=this.context.currentTime;
+    const at=this.context.currentTime + EFFECT_LEAD_SECONDS;
     // Organic low knock for damage; a higher, softer membrane snap for shield.
     // One impact voice, no sample loading and no queued/replayed missed events.
     const source=this.context.createOscillator(),gain=this.context.createGain();

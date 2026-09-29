@@ -2,6 +2,7 @@ import { desktopViewport, visibleChunkRadius, isTabletDevice, wideScreenEnabled 
 
 import { t as tr } from './language.mjs';
 import { MusicPlayer, musicScene } from './music.mjs';
+import { AUDIO_CONTEXT_OPTIONS, EFFECT_LEAD_SECONDS, audioPlaybackStats } from './audio-health.mjs';
 import { EFFECTS_MASTER_GAIN, SfxPlayer } from './sfx.mjs';
 import { captureOrbit, sweepPosition } from './orbital-sweep.mjs';
 import { UniverseFinale, FINALE_SECONDS, FINALE_BLACK_AT, FINALE_MUSIC_FADE_AT, drawVoidSurvivor } from './universe-finale.mjs';
@@ -317,7 +318,7 @@ export class VoroEngine {
         quality: this.rasterBudget.quality, pixels: this.canvas.width * this.canvas.height, zoomFactor: this.zoomFactor, zoom: this.zoom },
       animationSheets: this.animationSheets.stats(), animationCache: animationCacheStats(),
       audio: { enabled: this.sound, focused: this.audioFocus, contextState: this.audio?.state || 'not-created',
-        masterGain: this.master?.gain.value ?? 0, ingest: this.sfx?.stats() ?? null, music: this.music?.stats() ?? null },
+        output: audioPlaybackStats(this.audio), masterGain: this.master?.gain.value ?? 0, ingest: this.sfx?.stats() ?? null, music: this.music?.stats() ?? null },
       backgroundRebuilds: this.worldGround.redraws,
       background: this.backgroundStatus(),
       backgroundRebuildsDuringCapture: this.worldGround.redraws - this.groundAtCapture });
@@ -747,7 +748,7 @@ export class VoroEngine {
     }
     this.audioStarted = true;
     try {
-      this.audio = new AudioContext();
+      this.audio = new AudioContext(AUDIO_CONTEXT_OPTIONS);
       this.master = this.audio.createGain();
       this.master.gain.value = 0;
       this.effectsGainTarget = null;
@@ -799,7 +800,7 @@ export class VoroEngine {
   }
   chime(evolve = false) {
     if (!this.prepareEffects() || !this.audio || !this.master) return;
-    const now = this.audio.currentTime;
+    const now = this.audio.currentTime + EFFECT_LEAD_SECONDS;
     for (let i = 0; i < (evolve ? 4 : 1); i++) {
       const o = this.audio.createOscillator(),
         g = this.audio.createGain();
@@ -1853,7 +1854,7 @@ export class VoroEngine {
   }
   tone(from: number, to: number, duration: number, gain: number) {
     if (!this.prepareEffects() || !this.audio || !this.master) return;
-    const at = this.audio.currentTime,
+    const at = this.audio.currentTime + EFFECT_LEAD_SECONDS,
       o = this.audio.createOscillator(),
       g = this.audio.createGain();
     o.type = 'sine';
