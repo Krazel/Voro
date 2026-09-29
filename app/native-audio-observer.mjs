@@ -7,7 +7,7 @@ export function observeAudioSession(plugin,record,onActivity,doc=globalThis.docu
   const emit=(kind,detail)=>{if(!disposed)record(kind,detail);};
   const activity=value=>{
     if(disposed||!liveActivityAvailable||!value||typeof value.allowed!=='boolean'||!Number.isSafeInteger(value.sequence)||value.sequence<=lastSequence)return false;
-    lastSequence=value.sequence;latestActivity=value;
+    lastSequence=value.sequence;latestActivity=value;fallbackOpened=false;
     if(!recoveryHeld||!value.allowed)onActivity(value.allowed);
     return true;
   };

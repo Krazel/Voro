@@ -107,6 +107,15 @@ test('A failed interruption check stays closed and retries when the page returns
   pending.shift().resolve({activity:{sequence:1,allowed:true}});await settle();assert.equal(states.at(-1),true);stop();
 });
 
+test('A transient initial snapshot failure does not disable rechecks once live native activity is available',async()=>{
+  const doc=Object.assign(new EventTarget(),{hidden:false}),states=[];let listener,calls=0;
+  const stop=observeAudioSession({addListener:async(_name,fn)=>{listener=fn;return{remove(){}};},
+    snapshot:async()=>{if(++calls===1)throw Error('transient');return{activity:{sequence:1,allowed:false}};}},()=>{},active=>states.push(active),doc);
+  await settle();assert.equal(states.at(-1),true);
+  listener({sequence:1,activity:{sequence:1,allowed:false}});
+  assert.equal(stop.recheck(),true);await settle();assert.equal(calls,2);assert.equal(states.at(-1),false);stop();
+});
+
 test('Native active before visibility waits for the page; muted foreground never starts audio',async()=>{
   for(const muted of [false,true]){
     const f=fixture(),{g,context}=f;
