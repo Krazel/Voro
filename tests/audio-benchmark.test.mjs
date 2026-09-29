@@ -1,9 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { AudioBenchmark, AudioProbe } from '../app/audio-benchmark.mjs';
+import { SfxPlayer } from '../app/sfx.mjs';
 import { STAGES, stageStartMass } from '../app/journey-data.mjs';
 import { makeEngine } from './engine-fixture.mjs';
 import { compactPerformanceReport, deliverReportFile } from '../app/performance-report.mjs';
+
+test('A missing diagnostic bite is reported unavailable instead of replaced by another sample',()=>{
+ const p=new SfxPlayer({state:'running'},{});p.buffers=[{duration:.5}];
+ assert.equal(p.playIngest(4),false);assert.equal(p.stats().notReady,1);assert.equal(p.stats().played,0);
+});
 
 test('Audio sequence covers all tracks, five bites and both impacts without replaying late bursts',()=>{
  const tour=new AudioBenchmark(STAGES,stageStartMass);

@@ -84,6 +84,8 @@ export class SfxPlayer {
     this.diagnostics.requested++;
     const available = this.buffers.flatMap((buffer,index) => buffer ? [index] : []);
     if (!available.length) { this.diagnostics.notReady++; return false; }
+    // A diagnostic request must not silently substitute a different WAV.
+    if(sampleIndex!==null && (!Number.isInteger(sampleIndex)||!available.includes(sampleIndex))){this.diagnostics.notReady++;return false;}
     if (this.context.state && this.context.state !== 'running') { this.diagnostics.notRunning++; return false; }
     if (at - this.lastPlayedAt < 1000 / 3) { this.diagnostics.throttled++; return false; }
     // Hear the entire bank in random order before starting another round.
