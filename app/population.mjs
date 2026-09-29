@@ -26,7 +26,11 @@ export const POPULATION_PLANS = {
   orbit: {
     slots: [4, 4, 1],
     extraSmall: 1,
-    note: 'Diez plazas por zona: las nueve anteriores y un resto pequeño visible y comestible; sin más estaciones, satélites grandes ni peligros.',
+    extraForage: [
+      { id: 'orbit-matter-panel', r: 25, sizeFactors: [.88, 1.12] },
+      { id: 'orbit-2', r: 32, sizeFactors: [.88, 1.12] },
+    ],
+    note: 'Doce plazas por zona: las diez anteriores y dos piezas intermedias, un panel de 22–28 y un satélite de 28–36 de radio. Sin más restos iniciales ni peligros.',
   },
   planets: {
     slots: [2, 3, 1],
