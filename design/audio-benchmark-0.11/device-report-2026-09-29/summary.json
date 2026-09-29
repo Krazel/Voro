@@ -1,0 +1,421 @@
+{
+  "sourceSHA256": "cfc3d735d1d2e02cae198b52090c74fc21a9b4c5fff9f6f180ddb822ca26a8bf",
+  "date": "2026-09-29T16:07:02.620Z",
+  "version": "0.11",
+  "build": 1,
+  "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+  "summary": {
+    "frames": 5846,
+    "seconds": 98,
+    "fps": 59.6,
+    "slowFrames": 12
+  },
+  "observations": {
+    "sampledOverload": 0,
+    "mainThreadGaps": 1,
+    "stalledAudioClock": 0,
+    "notRunning": 0,
+    "userMarks": 0,
+    "effectsPlayed": 91,
+    "effectsFailed": 0,
+    "effectsMissed": 0
+  },
+  "scenes": [
+    {
+      "id": "menu",
+      "status": "ok",
+      "loadingMs": 0,
+      "summary": {
+        "fps": 60,
+        "cpu": 0.8,
+        "peak": 23,
+        "p95": 17,
+        "seconds": 8,
+        "frames": 480,
+        "slowFrames": 0,
+        "parts": {
+          "simulation": 0.29,
+          "animationPreparation": 0.02,
+          "background": 0.02,
+          "inhabitants": 0.24,
+          "protagonist": 0.15,
+          "render": 0.47
+        }
+      },
+      "observations": {
+        "sampledOverload": 0,
+        "mainThreadGaps": 0,
+        "stalledAudioClock": 0,
+        "notRunning": 0,
+        "userMarks": 0,
+        "effectsPlayed": 0,
+        "effectsFailed": 0,
+        "effectsMissed": 0
+      },
+      "maxSampledPeak": 0.05706
+    },
+    {
+      "id": "micro",
+      "status": "ok",
+      "loadingMs": 0,
+      "summary": {
+        "fps": 60,
+        "cpu": 0.7,
+        "peak": 42,
+        "p95": 17,
+        "seconds": 8,
+        "frames": 478,
+        "slowFrames": 1,
+        "parts": {
+          "simulation": 0.28,
+          "animationPreparation": 0.01,
+          "background": 0.04,
+          "inhabitants": 0.19,
+          "protagonist": 0.18,
+          "render": 0.45
+        }
+      },
+      "observations": {
+        "sampledOverload": 0,
+        "mainThreadGaps": 0,
+        "stalledAudioClock": 0,
+        "notRunning": 0,
+        "userMarks": 0,
+        "effectsPlayed": 9,
+        "effectsFailed": 0,
+        "effectsMissed": 0
+      },
+      "maxSampledPeak": 0.24102
+    },
+    {
+      "id": "pond",
+      "status": "ok",
+      "loadingMs": 85,
+      "summary": {
+        "fps": 60,
+        "cpu": 0.9,
+        "peak": 35,
+        "p95": 17,
+        "seconds": 8,
+        "frames": 477,
+        "slowFrames": 1,
+        "parts": {
+          "simulation": 0.35,
+          "animationPreparation": 0.01,
+          "background": 0.03,
+          "inhabitants": 0.17,
+          "protagonist": 0.2,
+          "render": 0.55
+        }
+      },
+      "observations": {
+        "sampledOverload": 0,
+        "mainThreadGaps": 0,
+        "stalledAudioClock": 0,
+        "notRunning": 0,
+        "userMarks": 0,
+        "effectsPlayed": 9,
+        "effectsFailed": 0,
+        "effectsMissed": 0
+      },
+      "maxSampledPeak": 0.32215
+    },
+    {
+      "id": "land",
+      "status": "ok",
+      "loadingMs": 90,
+      "summary": {
+        "fps": 60,
+        "cpu": 0.9,
+        "peak": 32,
+        "p95": 17,
+        "seconds": 8,
+        "frames": 480,
+        "slowFrames": 0,
+        "parts": {
+          "simulation": 0.43,
+          "animationPreparation": 0.01,
+          "background": 0.05,
+          "inhabitants": 0.14,
+          "protagonist": 0.17,
+          "render": 0.45
+        }
+      },
+      "observations": {
+        "sampledOverload": 0,
+        "mainThreadGaps": 0,
+        "stalledAudioClock": 0,
+        "notRunning": 0,
+        "userMarks": 0,
+        "effectsPlayed": 9,
+        "effectsFailed": 0,
+        "effectsMissed": 0
+      },
+      "maxSampledPeak": 0.46117
+    },
+    {
+      "id": "water",
+      "status": "ok",
+      "loadingMs": 141,
+      "summary": {
+        "fps": 60,
+        "cpu": 0.8,
+        "peak": 32,
+        "p95": 17,
+        "seconds": 8,
+        "frames": 480,
+        "slowFrames": 0,
+        "parts": {
+          "simulation": 0.35,
+          "animationPreparation": 0.01,
+          "background": 0.04,
+          "inhabitants": 0.16,
+          "protagonist": 0.17,
+          "render": 0.48
+        }
+      },
+      "observations": {
+        "sampledOverload": 0,
+        "mainThreadGaps": 0,
+        "stalledAudioClock": 0,
+        "notRunning": 0,
+        "userMarks": 0,
+        "effectsPlayed": 9,
+        "effectsFailed": 0,
+        "effectsMissed": 0
+      },
+      "maxSampledPeak": 0.47602
+    },
+    {
+      "id": "city",
+      "status": "ok",
+      "loadingMs": 78,
+      "summary": {
+        "fps": 59,
+        "cpu": 0.8,
+        "peak": 46,
+        "p95": 17,
+        "seconds": 8,
+        "frames": 473,
+        "slowFrames": 2,
+        "parts": {
+          "simulation": 0.38,
+          "animationPreparation": 0.01,
+          "background": 0.02,
+          "inhabitants": 0.18,
+          "protagonist": 0.14,
+          "render": 0.41
+        }
+      },
+      "observations": {
+        "sampledOverload": 0,
+        "mainThreadGaps": 0,
+        "stalledAudioClock": 0,
+        "notRunning": 0,
+        "userMarks": 0,
+        "effectsPlayed": 9,
+        "effectsFailed": 0,
+        "effectsMissed": 0
+      },
+      "maxSampledPeak": 0.4537
+    },
+    {
+      "id": "orbit",
+      "status": "ok",
+      "loadingMs": 333,
+      "summary": {
+        "fps": 59,
+        "cpu": 0.8,
+        "peak": 47,
+        "p95": 17,
+        "seconds": 8,
+        "frames": 476,
+        "slowFrames": 1,
+        "parts": {
+          "simulation": 0.29,
+          "animationPreparation": 0.01,
+          "background": 0.02,
+          "inhabitants": 0.09,
+          "protagonist": 0.19,
+          "render": 0.47
+        }
+      },
+      "observations": {
+        "sampledOverload": 0,
+        "mainThreadGaps": 1,
+        "stalledAudioClock": 0,
+        "notRunning": 0,
+        "userMarks": 0,
+        "effectsPlayed": 9,
+        "effectsFailed": 0,
+        "effectsMissed": 0
+      },
+      "maxSampledPeak": 0.23888
+    },
+    {
+      "id": "planets",
+      "status": "ok",
+      "loadingMs": 126,
+      "summary": {
+        "fps": 59,
+        "cpu": 0.7,
+        "peak": 37,
+        "p95": 17,
+        "seconds": 8,
+        "frames": 476,
+        "slowFrames": 2,
+        "parts": {
+          "simulation": 0.23,
+          "animationPreparation": 0.01,
+          "background": 0.02,
+          "inhabitants": 0.18,
+          "protagonist": 0.17,
+          "render": 0.43
+        }
+      },
+      "observations": {
+        "sampledOverload": 0,
+        "mainThreadGaps": 0,
+        "stalledAudioClock": 0,
+        "notRunning": 0,
+        "userMarks": 0,
+        "effectsPlayed": 9,
+        "effectsFailed": 0,
+        "effectsMissed": 0
+      },
+      "maxSampledPeak": 0.27235
+    },
+    {
+      "id": "stars",
+      "status": "ok",
+      "loadingMs": 181,
+      "summary": {
+        "fps": 59,
+        "cpu": 0.6,
+        "peak": 34,
+        "p95": 17,
+        "seconds": 8,
+        "frames": 476,
+        "slowFrames": 1,
+        "parts": {
+          "simulation": 0.19,
+          "animationPreparation": 0.01,
+          "background": 0.01,
+          "inhabitants": 0.17,
+          "protagonist": 0.15,
+          "render": 0.38
+        }
+      },
+      "observations": {
+        "sampledOverload": 0,
+        "mainThreadGaps": 0,
+        "stalledAudioClock": 0,
+        "notRunning": 0,
+        "userMarks": 0,
+        "effectsPlayed": 9,
+        "effectsFailed": 0,
+        "effectsMissed": 0
+      },
+      "maxSampledPeak": 0.48338
+    },
+    {
+      "id": "galaxies",
+      "status": "ok",
+      "loadingMs": 224,
+      "summary": {
+        "fps": 59,
+        "cpu": 0.7,
+        "peak": 45,
+        "p95": 17,
+        "seconds": 8,
+        "frames": 476,
+        "slowFrames": 2,
+        "parts": {
+          "simulation": 0.23,
+          "animationPreparation": 0.01,
+          "background": 0.02,
+          "inhabitants": 0.16,
+          "protagonist": 0.17,
+          "render": 0.45
+        }
+      },
+      "observations": {
+        "sampledOverload": 0,
+        "mainThreadGaps": 0,
+        "stalledAudioClock": 0,
+        "notRunning": 0,
+        "userMarks": 0,
+        "effectsPlayed": 9,
+        "effectsFailed": 0,
+        "effectsMissed": 0
+      },
+      "maxSampledPeak": 0.25162
+    },
+    {
+      "id": "universe",
+      "status": "ok",
+      "loadingMs": 181,
+      "summary": {
+        "fps": 60,
+        "cpu": 0.6,
+        "peak": 41,
+        "p95": 17,
+        "seconds": 8,
+        "frames": 477,
+        "slowFrames": 1,
+        "parts": {
+          "simulation": 0.21,
+          "animationPreparation": 0,
+          "background": 0.02,
+          "inhabitants": 0.13,
+          "protagonist": 0.17,
+          "render": 0.36
+        }
+      },
+      "observations": {
+        "sampledOverload": 0,
+        "mainThreadGaps": 0,
+        "stalledAudioClock": 0,
+        "notRunning": 0,
+        "userMarks": 0,
+        "effectsPlayed": 9,
+        "effectsFailed": 0,
+        "effectsMissed": 0
+      },
+      "maxSampledPeak": 0.46143
+    },
+    {
+      "id": "final",
+      "status": "ok",
+      "loadingMs": 0,
+      "summary": {
+        "fps": 60,
+        "cpu": 0.6,
+        "peak": 42,
+        "p95": 17,
+        "seconds": 10,
+        "frames": 597,
+        "slowFrames": 1,
+        "parts": {
+          "simulation": 0.22,
+          "animationPreparation": 0.01,
+          "background": 0.01,
+          "inhabitants": 0.15,
+          "protagonist": 0.15,
+          "render": 0.39
+        }
+      },
+      "observations": {
+        "sampledOverload": 0,
+        "mainThreadGaps": 0,
+        "stalledAudioClock": 0,
+        "notRunning": 0,
+        "userMarks": 0,
+        "effectsPlayed": 1,
+        "effectsFailed": 0,
+        "effectsMissed": 0
+      },
+      "maxSampledPeak": 0.03874
+    }
+  ]
+}
