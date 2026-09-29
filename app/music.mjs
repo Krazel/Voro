@@ -11,7 +11,8 @@ export function musicScene(started,completed,stage){return completed?'final':sta
 // Two streaming media decks keep long songs out of the decoded PCM heap.
 // Web Audio gain (rather than HTMLMediaElement.volume) also works on iOS.
 export class MusicPlayer {
-  constructor(context,{createAudio=()=>new Audio(),schedule=(fn)=>setInterval(fn,100),cancel=id=>clearInterval(id),onDiagnostic=(_kind,_detail)=>{}}={}) {
+  constructor(context,{createAudio=()=>new Audio(),schedule=(fn)=>setInterval(fn,100),cancel=id=>clearInterval(id),onDiagnostic=(_kind,_detail)=>{},ownsContextResume=true}={}) {
+    this.ownsContextResume=ownsContextResume;
     this.onDiagnostic=onDiagnostic;
     this.context=context;this.cancel=cancel;this.active=false;this.unlocked=false;
     this.desired='menu';this.current=null;this.destroyed=false;this.transition=null;this.serial=0;this.blocked=false;
@@ -67,7 +68,7 @@ export class MusicPlayer {
       &&(!this.active||this.transition||this.current?.audio.paused===false))return;
     const firstUnlock=!this.unlocked;
     this.unlocked=true;this.blocked=false;
-    if(this.context.state!=='running'){
+    if(this.ownsContextResume && this.context.state!=='running'){
       this.report('resume-request',{owner:'music',state:this.context.state});
       this.context.resume().then(()=>this.report('resume-resolved',{owner:'music',state:this.context.state}))
         .catch(error=>this.report('resume-rejected',{owner:'music',name:error?.name??'Error'}));

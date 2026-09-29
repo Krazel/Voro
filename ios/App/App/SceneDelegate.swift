@@ -11,7 +11,7 @@ class VoroBridgeViewController: CAPBridgeViewController {
     }
 }
 
-// Observation only: never activates, configures or records the audio session.
+// Coordinates WKWebView playback with native activity. Never configures or records AVAudioSession.
 @objc(VoroAudioDiagnosticsPlugin)
 public class VoroAudioDiagnosticsPlugin: CAPPlugin, CAPBridgedPlugin {
     public let identifier = "VoroAudioDiagnosticsPlugin"
@@ -19,15 +19,42 @@ public class VoroAudioDiagnosticsPlugin: CAPPlugin, CAPBridgedPlugin {
     public let pluginMethods: [CAPPluginMethod] = [CAPPluginMethod(name: "snapshot", returnType: CAPPluginReturnPromise)]
     private var events: [[String: Any]] = []
     private var sequence = 0
+    private var appActive = false
+    private var mediaSuspended = false
+    private var mediaReleasePending = false
+    private var mediaRevision = 0
     public override func load() {
+        appActive = UIApplication.shared.applicationState == .active
+        updateMediaSuspension()
         for name in [AVAudioSession.interruptionNotification, AVAudioSession.routeChangeNotification,
                      AVAudioSession.mediaServicesWereLostNotification, AVAudioSession.mediaServicesWereResetNotification,
-                     UIApplication.willResignActiveNotification, UIApplication.didBecomeActiveNotification] {
+                     UIApplication.willResignActiveNotification, UIApplication.didEnterBackgroundNotification,
+                     UIApplication.didBecomeActiveNotification] {
             NotificationCenter.default.addObserver(self, selector: #selector(observe(_:)), name: name, object: nil)
         }
         capture("native-load", info: [:])
     }
     deinit { NotificationCenter.default.removeObserver(self) }
+    private func activity() -> [String: Any] {
+        return ["sequence": sequence, "allowed": appActive && !mediaSuspended && !mediaReleasePending,
+                "appActive": appActive, "mediaSuspended": mediaSuspended, "releasePending": mediaReleasePending]
+    }
+    private func updateMediaSuspension() {
+        let suspended = !appActive
+        guard mediaSuspended != suspended else { return }
+        mediaSuspended = suspended
+        mediaReleasePending = !suspended
+        mediaRevision += 1
+        let revision = mediaRevision
+        guard let webView = bridge?.webView else { mediaReleasePending = false; return }
+        // Pause as well as block: releasing the block must not autoplay a paused game.
+        if suspended { webView.pauseAllMediaPlayback(completionHandler: nil) }
+        webView.setAllMediaPlaybackSuspended(suspended) { [weak self] in
+            guard let self = self, self.mediaRevision == revision else { return }
+            self.mediaReleasePending = false
+            self.capture(suspended ? "native-media-blocked" : "native-media-ready", info: [:])
+        }
+    }
     private func state() -> [String: Any] {
         let s = AVAudioSession.sharedInstance()
         return ["wallMs": Date().timeIntervalSince1970 * 1000,
@@ -44,18 +71,28 @@ public class VoroAudioDiagnosticsPlugin: CAPPlugin, CAPBridgedPlugin {
         for key in [AVAudioSessionInterruptionTypeKey, AVAudioSessionInterruptionOptionKey, AVAudioSessionRouteChangeReasonKey] {
             if let value = notification.userInfo?[key] as? NSNumber { info[key] = value }
         }
-        // Notifications need not arrive on the main thread. Serialize storage.
-        DispatchQueue.main.async { [weak self] in self?.capture(notification.name.rawValue, info: info) }
+        let name = notification.name
+        let apply = { [weak self] in
+            guard let self = self else { return }
+            if name == UIApplication.willResignActiveNotification || name == UIApplication.didEnterBackgroundNotification {
+                self.appActive = false; self.updateMediaSuspension()
+            } else if name == UIApplication.didBecomeActiveNotification {
+                self.appActive = true; self.updateMediaSuspension()
+            }
+            self.capture(name.rawValue, info: info)
+        }
+        // UIKit activity notifications are already on main: block playback now.
+        if Thread.isMainThread { apply() } else { DispatchQueue.main.async(execute: apply) }
     }
     private func capture(_ type: String, info: [String: Any]) {
         sequence += 1
-        let event: [String: Any] = ["sequence": sequence, "type": type, "info": info, "session": state()]
+        let event: [String: Any] = ["sequence": sequence, "type": type, "info": info, "session": state(), "activity": activity()]
         events.append(event)
         if events.count > 40 { events.removeFirst(events.count - 40) }
         notifyListeners("audioSession", data: event)
     }
     @objc func snapshot(_ call: CAPPluginCall) {
-        DispatchQueue.main.async { call.resolve(["session": self.state(), "events": self.events]) }
+        DispatchQueue.main.async { call.resolve(["session": self.state(), "events": self.events, "activity": self.activity()]) }
     }
 }
 

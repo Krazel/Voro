@@ -1,0 +1,90 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {makeEngine} from './engine-fixture.mjs';
+import {observeAudioSession} from '../app/native-audio-observer.mjs';
+
+const settle=()=>new Promise(resolve=>setImmediate(resolve));
+function fixture(){
+  let resumes=0,plays=0;const media=[];
+  const oldContext=globalThis.AudioContext,oldAudio=globalThis.Audio;
+  const param=()=>({value:0,cancelScheduledValues(){},setValueAtTime(v){this.value=v;},setTargetAtTime(v){this.value=v;},linearRampToValueAtTime(v){this.value=v;}});
+  const context=Object.assign(new EventTarget(),{state:'running',currentTime:1,destination:{},
+    resume(){resumes++;return Promise.resolve().then(()=>{context.state='running';context.dispatchEvent(new Event('statechange'));});},
+    close:async()=>{},createGain:()=>({gain:param(),connect(){},disconnect(){}}),createMediaElementSource:()=>({connect(){},disconnect(){}})});
+  globalThis.AudioContext=function(){return context;};
+  globalThis.Audio=function(){const a=Object.assign(new EventTarget(),{paused:true,ended:false,currentTime:12,duration:300,
+    setAttribute(){},removeAttribute(){},load(){},play(){plays++;a.paused=false;return Promise.resolve();},pause(){a.paused=true;}});media.push(a);return a;};
+  document.hidden=false;const {game:g}=makeEngine();g.started=true;g.birth=0;g.initAudio();
+  g.sfx.buffers=[{},{},{},{},{}];g.music.unlock();
+  return{g,context,media,get resumes(){return resumes;},get plays(){return plays;},
+    destroy(){g.destroy();document.hidden=false;if(oldContext===undefined)delete globalThis.AudioContext;else globalThis.AudioContext=oldContext;if(oldAudio===undefined)delete globalThis.Audio;else globalThis.Audio=oldAudio;}};
+}
+
+test('Recorded iOS order: native inactivity pauses before web visibility and prevents premature resume',async()=>{
+  const f=fixture(),{g,context}=f;
+  try{
+    await settle();const plays=f.plays;
+    g.setNativeAudioActive(false); // willResignActive, while the document still looks visible
+    assert.equal(document.hidden,false);assert.equal(g.paused,true);assert.equal(g.audioFocus,false);
+    assert.ok(f.media.every(a=>a.paused));assert.equal(g.music.volumeTarget,0);assert.equal(g.master.gain.value,0);
+    context.state='interrupted';context.dispatchEvent(new Event('statechange'));await settle();
+    g.initAudio(true);window.dispatchEvent(new Event('pointerdown'));g.restoreForegroundAudio();
+    assert.equal(f.resumes,0);assert.equal(f.plays,plays);
+    document.hidden=true;document.dispatchEvent(new Event('visibilitychange'));
+    document.hidden=false;document.dispatchEvent(new Event('visibilitychange'));window.dispatchEvent(new Event('focus'));
+    assert.equal(f.resumes,0,'Web focus cannot override inactive native state');
+    g.setNativeAudioActive(true); // native WebKit unblock has completed
+    window.dispatchEvent(new Event('focus'));document.dispatchEvent(new Event('visibilitychange'));
+    await settle();assert.equal(f.resumes,1,'One context recovery owner despite repeated foreground events');
+    assert.equal(g.paused,true);assert.ok(f.media.every(a=>a.paused));
+    g.action('pause');await settle();assert.equal(g.paused,false);assert.ok(f.media.some(a=>!a.paused));
+    assert.equal(g.music.volumeTarget,.42);
+  }finally{f.destroy();}
+});
+
+test('Native active before visibility waits for the page; muted foreground never starts audio',async()=>{
+  for(const muted of [false,true]){
+    const f=fixture(),{g,context}=f;
+    try{
+      await settle();g.sound=!muted;g.setNativeAudioActive(false);document.hidden=true;context.state='interrupted';
+      g.setNativeAudioActive(true);assert.equal(f.resumes,0);
+      document.hidden=false;document.dispatchEvent(new Event('visibilitychange'));await settle();
+      assert.equal(f.resumes,muted?0:1);assert.equal(g.sound,!muted);assert.equal(g.paused,true);
+      assert.ok(f.media.every(a=>a.paused));
+    }finally{f.destroy();}
+  }
+});
+
+test('A native pause during an in-flight recovery keeps music blocked after the promise completes',async()=>{
+  const f=fixture(),{g,context}=f;
+  try{
+    await settle();g.setNativeAudioActive(false);context.state='interrupted';
+    g.setNativeAudioActive(true);g.setNativeAudioActive(false);await settle();
+    assert.equal(g.nativeAudioActive,false);assert.equal(g.audioFocus,false);assert.equal(g.music.active,false);
+    assert.ok(f.media.every(a=>a.paused));assert.equal(f.resumes,1);
+  }finally{f.destroy();}
+});
+
+test('Delayed snapshots and historical events cannot override newer native activity',async()=>{
+  const doc=Object.assign(new EventTarget(),{hidden:false}),states=[],logs=[],pending=[];let listener;
+  const plugin={addListener:async(_name,fn)=>{listener=fn;return{remove(){}};},snapshot:()=>new Promise(resolve=>pending.push(resolve))};
+  const stop=observeAudioSession(plugin,(...x)=>logs.push(x),x=>states.push(x),doc);
+  listener({sequence:8,activity:{sequence:8,allowed:false}});
+  pending.shift()({activity:{sequence:5,allowed:true},events:[{sequence:4,activity:{sequence:4,allowed:true}}]});await settle();
+  assert.deepEqual(states,[false,false]);
+  listener({sequence:9,activity:{sequence:9,allowed:true}});
+  listener({sequence:8,activity:{sequence:8,allowed:false}});
+  doc.dispatchEvent(new Event('visibilitychange'));
+  pending.shift()({activity:{sequence:9,allowed:true},events:[{sequence:6,activity:{sequence:6,allowed:false}}]});await settle();
+  assert.deepEqual(states,[false,false,true]);assert.ok(logs.some(x=>x[0]==='native-event'&&x[1].sequence===6));
+  stop();listener({sequence:10,activity:{sequence:10,allowed:false}});assert.deepEqual(states,[false,false,true]);
+});
+
+test('Unavailable native plugin falls back to web lifecycle, and disposed replies cannot reactivate audio',async()=>{
+  const doc=Object.assign(new EventTarget(),{hidden:false}),states=[];
+  let resolve,removed=0;
+  const stop=observeAudioSession({addListener:async()=>({remove(){removed++;}}),snapshot:()=>new Promise(r=>resolve=r)},()=>{},x=>states.push(x),doc);
+  await settle();stop();resolve({activity:{sequence:1,allowed:true}});await settle();assert.deepEqual(states,[false]);assert.equal(removed,1);
+  const stopFallback=observeAudioSession({addListener:async()=>{throw Error('missing');},snapshot:async()=>{throw Error('missing');}},()=>{},x=>states.push(x),doc);
+  await settle();assert.deepEqual(states,[false,false,true]);stopFallback();
+});

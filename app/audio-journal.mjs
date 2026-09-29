@@ -8,7 +8,7 @@ export function audioSnapshot(game) {
   const c=game.audio,m=game.music;
   return {
     context:c?{state:c.state,time:finite(c.currentTime),...audioPlaybackStats(c)}:null,
-    gates:{audioStarted:!!game.audioStarted,sound:!!game.sound,focus:!!game.audioFocus,
+    gates:{audioStarted:!!game.audioStarted,sound:!!game.sound,focus:!!game.audioFocus,nativeActive:game.nativeAudioActive??true,
       hidden:!!globalThis.document?.hidden,started:!!game.started,paused:!!game.paused,
       settings:!!game.settingsOpen,review:!!game.reviewHold,dead:!!game.life?.dead,
       offer:!!game.progress?.offer?.length,completed:!!game.progress?.completed},

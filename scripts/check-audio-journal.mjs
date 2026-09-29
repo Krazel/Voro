@@ -1,8 +1,9 @@
 import {createRequire} from 'node:module';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
+import {RELEASE} from '../app/release.mjs';
 const {chromium,webkit}=createRequire(process.env.VORO_PLAYWRIGHT_RUNTIME)('playwright');
-const out='design/audio-journal-0.12';await mkdir(out,{recursive:true});const results=[];
+const out=`design/audio-journal-${RELEASE.version}`;await mkdir(out,{recursive:true});const results=[];
 for(const [name,type,options] of [['edge',chromium,{channel:'msedge'}],['webkit',webkit,{}]]){
  const browser=await type.launch({headless:true,...options});
  try{
@@ -14,6 +15,14 @@ for(const [name,type,options] of [['edge',chromium,{channel:'msedge'}],['webkit'
    await page.waitForFunction(()=>window.__voroLab?.audioJournal?.current.samples.length>0);
    await page.evaluate(()=>{const g=window.__voroLab;g.startTest(0,20,false,true,false);g.publish();});
    await page.getByRole('button',{name:/Ocultar pruebas|Hide tests/}).click();
+   const nativeGate=await page.evaluate(()=>{
+    const g=window.__voroLab;g.setNativeAudioActive(false);
+    const stopped=!g.effectsAudible()&&g.audioFocus===false&&g.paused&&(!g.music||g.music.decks.every(d=>d.audio.paused));
+    g.restoreForegroundAudio();const blocked=g.audioFocus===false;
+    g.setNativeAudioActive(true);const pauseRetained=g.paused;g.action('pause');
+    return {stopped,blocked,pauseRetained};
+   });
+   assert.deepEqual(nativeGate,{stopped:true,blocked:true,pauseRetained:true});
    await page.getByRole('button',{name:locale==='es-ES'?'Configuración':'Settings',exact:true}).first().click();
    const panel=page.locator('.audio-diagnostics');await panel.scrollIntoViewIfNeeded();
    await panel.locator('select').selectOption('silent');
@@ -31,7 +40,7 @@ for(const [name,type,options] of [['edge',chromium,{channel:'msedge'}],['webkit'
    await page.reload();await page.waitForFunction(()=>window.__voroLab?.audioJournal);
    const previous=await page.evaluate(()=>window.__voroLab.audioJournal.previous);
    assert.equal(previous.startedAt,originalStart);assert.deepEqual(errors,[]);
-   results.push({browser:name,device,locale,errors,audioContextAvailable,bytes:JSON.stringify(report).length,samples:report.current.samples.length,events:report.current.events.length,previousRetained:true,box});
+   results.push({browser:name,device,locale,errors,audioContextAvailable,nativeGate,bytes:JSON.stringify(report).length,samples:report.current.samples.length,events:report.current.events.length,previousRetained:true,box});
    await page.close();
   }
  }finally{await browser.close();}

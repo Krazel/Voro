@@ -201,7 +201,7 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
     const game = new VoroEngine(canvas.current!, setState, desktop);
     game.reviewEnabled = Capacitor.getPlatform() === 'ios';
     engine.current = game;
-    const stopAudioObservation=observeNativeAudio((kind,detail)=>game.audioJournal?.event(kind,detail));
+    const stopAudioObservation=observeNativeAudio((kind,detail)=>game.audioJournal?.event(kind,detail),active=>game.setNativeAudioActive(active));
     const lab=Capacitor.getPlatform()==='web'&&['localhost','127.0.0.1'].includes(window.location.hostname)
       &&new URLSearchParams(window.location.search).get('lab')==='cosmos';
     setCosmicLab(lab);

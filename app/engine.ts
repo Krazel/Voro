@@ -458,6 +458,7 @@ export class VoroEngine {
   music: MusicPlayer | null = null;
   sfx: SfxPlayer | null = null;
   audioFocus = true;
+  nativeAudioActive = true;
   effectsGainTarget: number | null = null;
   audioHealthAt = -Infinity;
   audio: AudioContext | null = null;
@@ -548,6 +549,7 @@ export class VoroEngine {
         metadata:{...RELEASE,desktop,userAgent:navigator.userAgent}});
       this.audioJournalTimer=window.setInterval(()=>this.audioJournal?.sample(),JOURNAL_LIMITS.interval);
       const lifecycleEvent=(event:Event)=>{
+        if((event.type==='focus'||event.type==='blur')&&event.target!==window)return;
         this.audioJournal?.event('lifecycle-before',{type:event.type});
         queueMicrotask(()=>{
           this.audioJournal?.event('lifecycle-after',{type:event.type});
@@ -560,7 +562,7 @@ export class VoroEngine {
     const unlockMusic = () => {
       const trace=!this.audioStarted||this.audio?.state!=='running'||this.music?.blocked;
       if(trace)this.audioJournal?.event('gesture-before');
-      if(this.sound && !document.hidden) { this.audioFocus=true;this.initAudio(true); this.setAudio(); this.music?.unlock(); }
+      if(this.sound && this.nativeAudioActive && !document.hidden) { this.audioFocus=true;this.initAudio(true); this.setAudio(); this.music?.unlock(); }
       if(trace)this.audioJournal?.event('gesture-after');
     };
     window.addEventListener('pointerdown',unlockMusic,opt);
@@ -662,17 +664,7 @@ export class VoroEngine {
     window.addEventListener(
       'blur',
       () => {
-        if(this.started && this.ending>0 && !this.paused && !this.settingsOpen)this.finaleBackgroundPause=true;
-        this.audioFocus=false; this.setAudio();
-        this.tilt.read(false);
-        this.save();
-        this.keys.clear();
-        this.pointer = null;
-        if (this.started && !this.life.complete) {
-          this.paused = true;
-          this.setAudio();
-          this.publish();
-        }
+        this.loseAudioFocus();
       },
       opt,
     );
@@ -680,15 +672,7 @@ export class VoroEngine {
       'visibilitychange',
       () => {
         this.tilt.read(false);
-        if (document.hidden && this.started) {
-          if(this.ending>0 && !this.paused && !this.settingsOpen)this.finaleBackgroundPause=true;
-          this.save();
-          this.paused = true;
-          this.keys.clear();
-          this.pointer = null;
-          this.setAudio();
-          this.publish();
-        }
+        if (document.hidden)this.loseAudioFocus();
         if(!document.hidden)this.restoreForegroundAudio();
         this.setAudio();
         this.last = 0;
@@ -798,16 +782,30 @@ export class VoroEngine {
     catch { /* The current-session choice still works without storage. */ }
     this.publish();
   }
+  loseAudioFocus() {
+    if(this.started && this.ending>0 && !this.paused && !this.settingsOpen)this.finaleBackgroundPause=true;
+    this.audioFocus=false;this.setAudio();
+    this.tilt.read(false);this.save();this.keys.clear();this.pointer=null;
+    if(this.started && !this.life.complete){this.paused=true;this.setAudio();this.publish();}
+  }
+  setNativeAudioActive(active:boolean) {
+    if(this.destroyed||this.nativeAudioActive===active)return;
+    this.nativeAudioActive=active;
+    this.audioJournal?.event('native-playback-gate',{active});
+    if(active)this.restoreForegroundAudio();else this.loseAudioFocus();
+  }
   restoreForegroundAudio() {
     this.audioJournal?.event('foreground-before');
-    if(this.destroyed || document.hidden)return;
+    if(this.destroyed || document.hidden || !this.nativeAudioActive)return;
+    const recovering=!this.audioFocus;
     this.audioFocus=true;
     this.resumeFinaleFromBackground();
-    if(this.sound && this.audioStarted){this.initAudio(true);this.music?.unlock();}
+    if(recovering && this.sound && this.audioStarted){this.initAudio(true);this.music?.unlock();}
     this.setAudio();
     this.audioJournal?.event('foreground-after');
   }
   initAudio(retryResume = false) {
+    if(!this.nativeAudioActive||document.hidden)return;
     if(this.audio?.state==='closed') {
       this.sfx?.destroy();this.music?.destroy();this.master?.disconnect();
       this.sfx=null;this.music=null;this.audio=null;this.master=null;this.audioStarted=false;
@@ -824,7 +822,7 @@ export class VoroEngine {
       this.master.gain.value = 0;
       this.effectsGainTarget = null;
       this.master.connect(this.audio.destination);
-      this.music = new MusicPlayer(this.audio,{onDiagnostic:(kind:string,detail:object)=>this.audioJournal?.event(kind,detail)});
+      this.music = new MusicPlayer(this.audio,{ownsContextResume:false,onDiagnostic:(kind:string,detail:object)=>this.audioJournal?.event(kind,detail)});
       this.sfx = new SfxPlayer(this.audio, this.master,{onDiagnostic:(kind:string,detail:object)=>this.audioJournal?.event(kind,detail)});
       this.audioJournal?.attach(this.audio,this.music.decks);
       this.sfx.unlock();
@@ -847,7 +845,7 @@ export class VoroEngine {
     const fade = finalSilence && !this.paused && !this.settingsOpen && !document.hidden && this.audioFocus
       ? FINALE_BLACK_AT - FINALE_MUSIC_FADE_AT : this.progress.offer.length ? .45 : this.music?.volumeTarget === .126 ? .65 : .08;
     this.music?.setState(this.autoTour instanceof AudioBenchmark ? this.autoTour.current.music : musicScene(this.started,this.progress.completed,stageOf(this.progress).id),
-      !finalSilence && !this.reviewHold && this.sound && this.audioFocus && !document.hidden && !this.paused && !this.settingsOpen && !this.life.dead, document.hidden || !this.audioFocus, fade, this.progress.offer.length ? .3 : 1);
+      !finalSilence && !this.reviewHold && this.sound && this.audioFocus && this.nativeAudioActive && !document.hidden && !this.paused && !this.settingsOpen && !this.life.dead, document.hidden || !this.audioFocus || !this.nativeAudioActive, fade, this.progress.offer.length ? .3 : 1);
   }
   setAudio() {
     this.syncMusic();
@@ -862,7 +860,7 @@ export class VoroEngine {
     }
   }
   effectsAudible() {
-    return !this.reviewHold && this.sound && this.audioFocus && !document.hidden && !this.settingsOpen &&
+    return !this.reviewHold && this.sound && this.audioFocus && this.nativeAudioActive && !document.hidden && !this.settingsOpen &&
       !this.paused && !this.progress.offer.length &&
       (!this.progress.completed || this.ending > FINALE_SECONDS - FINALE_BLACK_AT);
   }
@@ -1197,7 +1195,7 @@ export class VoroEngine {
     }
     this.save();
     this.setAudio();
-    if(!automatic && !this.paused && this.sound && !document.hidden){
+    if(!automatic && !this.paused && this.sound && this.nativeAudioActive && !document.hidden){
       this.audioFocus=true;this.initAudio(true);this.music?.unlock();
     }
     this.publish();
