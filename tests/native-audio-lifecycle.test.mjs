@@ -69,6 +69,7 @@ test('Delayed snapshots and historical events cannot override newer native activ
   const doc=Object.assign(new EventTarget(),{hidden:false}),states=[],logs=[],pending=[];let listener;
   const plugin={addListener:async(_name,fn)=>{listener=fn;return{remove(){}};},snapshot:()=>new Promise(resolve=>pending.push(resolve))};
   const stop=observeAudioSession(plugin,(...x)=>logs.push(x),x=>states.push(x),doc);
+  await settle();
   listener({sequence:8,activity:{sequence:8,allowed:false}});
   pending.shift()({activity:{sequence:5,allowed:true},events:[{sequence:4,activity:{sequence:4,allowed:true}}]});await settle();
   assert.deepEqual(states,[false,false]);
@@ -87,4 +88,11 @@ test('Unavailable native plugin falls back to web lifecycle, and disposed replie
   await settle();stop();resolve({activity:{sequence:1,allowed:true}});await settle();assert.deepEqual(states,[false]);assert.equal(removed,1);
   const stopFallback=observeAudioSession({addListener:async()=>{throw Error('missing');},snapshot:async()=>{throw Error('missing');}},()=>{},x=>states.push(x),doc);
   await settle();assert.deepEqual(states,[false,false,true]);stopFallback();
+});
+
+test('A failed event subscription never latches a snapshot permission with no live way to release it',async()=>{
+  const doc=Object.assign(new EventTarget(),{hidden:false}),states=[];
+  const stop=observeAudioSession({addListener:async()=>{throw Error('listener unavailable');},
+    snapshot:async()=>({activity:{sequence:4,allowed:false},events:[]})},()=>{},active=>states.push(active),doc);
+  await settle();assert.equal(states.at(-1),true);stop();
 });
