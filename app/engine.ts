@@ -14,7 +14,7 @@ import { FrameMonitor } from './frame-monitor.mjs';
 import { BenchmarkTour, tourReport } from './benchmark-tour.mjs';
 import { compactPerformanceReport } from './performance-report.mjs';
 import { AnimationSheets } from './animation-sheets.mjs';
-import { adaptationYield, ADAPTATION_FOOD_GAIN } from './campaign-pacing.mjs';
+import { adaptationYield, ADAPTATION_FOOD_GAIN, INCOMING_DAMAGE_FACTOR } from './campaign-pacing.mjs';
 import { transitionScene } from './journey-transitions.mjs';
 import { shouldHoldReview } from './review-policy.mjs';
 // Canvas2D rendering and input. The simulation stays independent of frame rendering.
@@ -1762,7 +1762,7 @@ export class VoroEngine {
       return 0;
     }
     const massBeforeHit = p.biomass;
-    const lost = takeDamage(p, source, fraction, minimum);
+    const lost = takeDamage(p, source, fraction * INCOMING_DAMAGE_FACTOR, minimum * INCOMING_DAMAGE_FACTOR);
     if (!lost) return 0;
     loseAdaptationProgress(this.progress, lost / massBeforeHit);
     this.huntingTentacles.clear();

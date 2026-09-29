@@ -9,7 +9,7 @@ import {transitionScene} from '../app/journey-transitions.mjs';
 import {gameplayZoom} from '../app/camera.mjs';
 import {STAGES} from '../app/journey-data.mjs';
 
-test('The fixed20% reduction also applies to pending meals finished during Earth absorption, only once',()=>{
+test('The fixed food reward also applies to pending meals finished during Earth absorption, only once',()=>{
  const {game}=makeEngine(),orbit=STAGES.findIndex(s=>s.id==='orbit');
  game.startTest(orbit,STAGES[orbit].goal,false,true,true);
  game.progress.mutations=['yield','yield'];game.stats=upgradeStats(game.progress.mutations);
@@ -17,7 +17,7 @@ test('The fixed20% reduction also applies to pending meals finished during Earth
  game.earthAbsorption=.999;
  const xp=game.progress.xp;
  game.update(.1);
- assert.ok(Math.abs(game.progress.xp-xp-6.8*1.1*adaptationYield('orbit'))<1e-8);
+ assert.ok(Math.abs(game.progress.xp-xp-7.48*1.1*adaptationYield('orbit'))<1e-8);
  assert.equal(game.life.digestion.length,0);
  const after=game.progress.xp;game.update(.1);assert.equal(game.progress.xp,after);
  game.destroy();
@@ -73,7 +73,7 @@ test('Nucleus choices now boost adaptation additively, preserve saved choices an
    game.stats=upgradeStats(game.progress.mutations);Object.assign(game.life,game.stats);
    game.life.digestion=[{progress:0.99,value:10,r:1,dx:0,dy:0,rotation:0,kind:'pond-0'}];
    const xp=game.progress.xp;game.update(.1);
-   assert.ok(Math.abs(game.progress.xp-xp-6.8*(1+count*.05)*adaptationYield('pond'))<1e-8);
+   assert.ok(Math.abs(game.progress.xp-xp-7.48*(1+count*.05)*adaptationYield('pond'))<1e-8);
  }
  game.destroy();
 });
