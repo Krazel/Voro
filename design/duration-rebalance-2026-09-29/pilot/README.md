@@ -1,6 +1,6 @@
 # Reparto de duración por entorno
 
-Motor real sin renderizado ni audio. Tres pilotos automáticos, cinco semillas. Los tiempos incluyen transiciones y 5–10 segundos supuestos por elección. Son estimaciones del ritmo, no promedios de jugadores humanos. Los contrastes a 60 Hz no se mezclan con las 15 campañas principales. El daño de contacto es del 10 %. No se han cambiado movimiento, tamaños, objetivos de biomasa, guardados ni animación final.
+Motor real sin renderizado ni audio. Tres pilotos automáticos, una semilla. Los tiempos incluyen transiciones y 5–10 segundos supuestos por elección. Son estimaciones del ritmo, no promedios de jugadores humanos. Los contrastes a 60 Hz no se mezclan con las 3 campañas preliminares. El daño de contacto es del 10 %. No se han cambiado movimiento, tamaños, objetivos de biomasa, guardados ni animación final.
 
 | Entorno | Antes | Objetivo | Medido | Rango (min) | Completadas |
 |---|---:|---:|---:|---:|---:|
