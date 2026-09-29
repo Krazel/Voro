@@ -4,9 +4,10 @@ import {resolve} from 'node:path';
 
 const out=resolve(process.argv[2]||'design/duration-simulation-2026-09-29');
 mkdirSync(out,{recursive:true});
-const profiles=['precise','direct','explorer'],seeds=[41,73,127,409,930];
+const pilot=process.argv[3]==='pilot';
+const profiles=['precise','direct','explorer'],seeds=pilot?[41]:[41,73,127,409,930];
 const jobs=seeds.flatMap(seed=>profiles.map(profile=>({profile,seed,hz:30})));
-jobs.push(...profiles.map(profile=>({profile,seed:41,hz:60,contrast:true})));
+if(!pilot)jobs.push(...profiles.map(profile=>({profile,seed:41,hz:60,contrast:true})));
 const state={started:new Date().toISOString(),concurrency:3,jobs:jobs.map(j=>({...j,status:'queued'}))};
 const save=()=>writeFileSync(`${out}/batch.json`,JSON.stringify(state,null,2)+'\n');
 save();let cursor=0,failed=false;
