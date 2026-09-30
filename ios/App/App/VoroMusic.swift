@@ -8,7 +8,7 @@ import Capacitor
 public class VoroMusicPlugin: CAPPlugin, CAPBridgedPlugin {
     public let identifier = "VoroMusicPlugin"
     public let jsName = "VoroMusic"
-    public let pluginMethods = [CAPPluginMethod(name: "setState", returnType: CAPPluginReturnPromise),
+    public let pluginMethods: [CAPPluginMethod] = [CAPPluginMethod(name: "setState", returnType: CAPPluginReturnPromise),
                                 CAPPluginMethod(name: "snapshot", returnType: CAPPluginReturnPromise)]
     private let tracks = ["menu":"life-in-silico", "micro":"solace", "pond":"reverie", "land":"ephemera",
         "water":"sleep", "city":"meanwhile", "orbit":"cirrus", "planets":"hymn-to-the-dawn",
