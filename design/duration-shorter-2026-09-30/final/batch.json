@@ -1,0 +1,172 @@
+{
+  "started": "2026-09-30T13:51:39.069Z",
+  "concurrency": 3,
+  "jobs": [
+    {
+      "profile": "precise",
+      "seed": 41,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-09-30T13:51:39.073Z",
+      "exitCode": 0,
+      "finished": "2026-09-30T13:52:54.782Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 41,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-09-30T13:51:39.090Z",
+      "exitCode": 0,
+      "finished": "2026-09-30T13:53:19.111Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 41,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-09-30T13:51:39.103Z",
+      "exitCode": 0,
+      "finished": "2026-09-30T13:53:10.895Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 73,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-09-30T13:52:54.784Z",
+      "exitCode": 0,
+      "finished": "2026-09-30T13:54:00.707Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 73,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-09-30T13:53:10.898Z",
+      "exitCode": 0,
+      "finished": "2026-09-30T13:54:31.973Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 73,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-09-30T13:53:19.115Z",
+      "exitCode": 0,
+      "finished": "2026-09-30T13:54:36.089Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 127,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-09-30T13:54:00.709Z",
+      "exitCode": 0,
+      "finished": "2026-09-30T13:55:02.888Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 127,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-09-30T13:54:31.977Z",
+      "exitCode": 0,
+      "finished": "2026-09-30T13:55:27.011Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 127,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-09-30T13:54:36.093Z",
+      "exitCode": 0,
+      "finished": "2026-09-30T13:55:55.703Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 409,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-09-30T13:55:02.891Z",
+      "exitCode": 0,
+      "finished": "2026-09-30T13:56:11.716Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 409,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-09-30T13:55:27.014Z",
+      "exitCode": 0,
+      "finished": "2026-09-30T13:56:31.420Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 409,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-09-30T13:55:55.705Z",
+      "exitCode": 0,
+      "finished": "2026-09-30T13:57:06.214Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 930,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-09-30T13:56:11.719Z",
+      "exitCode": 0,
+      "finished": "2026-09-30T13:57:16.328Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 930,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-09-30T13:56:31.423Z",
+      "exitCode": 0,
+      "finished": "2026-09-30T13:57:34.268Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 930,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-09-30T13:57:06.217Z",
+      "exitCode": 0,
+      "finished": "2026-09-30T13:58:11.387Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 41,
+      "hz": 60,
+      "contrast": true,
+      "status": "finished",
+      "started": "2026-09-30T13:57:16.330Z",
+      "exitCode": 0,
+      "finished": "2026-09-30T13:58:58.155Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 41,
+      "hz": 60,
+      "contrast": true,
+      "status": "finished",
+      "started": "2026-09-30T13:57:34.271Z",
+      "exitCode": 0,
+      "finished": "2026-09-30T13:59:17.816Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 41,
+      "hz": 60,
+      "contrast": true,
+      "status": "finished",
+      "started": "2026-09-30T13:58:11.389Z",
+      "exitCode": 0,
+      "finished": "2026-09-30T14:00:14.295Z"
+    }
+  ],
+  "finished": "2026-09-30T14:00:14.297Z"
+}

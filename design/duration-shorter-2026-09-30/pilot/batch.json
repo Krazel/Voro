@@ -1,0 +1,34 @@
+{
+  "started": "2026-09-30T13:49:46.324Z",
+  "concurrency": 3,
+  "jobs": [
+    {
+      "profile": "precise",
+      "seed": 41,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-09-30T13:49:46.327Z",
+      "exitCode": 0,
+      "finished": "2026-09-30T13:50:59.419Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 41,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-09-30T13:49:46.348Z",
+      "exitCode": 0,
+      "finished": "2026-09-30T13:51:19.918Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 41,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-09-30T13:49:46.362Z",
+      "exitCode": 0,
+      "finished": "2026-09-30T13:51:12.567Z"
+    }
+  ],
+  "finished": "2026-09-30T13:51:19.920Z"
+}
