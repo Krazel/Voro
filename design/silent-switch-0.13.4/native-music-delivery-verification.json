@@ -1,0 +1,16 @@
+{
+  "commit": "2ac0dbdadaf9b9fc3a328c0e4159f62dfe4d1b33",
+  "version": "0.13.4",
+  "build": 1,
+  "appleBuildId": "bf393aea-1a2a-40eb-8947-6466b2598b07",
+  "internalBuildState": "IN_BETA_TESTING",
+  "ipaBytes": 349499034,
+  "sha256": "48051b39ebc439c79c17511312f65c2ea908c6770ca61c2082db611c18d03fae",
+  "nativePlayerInBinary": true,
+  "approvedSongsPreserved": 12,
+  "comparisonRemoved": true,
+  "simulatorProbeNotShipped": true,
+  "effectsPlaybackSessionVerified": true,
+  "balanceIncluded": true,
+  "physicalAcousticQualityVerified": false
+}
