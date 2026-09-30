@@ -18,10 +18,11 @@ try{
  assert.equal(menu.backend,'AVAudioPlayer');assert.equal(menu.track,'menu');assert(menu.playing&&menu.time>1);
  assert.equal(micro.track,'micro');assert(micro.playing&&micro.time>4);assert.equal(micro.transition,false);
  assert.equal(muted.playing,false);assert.equal(resumed.track,'micro');assert(resumed.playing&&resumed.time>muted.time);assert(Math.abs(resumed.volume-.42)<.001);
+ const effects=await wait('effects');assert.equal(effects.webEffects.creationType,'playback');assert.equal(effects.webEffects.type,'playback');assert.equal(effects.webEffects.state,'running');assert.equal(effects.webEffects.decoded,5);assert(effects.webEffects.advanced);assert(effects.playing);
  run('xcrun',['simctl','launch',phone.udid,'com.apple.mobilesafari']);
  const background=await wait('state',s=>!s.foreground);assert.equal(background.playing,false);
  run('xcrun',['simctl','launch',phone.udid,'com.dmkr.voro']);const foreground=await wait('foreground');assert(foreground.playing&&foreground.time>background.time);
- fs.writeFileSync(out+'/verification.json',JSON.stringify({commit:process.env.GITHUB_SHA,runtime,device:phone.name,physicalDevice:false,menu,micro,muted,resumed,background,foreground},null,2));
+ fs.writeFileSync(out+'/verification.json',JSON.stringify({commit:process.env.GITHUB_SHA,runtime,device:phone.name,physicalDevice:false,menu,micro,muted,resumed,effects,background,foreground},null,2));
  }finally{
  if(container&&fs.existsSync(path.join(container,'Documents')))for(const name of fs.readdirSync(path.join(container,'Documents')))if(name.startsWith('music-'))fs.copyFileSync(path.join(container,'Documents',name),out+'/'+name);
  if(phone){spawnSync('xcrun',['simctl','io',phone.udid,'screenshot',out+'/screen.png']);const log=spawnSync('xcrun',['simctl','spawn',phone.udid,'log','show','--last','3m','--style','compact','--predicate','process == "App"'],{encoding:'utf8',maxBuffer:10*1024*1024,timeout:20000});fs.writeFileSync(out+'/runtime.log',log.stdout||'');}

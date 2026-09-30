@@ -4,6 +4,16 @@
 export const AUDIO_CONTEXT_OPTIONS = Object.freeze({ latencyHint: 'balanced' });
 export const EFFECT_LEAD_SECONDS = 0.012;
 
+// WKWebView owns a separate audio session from AVAudioPlayer. Its default
+// Web Audio policy follows the ringer switch; game effects must use media volume.
+export function configureEffectsSession(session = globalThis.navigator?.audioSession) {
+  if (!session) return false;
+  try {
+    if (session.type !== 'playback') session.type = 'playback';
+    return session.type === 'playback';
+  } catch { return false; }
+}
+
 export function audioPlaybackStats(context) {
   if (!context) return null;
   const finite = n => Number.isFinite(n) ? n : null;
@@ -16,5 +26,7 @@ export function audioPlaybackStats(context) {
       underrunEvents: finite(s.underrunEvents ?? s.fallbackFramesEvents),
     };
   } catch { /* Optional experimental API; absence is not zero underruns. */ }
-  return { requestedLatencyHint: AUDIO_CONTEXT_OPTIONS.latencyHint, sampleRate: finite(context.sampleRate), baseLatency: finite(context.baseLatency), outputLatency: finite(context.outputLatency), playback };
+  let webAudioSession = null;
+  try { const s=globalThis.navigator?.audioSession;if(s)webAudioSession={type:s.type,state:s.state}; } catch {}
+  return { requestedLatencyHint: AUDIO_CONTEXT_OPTIONS.latencyHint, sampleRate: finite(context.sampleRate), baseLatency: finite(context.baseLatency), outputLatency: finite(context.outputLatency), playback, webAudioSession };
 }

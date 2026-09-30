@@ -3,7 +3,7 @@ import { desktopViewport, visibleChunkRadius, isTabletDevice, wideScreenEnabled 
 import { t as tr } from './language.mjs';
 import { MusicPlayer, musicScene } from './music.mjs';
 import {NativeMusicPlayer,nativeMusicAvailable} from './native-music.mjs';
-import { AUDIO_CONTEXT_OPTIONS, EFFECT_LEAD_SECONDS, audioPlaybackStats } from './audio-health.mjs';
+import { AUDIO_CONTEXT_OPTIONS, EFFECT_LEAD_SECONDS, audioPlaybackStats, configureEffectsSession } from './audio-health.mjs';
 import { EFFECTS_MASTER_GAIN, SfxPlayer } from './sfx.mjs';
 import { captureOrbit, sweepPosition } from './orbital-sweep.mjs';
 import { UniverseFinale, FINALE_SECONDS, FINALE_BLACK_AT, FINALE_MUSIC_FADE_AT, drawVoidSurvivor } from './universe-finale.mjs';
@@ -822,6 +822,7 @@ export class VoroEngine {
   initAudio(retryResume = false) {
     if(!this.canResumeAudio())return;
     const nativeMusic=nativeMusicAvailable();
+    if(nativeMusic)configureEffectsSession();
     if(nativeMusic&&!this.music)this.music=new NativeMusicPlayer(null,{onDiagnostic:(kind:string,detail:object)=>this.audioJournal?.event(kind,detail)});
     if(this.audio?.state==='closed') {
       this.sfx?.destroy();if(!nativeMusic){this.music?.destroy();this.music=null;}this.master?.disconnect();
