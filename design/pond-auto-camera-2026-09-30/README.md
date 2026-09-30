@@ -19,3 +19,13 @@ Las ocho variantes conservan las dimensiones nativas de sus recortes en lugar de
 `browser.json`: UI final y de desarrollo, Charca decodificada/renderizada, Ctrl-rueda no cambia la cámara, cero controles de zoom y cero errores de página. Capturas del juego y Configuración. 27 pruebas dirigidas correctas; cobertura raster de Charca en dos escalas y desplazamiento correcto; TypeScript y build móvil con assets verificados. El comprobador raster general tiene una expectativa antigua de lienzo blanco que falla en Ciudad (renderer urbano específico, sin cambios); se permite filtrar el entorno para verificar Charca separadamente.
 
 La 0.13.4 (1) distribuida es la base; los cambios de esta carpeta corresponden a la siguiente build, no validan por sí solos TestFlight.
+
+## Entrega verificada · 0.13.5 (1)
+
+Fuente `0487cf45a04ab03e8cba9df70254c30d7797c604`. [CI 36761306167](https://github.com/Krazel/Voro/actions/runs/36761306167) completada correctamente: 325 pruebas, build móvil, verificación de assets, simulador iPhone, archivo firmado iPhone/iPad y subida.
+
+`apple-verification.json` registra la lectura por API posterior a la asignación: build `2e00fdbb-2635-489c-a848-4d3f63ff6eca`, versión 0.13.5 (1), `VALID`, `IN_BETA_TESTING`, grupo VORO Interno `05db8744-bcf3-4c2d-a465-2635012bfeeb`. Disponible en TestFlight interno; no se publica en App Store.
+
+`native-music-simulator.json` corresponde a la misma fuente: música AVAudioPlayer y cinco muestras Web Audio activas simultáneamente con sesión playback, silencio del juego, reanudación y retorno desde segundo plano correctos en iPhone 17 Pro simulado con iOS 26.5. No prueba acústica física ni FPS del dispositivo.
+
+Biblioteca PR-009 actualizada y releída, revisión 325, preservando tracking y coordinación de marketing. La ejecución 36760910429 se canceló antes de subir por apuntar a la fuente anterior; la entrega válida es únicamente 36761306167. Pendiente la prueba física de nitidez, cámara y fluidez por el usuario.
