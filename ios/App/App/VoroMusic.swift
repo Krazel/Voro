@@ -1,6 +1,7 @@
 import UIKit
 import AVFAudio
 import Capacitor
+import WebKit
 
 // Same playback stack and session policy as Tilt Arena's ClassicSound.
 // Web Audio is retained only for the game's existing effects.
@@ -31,13 +32,11 @@ public class VoroMusicPlugin: CAPPlugin, CAPBridgedPlugin {
     public override func load() {
         #if targetEnvironment(simulator)
         if ProcessInfo.processInfo.arguments.contains("--voro-native-audio-smoke") {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 6) { [weak self] in
-                guard let url = Bundle.main.url(forResource: "native-music-probe", withExtension: "js", subdirectory: "public"),
-                      let script = try? String(contentsOf: url, encoding: .utf8) else { return }
-                self?.saveProbe("injection", extra: ["url": self?.bridge?.webView?.url?.absoluteString ?? "missing"])
-                self?.bridge?.webView?.evaluateJavaScript(script + ";null") { _, error in
-                    if let error = error { self?.saveProbe("error", extra: ["injectionError": error.localizedDescription]) }
-                }
+            if let url = Bundle.main.url(forResource: "native-music-probe", withExtension: "js", subdirectory: "public"),
+               let script = try? String(contentsOf: url, encoding: .utf8) {
+                // Attach to the loaded document, not a timed provisional page that navigation can discard.
+                bridge?.webView?.configuration.userContentController.addUserScript(
+                    WKUserScript(source: script, injectionTime: .atDocumentEnd, forMainFrameOnly: true))
             }
         }
         #endif
