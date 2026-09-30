@@ -1,0 +1,1244 @@
+{
+  "browser": "Edge Windows",
+  "realMediaAndAudioContext": true,
+  "physicalIOS": false,
+  "acousticCrackleNotMeasured": true,
+  "initial": {
+    "version": "0.13.1",
+    "music": {
+      "switches": 0,
+      "loops": 0,
+      "waiting": 2,
+      "stalled": 0,
+      "errors": 0,
+      "desired": "micro",
+      "current": "micro",
+      "active": true,
+      "blocked": false,
+      "transition": false,
+      "volumeTarget": 0.42,
+      "context": "running",
+      "recovery": null,
+      "sampleRate": 48000,
+      "baseLatency": 0.01,
+      "outputLatency": 0.04,
+      "events": [
+        {
+          "type": "context",
+          "at": 0,
+          "detail": "running"
+        },
+        {
+          "type": "waiting",
+          "at": 0.48,
+          "detail": "http://127.0.0.1:5240/music/solace.mp3",
+          "mediaTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "waiting",
+          "at": 0.48,
+          "detail": "http://127.0.0.1:5240/music/solace.mp3",
+          "mediaTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "pause",
+          "at": 0.48,
+          "detail": "http://127.0.0.1:5240/music/solace.mp3",
+          "mediaTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "playing",
+          "at": 0.56,
+          "detail": "http://127.0.0.1:5240/music/solace.mp3",
+          "mediaTime": 0.008707,
+          "readyState": 4
+        },
+        {
+          "type": "pause",
+          "at": 0.851,
+          "detail": "http://127.0.0.1:5240/music/solace.mp3",
+          "mediaTime": 0.271741,
+          "readyState": 4
+        },
+        {
+          "type": "playing",
+          "at": 0.96,
+          "detail": "http://127.0.0.1:5240/music/solace.mp3",
+          "mediaTime": 0.272834,
+          "readyState": 4
+        }
+      ],
+      "decks": [
+        {
+          "id": "micro",
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "networkState": 1,
+          "time": 0.455246,
+          "duration": 356.355873,
+          "error": null
+        },
+        {
+          "id": "micro",
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "networkState": 1,
+          "time": 0,
+          "duration": 356.355873,
+          "error": null
+        }
+      ]
+    },
+    "events": [
+      {
+        "kind": "stream-recovery-pause",
+        "wallMs": 1790764650748,
+        "monotonicMs": 1976.4,
+        "detail": {
+          "reason": "scene-change",
+          "track": "micro",
+          "mediaTime": 0.271741
+        },
+        "state": {
+          "context": {
+            "state": "running",
+            "time": 0.821,
+            "requestedLatencyHint": "balanced",
+            "sampleRate": 48000,
+            "baseLatency": 0.01,
+            "outputLatency": 0.04,
+            "playback": {
+              "totalDuration": 0.002666,
+              "averageLatency": 0,
+              "minimumLatency": 0,
+              "maximumLatency": 0,
+              "underrunDuration": 0,
+              "underrunEvents": 0
+            }
+          },
+          "gates": {
+            "audioStarted": true,
+            "sound": true,
+            "focus": true,
+            "nativeActive": true,
+            "hidden": false,
+            "started": true,
+            "paused": false,
+            "settings": false,
+            "review": false,
+            "dead": false,
+            "offer": false,
+            "completed": false
+          },
+          "stage": 0,
+          "effectsTarget": 0.11,
+          "effectsGain": 0.11,
+          "effects": {
+            "attempts": 5,
+            "loadErrors": 0,
+            "readErrors": 0,
+            "decodeErrors": 0,
+            "lastLoadError": null,
+            "resumeErrors": 0,
+            "resumeAttempts": 0,
+            "playErrors": 0,
+            "requested": 2,
+            "played": 1,
+            "notReady": 0,
+            "notRunning": 0,
+            "throttled": 1,
+            "damageRequested": 0,
+            "damagePlayed": 0,
+            "shieldRequested": 0,
+            "shieldPlayed": 0,
+            "impactThrottled": 0,
+            "decoded": 5,
+            "pending": false,
+            "voices": 1,
+            "contextState": "running",
+            "voiceGain": 3
+          },
+          "music": {
+            "desired": "micro",
+            "current": "micro",
+            "active": true,
+            "unlocked": true,
+            "blocked": false,
+            "transition": false,
+            "target": 0.42,
+            "gain": 0.42,
+            "recovery": "paused",
+            "outputGain": 0,
+            "decks": [
+              {
+                "id": "micro",
+                "pending": false,
+                "paused": true,
+                "ended": false,
+                "time": 0.272,
+                "duration": 356.356,
+                "ready": 4,
+                "network": 1,
+                "error": null,
+                "muted": false,
+                "volume": 1,
+                "gain": 1
+              },
+              {
+                "id": "micro",
+                "pending": false,
+                "paused": true,
+                "ended": false,
+                "time": 0,
+                "duration": 356.356,
+                "ready": 4,
+                "network": 1,
+                "error": null,
+                "muted": false,
+                "volume": 1,
+                "gain": 0
+              }
+            ]
+          }
+        }
+      },
+      {
+        "kind": "stream-recovery-resume",
+        "wallMs": 1790764650887,
+        "monotonicMs": 2116.3,
+        "detail": {
+          "reason": "scene-change",
+          "track": "micro",
+          "mediaTime": 0.271741
+        },
+        "state": {
+          "context": {
+            "state": "running",
+            "time": 0.96,
+            "requestedLatencyHint": "balanced",
+            "sampleRate": 48000,
+            "baseLatency": 0.01,
+            "outputLatency": 0.04,
+            "playback": {
+              "totalDuration": 0.002666,
+              "averageLatency": 0,
+              "minimumLatency": 0,
+              "maximumLatency": 0,
+              "underrunDuration": 0,
+              "underrunEvents": 0
+            }
+          },
+          "gates": {
+            "audioStarted": true,
+            "sound": true,
+            "focus": true,
+            "nativeActive": true,
+            "hidden": false,
+            "started": true,
+            "paused": false,
+            "settings": false,
+            "review": false,
+            "dead": false,
+            "offer": false,
+            "completed": false
+          },
+          "stage": 0,
+          "effectsTarget": 0.11,
+          "effectsGain": 0.11,
+          "effects": {
+            "attempts": 5,
+            "loadErrors": 0,
+            "readErrors": 0,
+            "decodeErrors": 0,
+            "lastLoadError": null,
+            "resumeErrors": 0,
+            "resumeAttempts": 0,
+            "playErrors": 0,
+            "requested": 2,
+            "played": 1,
+            "notReady": 0,
+            "notRunning": 0,
+            "throttled": 1,
+            "damageRequested": 0,
+            "damagePlayed": 0,
+            "shieldRequested": 0,
+            "shieldPlayed": 0,
+            "impactThrottled": 0,
+            "decoded": 5,
+            "pending": false,
+            "voices": 0,
+            "contextState": "running",
+            "voiceGain": 3
+          },
+          "music": {
+            "desired": "micro",
+            "current": "micro",
+            "active": true,
+            "unlocked": true,
+            "blocked": false,
+            "transition": false,
+            "target": 0.42,
+            "gain": 0.42,
+            "recovery": "resuming",
+            "outputGain": 0,
+            "decks": [
+              {
+                "id": "micro",
+                "pending": false,
+                "paused": true,
+                "ended": false,
+                "time": 0.272,
+                "duration": 356.356,
+                "ready": 4,
+                "network": 1,
+                "error": null,
+                "muted": false,
+                "volume": 1,
+                "gain": 1
+              },
+              {
+                "id": "micro",
+                "pending": false,
+                "paused": true,
+                "ended": false,
+                "time": 0,
+                "duration": 356.356,
+                "ready": 4,
+                "network": 1,
+                "error": null,
+                "muted": false,
+                "volume": 1,
+                "gain": 0
+              }
+            ]
+          }
+        }
+      },
+      {
+        "kind": "stream-recovery-ready",
+        "wallMs": 1790764650888,
+        "monotonicMs": 2117,
+        "detail": {
+          "reason": "scene-change",
+          "track": "micro",
+          "mediaTime": 0.272834
+        },
+        "state": {
+          "context": {
+            "state": "running",
+            "time": 0.96,
+            "requestedLatencyHint": "balanced",
+            "sampleRate": 48000,
+            "baseLatency": 0.01,
+            "outputLatency": 0.04,
+            "playback": {
+              "totalDuration": 0.002666,
+              "averageLatency": 0,
+              "minimumLatency": 0,
+              "maximumLatency": 0,
+              "underrunDuration": 0,
+              "underrunEvents": 0
+            }
+          },
+          "gates": {
+            "audioStarted": true,
+            "sound": true,
+            "focus": true,
+            "nativeActive": true,
+            "hidden": false,
+            "started": true,
+            "paused": false,
+            "settings": false,
+            "review": false,
+            "dead": false,
+            "offer": false,
+            "completed": false
+          },
+          "stage": 0,
+          "effectsTarget": 0.11,
+          "effectsGain": 0.11,
+          "effects": {
+            "attempts": 5,
+            "loadErrors": 0,
+            "readErrors": 0,
+            "decodeErrors": 0,
+            "lastLoadError": null,
+            "resumeErrors": 0,
+            "resumeAttempts": 0,
+            "playErrors": 0,
+            "requested": 2,
+            "played": 1,
+            "notReady": 0,
+            "notRunning": 0,
+            "throttled": 1,
+            "damageRequested": 0,
+            "damagePlayed": 0,
+            "shieldRequested": 0,
+            "shieldPlayed": 0,
+            "impactThrottled": 0,
+            "decoded": 5,
+            "pending": false,
+            "voices": 0,
+            "contextState": "running",
+            "voiceGain": 3
+          },
+          "music": {
+            "desired": "micro",
+            "current": "micro",
+            "active": true,
+            "unlocked": true,
+            "blocked": false,
+            "transition": false,
+            "target": 0.42,
+            "gain": 0.42,
+            "recovery": null,
+            "outputGain": 0,
+            "decks": [
+              {
+                "id": "micro",
+                "pending": false,
+                "paused": false,
+                "ended": false,
+                "time": 0.273,
+                "duration": 356.356,
+                "ready": 4,
+                "network": 1,
+                "error": null,
+                "muted": false,
+                "volume": 1,
+                "gain": 1
+              },
+              {
+                "id": "micro",
+                "pending": false,
+                "paused": true,
+                "ended": false,
+                "time": 0,
+                "duration": 356.356,
+                "ready": 4,
+                "network": 1,
+                "error": null,
+                "muted": false,
+                "volume": 1,
+                "gain": 0
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "hidden": {
+    "gain": 0,
+    "paused": true
+  },
+  "recovered": {
+    "music": {
+      "switches": 0,
+      "loops": 0,
+      "waiting": 2,
+      "stalled": 0,
+      "errors": 0,
+      "desired": "micro",
+      "current": "micro",
+      "active": true,
+      "blocked": false,
+      "transition": false,
+      "volumeTarget": 0.42,
+      "context": "running",
+      "recovery": null,
+      "sampleRate": 48000,
+      "baseLatency": 0.01,
+      "outputLatency": 0.04,
+      "events": [
+        {
+          "type": "context",
+          "at": 0,
+          "detail": "running"
+        },
+        {
+          "type": "waiting",
+          "at": 0.48,
+          "detail": "http://127.0.0.1:5240/music/solace.mp3",
+          "mediaTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "waiting",
+          "at": 0.48,
+          "detail": "http://127.0.0.1:5240/music/solace.mp3",
+          "mediaTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "pause",
+          "at": 0.48,
+          "detail": "http://127.0.0.1:5240/music/solace.mp3",
+          "mediaTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "playing",
+          "at": 0.56,
+          "detail": "http://127.0.0.1:5240/music/solace.mp3",
+          "mediaTime": 0.008707,
+          "readyState": 4
+        },
+        {
+          "type": "pause",
+          "at": 0.851,
+          "detail": "http://127.0.0.1:5240/music/solace.mp3",
+          "mediaTime": 0.271741,
+          "readyState": 4
+        },
+        {
+          "type": "playing",
+          "at": 0.96,
+          "detail": "http://127.0.0.1:5240/music/solace.mp3",
+          "mediaTime": 0.272834,
+          "readyState": 4
+        },
+        {
+          "type": "pause",
+          "at": 1.152,
+          "detail": "http://127.0.0.1:5240/music/solace.mp3",
+          "mediaTime": 0.461835,
+          "readyState": 4
+        },
+        {
+          "type": "context",
+          "at": 1.152,
+          "detail": "suspended"
+        },
+        {
+          "type": "context",
+          "at": 1.16,
+          "detail": "running"
+        },
+        {
+          "type": "playing",
+          "at": 1.171,
+          "detail": "http://127.0.0.1:5240/music/solace.mp3",
+          "mediaTime": 0.464399,
+          "readyState": 4
+        },
+        {
+          "type": "pause",
+          "at": 1.44,
+          "detail": "http://127.0.0.1:5240/music/solace.mp3",
+          "mediaTime": 0.734331,
+          "readyState": 4
+        },
+        {
+          "type": "playing",
+          "at": 1.651,
+          "detail": "http://127.0.0.1:5240/music/solace.mp3",
+          "mediaTime": 0.734331,
+          "readyState": 4
+        }
+      ],
+      "decks": [
+        {
+          "id": "micro",
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "networkState": 1,
+          "time": 0.815601,
+          "duration": 356.355873,
+          "error": null
+        },
+        {
+          "id": "micro",
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "networkState": 1,
+          "time": 0,
+          "duration": 356.355873,
+          "error": null
+        }
+      ]
+    },
+    "events": [
+      {
+        "kind": "stream-recovery-pause",
+        "wallMs": 1790764650748,
+        "monotonicMs": 1976.4,
+        "detail": {
+          "reason": "scene-change",
+          "track": "micro",
+          "mediaTime": 0.271741
+        },
+        "state": {
+          "context": {
+            "state": "running",
+            "time": 0.821,
+            "requestedLatencyHint": "balanced",
+            "sampleRate": 48000,
+            "baseLatency": 0.01,
+            "outputLatency": 0.04,
+            "playback": {
+              "totalDuration": 0.002666,
+              "averageLatency": 0,
+              "minimumLatency": 0,
+              "maximumLatency": 0,
+              "underrunDuration": 0,
+              "underrunEvents": 0
+            }
+          },
+          "gates": {
+            "audioStarted": true,
+            "sound": true,
+            "focus": true,
+            "nativeActive": true,
+            "hidden": false,
+            "started": true,
+            "paused": false,
+            "settings": false,
+            "review": false,
+            "dead": false,
+            "offer": false,
+            "completed": false
+          },
+          "stage": 0,
+          "effectsTarget": 0.11,
+          "effectsGain": 0.11,
+          "effects": {
+            "attempts": 5,
+            "loadErrors": 0,
+            "readErrors": 0,
+            "decodeErrors": 0,
+            "lastLoadError": null,
+            "resumeErrors": 0,
+            "resumeAttempts": 0,
+            "playErrors": 0,
+            "requested": 2,
+            "played": 1,
+            "notReady": 0,
+            "notRunning": 0,
+            "throttled": 1,
+            "damageRequested": 0,
+            "damagePlayed": 0,
+            "shieldRequested": 0,
+            "shieldPlayed": 0,
+            "impactThrottled": 0,
+            "decoded": 5,
+            "pending": false,
+            "voices": 1,
+            "contextState": "running",
+            "voiceGain": 3
+          },
+          "music": {
+            "desired": "micro",
+            "current": "micro",
+            "active": true,
+            "unlocked": true,
+            "blocked": false,
+            "transition": false,
+            "target": 0.42,
+            "gain": 0.42,
+            "recovery": "paused",
+            "outputGain": 0,
+            "decks": [
+              {
+                "id": "micro",
+                "pending": false,
+                "paused": true,
+                "ended": false,
+                "time": 0.272,
+                "duration": 356.356,
+                "ready": 4,
+                "network": 1,
+                "error": null,
+                "muted": false,
+                "volume": 1,
+                "gain": 1
+              },
+              {
+                "id": "micro",
+                "pending": false,
+                "paused": true,
+                "ended": false,
+                "time": 0,
+                "duration": 356.356,
+                "ready": 4,
+                "network": 1,
+                "error": null,
+                "muted": false,
+                "volume": 1,
+                "gain": 0
+              }
+            ]
+          }
+        }
+      },
+      {
+        "kind": "stream-recovery-resume",
+        "wallMs": 1790764650887,
+        "monotonicMs": 2116.3,
+        "detail": {
+          "reason": "scene-change",
+          "track": "micro",
+          "mediaTime": 0.271741
+        },
+        "state": {
+          "context": {
+            "state": "running",
+            "time": 0.96,
+            "requestedLatencyHint": "balanced",
+            "sampleRate": 48000,
+            "baseLatency": 0.01,
+            "outputLatency": 0.04,
+            "playback": {
+              "totalDuration": 0.002666,
+              "averageLatency": 0,
+              "minimumLatency": 0,
+              "maximumLatency": 0,
+              "underrunDuration": 0,
+              "underrunEvents": 0
+            }
+          },
+          "gates": {
+            "audioStarted": true,
+            "sound": true,
+            "focus": true,
+            "nativeActive": true,
+            "hidden": false,
+            "started": true,
+            "paused": false,
+            "settings": false,
+            "review": false,
+            "dead": false,
+            "offer": false,
+            "completed": false
+          },
+          "stage": 0,
+          "effectsTarget": 0.11,
+          "effectsGain": 0.11,
+          "effects": {
+            "attempts": 5,
+            "loadErrors": 0,
+            "readErrors": 0,
+            "decodeErrors": 0,
+            "lastLoadError": null,
+            "resumeErrors": 0,
+            "resumeAttempts": 0,
+            "playErrors": 0,
+            "requested": 2,
+            "played": 1,
+            "notReady": 0,
+            "notRunning": 0,
+            "throttled": 1,
+            "damageRequested": 0,
+            "damagePlayed": 0,
+            "shieldRequested": 0,
+            "shieldPlayed": 0,
+            "impactThrottled": 0,
+            "decoded": 5,
+            "pending": false,
+            "voices": 0,
+            "contextState": "running",
+            "voiceGain": 3
+          },
+          "music": {
+            "desired": "micro",
+            "current": "micro",
+            "active": true,
+            "unlocked": true,
+            "blocked": false,
+            "transition": false,
+            "target": 0.42,
+            "gain": 0.42,
+            "recovery": "resuming",
+            "outputGain": 0,
+            "decks": [
+              {
+                "id": "micro",
+                "pending": false,
+                "paused": true,
+                "ended": false,
+                "time": 0.272,
+                "duration": 356.356,
+                "ready": 4,
+                "network": 1,
+                "error": null,
+                "muted": false,
+                "volume": 1,
+                "gain": 1
+              },
+              {
+                "id": "micro",
+                "pending": false,
+                "paused": true,
+                "ended": false,
+                "time": 0,
+                "duration": 356.356,
+                "ready": 4,
+                "network": 1,
+                "error": null,
+                "muted": false,
+                "volume": 1,
+                "gain": 0
+              }
+            ]
+          }
+        }
+      },
+      {
+        "kind": "stream-recovery-ready",
+        "wallMs": 1790764650888,
+        "monotonicMs": 2117,
+        "detail": {
+          "reason": "scene-change",
+          "track": "micro",
+          "mediaTime": 0.272834
+        },
+        "state": {
+          "context": {
+            "state": "running",
+            "time": 0.96,
+            "requestedLatencyHint": "balanced",
+            "sampleRate": 48000,
+            "baseLatency": 0.01,
+            "outputLatency": 0.04,
+            "playback": {
+              "totalDuration": 0.002666,
+              "averageLatency": 0,
+              "minimumLatency": 0,
+              "maximumLatency": 0,
+              "underrunDuration": 0,
+              "underrunEvents": 0
+            }
+          },
+          "gates": {
+            "audioStarted": true,
+            "sound": true,
+            "focus": true,
+            "nativeActive": true,
+            "hidden": false,
+            "started": true,
+            "paused": false,
+            "settings": false,
+            "review": false,
+            "dead": false,
+            "offer": false,
+            "completed": false
+          },
+          "stage": 0,
+          "effectsTarget": 0.11,
+          "effectsGain": 0.11,
+          "effects": {
+            "attempts": 5,
+            "loadErrors": 0,
+            "readErrors": 0,
+            "decodeErrors": 0,
+            "lastLoadError": null,
+            "resumeErrors": 0,
+            "resumeAttempts": 0,
+            "playErrors": 0,
+            "requested": 2,
+            "played": 1,
+            "notReady": 0,
+            "notRunning": 0,
+            "throttled": 1,
+            "damageRequested": 0,
+            "damagePlayed": 0,
+            "shieldRequested": 0,
+            "shieldPlayed": 0,
+            "impactThrottled": 0,
+            "decoded": 5,
+            "pending": false,
+            "voices": 0,
+            "contextState": "running",
+            "voiceGain": 3
+          },
+          "music": {
+            "desired": "micro",
+            "current": "micro",
+            "active": true,
+            "unlocked": true,
+            "blocked": false,
+            "transition": false,
+            "target": 0.42,
+            "gain": 0.42,
+            "recovery": null,
+            "outputGain": 0,
+            "decks": [
+              {
+                "id": "micro",
+                "pending": false,
+                "paused": false,
+                "ended": false,
+                "time": 0.273,
+                "duration": 356.356,
+                "ready": 4,
+                "network": 1,
+                "error": null,
+                "muted": false,
+                "volume": 1,
+                "gain": 1
+              },
+              {
+                "id": "micro",
+                "pending": false,
+                "paused": true,
+                "ended": false,
+                "time": 0,
+                "duration": 356.356,
+                "ready": 4,
+                "network": 1,
+                "error": null,
+                "muted": false,
+                "volume": 1,
+                "gain": 0
+              }
+            ]
+          }
+        }
+      },
+      {
+        "kind": "stream-recovery-pause",
+        "wallMs": 1790764651385,
+        "monotonicMs": 2613.4,
+        "detail": {
+          "reason": "paused",
+          "track": "micro",
+          "mediaTime": 0.734331
+        },
+        "state": {
+          "context": {
+            "state": "running",
+            "time": 1.44,
+            "requestedLatencyHint": "balanced",
+            "sampleRate": 48000,
+            "baseLatency": 0.01,
+            "outputLatency": 0.04,
+            "playback": {
+              "totalDuration": 1.01308,
+              "averageLatency": 0.042959,
+              "minimumLatency": 0,
+              "maximumLatency": 0.044854,
+              "underrunDuration": 0,
+              "underrunEvents": 0
+            }
+          },
+          "gates": {
+            "audioStarted": true,
+            "sound": true,
+            "focus": true,
+            "nativeActive": true,
+            "hidden": false,
+            "started": true,
+            "paused": false,
+            "settings": false,
+            "review": false,
+            "dead": false,
+            "offer": false,
+            "completed": false
+          },
+          "stage": 0,
+          "effectsTarget": 0.11,
+          "effectsGain": 0.11,
+          "effects": {
+            "attempts": 5,
+            "loadErrors": 0,
+            "readErrors": 0,
+            "decodeErrors": 0,
+            "lastLoadError": null,
+            "resumeErrors": 0,
+            "resumeAttempts": 1,
+            "playErrors": 0,
+            "requested": 2,
+            "played": 1,
+            "notReady": 0,
+            "notRunning": 0,
+            "throttled": 1,
+            "damageRequested": 0,
+            "damagePlayed": 0,
+            "shieldRequested": 0,
+            "shieldPlayed": 0,
+            "impactThrottled": 0,
+            "decoded": 5,
+            "pending": false,
+            "voices": 0,
+            "contextState": "running",
+            "voiceGain": 3
+          },
+          "music": {
+            "desired": "micro",
+            "current": "micro",
+            "active": true,
+            "unlocked": true,
+            "blocked": false,
+            "transition": false,
+            "target": 0.42,
+            "gain": 0.42,
+            "recovery": "paused",
+            "outputGain": 0,
+            "decks": [
+              {
+                "id": "micro",
+                "pending": false,
+                "paused": true,
+                "ended": false,
+                "time": 0.734,
+                "duration": 356.356,
+                "ready": 4,
+                "network": 1,
+                "error": null,
+                "muted": false,
+                "volume": 1,
+                "gain": 1
+              },
+              {
+                "id": "micro",
+                "pending": false,
+                "paused": true,
+                "ended": false,
+                "time": 0,
+                "duration": 356.356,
+                "ready": 4,
+                "network": 1,
+                "error": null,
+                "muted": false,
+                "volume": 1,
+                "gain": 0
+              }
+            ]
+          }
+        }
+      },
+      {
+        "kind": "stream-recovery-resume",
+        "wallMs": 1790764651586,
+        "monotonicMs": 2814.8,
+        "detail": {
+          "reason": "paused",
+          "track": "micro",
+          "mediaTime": 0.734331
+        },
+        "state": {
+          "context": {
+            "state": "running",
+            "time": 1.651,
+            "requestedLatencyHint": "balanced",
+            "sampleRate": 48000,
+            "baseLatency": 0.01,
+            "outputLatency": 0.04,
+            "playback": {
+              "totalDuration": 1.01308,
+              "averageLatency": 0.042959,
+              "minimumLatency": 0,
+              "maximumLatency": 0.044854,
+              "underrunDuration": 0,
+              "underrunEvents": 0
+            }
+          },
+          "gates": {
+            "audioStarted": true,
+            "sound": true,
+            "focus": true,
+            "nativeActive": true,
+            "hidden": false,
+            "started": true,
+            "paused": false,
+            "settings": false,
+            "review": false,
+            "dead": false,
+            "offer": false,
+            "completed": false
+          },
+          "stage": 0,
+          "effectsTarget": 0.11,
+          "effectsGain": 0.11,
+          "effects": {
+            "attempts": 5,
+            "loadErrors": 0,
+            "readErrors": 0,
+            "decodeErrors": 0,
+            "lastLoadError": null,
+            "resumeErrors": 0,
+            "resumeAttempts": 1,
+            "playErrors": 0,
+            "requested": 2,
+            "played": 1,
+            "notReady": 0,
+            "notRunning": 0,
+            "throttled": 1,
+            "damageRequested": 0,
+            "damagePlayed": 0,
+            "shieldRequested": 0,
+            "shieldPlayed": 0,
+            "impactThrottled": 0,
+            "decoded": 5,
+            "pending": false,
+            "voices": 0,
+            "contextState": "running",
+            "voiceGain": 3
+          },
+          "music": {
+            "desired": "micro",
+            "current": "micro",
+            "active": true,
+            "unlocked": true,
+            "blocked": false,
+            "transition": false,
+            "target": 0.42,
+            "gain": 0.42,
+            "recovery": "resuming",
+            "outputGain": 0,
+            "decks": [
+              {
+                "id": "micro",
+                "pending": false,
+                "paused": true,
+                "ended": false,
+                "time": 0.734,
+                "duration": 356.356,
+                "ready": 4,
+                "network": 1,
+                "error": null,
+                "muted": false,
+                "volume": 1,
+                "gain": 1
+              },
+              {
+                "id": "micro",
+                "pending": false,
+                "paused": true,
+                "ended": false,
+                "time": 0,
+                "duration": 356.356,
+                "ready": 4,
+                "network": 1,
+                "error": null,
+                "muted": false,
+                "volume": 1,
+                "gain": 0
+              }
+            ]
+          }
+        }
+      },
+      {
+        "kind": "stream-recovery-ready",
+        "wallMs": 1790764651586,
+        "monotonicMs": 2815,
+        "detail": {
+          "reason": "paused",
+          "track": "micro",
+          "mediaTime": 0.734331
+        },
+        "state": {
+          "context": {
+            "state": "running",
+            "time": 1.651,
+            "requestedLatencyHint": "balanced",
+            "sampleRate": 48000,
+            "baseLatency": 0.01,
+            "outputLatency": 0.04,
+            "playback": {
+              "totalDuration": 1.01308,
+              "averageLatency": 0.042959,
+              "minimumLatency": 0,
+              "maximumLatency": 0.044854,
+              "underrunDuration": 0,
+              "underrunEvents": 0
+            }
+          },
+          "gates": {
+            "audioStarted": true,
+            "sound": true,
+            "focus": true,
+            "nativeActive": true,
+            "hidden": false,
+            "started": true,
+            "paused": false,
+            "settings": false,
+            "review": false,
+            "dead": false,
+            "offer": false,
+            "completed": false
+          },
+          "stage": 0,
+          "effectsTarget": 0.11,
+          "effectsGain": 0.11,
+          "effects": {
+            "attempts": 5,
+            "loadErrors": 0,
+            "readErrors": 0,
+            "decodeErrors": 0,
+            "lastLoadError": null,
+            "resumeErrors": 0,
+            "resumeAttempts": 1,
+            "playErrors": 0,
+            "requested": 2,
+            "played": 1,
+            "notReady": 0,
+            "notRunning": 0,
+            "throttled": 1,
+            "damageRequested": 0,
+            "damagePlayed": 0,
+            "shieldRequested": 0,
+            "shieldPlayed": 0,
+            "impactThrottled": 0,
+            "decoded": 5,
+            "pending": false,
+            "voices": 0,
+            "contextState": "running",
+            "voiceGain": 3
+          },
+          "music": {
+            "desired": "micro",
+            "current": "micro",
+            "active": true,
+            "unlocked": true,
+            "blocked": false,
+            "transition": false,
+            "target": 0.42,
+            "gain": 0.42,
+            "recovery": null,
+            "outputGain": 0,
+            "decks": [
+              {
+                "id": "micro",
+                "pending": false,
+                "paused": false,
+                "ended": false,
+                "time": 0.734,
+                "duration": 356.356,
+                "ready": 4,
+                "network": 1,
+                "error": null,
+                "muted": false,
+                "volume": 1,
+                "gain": 1
+              },
+              {
+                "id": "micro",
+                "pending": false,
+                "paused": true,
+                "ended": false,
+                "time": 0,
+                "duration": 356.356,
+                "ready": 4,
+                "network": 1,
+                "error": null,
+                "muted": false,
+                "volume": 1,
+                "gain": 0
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "errors": []
+}

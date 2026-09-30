@@ -850,7 +850,7 @@ export class VoroEngine {
       this.master.gain.value = 0;
       this.effectsGainTarget = null;
       this.master.connect(this.audio.destination);
-      this.music = new MusicPlayer(this.audio,{ownsContextResume:false,onDiagnostic:(kind:string,detail:object)=>this.audioJournal?.event(kind,detail)});
+      this.music = new MusicPlayer(this.audio,{ownsContextResume:false,stabilizePlayback:!this.desktop,onDiagnostic:(kind:string,detail:object)=>this.audioJournal?.event(kind,detail)});
       this.sfx = new SfxPlayer(this.audio, this.master,{canResume:()=>this.canResumeAudio(),onDiagnostic:(kind:string,detail:object)=>this.audioJournal?.event(kind,detail)});
       this.audioJournal?.attach(this.audio,this.music.decks);
       this.sfx.unlock();

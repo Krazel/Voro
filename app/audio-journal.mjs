@@ -16,6 +16,7 @@ export function audioSnapshot(game) {
     effectsGain:finite(game.master?.gain.value),effects:game.sfx?.stats()??null,
     music:m?{desired:m.desired,current:m.current?.id??null,active:m.active,unlocked:m.unlocked,
       blocked:m.blocked,transition:!!m.transition,target:m.volumeTarget??null,gain:finite(m.bus?.gain.value),
+      recovery:m.recovery?.phase??null,outputGain:finite(m.output?.gain.value),
       decks:m.decks.map(d=>({id:d.id,pending:d.pending,paused:d.audio.paused,ended:d.audio.ended,
         time:finite(d.audio.currentTime),duration:finite(d.audio.duration),ready:d.audio.readyState,
         network:d.audio.networkState,error:d.audio.error?.code??null,muted:d.audio.muted,
