@@ -562,7 +562,10 @@ export class VoroEngine {
       for(const name of ['focus','blur','pageshow','pagehide'])window.addEventListener(name,lifecycleEvent,{...opt,capture:true});
       document.addEventListener('visibilitychange',lifecycleEvent,{...opt,capture:true});
     }
-    const unlockMusic = () => {
+    const unlockMusic = (event: Event) => {
+      // The start button's click selects the saved scene before initializing audio.
+      // Its earlier pointer/key event must not briefly start the menu song.
+      if (!this.started && (event.target as HTMLElement)?.closest?.('[data-voro-action="start"]')) return;
       const trace=!this.audioStarted||this.audio?.state!=='running'||this.music?.blocked;
       if(trace)this.audioJournal?.event('gesture-before');
       if(this.sound && this.nativeAudioActive && !document.hidden) { this.audioFocus=true;this.initAudio(true); this.setAudio(); this.music?.unlock(); }

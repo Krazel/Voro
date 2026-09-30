@@ -388,6 +388,7 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
             <button
               className="primary-button"
               disabled={!state.assetsReady}
+              data-voro-action="start"
               onClick={() => { engine.current?.tilt.calibrate(); action('start'); }}
             >
               {tr(!state.assetsReady
