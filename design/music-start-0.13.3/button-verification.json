@@ -1,0 +1,47 @@
+{
+  "browser": "Edge",
+  "physicalDevice": false,
+  "errors": [],
+  "reports": [
+    {
+      "input": "pointer",
+      "calls": [
+        {
+          "started": true,
+          "stage": 3
+        },
+        {
+          "started": true,
+          "stage": 3
+        },
+        {
+          "started": true,
+          "stage": 3
+        }
+      ],
+      "track": "water",
+      "started": true,
+      "stage": 3
+    },
+    {
+      "input": "keyboard",
+      "calls": [
+        {
+          "started": true,
+          "stage": 3
+        },
+        {
+          "started": true,
+          "stage": 3
+        },
+        {
+          "started": true,
+          "stage": 3
+        }
+      ],
+      "track": "water",
+      "started": true,
+      "stage": 3
+    }
+  ]
+}
