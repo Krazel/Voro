@@ -1,10 +1,10 @@
 {
-  "species": 81,
+  "species": 71,
   "targetFps": 30,
   "maxFrames": 128,
   "defaultSize": 192,
-  "uniqueFiles": 210,
-  "encodedBytes": 197505200,
-  "sourceHash": "1ee527ee18f6c3b1223ee414e074622731ee5dab09274d31bd4d70ff8d35c275",
+  "uniqueFiles": 190,
+  "encodedBytes": 192467300,
+  "sourceHash": "aee5489a941341219d6a640fd8c02666f12591cd8b3fcf7a17400a0949354ad5",
   "format": "WebP quality 94, alpha 100, same rigs and cycle timings; 24–128 micro poses, 24–64 other poses; micro 30 poses/s; optional medium and close-up tiers within device memory budget; rigid transforms continuous; tight common crop"
 }

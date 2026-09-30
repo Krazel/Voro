@@ -2,6 +2,7 @@ import { EDIBLE_MATTER } from './edible-matter.mjs';
 import { getLanguage, t } from './language.mjs';
 import { applyScaleAudit } from './scale-audit.mjs';
 import { applyCityCosmosArt } from './city-cosmos-art.mjs';
+import { applyCityPerspectiveArt } from './city-perspective-art.mjs';
 import { applyCosmicScales } from './cosmic-scales.mjs';
 import { applyCosmicDetail } from './cosmic-detail.mjs';
 import { applyClearArt } from './clear-art.mjs';
@@ -561,6 +562,7 @@ applyCityCosmosArt(STAGES, STAGE_SPECIES, SPECIES_BY_ID, ATLAS_URLS);
 applyCosmicScales(SPECIES_BY_ID);
 applyCosmicDetail(SPECIES_BY_ID,ATLAS_URLS);
 applyClearArt(SPECIES_BY_ID,ATLAS_URLS);
+applyCityPerspectiveArt(SPECIES_BY_ID,ATLAS_URLS);
 // Every scale includes a tiny recovery food after a severe hit.
 for (const list of STAGE_SPECIES) {
   const tiniest = list

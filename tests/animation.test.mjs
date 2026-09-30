@@ -9,9 +9,11 @@ import {
 } from '../app/inhabitant-animation.mjs';
 import { STAGE_SPECIES } from '../app/journey-data.mjs';
 import CLEAR_ART from '../app/clear-art.json' with {type:'json'};
+import CITY_ART from '../app/city-perspective-art.json' with {type:'json'};
 import { newJourney, journeyLife } from '../app/journey-progress.mjs';
 import { HuntingTentacles } from '../app/hunting-tentacles.mjs';
 const sizes = {
+  ...Object.fromEntries(CITY_ART.map(a=>[`cityView_${a.id}`,a.size])),
   ...Object.fromEntries(CLEAR_ART.map(a=>[`clearDetail${a.number}`,a.crop.slice(2)])),
   blackHoleDetail:[1254,1254],...Object.fromEntries(Array.from({length:6},(_,i)=>[`galaxyDetail${i}`,[1254,1254]])),
   'cosmic-wall':[1254,1254], 'lensed-crown':[1254,1254], 'cosmic-confluence':[1254,1254], 'cosmic-tide':[1254,1254],

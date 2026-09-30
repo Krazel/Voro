@@ -2228,6 +2228,7 @@ export class VoroEngine {
           (f.escape || 0) > 0 || (f.attack || 0) > 0 ? 1.5 : 1,
           f.flash || 0,
           this.animationSheets,
+          f.heading ?? f.seed,
         );
       c.restore();
       const spec = SPECIES_BY_ID[f.kind || 'nutrient'];

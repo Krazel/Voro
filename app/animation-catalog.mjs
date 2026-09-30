@@ -596,7 +596,7 @@ export const ANIMATIONS = Object.fromEntries(
   }),
 );
 export function animationCrop(s, image) {
-  return (
+  const crop = (
     ANIMATIONS[s.id].crop ||
     s.crop || [
       ((s.index % s.cols) * image.naturalWidth) / s.cols + 3,
@@ -607,4 +607,6 @@ export function animationCrop(s, image) {
       (image.naturalHeight || image.height) / s.rows - 6,
     ]
   );
+  return image.sourceScaleX ? [crop[0]*image.sourceScaleX,crop[1]*image.sourceScaleY,
+    crop[2]*image.sourceScaleX,crop[3]*image.sourceScaleY] : crop;
 }

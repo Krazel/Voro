@@ -1,0 +1,225 @@
+{
+  "assets": [
+    {
+      "id": "city-0",
+      "path": "public/inhabitants/city-perspective/city-0.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "frames": 8,
+      "bytes": 1916388,
+      "sha256": "c19372ef3b7792d99ca944bdb76a5cc5210cd807c4bc35d2b7afe1accdfb1ff3"
+    },
+    {
+      "id": "city-1",
+      "path": "public/inhabitants/city-perspective/city-1.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "frames": 8,
+      "bytes": 2042938,
+      "sha256": "f2536f888d36c1f6a8fd845ca24717a1fe4fc26fb9d285821a378e7f5ae02718"
+    },
+    {
+      "id": "city-2",
+      "path": "public/inhabitants/city-perspective/city-2.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "frames": 8,
+      "bytes": 2083358,
+      "sha256": "e7ea3178a7b106aeb87ed85285f19f1cbaf4dd150f94be4cc0838aedd6bb29a5"
+    },
+    {
+      "id": "city-3",
+      "path": "public/inhabitants/city-perspective/city-3.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "frames": 8,
+      "bytes": 1972488,
+      "sha256": "a4b4fabd9e3c37e153fb26b98ecadad9ebf22f44c9516f2261c39c8b8ad00076"
+    },
+    {
+      "id": "city-4",
+      "path": "public/inhabitants/city-perspective/city-4.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "frames": 4,
+      "bytes": 1377336,
+      "sha256": "ddd42209c7ed196d272fe056c8ed3409c6de59bc471006ebd376a22e6e0ca302"
+    },
+    {
+      "id": "city-5",
+      "path": "public/inhabitants/city-perspective/city-5.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "frames": 4,
+      "bytes": 1638679,
+      "sha256": "aedae51bf960c1b150cc2f489912e690deef0edc8ec8379c981f023dc0196a2c"
+    },
+    {
+      "id": "city-6",
+      "path": "public/inhabitants/city-perspective/city-6.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "frames": 4,
+      "bytes": 1274050,
+      "sha256": "18e7ca726c3d33552b86c01e6d32566eb316f999012d07be6e54a9196e8d88f5"
+    },
+    {
+      "id": "city-7",
+      "path": "public/inhabitants/city-perspective/city-7.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "frames": 4,
+      "bytes": 1760608,
+      "sha256": "927ae02dfed90251249b8d3f907cae1a7e8916438f20dcb71165da8254ebf3a4"
+    },
+    {
+      "id": "city-8",
+      "path": "public/inhabitants/city-perspective/city-8.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "frames": 4,
+      "bytes": 1467825,
+      "sha256": "081cc14bdcf412e67f0b547ef32f23908eea8b5105d661b25351efe90dbb2708"
+    },
+    {
+      "id": "city-9",
+      "path": "public/inhabitants/city-perspective/city-9.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "frames": 4,
+      "bytes": 695325,
+      "sha256": "a87f3b7f614ceac3228520a9ace036f413508204dee2634b7e17c0dabaf824a7"
+    },
+    {
+      "id": "city-civilian-0",
+      "path": "public/inhabitants/city-perspective/city-civilian-0.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "frames": 8,
+      "bytes": 1856730,
+      "sha256": "4004644e8180c80ddf60d1409fbf04ee87a8fdd38524d9eadb756e503921ce98"
+    },
+    {
+      "id": "city-civilian-1",
+      "path": "public/inhabitants/city-perspective/city-civilian-1.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "frames": 8,
+      "bytes": 1980156,
+      "sha256": "07ce764069d91f97d71bbf132aad1352021464ea6e44f324d4cbc87e1390b988"
+    },
+    {
+      "id": "city-civilian-2",
+      "path": "public/inhabitants/city-perspective/city-civilian-2.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "frames": 8,
+      "bytes": 1905517,
+      "sha256": "1dabb6582ae1433ccacbc8ffa07b25a89f9498f9a501f710fbb66dfd9cc58503"
+    },
+    {
+      "id": "city-civilian-3",
+      "path": "public/inhabitants/city-perspective/city-civilian-3.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "frames": 8,
+      "bytes": 1894600,
+      "sha256": "2e565231d4fa578268d9326c60c5ea166cc2f8c661dcb53cd6f7960cbd2a8a15"
+    },
+    {
+      "id": "city-civilian-4",
+      "path": "public/inhabitants/city-perspective/city-civilian-4.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "frames": 8,
+      "bytes": 1827833,
+      "sha256": "f391052c599d461d18664a1b1a53dc77758cebd8b65d145892aeae838c64a4d2"
+    },
+    {
+      "id": "city-civilian-5",
+      "path": "public/inhabitants/city-perspective/city-civilian-5.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "frames": 8,
+      "bytes": 1801981,
+      "sha256": "7e2d8fe509f1a21ad4729d4c472b9cc357f715d17f451e21eaf2c0475123c638"
+    },
+    {
+      "id": "city-matter-bench",
+      "path": "public/inhabitants/city-perspective/city-matter-bench.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "frames": 1,
+      "bytes": 2171332,
+      "sha256": "d0d78cf7599b2d5bc4f79a327c3674791e99c824d355e0d22dcb04dec8cd45d0"
+    },
+    {
+      "id": "city-matter-lamp",
+      "path": "public/inhabitants/city-perspective/city-matter-lamp.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "frames": 1,
+      "bytes": 1052165,
+      "sha256": "1ecf12aaa346ff2ba714245142e7cb0f849155c11374584fe2bc2d09dc25d892"
+    },
+    {
+      "id": "city-matter-palm",
+      "path": "public/inhabitants/city-perspective/city-matter-palm.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "frames": 1,
+      "bytes": 2392229,
+      "sha256": "f194519a214040f2159a4d85e4c3dbf1784edfdfcd2fb901a6d77d393774a3b9"
+    },
+    {
+      "id": "city-matter-sign",
+      "path": "public/inhabitants/city-perspective/city-matter-sign.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "frames": 1,
+      "bytes": 1280114,
+      "sha256": "a4abb3e7c2ce4f1369852b429a5fe840a920d598fabe9134f0fd80c0270f2ee1"
+    }
+  ],
+  "encodedBytes": 34391652
+}

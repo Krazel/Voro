@@ -1,5 +1,6 @@
 import { ANIMATIONS, animationCrop } from './animation-catalog.mjs';
 import { anatomicalPose, ANATOMICAL_RIGS } from './anatomical-rigs.mjs';
+import { drawCityDirectional } from './city-perspective-art.mjs';
 const TAU = Math.PI * 2;
 const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
 const smooth = (v) => {
@@ -995,9 +996,12 @@ export function drawInhabitant(
   r,
   seed,
   time,
-  { activity = 1, detail = false, cache = true, hurt = 0, sheets = null } = {},
+  { activity = 1, detail = false, cache = true, hurt = 0, sheets = null, heading = 0 } = {},
 ) {
   if (!image?.complete || !image.naturalWidth || r <= 0) return;
+  if(s.directionalArt) {
+    drawCityDirectional(c,image,s,r,seed,time,activity,hurt,heading);return;
+  }
   const profile = ANIMATIONS[s.id];
   if (!profile) return;
   visibleAssets.set(profile.assetKey, frameSerial);
@@ -1020,10 +1024,10 @@ export function drawInhabitant(
     c.clip('evenodd');c.globalAlpha*=.2;c.rotate(Math.sin(phase)*.035);
     c.drawImage(image,...crop,-w/2,-h/2,w,h);c.restore();c.restore();return;
   }
+  if (simpleAnimation(profile)) {
+    drawPose(c, image, s, r, phase, { activity, detail }); c.restore(); return;
+  }
   if (sheets && !detail && cache) {
-    if (simpleAnimation(profile)) {
-      drawPose(c, image, s, r, phase, { activity }); c.restore(); return;
-    }
     const result = sheets.draw(c, s, r, phase, activity);
     if (result === 'ready') { c.restore(); return; }
     if (result === 'pending') {

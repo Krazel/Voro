@@ -1,0 +1,322 @@
+[
+  {
+    "id": "city-0",
+    "r": 11.041666666666666,
+    "value": 1.3,
+    "speed": 34,
+    "sizeFactors": [
+      0.97,
+      1.03
+    ],
+    "kind": "flee",
+    "shot": null
+  },
+  {
+    "id": "city-1",
+    "r": 11.363636363636363,
+    "value": 2.5,
+    "speed": 26,
+    "sizeFactors": [
+      0.97,
+      1.03
+    ],
+    "kind": "ranged",
+    "shot": {
+      "interval": 2.2,
+      "speed": 185,
+      "damage": 0.08,
+      "edibleAt": 12,
+      "threatScale": 2
+    }
+  },
+  {
+    "id": "city-2",
+    "r": 8.88888888888889,
+    "value": 5,
+    "speed": 52,
+    "sizeFactors": [
+      0.97,
+      1.03
+    ],
+    "kind": "hunter",
+    "shot": null
+  },
+  {
+    "id": "city-3",
+    "r": 11.476014760147601,
+    "value": 4,
+    "speed": 20,
+    "sizeFactors": [
+      0.97,
+      1.03
+    ],
+    "kind": "ranged",
+    "shot": {
+      "interval": 3,
+      "speed": 185,
+      "damage": 0.08,
+      "edibleAt": 18,
+      "threatScale": 2.8
+    }
+  },
+  {
+    "id": "city-4",
+    "r": 9,
+    "value": 3,
+    "speed": 65,
+    "kind": "flee",
+    "shot": null
+  },
+  {
+    "id": "city-5",
+    "r": 15,
+    "value": 5,
+    "speed": 53,
+    "kind": "flee",
+    "shot": null
+  },
+  {
+    "id": "city-6",
+    "r": 20,
+    "value": 6,
+    "speed": 42,
+    "kind": "flee",
+    "shot": null
+  },
+  {
+    "id": "city-7",
+    "r": 26,
+    "value": 10,
+    "speed": 25,
+    "kind": "ranged",
+    "shot": {
+      "interval": 4,
+      "speed": 185,
+      "damage": 0.08,
+      "edibleAt": 150,
+      "threatScale": 4
+    }
+  },
+  {
+    "id": "city-8",
+    "r": 30,
+    "value": 17,
+    "speed": 18,
+    "kind": "ranged",
+    "shot": {
+      "interval": 4,
+      "speed": 185,
+      "damage": 0.17,
+      "edibleAt": 230,
+      "threatScale": 3.5
+    }
+  },
+  {
+    "id": "city-9",
+    "r": 48,
+    "value": 14,
+    "speed": 42,
+    "kind": "ranged",
+    "shot": {
+      "interval": 4,
+      "speed": 185,
+      "damage": 0.08,
+      "edibleAt": 270,
+      "threatScale": 3
+    }
+  },
+  {
+    "id": "city-10",
+    "r": 78,
+    "value": 15,
+    "speed": 0,
+    "sizeFactors": [
+      0.92,
+      1.06
+    ],
+    "kind": "still",
+    "shot": null
+  },
+  {
+    "id": "city-11",
+    "r": 102,
+    "value": 25,
+    "speed": 0,
+    "sizeFactors": [
+      0.92,
+      1.06
+    ],
+    "kind": "still",
+    "shot": null
+  },
+  {
+    "id": "city-matter-can",
+    "r": 0.6,
+    "value": 0.35,
+    "requiredMass": 0,
+    "speed": 0,
+    "kind": "still"
+  },
+  {
+    "id": "city-matter-bench",
+    "r": 6,
+    "value": 1,
+    "speed": 0,
+    "kind": "still"
+  },
+  {
+    "id": "city-matter-lamp",
+    "r": 18,
+    "value": 2.6,
+    "speed": 0,
+    "kind": "still"
+  },
+  {
+    "id": "city-matter-shrub",
+    "r": 10,
+    "value": 1.8,
+    "speed": 0,
+    "kind": "still"
+  },
+  {
+    "id": "city-matter-palm",
+    "r": 35,
+    "value": 6,
+    "speed": 0,
+    "kind": "still"
+  },
+  {
+    "id": "city-matter-sign",
+    "r": 9,
+    "value": 1.5,
+    "speed": 0,
+    "kind": "still"
+  },
+  {
+    "id": "city-matter-container",
+    "r": 41,
+    "value": 8,
+    "speed": 0,
+    "kind": "still"
+  },
+  {
+    "id": "city-civilian-0",
+    "r": 9.095477386934673,
+    "value": 1.3,
+    "speed": 34,
+    "sizeFactors": [
+      0.97,
+      1.03
+    ],
+    "kind": "flee",
+    "shot": null
+  },
+  {
+    "id": "city-civilian-1",
+    "r": 9.216589861751151,
+    "value": 1.3,
+    "speed": 34,
+    "sizeFactors": [
+      0.97,
+      1.03
+    ],
+    "kind": "flee",
+    "shot": null
+  },
+  {
+    "id": "city-civilian-2",
+    "r": 8.843373493975903,
+    "value": 1.3,
+    "speed": 34,
+    "sizeFactors": [
+      0.97,
+      1.03
+    ],
+    "kind": "flee",
+    "shot": null
+  },
+  {
+    "id": "city-civilian-3",
+    "r": 8.878504672897197,
+    "value": 1.3,
+    "speed": 34,
+    "sizeFactors": [
+      0.97,
+      1.03
+    ],
+    "kind": "flee",
+    "shot": null
+  },
+  {
+    "id": "city-civilian-4",
+    "r": 9.643705463182897,
+    "value": 1.3,
+    "speed": 34,
+    "sizeFactors": [
+      0.97,
+      1.03
+    ],
+    "kind": "flee",
+    "shot": null
+  },
+  {
+    "id": "city-civilian-5",
+    "r": 8.147268408551069,
+    "value": 1.3,
+    "speed": 34,
+    "sizeFactors": [
+      0.97,
+      1.03
+    ],
+    "kind": "flee",
+    "shot": null
+  },
+  {
+    "id": "city-house",
+    "r": 42,
+    "value": 9,
+    "speed": 0,
+    "sizeFactors": [
+      0.92,
+      1.06
+    ],
+    "kind": "still",
+    "shot": null
+  },
+  {
+    "id": "city-market",
+    "r": 87,
+    "value": 16,
+    "speed": 0,
+    "sizeFactors": [
+      0.92,
+      1.06
+    ],
+    "kind": "still",
+    "shot": null
+  },
+  {
+    "id": "city-warehouse",
+    "r": 96,
+    "value": 19,
+    "speed": 0,
+    "sizeFactors": [
+      0.92,
+      1.06
+    ],
+    "kind": "still",
+    "shot": null
+  },
+  {
+    "id": "city-civic",
+    "r": 102,
+    "value": 24,
+    "speed": 0,
+    "sizeFactors": [
+      0.92,
+      1.06
+    ],
+    "kind": "still",
+    "shot": null
+  }
+]

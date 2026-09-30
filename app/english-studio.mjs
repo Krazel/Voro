@@ -1,4 +1,5 @@
 export const STUDIO_ENGLISH = Object.fromEntries(`
+Vista elevada con cámara fija y orientación coherente con la ciudad.|Elevated view with a fixed camera and orientation consistent with the city.
 Midiendo|Measuring
 Animación de|Animation of
 Elementos de|Items in

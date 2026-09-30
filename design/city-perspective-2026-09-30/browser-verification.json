@@ -1,0 +1,440 @@
+{
+  "count": 29,
+  "errors": [],
+  "scenes": [
+    {
+      "scene": "centre",
+      "textures": [
+        {
+          "key": "cityView_city-0",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-1",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-2",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-3",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-4",
+          "width": 768,
+          "height": 768,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-5",
+          "width": 768,
+          "height": 768,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-6",
+          "width": 768,
+          "height": 768,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-7",
+          "width": 768,
+          "height": 768,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-8",
+          "width": 768,
+          "height": 768,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-9",
+          "width": 768,
+          "height": 768,
+          "compact": true
+        },
+        {
+          "key": "cityBuildings",
+          "width": 1536,
+          "height": 1024,
+          "compact": false
+        },
+        {
+          "key": "objectMatter",
+          "width": 1536,
+          "height": 1024,
+          "compact": false
+        },
+        {
+          "key": "cityView_city-matter-bench",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-matter-lamp",
+          "width": 512,
+          "height": 768,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-matter-palm",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-matter-sign",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityContainerAligned",
+          "width": 1774,
+          "height": 887,
+          "compact": false
+        },
+        {
+          "key": "cityView_city-civilian-0",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-civilian-1",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-civilian-2",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-civilian-3",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-civilian-4",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-civilian-5",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        }
+      ],
+      "entities": 598
+    },
+    {
+      "scene": "park",
+      "textures": [
+        {
+          "key": "cityView_city-0",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-1",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-2",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-3",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-4",
+          "width": 768,
+          "height": 768,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-5",
+          "width": 768,
+          "height": 768,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-6",
+          "width": 768,
+          "height": 768,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-7",
+          "width": 768,
+          "height": 768,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-8",
+          "width": 768,
+          "height": 768,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-9",
+          "width": 768,
+          "height": 768,
+          "compact": true
+        },
+        {
+          "key": "cityBuildings",
+          "width": 1536,
+          "height": 1024,
+          "compact": false
+        },
+        {
+          "key": "objectMatter",
+          "width": 1536,
+          "height": 1024,
+          "compact": false
+        },
+        {
+          "key": "cityView_city-matter-bench",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-matter-lamp",
+          "width": 512,
+          "height": 768,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-matter-palm",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-matter-sign",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityContainerAligned",
+          "width": 1774,
+          "height": 887,
+          "compact": false
+        },
+        {
+          "key": "cityView_city-civilian-0",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-civilian-1",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-civilian-2",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-civilian-3",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-civilian-4",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-civilian-5",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        }
+      ],
+      "entities": 598
+    },
+    {
+      "scene": "yard",
+      "textures": [
+        {
+          "key": "cityView_city-0",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-1",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-2",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-3",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-4",
+          "width": 768,
+          "height": 768,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-5",
+          "width": 768,
+          "height": 768,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-6",
+          "width": 768,
+          "height": 768,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-7",
+          "width": 768,
+          "height": 768,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-8",
+          "width": 768,
+          "height": 768,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-9",
+          "width": 768,
+          "height": 768,
+          "compact": true
+        },
+        {
+          "key": "cityBuildings",
+          "width": 1536,
+          "height": 1024,
+          "compact": false
+        },
+        {
+          "key": "objectMatter",
+          "width": 1536,
+          "height": 1024,
+          "compact": false
+        },
+        {
+          "key": "cityView_city-matter-bench",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-matter-lamp",
+          "width": 512,
+          "height": 768,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-matter-palm",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-matter-sign",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityContainerAligned",
+          "width": 1774,
+          "height": 887,
+          "compact": false
+        },
+        {
+          "key": "cityView_city-civilian-0",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-civilian-1",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-civilian-2",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-civilian-3",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-civilian-4",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        },
+        {
+          "key": "cityView_city-civilian-5",
+          "width": 768,
+          "height": 512,
+          "compact": true
+        }
+      ],
+      "entities": 598
+    }
+  ],
+  "cityAtlasMiB": 52.50257110595703,
+  "scope": "Browser QA; no physical iPhone performance measurement"
+}

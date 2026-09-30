@@ -1,0 +1,36 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VORO · Ciudad con cámara coherente</title>
+<style>body{margin:0;background:#102023;color:#e8eeeb;font:16px/1.5 system-ui}main{max-width:1350px;margin:auto;padding:24px}h1{margin:0}p{color:#bdcecc;max-width:960px}a{color:#abe7d6}button{font:inherit;border:1px solid #82b9ad;background:#26433c;color:white;border-radius:6px;padding:8px 16px;cursor:pointer}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}article{background:#1d3435;border:1px solid #476363;border-radius:8px;padding:12px}h3{font-size:17px;margin:0}small{color:#a9c4bc}canvas{width:100%;display:block;background:#818c85;margin:10px 0}details img{max-width:100%}.toolbar{display:flex;gap:20px;align-items:center;margin:20px 0}@media(max-width:700px){.grid{grid-template-columns:1fr}main{padding:12px}}</style>
+<main><h1>Una cámara para toda la ciudad</h1><p>Objetos alineados con la arquitectura. Personas y vehículos tienen vistas de frente, espalda y ambos lados: sus cuerpos ya no giran como una lámina. Esta galería utiliza el mismo renderer que la partida. Las imágenes están ampliadas para revisar la perspectiva; no representan sus tamaños relativos.</p>
+<div class="toolbar"><button id="toggle">Pausar animaciones</button><a href="/?ui=final&lab=cosmos">Abrir el juego</a></div>
+<section id="architecture"><h2>Arquitectura · referencia de cámara</h2><div class="grid"></div></section>
+<section id="props"><h2>Objetos y vegetación</h2><div class="grid"></div></section>
+<section id="vehicles"><h2>Vehículos · cuatro vistas</h2><div class="grid"></div></section>
+<section id="people"><h2>Personas · cuatro direcciones y pasos</h2><div class="grid"></div></section>
+<details><summary>Ver la revisión anterior</summary><img src="../city-layout-2026-09-30/perspective-vehicles.png" alt="Vehículos anteriores"><img src="../city-layout-2026-09-30/perspective-people.png" alt="Personas anteriores"></details></main>
+<script type="module">
+import{STAGE_SPECIES,ATLAS_URLS}from'../../app/journey-data.mjs';
+import{drawJourneySprite,journeyHeading}from'../../app/journey-sprites.mjs';
+const images={},cards=[];
+await Promise.all([...new Set(STAGE_SPECIES[4].map(s=>s.imageAtlas||s.atlas))].map(async k=>{const im=new Image();im.src=new URL(ATLAS_URLS[k],location.origin+'/');await im.decode();images[k]=im;}));
+for(const s of STAGE_SPECIES[4]) {
+ const mobile=!!s.directionalArt,group=s.building?'architecture':s.edibleMatter?'props':s.motion==='walker'?'people':'vehicles';
+ const article=document.createElement('article');article.dataset.id=s.id;
+ const title=document.createElement('h3');title.textContent=s.name;article.append(title);
+ const note=document.createElement('small');note.textContent=mobile?'Vistas propias · cámara fija':(s.imageAtlas||'').startsWith('cityView_')?'Dibujo nuevo alineado':'Referencia conservada';article.append(note);
+ const canvas=document.createElement('canvas');canvas.width=720;canvas.height=mobile?660:390;article.append(canvas);
+ document.querySelector('#'+group+' .grid').append(article);cards.push({s,canvas,mobile});
+}
+let playing=true,last=0,t=0;document.querySelector('#toggle').onclick=e=>{playing=!playing;e.target.textContent=playing?'Pausar animaciones':'Reanudar animaciones';};
+function render(now){if(now-last<33){requestAnimationFrame(render);return;}if(playing)t+=(now-last)/1000;last=now;
+ for(const{s,canvas,mobile}of cards){const box=canvas.getBoundingClientRect();if(box.bottom<0||box.top>innerHeight)continue;
+ const c=canvas.getContext('2d');c.clearRect(0,0,canvas.width,canvas.height);c.save();c.scale(2,2);c.textAlign='center';c.font='12px system-ui';
+ (mobile?[0,Math.PI/2,Math.PI,Math.PI*1.5]:[0]).forEach((heading,i)=>{const x=mobile?90+(i%2)*180:180,y=mobile?74+Math.floor(i/2)*162:97;
+ c.save();c.translate(x,y);c.rotate(journeyHeading(s.id,heading));
+ const r=mobile?(s.motion==='walker'?120/s.directionalArt.heightPerRadius:65):Math.min(76,76/(s.crop[3]/s.crop[2]))/(s.artScale||1);
+ drawJourneySprite(c,images,s.id,r,0,t,1,0,null,heading);c.restore();
+ if(mobile){c.fillStyle='#f2f7f2';c.fillText(['Derecha','Hacia ti','Izquierda','De espaldas'][i],x,y+76);}
+ });c.restore();}
+ requestAnimationFrame(render);
+}requestAnimationFrame(render);document.documentElement.dataset.ready='true';
+</script></html>

@@ -7,7 +7,7 @@ export const CITY_PLOTS = [
   {x:76,y:334,w:190,h:190}, {x:334,y:334,w:190,h:190},
 ];
 export function citySpriteScale(s) {
-  if (!s.building) return 1;
+  if (!s.building) return s.artScale ?? 1;
   const aspect = s.crop[3] / s.crop[2];
   return Math.min(1, 86 / (s.r * (s.sizeFactors?.[1] || 1) * Math.max(1,aspect)));
 }
