@@ -19,33 +19,35 @@ test('Pinch does not jump on touchdown, clamps, rebases extra fingers and waits 
  assert.ok(wheelZoom(1,-100)>1);assert.ok(wheelZoom(1,100)<1);
 });
 
-test('Canvas pinch suppresses movement, tilt and dash; remaining finger cannot turn into movement',()=>{
+test('Additional fingers cannot zoom or steal the movement pointer',()=>{
  const {game}=makeEngine();game.startTest(0,1,false,true,false);
  send(game,'pointerdown',1,50,300);send(game,'pointerdown',2,150,300);
- game.keys.add('KeyD');game.tilt.enabled=true;game.tilt.read=()=>({x:1,y:1});
- assert.deepEqual(game.input(),{x:0,y:0});game.action('dash');assert.equal(game.life.cooldown,0);
+ assert.equal(game.pointer.id,1);
  const camera={...game.camera},mass=game.life.biomass;
- send(game,'pointermove',2,250,300);assert.equal(game.zoomFactor,1.75);
+ send(game,'pointermove',2,250,300);assert.equal(game.zoomFactor,1);
  assert.deepEqual(game.camera,camera);assert.equal(game.life.biomass,mass);
  send(game,'pointerup',2,250,300);send(game,'pointermove',1,100,300);
- assert.equal(game.pointer,null);assert.equal(game.zoomGesture.locked,true);
- send(game,'pointerup',1,100,300);game.keys.clear();game.tilt.enabled=false;
+ assert.equal(game.pointer.id,1);assert.ok(game.input().x>.5);
+ game.action('dash');assert.ok(game.life.cooldown>0);
+ send(game,'pointerup',1,100,300);
  send(game,'pointerdown',3,100,300);send(game,'pointermove',3,140,300);
  assert.ok(game.input().x>.5);send(game,'pointerup',99,0,0);assert.equal(game.pointer.id,3);
  send(game,'pointercancel',3,140,300);assert.equal(game.pointer,null);
  game.destroy();
 });
 
-test('Wheel uses the actual camera scale without publishing every gesture event and ignores menus',()=>{
+test('Wheel cannot change automatic framing, including Ctrl-wheel, and ignores menus',()=>{
  const {game}=makeEngine();game.startTest(0,1,false,true,false);
  game.zoom=.95;let publishes=0;game.publish=()=>publishes++;
  const before=game.zoom;
  const e=send(game,'wheel',0,0,0,{deltaY:-60,deltaMode:0});
- assert.equal(e.defaultPrevented,true);assert.ok(game.zoomFactor>1);
- assert.ok(Math.abs(game.zoom-before*game.zoomFactor)<1e-10);assert.equal(publishes,0);
+ assert.equal(e.defaultPrevented,true);assert.equal(game.zoomFactor,1);
+ assert.equal(game.zoom,before);assert.equal(publishes,0);
+ assert.equal(send(game,'wheel',0,0,0,{deltaY:-120,deltaMode:0,ctrlKey:true}).defaultPrevented,true);
+ assert.equal(game.zoomFactor,1);
  const factor=game.zoomFactor;game.settingsOpen=true;
  send(game,'wheel',0,0,0,{deltaY:100,deltaMode:0});assert.equal(game.zoomFactor,factor);
- send(game,'pointerdown',1,0,0);send(game,'pointerdown',2,100,0);assert.equal(game.zoomGesture.locked,false);
+ send(game,'pointerdown',1,0,0);send(game,'pointerdown',2,100,0);assert.equal(game.pointer,null);
  game.destroy();
 });
 

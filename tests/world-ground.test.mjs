@@ -1,8 +1,25 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { groundPatch, GROUND_PROFILES } from '../app/world-ground.mjs';
+import { WorldGround, groundPatch, GROUND_PROFILES } from '../app/world-ground.mjs';
 import { STAGES, SPECIES_BY_ID } from '../app/journey-data.mjs';
 import { makeEngine } from './engine-fixture.mjs';
+
+test('Pond keeps source crop resolution with less texture memory and one cached draw per frame', () => {
+  const layer = new Proxy({}, {get:(_,k)=>k==='createLinearGradient'?()=>({addColorStop(){}}):()=>{},set:()=>true});
+  const ground = new WorldGround(()=>({width:0,height:0,getContext:()=>layer}));
+  const image = {width:1536,height:1024,naturalWidth:1536,complete:true};
+  const patches = ground.prepare(image,'pond');
+  assert.deepEqual(patches.map(p=>[p.width,p.height]), [...Array(4).fill([768,512]),...Array(4).fill([614,410])]);
+  assert.ok(patches.reduce((sum,p)=>sum+p.width*p.height*4,0)<8*768*768*4);
+  assert.equal(ground.prepare(image,'pond'),patches);
+  let draws=0;
+  const screen={drawImage:()=>draws++,getTransform:()=>({a:1.5,b:0})};
+  ground.draw(screen,image,'pond',{x:0,y:0},2,844,834,0,false,390);
+  const rebuilt=ground.redraws;
+  for(let i=1;i<=60;i++)ground.draw(screen,image,'pond',{x:i*.1,y:0},2,844,834,0,false,390);
+  assert.equal(ground.redraws,rebuilt);
+  assert.equal(draws,61);
+});
 
 test('Non-shore atlases stream stable varied regions; every biome has a ground profile', () => {
   assert.deepEqual(

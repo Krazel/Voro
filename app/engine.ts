@@ -53,7 +53,7 @@ import {
   retainAnimationSpecies,
 } from './inhabitant-animation.mjs';
 import { gameplayZoom, followGameplayZoom, visualSpeedFactor, zoomPreference } from './camera.mjs';
-import { ZoomGesture, wheelZoom } from './zoom-gesture.mjs';
+
 import { FramePacer, RasterBudget, rasterRatio } from './render-budget.mjs';
 import {
   shedBiomass,
@@ -226,7 +226,7 @@ export class VoroEngine {
   zoom = 1;
   zoomFactor = 1;
   uniformVisualSpeed = true;
-  zoomGesture = new ZoomGesture();
+
   framePacer = new FramePacer();
   rasterBudget = new RasterBudget();
   testMode = false;
@@ -583,10 +583,10 @@ export class VoroEngine {
         if (!this.cameraInputAllowed()) return;
         canvas.focus({ preventScroll: true });
         const p = this.point(e);
-        if(e.pointerType === 'touch')this.zoomGesture.down(e.pointerId,p);
+        if (this.pointer && this.pointer.id !== e.pointerId) { e.preventDefault(); return; }
         canvas.setPointerCapture(e.pointerId);
         e.preventDefault();
-        if(this.zoomGesture.locked) {this.pointer=null;return;}
+
         this.pointer = {
           id: e.pointerId,
           x: p.x,
@@ -602,12 +602,6 @@ export class VoroEngine {
       'pointermove',
       (e) => {
         if(!this.cameraInputAllowed())return;
-        const factor=this.zoomGesture.move(e.pointerId,this.point(e),this.zoomFactor);
-        if(this.zoomGesture.locked) {
-          this.pointer=null;
-          if(factor!==null)this.setZoom(factor,true);
-          e.preventDefault();return;
-        }
         if (this.pointer?.id === e.pointerId) {
           const p = this.point(e);
           this.pointer.x = p.x;
@@ -620,7 +614,7 @@ export class VoroEngine {
       canvas.addEventListener(
         event,
         (e: PointerEvent) => {
-          this.zoomGesture.up(e.pointerId);
+
           if(this.pointer?.id===e.pointerId)this.pointer = null;
         },
         opt,
@@ -628,12 +622,8 @@ export class VoroEngine {
     canvas.addEventListener('wheel',e=>{
       if(!this.cameraInputAllowed())return;
       e.preventDefault();
-      this.setZoom(wheelZoom(this.zoomFactor,e.deltaY,e.deltaMode),true);
+
     },{...opt,passive:false});
-    window.addEventListener('blur',()=>this.zoomGesture.reset(),opt);
-    window.addEventListener('keydown',e=>{if(e.code==='Escape')this.zoomGesture.reset();},opt);
-    window.addEventListener('resize',()=>this.zoomGesture.reset(),opt);
-    document.addEventListener('visibilitychange',()=>this.zoomGesture.reset(),opt);
     window.addEventListener(
       'keydown',
       (e) => {
@@ -774,6 +764,7 @@ export class VoroEngine {
   get cameraEntryRadius() {
     return this.progress.cameraEntryRadius ?? radiusForMass(stageStartMass(this.progress.stage));
   }
+  // Internal benchmark/review override; player input and menus use automatic framing.
   setZoom(value: number, continuous = false) {
     const previous=this.zoomFactor;
     this.zoomFactor = zoomPreference(value);
@@ -1195,7 +1186,7 @@ export class VoroEngine {
     }
     if (
       name === 'dash' &&
-      !this.zoomGesture.locked &&
+
       this.started &&
       !this.progress.completed &&
       !this.paused &&
@@ -1317,7 +1308,7 @@ export class VoroEngine {
   tilt = new TiltControl();
   input() {
     if(this.autoTour)return this.autoTour.movement();
-    if(this.zoomGesture.locked)return {x:0,y:0};
+
     let x =
         (this.keys.has('KeyD') || this.keys.has('ArrowRight') ? 1 : 0) -
         (this.keys.has('KeyA') || this.keys.has('ArrowLeft') ? 1 : 0),
@@ -1367,7 +1358,7 @@ export class VoroEngine {
     }
     if (this.paused || !this.started || this.settingsOpen || this.progress.offer.length || this.transition || this.life.dead || document.hidden)
       this.tilt.read(false);
-    if(!this.cameraInputAllowed())this.zoomGesture.reset();
+
     const frameStart = this.diagnosticsEnabled ? performance.now() : 0;
     const groundBefore = this.worldGround.redraws, uiBefore = this.uiPublishCount;
     const animationBefore = this.diagnosticsEnabled ? animationCacheStats() : null;

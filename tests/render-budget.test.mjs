@@ -25,7 +25,7 @@ test('Raster work has a tablet pixel budget without changing camera or CSS geome
   assert.equal(rasterRatio(375,812,3,true),2.5);
 });
 
-test('Zoom controls change the framing, not biomass, and survive biome entry and tests',()=>{
+test('Internal camera probes change framing, not biomass, and survive biome entry and tests',()=>{
   const {game}=makeEngine();game.startTest(0,150,false,true,true);
   const mass=game.life.biomass;
   game.setZoom(1.5);assert.equal(game.life.biomass,mass);
@@ -44,7 +44,7 @@ test('Zoom controls change the framing, not biomass, and survive biome entry and
   game.destroy();
 });
 
-test('Shared diagnostics preserve render budget and manual zoom settings',()=>{
+test('Shared diagnostics preserve render budget and internal camera probe settings',()=>{
   const {game}=makeEngine();game.setDiagnostics(true);game.setZoom(1.4);
   game.frameMonitor.add(17,4,{stage:0});
   const report=game.performanceReport();

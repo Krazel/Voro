@@ -3,7 +3,8 @@ import { cityTiles, cityDistrict } from './city-layout.mjs';
 
 export const GROUND_PROFILES = {
   micro: { file: 'micro', step: 640, depth: 0.65, tint: '#071e25' },
-  pond: { file: 'pond', step: 360, depth: 1, tint: '#102c29' },
+  // Finer terrain detail without increasing source texture or frame buffers.
+  pond: { file: 'pond', step: 240, depth: 1, tint: '#102c29' },
   land: { file: 'shore', step: 600, depth: 1, tint: '#1d3437' },
   water: { file: 'sea', step: 420, depth: 1, tint: '#082f3b' },
   city: { file: 'city', step: 600, depth: 1, tint: '#343b3e' },
@@ -64,9 +65,14 @@ export class WorldGround {
       const panel = groundPanels(stage)[i % 4],
         crop = i < 4 ? 1 : 0.8;
       const canvas = this.createCanvas();
-      canvas.width = size;
-      canvas.height = size;
+      // Preserve the pond's original detail instead of stretching each 768x512
+      // source crop into a square and filtering it again on the terrain layer.
+      const patchWidth = stage === 'pond' ? Math.round(sw * crop) : size;
+      const patchHeight = stage === 'pond' ? Math.round(sh * crop) : size;
+      canvas.width = patchWidth;
+      canvas.height = patchHeight;
       const c = canvas.getContext('2d');
+      if (stage === 'pond') c.imageSmoothingQuality = 'high';
       c.drawImage(
         image,
         (panel % 2) * sw + (sw * (1 - crop)) / 2,
@@ -75,8 +81,8 @@ export class WorldGround {
         sh * crop,
         0,
         0,
-        size,
-        size,
+        patchWidth,
+        patchHeight,
       );
       c.globalCompositeOperation = 'destination-in';
       // Adjacent patches overlap by one quarter. Linear edge weights sum to
@@ -85,15 +91,15 @@ export class WorldGround {
         const g = c.createLinearGradient(
           0,
           0,
-          horizontal ? size : 0,
-          horizontal ? 0 : size,
+          horizontal ? patchWidth : 0,
+          horizontal ? 0 : patchHeight,
         );
         g.addColorStop(0, 'transparent');
         g.addColorStop(0.25, '#fff');
         g.addColorStop(0.75, '#fff');
         g.addColorStop(1, 'transparent');
         c.fillStyle = g;
-        c.fillRect(0, 0, size, size);
+        c.fillRect(0, 0, patchWidth, patchHeight);
       }
       patches.push(canvas);
     }
@@ -178,6 +184,7 @@ export class WorldGround {
     this.trimViews();
     this.redraws++;
     const layer = surface.getContext('2d');
+    if (stage === 'pond') layer.imageSmoothingQuality = 'high';
     layer.setTransform(1,0,0,1,0,0);
     layer.clearRect(0, 0, surface.width, surface.height);
     layer.save();

@@ -16,7 +16,8 @@ const image = await loadImage(white.toBuffer('image/png'));
 const ground = new WorldGround(() => createCanvas(1, 1));
 // The coast intentionally shades the wet sand and water. It has a separate
 // coverage/cache/geography raster check instead of the white-atlas seam test.
-for (const stage of Object.keys(GROUND_PROFILES).filter(stage => stage !== 'land'))
+const stages = Object.keys(GROUND_PROFILES).filter(stage => stage !== 'land' && (!process.argv[2] || stage === process.argv[2]));
+for (const stage of stages)
   for (const zoom of [0.65, 1]) {
     const screen = createCanvas(480, 720),
       c = screen.getContext('2d');
@@ -53,5 +54,5 @@ assert.ok(
   'Terrain must remain fixed in world coordinates while the camera moves',
 );
 console.log(
-  '16 atlas raster coverage cases and real terrain camera movement passed.',
+  `${stages.length * 2} atlas raster coverage cases and real terrain camera movement passed.`,
 );

@@ -1,7 +1,7 @@
 // Exact approved artwork. Content revisions invalidate stale webview caches.
 export const BACKGROUND_ASSETS = {
   "micro": "./abyssal-background.png?v=7657d9ea7666",
-  "pond": "./backgrounds/pond-variants.webp?v=80937c511e02",
+  "pond": "./backgrounds/pond-variants-lossless.png?v=5a9af28139ab",
   "land": "./backgrounds/shore-variants.webp?v=8d71f9a2c417",
   "water": "./backgrounds/sea-variants.webp?v=86159a8516de",
   "city": "./backgrounds/city-materials-v2.webp?v=1824e210ae88",

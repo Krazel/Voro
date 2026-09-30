@@ -93,9 +93,6 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
   useEffect(()=>{
     setUiMode(initialUiMode(window.localStorage, window.location.search));
   },[]);
-  const [zoomControls, setZoomControls] = useState(true);
-  const [finalZoomControls,setFinalZoomControls]=useState(false);
-  const showZoomControls=finalUI?finalZoomControls:zoomControls;
   const [finalDetails, setFinalDetails] = useState(false);
   const leftHanded = useSyncExternalStore(subscribeControls, readLeftHanded, serverLeftHanded);
   const [controlsSaveError, setControlsSaveError] = useState(false);
@@ -420,11 +417,6 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
               <MembraneRim />{tr(state.hint)}
             </output>
             </div>
-            {tr(showZoomControls && !state.paused && !state.offer.length && !state.transition && <fieldset className="zoom-controls" aria-label={tr("Zoom de cámara")}>
-              <button aria-label={tr("Alejar cámara")} disabled={state.zoomFactor <= .75} onClick={() => engine.current?.setZoom(state.zoomFactor - .1)}>{tr("−")}</button>
-              <button aria-label={tr("Restablecer zoom automático")} onClick={() => engine.current?.setZoom(1)}>{tr(Math.round(state.zoomFactor * 100))}{tr(" %")}</button>
-              <button aria-label={tr("Acercar cámara")} disabled={state.zoomFactor >= 1.75} onClick={() => engine.current?.setZoom(state.zoomFactor + .1)}>{tr("+")}</button>
-            </fieldset>)}
             <div className="bottom-controls" data-dash-side={leftHanded ? 'left' : 'right'}>
               <button
                 className={'dash-button ' + (state.dash > 0 ? 'cooldown' : '')}
@@ -632,14 +624,6 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
           {!finalUI && <LanguagePicker />}
           {tr(modeButton)}
           {tr(!uiModeSaved && <p role="status" className="save-note">{tr("La vista ha cambiado; no se ha podido recordar para la próxima sesión.")}</p>)}
-          <details className="camera-details" open={finalUI?undefined:true}><summary>{tr("Encuadre y zoom")}</summary>
-            <div className="camera-settings">
-            <label htmlFor="camera-zoom">{tr("Zoom de cámara ")}<output>{tr(Math.round(state.zoomFactor * 100))}{tr(" %")}</output></label>
-            <input id="camera-zoom" type="range" min="75" max="175" step="5" value={Math.round(state.zoomFactor * 100)} onChange={e => engine.current?.setZoom(Number(e.target.value) / 100)} />
-            <button className="settings-row" onClick={() => engine.current?.setZoom(1)}>{tr("Restablecer encuadre")}<span>{tr("Automático")}</span></button>
-            <button className="settings-row" aria-pressed={showZoomControls} onClick={() => finalUI?setFinalZoomControls(!finalZoomControls):setZoomControls(!zoomControls)}>{tr("Botones de zoom al jugar")}<span>{tr(showZoomControls ? 'Activados' : 'Desactivados')}</span></button>
-            <p className="save-note">{tr("Pellizca con dos dedos para ajustar el zoom. En ordenador puedes usar la rueda o los botones. El ajuste se mantiene entre entornos durante esta sesión.")}</p>
-          </div></details>
           {tr(movementChoice)}
           <button className="settings-row"
             aria-pressed={state.uniformVisualSpeed}

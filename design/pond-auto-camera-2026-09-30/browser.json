@@ -1,0 +1,42 @@
+[
+  {
+    "ui": "final",
+    "before": 2.3611673195923903,
+    "after": 2.3611673195923903,
+    "factor": 1,
+    "background": {
+      "stage": "pond",
+      "mode": "test",
+      "renderer": "approved-atlas-v1",
+      "loaded": true,
+      "error": false,
+      "width": 1536,
+      "height": 1024,
+      "prepared": true,
+      "surfaceWidth": 864,
+      "surfaceHeight": 1429
+    },
+    "manualZoomControls": 0,
+    "errors": []
+  },
+  {
+    "ui": "development",
+    "before": 2.3611673195923903,
+    "after": 2.3611673195923903,
+    "factor": 1,
+    "background": {
+      "stage": "pond",
+      "mode": "test",
+      "renderer": "approved-atlas-v1",
+      "loaded": true,
+      "error": false,
+      "width": 1536,
+      "height": 1024,
+      "prepared": true,
+      "surfaceWidth": 864,
+      "surfaceHeight": 1429
+    },
+    "manualZoomControls": 0,
+    "errors": []
+  }
+]

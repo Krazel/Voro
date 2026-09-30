@@ -1,0 +1,106 @@
+[
+  {
+    "label": "before",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "zoom": 2.3611673195923903,
+    "prepareMs": 0.8000000044703484,
+    "source": {
+      "w": 1536,
+      "h": 1024
+    },
+    "textureBytes": 18874368,
+    "surfaceBytes": 8554248,
+    "cached": {
+      "n": 238,
+      "p50": 0,
+      "p95": 0.09999999403953552
+    },
+    "rebuilt": {
+      "n": 2,
+      "p50": 19,
+      "p95": 19
+    },
+    "note": "Desktop Chromium CPU submissions, not physical iPhone FPS or GPU timings."
+  },
+  {
+    "label": "after",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "zoom": 2.3611673195923903,
+    "prepareMs": 0.9000000059604645,
+    "source": {
+      "w": 1536,
+      "h": 1024
+    },
+    "textureBytes": 10319296,
+    "surfaceBytes": 8554248,
+    "cached": {
+      "n": 238,
+      "p50": 0,
+      "p95": 0
+    },
+    "rebuilt": {
+      "n": 2,
+      "p50": 15.399999998509884,
+      "p95": 15.399999998509884
+    },
+    "note": "Desktop Chromium CPU submissions, not physical iPhone FPS or GPU timings."
+  },
+  {
+    "label": "before",
+    "viewport": {
+      "width": 1194,
+      "height": 834
+    },
+    "zoom": 2.3611673195923903,
+    "prepareMs": 0.8999999985098839,
+    "source": {
+      "w": 1536,
+      "h": 1024
+    },
+    "textureBytes": 18874368,
+    "surfaceBytes": 17298036,
+    "cached": {
+      "n": 238,
+      "p50": 0,
+      "p95": 0
+    },
+    "rebuilt": {
+      "n": 2,
+      "p50": 19.200000002980232,
+      "p95": 19.200000002980232
+    },
+    "note": "Desktop Chromium CPU submissions, not physical iPhone FPS or GPU timings."
+  },
+  {
+    "label": "after",
+    "viewport": {
+      "width": 1194,
+      "height": 834
+    },
+    "zoom": 2.3611673195923903,
+    "prepareMs": 0.8000000044703484,
+    "source": {
+      "w": 1536,
+      "h": 1024
+    },
+    "textureBytes": 10319296,
+    "surfaceBytes": 17298036,
+    "cached": {
+      "n": 238,
+      "p50": 0,
+      "p95": 0
+    },
+    "rebuilt": {
+      "n": 2,
+      "p50": 15.199999995529652,
+      "p95": 15.199999995529652
+    },
+    "note": "Desktop Chromium CPU submissions, not physical iPhone FPS or GPU timings."
+  }
+]
