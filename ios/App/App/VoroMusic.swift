@@ -140,6 +140,11 @@ public class VoroMusicPlugin: CAPPlugin, CAPBridgedPlugin {
         notifyListeners("musicState", data: state())
         #if targetEnvironment(simulator)
         saveProbe("state")
+        if ProcessInfo.processInfo.arguments.contains("--voro-native-audio-smoke") {
+            bridge?.webView?.evaluateJavaScript("JSON.stringify({phase:window.__voroSmoke,ready:document.readyState,cap:typeof window.Capacitor,nativePromise:typeof window.Capacitor?.nativePromise,plugins:Object.keys(window.Capacitor?.Plugins||{}),headers:window.Capacitor?.PluginHeaders,hidden:document.hidden})") { [weak self] result, error in
+                self?.saveProbe("javascript", extra: ["javascript": result as? String ?? "nil", "evaluationError": error?.localizedDescription ?? ""])
+            }
+        }
         #endif
     }
     #if targetEnvironment(simulator)
