@@ -1,0 +1,52 @@
+[
+  {
+    "id": "city-0",
+    "uniqueFrames": 4,
+    "frameCount": 4
+  },
+  {
+    "id": "city-1",
+    "uniqueFrames": 4,
+    "frameCount": 4
+  },
+  {
+    "id": "city-2",
+    "uniqueFrames": 4,
+    "frameCount": 4
+  },
+  {
+    "id": "city-3",
+    "uniqueFrames": 4,
+    "frameCount": 4
+  },
+  {
+    "id": "city-civilian-0",
+    "uniqueFrames": 4,
+    "frameCount": 4
+  },
+  {
+    "id": "city-civilian-1",
+    "uniqueFrames": 4,
+    "frameCount": 4
+  },
+  {
+    "id": "city-civilian-2",
+    "uniqueFrames": 4,
+    "frameCount": 4
+  },
+  {
+    "id": "city-civilian-3",
+    "uniqueFrames": 4,
+    "frameCount": 4
+  },
+  {
+    "id": "city-civilian-4",
+    "uniqueFrames": 4,
+    "frameCount": 4
+  },
+  {
+    "id": "city-civilian-5",
+    "uniqueFrames": 4,
+    "frameCount": 4
+  }
+]

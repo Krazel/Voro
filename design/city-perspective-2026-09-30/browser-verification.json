@@ -8,25 +8,25 @@
         {
           "key": "cityView_city-0",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         },
         {
           "key": "cityView_city-1",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         },
         {
           "key": "cityView_city-2",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         },
         {
           "key": "cityView_city-3",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         },
         {
@@ -110,37 +110,37 @@
         {
           "key": "cityView_city-civilian-0",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         },
         {
           "key": "cityView_city-civilian-1",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         },
         {
           "key": "cityView_city-civilian-2",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         },
         {
           "key": "cityView_city-civilian-3",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         },
         {
           "key": "cityView_city-civilian-4",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         },
         {
           "key": "cityView_city-civilian-5",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         }
       ],
@@ -152,25 +152,25 @@
         {
           "key": "cityView_city-0",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         },
         {
           "key": "cityView_city-1",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         },
         {
           "key": "cityView_city-2",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         },
         {
           "key": "cityView_city-3",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         },
         {
@@ -254,37 +254,37 @@
         {
           "key": "cityView_city-civilian-0",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         },
         {
           "key": "cityView_city-civilian-1",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         },
         {
           "key": "cityView_city-civilian-2",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         },
         {
           "key": "cityView_city-civilian-3",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         },
         {
           "key": "cityView_city-civilian-4",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         },
         {
           "key": "cityView_city-civilian-5",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         }
       ],
@@ -296,25 +296,25 @@
         {
           "key": "cityView_city-0",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         },
         {
           "key": "cityView_city-1",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         },
         {
           "key": "cityView_city-2",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         },
         {
           "key": "cityView_city-3",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         },
         {
@@ -398,43 +398,43 @@
         {
           "key": "cityView_city-civilian-0",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         },
         {
           "key": "cityView_city-civilian-1",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         },
         {
           "key": "cityView_city-civilian-2",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         },
         {
           "key": "cityView_city-civilian-3",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         },
         {
           "key": "cityView_city-civilian-4",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         },
         {
           "key": "cityView_city-civilian-5",
           "width": 768,
-          "height": 512,
+          "height": 384,
           "compact": true
         }
       ],
       "entities": 598
     }
   ],
-  "cityAtlasMiB": 52.50257110595703,
+  "cityAtlasMiB": 48.75257110595703,
   "scope": "Browser QA; no physical iPhone performance measurement"
 }

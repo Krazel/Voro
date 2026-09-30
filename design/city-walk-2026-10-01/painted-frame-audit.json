@@ -1,0 +1,612 @@
+[
+  {
+    "id": "city-0",
+    "sourceSize": [
+      1261,
+      1247
+    ],
+    "poses": [
+      {
+        "crop": [
+          200,
+          33,
+          397,
+          564
+        ],
+        "headX": 376,
+        "legSpan": 0.7039007092198581
+      },
+      {
+        "crop": [
+          766,
+          33,
+          267,
+          566
+        ],
+        "headX": 907.5,
+        "legSpan": 0.4098939929328622
+      },
+      {
+        "crop": [
+          191,
+          650,
+          417,
+          546
+        ],
+        "headX": 377.5,
+        "legSpan": 0.7637362637362637
+      },
+      {
+        "crop": [
+          778,
+          652,
+          255,
+          554
+        ],
+        "headX": 906,
+        "legSpan": 0.4296028880866426
+      }
+    ],
+    "frameHashes": [
+      "993b505e74cfea5ae1d945185eddb3c737324fa47865b6d6e879d8f50a3ae4b5",
+      "877e1236c0b7bed02bbb197e2bb0c8736a08a956a71612563dd1d70119c48c5a",
+      "d4105b30f9f53e8596cc238e3bcb67ba87abdb86803be2ca674fd2f9984470e3",
+      "8ae6063852368817d0e98df47d2be40c6ce0565175213beda0620e10e95a4eef"
+    ],
+    "uniqueFrames": 4,
+    "preservedViews": [
+      1,
+      3
+    ],
+    "leftView": "mirrored right sequence"
+  },
+  {
+    "id": "city-1",
+    "sourceSize": [
+      1536,
+      1024
+    ],
+    "poses": [
+      {
+        "crop": [
+          305,
+          18,
+          326,
+          470
+        ],
+        "headX": 483.5,
+        "legSpan": 0.6936170212765957
+      },
+      {
+        "crop": [
+          934,
+          18,
+          274,
+          474
+        ],
+        "headX": 1071.5,
+        "legSpan": 0.43037974683544306
+      },
+      {
+        "crop": [
+          303,
+          528,
+          331,
+          469
+        ],
+        "headX": 482.5,
+        "legSpan": 0.7057569296375267
+      },
+      {
+        "crop": [
+          938,
+          528,
+          274,
+          473
+        ],
+        "headX": 1074.5,
+        "legSpan": 0.44608879492600423
+      }
+    ],
+    "frameHashes": [
+      "1f8859d651615b5ff1d1a90c05488c183baa0a6b79f963740d67d5967cfc99e3",
+      "5c180260b0541114f7392414865770f48b97ab3a681c22e9fab6ea83af3b5a1e",
+      "cd8e64a22e9d959525afaa657a2b6530e9294b603b1153ba8e8fed93331696b6",
+      "5b856cdeff25a8a8b68727efb9075d6703c0b70ca30024780e17b2f35f9035b9"
+    ],
+    "uniqueFrames": 4,
+    "preservedViews": [
+      1,
+      3
+    ],
+    "leftView": "mirrored right sequence"
+  },
+  {
+    "id": "city-2",
+    "sourceSize": [
+      1312,
+      1199
+    ],
+    "poses": [
+      {
+        "crop": [
+          160,
+          25,
+          399,
+          542
+        ],
+        "headX": 389.5,
+        "legSpan": 0.7361623616236163
+      },
+      {
+        "crop": [
+          798,
+          24,
+          287,
+          545
+        ],
+        "headX": 992,
+        "legSpan": 0.5266055045871559
+      },
+      {
+        "crop": [
+          156,
+          613,
+          406,
+          525
+        ],
+        "headX": 391,
+        "legSpan": 0.7733333333333333
+      },
+      {
+        "crop": [
+          812,
+          614,
+          289,
+          545
+        ],
+        "headX": 992.5,
+        "legSpan": 0.5302752293577981
+      }
+    ],
+    "frameHashes": [
+      "e766fdd547b3f1e92b5aa1feca05e6df537b28e5c60fc37adf085867d37c7592",
+      "69b253529b4c4631a242e87b8c239b0b9790f3d626bec37f7b50e5185b4f68e4",
+      "91adcd1ee11c69ab770ba87ca5bec9fbbc461b95bc66d2b3f1fbaabfe9959e5f",
+      "e3f740e65ad586b542348cf995e55b5e88a7dc752d7205d0a3d695c55ccd379e"
+    ],
+    "uniqueFrames": 4,
+    "preservedViews": [
+      1,
+      3
+    ],
+    "leftView": "mirrored right sequence"
+  },
+  {
+    "id": "city-3",
+    "sourceSize": [
+      1536,
+      1024
+    ],
+    "poses": [
+      {
+        "crop": [
+          300,
+          36,
+          402,
+          439
+        ],
+        "headX": 452.5,
+        "legSpan": 0.8154897494305239
+      },
+      {
+        "crop": [
+          921,
+          35,
+          358,
+          443
+        ],
+        "headX": 1036,
+        "legSpan": 0.4966139954853273
+      },
+      {
+        "crop": [
+          298,
+          521,
+          411,
+          449
+        ],
+        "headX": 457,
+        "legSpan": 0.8262806236080178
+      },
+      {
+        "crop": [
+          931,
+          524,
+          358,
+          448
+        ],
+        "headX": 1041.5,
+        "legSpan": 0.5200892857142857
+      }
+    ],
+    "frameHashes": [
+      "b6f3215e13f837f3d08938e8313107ff91108980d5c12b00d9c9feb8f55b7f63",
+      "8244d93656f38a9d3a756f12c7d812217d947510efc78d965523c15a659a1f0c",
+      "462a8070607c48fac204726157fbec250327bf030b4945625b8c5f412a5ace86",
+      "52a5d021bd2cbb234a82964c58270a08405def6a485ef2d413f3e990f35d694c"
+    ],
+    "uniqueFrames": 4,
+    "preservedViews": [
+      1,
+      3
+    ],
+    "leftView": "mirrored right sequence"
+  },
+  {
+    "id": "city-civilian-0",
+    "sourceSize": [
+      1312,
+      1199
+    ],
+    "poses": [
+      {
+        "crop": [
+          231,
+          13,
+          368,
+          541
+        ],
+        "headX": 398.5,
+        "legSpan": 0.6802218114602587
+      },
+      {
+        "crop": [
+          788,
+          13,
+          244,
+          547
+        ],
+        "headX": 934.5,
+        "legSpan": 0.41681901279707495
+      },
+      {
+        "crop": [
+          226,
+          611,
+          389,
+          533
+        ],
+        "headX": 412.5,
+        "legSpan": 0.7298311444652908
+      },
+      {
+        "crop": [
+          787,
+          611,
+          278,
+          549
+        ],
+        "headX": 936,
+        "legSpan": 0.4371584699453552
+      }
+    ],
+    "frameHashes": [
+      "7a40d64bcca974a579d860de61e0505dcedc538390857eb05d61359275911747",
+      "806f247e96d03be9390795acce65e962ad57a27a494b9b871e79dc37122df0c2",
+      "e8c5ca7f60bd31135fab59f14928a14be325943805b9564e86ad15703f3dfef3",
+      "ce20f9f1248e0d4b3c898911844f5aa12ea9470e9b17ffb8442ddbd3012e6800"
+    ],
+    "uniqueFrames": 4,
+    "preservedViews": [
+      1,
+      3
+    ],
+    "leftView": "mirrored right sequence"
+  },
+  {
+    "id": "city-civilian-1",
+    "sourceSize": [
+      1287,
+      1222
+    ],
+    "poses": [
+      {
+        "crop": [
+          212,
+          24,
+          392,
+          555
+        ],
+        "headX": 421,
+        "legSpan": 0.7063063063063063
+      },
+      {
+        "crop": [
+          746,
+          25,
+          276,
+          557
+        ],
+        "headX": 910,
+        "legSpan": 0.3752244165170557
+      },
+      {
+        "crop": [
+          219,
+          636,
+          380,
+          543
+        ],
+        "headX": 418.5,
+        "legSpan": 0.6998158379373849
+      },
+      {
+        "crop": [
+          745,
+          636,
+          296,
+          552
+        ],
+        "headX": 915,
+        "legSpan": 0.40942028985507245
+      }
+    ],
+    "frameHashes": [
+      "fc7244ae91f98b526e52053c842a4ba20b3e88c7bd181609d97bfa9b5c0ac8b9",
+      "126abd2a81cb574f1133c441994a5f7af602b57516d86d9cb61caff70cb952af",
+      "d7d61639489c0a5459ef988d55b43496fe60fd5330882eaa63d235307174b120",
+      "4b91259f4ef4be1524040e3e2a8f5d081dbed5444ccaa08a75b2f5e5119b4868"
+    ],
+    "uniqueFrames": 4,
+    "preservedViews": [
+      1,
+      3
+    ],
+    "leftView": "mirrored right sequence"
+  },
+  {
+    "id": "city-civilian-2",
+    "sourceSize": [
+      1287,
+      1222
+    ],
+    "poses": [
+      {
+        "crop": [
+          203,
+          19,
+          387,
+          578
+        ],
+        "headX": 375,
+        "legSpan": 0.6695501730103807
+      },
+      {
+        "crop": [
+          803,
+          19,
+          224,
+          582
+        ],
+        "headX": 913.5,
+        "legSpan": 0.3384879725085911
+      },
+      {
+        "crop": [
+          203,
+          624,
+          398,
+          565
+        ],
+        "headX": 380.5,
+        "legSpan": 0.7044247787610619
+      },
+      {
+        "crop": [
+          815,
+          625,
+          229,
+          567
+        ],
+        "headX": 916.5,
+        "legSpan": 0.3350970017636684
+      }
+    ],
+    "frameHashes": [
+      "dfb154a89e886b9f8565a9e18b97046cd10d2dfa7c6a13f5239556ed906eef09",
+      "581573a9a4727792be8767cde19d0bcc91f39ed69db7d7499baf0965a8fb670d",
+      "6915021c6f34df9b00c9b2cf2bd6b9979fefa7254099fbd91468f810ae0cfb1b",
+      "49f936a9a88f0a502be9a75f0ad3f8f3cb1d3d17b91f040d525d63279a123d57"
+    ],
+    "uniqueFrames": 4,
+    "preservedViews": [
+      1,
+      3
+    ],
+    "leftView": "mirrored right sequence"
+  },
+  {
+    "id": "city-civilian-3",
+    "sourceSize": [
+      1263,
+      1245
+    ],
+    "poses": [
+      {
+        "crop": [
+          181,
+          25,
+          365,
+          558
+        ],
+        "headX": 378,
+        "legSpan": 0.6541218637992832
+      },
+      {
+        "crop": [
+          773,
+          24,
+          252,
+          564
+        ],
+        "headX": 931,
+        "legSpan": 0.44680851063829785
+      },
+      {
+        "crop": [
+          169,
+          644,
+          396,
+          550
+        ],
+        "headX": 403,
+        "legSpan": 0.72
+      },
+      {
+        "crop": [
+          792,
+          644,
+          280,
+          569
+        ],
+        "headX": 968,
+        "legSpan": 0.492091388400703
+      }
+    ],
+    "frameHashes": [
+      "3b913f1d63168d297d3cd044e211473a0477a582b26b0a76c638727a256d70fa",
+      "489f43d4a22e37349d67283cd4c7a2bdb8aba002cef1ead46260d79a798c8991",
+      "7a3f0cb30eb30d5d0aa1eec26e635fb2905b78478026318239c4eefdc8237ef1",
+      "7d76dfb2c6729c03f01fc8e481dc0d46383831379a1877205b8b643da34d0b78"
+    ],
+    "uniqueFrames": 4,
+    "preservedViews": [
+      1,
+      3
+    ],
+    "leftView": "mirrored right sequence"
+  },
+  {
+    "id": "city-civilian-4",
+    "sourceSize": [
+      1536,
+      1024
+    ],
+    "poses": [
+      {
+        "crop": [
+          282,
+          22,
+          349,
+          458
+        ],
+        "headX": 446,
+        "legSpan": 0.7620087336244541
+      },
+      {
+        "crop": [
+          932,
+          22,
+          233,
+          469
+        ],
+        "headX": 1079,
+        "legSpan": 0.4968017057569296
+      },
+      {
+        "crop": [
+          249,
+          530,
+          385,
+          456
+        ],
+        "headX": 446,
+        "legSpan": 0.8442982456140351
+      },
+      {
+        "crop": [
+          923,
+          529,
+          260,
+          475
+        ],
+        "headX": 1081,
+        "legSpan": 0.52
+      }
+    ],
+    "frameHashes": [
+      "68470ce5f4610624fdbc442614da61a9bc50d6c82dca91b3afefcaaa0ba0c406",
+      "f9d0c46b1fa3e2c6f72b7110a45822508e320c9b9d8a7ae8ec753bdcaff3bed1",
+      "4d106719762eb819eabec2974409d062a98c6d3a432e63854f4e65306f7efdc0",
+      "af71212dbcd2c5f20b096e1f2ee30ae1f48a96942a1688fc808bfcfb31e5f1b7"
+    ],
+    "uniqueFrames": 4,
+    "preservedViews": [
+      1,
+      3
+    ],
+    "leftView": "mirrored right sequence"
+  },
+  {
+    "id": "city-civilian-5",
+    "sourceSize": [
+      1536,
+      1024
+    ],
+    "poses": [
+      {
+        "crop": [
+          346,
+          28,
+          337,
+          459
+        ],
+        "headX": 492.5,
+        "legSpan": 0.7342047930283224
+      },
+      {
+        "crop": [
+          942,
+          27,
+          216,
+          460
+        ],
+        "headX": 1050.5,
+        "legSpan": 0.3804347826086957
+      },
+      {
+        "crop": [
+          348,
+          531,
+          335,
+          456
+        ],
+        "headX": 501.5,
+        "legSpan": 0.7346491228070176
+      },
+      {
+        "crop": [
+          945,
+          528,
+          254,
+          464
+        ],
+        "headX": 1096,
+        "legSpan": 0.4267241379310345
+      }
+    ],
+    "frameHashes": [
+      "0daadb4a26eff9a5041926af20584665c47926d258a95daf74f164d359d0a437",
+      "024d3f6afa3a2eb6c6c86743ee92e366da2e5a8294a568d777ac30b708ac0043",
+      "ae419d0c1c3adbfee902f06171712ff4fb35e60ba7ee80de84dafaac26777f47",
+      "c16dd1bcf5662c870b662022c8335d017e3b590991a94552d3015aae58a37c8d"
+    ],
+    "uniqueFrames": 4,
+    "preservedViews": [
+      1,
+      3
+    ],
+    "leftView": "mirrored right sequence"
+  }
+]

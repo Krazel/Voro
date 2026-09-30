@@ -1,0 +1,1779 @@
+[
+  {
+    "id": "city-0",
+    "kind": "human",
+    "size": [
+      1536,
+      1024
+    ],
+    "referenceHeight": 433,
+    "referenceSpan": 433,
+    "frames": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "crop": [
+          144,
+          43,
+          233,
+          408
+        ],
+        "anchor": [
+          97.0,
+          216.5
+        ]
+      },
+      {
+        "direction": 1,
+        "pose": 0,
+        "crop": [
+          509,
+          42,
+          187,
+          431
+        ],
+        "anchor": [
+          93.0,
+          216.5
+        ]
+      },
+      {
+        "direction": 2,
+        "pose": 0,
+        "crop": [
+          819,
+          44,
+          226,
+          410
+        ],
+        "anchor": [
+          124.5,
+          216.5
+        ]
+      },
+      {
+        "direction": 3,
+        "pose": 0,
+        "crop": [
+          1201,
+          40,
+          180,
+          430
+        ],
+        "anchor": [
+          94.5,
+          216.5
+        ]
+      },
+      {
+        "direction": 0,
+        "pose": 1,
+        "crop": [
+          136,
+          535,
+          244,
+          404
+        ],
+        "anchor": [
+          94.5,
+          216.5
+        ]
+      },
+      {
+        "direction": 1,
+        "pose": 1,
+        "crop": [
+          518,
+          528,
+          180,
+          433
+        ],
+        "anchor": [
+          90.0,
+          216.5
+        ]
+      },
+      {
+        "direction": 2,
+        "pose": 1,
+        "crop": [
+          812,
+          532,
+          224,
+          405
+        ],
+        "anchor": [
+          132.0,
+          216.5
+        ]
+      },
+      {
+        "direction": 3,
+        "pose": 1,
+        "crop": [
+          1208,
+          529,
+          182,
+          432
+        ],
+        "anchor": [
+          96.0,
+          216.5
+        ]
+      }
+    ]
+  },
+  {
+    "id": "city-1",
+    "kind": "human",
+    "size": [
+      1536,
+      1024
+    ],
+    "referenceHeight": 435,
+    "referenceSpan": 435,
+    "frames": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "crop": [
+          126,
+          45,
+          258,
+          424
+        ],
+        "anchor": [
+          111.0,
+          217.5
+        ]
+      },
+      {
+        "direction": 1,
+        "pose": 0,
+        "crop": [
+          490,
+          46,
+          198,
+          431
+        ],
+        "anchor": [
+          94.0,
+          217.5
+        ]
+      },
+      {
+        "direction": 2,
+        "pose": 0,
+        "crop": [
+          795,
+          45,
+          252,
+          423
+        ],
+        "anchor": [
+          153.5,
+          217.5
+        ]
+      },
+      {
+        "direction": 3,
+        "pose": 0,
+        "crop": [
+          1202,
+          41,
+          193,
+          435
+        ],
+        "anchor": [
+          100.5,
+          217.5
+        ]
+      },
+      {
+        "direction": 0,
+        "pose": 1,
+        "crop": [
+          94,
+          527,
+          271,
+          426
+        ],
+        "anchor": [
+          119.0,
+          217.5
+        ]
+      },
+      {
+        "direction": 1,
+        "pose": 1,
+        "crop": [
+          489,
+          529,
+          194,
+          429
+        ],
+        "anchor": [
+          94.0,
+          217.5
+        ]
+      },
+      {
+        "direction": 2,
+        "pose": 1,
+        "crop": [
+          812,
+          529,
+          259,
+          422
+        ],
+        "anchor": [
+          148.0,
+          217.5
+        ]
+      },
+      {
+        "direction": 3,
+        "pose": 1,
+        "crop": [
+          1218,
+          525,
+          183,
+          433
+        ],
+        "anchor": [
+          88.0,
+          217.5
+        ]
+      }
+    ]
+  },
+  {
+    "id": "city-2",
+    "kind": "human",
+    "size": [
+      1536,
+      1024
+    ],
+    "referenceHeight": 478,
+    "referenceSpan": 478,
+    "frames": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "crop": [
+          93,
+          12,
+          231,
+          436
+        ],
+        "anchor": [
+          139.0,
+          239.0
+        ]
+      },
+      {
+        "direction": 1,
+        "pose": 0,
+        "crop": [
+          473,
+          15,
+          233,
+          465
+        ],
+        "anchor": [
+          130.5,
+          239.0
+        ]
+      },
+      {
+        "direction": 2,
+        "pose": 0,
+        "crop": [
+          855,
+          12,
+          221,
+          450
+        ],
+        "anchor": [
+          95.0,
+          239.0
+        ]
+      },
+      {
+        "direction": 3,
+        "pose": 0,
+        "crop": [
+          1214,
+          15,
+          214,
+          460
+        ],
+        "anchor": [
+          95.5,
+          239.0
+        ]
+      },
+      {
+        "direction": 0,
+        "pose": 1,
+        "crop": [
+          77,
+          492,
+          295,
+          455
+        ],
+        "anchor": [
+          154.0,
+          239.0
+        ]
+      },
+      {
+        "direction": 1,
+        "pose": 1,
+        "crop": [
+          476,
+          493,
+          237,
+          468
+        ],
+        "anchor": [
+          132.0,
+          239.0
+        ]
+      },
+      {
+        "direction": 2,
+        "pose": 1,
+        "crop": [
+          815,
+          493,
+          276,
+          450
+        ],
+        "anchor": [
+          122.0,
+          239.0
+        ]
+      },
+      {
+        "direction": 3,
+        "pose": 1,
+        "crop": [
+          1228,
+          492,
+          220,
+          478
+        ],
+        "anchor": [
+          100.5,
+          239.0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "city-3",
+    "kind": "human",
+    "size": [
+      1536,
+      1024
+    ],
+    "referenceHeight": 411,
+    "referenceSpan": 411,
+    "frames": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "crop": [
+          117,
+          61,
+          305,
+          382
+        ],
+        "anchor": [
+          87.0,
+          205.5
+        ]
+      },
+      {
+        "direction": 1,
+        "pose": 0,
+        "crop": [
+          503,
+          55,
+          184,
+          408
+        ],
+        "anchor": [
+          93.0,
+          205.5
+        ]
+      },
+      {
+        "direction": 2,
+        "pose": 0,
+        "crop": [
+          795,
+          61,
+          294,
+          387
+        ],
+        "anchor": [
+          207.0,
+          205.5
+        ]
+      },
+      {
+        "direction": 3,
+        "pose": 0,
+        "crop": [
+          1211,
+          57,
+          237,
+          400
+        ],
+        "anchor": [
+          143.5,
+          205.5
+        ]
+      },
+      {
+        "direction": 0,
+        "pose": 1,
+        "crop": [
+          102,
+          529,
+          321,
+          379
+        ],
+        "anchor": [
+          104.5,
+          205.5
+        ]
+      },
+      {
+        "direction": 1,
+        "pose": 1,
+        "crop": [
+          510,
+          524,
+          190,
+          404
+        ],
+        "anchor": [
+          96.0,
+          205.5
+        ]
+      },
+      {
+        "direction": 2,
+        "pose": 1,
+        "crop": [
+          792,
+          530,
+          299,
+          386
+        ],
+        "anchor": [
+          207.0,
+          205.5
+        ]
+      },
+      {
+        "direction": 3,
+        "pose": 1,
+        "crop": [
+          1231,
+          526,
+          219,
+          411
+        ],
+        "anchor": [
+          126.0,
+          205.5
+        ]
+      }
+    ]
+  },
+  {
+    "id": "city-4",
+    "kind": "vehicle",
+    "size": [
+      1254,
+      1254
+    ],
+    "referenceHeight": 541,
+    "referenceSpan": 708,
+    "frames": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "crop": [
+          61,
+          99,
+          708,
+          435
+        ],
+        "anchor": [
+          354.0,
+          217.5
+        ]
+      },
+      {
+        "direction": 1,
+        "pose": 0,
+        "crop": [
+          819,
+          73,
+          290,
+          541
+        ],
+        "anchor": [
+          145.0,
+          270.5
+        ]
+      },
+      {
+        "direction": 2,
+        "pose": 0,
+        "crop": [
+          52,
+          692,
+          708,
+          427
+        ],
+        "anchor": [
+          354.0,
+          213.5
+        ]
+      },
+      {
+        "direction": 3,
+        "pose": 0,
+        "crop": [
+          839,
+          668,
+          266,
+          490
+        ],
+        "anchor": [
+          133.0,
+          245.0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "city-5",
+    "kind": "vehicle",
+    "size": [
+      1254,
+      1254
+    ],
+    "referenceHeight": 489,
+    "referenceSpan": 726,
+    "frames": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "crop": [
+          33,
+          213,
+          720,
+          385
+        ],
+        "anchor": [
+          360.0,
+          192.5
+        ]
+      },
+      {
+        "direction": 1,
+        "pose": 0,
+        "crop": [
+          818,
+          128,
+          370,
+          489
+        ],
+        "anchor": [
+          185.0,
+          244.5
+        ]
+      },
+      {
+        "direction": 2,
+        "pose": 0,
+        "crop": [
+          26,
+          761,
+          726,
+          379
+        ],
+        "anchor": [
+          363.0,
+          189.5
+        ]
+      },
+      {
+        "direction": 3,
+        "pose": 0,
+        "crop": [
+          835,
+          741,
+          364,
+          390
+        ],
+        "anchor": [
+          182.0,
+          195.0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "city-6",
+    "kind": "vehicle",
+    "size": [
+      1254,
+      1254
+    ],
+    "referenceHeight": 528,
+    "referenceSpan": 666,
+    "frames": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "crop": [
+          55,
+          157,
+          663,
+          366
+        ],
+        "anchor": [
+          331.5,
+          183.0
+        ]
+      },
+      {
+        "direction": 1,
+        "pose": 0,
+        "crop": [
+          813,
+          65,
+          316,
+          528
+        ],
+        "anchor": [
+          158.0,
+          264.0
+        ]
+      },
+      {
+        "direction": 2,
+        "pose": 0,
+        "crop": [
+          43,
+          743,
+          666,
+          366
+        ],
+        "anchor": [
+          333.0,
+          183.0
+        ]
+      },
+      {
+        "direction": 3,
+        "pose": 0,
+        "crop": [
+          823,
+          662,
+          296,
+          469
+        ],
+        "anchor": [
+          148.0,
+          234.5
+        ]
+      }
+    ]
+  },
+  {
+    "id": "city-7",
+    "kind": "vehicle",
+    "size": [
+      1254,
+      1254
+    ],
+    "referenceHeight": 543,
+    "referenceSpan": 708,
+    "frames": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "crop": [
+          29,
+          122,
+          698,
+          451
+        ],
+        "anchor": [
+          349.0,
+          225.5
+        ]
+      },
+      {
+        "direction": 1,
+        "pose": 0,
+        "crop": [
+          821,
+          53,
+          352,
+          543
+        ],
+        "anchor": [
+          176.0,
+          271.5
+        ]
+      },
+      {
+        "direction": 2,
+        "pose": 0,
+        "crop": [
+          33,
+          689,
+          708,
+          446
+        ],
+        "anchor": [
+          354.0,
+          223.0
+        ]
+      },
+      {
+        "direction": 3,
+        "pose": 0,
+        "crop": [
+          831,
+          652,
+          342,
+          496
+        ],
+        "anchor": [
+          171.0,
+          248.0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "city-8",
+    "kind": "vehicle",
+    "size": [
+      1254,
+      1254
+    ],
+    "referenceHeight": 596,
+    "referenceSpan": 723,
+    "frames": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "crop": [
+          35,
+          123,
+          723,
+          382
+        ],
+        "anchor": [
+          361.5,
+          191.0
+        ]
+      },
+      {
+        "direction": 1,
+        "pose": 0,
+        "crop": [
+          813,
+          31,
+          349,
+          596
+        ],
+        "anchor": [
+          174.5,
+          298.0
+        ]
+      },
+      {
+        "direction": 2,
+        "pose": 0,
+        "crop": [
+          31,
+          719,
+          722,
+          394
+        ],
+        "anchor": [
+          361.0,
+          197.0
+        ]
+      },
+      {
+        "direction": 3,
+        "pose": 0,
+        "crop": [
+          830,
+          627,
+          371,
+          525
+        ],
+        "anchor": [
+          185.5,
+          262.5
+        ]
+      }
+    ]
+  },
+  {
+    "id": "city-9",
+    "kind": "rotor",
+    "size": [
+      1254,
+      1254
+    ],
+    "referenceHeight": 473,
+    "referenceSpan": 580,
+    "frames": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "crop": [
+          61,
+          198,
+          571,
+          292
+        ],
+        "anchor": [
+          285.5,
+          146.0
+        ],
+        "rotor": [
+          393,
+          22,
+          235,
+          128
+        ]
+      },
+      {
+        "direction": 1,
+        "pose": 0,
+        "crop": [
+          862,
+          58,
+          217,
+          473
+        ],
+        "anchor": [
+          108.5,
+          236.5
+        ],
+        "rotor": [
+          109,
+          175,
+          235,
+          128
+        ]
+      },
+      {
+        "direction": 2,
+        "pose": 0,
+        "crop": [
+          62,
+          820,
+          580,
+          283
+        ],
+        "anchor": [
+          290.0,
+          141.5
+        ],
+        "rotor": [
+          393,
+          15,
+          235,
+          128
+        ],
+        "flipX": true
+      },
+      {
+        "direction": 3,
+        "pose": 0,
+        "crop": [
+          864,
+          738,
+          214,
+          409
+        ],
+        "anchor": [
+          107.0,
+          204.5
+        ],
+        "rotor": [
+          110,
+          35,
+          235,
+          128
+        ]
+      }
+    ]
+  },
+  {
+    "id": "city-civilian-0",
+    "kind": "human",
+    "size": [
+      1536,
+      1024
+    ],
+    "referenceHeight": 444,
+    "referenceSpan": 444,
+    "frames": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "crop": [
+          116,
+          24,
+          240,
+          408
+        ],
+        "anchor": [
+          117.5,
+          222.0
+        ]
+      },
+      {
+        "direction": 1,
+        "pose": 0,
+        "crop": [
+          503,
+          20,
+          170,
+          440
+        ],
+        "anchor": [
+          88.5,
+          222.0
+        ]
+      },
+      {
+        "direction": 2,
+        "pose": 0,
+        "crop": [
+          798,
+          25,
+          229,
+          410
+        ],
+        "anchor": [
+          119.5,
+          222.0
+        ]
+      },
+      {
+        "direction": 3,
+        "pose": 0,
+        "crop": [
+          1224,
+          20,
+          178,
+          434
+        ],
+        "anchor": [
+          87.5,
+          222.0
+        ]
+      },
+      {
+        "direction": 0,
+        "pose": 1,
+        "crop": [
+          114,
+          504,
+          245,
+          402
+        ],
+        "anchor": [
+          119.0,
+          222.0
+        ]
+      },
+      {
+        "direction": 1,
+        "pose": 1,
+        "crop": [
+          502,
+          497,
+          175,
+          444
+        ],
+        "anchor": [
+          88.0,
+          222.0
+        ]
+      },
+      {
+        "direction": 2,
+        "pose": 1,
+        "crop": [
+          798,
+          504,
+          240,
+          401
+        ],
+        "anchor": [
+          117.5,
+          222.0
+        ]
+      },
+      {
+        "direction": 3,
+        "pose": 1,
+        "crop": [
+          1219,
+          498,
+          191,
+          437
+        ],
+        "anchor": [
+          91.0,
+          222.0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "city-civilian-1",
+    "kind": "human",
+    "size": [
+      1536,
+      1024
+    ],
+    "referenceHeight": 449,
+    "referenceSpan": 449,
+    "frames": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "crop": [
+          126,
+          26,
+          224,
+          424
+        ],
+        "anchor": [
+          126.0,
+          224.5
+        ]
+      },
+      {
+        "direction": 1,
+        "pose": 0,
+        "crop": [
+          491,
+          18,
+          200,
+          449
+        ],
+        "anchor": [
+          100.0,
+          224.5
+        ]
+      },
+      {
+        "direction": 2,
+        "pose": 0,
+        "crop": [
+          841,
+          25,
+          219,
+          421
+        ],
+        "anchor": [
+          99.0,
+          224.5
+        ]
+      },
+      {
+        "direction": 3,
+        "pose": 0,
+        "crop": [
+          1197,
+          18,
+          199,
+          449
+        ],
+        "anchor": [
+          103.0,
+          224.5
+        ]
+      },
+      {
+        "direction": 0,
+        "pose": 1,
+        "crop": [
+          110,
+          521,
+          238,
+          403
+        ],
+        "anchor": [
+          123.5,
+          224.5
+        ]
+      },
+      {
+        "direction": 1,
+        "pose": 1,
+        "crop": [
+          493,
+          516,
+          197,
+          444
+        ],
+        "anchor": [
+          101.0,
+          224.5
+        ]
+      },
+      {
+        "direction": 2,
+        "pose": 1,
+        "crop": [
+          843,
+          521,
+          230,
+          412
+        ],
+        "anchor": [
+          108.0,
+          224.5
+        ]
+      },
+      {
+        "direction": 3,
+        "pose": 1,
+        "crop": [
+          1197,
+          516,
+          199,
+          439
+        ],
+        "anchor": [
+          98.0,
+          224.5
+        ]
+      }
+    ]
+  },
+  {
+    "id": "city-civilian-2",
+    "kind": "human",
+    "size": [
+      1536,
+      1024
+    ],
+    "referenceHeight": 463,
+    "referenceSpan": 463,
+    "frames": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "crop": [
+          134,
+          28,
+          250,
+          408
+        ],
+        "anchor": [
+          129.5,
+          231.5
+        ]
+      },
+      {
+        "direction": 1,
+        "pose": 0,
+        "crop": [
+          517,
+          30,
+          170,
+          443
+        ],
+        "anchor": [
+          83.5,
+          231.5
+        ]
+      },
+      {
+        "direction": 2,
+        "pose": 0,
+        "crop": [
+          822,
+          34,
+          259,
+          405
+        ],
+        "anchor": [
+          127.5,
+          231.5
+        ]
+      },
+      {
+        "direction": 3,
+        "pose": 0,
+        "crop": [
+          1197,
+          28,
+          176,
+          450
+        ],
+        "anchor": [
+          90.0,
+          231.5
+        ]
+      },
+      {
+        "direction": 0,
+        "pose": 1,
+        "crop": [
+          123,
+          512,
+          285,
+          428
+        ],
+        "anchor": [
+          145.5,
+          231.5
+        ]
+      },
+      {
+        "direction": 1,
+        "pose": 1,
+        "crop": [
+          515,
+          518,
+          176,
+          459
+        ],
+        "anchor": [
+          92.5,
+          231.5
+        ]
+      },
+      {
+        "direction": 2,
+        "pose": 1,
+        "crop": [
+          809,
+          516,
+          281,
+          427
+        ],
+        "anchor": [
+          148.5,
+          231.5
+        ]
+      },
+      {
+        "direction": 3,
+        "pose": 1,
+        "crop": [
+          1195,
+          517,
+          179,
+          463
+        ],
+        "anchor": [
+          89.0,
+          231.5
+        ]
+      }
+    ]
+  },
+  {
+    "id": "city-civilian-3",
+    "kind": "human",
+    "size": [
+      1536,
+      1024
+    ],
+    "referenceHeight": 447,
+    "referenceSpan": 447,
+    "frames": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "crop": [
+          127,
+          27,
+          215,
+          422
+        ],
+        "anchor": [
+          125.0,
+          223.5
+        ]
+      },
+      {
+        "direction": 1,
+        "pose": 0,
+        "crop": [
+          489,
+          34,
+          201,
+          431
+        ],
+        "anchor": [
+          99.0,
+          223.5
+        ]
+      },
+      {
+        "direction": 2,
+        "pose": 0,
+        "crop": [
+          845,
+          29,
+          213,
+          423
+        ],
+        "anchor": [
+          91.0,
+          223.5
+        ]
+      },
+      {
+        "direction": 3,
+        "pose": 0,
+        "crop": [
+          1175,
+          29,
+          202,
+          440
+        ],
+        "anchor": [
+          102.0,
+          223.5
+        ]
+      },
+      {
+        "direction": 0,
+        "pose": 1,
+        "crop": [
+          116,
+          509,
+          221,
+          409
+        ],
+        "anchor": [
+          114.0,
+          223.5
+        ]
+      },
+      {
+        "direction": 1,
+        "pose": 1,
+        "crop": [
+          490,
+          515,
+          201,
+          430
+        ],
+        "anchor": [
+          100.0,
+          223.5
+        ]
+      },
+      {
+        "direction": 2,
+        "pose": 1,
+        "crop": [
+          828,
+          510,
+          224,
+          408
+        ],
+        "anchor": [
+          114.0,
+          223.5
+        ]
+      },
+      {
+        "direction": 3,
+        "pose": 1,
+        "crop": [
+          1181,
+          511,
+          199,
+          447
+        ],
+        "anchor": [
+          98.5,
+          223.5
+        ]
+      }
+    ]
+  },
+  {
+    "id": "city-civilian-4",
+    "kind": "human",
+    "size": [
+      1536,
+      1024
+    ],
+    "referenceHeight": 456,
+    "referenceSpan": 456,
+    "frames": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "crop": [
+          82,
+          30,
+          280,
+          418
+        ],
+        "anchor": [
+          133.5,
+          228.0
+        ]
+      },
+      {
+        "direction": 1,
+        "pose": 0,
+        "crop": [
+          491,
+          36,
+          194,
+          454
+        ],
+        "anchor": [
+          97.0,
+          228.0
+        ]
+      },
+      {
+        "direction": 2,
+        "pose": 0,
+        "crop": [
+          799,
+          33,
+          280,
+          411
+        ],
+        "anchor": [
+          146.5,
+          228.0
+        ]
+      },
+      {
+        "direction": 3,
+        "pose": 0,
+        "crop": [
+          1223,
+          25,
+          200,
+          450
+        ],
+        "anchor": [
+          96.0,
+          228.0
+        ]
+      },
+      {
+        "direction": 0,
+        "pose": 1,
+        "crop": [
+          79,
+          527,
+          290,
+          413
+        ],
+        "anchor": [
+          137.0,
+          228.0
+        ]
+      },
+      {
+        "direction": 1,
+        "pose": 1,
+        "crop": [
+          494,
+          531,
+          194,
+          454
+        ],
+        "anchor": [
+          98.5,
+          228.0
+        ]
+      },
+      {
+        "direction": 2,
+        "pose": 1,
+        "crop": [
+          802,
+          531,
+          284,
+          407
+        ],
+        "anchor": [
+          144.0,
+          228.0
+        ]
+      },
+      {
+        "direction": 3,
+        "pose": 1,
+        "crop": [
+          1223,
+          523,
+          194,
+          456
+        ],
+        "anchor": [
+          96.5,
+          228.0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "city-civilian-5",
+    "kind": "human",
+    "size": [
+      1536,
+      1024
+    ],
+    "referenceHeight": 423,
+    "referenceSpan": 423,
+    "frames": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "crop": [
+          113,
+          55,
+          249,
+          391
+        ],
+        "anchor": [
+          104.0,
+          211.5
+        ]
+      },
+      {
+        "direction": 1,
+        "pose": 0,
+        "crop": [
+          503,
+          61,
+          174,
+          411
+        ],
+        "anchor": [
+          86.5,
+          211.5
+        ]
+      },
+      {
+        "direction": 2,
+        "pose": 0,
+        "crop": [
+          834,
+          60,
+          242,
+          387
+        ],
+        "anchor": [
+          146.5,
+          211.5
+        ]
+      },
+      {
+        "direction": 3,
+        "pose": 0,
+        "crop": [
+          1226,
+          50,
+          180,
+          423
+        ],
+        "anchor": [
+          91.5,
+          211.5
+        ]
+      },
+      {
+        "direction": 0,
+        "pose": 1,
+        "crop": [
+          109,
+          539,
+          250,
+          399
+        ],
+        "anchor": [
+          111.5,
+          211.5
+        ]
+      },
+      {
+        "direction": 1,
+        "pose": 1,
+        "crop": [
+          497,
+          550,
+          179,
+          405
+        ],
+        "anchor": [
+          91.5,
+          211.5
+        ]
+      },
+      {
+        "direction": 2,
+        "pose": 1,
+        "crop": [
+          828,
+          537,
+          252,
+          395
+        ],
+        "anchor": [
+          146.0,
+          211.5
+        ]
+      },
+      {
+        "direction": 3,
+        "pose": 1,
+        "crop": [
+          1232,
+          540,
+          183,
+          414
+        ],
+        "anchor": [
+          92.0,
+          211.5
+        ]
+      }
+    ]
+  },
+  {
+    "id": "city-matter-bench",
+    "kind": "prop",
+    "size": [
+      1536,
+      1024
+    ],
+    "referenceHeight": 769,
+    "referenceSpan": 1322,
+    "frames": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "crop": [
+          107,
+          133,
+          1322,
+          769
+        ],
+        "anchor": [
+          661.0,
+          384.5
+        ]
+      }
+    ]
+  },
+  {
+    "id": "city-matter-lamp",
+    "kind": "prop",
+    "size": [
+      1024,
+      1536
+    ],
+    "referenceHeight": 1346,
+    "referenceSpan": 1346,
+    "frames": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "crop": [
+          413,
+          86,
+          201,
+          1346
+        ],
+        "anchor": [
+          100.5,
+          673.0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "city-matter-palm",
+    "kind": "prop",
+    "size": [
+      1536,
+      1024
+    ],
+    "referenceHeight": 903,
+    "referenceSpan": 1014,
+    "frames": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "crop": [
+          262,
+          39,
+          1014,
+          903
+        ],
+        "anchor": [
+          507.0,
+          451.5
+        ]
+      }
+    ]
+  },
+  {
+    "id": "city-matter-sign",
+    "kind": "prop",
+    "size": [
+      1536,
+      1024
+    ],
+    "referenceHeight": 945,
+    "referenceSpan": 945,
+    "frames": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "crop": [
+          566,
+          23,
+          405,
+          945
+        ],
+        "anchor": [
+          202.5,
+          472.5
+        ]
+      }
+    ]
+  }
+]

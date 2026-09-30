@@ -6,10 +6,10 @@ export function applyCityPerspectiveArt(byId, urls) {
     const s = byId[a.id];
     const oldAspect = s.crop[3] / s.crop[2];
     const key = `cityView_${a.id}`;
-    urls[key] = `./inhabitants/city-perspective/${a.id}.png`;
+    urls[key] = `./inhabitants/city-perspective/${a.file||a.id+'.png'}`;
     s.imageAtlas = key;
-    s.animationCropRevision = 4;
-    s.artProfile = {family:'prop',rigid:true,period:1.2,revision:4,
+    s.animationCropRevision = a.walkPeriod?6:4;
+    s.artProfile = {family:'prop',rigid:true,period:1.2,revision:s.animationCropRevision,
       crop:a.frames[0].crop,
       description:'Vista elevada con cámara fija y orientación coherente con la ciudad.'};
     if (a.kind === 'prop') {
@@ -29,7 +29,7 @@ export function cityDirection(heading) {
 }
 
 // Authored turns preserve the upright projection; never rotate these cutouts.
-// Registered walk poses alternate at a fixed cadence without per-frame meshes.
+// Lateral walks use painted contact/passing poses; one image draw per human.
 export function drawCityDirectional(c, image, s, r, seed, time, activity, hurt, heading) {
   const a=s.directionalArt;
   if (!image || !(image.naturalWidth || image.width)) return;
@@ -38,12 +38,14 @@ export function drawCityDirectional(c, image, s, r, seed, time, activity, hurt, 
   if (!frames.length) return;
   const phase=time*(a.kind==='human'?9:3)*Math.max(.25,activity)+seed;
   const walking=a.kind==='human'&&time>0&&activity>0;
-  const pose=walking&&frames.length>1?((Math.floor(phase/Math.PI)%frames.length)+frames.length)%frames.length:0;
+  const lateral=!!a.walkPeriod&&(direction===0||direction===2);
+  const tick=lateral?(time*Math.max(.25,activity)/a.walkPeriod+seed/(Math.PI*2))*frames.length:phase/Math.PI;
+  const pose=walking&&frames.length>1?((Math.floor(tick)%frames.length)+frames.length)%frames.length:0;
   const size=a.kind==='human'?r*a.heightPerRadius:r*2;
   const unit=size/(a.kind==='human'?a.referenceHeight:a.referenceSpan);
   const alpha=c.globalAlpha;
   c.save();
-  if(walking)c.translate(0,-Math.abs(Math.sin(phase))*size*.018);
+  if(walking)c.translate(0,-Math.abs(Math.sin(lateral?tick/frames.length*Math.PI*2:phase))*size*(lateral?.006:.018));
   else if(a.kind==='rotor')c.translate(0,Math.sin(phase)*r*.025);
   // Common foot/centre registration prevents the sprite jumping between views.
   {

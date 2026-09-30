@@ -49,5 +49,9 @@ for path in sorted(folder.glob('*.png')):
    f['rotor']=[hx-f['crop'][0],hy-f['crop'][1],235,128]
    if f['direction']==2:f['flipX']=True
  result.append({'id':id,'kind':kind,'size':[w,h],'referenceHeight':refh,'referenceSpan':span,'frames':frames})
+# Authored source crops remain reproducible; preserve subsequently baked walks.
+for i, a in enumerate(result):
+ baked=root/'design/city-walk-2026-10-01'/f"{a['id']}.json"
+ if a['kind']=='human' and baked.exists(): result[i]=json.loads(baked.read_text(encoding='utf-8'))
 (root/'app/city-perspective-art.json').write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8')
 print(json.dumps({'assets':len(result),'frames':sum(len(a['frames']) for a in result),'decodedMiB':round(sum(a['size'][0]*a['size'][1]*4 for a in result)/1048576,2)}))

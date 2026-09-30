@@ -1,0 +1,186 @@
+{
+  "id": "city-civilian-3",
+  "kind": "human",
+  "size": [
+    1024,
+    512
+  ],
+  "referenceHeight": 208,
+  "referenceSpan": 208,
+  "frames": [
+    {
+      "direction": 0,
+      "pose": 0,
+      "crop": [
+        0,
+        0,
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        128
+      ]
+    },
+    {
+      "direction": 0,
+      "pose": 1,
+      "crop": [
+        256,
+        0,
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        128
+      ]
+    },
+    {
+      "direction": 0,
+      "pose": 2,
+      "crop": [
+        512,
+        0,
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        128
+      ]
+    },
+    {
+      "direction": 0,
+      "pose": 3,
+      "crop": [
+        768,
+        0,
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        128
+      ]
+    },
+    {
+      "direction": 2,
+      "pose": 0,
+      "crop": [
+        0,
+        0,
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        128
+      ],
+      "flipX": true
+    },
+    {
+      "direction": 2,
+      "pose": 1,
+      "crop": [
+        256,
+        0,
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        128
+      ],
+      "flipX": true
+    },
+    {
+      "direction": 2,
+      "pose": 2,
+      "crop": [
+        512,
+        0,
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        128
+      ],
+      "flipX": true
+    },
+    {
+      "direction": 2,
+      "pose": 3,
+      "crop": [
+        768,
+        0,
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        128
+      ],
+      "flipX": true
+    },
+    {
+      "direction": 1,
+      "pose": 0,
+      "crop": [
+        0,
+        256,
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        128
+      ]
+    },
+    {
+      "direction": 3,
+      "pose": 0,
+      "crop": [
+        256,
+        256,
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        128
+      ]
+    },
+    {
+      "direction": 1,
+      "pose": 1,
+      "crop": [
+        512,
+        256,
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        128
+      ]
+    },
+    {
+      "direction": 3,
+      "pose": 1,
+      "crop": [
+        768,
+        256,
+        256,
+        256
+      ],
+      "anchor": [
+        128,
+        128
+      ]
+    }
+  ],
+  "file": "city-civilian-3-walk-v3.webp",
+  "walkPeriod": 1.4
+}
