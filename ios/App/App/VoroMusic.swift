@@ -34,7 +34,10 @@ public class VoroMusicPlugin: CAPPlugin, CAPBridgedPlugin {
             DispatchQueue.main.asyncAfter(deadline: .now() + 6) { [weak self] in
                 guard let url = Bundle.main.url(forResource: "native-music-probe", withExtension: "js", subdirectory: "public"),
                       let script = try? String(contentsOf: url, encoding: .utf8) else { return }
-                self?.bridge?.webView?.evaluateJavaScript(script, completionHandler: nil)
+                self?.saveProbe("injection", extra: ["url": self?.bridge?.webView?.url?.absoluteString ?? "missing"])
+                self?.bridge?.webView?.evaluateJavaScript(script + ";null") { _, error in
+                    if let error = error { self?.saveProbe("error", extra: ["injectionError": error.localizedDescription]) }
+                }
             }
         }
         #endif
@@ -145,6 +148,7 @@ public class VoroMusicPlugin: CAPPlugin, CAPBridgedPlugin {
         var report = state(); report.merge(extra) { _, new in new }
         if let data = try? JSONSerialization.data(withJSONObject: report, options: [.prettyPrinted]),
            let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            try? FileManager.default.createDirectory(at: documents, withIntermediateDirectories: true)
             try? data.write(to: documents.appendingPathComponent("music-\(name).json"), options: .atomic)
         }
     }
