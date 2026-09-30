@@ -72,7 +72,6 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
   const canvas = useRef<HTMLCanvasElement>(null),
     engine = useRef<VoroEngine | null>(null);
   const connectProtagonist = useCallback((node: HTMLCanvasElement | null) => engine.current?.setAdaptationCanvas(node), []);
-  const getAudioComparison = useCallback(()=>engine.current?.getAudioComparison()??null,[]);
   const [settings, setSettings] = useState(false),
     [confirmReset, setConfirmReset] = useState(false);
   const [testPanel, setTestPanel] = useState(false);
@@ -620,8 +619,7 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
             onSound={() => action('sound')}
             onRestart={() => { resume.current = false; action('restart'); changeSettings(false); }}
           />)}
-          <AudioDiagnosticSettings getComparison={getAudioComparison} sound={state.sound} onShare={async observation=>{
-            engine.current?.audioComparison?.stop('share');
+          <AudioDiagnosticSettings onShare={async observation=>{
             const journal=engine.current?.audioJournal;
             if(!journal)throw new Error('Audio journal unavailable');
             return shareAudioJournalFile(journal.report(observation));

@@ -6,10 +6,6 @@
 .audio-diagnostics button{margin:6px 0;font-weight:600}
 .audio-diagnostics :focus-visible{outline:2px solid #d8fff2;outline-offset:3px}
 .audio-diagnostics button:disabled{opacity:.6}
-.audio-comparison{border-bottom:1px solid #81bbae;padding-bottom:14px;margin-bottom:18px}
-.audio-comparison h3{font-size:19px;margin:0 0 12px;color:#effbf6}
-.audio-comparison-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.audio-comparison-result{font-weight:600}
 .audio-diagnostics [role=status]{margin:12px 0 0}
 .voro-settings.final-ui:has(.membrane-settings){display:flex;align-items:flex-start;justify-content:center;width:100vw;max-width:none;height:100dvh;max-height:none;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);border:0;border-radius:0;overflow:auto;background:#021416 url('/ui/membrane/background.webp') center/cover no-repeat;isolation:isolate;box-shadow:none}
 .voro-settings.final-ui:has(.membrane-settings)::before,.voro-settings.final-ui:has(.membrane-settings)::after{display:none}

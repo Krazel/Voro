@@ -12,13 +12,35 @@ function fixture(){
     resume(){resumes++;return Promise.resolve().then(()=>{context.state='running';context.dispatchEvent(new Event('statechange'));});},
     close:async()=>{},createGain:()=>({gain:param(),connect(){},disconnect(){}}),createMediaElementSource:()=>({connect(){},disconnect(){}})});
   globalThis.AudioContext=function(){return context;};
-  globalThis.Audio=function(){const a=Object.assign(new EventTarget(),{paused:true,ended:false,currentTime:12,duration:300,
+  globalThis.Audio=function(){const a=Object.assign(new EventTarget(),{paused:true,ended:false,currentTime:12,duration:300,readyState:4,
     setAttribute(){},removeAttribute(){},load(){},play(){plays++;a.paused=false;return Promise.resolve();},pause(){a.paused=true;}});media.push(a);return a;};
   document.hidden=false;const {game:g}=makeEngine();g.started=true;g.birth=0;g.initAudio();
   g.sfx.buffers=[{},{},{},{},{}];g.music.unlock();
   return{g,context,media,get resumes(){return resumes;},get plays(){return plays;},
     destroy(){g.destroy();document.hidden=false;if(oldContext===undefined)delete globalThis.AudioContext;else globalThis.AudioContext=oldContext;if(oldAudio===undefined)delete globalThis.Audio;else globalThis.Audio=oldAudio;}};
 }
+
+test('Mobile startup and foreground do not inject extra pause/play cycles into an advancing song',async()=>{
+  const f=fixture(),{g,context}=f;
+  const uninterrupted=async()=>{
+    await settle();const deck=g.music.current,plays=f.plays;
+    assert.equal(deck.audio.paused,false);
+    for(let i=0;i<12;i++){
+      context.currentTime+=.1;deck.audio.currentTime+=.1;
+      g.setAudio();g.music.tick();await settle();
+      assert.equal(deck.audio.paused,false,'No synthetic pause after audio has started');
+    }
+    assert.equal(f.plays,plays,'No synthetic restart while the song advances');
+  };
+  try{
+    await uninterrupted();
+    g.setNativeAudioActive(false);context.state='interrupted';context.dispatchEvent(new Event('statechange'));
+    g.setNativeAudioActive(true);await settle();g.action('pause');
+    await uninterrupted();
+    g.sound=false;g.setAudio();context.currentTime+=1;g.music.tick();
+    assert.ok(f.media.every(a=>a.paused));
+  }finally{f.destroy();}
+});
 
 test('Native inactivity before web visibility prevents premature resume',async()=>{
   const f=fixture(),{g,context}=f;
@@ -39,23 +61,6 @@ test('Native inactivity before web visibility prevents premature resume',async()
     assert.equal(g.paused,true);assert.ok(f.media.every(a=>a.paused));
     g.action('pause');await settle();assert.equal(g.paused,false);assert.ok(f.media.some(a=>!a.paused));
     assert.equal(g.music.volumeTarget,.42);
-  }finally{f.destroy();}
-});
-
-test('Integrated comparison shares the game context and stops on mute, settings close and native inactivity',async()=>{
-  const f=fixture(),{g,context}=f;
-  try{
-    await settle();assert.equal(g.getAudioComparison(),null,'Available only in Settings');
-    g.settingsOpen=true;g.setAudio();
-    context.decodeAudioData=async()=>({duration:14,length:672000,numberOfChannels:2});
-    context.createBufferSource=()=>({connect(){},disconnect(){},start(){},stop(){}});
-    const c=g.getAudioComparison();c.fetcher=async()=>({ok:true,arrayBuffer:async()=>new ArrayBuffer(4)});
-    assert.equal(c.context,context);await c.prepare();await c.play('A');
-    assert.equal(c.phase,'playing');assert.ok(g.music.decks.every(d=>d.audio.paused));assert.equal(g.effectsAudible(),false);
-    g.sound=false;g.setAudio();assert.equal(c.phase,'stopped');assert.equal(c.audio.paused,true);assert.equal(g.getAudioComparison(),null);
-    g.sound=true;await c.play('B');g.settingsOpen=false;g.setAudio();assert.equal(c.phase,'stopped');
-    g.settingsOpen=true;g.setAudio();await c.play('A');g.setNativeAudioActive(false);assert.equal(c.phase,'stopped');assert.equal(c.audio.paused,true);
-    g.setNativeAudioActive(true);await settle();assert.equal(c.phase,'stopped');assert.equal(c.audio.paused,true);
   }finally{f.destroy();}
 });
 

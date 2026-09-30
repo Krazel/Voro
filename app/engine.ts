@@ -2,6 +2,7 @@ import { desktopViewport, visibleChunkRadius, isTabletDevice, wideScreenEnabled 
 
 import { t as tr } from './language.mjs';
 import { MusicPlayer, musicScene } from './music.mjs';
+import {NativeMusicPlayer,nativeMusicAvailable} from './native-music.mjs';
 import { AUDIO_CONTEXT_OPTIONS, EFFECT_LEAD_SECONDS, audioPlaybackStats } from './audio-health.mjs';
 import { EFFECTS_MASTER_GAIN, SfxPlayer } from './sfx.mjs';
 import { captureOrbit, sweepPosition } from './orbital-sweep.mjs';
@@ -15,7 +16,6 @@ import { FrameMonitor } from './frame-monitor.mjs';
 import { BenchmarkTour, tourReport } from './benchmark-tour.mjs';
 import { AudioBenchmark, AudioProbe } from './audio-benchmark.mjs';
 import { AudioJournal, audioSnapshot, JOURNAL_LIMITS } from './audio-journal.mjs';
-import { AudioComparison } from './audio-comparison.mjs';
 import { compactPerformanceReport } from './performance-report.mjs';
 import { AnimationSheets } from './animation-sheets.mjs';
 import { adaptationYield, ADAPTATION_FOOD_GAIN, INCOMING_DAMAGE_FACTOR, CONTACT_BIOMASS_LOSS } from './campaign-pacing.mjs';
@@ -456,11 +456,10 @@ export class VoroEngine {
   } | null = null;
   observer: ResizeObserver;
   lifecycle = new AbortController();
-  music: MusicPlayer | null = null;
+  music: MusicPlayer | NativeMusicPlayer | null = null;
   sfx: SfxPlayer | null = null;
   audioFocus = true;
   nativeAudioActive = true;
-  audioComparison: AudioComparison | null = null;
   recheckNativeAudio: (()=>boolean) | null = null;
   nativeInterruptionObserved = false;
   effectsGainTarget: number | null = null;
@@ -787,7 +786,6 @@ export class VoroEngine {
     this.publish();
   }
   loseAudioFocus() {
-    this.audioComparison?.stop('focus-lost');
     if(this.started && this.ending>0 && !this.paused && !this.settingsOpen)this.finaleBackgroundPause=true;
     this.audioFocus=false;this.setAudio();
     this.tilt.read(false);this.save();this.keys.clear();this.pointer=null;
@@ -818,24 +816,13 @@ export class VoroEngine {
     }
     return !this.destroyed&&this.nativeAudioActive&&!document.hidden;
   }
-  getAudioComparison() {
-    if(!this.sound||!this.settingsOpen||!this.canResumeAudio())return null;
-    this.initAudio(true);
-    if(!this.audio)return null;
-    if(this.audioComparison?.context!==this.audio){this.audioComparison?.destroy();this.audioComparison=null;}
-    if(!this.audioComparison)this.audioComparison=new AudioComparison(this.audio,{
-      allowed:()=>this.sound&&this.settingsOpen&&this.audioFocus&&this.canResumeAudio(),
-      record:(kind:string,detail:object,report:object)=>{this.audioJournal?.event(kind,detail);this.audioJournal?.setComparison(report);},
-    });
-    // Configuration pauses gameplay; pause both music decks now, including a fade.
-    this.music?.decks.forEach(d=>d.audio.pause());
-    return this.audioComparison;
-  }
   initAudio(retryResume = false) {
     if(!this.canResumeAudio())return;
+    const nativeMusic=nativeMusicAvailable();
+    if(nativeMusic&&!this.music)this.music=new NativeMusicPlayer(null,{onDiagnostic:(kind:string,detail:object)=>this.audioJournal?.event(kind,detail)});
     if(this.audio?.state==='closed') {
-      this.sfx?.destroy();this.music?.destroy();this.master?.disconnect();
-      this.sfx=null;this.music=null;this.audio=null;this.master=null;this.audioStarted=false;
+      this.sfx?.destroy();if(!nativeMusic){this.music?.destroy();this.music=null;}this.master?.disconnect();
+      this.sfx=null;this.audio=null;this.master=null;this.audioStarted=false;
     }
     if (this.audioStarted) {
       this.sfx?.unlock(retryResume);
@@ -850,9 +837,9 @@ export class VoroEngine {
       this.master.gain.value = 0;
       this.effectsGainTarget = null;
       this.master.connect(this.audio.destination);
-      this.music = new MusicPlayer(this.audio,{ownsContextResume:false,stabilizePlayback:!this.desktop,onDiagnostic:(kind:string,detail:object)=>this.audioJournal?.event(kind,detail)});
+      if(!nativeMusic)this.music = new MusicPlayer(this.audio,{ownsContextResume:false,onDiagnostic:(kind:string,detail:object)=>this.audioJournal?.event(kind,detail)});
       this.sfx = new SfxPlayer(this.audio, this.master,{canResume:()=>this.canResumeAudio(),onDiagnostic:(kind:string,detail:object)=>this.audioJournal?.event(kind,detail)});
-      this.audioJournal?.attach(this.audio,this.music.decks);
+      this.audioJournal?.attach(this.audio,this.music?.decks??[]);
       this.sfx.unlock();
       this.audio.addEventListener('statechange',()=>{
         if(this.destroyed)return;
@@ -866,7 +853,8 @@ export class VoroEngine {
     } catch (error) {
       this.audioJournal?.event('audio-init-error',{name:error instanceof Error?error.name:'Error',message:String(error).slice(0,160)});
       this.sfx?.destroy();this.sfx=null;
-      this.music?.destroy();this.music=null;
+      if(!nativeMusic){this.music?.destroy();this.music=null;}
+      this.syncMusic();
       this.audio?.close().catch(()=>{});this.audio = null;this.audioStarted=false;
     }
   }
@@ -878,7 +866,6 @@ export class VoroEngine {
       !finalSilence && !this.reviewHold && this.sound && this.audioFocus && this.nativeAudioActive && !document.hidden && !this.paused && !this.settingsOpen && !this.life.dead, document.hidden || !this.audioFocus || !this.nativeAudioActive, fade, this.progress.offer.length ? .3 : 1);
   }
   setAudio() {
-    if(!this.sound||!this.settingsOpen||!this.audioFocus||!this.nativeAudioActive||document.hidden)this.audioComparison?.stop('game-state');
     this.syncMusic();
     const target=this.effectsAudible()?EFFECTS_MASTER_GAIN:0;
     if(!target || (this.audio && this.audio.state!=='running'))this.sfx?.cancelImpacts?.();
@@ -2806,7 +2793,6 @@ export class VoroEngine {
     }
   }
   destroy() {
-    this.audioComparison?.destroy();this.audioComparison=null;
     if(this.audioJournalTimer!==undefined)window.clearInterval(this.audioJournalTimer);
     this.audioJournal?.destroy();
     this.audioProbe?.destroy();this.audioProbe=null;this.stopAudioTestVoices();

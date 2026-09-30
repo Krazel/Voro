@@ -8,6 +8,7 @@ class VoroBridgeViewController: CAPBridgeViewController {
         bridge?.registerPluginInstance(VoroReviewPlugin())
         bridge?.registerPluginInstance(VoroBenchmarkDisplayPlugin())
         bridge?.registerPluginInstance(VoroAudioDiagnosticsPlugin())
+        bridge?.registerPluginInstance(VoroMusicPlugin())
     }
 }
 

@@ -1,5 +1,7 @@
 # Recuperación de streaming al activar audio · 0.13.1 (1)
 
+**Resultado físico posterior: rechazado.** El usuario informa de más petardeo y ráfagas de aproximadamente medio segundo al cambiar reproducción/ajustes o entrar/salir. Se retira esta intervención en 0.13.2; ver `../audio-rollback-0.13.2/README.md`. La entrega histórica y pruebas siguientes no acreditan una mejora acústica.
+
 El usuario confirma el 30-09-2026 que, cuando petardea, entrar y salir de Configuración sin reproducir A/B elimina el ruido. Solicita una solución. Se mantiene la autorización existente para corregir audio y entregar TestFlight interno.
 
 ## Evidencia recibida y límites
