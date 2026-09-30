@@ -10,7 +10,7 @@ import { decoyTarget } from './organic-decoy.mjs';
 import { advanceRepulsion } from './contact-repulsion.mjs';
 import { random, clamp } from './simulation.mjs';
 import { projectileThreatMass } from './threat-scale.mjs';
-import { cityLots, cityPlacement, constrainCity } from './city-layout.mjs';
+import { cityLots, cityPlacement, constrainCity, cityDistrict, cityAllowsSpecies, cityBounds, cityOverlap, CITY_PLOTS } from './city-layout.mjs';
 import { ORBITAL_EARTH } from './earth-landmark.mjs';
 import {
   STAGE_SPECIES,
@@ -60,7 +60,8 @@ export class JourneyWorld extends MicroWorld {
     }
     let depleted = false;
     const list = STAGE_SPECIES[this.stage].filter(
-      (s) => s.kind !== 'final' && !s.variantOf && !s.unique && !s.building,
+      (s) => s.kind !== 'final' && !s.variantOf && !s.unique && !s.building &&
+        (STAGES[this.stage].id!=='city'||cityAllowsSpecies(s,cityDistrict(cx,cy,this.seed))),
     );
     const small = list.filter(
         (s) =>
@@ -93,11 +94,14 @@ export class JourneyWorld extends MicroWorld {
     };
     const [starters, plannedForage, threats] = plan.slots;
     const lots = stageId === 'city' ? cityLots(cx, cy, this.seed) : [];
+    const cityOccupied=[];
     const forage = plannedForage - lots.length;
     for (const lot of lots) {
       const id = `city-lot:${cx}:${cy}:${lot.slot}`;
       const e = journeyEntity(SPECIES_BY_ID[lot.kind],lot.x,lot.y,rng()*6.28,id);
       occupied.push({x:e.x,y:e.y,r:e.r});
+      const plot=CITY_PLOTS[lot.slot];
+      cityOccupied.push({x:cx*600+plot.x,y:cy*600+plot.y,w:plot.w,h:plot.h});
       if ((this.journal.get(id)||0)>time) depleted=true;
       else entities.push(e);
     }
@@ -145,8 +149,10 @@ export class JourneyWorld extends MicroWorld {
         x = cx * TILE + margin + rng() * (TILE - 2 * margin);
         y = cy * TILE + margin + rng() * (TILE - 2 * margin);
         if (stageId === 'city') {
-          const pos = cityPlacement(s,x,y,cx,cy);
+          const pos = cityPlacement(s,x,y,cx,cy,candidate.r,this.seed);
+          if(!pos)continue;
           x=pos.x; y=pos.y; cityAxis=pos.axis;
+          if(s.motion!=='rotor' && cityOccupied.some(b=>cityOverlap(b,cityBounds(s,{x,y,r:candidate.r}))))continue;
         }
         if (stageId === 'land' && !shoreAllows(s, x, y, candidate.r)) continue;
         if (
@@ -163,6 +169,7 @@ export class JourneyWorld extends MicroWorld {
       // Consumed slots also reserve their geometry until regeneration, so eating
       // one object never moves or rerolls neighbouring objects on chunk reload.
       occupied.push({ x, y, r: candidate.r });
+      if(stageId==='city'&&s.motion!=='rotor')cityOccupied.push(cityBounds(s,{x,y,r:candidate.r}));
       if (isDanger(s) && Math.hypot(x - 700, y - 970) < 310 + Math.max(0,candidate.r-150)) continue;
       if ((this.journal.get(id) || 0) > time) { depleted = true; continue; }
       const inhabitant =
@@ -174,26 +181,36 @@ export class JourneyWorld extends MicroWorld {
     if (cx === 1 && cy === 1)
       for (let i = 0; i < 7; i++) {
         const id = `first:${i}`;
-        if ((this.journal.get(id) || 0) > time) { depleted = true; continue; }
+        const consumed=(this.journal.get(id) || 0) > time;
+        if (consumed) { depleted = true; if(stageId!=='city')continue; }
         const a = i * 2.399,
           d = 105 + i * 20;
-        entities.push(
-          journeyEntity(
-            small[i % small.length],
+        const s=small[i % small.length];
+        const e=journeyEntity(
+            s,
             700 + Math.cos(a) * d,
             970 + Math.sin(a) * d,
             i,
             id,
-          ),
-        );
+          );
+        if(stageId==='city') {
+          let placed=false;
+          for(let attempt=0;attempt<10;attempt++) {
+            const pos=cityPlacement(s,cx*TILE+rng()*TILE,cy*TILE+rng()*TILE,cx,cy,e.r,this.seed);
+            if(!pos)continue;
+            const bounds=cityBounds(s,{...pos,r:e.r});
+            if(cityOccupied.some(b=>cityOverlap(b,bounds)))continue;
+            e.x=e.homeX=pos.x;e.y=e.homeY=pos.y;e.cityAxis=pos.axis;
+            if(pos.axis)e.heading=pos.axis==='x'?0:Math.PI/2;
+            // Reserve consumed arrival objects too, preserving neighbours.
+            cityOccupied.push(bounds);placed=true;break;
+          }
+          if(!placed)continue;
+        }
+        if(!consumed)entities.push(e);
       }
     if (stageId === 'land')
       for (const e of entities) constrainToShore(e, SPECIES_BY_ID[e.kind]);
-    if (stageId === 'city') for (const e of entities) {
-      if (!e.id.startsWith('first:')) continue;
-      const pos=cityPlacement(SPECIES_BY_ID[e.kind],e.x,e.y,cx,cy);
-      e.x=e.homeX=pos.x; e.y=e.homeY=pos.y; e.cityAxis=pos.axis;
-    }
     // One Earth at the arrival point. A consumed landmark remains consumed,
     // unlike renewable forage, including after chunk eviction and save/load.
     if (stageId === 'planets' && cx === 1 && cy === 2 && !this.journal.has('landmark:earth')) {

@@ -18,6 +18,7 @@ const sizes = {
   cityCivilians: [1536,1024],
   ringedPlanet: [640,640],
   cityBuildings: [1536,1024],
+  cityContainerAligned: [1774,887],
   planetDiversity: [1536,1024],
   earth: [4096, 4096], pulsarDetail: [1254, 1254],
   naturalMatter: [1448, 1086],

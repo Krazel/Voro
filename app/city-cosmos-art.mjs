@@ -3,12 +3,16 @@ import CROPS from './city-cosmos-crops.json' with { type: 'json' };
 export function applyCityCosmosArt(stages, lists, byId, urls) {
   urls.cityCivilians = './inhabitants/city-civilians.png';
   urls.cityBuildings = './inhabitants/city-buildings-v2.webp';
+  urls.cityContainerAligned = './inhabitants/city-container-aligned-v1.png';
   urls.ringedPlanet = './inhabitants/ringed-planet-v2.webp';
   urls.planetDiversity = './inhabitants/planet-diversity-v2.webp';
   const city = stages.findIndex(s => s.id === 'city');
   const planets = stages.findIndex(s => s.id === 'planets');
-  for (const id of ['city-matter-bench','city-matter-lamp','city-matter-sign','city-matter-container'])
+  for (const id of ['city-matter-bench','city-matter-lamp','city-matter-sign','city-matter-container','city-matter-palm','city-matter-shrub'])
     byId[id].fixedHeading = 0;
+  Object.assign(byId['city-matter-container'], {imageAtlas:'cityContainerAligned',crop:[225,168,1340,590],
+    artProfile:{family:'prop',rigid:true,period:9,revision:2,
+      description:'Contenedor horizontal con la misma vista elevada frontal que los edificios.'}});
   const add = (source, id, name, stage, changes) => {
     const s = { ...source, id, name, stage, ...changes };
     lists[stage].push(s); byId[id] = s; return s;

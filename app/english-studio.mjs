@@ -273,6 +273,7 @@ El globo conserva su forma, con un giro lento.|The globe keeps its shape while s
 Brazos y piernas articulados, con brazada y patada alternas.|Articulated arms and legs with alternating strokes and kicks.
 Civil distinto, con silueta, ropa y accesorios propios.|Distinct civilian with an individual silhouette, clothing and accessories.
 Edificio fijo, alineado con su parcela y las calles.|Fixed building aligned with its plot and the streets.
+Contenedor horizontal con la misma vista elevada frontal que los edificios.|Horizontal container matching the buildings' elevated front view.
 Globo estable con iluminación coherente; deriva orbital lenta.|Stable globe with consistent lighting; slow orbital drift.
 Balanceo suave de las hojas, con la base estable.|Gentle leaf sway with a stable base.
 Flujo lento de gas y polvo dentro de su silueta.|Slow gas and dust flow within its silhouette.
