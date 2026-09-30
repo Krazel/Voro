@@ -1,6 +1,6 @@
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';import {spawnSync} from 'node:child_process';
 const out='artifact/native-music-qa';fs.mkdirSync(out,{recursive:true});
-const run=(cmd,args)=>{const r=spawnSync(cmd,args,{encoding:'utf8',maxBuffer:40*1024*1024,timeout:300000});assert.equal(r.status,0,(r.stderr+r.stdout).slice(-5000));return r.stdout.trim();};
+const run=(cmd,args)=>{const r=spawnSync(cmd,args,{encoding:'utf8',maxBuffer:40*1024*1024,timeout:300000});if(cmd==='xcodebuild')fs.writeFileSync(out+'/compile.log',r.stdout+r.stderr);assert.equal(r.status,0,(r.stdout+r.stderr).split('\n').filter(l=>/error:|warning:|BUILD FAILED|failed:/.test(l)).join('\n').slice(-10000)||(r.stdout+r.stderr).slice(-5000));return r.stdout.trim();};
 const probe='ios/App/App/public/native-music-probe.js',derived=path.join(process.env.RUNNER_TEMP,'VoroNativeMusicQA');
 fs.copyFileSync('scripts/native-music-probe.js',probe);
 try{
