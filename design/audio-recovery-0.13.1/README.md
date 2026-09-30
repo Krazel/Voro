@@ -34,6 +34,12 @@ Así reproduce de forma automática y breve la pausa/reanudación que recupera e
 
 ## Entrega
 
-Candidata 0.13.1 (1); TestFlight interno pendiente de build, firma, subida, procesamiento y relectura API. Biblioteca PR-009 revisión 311 actualizada y verificada, conservando marketing y tracking. No hay publicación App Store ni TestFlight externo.
+**Disponible en TestFlight interno: 0.13.1 (1), VALID / IN_BETA_TESTING.**
+
+- Fuente `a33c1ab93b3ae0d681fcdb64bacd8758d7f3e917`, [CI 36703693569](https://github.com/Krazel/Voro/actions/runs/36703693569) finalizada correctamente. 330/330 pruebas en macOS, compilación, firma, subida y acceso interno verificados.
+- Apple build `f6f12c68-6d8f-4d42-80f6-be83600be43f`, grupo VORO Interno `05db8744-bcf3-4c2d-a465-2635012bfeeb`. API confirma estado y pertenencia. Subida 30-09-2026; consulta final 10:50 UTC / 12:50 Europe/Madrid.
+- IPA `349761923` bytes, SHA-256 `3da03326097e1ff972930e274c6ca63b8ef12390f5ff7e823bc8bf140afdda6d`. `verify-delivery.py` comprueba versión/build, commit, familias iPhone/iPad, código nativo de suspensión, recuperación móvil y campos de diagnóstico dentro del paquete; resultado `verification.json`.
+- Biblioteca PR-009: revisión 311 durante implementación y **312** al entregar, guardada y releída; marketing, versión pública y tracking conservados. No hay publicación App Store ni TestFlight externo.
+- Falta confirmación física del usuario en su iPhone: jugar normalmente, arranque y regreso a la app, sin abrir Configuración para recuperar el audio. La build incorpora la corrección, pero la desaparición del petardeo no se declara comprobada por pruebas de navegador.
 
 Se reutiliza el flujo oficial de [subida de builds de Apple](https://developer.apple.com/help/app-store-connect/manage-builds/upload-builds/), consultado el 30-09-2026, y el preflight API comprueba que versión/build no existan antes de subir.
