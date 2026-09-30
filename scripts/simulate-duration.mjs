@@ -9,6 +9,7 @@ import {JourneyWorld} from '../app/journey-world.mjs';
 import {STAGES,SPECIES_BY_ID,isDanger} from '../app/journey-data.mjs';
 import {MAX_UPGRADE_CHOICES} from '../app/mutations.mjs';
 import {RELEASE} from '../app/release.mjs';
+import {CAMPAIGN_PACING, ADAPTATION_FOOD_GAIN, adaptationYield} from '../app/campaign-pacing.mjs';
 
 const profiles={
  precise:{reaction:0,exploration:0,choiceSeconds:5,priority:['yield','speed','digest','slots','shield','pull','tentacleReach','tentacles','combo','decoy','dash','turn','recycle','spikes']},
@@ -85,6 +86,8 @@ stages.at(-1).completed=completed;
 const menuSeconds=choices.length*config.choiceSeconds+deaths*5;
 const result={
  version:RELEASE,source:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),profile,seed,hz,config,
+ pacing:CAMPAIGN_PACING,adaptationFoodGain:ADAPTATION_FOOD_GAIN,
+ adaptationYields:Object.fromEntries(STAGES.map(s=>[s.id,adaptationYield(s.id)])),
  maxSeconds,finalStage:STAGES[g.progress.stage].id,finalMass:g.life.biomass,
  completed,stoppedReason:completed?'completed':deaths>=10?'death-limit':'time-limit',
  simulationSeconds:simulated,activeSeconds:active,cinematicSeconds:cinematic,menuSeconds,
