@@ -9,7 +9,8 @@ import {compactCityAtlas,StageAssets} from '../app/stage-assets.mjs';
 import {animationCrop} from '../app/animation-catalog.mjs';
 import WALK_AUDIT from '../design/city-walk-2026-10-01/painted-frame-audit.json' with {type:'json'};
 import RIG_AUDIT from '../design/city-walk-corrections-2026-10-01/rig-audit.json' with {type:'json'};
-import BEFORE from '../design/city-walk-corrections-2026-10-01/before-arms-art.json' with {type:'json'};
+import BEFORE from '../design/city-vertical-2026-10-01/before-art.json' with {type:'json'};
+import VERTICAL from '../design/city-vertical-2026-10-01/export-audit.json' with {type:'json'};
 
 test('City art replacement preserves every existing gameplay size, reward and attack',()=>{
  const current=STAGE_SPECIES[4].map(({id,r,value,requiredMass,speed,sizeFactors,kind,shot})=>({id,r,value,requiredMass,speed,sizeFactors,kind,shot}));
@@ -116,13 +117,18 @@ test('Corrected walks exchange the near/far supporting leg across both halves of
  }
 });
 
-test('All seven approved humans retain their art and motion apart from root registration',()=>{
- const withoutRegistration=a=>{
-  const {registrationRevision,...rest}=a;
-  return {...rest,frames:rest.frames.map(({anchor,registration,...f})=>f)};
- };
- for(const id of ['city-0','city-1','city-2','city-3','city-civilian-2','city-civilian-3','city-civilian-5'])
-  assert.deepEqual(withoutRegistration(ART.find(a=>a.id===id)),withoutRegistration(BEFORE.find(a=>a.id===id)));
+test('Approved directions retain their exact registration, poses, cadence and texture dimensions',()=>{
+ for(const old of BEFORE.filter(a=>a.kind==='human')){
+  const current=ART.find(a=>a.id===old.id);
+  assert.deepEqual(current.size,old.size);
+  assert.equal(current.walkPeriod,old.walkPeriod);
+  for(const f of old.frames){
+   if(VERTICAL.some(v=>v.id===old.id&&v.direction===f.direction))continue;
+   assert.deepEqual(current.frames.find(v=>v.direction===f.direction&&v.pose===f.pose),f);
+  }
+ }
+ assert.equal(VERTICAL.length,22);
+ for(const f of VERTICAL)assert.notEqual(f.hash,VERTICAL.find(v=>v.id===f.id&&v.direction===f.direction&&v.pose!==f.pose).hash);
 });
 
 test('Every human pose uses the same crown, ground and root without added translation',()=>{

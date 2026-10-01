@@ -1,0 +1,27 @@
+[
+  {
+    "id": "city-1",
+    "d": 1,
+    "prompt": "Edit the supplied 2x2 sprite sheet. ALL FOUR figures mistakenly have the same leg forward. FIX THIS: in BOTH BOTTOM figures, bend and lift the leg located on the LEFT SIDE OF THE IMAGE so its foot is much HIGHER, at mid-calf level. Extend the leg on the RIGHT SIDE OF THE IMAGE straight toward bottom edge, with that shoe becoming the LOWEST shoe. Opposite of top figures. Keep entire upper bodies, clothing, rifle and both hands completely unchanged. Do NOT mirror the body or accessories. Four full figures in 2x2 grid, identical character style to reference, transparent background. The bottom pair must clearly show lowest shoe on SCREEN RIGHT; the top pair have lowest shoe on SCREEN LEFT. This is essential for alternating walking."
+  },
+  {
+    "id": "city-civilian-0",
+    "d": 1,
+    "prompt": "Edit the supplied 2x2 sprite sheet. ALL FOUR figures mistakenly have the same leg forward. FIX THIS: in BOTH BOTTOM figures, bend and lift the leg located on the LEFT SIDE OF THE IMAGE so its foot is much HIGHER, at mid-calf level. Extend the leg on the RIGHT SIDE OF THE IMAGE straight toward bottom edge, with that shoe becoming the LOWEST shoe. Opposite of top figures. Keep entire upper bodies, clothing, bag on left side of image completely unchanged. Do NOT mirror the body or accessories. Four full figures in 2x2 grid, identical character style to reference, transparent background. The bottom pair must clearly show lowest shoe on SCREEN RIGHT; the top pair have lowest shoe on SCREEN LEFT. This is essential for alternating walking."
+  },
+  {
+    "id": "city-civilian-4",
+    "d": 1,
+    "prompt": "Edit the supplied 2x2 sprite sheet. ALL FOUR figures mistakenly have the same leg forward. FIX THIS: in BOTH BOTTOM figures, bend and lift the leg located on the LEFT SIDE OF THE IMAGE so its foot is much HIGHER, at mid-calf level. Extend the leg on the RIGHT SIDE OF THE IMAGE straight toward bottom edge, with that shoe becoming the LOWEST shoe. Opposite of top figures. Keep entire upper bodies, clothing, bag on left side of image completely unchanged. Do NOT mirror the body or accessories. Four full figures in 2x2 grid, identical character style to reference, transparent background. The bottom pair must clearly show lowest shoe on SCREEN RIGHT; the top pair have lowest shoe on SCREEN LEFT. This is essential for alternating walking."
+  },
+  {
+    "id": "city-3",
+    "d": 3,
+    "prompt": "Edit this rear-facing heavy soldier 2x2 sprite sheet. Currently all four poses have the same supporting leg. In the TWO BOTTOM poses ONLY, move the SCREEN RIGHT leg down so that its boot is the lowest point of the figure, fully extended. Bend SCREEN LEFT leg behind, its boot lifted to mid calf level and sole visible. Keep TOP poses unchanged. Preserve weapon on screen LEFT and antenna on screen RIGHT throughout, preserve torso/helmet scale camera and olive armor. Do not mirror entire figure. Genuine transparent background. Full body painted poses with no sliced joints."
+  },
+  {
+    "id": "city-3",
+    "d": 3,
+    "prompt": "Use the attached rear heavy soldier as character reference. Make ONE single full-body rear view walking pose, transparent background. Same olive armored soldier and backpack viewed mildly from above, gun extending to left of picture, antenna to right of picture. Crucially: the boot on the RIGHT SIDE OF THE PICTURE is flat planted on the floor and the LOWEST point. The leg on the LEFT SIDE OF THE PICTURE has its knee bent and boot lifted behind with SOLE facing viewer near knee level. This is the opposite step from reference. The right-side boot must be far lower than the left-side boot. One figure only centered. Preserve full detailed body and accessory design."
+  }
+]

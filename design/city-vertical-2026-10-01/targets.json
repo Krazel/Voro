@@ -1,0 +1,57 @@
+[
+  {
+    "id": "city-0",
+    "direction": 3,
+    "count": 4
+  },
+  {
+    "id": "city-1",
+    "direction": 1,
+    "count": 4
+  },
+  {
+    "id": "city-2",
+    "direction": 1,
+    "count": 4
+  },
+  {
+    "id": "city-2",
+    "direction": 3,
+    "count": 4
+  },
+  {
+    "id": "city-3",
+    "direction": 1,
+    "count": 2
+  },
+  {
+    "id": "city-3",
+    "direction": 3,
+    "count": 4
+  },
+  {
+    "id": "city-civilian-0",
+    "direction": 1,
+    "count": 4
+  },
+  {
+    "id": "city-civilian-0",
+    "direction": 3,
+    "count": 4
+  },
+  {
+    "id": "city-civilian-3",
+    "direction": 3,
+    "count": 4
+  },
+  {
+    "id": "city-civilian-4",
+    "direction": 1,
+    "count": 4
+  },
+  {
+    "id": "city-civilian-4",
+    "direction": 3,
+    "count": 2
+  }
+]

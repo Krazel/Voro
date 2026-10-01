@@ -1,0 +1,508 @@
+[
+  {
+    "id": "city-0",
+    "direction": 3,
+    "pose": 0,
+    "source": {
+      "file": "city-0-3",
+      "index": 0,
+      "count": 4,
+      "bounds": {
+        "l": 231,
+        "r": 470,
+        "t": 56,
+        "b": 603
+      }
+    },
+    "registration": {
+      "scale": 1,
+      "crownX": 128,
+      "top": 24,
+      "ground": 232
+    },
+    "hash": "41b808a5f9972066f419e8e45a17096d36b9af3420b81c91d5689a4a2fec0662"
+  },
+  {
+    "id": "city-0",
+    "direction": 3,
+    "pose": 1,
+    "source": {
+      "file": "city-0-3",
+      "index": 2,
+      "count": 4,
+      "bounds": {
+        "l": 229,
+        "r": 476,
+        "t": 663,
+        "b": 1195
+      }
+    },
+    "registration": {
+      "scale": 1.0097087378640777,
+      "crownX": 128,
+      "top": 25,
+      "ground": 231
+    },
+    "hash": "68d5db2012abe40f29f5cb0cb5eb3271c057419c8ee78b2d730109d07739b0f8"
+  },
+  {
+    "id": "city-1",
+    "direction": 1,
+    "pose": 0,
+    "source": {
+      "file": "city-1-1-fix",
+      "index": 0,
+      "count": 4,
+      "bounds": {
+        "l": 209,
+        "r": 472,
+        "t": 46,
+        "b": 618
+      }
+    },
+    "registration": {
+      "scale": 1,
+      "crownX": 127.5,
+      "top": 24,
+      "ground": 232
+    },
+    "hash": "21bfb7431acf1f6000dcfcff65fb55c889deb57e1df49d32a7e823be41228e9c"
+  },
+  {
+    "id": "city-1",
+    "direction": 1,
+    "pose": 1,
+    "source": {
+      "file": "city-1-1-fix",
+      "index": 2,
+      "count": 4,
+      "bounds": {
+        "l": 211,
+        "r": 478,
+        "t": 648,
+        "b": 1222
+      }
+    },
+    "registration": {
+      "scale": 1,
+      "crownX": 128,
+      "top": 24,
+      "ground": 232
+    },
+    "hash": "2b99e83a0c99cea2eec9a843e2ebb9bbf05f59e515251faccfc6411be0e5efa7"
+  },
+  {
+    "id": "city-2",
+    "direction": 1,
+    "pose": 0,
+    "source": {
+      "file": "city-2-1",
+      "index": 0,
+      "count": 4,
+      "bounds": {
+        "l": 195,
+        "r": 489,
+        "t": 60,
+        "b": 615
+      }
+    },
+    "registration": {
+      "scale": 1,
+      "crownX": 128,
+      "top": 24,
+      "ground": 232
+    },
+    "hash": "d7ad1257ee01fbee38062482a43a7932336b0fe2a5ad0fbd930c419b56a49292"
+  },
+  {
+    "id": "city-2",
+    "direction": 1,
+    "pose": 1,
+    "source": {
+      "file": "city-2-1",
+      "index": 2,
+      "count": 4,
+      "bounds": {
+        "l": 205,
+        "r": 489,
+        "t": 658,
+        "b": 1208
+      }
+    },
+    "registration": {
+      "scale": 1.0048309178743962,
+      "crownX": 128,
+      "top": 24,
+      "ground": 231
+    },
+    "hash": "fdc3a53d3f06ce507979eb078d879dc016efd9bbe0644230bc24baf682a00ac3"
+  },
+  {
+    "id": "city-2",
+    "direction": 3,
+    "pose": 0,
+    "source": {
+      "file": "city-2-3",
+      "index": 1,
+      "count": 4,
+      "bounds": {
+        "l": 812,
+        "r": 1068,
+        "t": 64,
+        "b": 588
+      }
+    },
+    "registration": {
+      "scale": 1.0048309178743962,
+      "crownX": 128,
+      "top": 24,
+      "ground": 231
+    },
+    "hash": "0eddd8def3522e97e9cf0eeb9a2d2547856d74f9fd2c28d3c9bffb81a2d7dd4d"
+  },
+  {
+    "id": "city-2",
+    "direction": 3,
+    "pose": 1,
+    "source": {
+      "file": "city-2-3",
+      "index": 3,
+      "count": 4,
+      "bounds": {
+        "l": 819,
+        "r": 1075,
+        "t": 677,
+        "b": 1200
+      }
+    },
+    "registration": {
+      "scale": 1,
+      "crownX": 128,
+      "top": 24,
+      "ground": 232
+    },
+    "hash": "ed6a25cd7ad3eeca92c4f0795b98ca5118fd29e7e3dbe41b725394ae7ca56ee6"
+  },
+  {
+    "id": "city-3",
+    "direction": 1,
+    "pose": 0,
+    "source": {
+      "file": "city-3-1",
+      "index": 0,
+      "count": 2,
+      "bounds": {
+        "l": 287,
+        "r": 618,
+        "t": 85,
+        "b": 815
+      }
+    },
+    "registration": {
+      "scale": 1.0097087378640777,
+      "crownX": 127.5,
+      "top": 25,
+      "ground": 231
+    },
+    "hash": "7adda7be7955820b20f929dd0ba026bd1364e425bfcedce8d28d41ef270a8f02"
+  },
+  {
+    "id": "city-3",
+    "direction": 1,
+    "pose": 1,
+    "source": {
+      "file": "city-3-1",
+      "index": 1,
+      "count": 2,
+      "bounds": {
+        "l": 1151,
+        "r": 1488,
+        "t": 84,
+        "b": 806
+      }
+    },
+    "registration": {
+      "scale": 1.0048309178743962,
+      "crownX": 128,
+      "top": 25,
+      "ground": 232
+    },
+    "hash": "93efc14a8c41d8fca5f0dcbb433f41a2ee9b247d7d3e80aa8322e90e212b61e9"
+  },
+  {
+    "id": "city-3",
+    "direction": 3,
+    "pose": 0,
+    "source": {
+      "file": "city-3-3-pair",
+      "index": 0,
+      "count": 2,
+      "bounds": {
+        "l": 208,
+        "r": 655,
+        "t": 83,
+        "b": 810
+      }
+    },
+    "registration": {
+      "scale": 1.0048309178743962,
+      "crownX": 128,
+      "top": 24,
+      "ground": 231
+    },
+    "hash": "997387b77ace5129a27aafd14696c59e27d970f2b53cdc00a65f5e2c128d8e43"
+  },
+  {
+    "id": "city-3",
+    "direction": 3,
+    "pose": 1,
+    "source": {
+      "file": "city-3-3-pair",
+      "index": 1,
+      "count": 2,
+      "bounds": {
+        "l": 1045,
+        "r": 1479,
+        "t": 83,
+        "b": 814
+      }
+    },
+    "registration": {
+      "scale": 1,
+      "crownX": 128,
+      "top": 24,
+      "ground": 232
+    },
+    "hash": "5606935cc997faaaed67e347314e9a293115eae498af288648a49987b414de28"
+  },
+  {
+    "id": "city-civilian-0",
+    "direction": 1,
+    "pose": 0,
+    "source": {
+      "file": "city-civilian-0-1-fix",
+      "index": 0,
+      "count": 4,
+      "bounds": {
+        "l": 203,
+        "r": 439,
+        "t": 37,
+        "b": 600
+      }
+    },
+    "registration": {
+      "scale": 1,
+      "crownX": 128,
+      "top": 24,
+      "ground": 232
+    },
+    "hash": "eae551e4960aa15adc89144088187966bc98a1ac87154562ffefb0b59873bcfb"
+  },
+  {
+    "id": "city-civilian-0",
+    "direction": 1,
+    "pose": 1,
+    "source": {
+      "file": "city-civilian-0-1-fix",
+      "index": 2,
+      "count": 4,
+      "bounds": {
+        "l": 203,
+        "r": 447,
+        "t": 656,
+        "b": 1218
+      }
+    },
+    "registration": {
+      "scale": 1.0048309178743962,
+      "crownX": 128,
+      "top": 25,
+      "ground": 232
+    },
+    "hash": "9eaea7fd1a9550d25c66d80b9afef7fc2e16f7b4fca4635656da4e14b18227de"
+  },
+  {
+    "id": "city-civilian-0",
+    "direction": 3,
+    "pose": 0,
+    "source": {
+      "file": "city-civilian-0-3",
+      "index": 1,
+      "count": 4,
+      "bounds": {
+        "l": 774,
+        "r": 1006,
+        "t": 46,
+        "b": 581
+      }
+    },
+    "registration": {
+      "scale": 1,
+      "crownX": 128,
+      "top": 24,
+      "ground": 232
+    },
+    "hash": "58d3ffce3ea17a13244c522410a0d1be4bf733c6cede7a3c0a10cd4c15ce17d8"
+  },
+  {
+    "id": "city-civilian-0",
+    "direction": 3,
+    "pose": 1,
+    "source": {
+      "file": "city-civilian-0-3",
+      "index": 3,
+      "count": 4,
+      "bounds": {
+        "l": 774,
+        "r": 1005,
+        "t": 658,
+        "b": 1191
+      }
+    },
+    "registration": {
+      "scale": 1,
+      "crownX": 128,
+      "top": 24,
+      "ground": 232
+    },
+    "hash": "c33ae905dc5d9ecc7e1a502b996cbda72a2e9e46af53f9634ec605071fc312c4"
+  },
+  {
+    "id": "city-civilian-3",
+    "direction": 3,
+    "pose": 0,
+    "source": {
+      "file": "city-civilian-3-3",
+      "index": 0,
+      "count": 4,
+      "bounds": {
+        "l": 186,
+        "r": 445,
+        "t": 62,
+        "b": 596
+      }
+    },
+    "registration": {
+      "scale": 1.0048309178743962,
+      "crownX": 127.5,
+      "top": 24,
+      "ground": 231
+    },
+    "hash": "307e35d45e8a88105c16e7c39d1e30aaa524815ebdd69dd05a9c0771c1e30910"
+  },
+  {
+    "id": "city-civilian-3",
+    "direction": 3,
+    "pose": 1,
+    "source": {
+      "file": "city-civilian-3-3",
+      "index": 2,
+      "count": 4,
+      "bounds": {
+        "l": 187,
+        "r": 446,
+        "t": 680,
+        "b": 1198
+      }
+    },
+    "registration": {
+      "scale": 1,
+      "crownX": 128,
+      "top": 24,
+      "ground": 232
+    },
+    "hash": "84aae657784a1524512a33a2a9e67ef995606ea55ffe37b3ec05ea7de70203c9"
+  },
+  {
+    "id": "city-civilian-4",
+    "direction": 1,
+    "pose": 0,
+    "source": {
+      "file": "city-civilian-4-1-fix",
+      "index": 0,
+      "count": 4,
+      "bounds": {
+        "l": 182,
+        "r": 455,
+        "t": 37,
+        "b": 623
+      }
+    },
+    "registration": {
+      "scale": 1,
+      "crownX": 128,
+      "top": 24,
+      "ground": 232
+    },
+    "hash": "1b8dd8d0ad9136313a351173b7e4b9c4136e43bed97b78f84b9bd71448091c5c"
+  },
+  {
+    "id": "city-civilian-4",
+    "direction": 1,
+    "pose": 1,
+    "source": {
+      "file": "city-civilian-4-1-fix",
+      "index": 2,
+      "count": 4,
+      "bounds": {
+        "l": 183,
+        "r": 460,
+        "t": 663,
+        "b": 1223
+      }
+    },
+    "registration": {
+      "scale": 1.0048309178743962,
+      "crownX": 128,
+      "top": 24,
+      "ground": 231
+    },
+    "hash": "9b45cafbfd503bd0de6281feef86181bce729eac164bb91ecf3d8ebc20c59f08"
+  },
+  {
+    "id": "city-civilian-4",
+    "direction": 3,
+    "pose": 0,
+    "source": {
+      "file": "city-civilian-4-3",
+      "index": 0,
+      "count": 2,
+      "bounds": {
+        "l": 294,
+        "r": 619,
+        "t": 85,
+        "b": 813
+      }
+    },
+    "registration": {
+      "scale": 1.0048309178743962,
+      "crownX": 128,
+      "top": 25,
+      "ground": 232
+    },
+    "hash": "2bae09257c0f77e3b061503ea807bae21bf9bc7242d8559fb111e7b525b65410"
+  },
+  {
+    "id": "city-civilian-4",
+    "direction": 3,
+    "pose": 1,
+    "source": {
+      "file": "city-civilian-4-3",
+      "index": 1,
+      "count": 2,
+      "bounds": {
+        "l": 1164,
+        "r": 1506,
+        "t": 85,
+        "b": 822
+      }
+    },
+    "registration": {
+      "scale": 1,
+      "crownX": 128,
+      "top": 24,
+      "ground": 232
+    },
+    "hash": "4e9baf910bb1adb261bf0fb0a2ff7bf090ad29b40adcf184d7c0db2f41c33a8e"
+  }
+]

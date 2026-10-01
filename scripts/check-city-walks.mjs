@@ -5,6 +5,8 @@ import{spawnSync}from'node:child_process';
 import{SPECIES_BY_ID,ATLAS_URLS}from'../app/journey-data.mjs';
 import{drawJourneySprite}from'../app/journey-sprites.mjs';
 import ART from'../app/city-perspective-art.json'with{type:'json'};
+import BEFORE from'../design/city-vertical-2026-10-01/before-art.json'with{type:'json'};
+import VERTICAL from'../design/city-vertical-2026-10-01/export-audit.json'with{type:'json'};
 const{createCanvas,loadImage}=createRequire(process.env.VORO_CANVAS_RUNTIME)('@napi-rs/canvas');
 const out='design/city-walk-2026-10-01',frameDir='work/city-walk-video';mkdirSync(frameDir,{recursive:true});
 const ids=ART.filter(a=>a.walkPeriod).map(a=>a.id),images={},rows=[];
@@ -23,12 +25,17 @@ for(let n=0;n<ids.length;n++){
  const upperBodyMoves=upperHashes[0]!==upperHashes[1];
  if(['city-civilian-0','city-civilian-1','city-civilian-4'].includes(s.id)&&!upperBodyMoves)throw Error(`${s.id}: frozen upper body across opposite steps`);
  const art=s.directionalArt;
- const old=await loadImage(`public/inhabitants/city-perspective/${s.id}-walk-v3.webp`);
- const oldCanvas=createCanvas(1024,256),kept=createCanvas(1024,256);
- oldCanvas.getContext('2d').drawImage(old,0,256,1024,256,0,0,1024,256);
- kept.getContext('2d').drawImage(images[s.imageAtlas],0,art.size[1]-256,1024,256,0,0,1024,256);
- const pixelHash=canvas=>createHash('sha256').update(canvas.getContext('2d').getImageData(0,0,1024,256).data).digest('hex');
- if(pixelHash(oldCanvas)!==pixelHash(kept))throw Error(`${s.id}: front/back pixels changed`);
+ const before=BEFORE.find(a=>a.id===s.id),old=await loadImage(`public/inhabitants/city-perspective/${before.file}`);
+ const oldCanvas=createCanvas(256,256),kept=createCanvas(256,256);
+ const pixelHash=canvas=>createHash('sha256').update(canvas.getContext('2d').getImageData(0,0,256,256).data).digest('hex');
+ for(const f of before.frames){
+  if(VERTICAL.some(v=>v.id===s.id&&v.direction===f.direction))continue;
+  const now=art.frames.find(v=>v.direction===f.direction&&v.pose===f.pose);
+  oldCanvas.getContext('2d').clearRect(0,0,256,256);kept.getContext('2d').clearRect(0,0,256,256);
+  oldCanvas.getContext('2d').drawImage(old,...f.crop,0,0,256,256);
+  kept.getContext('2d').drawImage(images[s.imageAtlas],...now.crop,0,0,256,256);
+  if(pixelHash(oldCanvas)!==pixelHash(kept))throw Error(`${s.id}: approved direction ${f.direction} changed`);
+ }
  const registration=[];
  for(let d=0;d<4;d++)for(let i=0;i<art.views[d].length;i++){
   c.clearRect(0,0,128,160);c.save();c.translate(64,80);
@@ -41,7 +48,7 @@ for(let n=0;n<ids.length;n++){
   if(Math.abs(top-15)>2||Math.abs(bottom-145)>2||Math.abs(crown-64)>2)throw Error(s.id+': registration drift '+JSON.stringify({d,i,top,bottom,crown}));
   registration.push({direction:d,pose:i,top,bottom,crown});
  }
- rows.push({id:s.id,uniqueFrames:hashes.size,frameCount:count,frontBackPixelsIdentical:true,upperBodyMoves,registration});
+ rows.push({id:s.id,uniqueFrames:hashes.size,frameCount:count,approvedDirectionPixelsIdentical:true,upperBodyMoves,registration});
  p.fillStyle='#142d26';p.font='13px sans-serif';p.fillText(s.name,(n%2)*600+10,Math.floor(n/2)*180+171);
 }
 writeFileSync(out+'/quarter-poses.png',proof.toBuffer('image/png'));

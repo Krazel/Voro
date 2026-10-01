@@ -203,14 +203,14 @@
           256
         ],
         "anchor": [
-          128,
+          126.5,
           128
         ],
         "registration": {
-          "scale": 1,
-          "crownX": 128,
-          "top": 24,
-          "ground": 232
+          "scale": 1.0297029702970297,
+          "crownX": 126.5,
+          "top": 27,
+          "ground": 229
         }
       },
       {
@@ -243,21 +243,20 @@
           256
         ],
         "anchor": [
-          128,
-          128
+          122.5,
+          128.5
         ],
         "registration": {
-          "scale": 1.0097087378640777,
-          "crownX": 128,
-          "top": 25,
-          "ground": 231
+          "scale": 1.0246305418719213,
+          "crownX": 122.5,
+          "top": 27,
+          "ground": 230
         }
       }
     ],
-    "file": "city-0-vertical-v1.png",
+    "file": "city-0-walk-v3.webp",
     "walkPeriod": 0.95,
-    "registrationRevision": 1,
-    "verticalRevision": 1
+    "registrationRevision": 1
   },
   {
     "id": "city-1",
@@ -608,13 +607,13 @@
         ],
         "anchor": [
           127.5,
-          128
+          127
         ],
         "registration": {
-          "scale": 1,
+          "scale": 1.0297029702970297,
           "crownX": 127.5,
-          "top": 24,
-          "ground": 232
+          "top": 26,
+          "ground": 228
         }
       },
       {
@@ -647,14 +646,14 @@
           256
         ],
         "anchor": [
-          128,
-          128
+          127.5,
+          126.5
         ],
         "registration": {
-          "scale": 1,
-          "crownX": 128,
-          "top": 24,
-          "ground": 232
+          "scale": 1.0348258706467661,
+          "crownX": 127.5,
+          "top": 26,
+          "ground": 227
         }
       },
       {
@@ -678,11 +677,10 @@
         }
       }
     ],
-    "file": "city-1-vertical-v1.png",
+    "file": "city-1-walk-v5.png",
     "walkPeriod": 0.95,
     "walkRevision": 8,
-    "registrationRevision": 1,
-    "verticalRevision": 1
+    "registrationRevision": 1
   },
   {
     "id": "city-2",
@@ -868,14 +866,14 @@
           256
         ],
         "anchor": [
-          128,
-          128
+          125,
+          126
         ],
         "registration": {
-          "scale": 1,
-          "crownX": 128,
-          "top": 24,
-          "ground": 232
+          "scale": 1.0947368421052632,
+          "crownX": 125,
+          "top": 31,
+          "ground": 221
         }
       },
       {
@@ -888,14 +886,14 @@
           256
         ],
         "anchor": [
-          128,
-          127.5
+          131,
+          126
         ],
         "registration": {
-          "scale": 1.0048309178743962,
-          "crownX": 128,
-          "top": 24,
-          "ground": 231
+          "scale": 1.0947368421052632,
+          "crownX": 131,
+          "top": 31,
+          "ground": 221
         }
       },
       {
@@ -908,14 +906,14 @@
           256
         ],
         "anchor": [
-          128,
-          127.5
+          124.5,
+          129.5
         ],
         "registration": {
-          "scale": 1.0048309178743962,
-          "crownX": 128,
-          "top": 24,
-          "ground": 231
+          "scale": 1.077720207253886,
+          "crownX": 124.5,
+          "top": 33,
+          "ground": 226
         }
       },
       {
@@ -928,21 +926,20 @@
           256
         ],
         "anchor": [
-          128,
-          128
+          129,
+          131.5
         ],
         "registration": {
-          "scale": 1,
-          "crownX": 128,
-          "top": 24,
-          "ground": 232
+          "scale": 1.0558375634517767,
+          "crownX": 129,
+          "top": 33,
+          "ground": 230
         }
       }
     ],
-    "file": "city-2-vertical-v1.png",
+    "file": "city-2-walk-v3.webp",
     "walkPeriod": 0.95,
-    "registrationRevision": 1,
-    "verticalRevision": 1
+    "registrationRevision": 1
   },
   {
     "id": "city-3",
@@ -1292,14 +1289,14 @@
           256
         ],
         "anchor": [
-          127.5,
-          128
+          133,
+          127
         ],
         "registration": {
-          "scale": 1.0097087378640777,
-          "crownX": 127.5,
-          "top": 25,
-          "ground": 231
+          "scale": 1.0297029702970297,
+          "crownX": 133,
+          "top": 26,
+          "ground": 228
         }
       },
       {
@@ -1313,13 +1310,13 @@
         ],
         "anchor": [
           128,
-          127.5
+          125.00000000000001
         ],
         "registration": {
-          "scale": 1.0048309178743962,
+          "scale": 1.0505050505050506,
           "crownX": 128,
-          "top": 24,
-          "ground": 231
+          "top": 26,
+          "ground": 224
         }
       },
       {
@@ -1332,14 +1329,14 @@
           256
         ],
         "anchor": [
-          128,
-          128.5
+          124,
+          126
         ],
         "registration": {
-          "scale": 1.0048309178743962,
-          "crownX": 128,
-          "top": 25,
-          "ground": 232
+          "scale": 1.04,
+          "crownX": 124,
+          "top": 26,
+          "ground": 226
         }
       },
       {
@@ -1352,22 +1349,21 @@
           256
         ],
         "anchor": [
-          128,
+          127,
           128
         ],
         "registration": {
-          "scale": 1,
-          "crownX": 128,
-          "top": 24,
-          "ground": 232
+          "scale": 1.0196078431372548,
+          "crownX": 127,
+          "top": 26,
+          "ground": 230
         }
       }
     ],
-    "file": "city-3-vertical-v1.png",
+    "file": "city-3-walk-v5.png",
     "walkPeriod": 1.1,
     "walkRevision": 8,
-    "registrationRevision": 1,
-    "verticalRevision": 1
+    "registrationRevision": 1
   },
   {
     "id": "city-4",
@@ -1986,14 +1982,14 @@
           256
         ],
         "anchor": [
-          128,
-          128
+          129,
+          127.50000000000001
         ],
         "registration": {
-          "scale": 1,
-          "crownX": 128,
-          "top": 24,
-          "ground": 232
+          "scale": 1.0246305418719213,
+          "crownX": 129,
+          "top": 26,
+          "ground": 229
         }
       },
       {
@@ -2007,13 +2003,13 @@
         ],
         "anchor": [
           128,
-          128
+          126
         ],
         "registration": {
-          "scale": 1,
+          "scale": 1.04,
           "crownX": 128,
-          "top": 24,
-          "ground": 232
+          "top": 26,
+          "ground": 226
         }
       },
       {
@@ -2026,14 +2022,14 @@
           256
         ],
         "anchor": [
-          128,
+          128.5,
           128.5
         ],
         "registration": {
-          "scale": 1.0048309178743962,
-          "crownX": 128,
-          "top": 25,
-          "ground": 232
+          "scale": 1.0246305418719213,
+          "crownX": 128.5,
+          "top": 27,
+          "ground": 230
         }
       },
       {
@@ -2047,22 +2043,21 @@
         ],
         "anchor": [
           128,
-          128
+          126.5
         ],
         "registration": {
-          "scale": 1,
+          "scale": 1.0348258706467661,
           "crownX": 128,
-          "top": 24,
-          "ground": 232
+          "top": 26,
+          "ground": 227
         }
       }
     ],
-    "file": "city-civilian-0-vertical-v1.png",
+    "file": "city-civilian-0-walk-v7.png",
     "walkPeriod": 0.95,
     "walkRevision": 10,
     "walkMethod": "painted-full-body",
-    "registrationRevision": 1,
-    "verticalRevision": 1
+    "registrationRevision": 1
   },
   {
     "id": "city-civilian-1",
@@ -2953,13 +2948,13 @@
         ],
         "anchor": [
           127.5,
-          127.5
+          126.5
         ],
         "registration": {
-          "scale": 1.0048309178743962,
+          "scale": 1.0348258706467661,
           "crownX": 127.5,
-          "top": 24,
-          "ground": 231
+          "top": 26,
+          "ground": 227
         }
       },
       {
@@ -2992,22 +2987,21 @@
           256
         ],
         "anchor": [
-          128,
+          128.5,
           128
         ],
         "registration": {
-          "scale": 1,
-          "crownX": 128,
-          "top": 24,
-          "ground": 232
+          "scale": 1.0196078431372548,
+          "crownX": 128.5,
+          "top": 26,
+          "ground": 230
         }
       }
     ],
-    "file": "city-civilian-3-vertical-v1.png",
+    "file": "city-civilian-3-walk-v5.png",
     "walkPeriod": 1.4,
     "walkRevision": 8,
-    "registrationRevision": 1,
-    "verticalRevision": 1
+    "registrationRevision": 1
   },
   {
     "id": "city-civilian-4",
@@ -3194,13 +3188,13 @@
         ],
         "anchor": [
           128,
-          128
+          127.50000000000001
         ],
         "registration": {
-          "scale": 1,
+          "scale": 1.0246305418719213,
           "crownX": 128,
-          "top": 24,
-          "ground": 232
+          "top": 26,
+          "ground": 229
         }
       },
       {
@@ -3214,13 +3208,13 @@
         ],
         "anchor": [
           128,
-          128.5
+          126.5
         ],
         "registration": {
-          "scale": 1.0048309178743962,
+          "scale": 1.0348258706467661,
           "crownX": 128,
-          "top": 25,
-          "ground": 232
+          "top": 26,
+          "ground": 227
         }
       },
       {
@@ -3234,13 +3228,13 @@
         ],
         "anchor": [
           128,
-          127.5
+          127.50000000000001
         ],
         "registration": {
-          "scale": 1.0048309178743962,
+          "scale": 1.0246305418719213,
           "crownX": 128,
-          "top": 24,
-          "ground": 231
+          "top": 26,
+          "ground": 229
         }
       },
       {
@@ -3253,23 +3247,22 @@
           256
         ],
         "anchor": [
-          128,
+          127.5,
           128
         ],
         "registration": {
-          "scale": 1,
-          "crownX": 128,
-          "top": 24,
-          "ground": 232
+          "scale": 1.0196078431372548,
+          "crownX": 127.5,
+          "top": 26,
+          "ground": 230
         }
       }
     ],
-    "file": "city-civilian-4-vertical-v1.png",
+    "file": "city-civilian-4-walk-v7.png",
     "walkPeriod": 0.95,
     "walkRevision": 10,
     "walkMethod": "painted-full-body",
-    "registrationRevision": 1,
-    "verticalRevision": 1
+    "registrationRevision": 1
   },
   {
     "id": "city-civilian-5",
