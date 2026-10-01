@@ -190,7 +190,7 @@
     "kind": "human",
     "size": [
       1024,
-      768
+      512
     ],
     "referenceHeight": 208,
     "referenceSpan": 208,
@@ -252,62 +252,6 @@
         ]
       },
       {
-        "direction": 0,
-        "pose": 4,
-        "crop": [
-          0,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ]
-      },
-      {
-        "direction": 0,
-        "pose": 5,
-        "crop": [
-          256,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ]
-      },
-      {
-        "direction": 0,
-        "pose": 6,
-        "crop": [
-          512,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ]
-      },
-      {
-        "direction": 0,
-        "pose": 7,
-        "crop": [
-          768,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ]
-      },
-      {
         "direction": 2,
         "pose": 0,
         "crop": [
@@ -368,71 +312,11 @@
         "flipX": true
       },
       {
-        "direction": 2,
-        "pose": 4,
-        "crop": [
-          0,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ],
-        "flipX": true
-      },
-      {
-        "direction": 2,
-        "pose": 5,
-        "crop": [
-          256,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ],
-        "flipX": true
-      },
-      {
-        "direction": 2,
-        "pose": 6,
-        "crop": [
-          512,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ],
-        "flipX": true
-      },
-      {
-        "direction": 2,
-        "pose": 7,
-        "crop": [
-          768,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ],
-        "flipX": true
-      },
-      {
         "direction": 1,
         "pose": 0,
         "crop": [
           0,
-          512,
+          256,
           256,
           256
         ],
@@ -446,7 +330,7 @@
         "pose": 0,
         "crop": [
           256,
-          512,
+          256,
           256,
           256
         ],
@@ -460,7 +344,7 @@
         "pose": 1,
         "crop": [
           512,
-          512,
+          256,
           256,
           256
         ],
@@ -474,7 +358,7 @@
         "pose": 1,
         "crop": [
           768,
-          512,
+          256,
           256,
           256
         ],
@@ -484,9 +368,8 @@
         ]
       }
     ],
-    "file": "city-1-walk-v5.png",
-    "walkPeriod": 0.95,
-    "walkRevision": 8
+    "file": "city-1-walk-v3.webp",
+    "walkPeriod": 0.95
   },
   {
     "id": "city-2",
@@ -679,7 +562,7 @@
     "kind": "human",
     "size": [
       1024,
-      768
+      512
     ],
     "referenceHeight": 208,
     "referenceSpan": 208,
@@ -741,62 +624,6 @@
         ]
       },
       {
-        "direction": 0,
-        "pose": 4,
-        "crop": [
-          0,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ]
-      },
-      {
-        "direction": 0,
-        "pose": 5,
-        "crop": [
-          256,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ]
-      },
-      {
-        "direction": 0,
-        "pose": 6,
-        "crop": [
-          512,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ]
-      },
-      {
-        "direction": 0,
-        "pose": 7,
-        "crop": [
-          768,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ]
-      },
-      {
         "direction": 2,
         "pose": 0,
         "crop": [
@@ -857,71 +684,11 @@
         "flipX": true
       },
       {
-        "direction": 2,
-        "pose": 4,
-        "crop": [
-          0,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ],
-        "flipX": true
-      },
-      {
-        "direction": 2,
-        "pose": 5,
-        "crop": [
-          256,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ],
-        "flipX": true
-      },
-      {
-        "direction": 2,
-        "pose": 6,
-        "crop": [
-          512,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ],
-        "flipX": true
-      },
-      {
-        "direction": 2,
-        "pose": 7,
-        "crop": [
-          768,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ],
-        "flipX": true
-      },
-      {
         "direction": 1,
         "pose": 0,
         "crop": [
           0,
-          512,
+          256,
           256,
           256
         ],
@@ -935,7 +702,7 @@
         "pose": 0,
         "crop": [
           256,
-          512,
+          256,
           256,
           256
         ],
@@ -949,7 +716,7 @@
         "pose": 1,
         "crop": [
           512,
-          512,
+          256,
           256,
           256
         ],
@@ -963,7 +730,7 @@
         "pose": 1,
         "crop": [
           768,
-          512,
+          256,
           256,
           256
         ],
@@ -973,9 +740,8 @@
         ]
       }
     ],
-    "file": "city-3-walk-v5.png",
-    "walkPeriod": 1.1,
-    "walkRevision": 8
+    "file": "city-3-walk-v3.webp",
+    "walkPeriod": 1.1
   },
   {
     "id": "city-4",
@@ -1415,7 +1181,7 @@
     "kind": "human",
     "size": [
       1024,
-      768
+      512
     ],
     "referenceHeight": 208,
     "referenceSpan": 208,
@@ -1477,62 +1243,6 @@
         ]
       },
       {
-        "direction": 0,
-        "pose": 4,
-        "crop": [
-          0,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ]
-      },
-      {
-        "direction": 0,
-        "pose": 5,
-        "crop": [
-          256,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ]
-      },
-      {
-        "direction": 0,
-        "pose": 6,
-        "crop": [
-          512,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ]
-      },
-      {
-        "direction": 0,
-        "pose": 7,
-        "crop": [
-          768,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ]
-      },
-      {
         "direction": 2,
         "pose": 0,
         "crop": [
@@ -1593,71 +1303,11 @@
         "flipX": true
       },
       {
-        "direction": 2,
-        "pose": 4,
-        "crop": [
-          0,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ],
-        "flipX": true
-      },
-      {
-        "direction": 2,
-        "pose": 5,
-        "crop": [
-          256,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ],
-        "flipX": true
-      },
-      {
-        "direction": 2,
-        "pose": 6,
-        "crop": [
-          512,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ],
-        "flipX": true
-      },
-      {
-        "direction": 2,
-        "pose": 7,
-        "crop": [
-          768,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ],
-        "flipX": true
-      },
-      {
         "direction": 1,
         "pose": 0,
         "crop": [
           0,
-          512,
+          256,
           256,
           256
         ],
@@ -1671,7 +1321,7 @@
         "pose": 0,
         "crop": [
           256,
-          512,
+          256,
           256,
           256
         ],
@@ -1685,7 +1335,7 @@
         "pose": 1,
         "crop": [
           512,
-          512,
+          256,
           256,
           256
         ],
@@ -1699,7 +1349,7 @@
         "pose": 1,
         "crop": [
           768,
-          512,
+          256,
           256,
           256
         ],
@@ -1709,16 +1359,15 @@
         ]
       }
     ],
-    "file": "city-civilian-0-walk-v5.png",
-    "walkPeriod": 0.95,
-    "walkRevision": 8
+    "file": "city-civilian-0-walk-v3.webp",
+    "walkPeriod": 0.95
   },
   {
     "id": "city-civilian-1",
     "kind": "human",
     "size": [
       1024,
-      768
+      512
     ],
     "referenceHeight": 208,
     "referenceSpan": 208,
@@ -1780,62 +1429,6 @@
         ]
       },
       {
-        "direction": 0,
-        "pose": 4,
-        "crop": [
-          0,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ]
-      },
-      {
-        "direction": 0,
-        "pose": 5,
-        "crop": [
-          256,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ]
-      },
-      {
-        "direction": 0,
-        "pose": 6,
-        "crop": [
-          512,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ]
-      },
-      {
-        "direction": 0,
-        "pose": 7,
-        "crop": [
-          768,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ]
-      },
-      {
         "direction": 2,
         "pose": 0,
         "crop": [
@@ -1896,71 +1489,11 @@
         "flipX": true
       },
       {
-        "direction": 2,
-        "pose": 4,
-        "crop": [
-          0,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ],
-        "flipX": true
-      },
-      {
-        "direction": 2,
-        "pose": 5,
-        "crop": [
-          256,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ],
-        "flipX": true
-      },
-      {
-        "direction": 2,
-        "pose": 6,
-        "crop": [
-          512,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ],
-        "flipX": true
-      },
-      {
-        "direction": 2,
-        "pose": 7,
-        "crop": [
-          768,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ],
-        "flipX": true
-      },
-      {
         "direction": 1,
         "pose": 0,
         "crop": [
           0,
-          512,
+          256,
           256,
           256
         ],
@@ -1974,7 +1507,7 @@
         "pose": 0,
         "crop": [
           256,
-          512,
+          256,
           256,
           256
         ],
@@ -1988,7 +1521,7 @@
         "pose": 1,
         "crop": [
           512,
-          512,
+          256,
           256,
           256
         ],
@@ -2002,7 +1535,7 @@
         "pose": 1,
         "crop": [
           768,
-          512,
+          256,
           256,
           256
         ],
@@ -2012,9 +1545,8 @@
         ]
       }
     ],
-    "file": "city-civilian-1-walk-v5.png",
-    "walkPeriod": 0.95,
-    "walkRevision": 8
+    "file": "city-civilian-1-walk-v3.webp",
+    "walkPeriod": 0.95
   },
   {
     "id": "city-civilian-2",
@@ -2207,7 +1739,7 @@
     "kind": "human",
     "size": [
       1024,
-      768
+      512
     ],
     "referenceHeight": 208,
     "referenceSpan": 208,
@@ -2269,62 +1801,6 @@
         ]
       },
       {
-        "direction": 0,
-        "pose": 4,
-        "crop": [
-          0,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ]
-      },
-      {
-        "direction": 0,
-        "pose": 5,
-        "crop": [
-          256,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ]
-      },
-      {
-        "direction": 0,
-        "pose": 6,
-        "crop": [
-          512,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ]
-      },
-      {
-        "direction": 0,
-        "pose": 7,
-        "crop": [
-          768,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ]
-      },
-      {
         "direction": 2,
         "pose": 0,
         "crop": [
@@ -2385,71 +1861,11 @@
         "flipX": true
       },
       {
-        "direction": 2,
-        "pose": 4,
-        "crop": [
-          0,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ],
-        "flipX": true
-      },
-      {
-        "direction": 2,
-        "pose": 5,
-        "crop": [
-          256,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ],
-        "flipX": true
-      },
-      {
-        "direction": 2,
-        "pose": 6,
-        "crop": [
-          512,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ],
-        "flipX": true
-      },
-      {
-        "direction": 2,
-        "pose": 7,
-        "crop": [
-          768,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ],
-        "flipX": true
-      },
-      {
         "direction": 1,
         "pose": 0,
         "crop": [
           0,
-          512,
+          256,
           256,
           256
         ],
@@ -2463,7 +1879,7 @@
         "pose": 0,
         "crop": [
           256,
-          512,
+          256,
           256,
           256
         ],
@@ -2477,7 +1893,7 @@
         "pose": 1,
         "crop": [
           512,
-          512,
+          256,
           256,
           256
         ],
@@ -2491,7 +1907,7 @@
         "pose": 1,
         "crop": [
           768,
-          512,
+          256,
           256,
           256
         ],
@@ -2501,16 +1917,15 @@
         ]
       }
     ],
-    "file": "city-civilian-3-walk-v5.png",
-    "walkPeriod": 1.4,
-    "walkRevision": 8
+    "file": "city-civilian-3-walk-v3.webp",
+    "walkPeriod": 1.4
   },
   {
     "id": "city-civilian-4",
     "kind": "human",
     "size": [
       1024,
-      768
+      512
     ],
     "referenceHeight": 208,
     "referenceSpan": 208,
@@ -2572,62 +1987,6 @@
         ]
       },
       {
-        "direction": 0,
-        "pose": 4,
-        "crop": [
-          0,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ]
-      },
-      {
-        "direction": 0,
-        "pose": 5,
-        "crop": [
-          256,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ]
-      },
-      {
-        "direction": 0,
-        "pose": 6,
-        "crop": [
-          512,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ]
-      },
-      {
-        "direction": 0,
-        "pose": 7,
-        "crop": [
-          768,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ]
-      },
-      {
         "direction": 2,
         "pose": 0,
         "crop": [
@@ -2688,71 +2047,11 @@
         "flipX": true
       },
       {
-        "direction": 2,
-        "pose": 4,
-        "crop": [
-          0,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ],
-        "flipX": true
-      },
-      {
-        "direction": 2,
-        "pose": 5,
-        "crop": [
-          256,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ],
-        "flipX": true
-      },
-      {
-        "direction": 2,
-        "pose": 6,
-        "crop": [
-          512,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ],
-        "flipX": true
-      },
-      {
-        "direction": 2,
-        "pose": 7,
-        "crop": [
-          768,
-          256,
-          256,
-          256
-        ],
-        "anchor": [
-          128,
-          128
-        ],
-        "flipX": true
-      },
-      {
         "direction": 1,
         "pose": 0,
         "crop": [
           0,
-          512,
+          256,
           256,
           256
         ],
@@ -2766,7 +2065,7 @@
         "pose": 0,
         "crop": [
           256,
-          512,
+          256,
           256,
           256
         ],
@@ -2780,7 +2079,7 @@
         "pose": 1,
         "crop": [
           512,
-          512,
+          256,
           256,
           256
         ],
@@ -2794,7 +2093,7 @@
         "pose": 1,
         "crop": [
           768,
-          512,
+          256,
           256,
           256
         ],
@@ -2804,9 +2103,8 @@
         ]
       }
     ],
-    "file": "city-civilian-4-walk-v5.png",
-    "walkPeriod": 0.95,
-    "walkRevision": 8
+    "file": "city-civilian-4-walk-v3.webp",
+    "walkPeriod": 0.95
   },
   {
     "id": "city-civilian-5",
@@ -2991,9 +2289,8 @@
         ]
       }
     ],
-    "file": "city-civilian-5-walk-v4.png",
-    "walkPeriod": 0.95,
-    "walkRevision": 7
+    "file": "city-civilian-5-walk-v3.webp",
+    "walkPeriod": 0.95
   },
   {
     "id": "city-matter-bench",

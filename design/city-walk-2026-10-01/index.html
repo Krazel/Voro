@@ -1,27 +1,28 @@
 <!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VORO · Marcha lateral</title>
 <style>body{margin:0;background:#102023;color:#e8eeeb;font:16px/1.5 system-ui}main{max-width:1250px;margin:auto;padding:24px}h1{margin:0}p{color:#b9cfca}a{color:#b5e4ce}button,input{font:inherit}button{padding:8px 14px;background:#294a42;color:white;border:1px solid #82b9ad;border-radius:6px;cursor:pointer}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}article{padding:14px;border:1px solid #3c615a;border-radius:8px;background:#19322f}h2{font-size:18px;margin:0}canvas{width:100%;background:#778780;margin-top:10px}.tools{position:sticky;top:0;padding:12px;background:#102023;display:flex;align-items:center;gap:18px;flex-wrap:wrap;z-index:1}input{width:200px}@media(max-width:650px){main{padding:12px}.grid{grid-template-columns:1fr}}</style>
-<main><h1>Marcha lateral · revisión</h1><p>Antes a la izquierda; poses nuevas de apoyo y paso a la derecha, en ambos sentidos. Las vistas hacia ti y de espaldas se conservan en la <a href="../city-perspective-2026-09-30/index.html#people">galería completa</a>. Misma animación que utiliza el juego.</p>
-<div class="tools"><button id="play">Pausar</button><label>Fotograma <input id="frame" type="range" min="0" max="3" value="0"></label><label>Velocidad <select id="speed"><option value=".5">0,5×</option><option selected value="1">1×</option></select></label></div><div class="grid" id="grid"></div></main>
+<main><h1>Marcha lateral · revisión</h1><p>Versión que acabas de revisar a la izquierda; corrección actual en el centro y a la derecha. Piernas alternas en los seis señalados y repartidor centrado. Civil, unidad con escudo y corredora conservan su animación aprobada. Vistas hacia ti y de espaldas en la <a href="../city-perspective-2026-09-30/index.html#people">galería completa</a>. Misma animación que utiliza el juego.</p>
+<div class="tools"><button id="play">Pausar</button><label>Fotograma <input id="frame" type="range" min="0" max="7" value="0"></label><label>Velocidad <select id="speed"><option value=".5">0,5×</option><option selected value="1">1×</option></select></label></div><div class="grid" id="grid"></div></main>
 <script type="module">
 import{SPECIES_BY_ID,ATLAS_URLS}from'../../app/journey-data.mjs';
 import{drawJourneySprite}from'../../app/journey-sprites.mjs';
-const originals=await(await fetch('./source-art.json')).json(),images={},cards=[];
+import{drawCityDirectional}from'../../app/city-perspective-art.mjs';
+const originals=await(await fetch('../city-walk-corrections-2026-10-01/before-art.json')).json(),images={},cards=[];
 for(const old of originals.filter(a=>a.kind==='human')){
  const s=SPECIES_BY_ID[old.id],key=s.imageAtlas,im=new Image(),before=new Image();
- im.src=new URL(ATLAS_URLS[key],location.origin+'/');before.src='/inhabitants/city-perspective/'+old.id+'.png';await Promise.all([im.decode(),before.decode()]);images[key]=im;
+ im.src=new URL(ATLAS_URLS[key],location.origin+'/');before.src='/inhabitants/city-perspective/'+old.file;await Promise.all([im.decode(),before.decode()]);images[key]=im;
  const article=document.createElement('article');article.dataset.id=s.id;const h=document.createElement('h2');h.textContent=s.name;article.append(h);
  const canvas=document.createElement('canvas');canvas.width=900;canvas.height=460;article.append(canvas);document.querySelector('#grid').append(article);cards.push({s,old,before,canvas});
 }
 let playing=true,t=0,last=performance.now();
 document.querySelector('#play').onclick=()=>{playing=!playing;document.querySelector('#play').textContent=playing?'Pausar':'Reanudar';};
 document.querySelector('#frame').oninput=()=>{playing=false;document.querySelector('#play').textContent='Reanudar';};
-function draw(now){if(playing)t+=(now-last)/1000*Number(document.querySelector('#speed').value);last=now;
+function draw(){const now=performance.now();if(playing)t+=Math.max(0,Math.min(.1,(now-last)/1000))*Number(document.querySelector('#speed').value);last=now;
  for(const{s,old,before,canvas}of cards){const box=canvas.getBoundingClientRect();if(box.bottom<0||box.top>innerHeight)continue;
  const c=canvas.getContext('2d');c.clearRect(0,0,900,460);c.fillStyle='#142d29';c.font='22px system-ui';c.textAlign='center';
  ['Antes','Derecha · nuevo','Izquierda · nuevo'].forEach((v,i)=>c.fillText(v,150+i*300,427));
- const time=playing?t:Number(document.querySelector('#frame').value)/4*s.directionalArt.walkPeriod;
- const f=old.frames.filter(f=>f.direction===0)[Math.floor(time*9/Math.PI)%2],u=300/old.referenceHeight;
- c.drawImage(before,...f.crop,150-f.anchor[0]*u,210-f.anchor[1]*u,f.crop[2]*u,f.crop[3]*u);
+ const time=playing?t:Number(document.querySelector('#frame').value)/8*s.directionalArt.walkPeriod;
+ const oldSpecies={...s,directionalArt:{...old,heightPerRadius:s.directionalArt.heightPerRadius,views:[0,1,2,3].map(d=>old.frames.filter(f=>f.direction===d))}};
+ c.save();c.translate(150,210);drawCityDirectional(c,before,oldSpecies,300/s.directionalArt.heightPerRadius,0,time+1e-6,1,0,0);c.restore();
  for(let i=0;i<2;i++){c.save();c.translate(450+i*300,210);drawJourneySprite(c,images,s.id,300/s.directionalArt.heightPerRadius,0,time+1e-6,1,0,null,i*Math.PI);c.restore();}
  }
  requestAnimationFrame(draw);

@@ -550,6 +550,7 @@
   },
   {
     "id": "city-civilian-5",
+    "source": "design/city-walk-2026-10-01/painted-sources/city-civilian-5.png",
     "sourceSize": [
       1536,
       1024
@@ -562,8 +563,13 @@
           337,
           459
         ],
-        "headX": 492.5,
-        "legSpan": 0.7342047930283224
+        "headX": 551,
+        "legSpan": 0.7342047930283224,
+        "registration": {
+          "crownX": 128,
+          "groundY": 232,
+          "height": 208
+        }
       },
       {
         "crop": [
@@ -572,8 +578,13 @@
           216,
           460
         ],
-        "headX": 1050.5,
-        "legSpan": 0.3804347826086957
+        "headX": 1103.5,
+        "legSpan": 0.3804347826086957,
+        "registration": {
+          "crownX": 128,
+          "groundY": 232,
+          "height": 208
+        }
       },
       {
         "crop": [
@@ -582,8 +593,13 @@
           335,
           456
         ],
-        "headX": 501.5,
-        "legSpan": 0.7346491228070176
+        "headX": 560.5,
+        "legSpan": 0.7346491228070176,
+        "registration": {
+          "crownX": 128,
+          "groundY": 232,
+          "height": 208
+        }
       },
       {
         "crop": [
@@ -592,21 +608,27 @@
           254,
           464
         ],
-        "headX": 1096,
-        "legSpan": 0.4267241379310345
+        "headX": 1106,
+        "legSpan": 0.4267241379310345,
+        "registration": {
+          "crownX": 128,
+          "groundY": 232,
+          "height": 208
+        }
       }
     ],
     "frameHashes": [
-      "0daadb4a26eff9a5041926af20584665c47926d258a95daf74f164d359d0a437",
-      "024d3f6afa3a2eb6c6c86743ee92e366da2e5a8294a568d777ac30b708ac0043",
-      "ae419d0c1c3adbfee902f06171712ff4fb35e60ba7ee80de84dafaac26777f47",
-      "c16dd1bcf5662c870b662022c8335d017e3b590991a94552d3015aae58a37c8d"
+      "e9b28714757029e1e074b9649b7e49d588620a8db31166d185d74466ba119231",
+      "7b24e24b346d88d2045d7370327c6f0248cf20e43a87f5f2fa85b884639a7793",
+      "acf24744cd3db34340eaf5fb2170edd732d22f9272b5d28642419f37b0c5dcd8",
+      "ba1419b80225daf991727fc710826536630cad386249de4e5573311607269875"
     ],
     "uniqueFrames": 4,
     "preservedViews": [
       1,
       3
     ],
-    "leftView": "mirrored right sequence"
+    "leftView": "mirrored right sequence",
+    "correction": "crown registration excludes backpack; common height and ground baseline"
   }
 ]

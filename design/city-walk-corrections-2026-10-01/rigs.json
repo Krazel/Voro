@@ -1,0 +1,46 @@
+{
+  "records": [
+    {
+      "id": "city-1",
+      "source": "design/city-walk-corrections-2026-10-01/rig-sources/city-1.png",
+      "hipHeight": 0.9,
+      "stride": 21
+    },
+    {
+      "id": "city-3",
+      "source": "design/city-walk-corrections-2026-10-01/rig-sources/city-3.png",
+      "hipHeight": 0.88,
+      "stride": 21
+    },
+    {
+      "id": "city-civilian-0",
+      "source": "design/city-walk-corrections-2026-10-01/rig-sources/city-civilian-0.png",
+      "hipHeight": 0.84,
+      "stride": 21
+    },
+    {
+      "id": "city-civilian-1",
+      "source": "design/city-walk-corrections-2026-10-01/rig-sources/city-civilian-1.png",
+      "hipHeight": 0.91,
+      "stride": 21
+    },
+    {
+      "id": "city-civilian-3",
+      "source": "design/city-walk-corrections-2026-10-01/rig-sources/city-civilian-3.png",
+      "hipHeight": 0.62,
+      "stride": 20,
+      "cane": [
+        518,
+        540,
+        70,
+        336
+      ]
+    },
+    {
+      "id": "city-civilian-4",
+      "source": "design/city-walk-corrections-2026-10-01/rig-sources/city-civilian-4.png",
+      "hipHeight": 0.67,
+      "stride": 21
+    }
+  ]
+}

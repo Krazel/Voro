@@ -2,51 +2,61 @@
   {
     "id": "city-0",
     "uniqueFrames": 4,
-    "frameCount": 4
+    "frameCount": 4,
+    "frontBackPixelsIdentical": true
   },
   {
     "id": "city-1",
-    "uniqueFrames": 4,
-    "frameCount": 4
+    "uniqueFrames": 8,
+    "frameCount": 8,
+    "frontBackPixelsIdentical": true
   },
   {
     "id": "city-2",
     "uniqueFrames": 4,
-    "frameCount": 4
+    "frameCount": 4,
+    "frontBackPixelsIdentical": true
   },
   {
     "id": "city-3",
-    "uniqueFrames": 4,
-    "frameCount": 4
+    "uniqueFrames": 8,
+    "frameCount": 8,
+    "frontBackPixelsIdentical": true
   },
   {
     "id": "city-civilian-0",
-    "uniqueFrames": 4,
-    "frameCount": 4
+    "uniqueFrames": 8,
+    "frameCount": 8,
+    "frontBackPixelsIdentical": true
   },
   {
     "id": "city-civilian-1",
-    "uniqueFrames": 4,
-    "frameCount": 4
+    "uniqueFrames": 8,
+    "frameCount": 8,
+    "frontBackPixelsIdentical": true
   },
   {
     "id": "city-civilian-2",
     "uniqueFrames": 4,
-    "frameCount": 4
+    "frameCount": 4,
+    "frontBackPixelsIdentical": true
   },
   {
     "id": "city-civilian-3",
-    "uniqueFrames": 4,
-    "frameCount": 4
+    "uniqueFrames": 8,
+    "frameCount": 8,
+    "frontBackPixelsIdentical": true
   },
   {
     "id": "city-civilian-4",
-    "uniqueFrames": 4,
-    "frameCount": 4
+    "uniqueFrames": 8,
+    "frameCount": 8,
+    "frontBackPixelsIdentical": true
   },
   {
     "id": "city-civilian-5",
     "uniqueFrames": 4,
-    "frameCount": 4
+    "frameCount": 4,
+    "frontBackPixelsIdentical": true
   }
 ]

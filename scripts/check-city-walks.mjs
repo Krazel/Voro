@@ -11,15 +11,22 @@ const ids=ART.filter(a=>a.walkPeriod).map(a=>a.id),images={},rows=[];
 for(const id of ids){const s=SPECIES_BY_ID[id];images[s.imageAtlas]=await loadImage('public/'+ATLAS_URLS[s.imageAtlas].slice(2));}
 const proof=createCanvas(1200,900),p=proof.getContext('2d');p.fillStyle='#83958d';p.fillRect(0,0,1200,900);
 for(let n=0;n<ids.length;n++){
- const s=SPECIES_BY_ID[ids[n]],hashes=new Set(),tiny=createCanvas(128,160),c=tiny.getContext('2d');
- for(let i=0;i<4;i++){
+ const s=SPECIES_BY_ID[ids[n]],hashes=new Set(),tiny=createCanvas(128,160),c=tiny.getContext('2d'),count=s.directionalArt.views[0].length;
+ for(let i=0;i<count;i++){
   c.clearRect(0,0,128,160);c.save();c.translate(64,80);
-  drawJourneySprite(c,images,s.id,130/s.directionalArt.heightPerRadius,0,(i+.01)/4*s.directionalArt.walkPeriod,1,0,null,0);c.restore();
+  drawJourneySprite(c,images,s.id,130/s.directionalArt.heightPerRadius,0,(i+.01)/count*s.directionalArt.walkPeriod,1,0,null,0);c.restore();
   hashes.add(createHash('sha256').update(c.getImageData(0,0,128,160).data).digest('hex'));
-  p.drawImage(tiny,(n%2)*600+i*140,Math.floor(n/2)*180);
+  if(i%(count/4)===0)p.drawImage(tiny,(n%2)*600+i/(count/4)*140,Math.floor(n/2)*180);
  }
- if(hashes.size!==4)throw Error(`${s.id}: duplicate walk frames`);
- rows.push({id:s.id,uniqueFrames:hashes.size,frameCount:4});
+ if(hashes.size!==count)throw Error(`${s.id}: duplicate walk frames`);
+ const art=s.directionalArt;
+ const old=await loadImage(`public/inhabitants/city-perspective/${s.id}-walk-v3.webp`);
+ const oldCanvas=createCanvas(1024,256),kept=createCanvas(1024,256);
+ oldCanvas.getContext('2d').drawImage(old,0,256,1024,256,0,0,1024,256);
+ kept.getContext('2d').drawImage(images[s.imageAtlas],0,art.size[1]-256,1024,256,0,0,1024,256);
+ const pixelHash=canvas=>createHash('sha256').update(canvas.getContext('2d').getImageData(0,0,1024,256).data).digest('hex');
+ if(pixelHash(oldCanvas)!==pixelHash(kept))throw Error(`${s.id}: front/back pixels changed`);
+ rows.push({id:s.id,uniqueFrames:hashes.size,frameCount:count,frontBackPixelsIdentical:true});
  p.fillStyle='#142d26';p.font='13px sans-serif';p.fillText(s.name,(n%2)*600+10,Math.floor(n/2)*180+171);
 }
 writeFileSync(out+'/quarter-poses.png',proof.toBuffer('image/png'));

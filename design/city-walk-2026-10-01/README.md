@@ -27,3 +27,12 @@ Ejecutar con `VORO_CANVAS_RUNTIME` apuntando al `package.json` del runtime autor
 - Candidata local y Git. No se ha enviado una nueva build a TestFlight; la interna vigente sigue siendo 0.13.5(1).
 
 La valoración estética final queda para la prueba del usuario; no se da su aprobación por supuesta.
+
+## Revisión posterior del usuario
+
+Civil, unidad con escudo y corredora aprobados. Se señalaron seis ciclos que no
+alternaban piernas y desplazamiento del repartidor. La versión vigente de la
+galería y del juego incorpora la corrección documentada en
+`../city-walk-corrections-2026-10-01/README.md`: seis ciclos articulados horneados
+de ocho fotogramas, repartidor registrado y frente/espalda conservados. Las
+cifras y descripción anteriores corresponden a v3.

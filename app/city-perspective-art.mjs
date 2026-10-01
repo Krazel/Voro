@@ -8,7 +8,7 @@ export function applyCityPerspectiveArt(byId, urls) {
     const key = `cityView_${a.id}`;
     urls[key] = `./inhabitants/city-perspective/${a.file||a.id+'.png'}`;
     s.imageAtlas = key;
-    s.animationCropRevision = a.walkPeriod?6:4;
+    s.animationCropRevision = a.walkRevision||(a.walkPeriod?6:4);
     s.artProfile = {family:'prop',rigid:true,period:1.2,revision:s.animationCropRevision,
       crop:a.frames[0].crop,
       description:'Vista elevada con cámara fija y orientación coherente con la ciudad.'};

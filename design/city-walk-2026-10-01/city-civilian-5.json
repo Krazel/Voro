@@ -181,6 +181,7 @@
       ]
     }
   ],
-  "file": "city-civilian-5-walk-v3.webp",
-  "walkPeriod": 0.95
+  "file": "city-civilian-5-walk-v4.png",
+  "walkPeriod": 0.95,
+  "walkRevision": 7
 }
