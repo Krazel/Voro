@@ -45,8 +45,11 @@ test('Every biome uses bounded populations with rare rabbits/swimmers and popula
     const w = new JourneyWorld(33, [], stage),
       plan = POPULATION_PLANS[STAGES[stage].id],
       max = plan.slots.reduce((a, b) => a + b, 0) + (plan.extraSmall || 0) + (plan.extraForage?.length || 0);
-    for (let x = 5; x < 25; x++)
-      assert.ok(w.generate(x, 10, 0).entities.length <= max);
+    for (let x = 5; x < 25; x++) {
+      const entities = w.generate(x, 10, 0).entities;
+      assert.ok(entities.filter(e=>!e.id.startsWith('city-street:')).length <= max);
+      assert.ok(entities.filter(e=>e.id.startsWith('city-street:')).length <= (STAGES[stage].id === 'city' ? 6 : 0));
+    }
   }
   const shore = populationReport(2),
     sea = populationReport(3),
@@ -60,11 +63,11 @@ test('Every biome uses bounded populations with rare rabbits/swimmers and popula
   assert.ok(
     city.rows
       .filter((s) => ['city-0', 'city-1', 'city-2', 'city-3'].includes(s.id)||s.id.startsWith('city-civilian-'))
-      .reduce((n, s) => n + s.per100, 0) > 35,
+      .reduce((n, s) => n + s.count, 0) / city.zones >= 10,
   );
   assert.ok(shore.average < 12);
   assert.ok(sea.average <= 12 && sea.average > 8);
-  assert.ok(city.average <= 24 && city.average > 22);
+  assert.ok(city.average <= 30 && city.average > 27);
 });
 
 test('Orbit adds only one readable starter per zone while keeping prior slots and consumed IDs stable',()=>{

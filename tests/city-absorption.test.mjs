@@ -37,7 +37,9 @@ test('Larger people and one unarmed car slot preserve bounded, deterministic str
  assert.ok(S['city-0'].r>=10&&S['city-3'].r>=10.7);assert.equal(S['city-5'].shot,null);
  const w=new JourneyWorld(51,[],city);let cars=0,total=0;
  for(let x=-20;x<20;x++){
-  const chunk=w.generate(x,12,0);assert.ok(chunk.entities.length<=24);
+  const chunk=w.generate(x,12,0);
+  assert.ok(chunk.entities.filter(e=>!e.id.startsWith('city-street:')).length<=24);
+  assert.ok(chunk.entities.filter(e=>e.id.startsWith('city-street:')).length<=6);
   const found=chunk.entities.filter(e=>e.kind==='city-5');assert.ok(found.length<=1);cars+=found.length;total+=chunk.entities.length;
   assert.deepEqual(w.generate(x,12,0),chunk);
   if(found[0]){w.eat(found[0],0);assert.ok(!w.generate(x,12,0).entities.some(e=>e.id===found[0].id));}

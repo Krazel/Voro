@@ -26,10 +26,12 @@ test('Every stage naturally spawns its new matter within each environment popula
             chunk.entities.length,
             new MicroWorld(56).generate(x, y, 0).entities.length,
           );
-        else
+        else {
           assert.ok(
-            chunk.entities.length <= (STAGES[stage].id === 'pond' ? 24 : stage === 3 ? 12 : STAGES[stage].id === 'city' ? 24 : 22),
+            chunk.entities.filter(e=>!e.id.startsWith('city-street:')).length <= (STAGES[stage].id === 'pond' ? 24 : stage === 3 ? 12 : STAGES[stage].id === 'city' ? 24 : 22),
           );
+          assert.ok(chunk.entities.filter(e=>e.id.startsWith('city-street:')).length <= (STAGES[stage].id === 'city' ? 6 : 0));
+        }
         for (const e of chunk.entities)
           if (SPECIES_BY_ID[e.kind].edibleMatter) found.add(e.kind);
       }
