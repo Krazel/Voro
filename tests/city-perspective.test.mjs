@@ -9,7 +9,7 @@ import {compactCityAtlas,StageAssets} from '../app/stage-assets.mjs';
 import {animationCrop} from '../app/animation-catalog.mjs';
 import WALK_AUDIT from '../design/city-walk-2026-10-01/painted-frame-audit.json' with {type:'json'};
 import RIG_AUDIT from '../design/city-walk-corrections-2026-10-01/rig-audit.json' with {type:'json'};
-import BEFORE from '../design/city-walk-corrections-2026-10-01/before-art.json' with {type:'json'};
+import BEFORE from '../design/city-walk-corrections-2026-10-01/before-arms-art.json' with {type:'json'};
 
 test('City art replacement preserves every existing gameplay size, reward and attack',()=>{
  const current=STAGE_SPECIES[4].map(({id,r,value,requiredMass,speed,sizeFactors,kind,shot})=>({id,r,value,requiredMass,speed,sizeFactors,kind,shot}));
@@ -68,7 +68,7 @@ test('City compact textures are released on stage changes and original decodes a
 test('Every lateral human walk visits its full cycle and has a stable stopped pose',()=>{
  for(const a of ART.filter(a=>a.kind==='human')){
   const s=SPECIES_BY_ID[a.id],im={complete:true,naturalWidth:a.size[0],naturalHeight:a.size[1]};
-  const count=a.walkRevision===8?8:4;
+  const count=a.walkRevision>=8?8:4;
   assert.equal(s.directionalArt.views[0].length,count);
   assert.equal(s.directionalArt.views[2].length,count);
   assert.equal(s.directionalArt.views[1].length,2);
@@ -92,7 +92,7 @@ test('Every lateral human walk visits its full cycle and has a stable stopped po
 
 test('Painted lateral passing poses really close the leg silhouette, not just recolour it',()=>{
  assert.equal(WALK_AUDIT.length,10);
- for(const a of WALK_AUDIT.filter(a=>SPECIES_BY_ID[a.id].directionalArt.walkRevision!==8)){
+ for(const a of WALK_AUDIT.filter(a=>!(SPECIES_BY_ID[a.id].directionalArt.walkRevision>=8))){
   assert.equal(a.uniqueFrames,4);
   for(const [contact,passing]of[[0,1],[2,3]])
    assert.ok(a.poses[contact].legSpan>a.poses[passing].legSpan*1.2,`${a.id}: passing pose must differ from contact`);
@@ -116,7 +116,16 @@ test('Corrected walks exchange the near/far supporting leg across both halves of
  }
 });
 
-test('Approved civilian, shield unit and runner art and motion remain unchanged',()=>{
- for(const id of ['city-0','city-2','city-civilian-2'])
+test('All seven approved humans retain their art and motion unchanged',()=>{
+ for(const id of ['city-0','city-1','city-2','city-3','city-civilian-2','city-civilian-3','city-civilian-5'])
   assert.deepEqual(ART.find(a=>a.id===id),BEFORE.find(a=>a.id===id));
+});
+
+test('Worker, pedestrian and office worker swing both arms and torso across opposite steps',()=>{
+ for(const id of ['city-civilian-0','city-civilian-1','city-civilian-4']){
+  const a=RIG_AUDIT.find(a=>a.id===id),first=a.poses[0].upper,opposite=a.poses[4].upper;
+  for(const key of ['bodyAngle','nearArmAngle','farArmAngle'])
+   assert.ok(first[key]*opposite[key]<0,`${id}: ${key} must change direction`);
+  assert.ok(first.nearArmAngle*first.farArmAngle<0,`${id}: arms move in opposition`);
+ }
 });

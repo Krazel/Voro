@@ -716,6 +716,11 @@
             216
           ],
           "stance": false
+        },
+        "upper": {
+          "bodyAngle": 0.028,
+          "nearArmAngle": 0.32,
+          "farArmAngle": -0.34
         }
       },
       {
@@ -748,6 +753,11 @@
             203.27207793864216
           ],
           "stance": false
+        },
+        "upper": {
+          "bodyAngle": 0.019798989873223333,
+          "nearArmAngle": 0.22627416997969524,
+          "farArmAngle": -0.2404163056034262
         }
       },
       {
@@ -780,6 +790,11 @@
             198
           ],
           "stance": false
+        },
+        "upper": {
+          "bodyAngle": 1.7145055188062945e-18,
+          "nearArmAngle": 1.959434878635765e-17,
+          "farArmAngle": -2.0818995585505005e-17
         }
       },
       {
@@ -812,6 +827,11 @@
             203.27207793864216
           ],
           "stance": false
+        },
+        "upper": {
+          "bodyAngle": -0.01979898987322333,
+          "nearArmAngle": -0.22627416997969518,
+          "farArmAngle": 0.24041630560342617
         }
       },
       {
@@ -844,6 +864,11 @@
             216
           ],
           "stance": true
+        },
+        "upper": {
+          "bodyAngle": -0.028,
+          "nearArmAngle": -0.32,
+          "farArmAngle": 0.34
         }
       },
       {
@@ -876,6 +901,11 @@
             216
           ],
           "stance": true
+        },
+        "upper": {
+          "bodyAngle": -0.019798989873223337,
+          "nearArmAngle": -0.22627416997969527,
+          "farArmAngle": 0.24041630560342622
         }
       },
       {
@@ -908,6 +938,11 @@
             216
           ],
           "stance": true
+        },
+        "upper": {
+          "bodyAngle": -5.143516556418883e-18,
+          "nearArmAngle": -5.878304635907295e-17,
+          "farArmAngle": 6.245698675651501e-17
         }
       },
       {
@@ -940,19 +975,24 @@
             216
           ],
           "stance": true
+        },
+        "upper": {
+          "bodyAngle": 0.019798989873223326,
+          "nearArmAngle": 0.22627416997969516,
+          "farArmAngle": -0.2404163056034261
         }
       }
     ],
     "uniqueFrames": 8,
     "frameHashes": [
-      "a05568e4e2464133400a23b2fbfd81d3a6bf23bda3c322fabc73c45297561b3b",
-      "226fe3260e072acbfbb84ec14b1d25138e56eb707dd6239ab04d1966308f187e",
-      "437c11e3d9b46633abe534873286b4cffffcce451932e2586590296327f8df2c",
-      "3a12092f8f69b97c5022bfcddfd9d62277d68bd94ebe287bba5bb845e4cf5791",
-      "bb9d0a15d079904d62f501bf9f5ee784e1243efd62c8d613940433cf28585203",
-      "929e9fe28c480bf5053a9db81ff216c417ff604462ae8421c425ec0c6c813932",
-      "59fefb32667fa8c0fe63c3bc8e7ae0f44443519a1e04d9033c20ba19877583f5",
-      "214fb9023cd445c377c88803626755f9af187259738f3377fe3f691f6f500356"
+      "d55e800b0f3b6bb4e8e75f644df05010f7d5fd62548b253bfb6669dc1db49b43",
+      "5f238aebb66dcd10bc1ddde87a415b2a0f3039c38cc79b6bf443ecd4e0a56fea",
+      "aec033fd1b5be8e449ae0e74168f9cf8797835ad504c4e94c478c941edacaa57",
+      "3fbf7675483df3db1248f7a1c3d10ad1e894eaa8ee2ad111813d21e73fb5a0f8",
+      "7e81fca8874905c36aed6231fb606395d4288d4846ad1b2e149fba7ad0655bc2",
+      "282a907beb7b44fbfb3533ead05df32dc9160de45898621a0122ae0ebcd242fd",
+      "9454b09699645769e7d4eb98c342a4ce221c013ec0ff89422170c42f51d9b56e",
+      "9c86b0212302771ab47a4391eac0e73fa77346138f977b691cbcf6a77392c7e8"
     ],
     "preservedViews": [
       1,
@@ -1036,6 +1076,11 @@
             216
           ],
           "stance": false
+        },
+        "upper": {
+          "bodyAngle": 0.028,
+          "nearArmAngle": 0.32,
+          "farArmAngle": -0.34
         }
       },
       {
@@ -1068,6 +1113,11 @@
             203.27207793864216
           ],
           "stance": false
+        },
+        "upper": {
+          "bodyAngle": 0.019798989873223333,
+          "nearArmAngle": 0.22627416997969524,
+          "farArmAngle": -0.2404163056034262
         }
       },
       {
@@ -1100,6 +1150,11 @@
             198
           ],
           "stance": false
+        },
+        "upper": {
+          "bodyAngle": 1.7145055188062945e-18,
+          "nearArmAngle": 1.959434878635765e-17,
+          "farArmAngle": -2.0818995585505005e-17
         }
       },
       {
@@ -1132,6 +1187,11 @@
             203.27207793864216
           ],
           "stance": false
+        },
+        "upper": {
+          "bodyAngle": -0.01979898987322333,
+          "nearArmAngle": -0.22627416997969518,
+          "farArmAngle": 0.24041630560342617
         }
       },
       {
@@ -1164,6 +1224,11 @@
             216
           ],
           "stance": true
+        },
+        "upper": {
+          "bodyAngle": -0.028,
+          "nearArmAngle": -0.32,
+          "farArmAngle": 0.34
         }
       },
       {
@@ -1196,6 +1261,11 @@
             216
           ],
           "stance": true
+        },
+        "upper": {
+          "bodyAngle": -0.019798989873223337,
+          "nearArmAngle": -0.22627416997969527,
+          "farArmAngle": 0.24041630560342622
         }
       },
       {
@@ -1228,6 +1298,11 @@
             216
           ],
           "stance": true
+        },
+        "upper": {
+          "bodyAngle": -5.143516556418883e-18,
+          "nearArmAngle": -5.878304635907295e-17,
+          "farArmAngle": 6.245698675651501e-17
         }
       },
       {
@@ -1260,19 +1335,24 @@
             216
           ],
           "stance": true
+        },
+        "upper": {
+          "bodyAngle": 0.019798989873223326,
+          "nearArmAngle": 0.22627416997969516,
+          "farArmAngle": -0.2404163056034261
         }
       }
     ],
     "uniqueFrames": 8,
     "frameHashes": [
-      "f992a5714696879de45a2197c2a9c44fc1e764a43960b8771906b5f75e095990",
-      "bad19d5f39e678341829aad02edea9e7ee2a6cae8410b7e6595cb97a57abb791",
-      "af7843f78139010cf903c29800726f73d64bd108a99d368d2818ecb00be8998f",
-      "9486fd6ea67a0c976d8cfd23f90ac8b8c0332f88c7e5b08bee766d402d670d45",
-      "a934fb77cb528828e935114febb771315cf7a17f1beddbaacf7b4fa3d8c434b8",
-      "a5b5e939cd0db8cc56ba2086c0791ef149dbdd7b0c80debfbb4fb020057b86f6",
-      "a26be52a07eb852164adebd035dbf41ade58d32d3d94048ec2f1b2f0553eeddc",
-      "3ab1efc7e60e890d0fbb773a9e41bea09f7aac9ea313da396661bef39c38fc43"
+      "0db90d209253af453136b160f28527ab5a9f8138a80533ab617e2ab2d1aa25dd",
+      "9dbd8357f9c478e4e8c07b5444f1773423f37d3b3b5f5c87a75ce69ef3c32c06",
+      "f53b119af1de8bf856da88e0dcfb7f47810546ef89bbdb8ee3fb6f2a320b1127",
+      "5ebc1fd7e587999ed1101faf91d2cbbe1c39de7d00b31c28a4d3825a06be75ff",
+      "6c646d0ebfb0672ee29032c5a18668eec0a36d05d4b85b02703dbc541411324d",
+      "f556b4bc8e4f3af67ca85e358511e06c6d3a3b799322d9bd477e849815311309",
+      "bc12e6cd751b2c1f6c9bace8522ad4b5a427ebbb4509a745ba25a6fe145b0f49",
+      "c7fd272b4c3a76365ae78c0110a27c6e74cddc1f5ae3921fcd651205bfbf1680"
     ],
     "preservedViews": [
       1,
@@ -1676,6 +1756,11 @@
             216
           ],
           "stance": false
+        },
+        "upper": {
+          "bodyAngle": 0.028,
+          "nearArmAngle": 0.2,
+          "farArmAngle": -0.34
         }
       },
       {
@@ -1708,6 +1793,11 @@
             203.27207793864216
           ],
           "stance": false
+        },
+        "upper": {
+          "bodyAngle": 0.019798989873223333,
+          "nearArmAngle": 0.14142135623730953,
+          "farArmAngle": -0.2404163056034262
         }
       },
       {
@@ -1740,6 +1830,11 @@
             198
           ],
           "stance": false
+        },
+        "upper": {
+          "bodyAngle": 1.7145055188062945e-18,
+          "nearArmAngle": 1.2246467991473533e-17,
+          "farArmAngle": -2.0818995585505005e-17
         }
       },
       {
@@ -1772,6 +1867,11 @@
             203.27207793864216
           ],
           "stance": false
+        },
+        "upper": {
+          "bodyAngle": -0.01979898987322333,
+          "nearArmAngle": -0.1414213562373095,
+          "farArmAngle": 0.24041630560342617
         }
       },
       {
@@ -1804,6 +1904,11 @@
             216
           ],
           "stance": true
+        },
+        "upper": {
+          "bodyAngle": -0.028,
+          "nearArmAngle": -0.2,
+          "farArmAngle": 0.34
         }
       },
       {
@@ -1836,6 +1941,11 @@
             216
           ],
           "stance": true
+        },
+        "upper": {
+          "bodyAngle": -0.019798989873223337,
+          "nearArmAngle": -0.14142135623730953,
+          "farArmAngle": 0.24041630560342622
         }
       },
       {
@@ -1868,6 +1978,11 @@
             216
           ],
           "stance": true
+        },
+        "upper": {
+          "bodyAngle": -5.143516556418883e-18,
+          "nearArmAngle": -3.6739403974420595e-17,
+          "farArmAngle": 6.245698675651501e-17
         }
       },
       {
@@ -1900,19 +2015,24 @@
             216
           ],
           "stance": true
+        },
+        "upper": {
+          "bodyAngle": 0.019798989873223326,
+          "nearArmAngle": 0.14142135623730948,
+          "farArmAngle": -0.2404163056034261
         }
       }
     ],
     "uniqueFrames": 8,
     "frameHashes": [
-      "180c464ec20477dc75287466bdbe6d80980cf06b3cd1c0bccef36286897ff4a4",
-      "cdacb0c972a9d0aa7c0353c64108184491535c092c860d5439ef58d1da0f25ae",
-      "f20a58c1d8d676daf2879b9d694b3ad6c7da50c1b6bc51c36aa633e9552992b3",
-      "c5f4222054b13025aac43cb8324c79c26dd35aed1e355ed3bc5e53ab9c38da94",
-      "2bccca0ea95906c9538702fe9753610b71d76545bde8bf576b79d1ed602b9dfa",
-      "e1d1945c6f538e6e81bf360f96516c9ad5631f877aabf0042f07d453d267813c",
-      "bc8585b77f8ab8c63740df37511eb80b17435692bb2c366b191f7113a56366e1",
-      "c5f5a97af9900d0f867e6c77403014c1f036b390cb4a64d0d9a938cfaeca5f70"
+      "d2bd747a64f588814023871a204b3668b33008ddae0480b6b64690552955ff80",
+      "f2f1b7bc1af1c7fd29aca7b0ca0637d4d9f0b7b7570e394c438e80133fddb428",
+      "d316f1e3c67a23bc99eb4f1fbac1d8dcf2e8861e459428c8f3fe4c5c0dd1d2d5",
+      "072e86239e571b69cb94d8dabce52579ffabad68cc97d387d1edf30cf240a054",
+      "a8293bad3cab26f3b5b45f3a32ce8812225cb9bb5a31f42b0222eb4fb0fa721a",
+      "9e880f4cd47e41617a9574ed5952e1576e2bb7c7049105628ee3e999f4f2c5f2",
+      "b8c485cebb447a8fdcad0d77425812ad00dc9dc327ca95fe6a0cee2029f5faca",
+      "54f68bbfc7a1f4774a35dbb2d2886831a327642665a6a1a2c3ea318cbedc480d"
     ],
     "preservedViews": [
       1,

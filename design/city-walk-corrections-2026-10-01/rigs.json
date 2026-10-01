@@ -16,13 +16,67 @@
       "id": "city-civilian-0",
       "source": "design/city-walk-corrections-2026-10-01/rig-sources/city-civilian-0.png",
       "hipHeight": 0.84,
-      "stride": 21
+      "stride": 21,
+      "upper": {
+        "source": "design/city-walk-corrections-2026-10-01/arm-sources/city-civilian-0.png",
+        "hip": [
+          441,
+          762
+        ],
+        "shoulders": [
+          [
+            371,
+            405
+          ],
+          [
+            510,
+            397
+          ]
+        ],
+        "armJoints": [
+          [
+            947,
+            355
+          ],
+          [
+            1408,
+            355
+          ]
+        ]
+      }
     },
     {
       "id": "city-civilian-1",
       "source": "design/city-walk-corrections-2026-10-01/rig-sources/city-civilian-1.png",
       "hipHeight": 0.91,
-      "stride": 21
+      "stride": 21,
+      "upper": {
+        "source": "design/city-walk-corrections-2026-10-01/arm-sources/city-civilian-1.png",
+        "hip": [
+          394,
+          740
+        ],
+        "shoulders": [
+          [
+            364,
+            429
+          ],
+          [
+            506,
+            400
+          ]
+        ],
+        "armJoints": [
+          [
+            950,
+            390
+          ],
+          [
+            1461,
+            393
+          ]
+        ]
+      }
     },
     {
       "id": "city-civilian-3",
@@ -40,7 +94,35 @@
       "id": "city-civilian-4",
       "source": "design/city-walk-corrections-2026-10-01/rig-sources/city-civilian-4.png",
       "hipHeight": 0.67,
-      "stride": 21
+      "stride": 21,
+      "upper": {
+        "source": "design/city-walk-corrections-2026-10-01/arm-sources/city-civilian-4.png",
+        "hip": [
+          450,
+          700
+        ],
+        "shoulders": [
+          [
+            350,
+            367
+          ],
+          [
+            529,
+            373
+          ]
+        ],
+        "armJoints": [
+          [
+            947,
+            342
+          ],
+          [
+            1431,
+            354
+          ]
+        ],
+        "nearSwing": 0.2
+      }
     }
   ]
 }

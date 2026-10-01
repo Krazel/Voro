@@ -49,3 +49,26 @@ y `rejected-painted/`, sin referencias desde el juego.
 - Sin nueva subida a TestFlight en este encargo; sigue vigente 0.13.5(1).
 
 Galería: `../city-walk-2026-10-01/index.html`.
+
+## Segunda revisión: brazos y unión de cadera
+
+Tras la revisión del usuario quedan aprobados civil, ambos soldados, unidad con
+escudo, corredora, persona con bastón y repartidor. Se conservan exactamente sus
+metadatos y archivos. Solo cambian peatona con bolso, trabajador y oficinista.
+
+- Nuevas piezas de torso sin brazos y dos brazos independientes, generadas con
+  ChatGPT Images. Originales y prompts: `arm-sources/` y `arm-sources.json`.
+- Ambos brazos oscilan en oposición y el torso acompaña el paso. El maletín del
+  oficinista se mueve con su brazo, con menor amplitud.
+- El torso incluye cadera y parte superior del pantalón para cubrir la unión
+  con los muslos durante todo el ciclo.
+- Ocho poses horneadas v6; mismo tamaño de atlas y coste de dibujado que v5.
+- La comparación usa ahora la revisión inmediatamente anterior, conservada en
+  `before-arms-art.json`, frente a los tres ciclos nuevos.
+
+Validación de esta revisión: nueve pruebas de ciudad correctas, comprobación de
+los diez ciclos renderizados y píxeles frontal/trasero idénticos. Builds móvil y
+PC correctos. Galería revisada en navegador, captura `browser-arms.jpg`.
+La cifra anterior de 336 pruebas corresponde a la primera revisión; en esta
+revisión se han repetido las nueve pruebas pertinentes de ciudad. No se ha
+subido una nueva build a TestFlight.

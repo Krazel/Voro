@@ -35,6 +35,14 @@ for(const entry of config.records){
  const thighJoints=entry.thighJoints||[jointTop(thigh),jointBottom(thigh)];
  const top=jointTop(shin),shinJoints=entry.shinJoints||[top,[top[0],shin[1]+shin[3]*.79]];
  const bodyScale=112/(bodyHip[1]-body[1]);
+ let upper=null;
+ if(entry.upper){
+  const u=entry.upper,source=await loadImage(u.source),canvas=createCanvas(source.width,source.height),ctx=canvas.getContext('2d');ctx.drawImage(source,0,0);
+  const pixels=ctx.getImageData(0,0,source.width,source.height),cuts=[0,.4,.69,1];
+  const crops=Array.from({length:3},(_,n)=>bounds(pixels.data,source.width,Math.round(source.width*cuts[n]),0,Math.round(source.width*cuts[n+1]),source.height));
+  for(let n=3;n<pixels.data.length;n+=4){const a=Math.max(0,Math.min(1,(pixels.data[n]-230)/20));pixels.data[n]=Math.round(255*a*a*(3-2*a));}ctx.putImageData(pixels,0,0);
+  upper={...u,canvas,crops,scale:112/(u.hip[1]-crops[0][1])};
+ }
  const sheet=createCanvas(1024,768),c=sheet.getContext('2d'),frames=[],poses=[],hashes=[];
  function segment(part,start,end,axisTop,axisBottom,widthScale=1){
   const len=Math.hypot(end[0]-start[0],end[1]-start[1]),scale=len/Math.hypot(axisBottom[0]-axisTop[0],axisBottom[1]-axisTop[1]);
@@ -54,9 +62,23 @@ for(const entry of config.records){
   const near=legPose(i/8,walkingHip,entry.stride||21),far=legPose(i/8+.5,[walkingHip[0]-4,walkingHip[1]],entry.stride||21);
   const x=i%4*256,y=Math.floor(i/4)*256;
   c.save();c.translate(x,y);
+  const swing=Math.cos(i/8*Math.PI*2),bodyAngle=upper?swing*.028:0;
+  function upperTransform(){c.translate(hip[0],hip[1]-rise);c.rotate(bodyAngle);}
+  function drawArm(far){
+   const n=far?1:0,part=upper.crops[n+1],joint=upper.armJoints[n],shoulder=upper.shoulders[n];
+   c.save();upperTransform();c.translate((shoulder[0]-upper.hip[0])*upper.scale,(shoulder[1]-upper.hip[1])*upper.scale);
+   c.rotate(swing*(far?-.34:(upper.nearSwing||.32)));
+   if(far)c.filter='brightness(.85)';
+   c.drawImage(upper.canvas,...part,(part[0]-joint[0])*upper.scale,(part[1]-joint[1])*upper.scale,part[2]*upper.scale,part[3]*upper.scale);c.restore();
+  }
+  if(upper)drawArm(true);
   drawLeg(far,true);drawLeg(near,false);
   const bx=(body[0]-bodyHip[0])*bodyScale+hip[0],by=(body[1]-bodyHip[1])*bodyScale+hip[1]-rise;
-  if(entry.cane){
+  if(upper){
+   const p=upper.crops[0];c.save();upperTransform();
+   c.drawImage(upper.canvas,...p,(p[0]-upper.hip[0])*upper.scale,(p[1]-upper.hip[1])*upper.scale,p[2]*upper.scale,p[3]*upper.scale);c.restore();
+   drawArm(false);
+  }else if(entry.cane){
    const [cx,cy,cw,ch]=entry.cane,tx=(cx-bodyHip[0])*bodyScale+hip[0],ty=(cy-bodyHip[1])*bodyScale+hip[1]-rise;
    c.save();c.beginPath();c.rect(0,0,256,256);c.rect(tx,ty,cw*bodyScale,ch*bodyScale+1);c.clip('evenodd');
    c.drawImage(master,...body,bx,by,body[2]*bodyScale,body[3]*bodyScale);c.restore();
@@ -65,15 +87,15 @@ for(const entry of config.records){
   c.restore();
   frames.push({direction:0,pose:i,crop:[x,y,256,256],anchor:[128,128]});
   hashes.push(createHash('sha256').update(c.getImageData(x,y,256,256).data).digest('hex'));
-  poses.push({near,far});
+  poses.push({near,far,...(upper?{upper:{bodyAngle,nearArmAngle:swing*(upper.nearSwing||.32),farArmAngle:-swing*.34}}:{})});
  }
  frames.push(...frames.map(f=>({...f,direction:2,flipX:true})));
  const old=await loadImage(`public/inhabitants/city-perspective/${id}-walk-v3.webp`);
  c.drawImage(old,0,256,1024,256,0,512,1024,256);
  for(const f of art.frames.filter(f=>f.direction===1||f.direction===3))frames.push({...f,crop:[f.crop[0],512,256,256]});
- const file=`${id}-walk-v5.png`;
+ const file=`${id}-walk-v${upper?6:5}.png`;
  writeFileSync(`public/inhabitants/city-perspective/${file}`,sheet.toBuffer('image/png'));
- const updated={...art,file,size:[1024,768],frames,walkRevision:8};
+ const updated={...art,file,size:[1024,768],frames,walkRevision:upper?9:8};
  live[live.findIndex(a=>a.id===id)]=updated;
  writeFileSync(`design/city-walk-2026-10-01/${id}.json`,JSON.stringify(updated,null,2)+'\n');
  audit.push({id,parts,bodyHip,thighJoints,shinJoints,poses,uniqueFrames:new Set(hashes).size,frameHashes:hashes,preservedViews:[1,3]});
