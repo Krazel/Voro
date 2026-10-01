@@ -4,69 +4,1097 @@
     "uniqueFrames": 4,
     "frameCount": 4,
     "frontBackPixelsIdentical": true,
-    "upperBodyMoves": true
+    "upperBodyMoves": true,
+    "registration": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64.5
+      },
+      {
+        "direction": 0,
+        "pose": 2,
+        "top": 15,
+        "bottom": 144,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 3,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 1,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 1,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 63.5
+      },
+      {
+        "direction": 2,
+        "pose": 2,
+        "top": 15,
+        "bottom": 144,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 3,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 3,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 63.5
+      },
+      {
+        "direction": 3,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 63.5
+      }
+    ]
   },
   {
     "id": "city-1",
     "uniqueFrames": 8,
     "frameCount": 8,
     "frontBackPixelsIdentical": true,
-    "upperBodyMoves": true
+    "upperBodyMoves": true,
+    "registration": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 2,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 3,
+        "top": 15,
+        "bottom": 145,
+        "crown": 63.5
+      },
+      {
+        "direction": 0,
+        "pose": 4,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 5,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 6,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 7,
+        "top": 15,
+        "bottom": 145,
+        "crown": 63.5
+      },
+      {
+        "direction": 1,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 1,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 2,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 3,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64.5
+      },
+      {
+        "direction": 2,
+        "pose": 4,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 5,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 6,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 7,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64.5
+      },
+      {
+        "direction": 3,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 3,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      }
+    ]
   },
   {
     "id": "city-2",
     "uniqueFrames": 4,
     "frameCount": 4,
     "frontBackPixelsIdentical": true,
-    "upperBodyMoves": true
+    "upperBodyMoves": true,
+    "registration": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64.5
+      },
+      {
+        "direction": 0,
+        "pose": 2,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 3,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 1,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 1,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 63.5
+      },
+      {
+        "direction": 2,
+        "pose": 2,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 3,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 3,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64.5
+      },
+      {
+        "direction": 3,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      }
+    ]
   },
   {
     "id": "city-3",
     "uniqueFrames": 8,
     "frameCount": 8,
     "frontBackPixelsIdentical": true,
-    "upperBodyMoves": true
+    "upperBodyMoves": true,
+    "registration": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 2,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 3,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 4,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 5,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 6,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 7,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 1,
+        "pose": 0,
+        "top": 17,
+        "bottom": 145,
+        "crown": 63.5
+      },
+      {
+        "direction": 1,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 2,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 3,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 4,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 5,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 6,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 7,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 3,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 3,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      }
+    ]
   },
   {
     "id": "city-civilian-0",
     "uniqueFrames": 4,
     "frameCount": 4,
     "frontBackPixelsIdentical": true,
-    "upperBodyMoves": true
+    "upperBodyMoves": true,
+    "registration": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 2,
+        "top": 15,
+        "bottom": 145,
+        "crown": 63.5
+      },
+      {
+        "direction": 0,
+        "pose": 3,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 1,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 1,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 2,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64.5
+      },
+      {
+        "direction": 2,
+        "pose": 3,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 3,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 3,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      }
+    ]
   },
   {
     "id": "city-civilian-1",
     "uniqueFrames": 4,
     "frameCount": 4,
     "frontBackPixelsIdentical": true,
-    "upperBodyMoves": true
+    "upperBodyMoves": true,
+    "registration": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 63
+      },
+      {
+        "direction": 0,
+        "pose": 1,
+        "top": 15,
+        "bottom": 144,
+        "crown": 63.5
+      },
+      {
+        "direction": 0,
+        "pose": 2,
+        "top": 15,
+        "bottom": 145,
+        "crown": 63
+      },
+      {
+        "direction": 0,
+        "pose": 3,
+        "top": 15,
+        "bottom": 145,
+        "crown": 63.5
+      },
+      {
+        "direction": 1,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 1,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 65
+      },
+      {
+        "direction": 2,
+        "pose": 1,
+        "top": 15,
+        "bottom": 144,
+        "crown": 64.5
+      },
+      {
+        "direction": 2,
+        "pose": 2,
+        "top": 15,
+        "bottom": 145,
+        "crown": 65
+      },
+      {
+        "direction": 2,
+        "pose": 3,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64.5
+      },
+      {
+        "direction": 3,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 63.5
+      },
+      {
+        "direction": 3,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64.5
+      }
+    ]
   },
   {
     "id": "city-civilian-2",
     "uniqueFrames": 4,
     "frameCount": 4,
     "frontBackPixelsIdentical": true,
-    "upperBodyMoves": true
+    "upperBodyMoves": true,
+    "registration": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64.5
+      },
+      {
+        "direction": 0,
+        "pose": 2,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 3,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 1,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 63.5
+      },
+      {
+        "direction": 1,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 63.5
+      },
+      {
+        "direction": 2,
+        "pose": 2,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 3,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 3,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 3,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      }
+    ]
   },
   {
     "id": "city-civilian-3",
     "uniqueFrames": 8,
     "frameCount": 8,
     "frontBackPixelsIdentical": true,
-    "upperBodyMoves": true
+    "upperBodyMoves": true,
+    "registration": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 2,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 3,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 4,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 5,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 6,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 7,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 1,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 1,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 2,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 3,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 4,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 5,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 6,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 7,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 3,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 3,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 63.5
+      }
+    ]
   },
   {
     "id": "city-civilian-4",
     "uniqueFrames": 4,
     "frameCount": 4,
     "frontBackPixelsIdentical": true,
-    "upperBodyMoves": true
+    "upperBodyMoves": true,
+    "registration": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 2,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 3,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 1,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 1,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 63.5
+      },
+      {
+        "direction": 2,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 2,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 3,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 3,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 3,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      }
+    ]
   },
   {
     "id": "city-civilian-5",
     "uniqueFrames": 4,
     "frameCount": 4,
     "frontBackPixelsIdentical": true,
-    "upperBodyMoves": true
+    "upperBodyMoves": true,
+    "registration": [
+      {
+        "direction": 0,
+        "pose": 0,
+        "top": 15,
+        "bottom": 144,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 2,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 0,
+        "pose": 3,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 1,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 1,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64.5
+      },
+      {
+        "direction": 2,
+        "pose": 0,
+        "top": 15,
+        "bottom": 144,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 2,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 2,
+        "pose": 3,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 3,
+        "pose": 0,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      },
+      {
+        "direction": 3,
+        "pose": 1,
+        "top": 15,
+        "bottom": 145,
+        "crown": 64
+      }
+    ]
   }
 ]

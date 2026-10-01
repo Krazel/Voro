@@ -29,7 +29,19 @@ for(let n=0;n<ids.length;n++){
  kept.getContext('2d').drawImage(images[s.imageAtlas],0,art.size[1]-256,1024,256,0,0,1024,256);
  const pixelHash=canvas=>createHash('sha256').update(canvas.getContext('2d').getImageData(0,0,1024,256).data).digest('hex');
  if(pixelHash(oldCanvas)!==pixelHash(kept))throw Error(`${s.id}: front/back pixels changed`);
- rows.push({id:s.id,uniqueFrames:hashes.size,frameCount:count,frontBackPixelsIdentical:true,upperBodyMoves});
+ const registration=[];
+ for(let d=0;d<4;d++)for(let i=0;i<art.views[d].length;i++){
+  c.clearRect(0,0,128,160);c.save();c.translate(64,80);
+  const time=(d===0||d===2)?(i+.1)/art.views[d].length*art.walkPeriod:(i+.1)*Math.PI/9;
+  drawJourneySprite(c,images,s.id,130/art.heightPerRadius,0,time,1,0,null,d*Math.PI/2);c.restore();
+  const pixels=c.getImageData(0,0,128,160).data;let top=160,bottom=0,left=128,right=0;
+  for(let y=0;y<160;y++)for(let x=0;x<128;x++)if(pixels[(y*128+x)*4+3]>230){top=Math.min(top,y);bottom=Math.max(bottom,y+1);}
+  for(let y=top;y<top+Math.round((bottom-top)*.08);y++)for(let x=0;x<128;x++)if(pixels[(y*128+x)*4+3]>230){left=Math.min(left,x);right=Math.max(right,x+1);}
+  const crown=(left+right)/2;
+  if(Math.abs(top-15)>2||Math.abs(bottom-145)>2||Math.abs(crown-64)>2)throw Error(s.id+': registration drift '+JSON.stringify({d,i,top,bottom,crown}));
+  registration.push({direction:d,pose:i,top,bottom,crown});
+ }
+ rows.push({id:s.id,uniqueFrames:hashes.size,frameCount:count,frontBackPixelsIdentical:true,upperBodyMoves,registration});
  p.fillStyle='#142d26';p.font='13px sans-serif';p.fillText(s.name,(n%2)*600+10,Math.floor(n/2)*180+171);
 }
 writeFileSync(out+'/quarter-poses.png',proof.toBuffer('image/png'));

@@ -116,9 +116,30 @@ test('Corrected walks exchange the near/far supporting leg across both halves of
  }
 });
 
-test('All seven approved humans retain their art and motion unchanged',()=>{
+test('All seven approved humans retain their art and motion apart from root registration',()=>{
+ const withoutRegistration=a=>{
+  const {registrationRevision,...rest}=a;
+  return {...rest,frames:rest.frames.map(({anchor,registration,...f})=>f)};
+ };
  for(const id of ['city-0','city-1','city-2','city-3','city-civilian-2','city-civilian-3','city-civilian-5'])
-  assert.deepEqual(ART.find(a=>a.id===id),BEFORE.find(a=>a.id===id));
+  assert.deepEqual(withoutRegistration(ART.find(a=>a.id===id)),withoutRegistration(BEFORE.find(a=>a.id===id)));
+});
+
+test('Every human pose uses the same crown, ground and root without added translation',()=>{
+ for(const a of ART.filter(a=>a.kind==='human')){
+  const s=SPECIES_BY_ID[a.id],im={naturalWidth:a.size[0],naturalHeight:a.size[1]};
+  assert.equal(a.registrationRevision,1);
+  for(const f of a.frames){
+   const p=f.registration;
+   assert.ok(p&&p.scale>0);
+   assert.ok(Math.abs((p.crownX-f.anchor[0])*p.scale)<1e-6);
+   assert.ok(Math.abs((p.ground-f.anchor[1])*p.scale-a.referenceHeight/2)<1e-6);
+   assert.ok(Math.abs((p.top-f.anchor[1])*p.scale+a.referenceHeight/2)<1e-6);
+  }
+  const c=new Proxy({globalAlpha:1,translate:()=>assert.fail('Registered human must not bob at runtime')},{get:(o,k)=>o[k]??(()=>{})});
+  for(const d of [0,1,2,3])for(const time of [.1,.24,.47,.7])
+   drawJourneySprite(c,{[s.imageAtlas]:im},s.id,s.r,0,time,1,0,null,d*Math.PI/2);
+ }
 });
 
 test('Three corrected humans use whole painted poses like the approved civilian',()=>{

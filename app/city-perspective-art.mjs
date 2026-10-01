@@ -8,7 +8,7 @@ export function applyCityPerspectiveArt(byId, urls) {
     const key = `cityView_${a.id}`;
     urls[key] = `./inhabitants/city-perspective/${a.file||a.id+'.png'}`;
     s.imageAtlas = key;
-    s.animationCropRevision = a.walkRevision||(a.walkPeriod?6:4);
+    s.animationCropRevision = (a.walkRevision||(a.walkPeriod?6:4))+(a.registrationRevision||0)*100;
     s.artProfile = {family:'prop',rigid:true,period:1.2,revision:s.animationCropRevision,
       crop:a.frames[0].crop,
       description:'Vista elevada con cámara fija y orientación coherente con la ciudad.'};
@@ -45,7 +45,7 @@ export function drawCityDirectional(c, image, s, r, seed, time, activity, hurt, 
   const unit=size/(a.kind==='human'?a.referenceHeight:a.referenceSpan);
   const alpha=c.globalAlpha;
   c.save();
-  if(walking)c.translate(0,-Math.abs(Math.sin(lateral?tick/frames.length*Math.PI*2:phase))*size*(lateral?.006:.018));
+  if(walking&&!a.registrationRevision)c.translate(0,-Math.abs(Math.sin(lateral?tick/frames.length*Math.PI*2:phase))*size*(lateral?.006:.018));
   else if(a.kind==='rotor')c.translate(0,Math.sin(phase)*r*.025);
   // Common foot/centre registration prevents the sprite jumping between views.
   {
@@ -53,7 +53,8 @@ export function drawCityDirectional(c, image, s, r, seed, time, activity, hurt, 
     c.globalAlpha=alpha;
     if(f.flipX)c.scale(-1,1);
     const sx=image.sourceScaleX||1,sy=image.sourceScaleY||1;
-    c.drawImage(image,x*sx,y*sy,w*sx,h*sy,-f.anchor[0]*unit,-f.anchor[1]*unit,w*unit,h*unit);
+    const frameUnit=unit*(f.registration?.scale||1);
+    c.drawImage(image,x*sx,y*sy,w*sx,h*sy,-f.anchor[0]*frameUnit,-f.anchor[1]*frameUnit,w*frameUnit,h*frameUnit);
     if(f.rotor) {
       const [hx,hy,rx,ry]=f.rotor,px=(hx-f.anchor[0])*unit,py=(hy-f.anchor[1])*unit;
       // The rotor spins in the horizontal world plane, projected as an ellipse.
