@@ -209,6 +209,26 @@ export class JourneyWorld extends MicroWorld {
         }
         if(!consumed)entities.push(e);
       }
+    // Static street objects have their own RNG and stable IDs. Append them only
+    // after arrival objects: existing people, buildings and threats never reroll.
+    if(stageId==='city') {
+      const streetRng=random((this.seed^Math.imul(cx,73856093)^Math.imul(cy,19349663)^0x51ee7)>>>0);
+      for(const [slot,kind] of (plan.streetObjects||[]).entries()) {
+        const id=`city-street:${cx}:${cy}:${slot}`,s=SPECIES_BY_ID[kind];
+        const e=journeyEntity(s,0,0,streetRng()*6.28,id);
+        for(let attempt=0;attempt<24;attempt++) {
+          const pos=cityPlacement(s,cx*TILE+streetRng()*TILE,cy*TILE+streetRng()*TILE,cx,cy,e.r,this.seed);
+          if(!pos)continue;
+          const bounds=cityBounds(s,{...pos,r:e.r});
+          if(cityOccupied.some(b=>cityOverlap(b,bounds)))continue;
+          cityOccupied.push(bounds);
+          e.x=e.homeX=pos.x;e.y=e.homeY=pos.y;
+          if((this.journal.get(id)||0)>time)depleted=true;
+          else entities.push(e);
+          break;
+        }
+      }
+    }
     if (stageId === 'land')
       for (const e of entities) constrainToShore(e, SPECIES_BY_ID[e.kind]);
     // One Earth at the arrival point. A consumed landmark remains consumed,

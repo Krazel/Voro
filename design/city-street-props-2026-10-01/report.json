@@ -1,0 +1,21 @@
+{
+  "chunks": 12,
+  "before": {
+    "city-matter-can": 35,
+    "city-matter-bench": 13,
+    "city-matter-sign": 15,
+    "city-matter-shrub": 1,
+    "city-matter-lamp": 16,
+    "city-matter-container": 1
+  },
+  "after": {
+    "city-matter-can": 59,
+    "city-matter-bench": 25,
+    "city-matter-sign": 39,
+    "city-matter-shrub": 1,
+    "city-matter-lamp": 26,
+    "city-matter-container": 1
+  },
+  "added": 70,
+  "averageAdded": 5.833333333333333
+}

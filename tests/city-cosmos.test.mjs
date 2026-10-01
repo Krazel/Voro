@@ -59,8 +59,8 @@ test('City sidewalks consistently receive a substantial civilian population with
   let people=0,total=0;
   for(let x=-15;x<15;x++) {
     const entities=w.generate(x,12,0).entities;
-    const civilians=entities.filter(e=>e.kind==='city-0'||e.kind.startsWith('city-civilian-'));people+=civilians.length;total+=entities.length;
-    assert.ok(civilians.length>=9);assert.ok(entities.length<=24);
+    const civilians=entities.filter(e=>e.kind==='city-0'||e.kind.startsWith('city-civilian-'));people+=civilians.length;total+=entities.filter(e=>!e.id.startsWith('city-street:')).length;
+    assert.ok(civilians.length>=9);assert.ok(entities.length<=30);
     assert.ok(civilians.every(e=>e.cityAxis==='x'||e.cityAxis==='y'));
     assert.equal(entities.filter(e=>SPECIES_BY_ID[e.kind].building).length,cityLots(x,12,51).length);
   }

@@ -21,7 +21,8 @@ export const POPULATION_PLANS = {
   city: {
     slots: [15, 7, 2],
     pedestrians: 10,
-    note: 'Diez plazas de peatones y una de automóvil sin armas por zona, dentro del mismo límite de población; además de objetos, edificios y defensa.',
+    streetObjects: ['city-matter-sign','city-matter-sign','city-matter-bench','city-matter-lamp','city-matter-can','city-matter-can'],
+    note: 'Diez plazas de peatones y una de automóvil sin armas; seis plazas adicionales de objetos de calle: dos señales, un banco, una farola y dos latas, sin aumentar la defensa.',
   },
   orbit: {
     slots: [4, 4, 1],
