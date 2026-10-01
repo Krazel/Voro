@@ -607,12 +607,12 @@
           256
         ],
         "anchor": [
-          128,
+          127.5,
           128
         ],
         "registration": {
           "scale": 1,
-          "crownX": 128,
+          "crownX": 127.5,
           "top": 24,
           "ground": 232
         }
@@ -678,11 +678,11 @@
         }
       }
     ],
-    "file": "city-1-vertical-v2.png",
+    "file": "city-1-vertical-v1.png",
     "walkPeriod": 0.95,
     "walkRevision": 8,
     "registrationRevision": 1,
-    "verticalRevision": 2
+    "verticalRevision": 1
   },
   {
     "id": "city-2",
@@ -1313,13 +1313,13 @@
         ],
         "anchor": [
           128,
-          128
+          127.5
         ],
         "registration": {
-          "scale": 1,
+          "scale": 1.0048309178743962,
           "crownX": 128,
           "top": 24,
-          "ground": 232
+          "ground": 231
         }
       },
       {
@@ -1363,11 +1363,11 @@
         }
       }
     ],
-    "file": "city-3-vertical-v2.png",
+    "file": "city-3-vertical-v1.png",
     "walkPeriod": 1.1,
     "walkRevision": 8,
     "registrationRevision": 1,
-    "verticalRevision": 2
+    "verticalRevision": 1
   },
   {
     "id": "city-4",

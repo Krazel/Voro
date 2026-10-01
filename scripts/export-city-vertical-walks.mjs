@@ -10,11 +10,11 @@ const live=JSON.parse(readFileSync('app/city-perspective-art.json','utf8'));
 // enter the game. This retains the approved two-contact playback cadence.
 const selections=[
  ['city-0',3,'city-0-3',0,2],
- ['city-1',1,'city-1-1-fix',0,2],
+ ['city-1',1,'city-1-front-natural-v4',0,1,2],
  ['city-2',1,'city-2-1',0,2],
  ['city-2',3,'city-2-3',1,3],
  ['city-3',1,'city-3-1',0,1,2],
- ['city-3',3,'city-3-3-pair',0,1,2],
+ ['city-3',3,'city-3-back-natural-v2',0,1,2],
  ['city-civilian-0',1,'city-civilian-0-1-fix',0,2],
  ['city-civilian-0',3,'city-civilian-0-3',1,3],
  ['city-civilian-3',3,'city-civilian-3-3',0,2],
@@ -52,7 +52,8 @@ for(const id of new Set(selections.map(s=>s[0]))){
    audit.push({id,direction,pose:p,source:data.source,registration:data.registration,hash:createHash('sha256').update(data.pixels.data).digest('hex')});
   }
  }
- a.file=id+'-vertical-v1.png';a.verticalRevision=1;
+ a.verticalRevision=['city-1','city-3'].includes(id)?2:1;
+ a.file=id+'-vertical-v'+a.verticalRevision+'.png';
  writeFileSync(dest+a.file,c.toBuffer('image/png'));live[live.findIndex(row=>row.id===id)]=a;
 }
 writeFileSync('app/city-perspective-art.json',JSON.stringify(live,null,2)+'\n');

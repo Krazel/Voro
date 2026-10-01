@@ -1,0 +1,16 @@
+[
+  {
+    "id": "city-1",
+    "direction": 1,
+    "source": "city-1-1-fix.png",
+    "file": "city-1-front-natural-v2",
+    "prompt": "Correct the anatomy of this soldier's walking legs. Make exactly TWO poses side by side on transparent background, full figure, same frontal elevated view and identity. Keep helmet, face, arms, rifle, torso, armor and colors consistent with reference. Replace exaggerated high-knee marching with a relaxed normal walking stride: thighs nearly vertical, knee only slightly bent, continuous visible shin from knee to ankle, correctly proportioned calf and boot. No dangling tiny foot directly attached to knee. Pose LEFT: leg on screen left extends slightly toward viewer, screen right foot trails mildly; pose RIGHT: screen right leg extends slightly toward viewer, screen left foot trails mildly. Both feet remain near ground, vertical offset between boots about half a boot length, NEVER knee high. Both lower legs must remain anatomically complete and equal length, with mild natural foreshortening only. Upper-body width and height exactly equal in both cells, same head center and ground level. Rifle same orientation in both. No mirrored upper body. Two natural opposite contacts for a subtle in-place walking loop, not running or stomping."
+  },
+  {
+    "id": "city-3",
+    "direction": 3,
+    "source": "city-3-3-pair.png",
+    "file": "city-3-back-natural-v2",
+    "prompt": "Precisely fix malformed lower legs in this rear-view heavy soldier animation. Exactly TWO full-body poses side by side, transparent background. Preserve chunky soldier, helmet, backpack, gun on screen LEFT, antenna on screen RIGHT, same elevated rear camera and broad proportions. Draw a NORMAL restrained walking step, not high knees, running or kneeling. BOTH legs have continuous full-length thighs, calves, ankles and boots. In existing right figure one leg seems to stop at knee; repair it by drawing its complete calf and boot down toward ground. Left figure: screen-left boot planted, screen-right boot trails slightly lifted. Right figure: screen-right boot planted, screen-left boot trails slightly lifted. Heel lift only half a boot height, NOT up to knee. A little sole can show under trailing heel but do not point a giant sole directly at viewer. The legs should retain nearly the same apparent length in both opposite steps. Character center, head, shoulders, waist and ground stay registered exactly across both cells. Keep all accessories on same side, no mirroring, no haze, no floor shadows."
+  }
+]

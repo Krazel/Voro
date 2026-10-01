@@ -50,37 +50,14 @@
     "direction": 1,
     "pose": 0,
     "source": {
-      "file": "city-1-1-fix",
+      "file": "city-1-front-natural-v4",
       "index": 0,
-      "count": 4,
+      "count": 2,
       "bounds": {
-        "l": 209,
-        "r": 472,
-        "t": 46,
-        "b": 618
-      }
-    },
-    "registration": {
-      "scale": 1,
-      "crownX": 127.5,
-      "top": 24,
-      "ground": 232
-    },
-    "hash": "21bfb7431acf1f6000dcfcff65fb55c889deb57e1df49d32a7e823be41228e9c"
-  },
-  {
-    "id": "city-1",
-    "direction": 1,
-    "pose": 1,
-    "source": {
-      "file": "city-1-1-fix",
-      "index": 2,
-      "count": 4,
-      "bounds": {
-        "l": 211,
-        "r": 478,
-        "t": 648,
-        "b": 1222
+        "l": 145,
+        "r": 568,
+        "t": 64,
+        "b": 1097
       }
     },
     "registration": {
@@ -89,7 +66,30 @@
       "top": 24,
       "ground": 232
     },
-    "hash": "2b99e83a0c99cea2eec9a843e2ebb9bbf05f59e515251faccfc6411be0e5efa7"
+    "hash": "d6bf6255ee07149bcdb16c7545e8bb562ea2e9934a5344a6d2819f26963cd38b"
+  },
+  {
+    "id": "city-1",
+    "direction": 1,
+    "pose": 1,
+    "source": {
+      "file": "city-1-front-natural-v4",
+      "index": 1,
+      "count": 2,
+      "bounds": {
+        "l": 672,
+        "r": 1097,
+        "t": 64,
+        "b": 1108
+      }
+    },
+    "registration": {
+      "scale": 1,
+      "crownX": 128,
+      "top": 24,
+      "ground": 232
+    },
+    "hash": "d0e98383defdb5e4363367ff7401108556c5f53b11f067bda15042a510f52a42"
   },
   {
     "id": "city-2",
@@ -234,37 +234,14 @@
     "direction": 3,
     "pose": 0,
     "source": {
-      "file": "city-3-3-pair",
+      "file": "city-3-back-natural-v2",
       "index": 0,
       "count": 2,
       "bounds": {
-        "l": 208,
-        "r": 655,
+        "l": 207,
+        "r": 657,
         "t": 83,
-        "b": 810
-      }
-    },
-    "registration": {
-      "scale": 1.0048309178743962,
-      "crownX": 128,
-      "top": 24,
-      "ground": 231
-    },
-    "hash": "997387b77ace5129a27aafd14696c59e27d970f2b53cdc00a65f5e2c128d8e43"
-  },
-  {
-    "id": "city-3",
-    "direction": 3,
-    "pose": 1,
-    "source": {
-      "file": "city-3-3-pair",
-      "index": 1,
-      "count": 2,
-      "bounds": {
-        "l": 1045,
-        "r": 1479,
-        "t": 83,
-        "b": 814
+        "b": 813
       }
     },
     "registration": {
@@ -273,7 +250,30 @@
       "top": 24,
       "ground": 232
     },
-    "hash": "5606935cc997faaaed67e347314e9a293115eae498af288648a49987b414de28"
+    "hash": "266f8118ecfde78631d2b765cdd9a9f8f3d659fa9022ccf180127596ddfcb3e8"
+  },
+  {
+    "id": "city-3",
+    "direction": 3,
+    "pose": 1,
+    "source": {
+      "file": "city-3-back-natural-v2",
+      "index": 1,
+      "count": 2,
+      "bounds": {
+        "l": 1044,
+        "r": 1482,
+        "t": 83,
+        "b": 813
+      }
+    },
+    "registration": {
+      "scale": 1,
+      "crownX": 128,
+      "top": 24,
+      "ground": 232
+    },
+    "hash": "6967bc20faa424bce906edfb2bfffb26b99b6130af1fa7d5444f6f88d551bb17"
   },
   {
     "id": "city-civilian-0",

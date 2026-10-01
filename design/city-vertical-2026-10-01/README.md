@@ -28,3 +28,7 @@ Verificado:
 - Galería real comprobada en navegador, con cambio de pose y todos los personajes cargados. Captura `preview.png`.
 
 Revisión visual: `../city-walk-2026-10-01/vertical.html`. Integrado en la candidata local; pendiente de aceptación visual del usuario. No se ha subido una nueva build a TestFlight por este cambio.
+
+## Segunda revisión: pantorrillas de los soldados
+
+El usuario pidió corregir únicamente el soldado de frente y el pesado de espaldas. Se sustituyen sus cuatro contactos por zancadas bajas, con pantorrillas completas y menor elevación del pie. Fuentes finales: `city-1-front-natural-v4.png` y `city-3-back-natural-v2.png`. Prompts de ChatGPT Images en `lower-leg-prompts.json` y `lower-leg-refinements.json`. Se mantiene la antena, arma y correas en el mismo lado. El resto de vistas queda idéntico a `before-lower-legs.json`, comprobado píxel a píxel por el verificador. Los nuevos atlas usan sufijo `vertical-v2` y revisión de caché 2.

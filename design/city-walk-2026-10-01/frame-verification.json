@@ -167,7 +167,7 @@
         "pose": 1,
         "top": 15,
         "bottom": 145,
-        "crown": 63.5
+        "crown": 64
       },
       {
         "direction": 2,
@@ -470,7 +470,7 @@
       {
         "direction": 3,
         "pose": 0,
-        "top": 16,
+        "top": 15,
         "bottom": 145,
         "crown": 64
       },
