@@ -11,3 +11,7 @@ Límite: tres horas simuladas o diez muertes. Las etapas incompletas se muestran
 Fuente de juego: TestFlight 0.14(1), commit de entrega 06c3822; HEAD f563362 contiene solamente los recibos posteriores. Esta auditoría añade herramientas y resultados, sin cambios en app/. Se registrará el commit exacto en cada ejecución.
 
 Ejecutar: `node scripts/run-duration-batch.mjs design/duration-audit-0.14 extended`.
+
+Comprobación de fuente: el árbol Git app/ coincide exactamente con la build TestFlight 06c3822. Fixture móvil vertical de 390 × 844, sin almacenamiento persistente del usuario. Se guardan las huellas del simulador y fixture en game-provenance.json. No mide específicamente la duración en PC, ni latencia de controles reales.
+
+Diagnóstico adicional elegido tras observar los resultados principales: repetir Preciso/2153 a 60 Hz (44,36 min y 263 golpes en Órbita a 30 Hz). Se guarda en diagnostics/. No se añade a las 90 campañas principales ni se presenta como muestra aleatoria: es una comprobación deliberada del caso más largo. Total final: 100 campañas, 90 principales + 9 contrastes prefijados + 1 diagnóstico.

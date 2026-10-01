@@ -1,0 +1,13 @@
+{
+  "releaseCommit": "06c38223fb667f5174f80e8445634e7047655cc6",
+  "auditCommit": "1fdd2c4bab24515fb5f85683088cb5efec7e1f01",
+  "gameTree": "f67674a0b9fbe8e64dfd59199d33c44e9b58fb3a",
+  "matchesTestFlight": true,
+  "viewport": {
+    "width": 390,
+    "height": 844,
+    "desktop": false
+  },
+  "simulatorSha256": "2BAF0831820291B326C743B05CFF7BC41A4F464D1A3639FF5288A6249A5AB7A9",
+  "fixtureSha256": "8D7D335DD4D11BB81592821E576CFBD0022B46421EC86A853CC4582A3764258C"
+}
