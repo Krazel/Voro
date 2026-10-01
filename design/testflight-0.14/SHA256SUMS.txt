@@ -1,0 +1,1 @@
+09fc38891627e2bd3431fd77c583f39d106efee9a9b420e75d8709d0bbbc64b4  artifact/testflight/App.ipa

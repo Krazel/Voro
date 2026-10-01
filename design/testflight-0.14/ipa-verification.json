@@ -1,0 +1,18 @@
+{
+  "version": "0.14",
+  "build": 1,
+  "developmentAccess": true,
+  "assets": [
+    {
+      "asset": "inhabitants/city-perspective/city-1-vertical-v2.png",
+      "sha256": "97BC0D6A3FEE542D9D1B0169552D4ED9D92A53A8D097AFFB18A71A3CBBB9E9AE",
+      "matchesSource": true
+    },
+    {
+      "asset": "inhabitants/city-perspective/city-3-vertical-v2.png",
+      "sha256": "76FD3CA3F2DD284CB781F50FCB3C56CD7BAF537278643C89412D3D9B5D514298",
+      "matchesSource": true
+    }
+  ],
+  "ipaSha256": "09FC38891627E2BD3431FD77C583F39D106EFEE9A9B420E75D8709D0BBBC64B4"
+}
