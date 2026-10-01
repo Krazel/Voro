@@ -1,0 +1,34 @@
+{
+  "tool": "ChatGPT Images built-in",
+  "records": [
+    {
+      "id": "city-civilian-0",
+      "subject": "woman with red leather jacket, brown shoulder bag, blue jeans, brown ankle boots and brown ponytail",
+      "prompt": "Use case: identity-preserve. Production VORO painted game animation sheet. Image 1 is the APPROVED movement reference: civilian walking. Image 2 is the character identity reference only. Redraw the character from image 2, woman with red leather jacket, brown shoulder bag, blue jeans, brown ankle boots and brown ponytail, as FOUR COMPLETE full-body hand-painted walk poses in a 2x2 equal grid on genuinely transparent background. Match image 1's natural coordinated full body motion, camera elevation, painterly detail and four-beat cadence. All face SCREEN RIGHT. Upper left: right/near foot reaches forward to right, left/far foot behind; near arm behind body, far arm forward. Upper right: weight on right/near foot directly below hip, far knee passes forward with foot lifted; arms cross mid swing. Lower left: left/far foot reaches forward, right/near foot behind; NEAR ARM NOW FORWARD and far arm back. Lower right: weight on left/far foot beneath hip, NEAR knee passes forward with near foot lifted; opposite arm swing. Pose3 MUST reverse which leg is in front compared to pose1. Torso shoulders and cloth naturally follow the weight transfer. Keep body seamlessly drawn through waist, shoulders, knees, no segmented puppet parts. Keep same head height, floor line and scale in each cell; generous margin around each complete silhouette. Do not add labels, gridlines, ground shadow, glow or background. Same character in every cell. Arms really change angle, opposing legs. This is a walk, not run, one foot on ground. Keep bag/briefcase attached naturally.",
+      "refs": [
+        "C:/Users/dmkra/Documents/Codex Apps/Voro-camera/design/city-walk-2026-10-01/painted-sources/city-0.png",
+        "C:/Users/dmkra/Documents/Codex Apps/Voro-camera/design/city-walk-2026-10-01/painted-sources/city-civilian-0.png"
+      ],
+      "source": "design/city-walk-fullbody-2026-10-01/city-civilian-0.png"
+    },
+    {
+      "id": "city-civilian-1",
+      "subject": "construction worker with yellow hardhat, orange reflective vest, grey shirt and trousers, gloves and work boots",
+      "prompt": "Change ONLY the outfit and accessories of this four-pose man walk cycle. Keep EXACTLY the four full body poses, arm positions, leg positions, body silhouette and camera from this supplied image. Replace olive jacket and backpack with orange reflective safety vest over grey work shirt; remove backpack completely. Replace jeans with grey work trousers and shoes with work boots; put yellow construction hardhat on head and grey work gloves on hands. Especially preserve BOTTOM LEFT near arm extended forwards unlike TOP LEFT near arm back. Do not copy top left torso into bottom left! Four complete painted poses 2x2, transparent background, no labels, no scenery, no shadow or haze. Same realistic painted art. Preserve each individual pose exactly while dressing the figure as a construction worker.",
+      "refs": [
+        "C:/Users/dmkra/Documents/Codex Apps/Voro-camera/design/city-walk-2026-10-01/painted-sources/city-0.png"
+      ],
+      "source": "design/city-walk-fullbody-2026-10-01/city-civilian-1.png"
+    },
+    {
+      "id": "city-civilian-4",
+      "subject": "office man with navy suit, white shirt and black briefcase",
+      "prompt": "Use case: identity-preserve. Production VORO painted game animation sheet. Image 1 is the APPROVED movement reference: civilian walking. Image 2 is the character identity reference only. Redraw the character from image 2, office man with navy suit, white shirt and black briefcase, as FOUR COMPLETE full-body hand-painted walk poses in a 2x2 equal grid on genuinely transparent background. Match image 1's natural coordinated full body motion, camera elevation, painterly detail and four-beat cadence. All face SCREEN RIGHT. Upper left: right/near foot reaches forward to right, left/far foot behind; near arm behind body, far arm forward. Upper right: weight on right/near foot directly below hip, far knee passes forward with foot lifted; arms cross mid swing. Lower left: left/far foot reaches forward, right/near foot behind; NEAR ARM NOW FORWARD and far arm back. Lower right: weight on left/far foot beneath hip, NEAR knee passes forward with near foot lifted; opposite arm swing. Pose3 MUST reverse which leg is in front compared to pose1. Torso shoulders and cloth naturally follow the weight transfer. Keep body seamlessly drawn through waist, shoulders, knees, no segmented puppet parts. Keep same head height, floor line and scale in each cell; generous margin around each complete silhouette. Do not add labels, gridlines, ground shadow, glow or background. Same character in every cell. Arms really change angle, opposing legs. This is a walk, not run, one foot on ground. Keep bag/briefcase attached naturally.",
+      "refs": [
+        "C:/Users/dmkra/Documents/Codex Apps/Voro-camera/design/city-walk-2026-10-01/painted-sources/city-0.png",
+        "C:/Users/dmkra/Documents/Codex Apps/Voro-camera/design/city-walk-2026-10-01/painted-sources/city-civilian-4.png"
+      ],
+      "source": "design/city-walk-fullbody-2026-10-01/city-civilian-4.png"
+    }
+  ]
+}

@@ -1415,7 +1415,7 @@
     "kind": "human",
     "size": [
       1024,
-      512
+      768
     ],
     "referenceHeight": 208,
     "referenceSpan": 208,
@@ -1477,6 +1477,62 @@
         ]
       },
       {
+        "direction": 0,
+        "pose": 4,
+        "crop": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "anchor": [
+          128,
+          128
+        ]
+      },
+      {
+        "direction": 0,
+        "pose": 5,
+        "crop": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "anchor": [
+          128,
+          128
+        ]
+      },
+      {
+        "direction": 0,
+        "pose": 6,
+        "crop": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "anchor": [
+          128,
+          128
+        ]
+      },
+      {
+        "direction": 0,
+        "pose": 7,
+        "crop": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "anchor": [
+          128,
+          128
+        ]
+      },
+      {
         "direction": 2,
         "pose": 0,
         "crop": [
@@ -1537,11 +1593,71 @@
         "flipX": true
       },
       {
+        "direction": 2,
+        "pose": 4,
+        "crop": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "anchor": [
+          128,
+          128
+        ],
+        "flipX": true
+      },
+      {
+        "direction": 2,
+        "pose": 5,
+        "crop": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "anchor": [
+          128,
+          128
+        ],
+        "flipX": true
+      },
+      {
+        "direction": 2,
+        "pose": 6,
+        "crop": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "anchor": [
+          128,
+          128
+        ],
+        "flipX": true
+      },
+      {
+        "direction": 2,
+        "pose": 7,
+        "crop": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "anchor": [
+          128,
+          128
+        ],
+        "flipX": true
+      },
+      {
         "direction": 1,
         "pose": 0,
         "crop": [
           0,
-          256,
+          512,
           256,
           256
         ],
@@ -1555,7 +1671,7 @@
         "pose": 0,
         "crop": [
           256,
-          256,
+          512,
           256,
           256
         ],
@@ -1569,7 +1685,7 @@
         "pose": 1,
         "crop": [
           512,
-          256,
+          512,
           256,
           256
         ],
@@ -1583,7 +1699,7 @@
         "pose": 1,
         "crop": [
           768,
-          256,
+          512,
           256,
           256
         ],
@@ -1593,17 +1709,16 @@
         ]
       }
     ],
-    "file": "city-civilian-0-walk-v7.png",
+    "file": "city-civilian-0-walk-v6.png",
     "walkPeriod": 0.95,
-    "walkRevision": 10,
-    "walkMethod": "painted-full-body"
+    "walkRevision": 9
   },
   {
     "id": "city-civilian-1",
     "kind": "human",
     "size": [
       1024,
-      512
+      768
     ],
     "referenceHeight": 208,
     "referenceSpan": 208,
@@ -1665,6 +1780,62 @@
         ]
       },
       {
+        "direction": 0,
+        "pose": 4,
+        "crop": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "anchor": [
+          128,
+          128
+        ]
+      },
+      {
+        "direction": 0,
+        "pose": 5,
+        "crop": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "anchor": [
+          128,
+          128
+        ]
+      },
+      {
+        "direction": 0,
+        "pose": 6,
+        "crop": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "anchor": [
+          128,
+          128
+        ]
+      },
+      {
+        "direction": 0,
+        "pose": 7,
+        "crop": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "anchor": [
+          128,
+          128
+        ]
+      },
+      {
         "direction": 2,
         "pose": 0,
         "crop": [
@@ -1725,11 +1896,71 @@
         "flipX": true
       },
       {
+        "direction": 2,
+        "pose": 4,
+        "crop": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "anchor": [
+          128,
+          128
+        ],
+        "flipX": true
+      },
+      {
+        "direction": 2,
+        "pose": 5,
+        "crop": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "anchor": [
+          128,
+          128
+        ],
+        "flipX": true
+      },
+      {
+        "direction": 2,
+        "pose": 6,
+        "crop": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "anchor": [
+          128,
+          128
+        ],
+        "flipX": true
+      },
+      {
+        "direction": 2,
+        "pose": 7,
+        "crop": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "anchor": [
+          128,
+          128
+        ],
+        "flipX": true
+      },
+      {
         "direction": 1,
         "pose": 0,
         "crop": [
           0,
-          256,
+          512,
           256,
           256
         ],
@@ -1743,7 +1974,7 @@
         "pose": 0,
         "crop": [
           256,
-          256,
+          512,
           256,
           256
         ],
@@ -1757,7 +1988,7 @@
         "pose": 1,
         "crop": [
           512,
-          256,
+          512,
           256,
           256
         ],
@@ -1771,7 +2002,7 @@
         "pose": 1,
         "crop": [
           768,
-          256,
+          512,
           256,
           256
         ],
@@ -1781,10 +2012,9 @@
         ]
       }
     ],
-    "file": "city-civilian-1-walk-v7.png",
+    "file": "city-civilian-1-walk-v6.png",
     "walkPeriod": 0.95,
-    "walkRevision": 10,
-    "walkMethod": "painted-full-body"
+    "walkRevision": 9
   },
   {
     "id": "city-civilian-2",
@@ -2280,7 +2510,7 @@
     "kind": "human",
     "size": [
       1024,
-      512
+      768
     ],
     "referenceHeight": 208,
     "referenceSpan": 208,
@@ -2342,6 +2572,62 @@
         ]
       },
       {
+        "direction": 0,
+        "pose": 4,
+        "crop": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "anchor": [
+          128,
+          128
+        ]
+      },
+      {
+        "direction": 0,
+        "pose": 5,
+        "crop": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "anchor": [
+          128,
+          128
+        ]
+      },
+      {
+        "direction": 0,
+        "pose": 6,
+        "crop": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "anchor": [
+          128,
+          128
+        ]
+      },
+      {
+        "direction": 0,
+        "pose": 7,
+        "crop": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "anchor": [
+          128,
+          128
+        ]
+      },
+      {
         "direction": 2,
         "pose": 0,
         "crop": [
@@ -2402,11 +2688,71 @@
         "flipX": true
       },
       {
+        "direction": 2,
+        "pose": 4,
+        "crop": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "anchor": [
+          128,
+          128
+        ],
+        "flipX": true
+      },
+      {
+        "direction": 2,
+        "pose": 5,
+        "crop": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "anchor": [
+          128,
+          128
+        ],
+        "flipX": true
+      },
+      {
+        "direction": 2,
+        "pose": 6,
+        "crop": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "anchor": [
+          128,
+          128
+        ],
+        "flipX": true
+      },
+      {
+        "direction": 2,
+        "pose": 7,
+        "crop": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "anchor": [
+          128,
+          128
+        ],
+        "flipX": true
+      },
+      {
         "direction": 1,
         "pose": 0,
         "crop": [
           0,
-          256,
+          512,
           256,
           256
         ],
@@ -2420,7 +2766,7 @@
         "pose": 0,
         "crop": [
           256,
-          256,
+          512,
           256,
           256
         ],
@@ -2434,7 +2780,7 @@
         "pose": 1,
         "crop": [
           512,
-          256,
+          512,
           256,
           256
         ],
@@ -2448,7 +2794,7 @@
         "pose": 1,
         "crop": [
           768,
-          256,
+          512,
           256,
           256
         ],
@@ -2458,10 +2804,9 @@
         ]
       }
     ],
-    "file": "city-civilian-4-walk-v7.png",
+    "file": "city-civilian-4-walk-v6.png",
     "walkPeriod": 0.95,
-    "walkRevision": 10,
-    "walkMethod": "painted-full-body"
+    "walkRevision": 9
   },
   {
     "id": "city-civilian-5",

@@ -252,50 +252,50 @@
     "poses": [
       {
         "crop": [
-          231,
-          13,
-          368,
-          541
+          216,
+          38,
+          415,
+          544
         ],
-        "headX": 398.5,
-        "legSpan": 0.6802218114602587
+        "headX": 399.5,
+        "legSpan": 0.7628676470588235
       },
       {
         "crop": [
-          788,
-          13,
-          244,
-          547
+          806,
+          38,
+          243,
+          551
         ],
-        "headX": 934.5,
-        "legSpan": 0.41681901279707495
+        "headX": 942.5,
+        "legSpan": 0.4246823956442831
       },
       {
         "crop": [
-          226,
-          611,
-          389,
-          533
+          208,
+          618,
+          435,
+          535
         ],
-        "headX": 412.5,
-        "legSpan": 0.7298311444652908
+        "headX": 400.5,
+        "legSpan": 0.8130841121495327
       },
       {
         "crop": [
-          787,
-          611,
-          278,
-          549
+          813,
+          619,
+          262,
+          544
         ],
-        "headX": 936,
-        "legSpan": 0.4371584699453552
+        "headX": 942.5,
+        "legSpan": 0.4577205882352941
       }
     ],
     "frameHashes": [
-      "7a40d64bcca974a579d860de61e0505dcedc538390857eb05d61359275911747",
-      "806f247e96d03be9390795acce65e962ad57a27a494b9b871e79dc37122df0c2",
-      "e8c5ca7f60bd31135fab59f14928a14be325943805b9564e86ad15703f3dfef3",
-      "ce20f9f1248e0d4b3c898911844f5aa12ea9470e9b17ffb8442ddbd3012e6800"
+      "69894311a5667978c498f56f546d85dc1bc4e40e6a050c88301faa30af615240",
+      "b495e185138ebfcd24a22b4e957451574f0fe90a8eb09384d170950f34ec70eb",
+      "dc4c0d1e2657310e74180c20a4e7c233dcfebf2bab29b9ff11eb27aa7499c4c1",
+      "be018ad22bc9adbb20f767ff2e62764b001cfc4568f723beefccd36dd7667f48"
     ],
     "uniqueFrames": 4,
     "preservedViews": [
@@ -307,56 +307,56 @@
   {
     "id": "city-civilian-1",
     "sourceSize": [
-      1287,
-      1222
+      1261,
+      1247
     ],
     "poses": [
       {
         "crop": [
-          212,
-          24,
-          392,
-          555
+          195,
+          15,
+          426,
+          587
         ],
-        "headX": 421,
-        "legSpan": 0.7063063063063063
+        "headX": 414,
+        "legSpan": 0.7257240204429302
       },
       {
         "crop": [
-          746,
-          25,
-          276,
-          557
+          780,
+          15,
+          287,
+          589
         ],
-        "headX": 910,
-        "legSpan": 0.3752244165170557
+        "headX": 969,
+        "legSpan": 0.42784380305602715
       },
       {
         "crop": [
-          219,
-          636,
-          380,
-          543
+          177,
+          637,
+          458,
+          567
         ],
-        "headX": 418.5,
-        "legSpan": 0.6998158379373849
+        "headX": 416.5,
+        "legSpan": 0.8077601410934744
       },
       {
         "crop": [
-          745,
-          636,
-          296,
-          552
+          794,
+          638,
+          273,
+          578
         ],
-        "headX": 915,
-        "legSpan": 0.40942028985507245
+        "headX": 969,
+        "legSpan": 0.4619377162629758
       }
     ],
     "frameHashes": [
-      "fc7244ae91f98b526e52053c842a4ba20b3e88c7bd181609d97bfa9b5c0ac8b9",
-      "126abd2a81cb574f1133c441994a5f7af602b57516d86d9cb61caff70cb952af",
-      "d7d61639489c0a5459ef988d55b43496fe60fd5330882eaa63d235307174b120",
-      "4b91259f4ef4be1524040e3e2a8f5d081dbed5444ccaa08a75b2f5e5119b4868"
+      "23a7be32157d67a64ff814f1a7f27fc98599d185064843dcd3abc51ba48c5354",
+      "92151cef2c961be5938f25ac8aed4df44fce72f2aede9a4ebef7e26cfbe1a857",
+      "b3ed49df3fb9cd0ca7de8e37016fbb3926fa83db99da82d561a1b4a00bb017cb",
+      "6f370e3e211cbcba2c397f1dac90045d91a6fd8d078321b7fdb1f3bdbc6a2775"
     ],
     "uniqueFrames": 4,
     "preservedViews": [
@@ -490,56 +490,56 @@
   {
     "id": "city-civilian-4",
     "sourceSize": [
-      1536,
-      1024
+      1261,
+      1247
     ],
     "poses": [
       {
         "crop": [
-          282,
-          22,
-          349,
-          458
+          175,
+          29,
+          436,
+          581
         ],
-        "headX": 446,
-        "legSpan": 0.7620087336244541
+        "headX": 388.5,
+        "legSpan": 0.7504302925989673
       },
       {
         "crop": [
-          932,
-          22,
-          233,
-          469
+          760,
+          29,
+          303,
+          583
         ],
-        "headX": 1079,
-        "legSpan": 0.4968017057569296
+        "headX": 939.5,
+        "legSpan": 0.4939965694682676
       },
       {
         "crop": [
-          249,
-          530,
-          385,
-          456
+          178,
+          648,
+          444,
+          556
         ],
-        "headX": 446,
-        "legSpan": 0.8442982456140351
+        "headX": 388,
+        "legSpan": 0.7985611510791367
       },
       {
         "crop": [
-          923,
-          529,
-          260,
-          475
+          765,
+          648,
+          299,
+          562
         ],
-        "headX": 1081,
-        "legSpan": 0.52
+        "headX": 939.5,
+        "legSpan": 0.5
       }
     ],
     "frameHashes": [
-      "68470ce5f4610624fdbc442614da61a9bc50d6c82dca91b3afefcaaa0ba0c406",
-      "f9d0c46b1fa3e2c6f72b7110a45822508e320c9b9d8a7ae8ec753bdcaff3bed1",
-      "4d106719762eb819eabec2974409d062a98c6d3a432e63854f4e65306f7efdc0",
-      "af71212dbcd2c5f20b096e1f2ee30ae1f48a96942a1688fc808bfcfb31e5f1b7"
+      "190bdc6e9a8e8baefb2770cc68b8ac5513b1787784adffe115effba11639c997",
+      "7deb3333ea5f8e80300c9082ba2a35c71f1979b5b6600d2f184bc2abbd8caa93",
+      "1ac1dafb89f052491a1a8ec7747531791784a0ef93aa07212328076bb08edaf2",
+      "d293f0f5c86317e168e9d5da8d85dd1ebef1aa424c41f741f052c26721eccbdd"
     ],
     "uniqueFrames": 4,
     "preservedViews": [
