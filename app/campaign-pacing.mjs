@@ -1,10 +1,11 @@
-// Fixed food rewards calibrated against full real-engine campaigns (2026-09-30).
+// Fixed food rewards calibrated against full real-engine campaigns (2026-09-30;
+// City shortened to an eight-minute target on 2026-10-02).
 // Minutes are design targets, never timers or adaptive throttles. Keep edible
 // sizes, stage goals, movement, cinematics and existing saved progress intact.
 export const CAMPAIGN_PACING = {
  micro: {minutes:8, biomass:.223}, pond:{minutes:8,biomass:.224},
  land:{minutes:8,biomass:.245}, water:{minutes:9,biomass:.163},
- city:{minutes:10,biomass:.140}, orbit:{minutes:7,biomass:.310},
+ city:{minutes:8,biomass:.190}, orbit:{minutes:7,biomass:.310},
  planets:{minutes:8,biomass:.169}, stars:{minutes:8,biomass:.213},
  galaxies:{minutes:7,biomass:.160}, universe:{minutes:5,biomass:.125},
 };
