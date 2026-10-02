@@ -149,6 +149,7 @@ type Food = {
   final?: boolean;
   id?: string;
   heading?: number;
+  cityAnimationTime?: number;
   flash?: number;
   recycled?: boolean;
   collectDelay?: number;
@@ -2224,8 +2225,8 @@ export class VoroEngine {
           f.kind || 'nutrient',
           r,
           f.seed,
-          this.reduced ? 0 : this.time,
-          (f.escape || 0) > 0 || (f.attack || 0) > 0 ? 1.5 : 1,
+          this.reduced ? 0 : (f.cityAnimationTime ?? this.time),
+          f.cityAnimationTime !== undefined ? 1 : (f.escape || 0) > 0 || (f.attack || 0) > 0 ? 1.5 : 1,
           f.flash || 0,
           this.animationSheets,
           f.heading ?? f.seed,
@@ -2436,7 +2437,7 @@ export class VoroEngine {
     const c=this.ctx,age=DECOY_SECONDS-d.remaining;
     const pulse=this.reduced?1:1+Math.sin(age*5)*.025;
     c.save();c.translate(d.x,d.y);c.scale(pulse,pulse);
-    c.globalAlpha=.26*Math.min(1,d.remaining/.65);
+    c.globalAlpha=.46*Math.min(1,d.remaining/.65);
     c.drawImage(this.decoyImage,-d.radius*3,-d.radius*3,d.radius*6,d.radius*6);
     c.restore();
   }

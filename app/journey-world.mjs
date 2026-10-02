@@ -6,6 +6,7 @@ import {
 } from './population.mjs';
 import { MicroWorld, makeEntity, TILE } from './micro-world.mjs';
 import { animalTarget } from './animal-steering.mjs';
+import { cityEscapeSpecies, cityEscapeSpeed, advanceCityGait } from './city-escape.mjs';
 import { decoyTarget } from './organic-decoy.mjs';
 import { advanceRepulsion } from './contact-repulsion.mjs';
 import { random, clamp } from './simulation.mjs';
@@ -279,8 +280,21 @@ export class JourneyWorld extends MicroWorld {
         d = Math.hypot(dx, dy);
       if (d > 1100) continue;
       const edible = p.biomass >= e.requiredMass;
-      const { x: tx, y: ty } = animalTarget(e, s, p, time, 340, 280, s.id==='orbit-0'?160:80);
+      const cityEscape = cityEscapeSpecies(s);
+      const reactionRange = cityEscape ? 340 + (p.radius || 0) + e.r : 340;
+      let { x: tx, y: ty } = animalTarget(e, s, p, time, reactionRange, 280, s.id==='orbit-0'?160:80);
+      const escaping = e.aiEngaged && !e.aiReturning && (s.kind === 'flee' || e.aiAfraid);
+      // Movement is along the lane: normalize that direction, not the discarded
+      // cross-street component, so a nearby threat also causes a real sprint.
+      if (cityEscape && e.cityAxis === 'x') {
+        if (escaping && Math.abs(tx-e.x)<.01) tx=e.x+(Math.cos(e.seed)>=0?1:-1)*100;
+        ty=e.y;
+      } else if (cityEscape && e.cityAxis === 'y') {
+        if (escaping && Math.abs(ty-e.y)<.01) ty=e.y+(Math.sin(e.seed)>=0?1:-1)*100;
+        tx=e.x;
+      }
       let speed = e.wound >= 1 ? 0 : s.speed;
+      if (cityEscape) speed *= cityEscapeSpeed(e,s,p,dt);
       const step = Math.sin(time * (s.motion === 'insect' ? 16 : 8) + e.seed);
       if (s.motion === 'hop') speed *= 0.2 + 1.8 * Math.max(0, step);
       if (s.motion === 'squid') speed *= 0.5 + Math.max(0, step);
@@ -297,6 +311,7 @@ export class JourneyWorld extends MicroWorld {
       e.y = clamp(e.y, e.homeY - 280, e.homeY + 280);
       if (STAGES[this.stage].id === 'land') constrainToShore(e, s);
       if (STAGES[this.stage].id === 'city') constrainCity(e);
+      if (cityEscape) advanceCityGait(e,s,Math.hypot(e.x-oldX,e.y-oldY),dt,time);
       if (speed > 4 && Math.hypot(e.x - oldX, e.y - oldY) > 0.001) {
         const angle = Math.atan2(e.y - oldY, e.x - oldX);
         e.heading +=
