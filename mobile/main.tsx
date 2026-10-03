@@ -1,23 +1,7 @@
-import React, { lazy, Suspense, useEffect, useState } from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
 import '../app/globals.css';
 import Home from '../app/page';
-import { initializeLanguage, t } from '../app/language.mjs';
+import { initializeLanguage } from '../app/language.mjs';
 initializeLanguage();
-const AnimationStudio = lazy(() => import('../app/animaciones/page'));
-const InterfaceStudio = lazy(() => import('../app/interfaz/page'));
-const ShorePreview = lazy(() => import('../app/orilla/page'));
-
-function MobileApp() {
-  const [path, setPath] = useState(location.hash.slice(1) || '/');
-  useEffect(() => {
-    const navigate = () => { setPath(location.hash.slice(1) || '/'); window.scrollTo(0, 0); };
-    window.addEventListener('hashchange', navigate);
-    return () => window.removeEventListener('hashchange', navigate);
-  }, []);
-  return <Suspense fallback={<output>{t('Cargando…')}</output>}>
-    {path === '/animaciones' ? <AnimationStudio /> : path === '/interfaz' ? <InterfaceStudio /> : path === '/orilla' ? <ShorePreview /> : <Home />}
-  </Suspense>;
-}
-
-createRoot(document.getElementById('root')!).render(<MobileApp />);
+createRoot(document.getElementById('root')!).render(<Home />);

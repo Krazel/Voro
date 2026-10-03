@@ -20,8 +20,8 @@
 .owned-wordmark { margin: 0 0 6px; font-size: 13px; letter-spacing: .5em; padding-left: .5em; font-weight: 600; }
 .owned-header [data-slot='dialog-title'] { margin: 0; color: var(--owned-cream); font: 700 clamp(24px, 5.8vw, 34px)/1.1 Arial, sans-serif; letter-spacing: -.025em; outline: none; }
 .owned-header [data-slot='dialog-description'] { margin: 6px 0 0; color: var(--owned-sage); font-size: clamp(13px, 3.5vw, 17px); line-height: 1.2; }
-.owned-back { position: absolute; left: 0; top: -5px; display: grid; place-items: center; width: 44px; height: 44px; color: var(--owned-cream); background: none; border: 0; border-radius: 50%; }
-.owned-back svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.owned-back { position: absolute; left: 0; top: -5px; display: grid; place-items: center; width: 44px; height: 44px; color: var(--owned-cream); background: #17221dc9; border: 1px solid #7a9b8b88; border-radius: 12px; }
+.owned-back svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .owned-scroll { min-height: 0; flex: 1 1 auto; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #626650 transparent; width: 100%; padding: 3px 4px 8px; }
 .owned-grid { display: flex; flex-wrap: wrap; justify-content: center; align-content: start; gap: 6px; width: 100%; max-width: 490px; margin: 0 auto; }
 .owned-capsule {

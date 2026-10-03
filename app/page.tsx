@@ -1,32 +1,33 @@
 'use client';
 import { t as tr } from './language.mjs';
-import { LanguagePicker, useLanguage } from './language-picker';
 
-import { MUSIC } from './music.mjs';
+
+
 import { finaleState } from './universe-finale.mjs';
-import { sharePerformanceFile, shareAudioJournalFile } from './share-performance';
+
 import { observeNativeAudio } from './audio-session';
-import { AudioDiagnosticSettings } from './audio-diagnostic-settings';
-import { RELEASE } from './release.mjs';
-import { performanceSummaryText } from './performance-report.mjs';
+
+
+
 import { TRANSITION_ROUTES } from './journey-transitions.mjs';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { readLeftHanded, writeLeftHanded, subscribeControls, serverLeftHanded } from './control-preferences';
-import Link from 'next/link';
-import { AdaptationChoices, CristalPreview } from './cristal-ui';
+
+import { AdaptationChoices } from './cristal-ui';
+import { useLanguage } from './language-picker';
 import { ReviewMilestone } from './review-milestone';
 import { Capacitor } from '@capacitor/core';
-import { useBenchmarkAwake } from './benchmark-awake';
+
 import { FinalSettings } from './final-settings';
 import { JourneyComplete } from './journey-complete';
-import { CosmicLab } from './cosmic-lab';
+
 import { MembraneRim } from './membrane-rim';
 import { OwnedAdaptations } from './owned-adaptations.tsx';
 import { isTabletDevice, wideScreenEnabled } from './desktop-viewport.mjs';
 import './wide-screen.css';
 import './cristal.css';
 import './final-ui.css';
-import { initialUiMode, writeUiMode } from './ui-mode.mjs';
+
 import {
   X,
   Pause,
@@ -48,13 +49,8 @@ import {
   DialogClose,
 } from '@/components/ui/dialog';
 import { VoroEngine, type Snapshot } from './engine';
-import { UPGRADES, levelOf, MAX_UPGRADE_CHOICES } from './mutations.mjs';
-import {
-  STAGES,
-  STAGE_SPECIES,
-  stageStartMass,
-  formatSize,
-} from './journey-data.mjs';
+import { MAX_UPGRADE_CHOICES } from './mutations.mjs';
+import { STAGES } from './journey-data.mjs';
 export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
   const [wideScreen, setWideScreen] = useState(desktop);
   const [wideSettings, setWideSettings] = useState(false);
@@ -72,9 +68,7 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
   const canvas = useRef<HTMLCanvasElement>(null),
     engine = useRef<VoroEngine | null>(null);
   const connectProtagonist = useCallback((node: HTMLCanvasElement | null) => engine.current?.setAdaptationCanvas(node), []);
-  const [settings, setSettings] = useState(false),
-    [confirmReset, setConfirmReset] = useState(false);
-  const [testPanel, setTestPanel] = useState(false);
+  const [settings, setSettings] = useState(false);
   const [ownedOpen, setOwnedOpen] = useState(false);
   const ownedTrigger = useRef<HTMLButtonElement>(null);
   const changeOwned = (open: boolean) => {
@@ -86,13 +80,6 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
     }
     setOwnedOpen(open);
   };
-  const [cosmicLab,setCosmicLab]=useState(false);
-  const [uiMode,setUiMode]=useState('final');
-  const finalUI=uiMode==='final';
-  const [uiModeSaved,setUiModeSaved]=useState(true);
-  useEffect(()=>{
-    setUiMode(initialUiMode(window.localStorage, window.location.search));
-  },[]);
   const [finalDetails, setFinalDetails] = useState(false);
   const leftHanded = useSyncExternalStore(subscribeControls, readLeftHanded, serverLeftHanded);
   const [controlsSaveError, setControlsSaveError] = useState(false);
@@ -111,41 +98,7 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
       setTiltMessage(ok ? 'Inclina suavemente. Puedes recalibrar en Configuración.' : 'No se reciben datos de inclinación. Puedes seguir jugando con el dedo.');
     }
   };
-  const movementChoice = <div className="movement-choice">
-    <span>{tr("Cómo quieres moverte")}</span>
-    <div>
-      <button aria-pressed={!tilt && !tiltPending} onClick={() => selectMovement(false)}>{tr("Con el dedo")}</button>
-      <button aria-pressed={tilt} disabled={tiltPending} onClick={() => selectMovement(true)}>{tr(tiltPending ? 'Conectando…' : 'Inclinando el móvil')}</button>
-    </div>
-    {tr(tiltMessage && <output>{tr(tiltMessage)}</output>)}
-  </div>;
-  const [reportText, setReportText] = useState('');
-  const [reportCopied, setReportCopied] = useState(false);
-  const [sharingReport, setSharingReport] = useState(false);
-  const [shareMessage, setShareMessage] = useState('');
-  const [tourNoticeDismissed,setTourNoticeDismissed]=useState(false);
-  const shareReport=async()=>{
-    const report=engine.current?.performanceReport();
-    if(!report?.summary.frames && report?.format!=='voro-performance-tour-v1'){setShareMessage('Primero mide una partida de 30 s.');return;}
-    setSharingReport(true);setShareMessage('');
-    try {
-      const result=await sharePerformanceFile(report);
-      setShareMessage(result==='downloaded'?'Archivo descargado. Puedes adjuntarlo en WhatsApp.':'Archivo preparado. Puedes volver a compartirlo cuando quieras.');
-    } catch(error){
-      const message=error instanceof Error?error.message:String(error);
-      setShareMessage(/cancel|abort/i.test(message)?'No se ha compartido el archivo.':'No se pudo compartir. Puedes copiar el resumen y volver a intentarlo.');
-    } finally {setSharingReport(false);}
-  };
-  const [uiPreview, setUiPreview] = useState(false);
-  const [testStage, setTestStage] = useState(0);
-  const [testSize, setTestSize] = useState(0);
-  const [keepUpgrades, setKeepUpgrades] = useState(true);
-  const [testSafe, setTestSafe] = useState(false);
-  const [testEvolution, setTestEvolution] = useState(true);
-  const testMass =
-    stageStartMass(testStage) *
-    ((STAGES[testStage].goal * 1.5) / stageStartMass(testStage)) **
-      (testSize / 100);
+
   const resume = useRef(false);
   const adaptationHeading = useRef<HTMLDivElement>(null);
   const [state, setState] = useState<Snapshot>({
@@ -200,22 +153,16 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
     engine.current = game;
     const stopAudioObservation=observeNativeAudio((kind,detail)=>game.audioJournal?.event(kind,detail),active=>game.setNativeAudioActive(active));
     game.recheckNativeAudio=stopAudioObservation.recheck;
-    const lab=Capacitor.getPlatform()==='web'&&['localhost','127.0.0.1'].includes(window.location.hostname)
-      &&new URLSearchParams(window.location.search).get('lab')==='cosmos';
-    setCosmicLab(lab);
-    if(lab)(window as unknown as {__voroLab?:VoroEngine}).__voroLab=game;
     return () => {
       stopAudioObservation();
       game.destroy();
       engine.current = null;
-      delete (window as unknown as {__voroLab?:VoroEngine}).__voroLab;
     };
   }, []);
   const action = (
     name: 'start' | 'pause' | 'restart' | 'retry' | 'dash' | 'sound',
   ) => engine.current?.action(name);
   useLayoutEffect(() => { engine.current?.recordUiCommit(); }, [state]);
-  useBenchmarkAwake(!!state.automated?.running && !state.automated.paused);
   const changeSettings = (open: boolean) => {
     if (engine.current) engine.current.settingsOpen = open;
     if (open) {
@@ -227,19 +174,9 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
       if (engine.current?.paused) action('pause');
       resume.current = false;
     }
-    setConfirmReset(false);
     engine.current?.setAudio();
     setSettings(open);
   };
-  const toggleUiMode=()=>{
-    const mode=finalUI?'development':'final';
-    setUiMode(mode);setUiModeSaved(writeUiMode(window.localStorage,mode));
-    setTestPanel(false);setUiPreview(false);
-    if(mode==='final')engine.current?.setDiagnostics(false);
-  };
-  const modeButton=<button type="button" className="ui-mode-toggle" data-ui-mode-toggle aria-pressed={finalUI} onClick={toggleUiMode}>
-    {tr(finalUI?'Volver a UI de desarrollo':'Pasar a UI final')}<span>{tr(finalUI?'Final':'Desarrollo')}</span>
-  </button>;
   const finale = state.started && (state.ending > 0 || state.complete);
   const finalCaption = finaleState(state.ending).caption;
   const active =
@@ -256,9 +193,9 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
           ),
         );
   return (
-    <main className={'voro-shell' + (finale ? ' universe-ended' : '')} data-wide={wideScreen} data-ui="cristal" data-ui-mode={uiMode}>
+    <main className={'voro-shell' + (finale ? ' universe-ended' : '')} data-wide={wideScreen} data-ui="cristal" data-ui-mode="final">
       <section
-        className={'viewport' + (finale ? ' universe-finale' : '') + (state.automated?.running?' auto-testing':'')}
+        className={'viewport' + (finale ? ' universe-finale' : '')}
         data-event={
           state.birth > 0 ? 'birth' : !state.started ? 'intro' : state.offer.length
             ? 'adaptation'
@@ -315,7 +252,6 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
           <div className="size">
             <strong className="journey-size">{tr(state.scale)}</strong>
             <span>
-              {tr(state.testMode ? finalUI?'VISTA PREVIA · ':'PRUEBA · ' : '')}
               {tr(STAGES[state.stage].short)}
             </span>
           </div>
@@ -381,7 +317,6 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
                 ? 'Tu evolución continúa.'
                 : 'De una célula a todo lo que existe.')}
             </p>
-          {tr(!finalUI && movementChoice)}
             <button
               className="primary-button"
               disabled={!state.assetsReady}
@@ -395,7 +330,6 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
                   : 'Despertar')}
               <ArrowUpRight size={20} />
             </button>
-            {tr(modeButton)}
             {tr(state.assetError && !state.assetsReady && (
               <button
                 className="text-button"
@@ -532,28 +466,6 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
             onClose={() => setFinalDetails(false)}
             onRestart={() => { setFinalDetails(false); action('restart'); }} />
         ))}
-        {tr(state.automated && (!tourNoticeDismissed || state.automated.running) && <section className="automatic-benchmark" aria-label={tr('Prueba automática de rendimiento')}>
-          <strong>{tr(state.automated.running?state.automated.audio?'Prueba automática de audio':'Prueba automática de rendimiento':state.automated.status==='completed'?'Prueba terminada':'Prueba cancelada')}</strong>
-          {state.automated.running ? <>
-            <p>{tr(state.automated.stage)} · {tr(state.automated.audio?'Música y efectos':state.automated.size==='entry'?'Tamaño inicial':'Tamaño grande')} · {state.automated.step}/{state.automated.total}</p>
-            <p>{tr(state.automated.paused?'Prueba en pausa':state.automated.status==='loading'?'Cargando entorno…':state.automated.status==='warmup'?'Preparando escena…':'Midiendo')}{state.automated.status==='recording' && !state.automated.paused?' · '+state.automated.remaining+' s':''}</p>
-            <div>{state.automated.paused && <button onClick={()=>engine.current?.resumeAutomaticBenchmark()}>{tr('Continuar prueba')}</button>}
-            {state.automated.audio && <button onClick={()=>engine.current?.markAudioGlitch()}>{tr('He oído un fallo')}{state.automated.audioMarks ? ` · ${state.automated.audioMarks}` : ''}</button>}
-            <button onClick={()=>engine.current?.finishAutomaticBenchmark()}>{tr('Cancelar y volver')}</button></div>
-          </> : <>
-            <p>{state.automated.step}/{state.automated.total} · {tr('Tu partida se ha restaurado.')}</p>
-            {state.automated.failed>0 && <p>{tr('Escenarios incompletos')}: {state.automated.failed}</p>}
-            <div><button disabled={sharingReport} onClick={shareReport}>{tr(sharingReport?'Preparando…':'Compartir informe como archivo')}</button>
-            <button onClick={()=>{setTourNoticeDismissed(true);if(engine.current?.paused)action('pause');}}>{tr('Volver')}</button></div>
-            {shareMessage && <p>{tr(shareMessage)}</p>}
-          </>}
-        </section>)}
-        {tr(!finalUI && state.performance && !finale && !state.automated?.running && (
-          <output className="performance-readout">
-            {tr(state.performance.recording ? state.performance.remaining ? `Midiendo · ${state.performance.remaining} s` : 'Rendimiento' : 'Medición terminada')}
-            <br />{tr(state.performance.fps || '—')}{tr(" FPS · P95 ")}{tr(state.performance.p95)}{tr(" ms · pico ")}{tr(state.performance.peak)}{tr(" ms ")}<br />{tr("CPU ")}{tr(state.performance.cpu)}{tr(" ms · lentos ")}{tr(state.performance.slowFrames)}
-            <br />{tr("Cargas ")}{tr(state.performance.loading)}{tr(" · poses ")}{tr(state.performance.pending)}{tr(" · ")}{tr(state.performance.cacheMB)}{tr(" MB ")}</output>
-        ))}
       </section>
       {ownedOpen && <OwnedAdaptations mutations={state.mutations} onClose={() => changeOwned(false)} returnFocus={ownedTrigger} />}
       {tr(active && state.offer.length > 0 && <Dialog
@@ -579,336 +491,23 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
           />
         </DialogContent>
       </Dialog>)}
-      {tr(uiPreview && <CristalPreview
-        key={uiPreview ? 'open' : 'closed'}
-        onProtagonist={connectProtagonist}
-        open={uiPreview}
-        onClose={() => setUiPreview(false)}
-      />)}
-      {tr(settings && <Dialog open={!uiPreview} onOpenChange={changeSettings}>
-        <DialogContent
-          className={'voro-settings cristal-dialog'+(finalUI?' final-ui':'')}
-          initialFocus={finalUI?()=>document.querySelector<HTMLElement>('.membrane-heading'):undefined}
-          style={finalUI?{inset:0,translate:'none',transform:'none'}:undefined}
-          showCloseButton={false}
-        >
-          {finalUI && <button className="settings-development-access" onClick={toggleUiMode}>{tr('Modo de desarrollo')}</button>}
-          {tr(finalUI && <FinalSettings
-            wide={wideSettings}
-            stage={state.stage}
-            complete={state.complete}
-            eaten={state.eaten}
-            elapsed={state.elapsed}
-            adaptations={state.level}
-            absorptionsByStage={state.absorptionsByStage}
-            hitsReceived={state.hitsReceived}
-            hitsPartial={state.hitsPartial}
-            tilt={tilt}
-            leftHanded={leftHanded}
-            sound={state.sound}
-            testMode={state.testMode}
+      {tr(settings && <Dialog open onOpenChange={changeSettings}>
+        <DialogContent className="voro-settings cristal-dialog final-ui"
+          initialFocus={()=>document.querySelector<HTMLElement>('.membrane-heading')}
+          style={{inset:0,translate:'none',transform:'none'}} showCloseButton={false}>
+          <FinalSettings wide={wideSettings} stage={state.stage} complete={state.complete}
+            eaten={state.eaten} elapsed={state.elapsed} adaptations={state.level}
+            absorptionsByStage={state.absorptionsByStage} hitsReceived={state.hitsReceived} hitsPartial={state.hitsPartial}
+            tilt={tilt} leftHanded={leftHanded} sound={state.sound} testMode={false}
             onMovement={selectMovement}
             onLeftHanded={() => setControlsSaveError(!writeLeftHanded(!leftHanded))}
             onSound={() => action('sound')}
-            onRestart={() => { resume.current = false; action('restart'); changeSettings(false); }}
-          />)}
-          <AudioDiagnosticSettings onShare={async observation=>{
-            const journal=engine.current?.audioJournal;
-            if(!journal)throw new Error('Audio journal unavailable');
-            return shareAudioJournalFile(journal.report(observation));
-          }}/>
-          <DialogClose className="settings-close icon-button" aria-label={tr("Cerrar configuración")}><X size={20}/></DialogClose>
-          <p className="eyebrow">{tr("VORO · ABISAL")}</p>
-          <DialogTitle>{tr("Configuración")}</DialogTitle>
-          <DialogDescription>{tr(state.stageName)}{tr(!finalUI && ` · VORO ${RELEASE.version} (${RELEASE.build})`)}</DialogDescription>
-          {!finalUI && <LanguagePicker />}
-          {tr(modeButton)}
-          {tr(!uiModeSaved && <p role="status" className="save-note">{tr("La vista ha cambiado; no se ha podido recordar para la próxima sesión.")}</p>)}
-          {tr(movementChoice)}
-          <button className="settings-row"
-            aria-pressed={state.uniformVisualSpeed}
-            onClick={() => engine.current?.setUniformVisualSpeed(!state.uniformVisualSpeed)}>{tr(" Velocidad visual entre entornos")}<span>{tr(state.uniformVisualSpeed ? 'Uniforme' : 'Clásica')}</span>
-          </button>
-          <p className="save-note">{tr("Uniforme compensa la escala de cada entorno. Clásica conserva el movimiento anterior.")}</p>
-          {tr(tilt && <button className="settings-row" onClick={() => { engine.current?.tilt.calibrate(); setTiltMessage('Posición centrada. Mantén el móvil cómodo al continuar.'); }}>{tr("Centrar inclinación")}<span>{tr("Recalibrar")}</span></button>)}
-          <button className="settings-row"
-            aria-pressed={leftHanded}
-            onClick={() => {
-              setControlsSaveError(!writeLeftHanded(!leftHanded));
-            }}>{tr(" Impulso a la izquierda")}<span>{tr(leftHanded ? 'Activado' : 'Desactivado')}</span>
-          </button>
-          {tr(controlsSaveError && <output className="save-note">{tr("El cambio funciona ahora, pero no se ha podido guardar para la próxima sesión.")}</output>)}
-          {tr(!finalUI && <>
-          <button className="settings-row"
-            onClick={() => engine.current?.setDiagnostics(!state.performance)}
-            aria-pressed={!!state.performance}>{tr(" Mostrar rendimiento")}<span>{tr(state.performance ? 'Activado' : 'Desactivado')}</span>
-          </button>
-          <button className="settings-row" onClick={() => {
-            setReportText(''); setReportCopied(false); setShareMessage('');
-            engine.current?.startBenchmark(); changeSettings(false);
-          }}>{tr("Medir una partida de 30 s")}<span>{tr("Iniciar")}</span></button>
-          <button className="settings-row" onClick={()=>{
-            setReportText('');setReportCopied(false);setShareMessage('');setTourNoticeDismissed(false);
-            if(engine.current?.startAutomaticBenchmark()){resume.current=false;changeSettings(false);}
-          }}>{tr('Probar todos los entornos automáticamente')}<span>{tr('Iniciar')}</span></button>
-          <p className="save-note">{tr('Unos 2 minutos más las cargas. Prueba dos tamaños por entorno, moviéndose y usando el impulso. Mantén el juego abierto. Puedes cancelar y recuperar tu partida en cualquier momento.')}</p>
-          <button className="settings-row" onClick={()=>{
-            setReportText('');setReportCopied(false);setShareMessage('');setTourNoticeDismissed(false);
-            if(engine.current?.startAutomaticBenchmark(true)){resume.current=false;changeSettings(false);}
-          }}>{tr('Probar audio automáticamente')}<span>{tr('Iniciar')}</span></button>
-          <p className="save-note">{tr('Unos 2 minutos más las cargas. Activa temporalmente el sonido y prueba música y efectos. Si oyes un corte, pulsa «He oído un fallo». Al acabar puedes compartir el archivo; tu partida y tu ajuste de sonido se restauran.')}</p>
-          <button className="settings-row" onClick={async () => {
-            const report = engine.current?.performanceReport();
-            if (!report) return;
-            if (!report.summary.frames && report.format!=='voro-performance-tour-v1') { setShareMessage('Primero mide una partida de 30 s.'); return; }
-            const text = performanceSummaryText(report);
-            setReportText(text); setReportCopied(false);
-            try { await navigator.clipboard.writeText(text); setReportCopied(true); } catch { /* selectable fallback below */ }
-          }}>{tr("Copiar resumen de rendimiento")}<span>{tr(reportCopied ? 'Copiado' : 'Copiar')}</span></button>
-          <button className="settings-row" disabled={sharingReport} onClick={shareReport}>{tr("Compartir informe como archivo")}<span>{tr(sharingReport ? 'Preparando…' : 'Compartir')}</span></button>
-          {tr(shareMessage && <output className="save-note">{tr(shareMessage)}</output>)}
-          <p className="save-note">{tr("Elige WhatsApp en el menú de compartir. El archivo incluye el resumen y los peores tirones. La prueba cuenta solo mientras juegas. Incluye FPS, fotogramas lentos, cargas y tiempos por sistema. El informe se queda en tu dispositivo hasta que lo compartas.")}</p>
-          {tr(reportText && <label className="performance-report-label">{tr("Informe de rendimiento ")}<textarea className="performance-report" readOnly rows={5} value={reportText}
-              onFocus={event => event.currentTarget.select()} />
-          </label>)}
-          </>)}
-          <button
-            className="settings-row"
-            onClick={() => action('sound')}
-            aria-pressed={state.sound}
-          >{tr(" Sonido")}<span>{tr(state.sound ? 'Activado' : 'Desactivado')}</span>
-          </button>
-          <details className="music-credits">
-            <p>{tr('Imagen de la Tierra: ')}<a href="https://svs.gsfc.nasa.gov/30002/" target="_blank" rel="noopener noreferrer">NASA/NOAA/GSFC/Suomi NPP/VIIRS/Norman Kuring</a></p>
-            <summary>{tr("Créditos musicales")}</summary>
-            <p>{tr("Música de Scott Buckley · ")}<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">{tr("CC BY 4.0")}</a></p>
-            <ul>{tr(MUSIC.map(track=><li key={track.id}><a href={track.source} target="_blank" rel="noopener noreferrer">{tr(track.title)}</a>{tr(" — Scott Buckley")}</li>))}</ul>
-            <p>{tr("Composiciones completas. Volumen normalizado, conversión MP3 y fundidos de entrada, salida y repetición. Sin recortes de secciones.")}</p>
-            <a href="https://www.scottbuckley.com.au/library/using-this-music/" target="_blank" rel="noopener noreferrer">{tr("Fuentes y condiciones del autor")}</a>
-          </details>
-          <div className="micro-stat-row">
-            <span>{tr(state.eaten)}{tr(" absorciones")}</span>
-            <span>{tr(Math.floor(state.elapsed / 60))}{tr(" min de vida")}</span>
-          </div>
-          <p className="save-note">
-            {tr(state.testMode
-              ? 'Modo de pruebas. Tu partida está a salvo.'
-              : state.storageAvailable
-                ? 'La partida se guarda en este dispositivo.'
-                : 'El guardado no está disponible en este navegador.')}
-          </p>
-          {tr(!finalUI && <>
-          <button
-            className="settings-row"
-            aria-expanded={testPanel}
-            aria-controls="environment-tests"
-            onClick={() => {
-              setTestPanel(!testPanel);
-              if (!testPanel) {
-                setTestStage(state.stage);
-                setTestSize(0);
-              }
-            }}
-          >{tr(" Probar entornos y tamaños ")}<ChevronsRight size={17} />
-          </button>
-          {tr(testPanel && (
-            <div id="environment-tests" className="environment-tests">
-              <label htmlFor="test-environment">{tr("Entorno")}</label>
-              <select
-                id="test-environment"
-                value={testStage}
-                onChange={(e) => setTestStage(Number(e.target.value))}
-              >
-                {tr(STAGES.map((s, i) => (
-                  <option key={s.id} value={i}>
-                    {tr(String(i + 1).padStart(2, '0'))}{tr(" · ")}{tr(s.short)}
-                  </option>
-                )))}
-              </select>
-              <label htmlFor="test-size">{tr(" Tamaño")}{tr(' ')}
-                <output htmlFor="test-size">
-                  {tr(formatSize(testStage, testMass))}
-                </output>
-              </label>
-              <input
-                id="test-size"
-                type="range"
-                min="0"
-                max="100"
-                step="1"
-                value={testSize}
-                aria-valuetext={formatSize(testStage, testMass)}
-                onChange={(e) => setTestSize(Number(e.target.value))}
-              />
-              <div className="test-presets">
-                {tr([
-                  ['Pequeño', 0],
-                  ['Mediano', 40],
-                  ['Grande', 75],
-                  ['Gigante', 100],
-                ].map(([label, size]) => (
-                  <button
-                    key={label}
-                    aria-pressed={testSize === size}
-                    onClick={() => setTestSize(Number(size))}
-                  >
-                    {tr(label)}
-                  </button>
-                )))}
-              </div>
-              <label className="test-check">
-                <input
-                  type="checkbox"
-                  checked={keepUpgrades}
-                  onChange={(e) => setKeepUpgrades(e.target.checked)}
-                />{tr(" Usar mis adaptaciones ")}</label>
-              <label className="test-check">
-                <input
-                  type="checkbox"
-                  checked={testSafe}
-                  onChange={(e) => setTestSafe(e.target.checked)}
-                />{tr(" Invulnerabilidad ")}</label>
-              <label className="test-check">
-                <input type="checkbox" checked={testEvolution} onChange={e => {
-                  setTestEvolution(e.target.checked);
-                  if (engine.current?.testMode) engine.current.testEvolution = e.target.checked;
-                }} />{tr(" Permitir pasar al siguiente entorno ")}</label>
-              <p className="save-note">{tr("Prueba crecimiento, adaptaciones y transiciones sin cambiar tu partida guardada.")}</p>
-              {tr(state.testMode && <div className="test-boosts">
-                <p className="save-note">{tr("Biomasa de prueba: ")}{tr(state.biomass.toFixed(1))}{tr(" / ")}{tr(state.target)}</p>
-                <button className="settings-row" onClick={() => engine.current?.boostTest('biomass')}>{tr("Añadir biomasa ")}<span>{tr("+25 % de la meta")}</span></button>
-                <button className="settings-row" onClick={() => engine.current?.boostTest('goal')}>{tr("Llenar la barra de biomasa ")}<span>{tr("100 %")}</span></button>
-                <button className="settings-row" disabled={state.level >= MAX_UPGRADE_CHOICES} onClick={() => {
-                  if (engine.current?.boostTest('adaptation')) { resume.current = false; if(engine.current) engine.current.paused = false; changeSettings(false); }
-                }}>{tr("Conseguir una adaptación ")}<span>{tr("Elegir ahora")}</span></button>
-              </div>)}
-
-              <button
-                className="primary-button"
-                onClick={() => {
-                  if (
-                    engine.current?.startTest(
-                      testStage,
-                      testMass,
-                      keepUpgrades,
-                      testSafe,
-                      testEvolution,
-                    )
-                  ) {
-                    resume.current = false;
-                    changeSettings(false);
-                  }
-                }}
-              >
-                {tr(state.testMode ? 'Reiniciar prueba elegida' : 'Entrar en la prueba')} <Play size={18} />
-              </button>
-            </div>
-          ))}
-          </>)}
-          {tr(state.testMode && (
-            <button
-              className="settings-row"
-              onClick={() => {
-                engine.current?.exitTest();
-                resume.current = false;
-                changeSettings(false);
-              }}
-            >
-              {tr(finalUI?'Volver a mi partida':'Salir de pruebas y volver a mi partida')} <ArrowUpRight size={17} />
-            </button>
-          ))}
-          <details className="route-details" open={finalUI?undefined:true}><summary>{tr("Tu recorrido")}</summary>
-          <ol className="journey-route" aria-label={tr("Tu recorrido")}>
-            {tr(STAGES.map((s, i) => (
-              <li
-                key={s.id}
-                className={
-                  state.complete || i < state.stage
-                    ? 'done'
-                    : i === state.stage
-                      ? 'current'
-                      : 'locked'
-                }
-              >
-                <span>{tr(String(i + 1).padStart(2, '0'))}</span>
-                <b>{tr(s.short)}</b>
-                <small>
-                  {tr(state.complete || i < state.stage
-                    ? 'Superado'
-                    : i === state.stage
-                      ? 'Aquí estás'
-                      : 'Por descubrir')}
-                </small>
-              </li>
-            )))}
-          </ol></details>
-          {tr(!finalUI && <>
-          <button className="settings-row" onClick={() => setUiPreview(true)}>{tr(" Probar interfaz Cristal ")}<Sparkles size={17} />
-          </button>
-          <Link className="settings-row" href="/interfaz">{tr(" Probar diseños de interfaz ")}<ArrowUpRight size={17} />
-          </Link>
-          <Link className="settings-row" href="/animaciones">{tr(" Galería de animaciones ")}<ArrowUpRight size={17} />
-          </Link>
-          <Link className="settings-row" href="/orilla">{tr(" Probar la nueva orilla ")}<ArrowUpRight size={17} />
-          </Link>
-          </>)}
-          {tr(state.level > 0 && (
-            <div className="micro-upgrade-list">
-              {tr(UPGRADES.map((u) => {
-                const n = levelOf(state.mutations, u.id);
-                return n ? (
-                  <div key={u.id}>
-                    <span>{tr(u.name)}</span>
-                    <b>
-                      {tr(n)}{tr(" / ")}{tr(u.max)}
-                      {tr(n === u.max ? ' · Completa' : ' adquiridas')}
-                    </b>
-                  </div>
-                ) : null;
-              }))}
-            </div>
-          ))}
-          {tr(!state.testMode &&
-            (confirmReset ? (
-              <div className="reset-confirm">
-                <p>{tr("Se borrará esta partida y sus adaptaciones.")}</p>
-                <button
-                  className="primary-button"
-                  onClick={() => {
-                    resume.current = false;
-                    action('restart');
-                    changeSettings(false);
-                  }}
-                >{tr(" Sí, volver a nacer ")}<RotateCcw size={16} />
-                </button>
-                <button
-                  className="text-button"
-                  onClick={() => setConfirmReset(false)}
-                >{tr(" Cancelar ")}</button>
-              </div>
-            ) : (
-              <button
-                className="settings-row"
-                onClick={() => setConfirmReset(true)}
-              >{tr(" Volver a nacer ")}<RotateCcw size={16} />
-              </button>
-            )))}
-          <DialogClose className="primary-button">{tr(" Volver al juego ")}<Play size={18} />
-          </DialogClose>
+            onRestart={() => { resume.current = false; action('restart'); changeSettings(false); }} />
+          {controlsSaveError && <output className="save-note" role="status">{tr('El cambio funciona ahora, pero no se ha podido guardar para la próxima sesión.')}</output>}
         </DialogContent>
       </Dialog>)}
-      {cosmicLab&&engine.current&&<CosmicLab game={engine.current}/>}
       <ReviewMilestone held={state.reviewHold} onContinue={() => engine.current?.finishReview()} />
-      {tr(!finalUI && !finale && <aside className="desktop-note">
-        <span>
-          {tr(String(state.stage + 1).padStart(2, '0'))}{tr(" —")}{tr(' ')}
-          {tr(state.stageName.toUpperCase())}
-        </span>
-        <p>{tr(" Arrastra para moverte ")}<br />{tr(" WASD / flechas · espacio para impulso ")}<br />{tr(" Mando · stick izquierdo + A ")}</p>
-        <small>
-          {tr(STAGE_SPECIES[state.stage].length)}{tr(" habitantes en esta escala ")}<br />
-          {tr(UPGRADES.length)}{tr(" adaptaciones · mundo infinito ")}</small>
-      </aside>)}
+
     </main>
   );
 }

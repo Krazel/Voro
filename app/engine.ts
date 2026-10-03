@@ -547,22 +547,7 @@ export class VoroEngine {
     this.observer = new ResizeObserver(() => this.resize());
     this.observer.observe(canvas);
     const opt = { signal: this.lifecycle.signal };
-    if(typeof window.setInterval==='function'){
-      let storage:Storage|null=null;try{storage=window.localStorage;}catch{}
-      this.audioJournal=new AudioJournal({snapshot:()=>audioSnapshot(this),storage,
-        metadata:{...RELEASE,desktop,userAgent:navigator.userAgent}});
-      this.audioJournalTimer=window.setInterval(()=>this.audioJournal?.sample(),JOURNAL_LIMITS.interval);
-      const lifecycleEvent=(event:Event)=>{
-        if((event.type==='focus'||event.type==='blur')&&event.target!==window)return;
-        this.audioJournal?.event('lifecycle-before',{type:event.type});
-        queueMicrotask(()=>{
-          this.audioJournal?.event('lifecycle-after',{type:event.type});
-          if(document.hidden||event.type==='pagehide'||event.type==='blur')this.audioJournal?.flush();
-        });
-      };
-      for(const name of ['focus','blur','pageshow','pagehide'])window.addEventListener(name,lifecycleEvent,{...opt,capture:true});
-      document.addEventListener('visibilitychange',lifecycleEvent,{...opt,capture:true});
-    }
+    // Final release: no background diagnostic journal or developer registration.
     const unlockMusic = (event: Event) => {
       // The start button's click selects the saved scene before initializing audio.
       // Its earlier pointer/key event must not briefly start the menu song.
@@ -676,7 +661,6 @@ export class VoroEngine {
       },
       opt,
     );
-    this.registerTools();
     this.syncStageAssets();
     this.publish();
     this.raf = requestAnimationFrame(this.frame);

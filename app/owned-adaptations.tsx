@@ -1,4 +1,5 @@
 'use client';
+import { ArrowLeft } from 'lucide-react';
 import { useRef, useState, type RefObject } from 'react';
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { useLanguage } from './language-picker';
@@ -49,7 +50,7 @@ export function OwnedAdaptations({ mutations, onClose, returnFocus }: {
     <DialogContent className="owned-adaptations translate-x-0 translate-y-0" showCloseButton={false} initialFocus={heading} finalFocus={returnFocus}>
       <header className="owned-header">
         <button className="owned-back" type="button" onClick={onClose} aria-label={back}>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 4-8 8 8 8" /></svg>
+          <ArrowLeft size={22} strokeWidth={2} aria-hidden="true" />
         </button>
         <p className="owned-wordmark" aria-hidden="true">VORO</p>
         <DialogTitle ref={heading} tabIndex={-1}>{t('Tus adaptaciones')}</DialogTitle>
