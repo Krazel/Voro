@@ -2,6 +2,12 @@
 
 Juego 2D para web e iOS con Capacitor, con diez escalas y un final. Mantiene el organismo azul translúcido con núcleo ámbar del inicio aprobado. Steam sigue pendiente.
 
+## Candidata final vigente: 1.0 (1), 04-10-2026
+
+[Revisión final y duraciones](design/final-review-1.0-2026-10-04/README.md). Interfaz de jugador sin herramientas de desarrollo, galerías, laboratorio ni pruebas automáticas; botón convencional de volver a la pausa en Tus adaptaciones. Los métodos de QA se conservan internamente para ejecutar las regresiones del repositorio. La candidata local no equivale a una nueva entrega en TestFlight ni a publicación en tienda.
+
+Los apartados siguientes son documentación histórica. El código y la revisión final enlazada prevalecen para el recorrido, las cifras, el audio, la interfaz y la distribución actuales.
+
 Candidata local 19-09-2026: [selector de tres adaptaciones animadas y escudo único](design/adaptation-2026-09-19/README.md). Evidencia web; sin nueva distribución iOS.
 
 Estado vigente 0.4.4: [transiciones, adaptación e informes compartibles](design/report-sharing-0.4.4.md). Entrega anterior: [optimización 0.4.3 (1)](design/streaming-performance.md). Los apartados siguientes conservan decisiones históricas de la campaña; los documentos de entrega y el código prevalecen para valores y distribución actuales.

@@ -1,0 +1,614 @@
+{
+  "version": {
+    "version": "1.0",
+    "build": 1
+  },
+  "source": "89889c39582592669b4dfb4daec7c0f121267036",
+  "profile": "explorer",
+  "seed": 1151,
+  "hz": 30,
+  "config": {
+    "reaction": 0.25,
+    "exploration": 0.15,
+    "choiceSeconds": 10,
+    "priority": [
+      "shield",
+      "speed",
+      "digest",
+      "tentacles",
+      "decoy",
+      "slots",
+      "dash",
+      "pull",
+      "recycle",
+      "spikes",
+      "tentacleReach",
+      "combo",
+      "turn",
+      "yield"
+    ]
+  },
+  "pacing": {
+    "micro": {
+      "minutes": 8,
+      "biomass": 0.223
+    },
+    "pond": {
+      "minutes": 8,
+      "biomass": 0.224
+    },
+    "land": {
+      "minutes": 8,
+      "biomass": 0.245
+    },
+    "water": {
+      "minutes": 9,
+      "biomass": 0.163
+    },
+    "city": {
+      "minutes": 8,
+      "biomass": 0.19
+    },
+    "orbit": {
+      "minutes": 7,
+      "biomass": 0.31
+    },
+    "planets": {
+      "minutes": 8,
+      "biomass": 0.169
+    },
+    "stars": {
+      "minutes": 8,
+      "biomass": 0.213
+    },
+    "galaxies": {
+      "minutes": 7,
+      "biomass": 0.16
+    },
+    "universe": {
+      "minutes": 5,
+      "biomass": 0.125
+    }
+  },
+  "adaptationFoodGain": 0.85,
+  "adaptationYields": {
+    "micro": 0.36055512754639896,
+    "pond": 0.4,
+    "land": 0.4,
+    "water": 0.3687817782917155,
+    "city": 0.322490309931942,
+    "orbit": 0.565685424949238,
+    "planets": 0.4472135954999579,
+    "stars": 0.47958315233127197,
+    "galaxies": 0.5477225575051661,
+    "universe": 0.5477225575051661
+  },
+  "maxSeconds": 10800,
+  "finalStage": "universe",
+  "finalMass": 230.02318117366772,
+  "completed": true,
+  "stoppedReason": "completed",
+  "simulationSeconds": 5098.4333333430295,
+  "activeSeconds": 4996.3333333417295,
+  "cinematicSeconds": 102.09999999999677,
+  "menuSeconds": 720,
+  "estimatedSessionSeconds": 5818.4333333430295,
+  "wallSeconds": 239.0009338,
+  "speedup": 21.33227369567302,
+  "finalConsumptionAt": 5067.433333342635,
+  "deaths": 0,
+  "upgrades": 72,
+  "remainingChoices": 2,
+  "stages": [
+    {
+      "id": "micro",
+      "start": 0,
+      "choices": 10,
+      "deaths": 0,
+      "hits": 6,
+      "biomassLost": 10.876542434875116,
+      "completed": true,
+      "entryUpgrades": 0,
+      "entryMass": 2,
+      "end": 504.7000000001859,
+      "seconds": 504.7000000001859,
+      "menuSeconds": 100
+    },
+    {
+      "id": "pond",
+      "start": 504.7000000001859,
+      "choices": 7,
+      "deaths": 0,
+      "hits": 0,
+      "biomassLost": 0,
+      "completed": true,
+      "entryUpgrades": 10,
+      "entryMass": 0.45,
+      "end": 1127.5333333329652,
+      "seconds": 622.8333333327793,
+      "menuSeconds": 70
+    },
+    {
+      "id": "land",
+      "start": 1127.5333333329652,
+      "choices": 7,
+      "deaths": 0,
+      "hits": 0,
+      "biomassLost": 0,
+      "completed": true,
+      "entryUpgrades": 17,
+      "entryMass": 0.45,
+      "end": 1667.8999999991404,
+      "seconds": 540.3666666661752,
+      "menuSeconds": 70
+    },
+    {
+      "id": "water",
+      "start": 1667.8999999991404,
+      "choices": 6,
+      "deaths": 0,
+      "hits": 0,
+      "biomassLost": 0,
+      "completed": true,
+      "entryUpgrades": 24,
+      "entryMass": 0.45,
+      "end": 2234.666666665292,
+      "seconds": 566.7666666661514,
+      "menuSeconds": 60
+    },
+    {
+      "id": "city",
+      "start": 2234.666666665292,
+      "choices": 12,
+      "deaths": 0,
+      "hits": 39,
+      "biomassLost": 86.13325737703687,
+      "completed": true,
+      "entryUpgrades": 30,
+      "entryMass": 2,
+      "end": 2778.233333331464,
+      "seconds": 543.5666666661723,
+      "menuSeconds": 120
+    },
+    {
+      "id": "orbit",
+      "start": 2778.233333331464,
+      "choices": 3,
+      "deaths": 0,
+      "hits": 21,
+      "biomassLost": 25.84259788152282,
+      "completed": true,
+      "entryUpgrades": 42,
+      "entryMass": 9.197169751310897,
+      "end": 3171.5333333311064,
+      "seconds": 393.2999999996423,
+      "menuSeconds": 30
+    },
+    {
+      "id": "planets",
+      "start": 3171.5333333311064,
+      "choices": 6,
+      "deaths": 0,
+      "hits": 0,
+      "biomassLost": 0,
+      "completed": true,
+      "entryUpgrades": 45,
+      "entryMass": 2,
+      "end": 3776.8999999972225,
+      "seconds": 605.3666666661161,
+      "menuSeconds": 60
+    },
+    {
+      "id": "stars",
+      "start": 3776.8999999972225,
+      "choices": 6,
+      "deaths": 0,
+      "hits": 26,
+      "biomassLost": 199.06117274897846,
+      "completed": true,
+      "entryUpgrades": 51,
+      "entryMass": 2,
+      "end": 4344.233333333426,
+      "seconds": 567.3333333362039,
+      "menuSeconds": 60
+    },
+    {
+      "id": "galaxies",
+      "start": 4344.233333333426,
+      "choices": 6,
+      "deaths": 0,
+      "hits": 0,
+      "biomassLost": 0,
+      "completed": true,
+      "entryUpgrades": 57,
+      "entryMass": 2,
+      "end": 4824.200000006204,
+      "seconds": 479.96666667277805,
+      "menuSeconds": 60
+    },
+    {
+      "id": "universe",
+      "start": 4824.200000006204,
+      "choices": 9,
+      "deaths": 0,
+      "hits": 0,
+      "biomassLost": 0,
+      "completed": true,
+      "entryUpgrades": 63,
+      "entryMass": 2,
+      "end": 5098.4333333430295,
+      "seconds": 274.2333333368251,
+      "menuSeconds": 90
+    }
+  ],
+  "choices": [
+    {
+      "at": 110.2999999999963,
+      "stage": "micro",
+      "id": "shield"
+    },
+    {
+      "at": 164.09999999999326,
+      "stage": "micro",
+      "id": "tentacles"
+    },
+    {
+      "at": 226.4999999999897,
+      "stage": "micro",
+      "id": "pull"
+    },
+    {
+      "at": 295.73333333335296,
+      "stage": "micro",
+      "id": "digest"
+    },
+    {
+      "at": 342.50000000005684,
+      "stage": "micro",
+      "id": "speed"
+    },
+    {
+      "at": 375.7333333334166,
+      "stage": "micro",
+      "id": "tentacles"
+    },
+    {
+      "at": 397.40000000010053,
+      "stage": "micro",
+      "id": "digest"
+    },
+    {
+      "at": 425.70000000012305,
+      "stage": "micro",
+      "id": "tentacles"
+    },
+    {
+      "at": 453.43333333347846,
+      "stage": "micro",
+      "id": "digest"
+    },
+    {
+      "at": 484.23333333350297,
+      "stage": "micro",
+      "id": "tentacles"
+    },
+    {
+      "at": 664.7333333333861,
+      "stage": "pond",
+      "id": "speed"
+    },
+    {
+      "at": 775.0999999999524,
+      "stage": "pond",
+      "id": "tentacles"
+    },
+    {
+      "at": 851.4333333332163,
+      "stage": "pond",
+      "id": "decoy"
+    },
+    {
+      "at": 907.0333333331657,
+      "stage": "pond",
+      "id": "speed"
+    },
+    {
+      "at": 978.6666666664339,
+      "stage": "pond",
+      "id": "pull"
+    },
+    {
+      "at": 1041.166666666377,
+      "stage": "pond",
+      "id": "digest"
+    },
+    {
+      "at": 1094.9999999996614,
+      "stage": "pond",
+      "id": "speed"
+    },
+    {
+      "at": 1297.2666666661441,
+      "stage": "land",
+      "id": "speed"
+    },
+    {
+      "at": 1402.199999999382,
+      "stage": "land",
+      "id": "digest"
+    },
+    {
+      "at": 1461.1999999993284,
+      "stage": "land",
+      "id": "digest"
+    },
+    {
+      "at": 1503.9333333326229,
+      "stage": "land",
+      "id": "spikes"
+    },
+    {
+      "at": 1560.8666666659044,
+      "stage": "land",
+      "id": "digest"
+    },
+    {
+      "at": 1610.4666666658593,
+      "stage": "land",
+      "id": "digest"
+    },
+    {
+      "at": 1658.5999999991488,
+      "stage": "land",
+      "id": "slots"
+    },
+    {
+      "at": 1879.833333332281,
+      "stage": "water",
+      "id": "spikes"
+    },
+    {
+      "at": 1984.9333333321854,
+      "stage": "water",
+      "id": "tentacles"
+    },
+    {
+      "at": 2062.866666665448,
+      "stage": "water",
+      "id": "speed"
+    },
+    {
+      "at": 2112.599999998736,
+      "stage": "water",
+      "id": "recycle"
+    },
+    {
+      "at": 2167.03333333202,
+      "stage": "water",
+      "id": "slots"
+    },
+    {
+      "at": 2203.1666666653205,
+      "stage": "water",
+      "id": "dash"
+    },
+    {
+      "at": 2265.399999998597,
+      "stage": "city",
+      "id": "slots"
+    },
+    {
+      "at": 2450.6999999984287,
+      "stage": "city",
+      "id": "spikes"
+    },
+    {
+      "at": 2534.233333331686,
+      "stage": "city",
+      "id": "dash"
+    },
+    {
+      "at": 2578.7333333316456,
+      "stage": "city",
+      "id": "slots"
+    },
+    {
+      "at": 2610.66666666495,
+      "stage": "city",
+      "id": "recycle"
+    },
+    {
+      "at": 2633.2999999982626,
+      "stage": "city",
+      "id": "slots"
+    },
+    {
+      "at": 2656.533333331575,
+      "stage": "city",
+      "id": "dash"
+    },
+    {
+      "at": 2678.3666666648883,
+      "stage": "city",
+      "id": "recycle"
+    },
+    {
+      "at": 2699.9333333315353,
+      "stage": "city",
+      "id": "pull"
+    },
+    {
+      "at": 2724.666666664846,
+      "stage": "city",
+      "id": "dash"
+    },
+    {
+      "at": 2744.666666664828,
+      "stage": "city",
+      "id": "slots"
+    },
+    {
+      "at": 2764.66666666481,
+      "stage": "city",
+      "id": "recycle"
+    },
+    {
+      "at": 3002.966666664593,
+      "stage": "orbit",
+      "id": "dash"
+    },
+    {
+      "at": 3062.466666664539,
+      "stage": "orbit",
+      "id": "dash"
+    },
+    {
+      "at": 3137.1999999978043,
+      "stage": "orbit",
+      "id": "recycle"
+    },
+    {
+      "at": 3403.733333330895,
+      "stage": "planets",
+      "id": "pull"
+    },
+    {
+      "at": 3551.433333330761,
+      "stage": "planets",
+      "id": "recycle"
+    },
+    {
+      "at": 3634.7666666640184,
+      "stage": "planets",
+      "id": "dash"
+    },
+    {
+      "at": 3684.899999997306,
+      "stage": "planets",
+      "id": "dash"
+    },
+    {
+      "at": 3732.633333330596,
+      "stage": "planets",
+      "id": "spikes"
+    },
+    {
+      "at": 3772.7333333305596,
+      "stage": "planets",
+      "id": "combo"
+    },
+    {
+      "at": 4014.03333333034,
+      "stage": "stars",
+      "id": "spikes"
+    },
+    {
+      "at": 4154.566666664345,
+      "stage": "stars",
+      "id": "pull"
+    },
+    {
+      "at": 4210.633333331725,
+      "stage": "stars",
+      "id": "pull"
+    },
+    {
+      "at": 4282.666666665976,
+      "stage": "stars",
+      "id": "spikes"
+    },
+    {
+      "at": 4314.7666666663845,
+      "stage": "stars",
+      "id": "tentacleReach"
+    },
+    {
+      "at": 4340.36666666671,
+      "stage": "stars",
+      "id": "tentacleReach"
+    },
+    {
+      "at": 4593.8333333366045,
+      "stage": "galaxies",
+      "id": "tentacleReach"
+    },
+    {
+      "at": 4673.200000004282,
+      "stage": "galaxies",
+      "id": "tentacleReach"
+    },
+    {
+      "at": 4720.400000004883,
+      "stage": "galaxies",
+      "id": "combo"
+    },
+    {
+      "at": 4756.56666667201,
+      "stage": "galaxies",
+      "id": "combo"
+    },
+    {
+      "at": 4781.733333338997,
+      "stage": "galaxies",
+      "id": "combo"
+    },
+    {
+      "at": 4804.166666672616,
+      "stage": "galaxies",
+      "id": "turn"
+    },
+    {
+      "at": 4858.8666666733125,
+      "stage": "universe",
+      "id": "turn"
+    },
+    {
+      "at": 4919.600000007419,
+      "stage": "universe",
+      "id": "turn"
+    },
+    {
+      "at": 4958.233333341244,
+      "stage": "universe",
+      "id": "turn"
+    },
+    {
+      "at": 4985.86666667493,
+      "stage": "universe",
+      "id": "yield"
+    },
+    {
+      "at": 5010.566666675244,
+      "stage": "universe",
+      "id": "yield"
+    },
+    {
+      "at": 5025.566666675435,
+      "stage": "universe",
+      "id": "yield"
+    },
+    {
+      "at": 5039.366666675611,
+      "stage": "universe",
+      "id": "yield"
+    },
+    {
+      "at": 5051.1000000090935,
+      "stage": "universe",
+      "id": "yield"
+    },
+    {
+      "at": 5062.8000000092425,
+      "stage": "universe",
+      "id": "yield"
+    }
+  ],
+  "assumptions": [
+    "Real update/feeding/damage/spawn/adaptation logic with fixed small steps; no modified balance or invulnerability.",
+    "Rendering and audio are stubbed; this estimates pacing, never device FPS or loading time.",
+    "Pilot can inspect all loaded entities and their edible thresholds. Profiles are synthetic, not calibrated human skill groups.",
+    "Choice reading time and 5 seconds per retry are explicit added assumptions; breaks, loading and optional menus are excluded.",
+    "Total simulation clock includes birth, evolution, Earth absorption, ending and failed attempts.",
+    "At most three simulated hours / ten deaths. Incomplete runs are censored, never reported as completion times."
+  ]
+}

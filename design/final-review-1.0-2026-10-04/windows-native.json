@@ -1,0 +1,8 @@
+{
+  "executable": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-camera\\artifact\\windows\\1.0-preview.2\\VORO-win32-x64\\VORO.exe",
+  "profile": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-camera\\work\\final-windows-qa-1791069995068",
+  "purpose": "Native wrapper startup/settings/save QA, hidden window; not physical audio or FPS",
+  "passed": false,
+  "inspectorReady": 2,
+  "error": "Error: Runtime.evaluate timeout"
+}

@@ -2728,51 +2728,6 @@ export class VoroEngine {
     }
   }
 
-  registerTools() {
-    const context = (
-      document as unknown as {
-        modelContext?: {
-          registerTool: (tool: unknown, options: unknown) => unknown;
-        };
-      }
-    ).modelContext;
-    if (!context?.registerTool) return;
-    const common = {
-      inputSchema: {
-        type: 'object',
-        properties: {},
-        additionalProperties: false,
-      },
-      annotations: { readOnlyHint: false, untrustedContentHint: false },
-    };
-    for (const [name, description, action] of [
-      ['start_voro', 'Start or resume the VORO evolution game.', 'start'],
-      ['restart_voro', 'Restart VORO and clear this run.', 'restart'],
-    ] as const) {
-      try {
-        Promise.resolve(
-          context.registerTool(
-            {
-              ...common,
-              name,
-              description,
-              execute: (input: unknown) => {
-                if (
-                  !input ||
-                  typeof input !== 'object' ||
-                  Object.keys(input).length
-                )
-                  throw new Error('Expected an empty object');
-                this.action(action);
-                return { started: this.started, eaten: this.life.eaten };
-              },
-            },
-            { signal: this.lifecycle.signal },
-          ),
-        ).catch(() => {});
-      } catch {}
-    }
-  }
   destroy() {
     if(this.audioJournalTimer!==undefined)window.clearInterval(this.audioJournalTimer);
     this.audioJournal?.destroy();

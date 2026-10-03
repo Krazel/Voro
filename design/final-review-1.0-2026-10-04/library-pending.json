@@ -1,0 +1,19 @@
+{
+  "productId": "PR-009",
+  "lastObservedRevision": 346,
+  "status": "pending",
+  "reason": "La API autorizada de la biblioteca no se pudo abrir: el entorno restringido rechazó el acceso al socket. El conector disponible permite leer D1, pero no actualizar esta fila. No se ha guardado ni verificado una escritura.",
+  "evidence": "design/final-review-1.0-2026-10-04/README.md",
+  "proposedUpdate": {
+    "stage": "En producción",
+    "detailAppend": "Candidata final local 1.0 (1): sin herramientas de desarrollo visibles ni puentes de pruebas; botón convencional para volver a la pausa. Auditoría completa de progresión, guardados, UI y duraciones registrada en el repositorio.",
+    "next": "Cerrar la validación física de la candidata final. Mantener las tareas y estados de marketing existentes. No confundir paquetes locales con TestFlight o publicación en tiendas."
+  },
+  "distribution": {
+    "candidate": "1.0 (1), local",
+    "testflight": "Sin nueva subida en esta revisión; última entrega registrada 0.14 (1), interna",
+    "appStore": "Sin nueva publicación ni cambios de metadatos en esta revisión",
+    "ads": "Sin cambios"
+  },
+  "reconcile": "Releer la revisión vigente y el registro completo PR-009 antes de escribir. Conciliar estas evidencias con detail/source/next existentes; conservar tracking, releases, marketing y URLs. Verificar la fila después del PATCH. No usar este documento como reemplazo completo de la ficha."
+}

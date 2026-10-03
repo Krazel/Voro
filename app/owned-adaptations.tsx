@@ -85,7 +85,7 @@ export function OwnedAdaptations({ mutations, onClose, returnFocus }: {
           <p>{ownedEffect(selected.id, selected.count, language)}</p>
         </section>}
         <button type="button" className="owned-return" onClick={onClose}>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13 7-5 5 5 5M8 12h10" /></svg>
+          <ArrowLeft size={22} strokeWidth={2} aria-hidden="true" />
           <span>{back}</span>
         </button>
       </footer>

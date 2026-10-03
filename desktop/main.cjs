@@ -39,7 +39,7 @@ else {
       title: 'VORO · Abisal', width: 1440, height: 900, minWidth: 800, minHeight: 600,
       backgroundColor: '#001018', show: false, autoHideMenuBar: true,
       icon: path.join(__dirname, 'icon.ico'),
-      webPreferences: { nodeIntegration: false, contextIsolation: true, sandbox: true, webSecurity: true },
+      webPreferences: { devTools: false, nodeIntegration: false, contextIsolation: true, sandbox: true, webSecurity: true },
     });
     const openExternal = url => { if (externalAllowed(url)) void shell.openExternal(url); };
     win.webContents.setWindowOpenHandler(({ url }) => { openExternal(url); return { action: 'deny' }; });

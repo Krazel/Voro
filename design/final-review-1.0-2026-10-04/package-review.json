@@ -1,0 +1,25 @@
+{
+  "candidate": "1.0 (1)",
+  "mobileWebBuild": "passed; assets verified against sources",
+  "pcWebBuild": "passed",
+  "windows": {
+    "package": "artifact/windows/1.0-preview.2/VORO-win32-x64/VORO.exe",
+    "integrity": "passed; windows-integrity.json",
+    "nativeSmoke": "not completed; external main-process inspector Runtime.evaluate timeout, windows-native.json",
+    "deviceAudioAndFps": "not verified by this audit"
+  },
+  "android": {
+    "versionName": "1.0",
+    "versionCode": 2,
+    "newApk": false,
+    "build": "blocked by java.nio.file.AccessDeniedException reading generated Gradle JARs; reproduced with a workspace cache and fresh build output",
+    "previousApk": "0.14, versionCode 1; this is not the final candidate APK"
+  },
+  "ios": {
+    "sourceVersion": "1.0 (1)",
+    "newTestFlight": false,
+    "newIpa": false,
+    "physicalValidation": "pending on a newly compiled iPhone/iPad binary; browser QA is not native QA"
+  },
+  "storePublication": "none in this review"
+}

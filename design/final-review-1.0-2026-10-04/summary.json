@@ -1,0 +1,1557 @@
+{
+  "version": {
+    "version": "1.0",
+    "build": 1
+  },
+  "sourceCommits": [
+    "89889c39582592669b4dfb4daec7c0f121267036"
+  ],
+  "attempted": 90,
+  "completed": 90,
+  "sessionMinutes": {
+    "n": 90,
+    "mean": 79.00808024693023,
+    "median": 73.6602777777272,
+    "min": 63.212222222181,
+    "max": 108.04500000037685
+  },
+  "profiles": {
+    "precise": {
+      "attempted": 30,
+      "completed": 30,
+      "sessionMinutes": {
+        "n": 30,
+        "mean": 72.20938888886361,
+        "median": 70.7391666666189,
+        "min": 64.34666666662471,
+        "max": 108.04500000037685
+      }
+    },
+    "direct": {
+      "attempted": 30,
+      "completed": 30,
+      "sessionMinutes": {
+        "n": 30,
+        "mean": 72.49564814811954,
+        "median": 71.19249999995155,
+        "min": 63.212222222181,
+        "max": 96.77777777801434
+      }
+    },
+    "explorer": {
+      "attempted": 30,
+      "completed": 30,
+      "sessionMinutes": {
+        "n": 30,
+        "mean": 92.31920370380752,
+        "median": 91.43333333342545,
+        "min": 85.46444444446162,
+        "max": 99.30555555574897
+      }
+    }
+  },
+  "stages": [
+    {
+      "id": "micro",
+      "reached": 90,
+      "completed": 90,
+      "censored": [],
+      "minutes": {
+        "n": 90,
+        "mean": 8.467104938273648,
+        "median": 8.286944444446782,
+        "min": 6.266111111111839,
+        "max": 12.678333333334274
+      },
+      "simulationMinutes": {
+        "n": 90,
+        "mean": 7.355067901236609,
+        "median": 7.297500000002213,
+        "min": 5.432777777778506,
+        "max": 11.011666666667606
+      },
+      "assumedChoiceMinutes": {
+        "n": 90,
+        "mean": 1.1120370370370383,
+        "median": 0.8333333333333334,
+        "min": 0.8333333333333334,
+        "max": 1.6666666666666667
+      },
+      "hits": {
+        "n": 90,
+        "mean": 3.9,
+        "median": 3,
+        "min": 0,
+        "max": 20
+      },
+      "byProfile": {
+        "precise": {
+          "n": 30,
+          "mean": 7.791296296298199,
+          "median": 7.845000000001985,
+          "min": 6.456666666667546,
+          "max": 9.995555555558253
+        },
+        "direct": {
+          "n": 30,
+          "mean": 7.7118148148166865,
+          "median": 7.6894444444463055,
+          "min": 6.266111111111839,
+          "max": 9.485000000003087
+        },
+        "explorer": {
+          "n": 30,
+          "mean": 9.898203703706052,
+          "median": 9.675833333336112,
+          "min": 8.040000000001477,
+          "max": 12.678333333334274
+        }
+      }
+    },
+    {
+      "id": "pond",
+      "reached": 90,
+      "completed": 90,
+      "censored": [],
+      "minutes": {
+        "n": 90,
+        "mean": 8.61038271604451,
+        "median": 8.399166666662564,
+        "min": 6.553888888886066,
+        "max": 11.547222222212987
+      },
+      "simulationMinutes": {
+        "n": 90,
+        "mean": 7.802049382711178,
+        "median": 7.672499999996196,
+        "min": 5.970555555552733,
+        "max": 10.380555555546321
+      },
+      "assumedChoiceMinutes": {
+        "n": 90,
+        "mean": 0.8083333333333333,
+        "median": 0.6666666666666666,
+        "min": 0.5833333333333334,
+        "max": 1.1666666666666667
+      },
+      "hits": {
+        "n": 90,
+        "mean": 0.011111111111111112,
+        "median": 0,
+        "min": 0,
+        "max": 1
+      },
+      "byProfile": {
+        "precise": {
+          "n": 30,
+          "mean": 8.126722222218172,
+          "median": 8.246388888884868,
+          "min": 6.738888888885206,
+          "max": 9.124444444436753
+        },
+        "direct": {
+          "n": 30,
+          "mean": 7.883907407403596,
+          "median": 7.82166666666431,
+          "min": 6.553888888886066,
+          "max": 9.099444444439312
+        },
+        "explorer": {
+          "n": 30,
+          "mean": 9.820518518511767,
+          "median": 9.770555555550168,
+          "min": 8.7461111111079,
+          "max": 11.547222222212987
+        }
+      }
+    },
+    {
+      "id": "land",
+      "reached": 90,
+      "completed": 90,
+      "censored": [],
+      "minutes": {
+        "n": 90,
+        "mean": 8.50495061727695,
+        "median": 8.139999999993165,
+        "min": 6.844999999994381,
+        "max": 11.206666666657535
+      },
+      "simulationMinutes": {
+        "n": 90,
+        "mean": 7.69754320986954,
+        "median": 7.53916666665981,
+        "min": 6.178333333327714,
+        "max": 10.039999999990869
+      },
+      "assumedChoiceMinutes": {
+        "n": 90,
+        "mean": 0.8074074074074074,
+        "median": 0.6666666666666666,
+        "min": 0.5833333333333334,
+        "max": 1.1666666666666667
+      },
+      "hits": {
+        "n": 90,
+        "mean": 0.03333333333333333,
+        "median": 0,
+        "min": 0,
+        "max": 1
+      },
+      "byProfile": {
+        "precise": {
+          "n": 30,
+          "mean": 7.913074074067487,
+          "median": 7.94833333332671,
+          "min": 6.844999999994381,
+          "max": 8.763888888881525
+        },
+        "direct": {
+          "n": 30,
+          "mean": 7.681425925919472,
+          "median": 7.561111111104765,
+          "min": 6.914444444438686,
+          "max": 8.624999999992687
+        },
+        "explorer": {
+          "n": 30,
+          "mean": 9.920351851843893,
+          "median": 9.925833333325366,
+          "min": 9.03888888888173,
+          "max": 11.206666666657535
+        }
+      }
+    },
+    {
+      "id": "water",
+      "reached": 90,
+      "completed": 90,
+      "censored": [],
+      "minutes": {
+        "n": 90,
+        "mean": 9.11376543209114,
+        "median": 8.7238888888816,
+        "min": 6.69222222221659,
+        "max": 11.623333333323675
+      },
+      "simulationMinutes": {
+        "n": 90,
+        "mean": 8.383209876535586,
+        "median": 8.09249999999264,
+        "min": 6.19222222221659,
+        "max": 10.623333333323675
+      },
+      "assumedChoiceMinutes": {
+        "n": 90,
+        "mean": 0.7305555555555558,
+        "median": 0.6666666666666666,
+        "min": 0.5,
+        "max": 1.1666666666666667
+      },
+      "hits": {
+        "n": 90,
+        "mean": 0.07777777777777778,
+        "median": 0,
+        "min": 0,
+        "max": 1
+      },
+      "byProfile": {
+        "precise": {
+          "n": 30,
+          "mean": 8.485425925918824,
+          "median": 8.446388888881813,
+          "min": 7.204999999994054,
+          "max": 9.766111111102836
+        },
+        "direct": {
+          "n": 30,
+          "mean": 8.367240740733584,
+          "median": 8.370833333326175,
+          "min": 6.69222222221659,
+          "max": 9.116111111103274
+        },
+        "explorer": {
+          "n": 30,
+          "mean": 10.488629629621014,
+          "median": 10.483055555546935,
+          "min": 9.442777777770255,
+          "max": 11.623333333323675
+        }
+      }
+    },
+    {
+      "id": "city",
+      "reached": 90,
+      "completed": 90,
+      "censored": [],
+      "minutes": {
+        "n": 90,
+        "mean": 8.081333333327182,
+        "median": 7.464166666660829,
+        "min": 6.027777777773281,
+        "max": 12.663333333323635
+      },
+      "simulationMinutes": {
+        "n": 90,
+        "mean": 6.761888888882739,
+        "median": 6.367222222216434,
+        "min": 4.944444444439948,
+        "max": 10.663333333323635
+      },
+      "assumedChoiceMinutes": {
+        "n": 90,
+        "mean": 1.3194444444444438,
+        "median": 1.0833333333333333,
+        "min": 0.9166666666666666,
+        "max": 2.1666666666666665
+      },
+      "hits": {
+        "n": 90,
+        "mean": 21.511111111111113,
+        "median": 21,
+        "min": 6,
+        "max": 54
+      },
+      "byProfile": {
+        "precise": {
+          "n": 30,
+          "mean": 7.139925925920455,
+          "median": 7.115555555550073,
+          "min": 6.027777777773281,
+          "max": 8.82277777777097
+        },
+        "direct": {
+          "n": 30,
+          "mean": 7.056481481475911,
+          "median": 6.916944444438991,
+          "min": 6.079444444439753,
+          "max": 8.568333333326454
+        },
+        "explorer": {
+          "n": 30,
+          "mean": 10.047592592585188,
+          "median": 9.85249999999286,
+          "min": 7.904999999994482,
+          "max": 12.663333333323635
+        }
+      }
+    },
+    {
+      "id": "orbit",
+      "reached": 90,
+      "completed": 90,
+      "censored": [],
+      "minutes": {
+        "n": 90,
+        "mean": 7.550679012341091,
+        "median": 5.932777777772725,
+        "min": 3.1961111111084315,
+        "max": 43.726666666788965
+      },
+      "simulationMinutes": {
+        "n": 90,
+        "mean": 7.157160493822572,
+        "median": 5.628333333328214,
+        "min": 2.9461111111084315,
+        "max": 43.39333333345563
+      },
+      "assumedChoiceMinutes": {
+        "n": 90,
+        "mean": 0.39351851851851855,
+        "median": 0.3333333333333333,
+        "min": 0.25,
+        "max": 0.6666666666666666
+      },
+      "hits": {
+        "n": 90,
+        "mean": 18.244444444444444,
+        "median": 6,
+        "min": 0,
+        "max": 174
+      },
+      "byProfile": {
+        "precise": {
+          "n": 30,
+          "mean": 8.581740740738661,
+          "median": 6.572222222216588,
+          "min": 3.522777777774881,
+          "max": 43.726666666788965
+        },
+        "direct": {
+          "n": 30,
+          "mean": 8.154796296289506,
+          "median": 5.973055555550388,
+          "min": 3.1961111111084315,
+          "max": 34.033333333313664
+        },
+        "explorer": {
+          "n": 30,
+          "mean": 5.915499999995105,
+          "median": 5.474722222217697,
+          "min": 3.7416666666637184,
+          "max": 9.849999999991496
+        }
+      }
+    },
+    {
+      "id": "planets",
+      "reached": 90,
+      "completed": 90,
+      "censored": [],
+      "minutes": {
+        "n": 90,
+        "mean": 8.54704938271118,
+        "median": 7.701944444437895,
+        "min": 6.8111111111053715,
+        "max": 11.546111111101519
+      },
+      "simulationMinutes": {
+        "n": 90,
+        "mean": 7.881308641970438,
+        "median": 7.201944444437895,
+        "min": 6.230555555549889,
+        "max": 10.632777777768107
+      },
+      "assumedChoiceMinutes": {
+        "n": 90,
+        "mean": 0.6657407407407405,
+        "median": 0.5833333333333334,
+        "min": 0.4166666666666667,
+        "max": 1
+      },
+      "hits": {
+        "n": 90,
+        "mean": 0.07777777777777778,
+        "median": 0,
+        "min": 0,
+        "max": 2
+      },
+      "byProfile": {
+        "precise": {
+          "n": 30,
+          "mean": 7.377851851849087,
+          "median": 7.317777777771653,
+          "min": 6.8111111111053715,
+          "max": 8.37666666665958
+        },
+        "direct": {
+          "n": 30,
+          "mean": 7.556462962959979,
+          "median": 7.376666666667852,
+          "min": 6.857222222216365,
+          "max": 9.064444444436655
+        },
+        "explorer": {
+          "n": 30,
+          "mean": 10.706833333324477,
+          "median": 10.731666666657816,
+          "min": 9.697222222214313,
+          "max": 11.546111111101519
+        }
+      }
+    },
+    {
+      "id": "stars",
+      "reached": 90,
+      "completed": 90,
+      "censored": [],
+      "minutes": {
+        "n": 90,
+        "mean": 7.744240740741526,
+        "median": 7.3130555555493215,
+        "min": 4.6188888888849915,
+        "max": 14.217777777765908
+      },
+      "simulationMinutes": {
+        "n": 90,
+        "mean": 7.143314814815597,
+        "median": 6.8547222222159885,
+        "min": 4.213333333329501,
+        "max": 13.05111111109924
+      },
+      "assumedChoiceMinutes": {
+        "n": 90,
+        "mean": 0.6009259259259263,
+        "median": 0.5,
+        "min": 0.3333333333333333,
+        "max": 1.1666666666666667
+      },
+      "hits": {
+        "n": 90,
+        "mean": 11.077777777777778,
+        "median": 8.5,
+        "min": 0,
+        "max": 50
+      },
+      "byProfile": {
+        "precise": {
+          "n": 30,
+          "mean": 6.307499999996795,
+          "median": 5.662777777773082,
+          "min": 4.673888888885017,
+          "max": 12.321666666656066
+        },
+        "direct": {
+          "n": 30,
+          "mean": 6.761981481480053,
+          "median": 6.701388888883173,
+          "min": 4.6188888888849915,
+          "max": 10.272777777768814
+        },
+        "explorer": {
+          "n": 30,
+          "mean": 10.16324074074773,
+          "median": 9.954444444491752,
+          "min": 8.122222222215592,
+          "max": 14.217777777765908
+        }
+      }
+    },
+    {
+      "id": "galaxies",
+      "reached": 90,
+      "completed": 90,
+      "censored": [],
+      "minutes": {
+        "n": 90,
+        "mean": 7.213500000025674,
+        "median": 6.448611111105777,
+        "min": 5.583888888884417,
+        "max": 9.948888889000711
+      },
+      "simulationMinutes": {
+        "n": 90,
+        "mean": 6.424611111136787,
+        "median": 5.841111111105798,
+        "min": 4.91722222221775,
+        "max": 8.782222222334045
+      },
+      "assumedChoiceMinutes": {
+        "n": 90,
+        "mean": 0.7888888888888891,
+        "median": 0.6666666666666666,
+        "min": 0.5,
+        "max": 1.1666666666666667
+      },
+      "hits": {
+        "n": 90,
+        "mean": 0.05555555555555555,
+        "median": 0,
+        "min": 0,
+        "max": 2
+      },
+      "byProfile": {
+        "precise": {
+          "n": 30,
+          "mean": 6.2618703703692224,
+          "median": 6.285555555550445,
+          "min": 5.583888888884417,
+          "max": 6.538333333327993
+        },
+        "direct": {
+          "n": 30,
+          "mean": 6.31924074074148,
+          "median": 6.300833333328134,
+          "min": 6.003888888883959,
+          "max": 6.653333333410623
+        },
+        "explorer": {
+          "n": 30,
+          "mean": 9.059388888966323,
+          "median": 8.994722222310415,
+          "min": 8.346666666711455,
+          "max": 9.948888889000711
+        }
+      }
+    },
+    {
+      "id": "universe",
+      "reached": 90,
+      "completed": 90,
+      "censored": [],
+      "minutes": {
+        "n": 90,
+        "mean": 5.175074074097319,
+        "median": 5.0563888888961515,
+        "min": 3.898333333329788,
+        "max": 6.808888888956487
+      },
+      "simulationMinutes": {
+        "n": 90,
+        "mean": 4.416740740763984,
+        "median": 4.324444444470119,
+        "min": 3.898333333329788,
+        "max": 5.308888888956487
+      },
+      "assumedChoiceMinutes": {
+        "n": 90,
+        "mean": 0.7583333333333333,
+        "median": 0.75,
+        "min": 0,
+        "max": 1.5
+      },
+      "hits": {
+        "n": 90,
+        "mean": 0.03333333333333333,
+        "median": 0,
+        "min": 0,
+        "max": 1
+      },
+      "byProfile": {
+        "precise": {
+          "n": 30,
+          "mean": 4.223981481486704,
+          "median": 4.2274999999962315,
+          "min": 3.898333333329788,
+          "max": 4.435555555551673
+        },
+        "direct": {
+          "n": 30,
+          "mean": 5.002296296299279,
+          "median": 5.0563888888961515,
+          "min": 4.729444444445926,
+          "max": 5.306666666662522
+        },
+        "explorer": {
+          "n": 30,
+          "mean": 6.298944444505975,
+          "median": 6.311388888951213,
+          "min": 5.960555555614474,
+          "max": 6.808888888956487
+        }
+      }
+    }
+  ],
+  "contrasts": [
+    {
+      "profile": "direct",
+      "seed": 1013,
+      "baseCompleted": true,
+      "completed": true,
+      "minutes30": 72.38777777772829,
+      "minutes60": 76.05694444482864,
+      "stages": [
+        {
+          "id": "micro",
+          "completed": true,
+          "minutes60": 7.142222222221962,
+          "minutes30": 7.441111111112774
+        },
+        {
+          "id": "pond",
+          "completed": true,
+          "minutes60": 8.054166666659873,
+          "minutes30": 7.69444444444126
+        },
+        {
+          "id": "land",
+          "completed": true,
+          "minutes60": 7.998333333326591,
+          "minutes30": 7.413888888882677
+        },
+        {
+          "id": "water",
+          "completed": true,
+          "minutes60": 8.590833333325975,
+          "minutes30": 8.384444444437273
+        },
+        {
+          "id": "city",
+          "completed": true,
+          "minutes60": 7.713055555574897,
+          "minutes30": 7.914999999993639
+        },
+        {
+          "id": "orbit",
+          "completed": true,
+          "minutes60": 8.586111111217255,
+          "minutes30": 5.9594444444393275
+        },
+        {
+          "id": "planets",
+          "completed": true,
+          "minutes60": 8.101388888985676,
+          "minutes30": 9.02388888888106
+        },
+        {
+          "id": "stars",
+          "completed": true,
+          "minutes60": 8.581388888991789,
+          "minutes30": 7.0233333333274
+        },
+        {
+          "id": "galaxies",
+          "completed": true,
+          "minutes60": 6.264444444516782,
+          "minutes30": 6.442777777772449
+        },
+        {
+          "id": "universe",
+          "completed": true,
+          "minutes60": 5.025000000007852,
+          "minutes30": 5.089444444440422
+        }
+      ]
+    },
+    {
+      "profile": "direct",
+      "seed": 2203,
+      "baseCompleted": true,
+      "completed": true,
+      "minutes30": 89.62555555570106,
+      "minutes60": 76.92222222259262,
+      "stages": [
+        {
+          "id": "micro",
+          "completed": true,
+          "minutes60": 7.873055555554631,
+          "minutes30": 7.006111111112428
+        },
+        {
+          "id": "pond",
+          "completed": true,
+          "minutes60": 8.05888888888209,
+          "minutes30": 7.816111111108557
+        },
+        {
+          "id": "land",
+          "completed": true,
+          "minutes60": 8.14333333332646,
+          "minutes30": 7.642777777771357
+        },
+        {
+          "id": "water",
+          "completed": true,
+          "minutes60": 9.094444444436627,
+          "minutes30": 8.769444444436923
+        },
+        {
+          "id": "city",
+          "completed": true,
+          "minutes60": 8.392222222270156,
+          "minutes30": 8.216666666660107
+        },
+        {
+          "id": "orbit",
+          "completed": true,
+          "minutes60": 9.758333333453342,
+          "minutes30": 26.791111111086973
+        },
+        {
+          "id": "planets",
+          "completed": true,
+          "minutes60": 7.431666666754927,
+          "minutes30": 7.365000000008634
+        },
+        {
+          "id": "stars",
+          "completed": true,
+          "minutes60": 7.051666666751149,
+          "minutes30": 5.00000000005942
+        },
+        {
+          "id": "galaxies",
+          "completed": true,
+          "minutes60": 6.066388888958704,
+          "minutes30": 6.046666666736231
+        },
+        {
+          "id": "universe",
+          "completed": true,
+          "minutes60": 5.052222222204538,
+          "minutes30": 4.971666666720421
+        }
+      ]
+    },
+    {
+      "profile": "direct",
+      "seed": 41,
+      "baseCompleted": true,
+      "completed": true,
+      "minutes30": 74.55722222217585,
+      "minutes60": 68.93361111145438,
+      "stages": [
+        {
+          "id": "micro",
+          "completed": true,
+          "minutes60": 9.474444444442064,
+          "minutes30": 7.287222222223763
+        },
+        {
+          "id": "pond",
+          "completed": true,
+          "minutes60": 8.205555555548623,
+          "minutes30": 8.306111111107633
+        },
+        {
+          "id": "land",
+          "completed": true,
+          "minutes60": 7.616388888882494,
+          "minutes30": 7.356666666660506
+        },
+        {
+          "id": "water",
+          "completed": true,
+          "minutes60": 8.634444444437046,
+          "minutes30": 8.919444444436786
+        },
+        {
+          "id": "city",
+          "completed": true,
+          "minutes60": 7.380555555600991,
+          "minutes30": 7.064444444438857
+        },
+        {
+          "id": "orbit",
+          "completed": true,
+          "minutes60": 4.02777777782588,
+          "minutes30": 11.274444444434417
+        },
+        {
+          "id": "planets",
+          "completed": true,
+          "minutes60": 7.392777777865543,
+          "minutes30": 7.205555555549457
+        },
+        {
+          "id": "stars",
+          "completed": true,
+          "minutes60": 4.992500000059325,
+          "minutes30": 6.25944444443913
+        },
+        {
+          "id": "galaxies",
+          "completed": true,
+          "minutes60": 6.368888888962556,
+          "minutes30": 6.1544444444393775
+        },
+        {
+          "id": "universe",
+          "completed": true,
+          "minutes60": 4.840277777829859,
+          "minutes30": 4.729444444445926
+        }
+      ]
+    },
+    {
+      "profile": "explorer",
+      "seed": 1013,
+      "baseCompleted": true,
+      "completed": true,
+      "minutes30": 91.13111111119832,
+      "minutes60": 93.82777777798948,
+      "stages": [
+        {
+          "id": "micro",
+          "completed": true,
+          "minutes60": 10.328888888886489,
+          "minutes30": 12.116111111112563
+        },
+        {
+          "id": "pond",
+          "completed": true,
+          "minutes60": 9.01305555554842,
+          "minutes30": 9.401111111103623
+        },
+        {
+          "id": "land",
+          "completed": true,
+          "minutes60": 9.123888888881654,
+          "minutes30": 9.689444444436694
+        },
+        {
+          "id": "water",
+          "completed": true,
+          "minutes60": 9.641944444436584,
+          "minutes30": 9.442777777770255
+        },
+        {
+          "id": "city",
+          "completed": true,
+          "minutes60": 9.862500000088243,
+          "minutes30": 10.011666666659229
+        },
+        {
+          "id": "orbit",
+          "completed": true,
+          "minutes60": 8.137222222315222,
+          "minutes30": 5.135555555551339
+        },
+        {
+          "id": "planets",
+          "completed": true,
+          "minutes60": 10.520555555678902,
+          "minutes30": 10.16555555554722
+        },
+        {
+          "id": "stars",
+          "completed": true,
+          "minutes60": 12.340277777889378,
+          "minutes30": 10.12944444443599
+        },
+        {
+          "id": "galaxies",
+          "completed": true,
+          "minutes60": 8.565277777667688,
+          "minutes30": 8.931111111189399
+        },
+        {
+          "id": "universe",
+          "completed": true,
+          "minutes60": 6.294166666596903,
+          "minutes30": 6.108333333392011
+        }
+      ]
+    },
+    {
+      "profile": "explorer",
+      "seed": 2203,
+      "baseCompleted": true,
+      "completed": true,
+      "minutes30": 96.79166666682595,
+      "minutes60": 100.77833333344633,
+      "stages": [
+        {
+          "id": "micro",
+          "completed": true,
+          "minutes60": 9.019444444443234,
+          "minutes30": 12.461111111112249
+        },
+        {
+          "id": "pond",
+          "completed": true,
+          "minutes60": 9.648888888881174,
+          "minutes30": 9.541111111103495
+        },
+        {
+          "id": "land",
+          "completed": true,
+          "minutes60": 9.95277777776979,
+          "minutes30": 10.241111111102859
+        },
+        {
+          "id": "water",
+          "completed": true,
+          "minutes60": 10.50777777776913,
+          "minutes30": 10.949444444435551
+        },
+        {
+          "id": "city",
+          "completed": true,
+          "minutes60": 10.046111111215623,
+          "minutes30": 11.541111111102282
+        },
+        {
+          "id": "orbit",
+          "completed": true,
+          "minutes60": 11.808611111255102,
+          "minutes30": 6.474444444439162
+        },
+        {
+          "id": "planets",
+          "completed": true,
+          "minutes60": 10.363055555674775,
+          "minutes30": 10.85777777776866
+        },
+        {
+          "id": "stars",
+          "completed": true,
+          "minutes60": 14.479999999949595,
+          "minutes30": 9.954444444494333
+        },
+        {
+          "id": "galaxies",
+          "completed": true,
+          "minutes60": 8.85722222211031,
+          "minutes30": 8.733888888987364
+        },
+        {
+          "id": "universe",
+          "completed": true,
+          "minutes60": 6.0944444443775865,
+          "minutes30": 6.037222222279994
+        }
+      ]
+    },
+    {
+      "profile": "explorer",
+      "seed": 41,
+      "baseCompleted": true,
+      "completed": true,
+      "minutes30": 96.83111111127302,
+      "minutes60": 95.23555555574436,
+      "stages": [
+        {
+          "id": "micro",
+          "completed": true,
+          "minutes60": 9.198888888887517,
+          "minutes30": 12.266666666667982
+        },
+        {
+          "id": "pond",
+          "completed": true,
+          "minutes60": 10.788333333324584,
+          "minutes30": 10.613888888880297
+        },
+        {
+          "id": "land",
+          "completed": true,
+          "minutes60": 10.717499999991313,
+          "minutes30": 10.608333333324746
+        },
+        {
+          "id": "water",
+          "completed": true,
+          "minutes60": 11.276944444473957,
+          "minutes30": 11.228888888879741
+        },
+        {
+          "id": "city",
+          "completed": true,
+          "minutes60": 10.879444444559628,
+          "minutes30": 10.776111111102978
+        },
+        {
+          "id": "orbit",
+          "completed": true,
+          "minutes60": 5.5872222222848755,
+          "minutes30": 5.293333333328974
+        },
+        {
+          "id": "planets",
+          "completed": true,
+          "minutes60": 10.426388889011037,
+          "minutes30": 10.744999999991137
+        },
+        {
+          "id": "stars",
+          "completed": true,
+          "minutes60": 11.413888888948122,
+          "minutes30": 9.954444444489173
+        },
+        {
+          "id": "galaxies",
+          "completed": true,
+          "minutes60": 8.749444444331676,
+          "minutes30": 9.260555555658614
+        },
+        {
+          "id": "universe",
+          "completed": true,
+          "minutes60": 6.197499999931642,
+          "minutes30": 6.083888888949377
+        }
+      ]
+    },
+    {
+      "profile": "precise",
+      "seed": 1013,
+      "baseCompleted": true,
+      "completed": true,
+      "minutes30": 78.79000000000434,
+      "minutes60": 71.92000000037706,
+      "stages": [
+        {
+          "id": "micro",
+          "completed": true,
+          "minutes60": 8.824722222220432,
+          "minutes30": 7.687222222224081
+        },
+        {
+          "id": "pond",
+          "completed": true,
+          "minutes60": 8.685555555548262,
+          "minutes30": 8.317222222218128
+        },
+        {
+          "id": "land",
+          "completed": true,
+          "minutes60": 8.203888888882112,
+          "minutes30": 8.059999999993275
+        },
+        {
+          "id": "water",
+          "completed": true,
+          "minutes60": 8.91472222221472,
+          "minutes30": 9.276666666658912
+        },
+        {
+          "id": "city",
+          "completed": true,
+          "minutes60": 7.610000000050074,
+          "minutes30": 7.019444444439049
+        },
+        {
+          "id": "orbit",
+          "completed": true,
+          "minutes60": 3.7258333333765297,
+          "minutes30": 13.304999999988203
+        },
+        {
+          "id": "planets",
+          "completed": true,
+          "minutes60": 7.700000000090616,
+          "minutes30": 7.896666666660015
+        },
+        {
+          "id": "stars",
+          "completed": true,
+          "minutes60": 7.778055555648226,
+          "minutes30": 6.482222222216706
+        },
+        {
+          "id": "galaxies",
+          "completed": true,
+          "minutes60": 6.1902777778481095,
+          "minutes30": 6.464999999996977
+        },
+        {
+          "id": "universe",
+          "completed": true,
+          "minutes60": 4.286944444497968,
+          "minutes30": 4.2805555556089985
+        }
+      ]
+    },
+    {
+      "profile": "precise",
+      "seed": 2203,
+      "baseCompleted": true,
+      "completed": true,
+      "minutes30": 68.89611111106503,
+      "minutes60": 68.26277777810826,
+      "stages": [
+        {
+          "id": "micro",
+          "completed": true,
+          "minutes60": 6.788611111111172,
+          "minutes30": 7.249444444445955
+        },
+        {
+          "id": "pond",
+          "completed": true,
+          "minutes60": 7.6666666666603005,
+          "minutes30": 7.539999999997359
+        },
+        {
+          "id": "land",
+          "completed": true,
+          "minutes60": 8.229722222215345,
+          "minutes30": 8.407222222215182
+        },
+        {
+          "id": "water",
+          "completed": true,
+          "minutes60": 8.601111111103895,
+          "minutes30": 8.274444444437526
+        },
+        {
+          "id": "city",
+          "completed": true,
+          "minutes60": 8.396111111125666,
+          "minutes30": 8.084444444438157
+        },
+        {
+          "id": "orbit",
+          "completed": true,
+          "minutes60": 4.96194444450338,
+          "minutes30": 7.4411111111047985
+        },
+        {
+          "id": "planets",
+          "completed": true,
+          "minutes60": 7.449166666754089,
+          "minutes30": 6.928333333327487
+        },
+        {
+          "id": "stars",
+          "completed": true,
+          "minutes60": 5.842500000069086,
+          "minutes30": 5.041666666662536
+        },
+        {
+          "id": "galaxies",
+          "completed": true,
+          "minutes60": 6.167500000070041,
+          "minutes30": 6.031111111106232
+        },
+        {
+          "id": "universe",
+          "completed": true,
+          "minutes60": 4.159444444495284,
+          "minutes30": 3.898333333329788
+        }
+      ]
+    },
+    {
+      "profile": "precise",
+      "seed": 41,
+      "baseCompleted": true,
+      "completed": true,
+      "minutes30": 73.90722222217158,
+      "minutes60": 68.28388888921964,
+      "stages": [
+        {
+          "id": "micro",
+          "completed": true,
+          "minutes60": 7.601111111110433,
+          "minutes30": 8.286666666669003
+        },
+        {
+          "id": "pond",
+          "completed": true,
+          "minutes60": 8.579166666659395,
+          "minutes30": 8.294999999994827
+        },
+        {
+          "id": "land",
+          "completed": true,
+          "minutes60": 8.059444444437723,
+          "minutes30": 8.289444444437512
+        },
+        {
+          "id": "water",
+          "completed": true,
+          "minutes60": 8.852499999992554,
+          "minutes30": 8.518888888881747
+        },
+        {
+          "id": "city",
+          "completed": true,
+          "minutes60": 7.640833333364048,
+          "minutes30": 8.82277777777097
+        },
+        {
+          "id": "orbit",
+          "completed": true,
+          "minutes60": 5.477777777843282,
+          "minutes30": 8.844444444436704
+        },
+        {
+          "id": "planets",
+          "completed": true,
+          "minutes60": 7.235555555640258,
+          "minutes30": 7.373333333327158
+        },
+        {
+          "id": "stars",
+          "completed": true,
+          "minutes60": 4.728055555610452,
+          "minutes30": 5.736666666661904
+        },
+        {
+          "id": "galaxies",
+          "completed": true,
+          "minutes60": 5.76166666673048,
+          "minutes30": 5.583888888884417
+        },
+        {
+          "id": "universe",
+          "completed": true,
+          "minutes60": 4.347777777831015,
+          "minutes30": 4.1561111111073314
+        }
+      ]
+    }
+  ],
+  "contrastCount": 9,
+  "allCompleted": true,
+  "hoursSimulated": 117.33108333340245,
+  "incomplete": [],
+  "slowestOrbit": [
+    {
+      "profile": "precise",
+      "seed": 1907,
+      "id": "orbit",
+      "start": 2203.8333333319865,
+      "choices": 4,
+      "deaths": 0,
+      "hits": 167,
+      "biomassLost": 80.72322919984809,
+      "completed": true,
+      "entryUpgrades": 48,
+      "entryMass": 9.195269021231605,
+      "end": 4807.433333339324,
+      "seconds": 2603.6000000073377,
+      "menuSeconds": 20
+    },
+    {
+      "profile": "direct",
+      "seed": 1801,
+      "id": "orbit",
+      "start": 2117.633333332065,
+      "choices": 3,
+      "deaths": 0,
+      "hits": 143,
+      "biomassLost": 50.522046503519014,
+      "completed": true,
+      "entryUpgrades": 42,
+      "entryMass": 9.188317482413037,
+      "end": 4144.633333330885,
+      "seconds": 2026.99999999882,
+      "menuSeconds": 15
+    },
+    {
+      "profile": "direct",
+      "seed": 2203,
+      "id": "orbit",
+      "start": 2157.0666666653624,
+      "choices": 3,
+      "deaths": 0,
+      "hits": 174,
+      "biomassLost": 72.34054785449624,
+      "completed": true,
+      "entryUpgrades": 42,
+      "entryMass": 9.189652277737851,
+      "firstGoalAt": 3742.6999999972536,
+      "end": 3749.5333333305807,
+      "seconds": 1592.4666666652183,
+      "menuSeconds": 15
+    }
+  ],
+  "orbitOver15Minutes": 5,
+  "orbitalReplay": {
+    "profile": "precise",
+    "seed": 1907,
+    "completed": true,
+    "firstGoalMinutes": 43.27944444456529,
+    "completionMinutes": 43.726666666788965,
+    "hits": 167,
+    "biomassLost": 80.72322919984809,
+    "secondsFromFirstGoalToNextStage": 6.833333333420342
+  },
+  "adaptationReserve": {
+    "precise": {
+      "remaining": {
+        "n": 30,
+        "mean": 0,
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "exhausted": 30
+    },
+    "direct": {
+      "remaining": {
+        "n": 30,
+        "mean": 3.1333333333333333,
+        "median": 3,
+        "min": 1,
+        "max": 4
+      },
+      "exhausted": 0
+    },
+    "explorer": {
+      "remaining": {
+        "n": 30,
+        "mean": 2.7,
+        "median": 3,
+        "min": 2,
+        "max": 4
+      },
+      "exhausted": 0
+    }
+  },
+  "ui": [
+    {
+      "browser": "edge",
+      "device": "iphone-new",
+      "width": 390,
+      "height": 844,
+      "locale": "es-ES",
+      "saved": false,
+      "passed": true
+    },
+    {
+      "browser": "edge",
+      "device": "iphone-save",
+      "width": 390,
+      "height": 844,
+      "locale": "es-ES",
+      "saved": true,
+      "passed": true
+    },
+    {
+      "browser": "edge",
+      "device": "small-phone",
+      "width": 375,
+      "height": 667,
+      "locale": "en-US",
+      "saved": true,
+      "passed": true
+    },
+    {
+      "browser": "edge",
+      "device": "ipad-landscape",
+      "width": 1194,
+      "height": 834,
+      "locale": "en-US",
+      "saved": true,
+      "passed": true
+    },
+    {
+      "browser": "edge",
+      "device": "ipad-portrait",
+      "width": 834,
+      "height": 1194,
+      "locale": "es-ES",
+      "saved": true,
+      "passed": true
+    },
+    {
+      "browser": "edge",
+      "device": "pc",
+      "width": 1440,
+      "height": 900,
+      "locale": "es-ES",
+      "saved": true,
+      "passed": true
+    },
+    {
+      "browser": "webkit",
+      "device": "iphone-new",
+      "width": 390,
+      "height": 844,
+      "locale": "es-ES",
+      "saved": false,
+      "passed": true
+    },
+    {
+      "browser": "webkit",
+      "device": "iphone-save",
+      "width": 390,
+      "height": 844,
+      "locale": "es-ES",
+      "saved": true,
+      "passed": true
+    },
+    {
+      "browser": "webkit",
+      "device": "small-phone",
+      "width": 375,
+      "height": 667,
+      "locale": "en-US",
+      "saved": true,
+      "passed": true
+    },
+    {
+      "browser": "webkit",
+      "device": "ipad-landscape",
+      "width": 1194,
+      "height": 834,
+      "locale": "en-US",
+      "saved": true,
+      "passed": true
+    },
+    {
+      "browser": "webkit",
+      "device": "ipad-portrait",
+      "width": 834,
+      "height": 1194,
+      "locale": "es-ES",
+      "saved": true,
+      "passed": true
+    },
+    {
+      "browser": "webkit",
+      "device": "pc",
+      "width": 1440,
+      "height": 900,
+      "locale": "es-ES",
+      "saved": true,
+      "passed": true
+    }
+  ],
+  "resumptions": [
+    {
+      "at": "2026-10-03T22:58:53.689Z",
+      "interrupted": [
+        {
+          "profile": "explorer",
+          "seed": 1103,
+          "hz": 30
+        },
+        {
+          "profile": "precise",
+          "seed": 1151,
+          "hz": 30
+        },
+        {
+          "profile": "direct",
+          "seed": 1151,
+          "hz": 30
+        },
+        {
+          "profile": "explorer",
+          "seed": 1151,
+          "hz": 30
+        },
+        {
+          "profile": "precise",
+          "seed": 1201,
+          "hz": 30
+        },
+        {
+          "profile": "direct",
+          "seed": 1201,
+          "hz": 30
+        }
+      ]
+    },
+    {
+      "at": "2026-10-03T23:44:05.387Z",
+      "interrupted": [
+        {
+          "profile": "direct",
+          "seed": 2203,
+          "hz": 30
+        },
+        {
+          "profile": "precise",
+          "seed": 41,
+          "hz": 60
+        },
+        {
+          "profile": "direct",
+          "seed": 41,
+          "hz": 60
+        },
+        {
+          "profile": "explorer",
+          "seed": 41,
+          "hz": 60
+        },
+        {
+          "profile": "precise",
+          "seed": 1013,
+          "hz": 60
+        },
+        {
+          "profile": "direct",
+          "seed": 1013,
+          "hz": 60
+        },
+        {
+          "profile": "explorer",
+          "seed": 1013,
+          "hz": 60
+        },
+        {
+          "profile": "precise",
+          "seed": 2203,
+          "hz": 60
+        },
+        {
+          "profile": "direct",
+          "seed": 2203,
+          "hz": 60
+        },
+        {
+          "profile": "explorer",
+          "seed": 2203,
+          "hz": 60
+        }
+      ]
+    }
+  ]
+}

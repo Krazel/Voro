@@ -1,0 +1,112 @@
+{
+  "results": [
+    {
+      "browser": "edge",
+      "device": "iphone-new",
+      "width": 390,
+      "height": 844,
+      "locale": "es-ES",
+      "saved": false,
+      "passed": true
+    },
+    {
+      "browser": "edge",
+      "device": "iphone-save",
+      "width": 390,
+      "height": 844,
+      "locale": "es-ES",
+      "saved": true,
+      "passed": true
+    },
+    {
+      "browser": "edge",
+      "device": "small-phone",
+      "width": 375,
+      "height": 667,
+      "locale": "en-US",
+      "saved": true,
+      "passed": true
+    },
+    {
+      "browser": "edge",
+      "device": "ipad-landscape",
+      "width": 1194,
+      "height": 834,
+      "locale": "en-US",
+      "saved": true,
+      "passed": true
+    },
+    {
+      "browser": "edge",
+      "device": "ipad-portrait",
+      "width": 834,
+      "height": 1194,
+      "locale": "es-ES",
+      "saved": true,
+      "passed": true
+    },
+    {
+      "browser": "edge",
+      "device": "pc",
+      "width": 1440,
+      "height": 900,
+      "locale": "es-ES",
+      "saved": true,
+      "passed": true
+    },
+    {
+      "browser": "webkit",
+      "device": "iphone-new",
+      "width": 390,
+      "height": 844,
+      "locale": "es-ES",
+      "saved": false,
+      "passed": true
+    },
+    {
+      "browser": "webkit",
+      "device": "iphone-save",
+      "width": 390,
+      "height": 844,
+      "locale": "es-ES",
+      "saved": true,
+      "passed": true
+    },
+    {
+      "browser": "webkit",
+      "device": "small-phone",
+      "width": 375,
+      "height": 667,
+      "locale": "en-US",
+      "saved": true,
+      "passed": true
+    },
+    {
+      "browser": "webkit",
+      "device": "ipad-landscape",
+      "width": 1194,
+      "height": 834,
+      "locale": "en-US",
+      "saved": true,
+      "passed": true
+    },
+    {
+      "browser": "webkit",
+      "device": "ipad-portrait",
+      "width": 834,
+      "height": 1194,
+      "locale": "es-ES",
+      "saved": true,
+      "passed": true
+    },
+    {
+      "browser": "webkit",
+      "device": "pc",
+      "width": 1440,
+      "height": 900,
+      "locale": "es-ES",
+      "saved": true,
+      "passed": true
+    }
+  ]
+}

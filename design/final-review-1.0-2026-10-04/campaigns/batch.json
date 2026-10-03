@@ -1,0 +1,999 @@
+{
+  "started": "2026-10-03T22:31:59.077Z",
+  "concurrency": 6,
+  "jobs": [
+    {
+      "profile": "precise",
+      "seed": 41,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:31:59.083Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T22:34:45.148Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 41,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:31:59.104Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T22:34:40.210Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 41,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:31:59.122Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T22:34:52.856Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 73,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:31:59.141Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T22:33:57.956Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 73,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:31:59.171Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T22:34:04.305Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 73,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:31:59.207Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T22:35:04.171Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 127,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:33:57.978Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T22:37:37.982Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 127,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:34:04.346Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T22:36:31.144Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 127,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:34:40.482Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T22:37:38.150Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 409,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:34:45.274Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T22:37:23.303Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 409,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:34:52.879Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T22:37:39.913Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 409,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:35:04.180Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T22:37:59.603Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 930,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:36:31.200Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T22:39:33.416Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 930,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:37:23.328Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T22:40:40.297Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 930,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:37:38.006Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T22:40:55.463Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 1013,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:37:38.184Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T22:41:28.526Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 1013,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:37:39.933Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T22:40:50.011Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 1013,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:37:59.614Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T22:41:32.876Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 1061,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:39:33.472Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T22:46:29.699Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 1061,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:40:40.310Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T22:46:13.038Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 1061,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:40:50.017Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T22:46:44.859Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 1103,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:40:55.471Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T22:46:27.517Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 1103,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:41:28.535Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T22:47:41.523Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 1103,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:58:53.715Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:02:42.859Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 1151,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:58:53.739Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:02:36.035Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 1151,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:58:53.767Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:02:02.800Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 1151,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:58:53.782Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:02:54.539Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 1201,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:58:53.800Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:01:56.663Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 1201,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:58:53.816Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:02:27.401Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 1201,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:58:53.849Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:02:24.643Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 1259,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:58:53.868Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:02:28.793Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 1259,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:58:53.896Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:02:18.323Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 1259,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T22:58:53.959Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:02:17.657Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 1301,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:01:56.714Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:05:52.410Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 1301,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:02:02.876Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:05:54.686Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 1301,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:02:17.737Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:07:03.167Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 1361,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:02:18.384Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:06:01.334Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 1361,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:02:24.650Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:07:03.665Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 1361,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:02:27.408Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:06:45.344Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 1409,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:02:28.832Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:06:18.500Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 1409,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:02:36.049Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:06:22.507Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 1409,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:02:42.866Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:07:08.016Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 1453,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:02:54.550Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:07:31.996Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 1453,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:05:52.481Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:09:43.540Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 1453,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:05:54.782Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:10:11.024Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 1511,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:06:01.372Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:10:04.185Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 1511,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:06:18.563Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:10:03.375Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 1511,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:06:22.605Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:10:36.486Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 1559,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:06:45.416Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:11:33.403Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 1559,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:07:03.212Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:10:56.136Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 1559,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:07:03.735Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:11:09.891Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 1601,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:07:08.024Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:10:56.910Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 1601,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:07:32.048Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:11:22.761Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 1601,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:09:43.575Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:13:37.670Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 1657,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:10:03.412Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:14:06.191Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 1657,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:10:04.245Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:14:08.571Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 1657,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:10:11.119Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:14:21.428Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 1709,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:10:36.529Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:14:46.810Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 1709,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:10:56.257Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:14:57.026Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 1709,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:10:57.167Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:15:19.491Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 1753,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:11:10.077Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:15:37.261Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 1753,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:11:22.847Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:15:33.190Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 1753,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:11:33.439Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:15:43.958Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 1801,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:13:37.727Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:18:22.848Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 1801,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:14:06.265Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:23:59.074Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 1801,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:14:08.727Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:20:39.980Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 1861,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:14:21.587Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:19:14.585Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 1861,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:14:46.848Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:22:54.352Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 1861,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:14:57.105Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:22:18.182Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 1907,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:15:19.599Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:26:04.481Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 1907,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:15:33.205Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:22:44.765Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 1907,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:15:37.267Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:23:37.950Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 1951,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:15:43.968Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:22:33.024Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 1951,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:18:22.860Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:25:10.594Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 1951,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:19:14.599Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:26:07.540Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 2003,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:20:39.989Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:25:50.115Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 2003,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:22:18.188Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:27:10.272Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 2003,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:22:33.032Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:28:16.894Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 2053,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:22:44.775Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:27:49.072Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 2053,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:22:54.363Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:27:43.621Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 2053,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:23:37.959Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:28:54.511Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 2111,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:23:59.083Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:28:33.206Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 2111,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:25:10.602Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:29:45.771Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 2111,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:25:50.186Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:31:10.432Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 2153,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:26:04.546Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:30:56.218Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 2153,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:26:07.614Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:30:51.562Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 2153,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:27:10.350Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:31:50.393Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 2203,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:27:43.688Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:31:44.143Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 2203,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:44:05.414Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:47:07.960Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 2203,
+      "hz": 30,
+      "status": "finished",
+      "started": "2026-10-03T23:28:16.913Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:32:47.148Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 41,
+      "hz": 60,
+      "contrast": true,
+      "status": "finished",
+      "started": "2026-10-03T23:44:05.443Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:47:18.674Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 41,
+      "hz": 60,
+      "contrast": true,
+      "status": "finished",
+      "started": "2026-10-03T23:44:05.468Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:47:12.173Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 41,
+      "hz": 60,
+      "contrast": true,
+      "status": "finished",
+      "started": "2026-10-03T23:44:05.484Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:47:49.089Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 1013,
+      "hz": 60,
+      "contrast": true,
+      "status": "finished",
+      "started": "2026-10-03T23:44:05.505Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:47:20.689Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 1013,
+      "hz": 60,
+      "contrast": true,
+      "status": "finished",
+      "started": "2026-10-03T23:44:05.530Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:47:40.489Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 1013,
+      "hz": 60,
+      "contrast": true,
+      "status": "finished",
+      "started": "2026-10-03T23:47:07.964Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:50:55.492Z"
+    },
+    {
+      "profile": "precise",
+      "seed": 2203,
+      "hz": 60,
+      "contrast": true,
+      "status": "finished",
+      "started": "2026-10-03T23:47:12.180Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:50:02.437Z"
+    },
+    {
+      "profile": "direct",
+      "seed": 2203,
+      "hz": 60,
+      "contrast": true,
+      "status": "finished",
+      "started": "2026-10-03T23:47:18.681Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:51:08.754Z"
+    },
+    {
+      "profile": "explorer",
+      "seed": 2203,
+      "hz": 60,
+      "contrast": true,
+      "status": "finished",
+      "started": "2026-10-03T23:47:20.696Z",
+      "exitCode": 0,
+      "finished": "2026-10-03T23:51:50.436Z"
+    }
+  ],
+  "resumptions": [
+    {
+      "at": "2026-10-03T22:58:53.689Z",
+      "interrupted": [
+        {
+          "profile": "explorer",
+          "seed": 1103,
+          "hz": 30
+        },
+        {
+          "profile": "precise",
+          "seed": 1151,
+          "hz": 30
+        },
+        {
+          "profile": "direct",
+          "seed": 1151,
+          "hz": 30
+        },
+        {
+          "profile": "explorer",
+          "seed": 1151,
+          "hz": 30
+        },
+        {
+          "profile": "precise",
+          "seed": 1201,
+          "hz": 30
+        },
+        {
+          "profile": "direct",
+          "seed": 1201,
+          "hz": 30
+        }
+      ]
+    },
+    {
+      "at": "2026-10-03T23:44:05.387Z",
+      "interrupted": [
+        {
+          "profile": "direct",
+          "seed": 2203,
+          "hz": 30
+        },
+        {
+          "profile": "precise",
+          "seed": 41,
+          "hz": 60
+        },
+        {
+          "profile": "direct",
+          "seed": 41,
+          "hz": 60
+        },
+        {
+          "profile": "explorer",
+          "seed": 41,
+          "hz": 60
+        },
+        {
+          "profile": "precise",
+          "seed": 1013,
+          "hz": 60
+        },
+        {
+          "profile": "direct",
+          "seed": 1013,
+          "hz": 60
+        },
+        {
+          "profile": "explorer",
+          "seed": 1013,
+          "hz": 60
+        },
+        {
+          "profile": "precise",
+          "seed": 2203,
+          "hz": 60
+        },
+        {
+          "profile": "direct",
+          "seed": 2203,
+          "hz": 60
+        },
+        {
+          "profile": "explorer",
+          "seed": 2203,
+          "hz": 60
+        }
+      ]
+    }
+  ],
+  "finished": "2026-10-03T23:51:50.440Z"
+}

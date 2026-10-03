@@ -10,6 +10,7 @@ import {STAGES,SPECIES_BY_ID,isDanger} from '../app/journey-data.mjs';
 import {MAX_UPGRADE_CHOICES} from '../app/mutations.mjs';
 import {RELEASE} from '../app/release.mjs';
 import {CAMPAIGN_PACING, ADAPTATION_FOOD_GAIN, adaptationYield} from '../app/campaign-pacing.mjs';
+import {ORBITAL_EARTH} from '../app/earth-landmark.mjs';
 
 const profiles={
  precise:{reaction:0,exploration:0,choiceSeconds:5,priority:['yield','speed','digest','slots','shield','pull','tentacleReach','tentacles','combo','decoy','dash','turn','recycle','spikes']},
@@ -19,6 +20,9 @@ const profiles={
 const profile=process.argv[2]||'direct',seed=Number(process.argv[3]||41),hz=Number(process.argv[4]||30);
 if(!profiles[profile]||!Number.isSafeInteger(seed)||![30,60].includes(hz))throw new Error('Usage: simulate-duration.mjs precise|direct|explorer SEED [30|60]');
 const config=profiles[profile],out=process.argv[5]||'design/duration-simulation-2026-09-28';mkdirSync(out,{recursive:true});
+// Separate sensitivity check: deliberately return to Earth when ready. The
+// historical pilot continues foraging and reaches Earth only incidentally.
+const earthReturn=process.env.VORO_SIM_EARTH_RETURN==='1';
 // Freeze ambient randomness as well as the world seed, for repeatable runs.
 let randomState=seed>>>0;
 Math.random=()=>{randomState=(Math.imul(randomState,1664525)+1013904223)>>>0;return randomState/4294967296;};
@@ -31,6 +35,10 @@ let simulated=0,active=0,cinematic=0,deaths=0,lastStage=-1,target=null,nextDecis
 
 function steer(){
  const p=g.life;
+ if(earthReturn&&STAGES[g.progress.stage].id==='orbit'&&p.biomass>=p.goalMass){
+  const dx=ORBITAL_EARTH.x-p.x,dy=ORBITAL_EARTH.y-p.y,length=Math.max(1,Math.hypot(dx,dy));
+  g.padInput={x:dx/length,y:dy/length};return;
+ }
  if(!target||target.eaten||simulated>=nextTarget){
   nextTarget=simulated+1;
   const enemies=g.world.entities.filter(e=>!e.eaten&&e.requiredMass>p.biomass&&isDanger(SPECIES_BY_ID[e.kind]));
@@ -73,6 +81,7 @@ for(let frame=0;frame<maxSeconds*hz;frame++){
   const id=config.priority.find(id=>g.progress.offer.includes(id))||g.progress.offer[0];
   choices.push({at:simulated,stage:STAGES[lastStage].id,id});stages.at(-1).choices++;g.choose(id);
  }
+ if(g.life.biomass>=g.life.goalMass&&stages.at(-1).firstGoalAt===undefined)stages.at(-1).firstGoalAt=simulated;
  const inCinematic=!!(g.birth||g.transition||g.earthAbsorption||g.ending);
  if(!inCinematic&&!g.progress.completed&&simulated>=nextDecision){steer();nextDecision=simulated+config.reaction;}
  if(inCinematic)cinematic+=dt;else active+=dt;
@@ -85,7 +94,7 @@ const completed=g.progress.completed&&g.ending<=0,wallSeconds=(performance.now()
 stages.at(-1).completed=completed;
 const menuSeconds=choices.length*config.choiceSeconds+deaths*5;
 const result={
- version:RELEASE,source:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),profile,seed,hz,config,
+ version:RELEASE,source:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),profile,seed,hz,config,earthReturn,
  pacing:CAMPAIGN_PACING,adaptationFoodGain:ADAPTATION_FOOD_GAIN,
  adaptationYields:Object.fromEntries(STAGES.map(s=>[s.id,adaptationYield(s.id)])),
  maxSeconds,finalStage:STAGES[g.progress.stage].id,finalMass:g.life.biomass,
