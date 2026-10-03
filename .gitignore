@@ -42,3 +42,8 @@ next-env.d.ts
 /pc-dist/
 /artifact/
 /build/
+/android-signing/
+*.jks
+*.keystore
+*.p12
+*.password
