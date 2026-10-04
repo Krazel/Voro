@@ -51,11 +51,11 @@ const active=submissions.filter(s=>!['COMPLETE','CANCELED'].includes(s.attribute
 if(active.length>1)throw Error('Multiple active submissions: reconcile without altering');
 let submission=active[0];
 if(!submission)submission=(await api('/v1/reviewSubmissions','POST',{data:{type:'reviewSubmissions',relationships:{app:rel('apps',appId)}}})).data;
-let items=(await api(`/v1/reviewSubmissions/${submission.id}/items`)).data;
+let items=(await api(`/v1/reviewSubmissions/${submission.id}/items?include=appStoreVersion&fields[reviewSubmissionItems]=state,appStoreVersion`)).data;
 if(items.some(i=>i.relationships.appStoreVersion?.data?.id!==versionId))throw Error('Submission contains another item: preserve and stop');
 assert(items.length<=1);
 if(!items.length){assert(['READY_FOR_REVIEW','UNRESOLVED_ISSUES'].includes(submission.attributes.state));await api('/v1/reviewSubmissionItems','POST',{data:{type:'reviewSubmissionItems',relationships:{reviewSubmission:rel('reviewSubmissions',submission.id),appStoreVersion:rel('appStoreVersions',versionId)}}});}
-items=(await api(`/v1/reviewSubmissions/${submission.id}/items`)).data;assert.equal(items.length,1);assert.equal(items[0].relationships.appStoreVersion.data.id,versionId);
+items=(await api(`/v1/reviewSubmissions/${submission.id}/items?include=appStoreVersion&fields[reviewSubmissionItems]=state,appStoreVersion`)).data;assert.equal(items.length,1);assert.equal(items[0].relationships.appStoreVersion.data.id,versionId);
 submission=(await api(`/v1/reviewSubmissions/${submission.id}`)).data;
 if(submission.attributes.state==='READY_FOR_REVIEW')await api(`/v1/reviewSubmissions/${submission.id}`,'PATCH',{data:{type:'reviewSubmissions',id:submission.id,attributes:{submitted:true}}});
 submission=(await api(`/v1/reviewSubmissions/${submission.id}`)).data;
