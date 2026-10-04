@@ -1,0 +1,14 @@
+{
+  "id": "PR-009",
+  "revision": 352,
+  "verified": true,
+  "tracking": {
+    "testflight": "Interno",
+    "appStore": "En revisión",
+    "ads": "Por confirmar",
+    "testflightUrl": "https://appstoreconnect.apple.com/teams/7f069118-9712-49c8-a1f0-fda00b62a281/apps/6809193565/testflight/groups/05db8744-bcf3-4c2d-a465-2635012bfeeb",
+    "appStoreUrl": "https://appstoreconnect.apple.com/apps/6809193565/distribution"
+  },
+  "detail": "VORO 1.0(1) enviada a App Review el 04/10/2026: WAITING_FOR_REVIEW. Verificado por API: build final, ocho capturas originales y vídeos/textos aprobados intactos, base España 5,99 EUR. Publicación manual; todavía no publicada. TestFlight interno conservado. Windows final en itch.io por 5,99 USD, Draft; no se publica itch por este encargo.",
+  "next": "Esperar la revisión de Apple de VORO 1.0(1). Publicación MANUAL tras aprobación, sin release automático. No cambiar textos, capturas ni vídeos aprobados. itch.io continúa Draft con ZIP Windows final y 5,99 USD; su publicación queda fuera de este envío. Envío verificado: https://github.com/Krazel/Voro/actions/runs/37207743917 . Evidencia: Voro-camera/design/store-launch-1.0-2026-10-04/app-review-submitted.json."
+}

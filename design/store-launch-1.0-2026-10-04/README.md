@@ -2,7 +2,11 @@
 
 El usuario autorizó preparar la venta de Windows y la revisión de App Store. Precio final aclarado: **5,99 USD en itch.io**, conservando el sistema de cobro actual; **5,99 EUR como base de España en App Store**. Esta entrega prepara las fichas y archivos; no publica itch.io ni envía la app a revisión.
 
-## Corrección del usuario — estado vigente
+## Envío a App Review — estado vigente
+
+El 04/10/2026, por autorización explícita posterior del usuario, se envió únicamente VORO 1.0(1) a revisión de Apple. Estado verificado `WAITING_FOR_REVIEW`; publicación `MANUAL`, todavía no publicada. Capturas, vídeos, textos y precio sin cambios. Workflow: https://github.com/Krazel/Voro/actions/runs/37207743917 . Confirmación: `app-review-submitted.json`; biblioteca: `library-review-receipt.json`. itch.io no se publica ni se modifica en este envío. Las secciones de preparación inferiores conservan el historial previo.
+
+## Corrección del usuario — materiales vigentes
 
 El usuario rechazó la renovación de capturas y textos. Se restauraron por API las ocho capturas originales con idénticos archivos, checksums y orden; las dos previews siguen intactas. Ver `apple-restored.json` y run 37202373721. Las 20 imágenes nuevas descritas más abajo son historia de un cambio revertido, no el estado vigente. La descripción original de itch.io se repuso desde el HTML aprobado guardado en `.studio/marketing/voro/itchio/controls-20260929/description-after.html`; se guardó, pero la relectura quedó pendiente al desconectarse Chrome. No ampliar el encargo más allá del ejecutable y precios.
 

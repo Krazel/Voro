@@ -1,0 +1,24 @@
+{
+  "verified": true,
+  "checkedAt": "2026-10-04T14:02:35.540Z",
+  "appId": "6809193565",
+  "version": "1.0",
+  "build": "1",
+  "buildId": "29c99cb9-ef4f-4a41-997c-3c88fb3e49e9",
+  "versionId": "86951539-3189-4abd-b333-c400588c1e9d",
+  "submissionId": "02be2420-9f1c-478d-9dd5-1be2b58d2880",
+  "submissionState": "WAITING_FOR_REVIEW",
+  "appStoreState": "WAITING_FOR_REVIEW",
+  "releaseType": "MANUAL",
+  "approvedMediaUnchanged": true,
+  "approvedTextUnchanged": true,
+  "priceUnchanged": true,
+  "priceSpain": "5.99 EUR",
+  "published": false,
+  "items": [
+    {
+      "id": "MDJiZTI0MjAtOWYxYy00NzhkLTlkZDUtMWJlMmI1OGQyODgwfDZ8ODkwOTE1MzQ3",
+      "versionId": "86951539-3189-4abd-b333-c400588c1e9d"
+    }
+  ]
+}
