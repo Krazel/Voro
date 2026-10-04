@@ -36,7 +36,7 @@ async function snapshot(){
   media.push({locale:loc.attributes.locale,previews:(previews.included??[]).filter(x=>x.type==='appPreviews').map(s=>({id:s.id,attributes:s.attributes}))});
  }
  assert.equal(media.filter(m=>m.files).length,2);
- const schedule=(await api(`/v1/apps/${appId}/appPriceSchedule`)).data;assert.equal(schedule.relationships.baseTerritory.data.id,'ESP');
+ const schedule=(await api(`/v1/apps/${appId}/appPriceSchedule?include=baseTerritory`)).data;assert.equal(schedule.relationships.baseTerritory.data.id,'ESP');
  const prices=await api(`/v1/appPriceSchedules/${schedule.id}/manualPrices?include=appPricePoint,territory&limit=200`);
  assert(prices.data.some(p=>p.relationships.territory.data.id==='ESP'&&prices.included?.some(x=>x.type==='appPricePoints'&&x.id===p.relationships.appPricePoint.data.id&&x.attributes.customerPrice==='5.99')));
  const review=(await api(`/v1/appStoreVersions/${versionId}/appStoreReviewDetail`)).data;
