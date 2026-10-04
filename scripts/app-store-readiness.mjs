@@ -14,6 +14,7 @@ async function api(path,method='GET',body) {
 }
 const review = r => r.data ? {id:r.data.id,attributes:{...Object.fromEntries(Object.entries(r.data.attributes??{}).filter(([k])=>!/^contact|demoAccount(Name|Password)/.test(k))),contactComplete:['contactFirstName','contactLastName','contactPhone','contactEmail'].every(k=>!!r.data.attributes?.[k]),demoCredentialsPresent:!!r.data.attributes?.demoAccountName}} : r;
 if(process.env.PREPARE_STORE==='true') await prepare();
+if(process.env.FINALIZE_CANDIDATE==='true') await finalizeCandidate();
 if(process.env.UPLOAD_SCREENSHOTS==='true') await uploadScreenshots();
 if(process.env.UPLOAD_PREVIEWS==='true') await uploadPreviews();
 if(process.env.CORRECT_WEAPONS_RATING==='true') await correctWeaponsRating();
@@ -47,6 +48,44 @@ report.categories = await api('/v1/appCategories?limit=200');
 fs.mkdirSync('artifact/store-readiness',{recursive:true});
 fs.writeFileSync('artifact/store-readiness/audit.json',JSON.stringify(report,null,2));
 console.log(JSON.stringify({appId,versions:report.versions.data?.map(v=>({id:v.id,...v.attributes,buildId:v.build.data?.id,review:v.review})),builds:report.builds.data?.map(b=>({id:b.id,...b.attributes})),auditSaved:true},null,2));
+
+async function finalizeCandidate(){
+ const versionId='86951539-3189-4abd-b333-c400588c1e9d',buildId='29c99cb9-ef4f-4a41-997c-3c88fb3e49e9';
+ const requireData=(r,label)=>{if(!r.data)throw Error(label+': '+JSON.stringify(r));return r.data;};
+ const version=requireData(await api(`/v1/appStoreVersions/${versionId}`),'Version');
+ if(version.attributes.versionString!=='1.0'||version.attributes.appStoreState!=='PREPARE_FOR_SUBMISSION')throw Error('Final version is not editable');
+ const buildResult=await api(`/v1/builds/${buildId}?include=preReleaseVersion,app`);
+ const build=requireData(buildResult,'Final build');
+ if(build.attributes.version!=='1'||build.attributes.processingState!=='VALID'||build.attributes.expired||build.attributes.buildAudienceType!=='APP_STORE_ELIGIBLE')throw Error('Wrong final build');
+ if(buildResult.included?.find(x=>x.type==='preReleaseVersions')?.attributes.version!=='1.0'||build.relationships.app.data.id!==appId)throw Error('Build provenance mismatch');
+ const manifest=JSON.parse(fs.readFileSync('store/app-store-connect-metadata.json','utf8'));
+ if(manifest.app.price.amount!=='5.99'||manifest.app.price.currency!=='EUR'||manifest.app.price.territory!=='ESP')throw Error('Price authorization mismatch');
+ const pointResult=await api(`/v1/apps/${appId}/appPricePoints?filter[territory]=ESP&include=territory&limit=200`);
+ const point=(pointResult.data??[]).find(p=>p.attributes.customerPrice==='5.99');
+ if(!point)throw Error('Authorized price point unavailable');
+ const schedule=requireData(await api(`/v1/apps/${appId}/appPriceSchedule?include=baseTerritory`),'Current price schedule');
+ const prices=requireData(await api(`/v1/appPriceSchedules/${schedule.id}/manualPrices?include=appPricePoint,territory&limit=200`),'Manual prices');
+ if(prices.some(p=>p.relationships.territory.data.id!=='ESP'||p.attributes.startDate||p.attributes.endDate))throw Error('Preserve other manual prices or scheduled changes; reconcile first');
+ const before={versionId,selectedBuildId:(await api(`/v1/appStoreVersions/${versionId}/build`)).data?.id,pricePointIds:prices.map(p=>p.relationships.appPricePoint.data.id),releaseType:version.attributes.releaseType};
+ fs.mkdirSync('artifact/store-readiness',{recursive:true});
+ fs.writeFileSync('artifact/store-readiness/final-before.json',JSON.stringify(before,null,2));
+ if(schedule.relationships.baseTerritory.data.id!=='ESP'||!prices.some(p=>p.relationships.appPricePoint.data.id===point.id)){
+  const manualId='${voro-final-price}';
+  requireData(await api('/v1/appPriceSchedules','POST',{data:{type:'appPriceSchedules',relationships:{app:{data:{type:'apps',id:appId}},baseTerritory:{data:{type:'territories',id:'ESP'}},manualPrices:{data:[{type:'appPrices',id:manualId}]}}},included:[{type:'appPrices',id:manualId,attributes:{startDate:null,endDate:null},relationships:{appPricePoint:{data:{type:'appPricePoints',id:point.id}}}}]}),'Price update');
+ }
+ requireData(await api(`/v1/appStoreVersions/${versionId}`,'PATCH',{data:{type:'appStoreVersions',id:versionId,attributes:{releaseType:'MANUAL'},relationships:{build:{data:{type:'builds',id:buildId}}}}}),'Build selection');
+ const review=requireData(await api(`/v1/appStoreVersions/${versionId}/appStoreReviewDetail`),'Review detail');
+ const notes="VORO: Abyssal is a complete offline single-player action/adventure game. No account or login is required. Tap Awaken on the opening screen, then drag on the play area to move. Absorb smaller organisms and matter, avoid larger threats, and choose adaptations when prompted. Use the boost button to escape or approach food. Settings offers touch or tilt controls, a left-handed layout, sound, English/Spanish language, journey statistics and credits. Progress and preferences remain on the device. There are no ads, in-app purchases, subscriptions, tracking or remote analytics. Developer tools and performance-report menus are not included in this release. Music is licensed under CC BY 4.0; individual credits and source links are in Settings > Credits > View licenses.";
+ requireData(await api(`/v1/appStoreReviewDetails/${review.id}`,'PATCH',{data:{type:'appStoreReviewDetails',id:review.id,attributes:{demoAccountRequired:false,notes}}}),'Review notes');
+ const freshVersion=requireData(await api(`/v1/appStoreVersions/${versionId}?include=build`),'Verify selected build');
+ const freshSchedule=requireData(await api(`/v1/apps/${appId}/appPriceSchedule?include=baseTerritory`),'Verify base territory');
+ const freshPrices=await api(`/v1/appPriceSchedules/${freshSchedule.id}/manualPrices?include=appPricePoint,territory&limit=200`);
+ const freshReview=requireData(await api(`/v1/appStoreReviewDetails/${review.id}`),'Verify review notes');
+ if(freshVersion.relationships.build.data.id!==buildId||freshVersion.attributes.releaseType!=='MANUAL'||freshSchedule.relationships.baseTerritory.data.id!=='ESP'||!freshPrices.data?.some(p=>p.relationships.appPricePoint.data.id===point.id)||freshReview.attributes.notes!==notes)throw Error('Final preparation readback mismatch');
+ const receipt={verified:true,version:'1.0',build:'1',buildId,versionId,price:'5.99',currency:'EUR',baseTerritory:'ESP',releaseType:'MANUAL',appStoreState:freshVersion.attributes.appStoreState,reviewContactComplete:['contactFirstName','contactLastName','contactPhone','contactEmail'].every(k=>!!freshReview.attributes[k]),reviewNotes:notes,submitted:false};
+ fs.writeFileSync('artifact/store-readiness/final-prepared.json',JSON.stringify(receipt,null,2));
+ console.log(JSON.stringify(receipt));
+}
 
 async function prepare(){
  const appInfoId='edb0e880-2be4-4952-9e3a-97962c60cde6', versionId='86951539-3189-4abd-b333-c400588c1e9d';

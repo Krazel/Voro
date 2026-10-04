@@ -2,6 +2,10 @@ name: VORO App Store readiness
 on:
   workflow_dispatch:
     inputs:
+      finalize_candidate:
+        description: Select verified final 1.0 build 1 and set authorized Spain price 5.99 EUR, without submitting
+        type: boolean
+        default: false
       prepare:
         description: Complete authorized metadata without submitting to review
         type: boolean
@@ -37,6 +41,7 @@ jobs:
       UPLOAD_SCREENSHOTS: ${{ inputs.upload_screenshots }}
       UPLOAD_PREVIEWS: ${{ inputs.upload_previews }}
       CORRECT_WEAPONS_RATING: ${{ inputs.correct_weapons_rating }}
+      FINALIZE_CANDIDATE: ${{ inputs.finalize_candidate }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
