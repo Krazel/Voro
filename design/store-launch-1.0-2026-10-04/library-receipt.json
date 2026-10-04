@@ -1,0 +1,8 @@
+{
+  "id": "PR-009",
+  "revision": 351,
+  "verified": true,
+  "trackingPreserved": true,
+  "detail": "VORO 1.0(1) final: TestFlight interno VALID y Windows probado. itch.io: ZIP final subido, descarga con SHA idéntico, mínimo 5,99 USD, Draft. ASC: build 1.0(1), España 5,99 EUR, MANUAL/PREPARE_FOR_SUBMISSION. Corrección del usuario 04/10: restauradas y verificadas por API las ocho capturas originales, mismos archivos y orden; vídeos intactos. Descripción original itch guardada; relectura pendiente por desconexión de Chrome. No publicación ni envío a revisión.",
+  "next": "Conservar exactamente las fichas y materiales aprobados; no renovar capturas ni textos sin encargo. Únicamente .exe final y precios autorizados: itch 5,99 USD, España ASC 5,99 EUR. Confirmar relectura de descripción itch al recuperar Chrome. Envío a revisión/publicación aún pendientes. Evidencia: Voro-camera/design/store-launch-1.0-2026-10-04/apple-restored.json. Android fuera del encargo. Evidencia: Voro-camera/design/store-launch-1.0-2026-10-04/README.md."
+}

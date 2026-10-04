@@ -24,5 +24,5 @@ const [appPath] = await packager({
   icon: path.join(tools, 'icon.ico'), asar: true, overwrite: false, prune: false,
   win32metadata: { CompanyName: 'Krazel Games', FileDescription: 'VORO · Abisal', ProductName: 'VORO' },
 });
-await writeFile(path.join(appPath, 'LEEME.txt'), `VORO · Abisal — ${RELEASE.version}, prueba Windows ${preview}\r\n\r\nExtrae el ZIP completo y abre VORO.exe. No se necesita Node, navegador ni servidor.\r\nMovimiento: WASD / flechas o raton. Impulso: espacio. Pausa: Escape.\r\nPantalla completa: F11 o Alt+Enter. Cerrar: Alt+F4 o boton de la ventana.\r\nLa partida se guarda en %APPDATA%\\Krazel Games\\VORO, fuera de la carpeta del juego.\r\nVersion local de prueba sin firma digital; aun no publicada en itch.io ni Steam.\r\nMusica y licencias: Configuracion > Creditos > Ver licencias.\r\n\r\nExtract the entire ZIP and open VORO.exe. No browser or server required.\r\nMove: WASD / arrows or mouse. Dash: Space. Pause: Escape. Fullscreen: F11 / Alt+Enter.\r\nTest build, unsigned, not yet published. Music credits are available in Settings.\r\n`);
+await writeFile(path.join(appPath, 'LEEME.txt'), (await readFile(path.join(tools, 'LEEME.txt'), 'utf8')).replaceAll('{{VERSION}}', RELEASE.version));
 console.log(JSON.stringify({ appPath, version: RELEASE.version, desktopBuild: preview, electron: '44.4.3' }));

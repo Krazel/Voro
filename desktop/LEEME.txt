@@ -1,0 +1,32 @@
+VORO · Abisal / VORO: Abyssal — {{VERSION}}
+Krazel Games
+
+ESPAÑOL
+Windows 10/11 de 64 bits.
+Extrae el ZIP completo a una carpeta y abre VORO.exe. Mantén todos los archivos juntos.
+No necesitas instalar Node, abrir un navegador, ejecutar un servidor ni conectarte a Internet para jugar.
+
+Movimiento: WASD, flechas o mantener pulsado el botón izquierdo del ratón.
+Impulso: espacio. Pausa / continuar: Escape.
+Pantalla completa: F11 o Alt+Enter. Cerrar: Alt+F4 o el botón de la ventana.
+
+La partida y los ajustes se guardan automáticamente en %APPDATA%\Krazel Games\VORO.
+El idioma sigue el de tu dispositivo por defecto; puedes cambiarlo en Configuración.
+Créditos de música y licencias: Configuración > Créditos > Ver licencias.
+Ayuda: https://krazel.github.io/voro-abisal/support/
+Privacidad: https://krazel.github.io/voro-abisal/privacy/
+
+ENGLISH
+64-bit Windows 10/11.
+Extract the entire ZIP to a folder and open VORO.exe. Keep all included files together.
+No Node installation, browser, server or Internet connection is required to play.
+
+Move: WASD, arrow keys, or hold the left mouse button.
+Boost: Space. Pause / continue: Escape.
+Fullscreen: F11 or Alt+Enter. Exit: Alt+F4 or the window's close button.
+
+Progress and settings are saved automatically in %APPDATA%\Krazel Games\VORO.
+Language follows your device by default; you can change it in Settings.
+Music credits and licenses: Settings > Credits > View licenses.
+Support: https://krazel.github.io/voro-abisal/support/
+Privacy: https://krazel.github.io/voro-abisal/privacy/

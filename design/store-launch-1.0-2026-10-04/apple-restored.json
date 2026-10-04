@@ -1,0 +1,67 @@
+{
+  "verified": true,
+  "exactOriginalFilesChecksumsAndOrder": true,
+  "previewsUnchanged": true,
+  "groups": [
+    {
+      "locale": "en-US",
+      "sets": [
+        {
+          "displayType": "APP_IPAD_PRO_3GEN_129",
+          "files": [
+            {
+              "name": "voro-ipad-full-micro.png",
+              "md5": "c5bdec9a0976200e48bf62da1ab222b6",
+              "state": "COMPLETE"
+            },
+            {
+              "name": "voro-ipad-full-sea.png",
+              "md5": "24615d9da125fcf9810b3aad97307b22",
+              "state": "COMPLETE"
+            },
+            {
+              "name": "voro-ipad-full-city.png",
+              "md5": "58c3e90da4c94e8f1fed2ba0cd6fc8bd",
+              "state": "COMPLETE"
+            },
+            {
+              "name": "voro-ipad-full-planets.png",
+              "md5": "198e86f0aac110c127793dcd411aa284",
+              "state": "COMPLETE"
+            }
+          ]
+        },
+        {
+          "displayType": "APP_IPHONE_67",
+          "files": [
+            {
+              "name": "voro-iphone-01-gameplay.png",
+              "md5": "f72387b294a880118e03e0d8c8e84a93",
+              "state": "COMPLETE"
+            },
+            {
+              "name": "voro-iphone-full-sea.png",
+              "md5": "413bbf9adf99de3618d3e9d4fa71588a",
+              "state": "COMPLETE"
+            },
+            {
+              "name": "voro-iphone-full-city.png",
+              "md5": "485682fe4ec43cd3d41b7e3a2f7a4b18",
+              "state": "COMPLETE"
+            },
+            {
+              "name": "voro-iphone-full-planets.png",
+              "md5": "4a9617d1320b8d823bf2255e5f5e7c5a",
+              "state": "COMPLETE"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "locale": "es-ES",
+      "sets": []
+    }
+  ],
+  "run": "https://github.com/Krazel/Voro/actions/runs/37202373721"
+}
