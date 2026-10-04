@@ -14,7 +14,7 @@ npm run build:windows
 python desktop/archive.py
 ```
 
-Output for the current `desktop/release.json`: `artifact/windows/0.9-preview.1/VORO-win32-x64/VORO.exe` and `VORO-0.9-Windows-x64-prueba1.zip`. These are the next package paths; the latest delivered Windows package remains 0.8.1 preview 1. Extract the complete ZIP; the executable needs the accompanying Electron files. Do not overwrite a delivered preview; advance `preview` in `desktop/release.json` for a subsequent package. The icon is a format conversion of the existing approved iOS app icon.
+Output for the current `desktop/release.json`: `artifact/windows/1.0-preview.2/VORO-win32-x64/VORO.exe` and `VORO-1.0-Windows-x64-prueba2.zip`. Version 1.0 package 2 was delivered on 2026-10-04. Extract the complete ZIP; the executable needs the accompanying Electron files. Do not overwrite a delivered package; advance `preview` in `desktop/release.json` for a subsequent package. The icon is a format conversion of the existing approved iOS app icon.
 
 For automated testing, set `VORO_PLAYWRIGHT_RUNTIME` to the package.json of an installed Playwright runtime and run `node desktop/check-package.mjs`. The test uses its own `VORO_QA_PROFILE` and does not touch the player's save. Native Electron input is used to verify F11; CDP keyboard injection bypasses the main-process handler.
 
@@ -28,5 +28,7 @@ For automated testing, set `VORO_PLAYWRIGHT_RUNTIME` to the package.json of an i
 - No update server, no telemetry, no remote game loading. This preview is unsigned; Windows may show a publisher warning. Signing and store publication are separate release work.
 
 ## Validation
+
+Current final package: `design/delivery-1.0-2026-10-04/windows-native-check.json` records a successful run of the actual distributable executable, with all 363 local assets, GPU compositing/Canvas/rasterization enabled, WAV playback, fullscreen, and save persistence after restart. No JavaScript errors, failed local files, or remote game requests were observed. ZIP CRC and SHA-256 were verified before delivery. This automated check does not establish minimum-device FPS or replace human audio listening. Developer tools are disabled for the player.
 
 `design/windows-preview-2026-09-22/` contains actual executable screenshots and checks: start, movement/dash, menus, fullscreen, all 206 local game files, WAV decoding/playback and persistence after restart. GPU status is read after graphics initialization; an early query can misleadingly return disabled/software before GPU info arrives. Rendering uses the RTX 3080 Ti with GPU compositing and Canvas acceleration enabled on the tested PC. This is not a minimum-hardware or Steam Deck certification.

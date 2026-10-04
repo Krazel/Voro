@@ -1,0 +1,15 @@
+{
+  "gameVersion": "1.0",
+  "windowsPreview": 2,
+  "platform": "Windows x64",
+  "signed": false,
+  "published": false,
+  "archive": "VORO-1.0-Windows-x64-prueba2.zip",
+  "bytes": 545386244,
+  "expandedBytes": 775359391,
+  "files": 74,
+  "sha256": "3ce18faf4b3c5f072265d31c2f0370ddecb57f2fea10686c3a48e0516431dc8f",
+  "exeSha256": "a6d1588a0b2d3353d1b75d0ed2fd7b9412329a85f06c95f8551f63048536a095",
+  "appAsarSha256": "c0c317860bd5dd29051d8a2ef8005034906cbe86c9733c56d39791e3bd7495ff",
+  "zipCrcVerified": true
+}

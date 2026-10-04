@@ -1,7 +1,11 @@
 {
   "productId": "PR-009",
   "lastObservedRevision": 346,
-  "status": "pending",
+  "status": "resolved",
+  "resolvedRevision": 348,
+  "resolvedOn": "2026-10-04",
+  "resolution": "Acceso autorizado fuera del sandbox: PR-009 releído, actualizado por PUT con su revisión vigente y verificado. Entregas TestFlight 1.0 (1) interno y Windows 1.0 paquete 2 registradas; campos ajenos preservados.",
+  "deliveryEvidence": "design/delivery-1.0-2026-10-04/README.md",
   "reason": "La API autorizada de la biblioteca no se pudo abrir: el entorno restringido rechazó el acceso al socket. El conector disponible permite leer D1, pero no actualizar esta fila. No se ha guardado ni verificado una escritura.",
   "evidence": "design/final-review-1.0-2026-10-04/README.md",
   "proposedUpdate": {
