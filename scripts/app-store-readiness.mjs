@@ -137,10 +137,11 @@ async function prepare(){
 
 async function uploadScreenshots(){
  const manifest=JSON.parse(fs.readFileSync('store/native-screenshots.json','utf8'));
- if(manifest.sourceCommit!=='aa0695334e428c03820aa2c5b442235b94189694')throw new Error('Wrong native source');
+ if(manifest.sourceCommit!=='b1285d832684ef203dad1906db767e0d8f7d57d2')throw new Error('Wrong final native source');
  const versionId='86951539-3189-4abd-b333-c400588c1e9d';
  const version=(await api(`/v1/appStoreVersions/${versionId}`)).data;
  if(version.attributes.appStoreState!=='PREPARE_FOR_SUBMISSION')throw new Error('Version is not editable');
+ if((await api(`/v1/appStoreVersions/${versionId}/build`)).data?.id!=='29c99cb9-ef4f-4a41-997c-3c88fb3e49e9')throw new Error('Selected final build changed');
  const locs=(await api(`/v1/appStoreVersions/${versionId}/appStoreVersionLocalizations`)).data;
  for(const group of manifest.groups){
   const loc=locs.find(l=>l.attributes.locale===group.locale);
