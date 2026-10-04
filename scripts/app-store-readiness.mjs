@@ -137,7 +137,7 @@ async function prepare(){
 
 async function uploadScreenshots(){
  const manifest=JSON.parse(fs.readFileSync('store/native-screenshots.json','utf8'));
- if(manifest.sourceCommit!=='b1285d832684ef203dad1906db767e0d8f7d57d2')throw new Error('Wrong final native source');
+ if(manifest.restoreOriginal!==true&&manifest.sourceCommit!=='b1285d832684ef203dad1906db767e0d8f7d57d2')throw new Error('Wrong final native source');
  const versionId='86951539-3189-4abd-b333-c400588c1e9d';
  const version=(await api(`/v1/appStoreVersions/${versionId}`)).data;
  if(version.attributes.appStoreState!=='PREPARE_FOR_SUBMISSION')throw new Error('Version is not editable');
@@ -201,6 +201,21 @@ async function uploadScreenshots(){
   if(reorder.errors)throw new Error(JSON.stringify(reorder.errors));
   const confirmed=(await api(`/v1/appScreenshotSets/${set.id}/relationships/appScreenshots`)).data;
   if(JSON.stringify(confirmed.map(s=>s.id))!==JSON.stringify(ordered.map(s=>s.id)))throw new Error('Screenshot order verification failed');
+ }
+ if(manifest.restoreOriginal===true){
+  for(const group of manifest.removeAddedLocaleSets??[]){
+   const loc=locs.find(l=>l.attributes.locale===group.locale);
+   const sets=(await api(`/v1/appStoreVersionLocalizations/${loc.id}/appScreenshotSets`)).data;
+   const set=sets.find(s=>s.attributes.screenshotDisplayType===group.displayType);
+   if(!set)continue;
+   const shots=(await api(`/v1/appScreenshotSets/${set.id}/appScreenshots`)).data;
+   if(shots.some(s=>!group.names.includes(s.attributes.fileName)))throw Error('Unexpected screenshot: preserve and reconcile');
+   for(const shot of shots){const r=await api(`/v1/appScreenshots/${shot.id}`,'DELETE');if(r.errors)throw Error(JSON.stringify(r.errors));}
+   const removed=await api(`/v1/appScreenshotSets/${set.id}`,'DELETE');if(removed.errors)throw Error(JSON.stringify(removed.errors));
+   const fresh=(await api(`/v1/appStoreVersionLocalizations/${loc.id}/appScreenshotSets`)).data;
+   if(fresh.some(s=>s.id===set.id))throw Error('Added set not removed');
+  }
+  console.log('Original eight approved screenshots restored; added locale screenshot sets removed.');
  }
 }
 
