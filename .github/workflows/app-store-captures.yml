@@ -15,16 +15,18 @@ jobs:
       - uses: actions/checkout@v4
       - name: Preserve capture tools and checkout uploaded candidate source
         run: |
-          cp scripts/store-capture-setup.rb scripts/StoreCapture.swift "$RUNNER_TEMP/"
-          git fetch --depth=1 origin aa0695334e428c03820aa2c5b442235b94189694
+          cp scripts/store-capture-setup.rb scripts/StoreCapture.swift scripts/store-capture-fixtures.mjs "$RUNNER_TEMP/"
+          git fetch --depth=1 origin b1285d832684ef203dad1906db767e0d8f7d57d2
           git checkout FETCH_HEAD
-          cp "$RUNNER_TEMP/store-capture-setup.rb" "$RUNNER_TEMP/StoreCapture.swift" scripts/
+          cp "$RUNNER_TEMP/store-capture-setup.rb" "$RUNNER_TEMP/StoreCapture.swift" "$RUNNER_TEMP/store-capture-fixtures.mjs" scripts/
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
           cache: npm
       - run: npm ci
       - run: npm run ios:sync
+      - name: Seed ordinary saved journeys in this capture-only simulator build
+        run: node scripts/store-capture-fixtures.mjs
       - name: Add capture-only XCTest target
         run: |
           gem install xcodeproj --no-document --user-install
