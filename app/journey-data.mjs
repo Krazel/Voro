@@ -69,7 +69,7 @@ export const STAGES = [
     short: 'Órbita',
     intro: 'Satélites, estaciones y lunas flotan a tu alcance.',
     evolution: 'Los mundos parecen semillas.',
-    goal: 180,
+    goal: 192,
     growth: 0.35,
     base: 80,
     unit: 'km',
@@ -563,6 +563,12 @@ applyCosmicScales(SPECIES_BY_ID);
 applyCosmicDetail(SPECIES_BY_ID,ATLAS_URLS);
 applyClearArt(SPECIES_BY_ID,ATLAS_URLS);
 applyCityPerspectiveArt(SPECIES_BY_ID,ATLAS_URLS);
+// A ray's tail and transparent atlas corners are not its edible body. Contact
+// follows the body ellipse in sprite coordinates, rotated with its heading.
+Object.assign(SPECIES_BY_ID['water-15'], {
+  edibleRadiusFactor: .72,
+  absorptionBody: {x:.28,y:0,rx:.60,ry:.68},
+});
 // Every scale includes a tiny recovery food after a severe hit.
 for (const list of STAGE_SPECIES) {
   const tiniest = list

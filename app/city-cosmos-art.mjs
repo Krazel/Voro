@@ -53,6 +53,10 @@ export function applyCityCosmosArt(stages, lists, byId, urls) {
   ]) planet(add(byId['planets-0'],'planets-'+id,name,planets,
     {r,value,sizeFactors:range,populationWeight:weight,requiredMass:undefined}),i);
   Object.assign(byId['planets-5'], {imageAtlas:'ringedPlanet', crop:[4,100,632,447]});
+  // The neighbouring purple ring intrudes into the ice world's rectangular
+  // atlas cell. Clip the globe itself, including at native-detail rendering.
+  byId['planets-3'].crop = [782,575,350,348];
+  Object.assign(byId['planets-3'].artProfile, {circularClip:true,revision:4});
   // Ocean worlds are exceptional, not the default model for a planet.
   byId['planets-1'].populationWeight = .35;
   const universe=stages.findIndex(s=>s.id==='universe');

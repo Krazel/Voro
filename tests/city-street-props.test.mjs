@@ -4,11 +4,14 @@ import BEFORE from '../design/city-street-props-2026-10-01/before.json' with {ty
 import {JourneyWorld} from '../app/journey-world.mjs';
 import {SPECIES_BY_ID} from '../app/journey-data.mjs';
 import {cityBounds,cityOverlap} from '../app/city-layout.mjs';
+import {nearbyCityBarriers} from '../app/city-barriers.mjs';
 
-test('Six street-object slots preserve every previous resident, building and arrival object',()=>{
+test('Street objects preserve previous residents; only silhouettes blocked by new roadworks are excluded',()=>{
  for(const {seed,x,y,entities} of BEFORE){
   const after=new JourneyWorld(seed,[],4).generate(x,y,0).entities;
-  assert.deepEqual(after.filter(e=>!e.id.startsWith('city-street:')).map(({id,kind,x,y,r})=>({id,kind,x,y,r})),entities);
+  const barriers=nearbyCityBarriers(x*600+300,y*600+300,seed);
+  const expected=entities.filter(e=>SPECIES_BY_ID[e.kind].motion==='rotor'||!barriers.some(b=>cityOverlap(b,cityBounds(SPECIES_BY_ID[e.kind],e))));
+  assert.deepEqual(after.filter(e=>!e.id.startsWith('city-street:')).map(({id,kind,x,y,r})=>({id,kind,x,y,r})),expected);
  }
 });
 

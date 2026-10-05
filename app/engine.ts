@@ -8,6 +8,8 @@ import { EFFECTS_MASTER_GAIN, SfxPlayer } from './sfx.mjs';
 import { captureOrbit, sweepPosition } from './orbital-sweep.mjs';
 import { UniverseFinale, FINALE_SECONDS, FINALE_BLACK_AT, FINALE_MUSIC_FADE_AT, drawVoidSurvivor } from './universe-finale.mjs';
 import { WorldGround } from './world-ground.mjs';
+import {constrainCityBarriers,drawCityBarriers} from './city-barriers.mjs';
+import {sweptShotHit,drawMeteor} from './planet-meteors.mjs';
 import { RELEASE } from './release.mjs';
 import { TiltControl } from './tilt-control.ts';
 import { drawOrbitalEarth, constrainOrbit, canAbsorbEarth, earthConsumptionPose } from './earth-landmark.mjs';
@@ -1556,7 +1558,9 @@ export class VoroEngine {
       Object.assign(p, this.stats);
       tickDecoy(p,dt);
       syncShields(this.progress, this.stats, dt);
+      const previousPosition={x:p.x,y:p.y};
       integrate(p, dt, this.input(), this.uniformVisualSpeed ? visualSpeedFactor(this.cameraEntryRadius,p.radius,this.zoom/this.zoomFactor) : 1);
+      if(stageOf(this.progress).id==='city')constrainCityBarriers(p,previousPosition,this.world.seed);
       if (stageOf(this.progress).id === 'orbit') constrainOrbit(p, dt);
       const speed = Math.hypot(p.vx, p.vy);
       if (speed > 8) {
@@ -1675,11 +1679,17 @@ export class VoroEngine {
         this.save();
         this.publish();
       }
+      if(stageOf(this.progress).id==='planets')this.world.meteorField.update(dt,p,{
+        left:this.camera.x-this.width/2/this.zoom,right:this.camera.x+this.width/2/this.zoom,
+        top:this.camera.y-this.height*.48/this.zoom,bottom:this.camera.y+this.height*.52/this.zoom,
+      },this.world.projectiles);
       for (const shot of this.world.projectiles) {
+        if(shot.warning>0){shot.warning=Math.max(0,shot.warning-dt);continue;}
+        const sx=shot.x,sy=shot.y;
         shot.x += shot.vx * dt;
         shot.y += shot.vy * dt;
         shot.life -= dt;
-        if (Math.hypot(shot.x - p.x, shot.y - p.y) < p.radius * 0.88 + shot.r) {
+        if (sweptShotHit(shot,sx,sy,p)) {
           shot.life = 0;
           if (p.biomass >= shot.edibleAt) {
             p.biomass = Math.min(p.maxMass, p.biomass + 0.025);
@@ -1691,7 +1701,7 @@ export class VoroEngine {
         }
       }
       this.world.projectiles = this.world.projectiles.filter(
-        (b) => b.life > 0 && Math.hypot(b.x - p.x, b.y - p.y) < 1300,
+        (b) => b.life > 0 && (b.meteor || Math.hypot(b.x - p.x, b.y - p.y) < 1300),
       );
       this.foodClock += dt;
       if (this.foodClock > 8) {
@@ -2187,6 +2197,9 @@ export class VoroEngine {
           m.r,
           '#9bd3dc35',
         );
+    if(STAGES[this.progress.stage].id==='city')drawCityBarriers(c,{
+      left:-ox,right:this.width/this.zoom-ox,top:-oy,bottom:this.height/this.zoom-oy,
+    },this.world.seed);
     const inhabitantsStarted = this.diagnosticsEnabled ? performance.now() : 0;
     const sweep = this.earthAbsorption > 0 ? this.progress.orbitSweep : null;
     const renderedFood = sweep ? sweep.items.map((f: Food) => sweepPosition(f, p, this.earthAbsorption)) : this.food;
@@ -2238,6 +2251,8 @@ export class VoroEngine {
       this.frameMonitor.frameParts.inhabitants = performance.now() - inhabitantsStarted;
     const renderedShots = sweep ? sweep.shots.map((b: {x:number;y:number;r:number;vx:number;vy:number;plasma:boolean}) => sweepPosition(b, p, this.earthAbsorption)) : this.world.projectiles;
     for (const b of renderedShots) {
+      if(b.meteor){drawMeteor(c,b,this.time,(ctx:CanvasRenderingContext2D,rock:{r:number;seed:number})=>
+        drawJourneySprite(ctx,this.atlasImages,'planets-Fragmento planetario',rock.r,rock.seed,0,1,0,this.animationSheets));continue;}
       if (!visible(b.x, b.y, 10)) continue;
       c.strokeStyle = b.plasma ? '#b9e6ff' : '#ffda9c';
       c.lineWidth = b.r;

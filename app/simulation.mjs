@@ -143,6 +143,16 @@ export function digest(life, dt) {
   }
   return count;
 }
+export function absorptionDistance(life, food) {
+  const b = food.absorptionBody;
+  if (!b) return Math.hypot(food.x-life.x, food.y-life.y);
+  const a = food.heading ?? food.seed ?? 0, co = Math.cos(a), si = Math.sin(a);
+  const dx=life.x-food.x,dy=life.y-food.y,r=food.r;
+  const x=dx*co+dy*si-b.x*r,y=-dx*si+dy*co-b.y*r;
+  // Distance to a conservative inscribed body circle. This never includes the
+  // tail or the transparent corners and remains stable through wing beats.
+  return Math.max(0,Math.hypot(x,y)-Math.min(b.rx,b.ry)*r);
+}
 export function canBeginAbsorb(life, food) {
   if (
     life.dead ||
@@ -151,7 +161,7 @@ export function canBeginAbsorb(life, food) {
     life.complete ||
     life.biomass < (food.requiredMass || 0) ||
     life.digestion.length >= life.absorptionSlots ||
-    Math.hypot(food.x - life.x, food.y - life.y) >
+    absorptionDistance(life, food) >
       life.radius * 1.12 * life.reachFactor
   )
     return false;

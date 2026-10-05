@@ -7,6 +7,7 @@ import { ORBITAL_EARTH as earth, constrainOrbit } from '../app/earth-landmark.mj
 import { populationReport } from '../app/population-report.mjs';
 import { makeEngine } from './engine-fixture.mjs';
 import { journeyHeading } from '../app/journey-sprites.mjs';
+import {nearbyCityBarriers} from '../app/city-barriers.mjs';
 
 test('Approaching Earth never clamps position or cancels inward velocity, including its centre',()=>{
   for(const d of [0, 100, earth.radius-20, earth.radius+10, earth.softLimit-1]) {
@@ -60,9 +61,11 @@ test('City sidewalks consistently receive a substantial civilian population with
   for(let x=-15;x<15;x++) {
     const entities=w.generate(x,12,0).entities;
     const civilians=entities.filter(e=>e.kind==='city-0'||e.kind.startsWith('city-civilian-'));people+=civilians.length;total+=entities.filter(e=>!e.id.startsWith('city-street:')).length;
-    assert.ok(civilians.length>=9);assert.ok(entities.length<=30);
+    const roadworks=nearbyCityBarriers(x*600+300,12*600+300,51).length>0;
+    assert.ok(civilians.length>=(roadworks?8:9));assert.ok(entities.length<=30);
     assert.ok(civilians.every(e=>e.cityAxis==='x'||e.cityAxis==='y'));
     assert.equal(entities.filter(e=>SPECIES_BY_ID[e.kind].building).length,cityLots(x,12,51).length);
   }
+  assert.ok(people/30>=9.5,'Roadworks must not depopulate the city');
   assert.ok(people/total>.38&&people/total<.5);
 });

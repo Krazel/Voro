@@ -10,10 +10,10 @@ import {ANIMATIONS} from '../app/animation-catalog.mjs';
 import manifest from '../app/animation-sheets.json' with {type:'json'};
 import {sizeRange} from '../app/entity-sizes.mjs';
 test('Campaign rewards slow feeding without changing stage sizes/goals, and legacy saves keep mass, XP, choices and pending food',()=>{
- assert.equal(Object.values(CAMPAIGN_PACING).reduce((n,p)=>n+p.minutes,0),76);
+ assert.equal(Object.values(CAMPAIGN_PACING).reduce((n,p)=>n+p.minutes,0),77);
  assert.deepEqual(STAGES.slice(0,5).map(s=>CAMPAIGN_PACING[s.id].minutes),[8,8,8,9,8]);
  const space=STAGES.slice(5).map(s=>CAMPAIGN_PACING[s.id].minutes);
- assert.deepEqual(space,[7,8,8,7,5]);
+ assert.deepEqual(space,[8,8,8,7,5]);
  for(const [stage,s]of STAGES.entries()){
   const p=newJourney(834);p.stage=stage;p.mutations=['speed','digest'];p.level=2;p.xp=48;
   p.totalEaten=17;p.totalTime=123;p.offer=[];

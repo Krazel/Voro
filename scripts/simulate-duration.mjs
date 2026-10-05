@@ -11,6 +11,7 @@ import {MAX_UPGRADE_CHOICES} from '../app/mutations.mjs';
 import {RELEASE} from '../app/release.mjs';
 import {CAMPAIGN_PACING, ADAPTATION_FOOD_GAIN, adaptationYield} from '../app/campaign-pacing.mjs';
 import {ORBITAL_EARTH} from '../app/earth-landmark.mjs';
+import {cityWaypoint} from '../tests/city-pilot.mjs';
 
 const profiles={
  precise:{reaction:0,exploration:0,choiceSeconds:5,priority:['yield','speed','digest','slots','shield','pull','tentacleReach','tentacles','combo','decoy','dash','turn','recycle','spikes']},
@@ -51,7 +52,8 @@ function steer(){
   target=eligible.find(e=>e.final)||eligible.sort((a,b)=>score(a)-score(b))[0];
  }
  if(!target){g.padInput={x:Math.cos(simulated*.05),y:Math.sin(simulated*.05)};return;}
- const dx=target.x-p.x,dy=target.y-p.y,len=Math.max(1,Math.hypot(dx,dy));
+ const waypoint=STAGES[g.progress.stage].id==='city'?cityWaypoint(p,target,g.world.seed):target;
+ const dx=waypoint.x-p.x,dy=waypoint.y-p.y,len=Math.max(1,Math.hypot(dx,dy));
  let x=dx/len,y=dy/len;
  // Explicit sensitivity scenario, not a calibrated average human: spend 15%
  // of active navigation heading elsewhere, still exposed to normal dangers.

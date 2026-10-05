@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {cityWaypoint} from './city-pilot.mjs';
 import assert from 'node:assert/strict';
 import { FINALE_SECONDS } from '../app/universe-finale.mjs';
 import CLEAR_ART from '../app/clear-art.json' with {type:'json'};
@@ -321,8 +322,9 @@ test('A complete run eats planets, stars, galaxies and the universe in order, wi
         eligible.sort((a, b) => score(a) - score(b))[0];
     }
     if (target && !g.transition) {
-      const dx = target.x - p.x,
-        dy = target.y - p.y,
+      const waypoint=STAGES[g.progress.stage].id==='city'?cityWaypoint(p,target,g.world.seed):target;
+      const dx = waypoint.x - p.x,
+        dy = waypoint.y - p.y,
         len = Math.max(1, Math.hypot(dx, dy));
       let x = dx / len,
         y = dy / len;

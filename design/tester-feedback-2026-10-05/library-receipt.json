@@ -1,0 +1,13 @@
+{
+  "id": "PR-009",
+  "revision": 354,
+  "verified": true,
+  "tracking": {
+    "testflight": "Interno",
+    "appStore": "En revisión",
+    "ads": "Por confirmar",
+    "testflightUrl": "https://appstoreconnect.apple.com/teams/7f069118-9712-49c8-a1f0-fda00b62a281/apps/6809193565/testflight/groups/05db8744-bcf3-4c2d-a465-2635012bfeeb",
+    "appStoreUrl": "https://appstoreconnect.apple.com/apps/6809193565/distribution"
+  },
+  "next": "VORO 1.0(1) sigue enviada a App Review (última verificación 04/10), publicación MANUAL; tienda y capturas aprobadas intactas. Nueva candidata local 05/10: recorte planeta helado, colisión mantarraya, barricadas en ciudad, Tierra a 192 de biomasa y meteoritos en Planetas. Build móvil y navegador comprobados; campaña completa sin bloqueo. Órbita tuvo una duración larga en la simulación: validar equilibrio con juego humano antes de otra build. Evidencias: Voro-camera/design/tester-feedback-2026-10-05/qa.json. No se ha subido esta candidata a TestFlight ni sustituido la revisión. itch.io sigue Draft, ZIP final y 5,99 USD."
+}

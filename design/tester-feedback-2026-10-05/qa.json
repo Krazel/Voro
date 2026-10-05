@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-05",
+  "status": "local-candidate-not-uploaded",
+  "approvedStoreVersion": "1.0 (1), submitted 2026-10-04; submission and metadata untouched",
+  "changes": {
+    "icePlanet": "Exclude the neighbour's ring and clip the icy globe at native resolution; no additional texture allocation.",
+    "manta": "Edibility based on body rather than tail/padding. Absorption contact uses an offset inscribed body circle rotated with heading.",
+    "city": "Open-ended concrete/wire barricades across selected streets and perimeter avenues. Swept boost collisions; capped soft-body core. Buildings and unaffected original slots remain unchanged; objects overlapping roadworks are omitted. Approximately 9.87 civilians per sampled block remain.",
+    "earth": "Orbital biomass goal 180 -> 192 (+6.67%); original .310 biomass yield retained. No XP change, artificial waiting timer, or cinematic change.",
+    "meteors": "Planets only; offscreen spawns, 1.1s warning, straight non-homing trajectories, 55% aimed at initial player position, others crossing. Radii 12-38; 4.5-7.5s between spawns; maximum four; 8% damage before defensive adaptations. Swept collision, existing damage immunity and shields, bounded lifetime. Reuses rock art with procedural hot trail."
+  },
+  "validation": {
+    "mobileBuild": "npm run build:mobile passed; verify-mobile-assets passed; no signing/upload performed",
+    "browser": "Edge desktop 1100x820 and mobile viewport 390x844; no page errors; captures inspected. This is not a physical iPhone performance test.",
+    "fullSuite": "351 tests: 350 passed; one historical population minimum assertion needed adjustment for objects omitted from new barricades. The corrected test preserves a 9.5+ average civilian minimum. All 30 affected tests then passed.",
+    "targeted": "30 passed, zero failures; hitbox, cropped planet, barriers in both directions, boosted crossings, escape endpoints, population, persistence, orbital recovery, damage/immunity and meteors.",
+    "campaign": {
+      "seed": 41,
+      "completed": true,
+      "deaths": 0,
+      "simulatedSeconds": 5840,
+      "citySeconds": 446,
+      "orbitSeconds": 2139,
+      "planetsSeconds": 432,
+      "note": "Synthetic pilot, not a measured human average. Navigation updated to walk around physical barricades. Historical pilot returns to Earth incidentally. The orbit outlier requires human pacing validation; do not claim an eight-minute measured average."
+    },
+    "discardedExperiment": "Global orbit yield reduction .310 -> .275 rejected after a 77-minute orbital outlier with 469 hits in seed73. Final candidate retains .310 and changes only the final mass threshold."
+  },
+  "preview": "http://127.0.0.1:5235/@fs/C:/Users/dmkra/Documents/Codex%20Apps/Voro-camera/design/tester-feedback-2026-10-05/index.html",
+  "remaining": ["Human review of barricade layout/difficulty and orbit pacing", "Physical iPhone/iPad performance after a separately requested TestFlight build"]
+}

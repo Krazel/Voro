@@ -1,0 +1,17 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><base href="/"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VORO · Prueba de cambios</title>
+<style>body{margin:0;background:#041218;color:#c9e2e2;font:14px system-ui}header{position:absolute;z-index:2;background:#06151ce8;padding:10px;display:flex;gap:8px;flex-wrap:wrap}button{background:#153339;color:#eff;border:1px solid #477;border-radius:8px;padding:9px;cursor:pointer}canvas{width:100vw;height:100vh;display:block;touch-action:none}small{align-self:center}</style>
+<header><button data-stage="4">Ciudad</button><button data-stage="6">Planetas</button><button data-stage="3">Mantarraya</button><button data-stage="5">Órbita</button><button id="pause">Pausa / continuar</button><small id="info"></small></header><canvas id="game"></canvas>
+<script type="module">
+import {VoroEngine} from '/@fs/C:/Users/dmkra/Documents/Codex Apps/Voro-camera/app/engine.ts';
+import {journeyEntity} from '/@fs/C:/Users/dmkra/Documents/Codex Apps/Voro-camera/app/journey-world.mjs';
+import {SPECIES_BY_ID} from '/@fs/C:/Users/dmkra/Documents/Codex Apps/Voro-camera/app/journey-data.mjs';
+const g=window.preview=new VoroEngine(document.querySelector('canvas'),s=>document.querySelector('#info').textContent=`Biomasa ${s.biomass?.toFixed(1)??''} · WASD / arrastrar · espacio: impulso`,true);
+g.sound=false;g.progress.seed=834;
+window.scene=(stage)=>{
+g.reviewHold=false;g.startTest(stage,stage===3?65:stage===4?22:stage===5?130:40,false,false,false);g.sound=false;g.birth=0;g.transition=0;g.progress.offer=[];
+if(stage===3){g.world.entities=[journeyEntity(SPECIES_BY_ID['water-15'],g.life.x+200,g.life.y,0,'preview-ray')];g.world.stream=()=>{};g.world.replenish=()=>{};g.food=g.world.entities;}
+if(stage===4){g.life.x=1400;g.life.y=1400;g.camera.x=g.life.x;g.camera.y=g.life.y;g.world.stream(g.life.x,g.life.y,0,true,3);g.food=g.world.entities;}
+};
+document.querySelectorAll('[data-stage]').forEach(b=>b.onclick=()=>scene(+b.dataset.stage));document.querySelector('#pause').onclick=()=>g.action('pause');
+scene(6);
+</script></html>

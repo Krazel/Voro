@@ -13,6 +13,8 @@ import { random, clamp } from './simulation.mjs';
 import { projectileThreatMass } from './threat-scale.mjs';
 import { cityLots, cityPlacement, constrainCity, cityDistrict, cityAllowsSpecies, cityBounds, cityOverlap, CITY_PLOTS } from './city-layout.mjs';
 import { ORBITAL_EARTH } from './earth-landmark.mjs';
+import {nearbyCityBarriers,constrainCityBarriers} from './city-barriers.mjs';
+import {PlanetMeteors} from './planet-meteors.mjs';
 import {
   STAGE_SPECIES,
   STAGES,
@@ -33,6 +35,7 @@ export class JourneyWorld extends MicroWorld {
     super(seed, journal);
     this.stage = stage;
     this.projectiles = [];
+    this.meteorField = new PlanetMeteors(seed);
     this.finalSpawned = false;
     this.finalEntity = null;
   }
@@ -244,7 +247,13 @@ export class JourneyWorld extends MicroWorld {
         r: 0.4 + rng() * 1.4,
         phase: rng() * 6.28,
       });
-    return { entities, motes, depleted };
+    // Do not consume extra placement RNG for roadblocks: old saved slot IDs,
+    // species and all unaffected neighbours must stay at their old positions.
+    const barriers=stageId==='city'?nearbyCityBarriers(cx*600+300,cy*600+300,this.seed):[];
+    return { entities:barriers.length?entities.filter(e=>{
+      const s=SPECIES_BY_ID[e.kind];
+      return s.motion==='rotor'||!barriers.some(b=>cityOverlap(b,cityBounds(s,e)));
+    }):entities, motes, depleted };
   }
   /** @param {{left:number,right:number,top:number,bottom:number}|null} view */
   move(dt, time, p, stats, trail, view = null) {
@@ -310,7 +319,10 @@ export class JourneyWorld extends MicroWorld {
       e.x = clamp(e.x, e.homeX - 280, e.homeX + 280);
       e.y = clamp(e.y, e.homeY - 280, e.homeY + 280);
       if (STAGES[this.stage].id === 'land') constrainToShore(e, s);
-      if (STAGES[this.stage].id === 'city') constrainCity(e);
+      if (STAGES[this.stage].id === 'city') {
+        constrainCity(e);
+        if(s.motion!=='rotor')constrainCityBarriers(e,{x:oldX,y:oldY},this.seed);
+      }
       if (cityEscape) advanceCityGait(e,s,Math.hypot(e.x-oldX,e.y-oldY),dt,time);
       if (speed > 4 && Math.hypot(e.x - oldX, e.y - oldY) > 0.001) {
         const angle = Math.atan2(e.y - oldY, e.x - oldX);

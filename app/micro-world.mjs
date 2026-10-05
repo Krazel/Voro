@@ -133,6 +133,7 @@ export function makeEntity(species, x, y, seed, id) {
     kind: species.id,
     r,
     sizeFactor,
+    absorptionBody: species.absorptionBody,
     value: species.value * sizeFactor ** 2,
     requiredMass:
       (species.requiredMass ?? 8 * ((species.r * (species.edibleRadiusFactor || 1) * 1.17) / 48) ** 2) *
