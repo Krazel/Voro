@@ -20,6 +20,9 @@ try{
  assert.equal(muted.playing,false);assert.equal(resumed.track,'micro');assert(resumed.playing&&resumed.time>muted.time);assert(Math.abs(resumed.volume-.42)<.001);
  const effects=await wait('effects');assert.equal(effects.webEffects.creationType,'playback');assert.equal(effects.webEffects.type,'playback');assert.equal(effects.webEffects.state,'running');assert.equal(effects.webEffects.decoded,5);assert(effects.webEffects.advanced);assert(effects.playing);
  run('xcrun',['simctl','launch',phone.udid,'com.apple.mobilesafari']);
+ // Native willResignActive precedes WKWebView's visibilitychange. Returning
+ // immediately at that point can cancel the browser's background transition.
+ await wait('background');
  const background=await wait('state',s=>!s.foreground);assert.equal(background.playing,false);
  run('xcrun',['simctl','launch',phone.udid,'com.dmkr.voro']);const foreground=await wait('foreground');assert(foreground.playing&&foreground.time>background.time);
  fs.writeFileSync(out+'/verification.json',JSON.stringify({commit:process.env.GITHUB_SHA,runtime,device:phone.name,physicalDevice:false,menu,micro,muted,resumed,effects,background,foreground},null,2));

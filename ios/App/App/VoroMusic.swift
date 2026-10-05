@@ -122,7 +122,7 @@ public class VoroMusicPlugin: CAPPlugin, CAPBridgedPlugin {
     }
     @objc func snapshot(_ call: CAPPluginCall) { DispatchQueue.main.async {
         #if targetEnvironment(simulator)
-        if let probe = call.getString("probe"), ["menu", "micro", "muted", "resumed", "foreground", "effects", "error"].contains(probe) {
+        if let probe = call.getString("probe"), ["menu", "micro", "muted", "resumed", "background", "foreground", "effects", "error"].contains(probe) {
             self.saveProbe(probe, extra: ["probeError": call.getString("error") ?? "", "webEffects": call.getObject("webEffects") ?? [:]])
         }
         #endif
