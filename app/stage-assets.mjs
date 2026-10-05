@@ -4,12 +4,12 @@ import { BACKGROUND_ASSETS } from './background-assets.mjs';
 // Keep high-resolution masters on disk, but city residents are tiny on screen.
 // Resize once during stage loading, never in the animation loop. Source-space
 // crop metadata is retained through explicit scale factors (including props).
-export function compactCityAtlas(image, createCanvas) {
+export function compactCityAtlas(image, createCanvas, maxSize=768) {
   if(!(image.naturalWidth>0&&image.naturalHeight>0))return null;
   const canvas=createCanvas?.();
   if(!canvas)return null;
   const w=image.naturalWidth,h=image.naturalHeight;
-  const scale=Math.min(1,768/Math.max(w,h));
+  const scale=Math.min(1,maxSize/Math.max(w,h));
   canvas.width=Math.round(w*scale);canvas.height=Math.round(h*scale);
   const c=canvas.getContext('2d');if(!c)return null;
   c.drawImage(image,0,0,canvas.width,canvas.height);
@@ -26,6 +26,8 @@ const RESOURCE_LISTS = STAGES.map((_, stage) => {
     .map(key => ({ key, url: ATLAS_URLS[key], kind: 'atlas' }));
   const id = STAGES[stage].id;
   if (id === 'orbit') resources.push({ key: 'earth', kind: 'atlas', url: ATLAS_URLS.earth });
+  if (id === 'city') resources.push({ key:'cityTallFence',kind:'atlas',url:ATLAS_URLS.cityTallFence });
+  if (id === 'planets') resources.push({ key:'planetMeteor',kind:'atlas',url:ATLAS_URLS.planetMeteor });
   resources.push({ key: id, kind: 'ground', url: BACKGROUND_ASSETS[id] });
   return resources;
 });
@@ -78,8 +80,8 @@ export class StageAssets {
         settled = true;
         this.active--;
         if (!e.cancelled && !this.destroyed) {
-          if(ok&&e.key.startsWith('cityView_')) {
-            const surface=compactCityAtlas(e.image,this.createCanvas);
+          if(ok&&(e.key.startsWith('cityView_')||e.key==='cityTallFence'||e.key==='planetMeteor')) {
+            const surface=compactCityAtlas(e.image,this.createCanvas,e.key==='planetMeteor'?256:768);
             if(surface) {
               e.surface=surface;this.atlases[e.key]=surface;
               e.image.onload=e.image.onerror=null;e.image.src='';

@@ -2197,9 +2197,10 @@ export class VoroEngine {
           m.r,
           '#9bd3dc35',
         );
-    if(STAGES[this.progress.stage].id==='city')drawCityBarriers(c,{
+    const cityView=STAGES[this.progress.stage].id==='city'?{
       left:-ox,right:this.width/this.zoom-ox,top:-oy,bottom:this.height/this.zoom-oy,
-    },this.world.seed);
+    }:null;
+    if(cityView)drawCityBarriers(c,cityView,this.world.seed,this.atlasImages.cityTallFence,'shadow',p);
     const inhabitantsStarted = this.diagnosticsEnabled ? performance.now() : 0;
     const sweep = this.earthAbsorption > 0 ? this.progress.orbitSweep : null;
     const renderedFood = sweep ? sweep.items.map((f: Food) => sweepPosition(f, p, this.earthAbsorption)) : this.food;
@@ -2247,12 +2248,15 @@ export class VoroEngine {
         c.fillText(tr('DEMASIADO GRANDE'), f.x, f.y + r + 14 / this.zoom);
       }
     }
+    if(cityView)drawCityBarriers(c,cityView,this.world.seed,this.atlasImages.cityTallFence,'behind',p);
     if (this.diagnosticsEnabled)
       this.frameMonitor.frameParts.inhabitants = performance.now() - inhabitantsStarted;
     const renderedShots = sweep ? sweep.shots.map((b: {x:number;y:number;r:number;vx:number;vy:number;plasma:boolean}) => sweepPosition(b, p, this.earthAbsorption)) : this.world.projectiles;
     for (const b of renderedShots) {
-      if(b.meteor){drawMeteor(c,b,this.time,(ctx:CanvasRenderingContext2D,rock:{r:number;seed:number})=>
-        drawJourneySprite(ctx,this.atlasImages,'planets-Fragmento planetario',rock.r,rock.seed,0,1,0,this.animationSheets));continue;}
+      if(b.meteor){drawMeteor(c,b,this.time,(ctx:CanvasRenderingContext2D,rock:{r:number;seed:number})=>{
+        const img=this.atlasImages.planetMeteor;
+        if(img?.complete&&img.naturalWidth)ctx.drawImage(img,-rock.r*1.12,-rock.r*1.12,rock.r*2.24,rock.r*2.24);
+      });continue;}
       if (!visible(b.x, b.y, 10)) continue;
       c.strokeStyle = b.plasma ? '#b9e6ff' : '#ffda9c';
       c.lineWidth = b.r;
@@ -2287,6 +2291,7 @@ export class VoroEngine {
     this.drawDecoy();
     if (!skipProtagonist && !this.adaptationCanvas) this.measured('protagonist', () => this.drawCell());
     c.restore();
+    if(cityView)drawCityBarriers(c,cityView,this.world.seed,this.atlasImages.cityTallFence,'front',p);
     for (const f of this.floating) {
       c.save();
       c.globalAlpha = Math.min(1, f.life * 1.8);

@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-05",
+  "status": "Local candidate; not uploaded to TestFlight or App Review",
+  "assets": [
+    {
+      "path": "public/inhabitants/city-tall-fence-v1.png",
+      "tool": "ChatGPT Images",
+      "runtimeMaxDimension": 768,
+      "prompt": "Production game sprite, ONE single modular panel of a VERY TALL fortified urban security fence for a realistic painted 2D top-down city game. Straight-on orthographic FRONT ELEVATION, no perspective convergence, no ground plane, no scenery, no labels, no people, no cast shadow, genuinely transparent background outside and through mesh. Wide rectangle panel, approximately 2:1 width to height. Very tall dark galvanized steel anti-climb fence: solid battered dark grey concrete plinth bottom 15%, tall fine double welded steel wire mesh (open diamond mesh) between heavy square steel posts at left and right, horizontal cross beam midway, tight coils of razor wire on top. Worn metal, fine realistic photographic texture, subtle rust at joints, restrained grey green palette, realistic daylight from top left. Main fence silhouette rectangular, posts perfectly vertical, both posts same height, top and bottom horizontal. Fill the canvas with this one panel nearly edge to edge with only 3% transparent margin. This panel will be repeated end to end and projected into a game's 3D-looking city, not a stylized yellow striped road barrier. No hazard stripes. No outline illustration, no glowing edges. Fine material detail with solid readable posts at small scale."
+    },
+    {
+      "path": "public/inhabitants/planet-meteor-v1.png",
+      "tool": "ChatGPT Images",
+      "runtimeMaxDimension": 256,
+      "prompt": "One single solid irregular meteorite game sprite, isolated on true transparent background, centered, fills 80 percent of a square canvas. Realistic high-detail dark iron and basalt rock with craters, jagged chunky silhouette, molten orange cracks on the leading right-hand face, rim of tiny white-orange incandescent flecks. View from above, realistic painted photoreal game art. This is ONE coherent chunky rock, NOT a cluster of gravel, NOT a planet, NOT a circle. Warm highlights on the right, dark textured trailing left side. No surrounding debris, no flames or smoke, NO TRAIL (the game draws an animated trail), no scenery, no text, no shadow plane. Bright molten cracks should remain visible when reduced to 50 pixels. Transparent alpha outside the single rock."
+    }
+  ],
+  "changes": {
+    "fences": "Projected metal mesh panels with razor wire, 112 world units projected height, cast shadows, player occlusion. Collision geometry unchanged.",
+    "meteors": "Viewport diagonal crossing in 1.05–1.4 seconds independent of zoom. Coherent incandescent rock, soft plume, animated embers. One cached 32x32 plume brush.",
+    "preview": "Manual meteor trigger and functional adaptation offers."
+  },
+  "validation": {
+    "tests": 29,
+    "failed": 0,
+    "mobileBuild": "passed including verify-mobile-assets",
+    "browserErrors": [],
+    "movementScreenUnits": 184.39897067481712,
+    "elapsedSimulationSeconds": 0.1947,
+    "video": "motion.webm",
+    "physicalIPhoneTest": false,
+    "campaign": "Previous commit campaign remains documented in ../qa.json; not repeated for this visual revision."
+  }
+}

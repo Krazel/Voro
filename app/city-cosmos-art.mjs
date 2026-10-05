@@ -4,6 +4,8 @@ export function applyCityCosmosArt(stages, lists, byId, urls) {
   urls.cityCivilians = './inhabitants/city-civilians.png';
   urls.cityBuildings = './inhabitants/city-buildings-v2.webp';
   urls.cityContainerAligned = './inhabitants/city-container-aligned-v1.png';
+  urls.cityTallFence = './inhabitants/city-tall-fence-v1.png';
+  urls.planetMeteor = './inhabitants/planet-meteor-v1.png';
   urls.ringedPlanet = './inhabitants/ringed-planet-v2.webp';
   urls.planetDiversity = './inhabitants/planet-diversity-v2.webp';
   const city = stages.findIndex(s => s.id === 'city');

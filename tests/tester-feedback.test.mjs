@@ -53,3 +53,12 @@ test('In-engine meteors damage, respect invulnerability, and do not exist in orb
   const after=p.biomass;g.world.projectiles=[shot()];g.update(.016);assert.equal(p.biomass,after);
   g.startTest(STAGES.findIndex(s=>s.id==='orbit'),50,false,false,false);assert.equal(g.world.projectiles.length,0);g.destroy();
 });
+
+test('Meteor screen crossing stays fast across phone/tablet/desktop and camera zoom',()=>{
+ for(const [w,h] of [[390,844],[1024,768],[1920,1080]])for(const zoom of [.18,.5,1.2]){
+  const field=new PlanetMeteors(73),shots=[];field.clock=0;
+  field.update(.016,{x:0,y:0,vx:0,vy:0},{left:-w/2/zoom,right:w/2/zoom,top:-h/2/zoom,bottom:h/2/zoom},shots);
+  const seconds=Math.hypot(w,h)/(Math.hypot(shots[0].vx,shots[0].vy)*zoom);
+  assert.ok(seconds>=1.05&&seconds<=1.4);
+ }
+});

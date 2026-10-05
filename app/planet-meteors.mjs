@@ -1,4 +1,14 @@
 import {random} from './simulation.mjs';
+let plumeBrush=null;
+function fireBrush(){
+  if(plumeBrush)return plumeBrush;
+  if(typeof document==='undefined'||!document.createElement)return null;
+  const canvas=document.createElement('canvas');canvas.width=canvas.height=32;
+  const c=canvas.getContext('2d');if(!c)return null;
+  const g=c.createRadialGradient(16,16,0,16,16,16);
+  g.addColorStop(0,'#fff4ca');g.addColorStop(.2,'#ffd087');g.addColorStop(.55,'#fb802d66');g.addColorStop(1,'#e8451400');
+  c.fillStyle=g;c.fillRect(0,0,32,32);plumeBrush=canvas;return canvas;
+}
 export class PlanetMeteors {
   constructor(seed){this.rng=random(seed^0x4d37e0);this.clock=5;}
   update(dt,p,view,shots){
@@ -15,7 +25,9 @@ export class PlanetMeteors {
     const tx=aimed?p.x+p.vx*.35:cx+(rng()-.5)*hw*1.4;
     const ty=aimed?p.y+p.vy*.35:cy+(rng()-.5)*hh*1.4;
     const length=Math.max(1,Math.hypot(tx-x,ty-y));
-    const speed=Math.min(850,Math.max(360,Math.min(hw,hh)*1.35))*(.85+rng()*.3);
+    // Screen-crossing time stays fast at every automatic zoom and aspect ratio.
+    // A fixed world-speed cap made the rocks crawl when the camera pulled out.
+    const speed=2*Math.hypot(hw,hh)/(1.05+rng()*.35);
     shots.push({meteor:true,x,y,r,vx:(tx-x)/length*speed,vy:(ty-y)/length*speed,
       entryX:cx+dx*(edge-25),entryY:cy+dy*(edge-25),warning:1.1,
       life:Math.min(18,2*Math.hypot(hw,hh)/speed+4),damage:.08/.60,edibleAt:Infinity,seed:rng()*6.28,plasma:false});
@@ -35,10 +47,22 @@ export function drawMeteor(c,b,time,drawRock) {
     c.restore();return;
   }
   c.translate(b.x,b.y);c.rotate(Math.atan2(b.vy,b.vx));
-  const tail=Math.max(65,b.r*4);
-  const g=c.createLinearGradient(-tail,0,b.r,0);g.addColorStop(0,'#ef511000');g.addColorStop(.65,'#ef541980');g.addColorStop(1,'#ffcf8b');
-  c.fillStyle=g;c.beginPath();c.moveTo(-tail,0);c.quadraticCurveTo(-b.r,b.r*-.35,0,-b.r*1.15);c.quadraticCurveTo(b.r*1.8,0,0,b.r*1.15);c.quadraticCurveTo(-b.r,b.r*.35,-tail,0);c.fill();
+  const tail=Math.max(b.r*5,Math.hypot(b.vx,b.vy)*.19);
+  const alpha=c.globalAlpha,brush=fireBrush();
+  // A single cached 32px soft brush, reused along the flowing plume. No live
+  // blur filters, sharp ribbon edges or new offscreen buffers per frame.
+  if(brush)for(let i=13;i>=0;i--){
+    const u=i/14,flow=time*18+b.seed+i*1.9,r=b.r*(.22+(1-u)*.65);
+    const y=Math.sin(flow)*b.r*.12*(.3+u);
+    c.globalAlpha=alpha*(1-u)**1.3*.68;
+    c.drawImage(brush,-tail*u-r*2,y-r,r*4,r*2);
+  }
+  c.lineCap='round';c.strokeStyle='#ffc480';c.lineWidth=Math.max(1,b.r*.045);
+  for(let i=0;i<7;i++){
+    const u=(time*2.8+i/7+b.seed)%1,x=-tail*u,y=Math.sin(i*17+b.seed)*b.r*(.3+u*.6);
+    c.globalAlpha=alpha*(1-u)**2*.7;c.beginPath();c.moveTo(x,y);c.lineTo(x-tail*.045,y);c.stroke();
+  }c.globalAlpha=alpha;
   const glow=c.createRadialGradient(0,0,b.r*.65,0,0,b.r*1.45);glow.addColorStop(0,'#ffc27dcc');glow.addColorStop(.65,'#f36d3355');glow.addColorStop(1,'#f36d3300');
   c.fillStyle=glow;c.beginPath();c.arc(0,0,b.r*1.45,0,Math.PI*2);c.fill();
-  drawRock(c,b);c.restore();
+  c.save();c.rotate(time*.9+b.seed);drawRock(c,b);c.restore();c.restore();
 }

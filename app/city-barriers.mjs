@@ -30,20 +30,31 @@ export function constrainCityBarriers(p,previous,seed) {
     }
   }
 }
-export function drawCityBarriers(c,view,seed) {
-  for(let cy=Math.floor((view.top-65)/600);cy<=Math.floor((view.bottom+65)/600);cy++)
-    for(let cx=Math.floor((view.left-65)/600);cx<=Math.floor((view.right+65)/600);cx++)
+export function drawCityBarriers(c,view,seed,image,layer='all',player=null) {
+  for(let cy=Math.floor((view.top-180)/600);cy<=Math.floor((view.bottom+180)/600);cy++)
+    for(let cx=Math.floor((view.left-100)/600);cx<=Math.floor((view.right+100)/600);cx++)
       for(const b of cityBarriers(cx,cy,seed)) {
-        c.save();c.translate(b.x+b.w/2,b.y+b.h/2);if(b.vertical)c.rotate(Math.PI/2);
-        c.fillStyle='#0008';c.fillRect(-369,3,738,17);
-        c.fillStyle='#5e6462';c.fillRect(-365,-9,730,18);
-        c.strokeStyle='#a7aba1';c.lineWidth=2;c.strokeRect(-365,-9,730,18);
-        // Concrete base, warning stripes and wire loops: recognizable from
-        // above, no opaque image rectangle or animated bitmap allocation.
-        for(let x=-358;x<350;x+=26){
-          c.fillStyle='#d4a955';c.fillRect(x,-7,12,14);
-          c.strokeStyle='#bac6c2';c.lineWidth=1;c.beginPath();c.ellipse(x+6,-9,11,6,0,0,Math.PI*2);c.stroke();
-          c.beginPath();c.moveTo(x+3,-17);c.lineTo(x+9,-9);c.moveTo(x+9,-17);c.lineTo(x+3,-9);c.stroke();
+        const x=b.x+(b.vertical?b.w/2:0),y=b.y+(b.vertical?0:b.h/2);
+        const dx=b.vertical?0:730,dy=b.vertical?730:0;
+        const foreground=player&&(b.vertical?player.x<x:player.y<y);
+        if(layer==='behind'&&foreground||layer==='front'&&!foreground)continue;
+        c.save();
+        if(layer==='shadow'||layer==='all'){
+          c.fillStyle='#07101240';c.beginPath();c.moveTo(x-6,y);c.lineTo(x+dx+6,y+dy);
+          c.lineTo(x+dx+40,y+dy+48);c.lineTo(x+34,y+48);c.closePath();c.fill();
+          c.fillStyle='#11191b60';c.fillRect(b.x-2,b.y-2,b.w+4,b.h+4);
+        }
+        if(layer!=='shadow'&&image?.complete&&image.naturalWidth){
+          const w=image.naturalWidth,h=image.naturalHeight,ux=-22,uy=-112;
+          // Height always projects toward the back of the world. Rotating a
+          // flat sprite 90 degrees would put its posts sideways on the road.
+          for(let i=0;i<4;i++){
+            const bx=x+dx*i/4,by=y+dy*i/4;
+            c.save();c.transform(dx/4/w,dy/4/w,-ux/h,-uy/h,bx+ux,by+uy);
+            c.drawImage(image,0,0,w,h);c.restore();
+          }
+          // Thin concrete cap and footing share the same projected elevation.
+          c.strokeStyle='#89928c';c.lineWidth=2;c.beginPath();c.moveTo(x-22,y-99);c.lineTo(x+dx-22,y+dy-99);c.stroke();
         }
         c.restore();
       }
