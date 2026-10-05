@@ -5,6 +5,7 @@ globalThis.devicePixelRatio = 1;
 globalThis.Image = class {
   complete = true;
   naturalWidth = 1448;
+  naturalHeight = 1086;
   width = 1448;
   height = 1086;
   src = '';

@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+const [root='mobile-dist',flavor='player']=process.argv.slice(2);
+assert.ok(['player','development'].includes(flavor));
+const info=JSON.parse(fs.readFileSync(path.join(root,'voro-build.json'),'utf8'));
+assert.equal(info.developmentTools,flavor==='development');
+const chunks=fs.readdirSync(path.join(root,'assets')).filter(f=>/^developer-tools-.*\.js$/.test(f));
+assert.equal(chunks.length>0,info.developmentTools,'Developer UI must be absent from player bundle');
+console.log(JSON.stringify({...info,flavor,verified:true}));

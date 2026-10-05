@@ -10,7 +10,9 @@ import { observeNativeAudio } from './audio-session';
 
 
 import { TRANSITION_ROUTES } from './journey-transitions.mjs';
-import { useCallback, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
+import { DEVELOPMENT_TOOLS } from './build-flavor.mjs';
+const DeveloperTools = DEVELOPMENT_TOOLS ? lazy(()=>import('./developer-tools')) : null;
 import { readLeftHanded, writeLeftHanded, subscribeControls, serverLeftHanded } from './control-preferences';
 
 import { AdaptationChoices } from './cristal-ui';
@@ -498,7 +500,7 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
           <FinalSettings wide={wideSettings} stage={state.stage} complete={state.complete}
             eaten={state.eaten} elapsed={state.elapsed} adaptations={state.level}
             absorptionsByStage={state.absorptionsByStage} hitsReceived={state.hitsReceived} hitsPartial={state.hitsPartial}
-            tilt={tilt} leftHanded={leftHanded} sound={state.sound} testMode={false}
+            tilt={tilt} leftHanded={leftHanded} sound={state.sound} testMode={state.testMode}
             onMovement={selectMovement}
             onLeftHanded={() => setControlsSaveError(!writeLeftHanded(!leftHanded))}
             onSound={() => action('sound')}
@@ -507,6 +509,7 @@ export default function Home({ desktop = false }: { desktop?: boolean } = {}) {
         </DialogContent>
       </Dialog>)}
       <ReviewMilestone held={state.reviewHold} onContinue={() => engine.current?.finishReview()} />
+      {DEVELOPMENT_TOOLS && DeveloperTools && <Suspense fallback={null}><DeveloperTools engine={engine.current} state={state}/></Suspense>}
 
     </main>
   );

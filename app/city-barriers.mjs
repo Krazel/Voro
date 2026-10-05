@@ -44,7 +44,7 @@ export function drawCityBarriers(c,view,seed,image,layer='all',player=null) {
           c.lineTo(x+dx+40,y+dy+48);c.lineTo(x+34,y+48);c.closePath();c.fill();
           c.fillStyle='#11191b60';c.fillRect(b.x-2,b.y-2,b.w+4,b.h+4);
         }
-        if(layer!=='shadow'&&image?.complete&&image.naturalWidth){
+        if(layer!=='shadow'&&image?.complete&&image.naturalWidth>0&&image.naturalHeight>0){
           const w=image.naturalWidth,h=image.naturalHeight,ux=-22,uy=-112;
           // Height always projects toward the back of the world. Rotating a
           // flat sprite 90 degrees would put its posts sideways on the road.
