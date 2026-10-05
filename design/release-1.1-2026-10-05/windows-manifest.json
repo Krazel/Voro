@@ -1,0 +1,13 @@
+{
+  "version": "1.1",
+  "developmentTools": false,
+  "exe": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-camera\\artifact\\windows\\1.1-preview.2\\VORO-win32-x64\\VORO.exe",
+  "archive": "C:\\Users\\dmkra\\Documents\\Codex Apps\\Voro-camera\\artifact\\releases\\1.1\\VORO-1.1-Windows.zip",
+  "bytes": 568101032,
+  "files": 74,
+  "zipCrcVerified": true,
+  "sha256": "67af44b667045565a2bfc298957fc5d1d1189b70ac5a05848fc24189494cfe6e",
+  "exeSha256": "79562abf023f2b20fbbfe56d9c5965c61d3f94c603296debdf62c0e4ef278fc1",
+  "signed": false,
+  "published": false
+}

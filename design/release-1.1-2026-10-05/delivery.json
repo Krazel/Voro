@@ -1,0 +1,41 @@
+{
+  "version": "1.1",
+  "commit": "0ef48ef",
+  "date": "2026-10-05",
+  "testflight": {
+    "status": "blocked-by-automatic-approval-review",
+    "development": {
+      "version": "1.1",
+      "build": 1
+    },
+    "player": {
+      "version": "1.1",
+      "build": 2
+    },
+    "pending": "Explicit authorization to push candidate to public main and dispatch existing GitHub Actions requested asynchronously. No push, dispatch or upload occurred.",
+    "appReview": "Existing 1.0 (1) unchanged; last Apple verification 04/10."
+  },
+  "windows": {
+    "developmentTools": false,
+    "exe": "artifact/windows/1.1-preview.2/VORO-win32-x64/VORO.exe",
+    "zip": "artifact/releases/1.1/VORO-1.1-Windows.zip",
+    "sha256": "67af44b667045565a2bfc298957fc5d1d1189b70ac5a05848fc24189494cfe6e",
+    "qa": "Actual packaged Electron launch, control input, full-screen, audio decode/playback, all local assets and save reload passed. No remote requests. See design/windows-preview-2-2026-10-05/check.json",
+    "signed": false
+  },
+  "android": {
+    "developmentTools": true,
+    "versionCode": 3,
+    "apk": "artifact/releases/1.1/VORO-1.1-Desarrollador.apk",
+    "sha256": "f6cb5351bb33250731ce0007cc6904d34f1b566f21ba73bfd2e0f3e9e29a13ef",
+    "signed": true,
+    "bundledFilesVerified": 370,
+    "emulator": "APK installed successfully. Instrumentation started, but emulator disconnected before producing a result; native lifecycle QA remains unverified."
+  },
+  "validation": {
+    "regression": "356 tests: 355 passed; remaining canvas-fixture failure fixed, 12 affected tests rerun and passed. Full campaign completed.",
+    "developerUI": "iPhone and iPad browser viewport checks passed, enter sandbox / biomass / return / auto tour start-stop",
+    "playerUI": "iPhone and iPad browser viewport checks passed; developer chunk absent from bundle",
+    "physicalDevice": false
+  }
+}
