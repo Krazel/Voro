@@ -12,7 +12,8 @@ import { observeNativeAudio } from './audio-session';
 import { TRANSITION_ROUTES } from './journey-transitions.mjs';
 import { lazy, Suspense, useCallback, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { DEVELOPMENT_TOOLS } from './build-flavor.mjs';
-const DeveloperTools = DEVELOPMENT_TOOLS ? lazy(()=>import('./developer-tools')) : null;
+declare const __VORO_DEVELOPMENT__: boolean;
+const DeveloperTools = typeof __VORO_DEVELOPMENT__ !== 'undefined' && __VORO_DEVELOPMENT__ ? lazy(()=>import('./developer-tools')) : null;
 import { readLeftHanded, writeLeftHanded, subscribeControls, serverLeftHanded } from './control-preferences';
 
 import { AdaptationChoices } from './cristal-ui';

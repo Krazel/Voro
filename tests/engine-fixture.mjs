@@ -54,12 +54,18 @@ export function makeEngine({ desktop = false, bounds = { width: 390, height: 844
     width: 0,
     height: 0,
   });
-  const game = new VoroEngine(canvas, (value) => (snapshot = value), desktop);
+  const makeCanvas=()=>({width:0,height:0,getContext:()=>ctx});
+  const previousCreate=document.createElement;
+  document.createElement=makeCanvas;
+  let game;
+  try{game = new VoroEngine(canvas, (value) => (snapshot = value), desktop);}
+  finally{if(previousCreate)document.createElement=previousCreate;else delete document.createElement;}
   game.worldGround.createCanvas = () => ({
     width: 0,
     height: 0,
     getContext: () => ctx,
   });
+  game.assets.createCanvas = game.worldGround.createCanvas;
   return {
     game,
     get snapshot() {
