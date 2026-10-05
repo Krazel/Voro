@@ -1,13 +1,13 @@
 {
   "id": "PR-009",
-  "revision": 359,
+  "revision": 363,
   "verified": true,
   "tracking": {
     "testflight": "Interno",
-    "appStore": "En revisión",
+    "appStore": "En preparación",
     "ads": "Por confirmar",
     "testflightUrl": "https://appstoreconnect.apple.com/teams/7f069118-9712-49c8-a1f0-fda00b62a281/apps/6809193565/testflight/groups/05db8744-bcf3-4c2d-a465-2635012bfeeb",
     "appStoreUrl": "https://appstoreconnect.apple.com/apps/6809193565/distribution"
   },
-  "next": "VORO 1.0(1) en App Review (verificada 04/10), publicación MANUAL intacta; itch.io Draft 5,99 USD. Candidata 1.1 local 05/10, commit 0ef48ef: EXE normal probado y ZIP verificado; APK firmada con modo desarrollador y assets verificados. TestFlight 1.1(1) desarrollo y 1.1(2) normal preparados, NO subidos: revisión automática bloqueó push a main/workflow; confirmación específica solicitada. Evidencias: Voro-camera/design/release-1.1-2026-10-05/delivery.json. Valla/mantarraya/planetas/órbita aprobados; meteoritos aleatorios más frecuentes y avisos corregidos. Órbita larga en simulación: validar con juego humano. Opción futura, sin implementar: demo de 1/2 entornos + desbloqueo único si falla el pago inicial; corte/precio pendientes. Plan: .studio/marketing/launch-strategy-20260923/OPCION-DEMO-DESBLOQUEO-20261005.md."
+  "next": "TestFlight interno 05/10: VORO 1.1(1) desarrollo y 1.1(2) normal, ambas VALID / IN_BETA_TESTING. Runs 37304639892 y 37305955114; commit 56bed5b. EXE normal probado y ZIP verificado; APK firmada con modo desarrollador, QA nativa pendiente. Ambas builds: 356 pruebas pasadas y audio iOS simulador/segundo plano verificado; pendiente prueba humana en móvil. App Review 1.0(1): última lectura DEVELOPER_REJECTED; sin cambios de review por este encargo. Evidencias: Voro-camera/design/release-1.1-2026-10-05/delivery.json. Órbita larga en simulación: validar con juego humano. Opción futura, sin implementar: demo de 1/2 entornos + desbloqueo único si falla el pago inicial; corte/precio pendientes. Plan: .studio/marketing/launch-strategy-20260923/OPCION-DEMO-DESBLOQUEO-20261005.md."
 }

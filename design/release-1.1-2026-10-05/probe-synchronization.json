@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "checks": [
+    "Early focus does not consume resume handler",
+    "Background handshake recorded",
+    "Focus and visibility resume once"
+  ],
+  "shots": [
+    "menu",
+    "micro",
+    "muted",
+    "resumed",
+    "effects",
+    "background",
+    "foreground"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "verified": true,
+  "version": "1.1",
+  "build": "2",
+  "developmentTools": false,
+  "sha256": "1a4d4bd768a2cbcf82eb50241813f346dd07cbb39231ab0941225846765c823f",
+  "ipa": "artifact\\releases\\1.1\\testflight-player\\App.ipa",
+  "commit": "56bed5b8d2a8c1bf66aa3ad45f1a5176082bfe42",
+  "processingState": "VALID",
+  "internalBuildState": "IN_BETA_TESTING",
+  "deviceFamilies": [
+    1,
+    2
+  ],
+  "developerChunks": 0,
+  "simulatorProbeAbsent": true
+}

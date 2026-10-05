@@ -1,0 +1,20 @@
+{
+  "checkedAt": "2026-10-05T11:35:24.449Z",
+  "readOnly": true,
+  "run": "37303825278",
+  "version": "1.0",
+  "state": "DEVELOPER_REJECTED",
+  "releaseType": "MANUAL",
+  "buildId": "29c99cb9-ef4f-4a41-997c-3c88fb3e49e9",
+  "build": "1",
+  "screenshots": [
+    "34c00019-5dc0-8c5d-8024-ef6543a891a8",
+    "5b800019-5dc0-8c5d-8027-a662a546be7e",
+    "b8400019-5dc0-8c5d-8035-d1faefe04270",
+    "99c00019-5dc0-8c5d-8005-024963042d3d",
+    "07000019-5dc0-8c5d-803b-b0b32649a836",
+    "4f400019-5dc0-8c5d-8014-ad88824dfa6b",
+    "07c00019-5dc0-8c5d-801d-42ae5af677aa",
+    "31c00019-5dc0-8c5d-803a-9460f9a7b232"
+  ]
+}

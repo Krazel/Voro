@@ -3,17 +3,38 @@
   "commit": "0ef48ef",
   "date": "2026-10-05",
   "testflight": {
-    "status": "blocked-by-automatic-approval-review",
+    "status": "both-available-internal",
     "development": {
       "version": "1.1",
-      "build": 1
+      "build": 1,
+      "run": "https://github.com/Krazel/Voro/actions/runs/37304639892",
+      "failedRun": "https://github.com/Krazel/Voro/actions/runs/37303652884",
+      "processingState": "VALID",
+      "internalBuildState": "IN_BETA_TESTING",
+      "buildId": "01a202cb-4175-44f9-ae65-5a6db3354e4f",
+      "verification": "design/release-1.1-2026-10-05/testflight-development-verification.json"
     },
     "player": {
       "version": "1.1",
-      "build": 2
+      "build": 2,
+      "run": "https://github.com/Krazel/Voro/actions/runs/37305955114",
+      "processingState": "VALID",
+      "internalBuildState": "IN_BETA_TESTING",
+      "buildId": "5577fdc1-a3c3-476b-84fb-2942912dad4e",
+      "verification": "design/release-1.1-2026-10-05/testflight-player-verification.json"
     },
-    "pending": "Explicit authorization to push candidate to public main and dispatch existing GitHub Actions requested asynchronously. No push, dispatch or upload occurred.",
-    "appReview": "Existing 1.0 (1) unchanged; last Apple verification 04/10."
+    "appReview": {
+      "version": "1.0",
+      "build": 1,
+      "state": "DEVELOPER_REJECTED",
+      "checkedAt": "2026-10-05T11:35:24.449Z",
+      "readOnlyRun": "https://github.com/Krazel/Voro/actions/runs/37303825278",
+      "changedByThisTask": false,
+      "releaseType": "MANUAL",
+      "screenshots": 8
+    },
+    "sourceCommit": "56bed5b8d2a8c1bf66aa3ad45f1a5176082bfe42",
+    "completedAt": "2026-10-05T12:34:14.542Z"
   },
   "windows": {
     "developmentTools": false,
@@ -33,9 +54,19 @@
     "emulator": "APK installed successfully. Instrumentation started, but emulator disconnected before producing a result; native lifecycle QA remains unverified."
   },
   "validation": {
-    "regression": "356 tests: 355 passed; remaining canvas-fixture failure fixed, 12 affected tests rerun and passed. Full campaign completed.",
+    "regression": "All 356 tests passed in each final TestFlight CI run.",
     "developerUI": "iPhone and iPad browser viewport checks passed, enter sandbox / biomass / return / auto tour start-stop",
     "playerUI": "iPhone and iPad browser viewport checks passed; developer chunk absent from bundle",
-    "physicalDevice": false
+    "physicalDevice": false,
+    "nativeIOS": {
+      "development": "design/release-1.1-2026-10-05/native-development/verification.json",
+      "player": "design/release-1.1-2026-10-05/native-player/verification.json",
+      "physicalDevice": false
+    }
+  },
+  "library": {
+    "id": "PR-009",
+    "revision": 363,
+    "verified": true
   }
 }
