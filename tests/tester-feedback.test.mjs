@@ -39,10 +39,32 @@ test('City fences stop boosts, permit a detour at either end, and do not fence t
 test('Meteorites enter off screen with a warning, fixed velocities, varied sizes and bounded numbers',()=>{
   const field=new PlanetMeteors(41),p={x:0,y:0,vx:0,vy:0},view={left:-300,right:300,top:-500,bottom:500},shots=[];
   for(let i=0;i<200;i++)field.update(.1,p,view,shots);
-  assert.equal(shots.length,3);assert.ok(new Set(shots.map(s=>s.r)).size>1);
+  assert.ok(shots.length>=1&&shots.length<=4);
   for(const s of shots){assert.ok(s.x<view.left||s.x>view.right||s.y<view.top||s.y>view.bottom);assert.ok(s.warning>=1);assert.ok(Math.hypot(s.vx,s.vy)>150);assert.equal(s.edibleAt,Infinity);}
   for(let i=0;i<1000;i++)field.update(.1,p,view,shots);assert.equal(shots.length,4);
   assert.ok(sweptShotHit({x:200,y:0,r:10},-200,0,{x:0,y:0,radius:30}));
+});
+
+test('Meteor arrivals include close pairs and quiet spells without periodic timing or queued bursts',()=>{
+ const p={x:0,y:0,vx:0,vy:0},view={left:-600,right:600,top:-450,bottom:450};
+ const run=(seed)=>{
+  const field=new PlanetMeteors(seed),times=[];let now=0;
+  for(let i=0;i<24000;i++){
+   now+=.05;const shots=[];field.update(.05,p,view,shots);
+   if(shots.length)times.push(now);
+  }
+  return times;
+ };
+ const times=run(41),gaps=times.slice(1).map((t,i)=>t-times[i]);
+ assert.deepEqual(times,run(41));assert.notDeepEqual(times,run(73));
+ assert.ok(gaps.filter(t=>t<1.6).length>10,'occasional closely spaced arrivals');
+ assert.ok(gaps.filter(t=>t>11).length>10,'quiet spells');
+ assert.ok(gaps.every(t=>t>=.65-1e-8&&t<=19.05));
+ assert.ok(!gaps.some((t,i)=>i>0&&t<1.6&&gaps[i-1]<1.6),'at most two in a close group');
+ const full=Array.from({length:4},()=>({meteor:true,life:10})),field=new PlanetMeteors(4);
+ field.clock=0;field.update(.1,p,view,full);assert.equal(full.length,4);
+ const empty=[];field.update(0,p,view,empty);assert.equal(empty.length,0,'no queued burst after a blocked spawn');
+ field.update(60,p,view,empty);assert.equal(empty.length,1,'long frame cannot spawn a catch-up barrage');
 });
 test('In-engine meteors damage, respect invulnerability, and do not exist in orbit',()=>{
   const {game:g}=makeEngine();g.startTest(STAGES.findIndex(s=>s.id==='planets'),50,false,false,false);

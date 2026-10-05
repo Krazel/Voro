@@ -10,10 +10,22 @@ function fireBrush(){
   c.fillStyle=g;c.fillRect(0,0,32,32);plumeBrush=canvas;return canvas;
 }
 export class PlanetMeteors {
-  constructor(seed){this.rng=random(seed^0x4d37e0);this.clock=5;}
+  constructor(seed){
+    this.rng=random(seed^0x4d37e0);this.timing=random(seed^0x71ae23);
+    this.clock=3+this.timing()*5;this.closeFollowup=false;
+  }
+  nextArrival(){
+    // Irregular encounters: occasional close pairs, ordinary gaps and quiet spells.
+    // Never chain close pairs into a sustained barrage or queue missed arrivals.
+    if(!this.closeFollowup&&this.timing()<.25){
+      this.closeFollowup=true;return .65+this.timing()*.85;
+    }
+    this.closeFollowup=false;
+    return this.timing()<.35?11+this.timing()*8:3+this.timing()*5;
+  }
   update(dt,p,view,shots){
     this.clock-=dt;if(this.clock>0)return;
-    const rng=this.rng;this.clock=4.5+rng()*3;
+    const rng=this.rng;this.clock=this.nextArrival();
     if(shots.filter(s=>s.meteor&&s.life>0).length>=4)return;
     const cx=(view.left+view.right)/2,cy=(view.top+view.bottom)/2;
     const hw=(view.right-view.left)/2,hh=(view.bottom-view.top)/2;

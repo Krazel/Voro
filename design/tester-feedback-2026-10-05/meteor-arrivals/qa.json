@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-05",
+  "results": [
+    {
+      "seed": 41,
+      "simulatedSeconds": 1200,
+      "arrivals": 173,
+      "minGap": 0.6999999999999318,
+      "maxGap": 18.44999999999999,
+      "closePairs": 37,
+      "quietGaps": 45
+    },
+    {
+      "seed": 73,
+      "simulatedSeconds": 1200,
+      "arrivals": 161,
+      "minGap": 0.75,
+      "maxGap": 18.950000000000045,
+      "closePairs": 29,
+      "quietGaps": 43
+    },
+    {
+      "seed": 419,
+      "simulatedSeconds": 1200,
+      "arrivals": 150,
+      "minGap": 0.6999999999999318,
+      "maxGap": 19,
+      "closePairs": 28,
+      "quietGaps": 53
+    }
+  ],
+  "scope": "Arrival scheduling with an empty projectile list; live-projectile cap covered separately by regression tests.",
+  "regressionTests": 8,
+  "earth": "Visual radius unchanged at 1200 world units; previous goal increase 180 to 192 retained.",
+  "userApproval": "City fence, manta, planets and orbit approved in current conversation.",
+  "distribution": "Local candidate, no TestFlight upload."
+}
