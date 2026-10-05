@@ -1,0 +1,13 @@
+{
+  "id": "PR-009",
+  "revision": 356,
+  "verified": true,
+  "tracking": {
+    "testflight": "Interno",
+    "appStore": "En revisión",
+    "ads": "Por confirmar",
+    "testflightUrl": "https://appstoreconnect.apple.com/teams/7f069118-9712-49c8-a1f0-fda00b62a281/apps/6809193565/testflight/groups/05db8744-bcf3-4c2d-a465-2635012bfeeb",
+    "appStoreUrl": "https://appstoreconnect.apple.com/apps/6809193565/distribution"
+  },
+  "next": "VORO 1.0(1) enviada a App Review (verificada 04/10), publicación MANUAL. Tienda/capturas intactas; itch.io Draft, 5,99 USD. Candidata local 05/10: planeta helado, mantarraya, Tierra a 192, vallas altas realistas y meteoritos de velocidad moderada y variada, tamaños 10–48 y 30% dirigidos sin seguimiento. Pruebas, build móvil y movimiento en navegador comprobados; campaña previa completa sin bloqueo. Órbita larga en simulación: validar equilibrio humano. Evidencias: Voro-camera/design/tester-feedback-2026-10-05/meteor-variety/manifest.json. Sin nueva subida a TestFlight ni sustitución de la revisión. Opción futura, sin implementar: demo de 1/2 entornos + desbloqueo único si falla el pago inicial; corte/precio pendientes. Plan: .studio/marketing/launch-strategy-20260923/OPCION-DEMO-DESBLOQUEO-20261005.md."
+}

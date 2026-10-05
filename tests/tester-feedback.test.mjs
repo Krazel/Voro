@@ -40,7 +40,7 @@ test('Meteorites enter off screen with a warning, fixed velocities, varied sizes
   const field=new PlanetMeteors(41),p={x:0,y:0,vx:0,vy:0},view={left:-300,right:300,top:-500,bottom:500},shots=[];
   for(let i=0;i<200;i++)field.update(.1,p,view,shots);
   assert.equal(shots.length,3);assert.ok(new Set(shots.map(s=>s.r)).size>1);
-  for(const s of shots){assert.ok(s.x<view.left||s.x>view.right||s.y<view.top||s.y>view.bottom);assert.ok(s.warning>=1);assert.ok(Math.hypot(s.vx,s.vy)>300);assert.equal(s.edibleAt,Infinity);}
+  for(const s of shots){assert.ok(s.x<view.left||s.x>view.right||s.y<view.top||s.y>view.bottom);assert.ok(s.warning>=1);assert.ok(Math.hypot(s.vx,s.vy)>150);assert.equal(s.edibleAt,Infinity);}
   for(let i=0;i<1000;i++)field.update(.1,p,view,shots);assert.equal(shots.length,4);
   assert.ok(sweptShotHit({x:200,y:0,r:10},-200,0,{x:0,y:0,radius:30}));
 });
@@ -54,11 +54,29 @@ test('In-engine meteors damage, respect invulnerability, and do not exist in orb
   g.startTest(STAGES.findIndex(s=>s.id==='orbit'),50,false,false,false);assert.equal(g.world.projectiles.length,0);g.destroy();
 });
 
-test('Meteor screen crossing stays fast across phone/tablet/desktop and camera zoom',()=>{
+test('Meteor screen crossing preserves the slower pace across phone/tablet/desktop and camera zoom',()=>{
  for(const [w,h] of [[390,844],[1024,768],[1920,1080]])for(const zoom of [.18,.5,1.2]){
   const field=new PlanetMeteors(73),shots=[];field.clock=0;
   field.update(.016,{x:0,y:0,vx:0,vy:0},{left:-w/2/zoom,right:w/2/zoom,top:-h/2/zoom,bottom:h/2/zoom},shots);
   const seconds=Math.hypot(w,h)/(Math.hypot(shots[0].vx,shots[0].vy)*zoom);
-  assert.ok(seconds>=1.05&&seconds<=1.4);
+  assert.ok(seconds>=2.8&&seconds<=7.5);
  }
+});
+
+test('Meteor showers mix sizes and speeds, mostly pass by, and aim only once at current position',()=>{
+ const field=new PlanetMeteors(419),p={x:0,y:0,vx:300,vy:-300};
+ const view={left:-600,right:600,top:-450,bottom:450},samples=[];
+ for(let i=0;i<600;i++){
+  const shots=[];field.clock=0;field.update(.016,p,view,shots);const s=shots[0];samples.push(s);
+  const speed=Math.hypot(s.vx,s.vy),distance=Math.hypot(s.x,s.y);
+  const missDistance=Math.abs(s.x*s.vy-s.y*s.vx)/speed;
+  if(s.aimed){assert.ok(missDistance<1e-8);assert.ok(s.x*s.vx+s.y*s.vy<0);}
+  else assert.ok(missDistance>100,'passing trajectory should not converge on the player');
+  assert.ok(s.life>distance/speed+1.1,'rock must survive its warning and travel');
+  const velocity=[s.vx,s.vy];field.update(.01,{...p,x:500,y:500},view,shots);
+  assert.deepEqual([s.vx,s.vy],velocity,'moving player must not redirect an existing rock');
+ }
+ const aimed=samples.filter(s=>s.aimed).length;assert.ok(aimed>120&&aimed<240);
+ const speeds=samples.map(s=>Math.hypot(s.vx,s.vy));assert.ok(Math.max(...speeds)/Math.min(...speeds)>2.4);
+ for(const [min,max]of [[10,18],[20,30],[34,48]])assert.ok(samples.filter(s=>s.r>=min&&s.r<=max).length>70);
 });

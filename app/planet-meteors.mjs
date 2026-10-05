@@ -19,18 +19,22 @@ export class PlanetMeteors {
     const hw=(view.right-view.left)/2,hh=(view.bottom-view.top)/2;
     const a=rng()*Math.PI*2,dx=Math.cos(a),dy=Math.sin(a);
     const edge=Math.min(hw/Math.max(.001,Math.abs(dx)),hh/Math.max(.001,Math.abs(dy)));
-    const r=12+rng()*26,x=cx+dx*(edge+r+90),y=cy+dy*(edge+r+90);
-    const aimed=rng()<.55;
+    // Size and speed vary independently: a large rock need not be a fast one.
+    const size=rng(),r=size<.4?10+rng()*8:size<.8?20+rng()*10:34+rng()*14;
+    const x=cx+dx*(edge+r+90),y=cy+dy*(edge+r+90);
+    const aimed=rng()<.30;
     // Aim once, before the warning. No homing or readjustment after launch.
-    const tx=aimed?p.x+p.vx*.35:cx+(rng()-.5)*hw*1.4;
-    const ty=aimed?p.y+p.vy*.35:cy+(rng()-.5)*hh*1.4;
+    // Passing rocks use an off-centre chord, rather than all crossing the player.
+    const offset=aimed?0:(rng()<.5?-1:1)*Math.min(hw,hh)*(.45+rng()*.35);
+    const tx=aimed?p.x:cx-dy*offset;
+    const ty=aimed?p.y:cy+dx*offset;
     const length=Math.max(1,Math.hypot(tx-x,ty-y));
-    // Screen-crossing time stays fast at every automatic zoom and aspect ratio.
-    // A fixed world-speed cap made the rocks crawl when the camera pulled out.
-    const speed=2*Math.hypot(hw,hh)/(1.05+rng()*.35);
-    shots.push({meteor:true,x,y,r,vx:(tx-x)/length*speed,vy:(ty-y)/length*speed,
+    // Slower, mixed speeds; preserve screen cadence across automatic camera zoom.
+    const pace=rng(),crossing=pace<.3?6+rng()*1.5:pace<.8?4+rng()*1.5:2.8+rng()*.8;
+    const speed=2*Math.hypot(hw,hh)/crossing;
+    shots.push({meteor:true,aimed,x,y,r,vx:(tx-x)/length*speed,vy:(ty-y)/length*speed,
       entryX:cx+dx*(edge-25),entryY:cy+dy*(edge-25),warning:1.1,
-      life:Math.min(18,2*Math.hypot(hw,hh)/speed+4),damage:.08/.60,edibleAt:Infinity,seed:rng()*6.28,plasma:false});
+      life:crossing+2*(r+90)/speed+3,damage:.08/.60,edibleAt:Infinity,seed:rng()*6.28,plasma:false});
   }
 }
 export function sweptShotHit(shot,x,y,p) {

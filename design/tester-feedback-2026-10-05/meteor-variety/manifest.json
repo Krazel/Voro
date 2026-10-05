@@ -1,0 +1,70 @@
+{
+  "date": "2026-10-05",
+  "status": "Local candidate, no TestFlight upload",
+  "parameters": {
+    "aimedChance": 0.3,
+    "aim": "Current player position sampled once, no prediction/homing",
+    "passing": "Off-centre chords with random sides",
+    "radii": [
+      {
+        "range": [
+          10,
+          18
+        ],
+        "chance": 0.4
+      },
+      {
+        "range": [
+          20,
+          30
+        ],
+        "chance": 0.4
+      },
+      {
+        "range": [
+          34,
+          48
+        ],
+        "chance": 0.2
+      }
+    ],
+    "screenDiagonalSeconds": [
+      {
+        "range": [
+          6,
+          7.5
+        ],
+        "chance": 0.3
+      },
+      {
+        "range": [
+          4,
+          5.5
+        ],
+        "chance": 0.5
+      },
+      {
+        "range": [
+          2.8,
+          3.6
+        ],
+        "chance": 0.2
+      }
+    ],
+    "spawnIntervalSeconds": [
+      4.5,
+      7.5
+    ],
+    "maxActive": 4
+  },
+  "qa": {
+    "testsPassed": 7,
+    "randomSampleCount": 600,
+    "mobileBuild": "passed",
+    "browserErrors": [],
+    "movementScreenUnits": 44.29393532577005,
+    "simulationSeconds": 0.1809,
+    "physicalDevice": false
+  },
+  "note": "Previous tall-fences-fast-meteors evidence is historical, before this slower pacing adjustment."
+}

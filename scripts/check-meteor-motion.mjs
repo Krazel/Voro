@@ -2,7 +2,7 @@ import {createRequire} from 'node:module';
 import {mkdir,writeFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 const {chromium}=createRequire(process.env.VORO_PLAYWRIGHT_RUNTIME)('playwright');
-const out='design/tester-feedback-2026-10-05/tall-fences-fast-meteors';await mkdir(out,{recursive:true});
+const out=process.env.VORO_METEOR_QA_OUT||'design/tester-feedback-2026-10-05/tall-fences-fast-meteors';await mkdir(out,{recursive:true});
 const browser=await chromium.launch({channel:'msedge',headless:true});
 try{
  const context=await browser.newContext({viewport:{width:900,height:740}});
@@ -16,11 +16,12 @@ try{
   window.qaRecorder.ondataavailable=e=>window.qaVideo.push(e.data);window.qaRecorder.start();
  });
  await page.waitForFunction(()=>window.preview.world.projectiles.some(b=>b.meteor&&b.warning===0));
- const before=await page.evaluate(()=>{const g=window.preview,b=g.world.projectiles.find(b=>b.meteor&&b.warning===0);window.testMeteor=b;return{x:b.x,y:b.y,time:g.life.elapsed,zoom:g.zoom};});
+ const before=await page.evaluate(()=>{const g=window.preview,b=g.world.projectiles.find(b=>b.meteor&&b.warning===0);window.testMeteor=b;return{x:b.x,y:b.y,time:g.life.elapsed,zoom:g.zoom,speed:Math.hypot(b.vx,b.vy)};});
  await page.waitForTimeout(180);
  const after=await page.evaluate(()=>{const g=window.preview,b=window.testMeteor;return{x:b.x,y:b.y,time:g.life.elapsed};});
  const distance=Math.hypot(after.x-before.x,after.y-before.y)*before.zoom;
- assert.ok(distance>75,`meteor moved only ${distance} screen units`);
+ const expected=before.speed*(after.time-before.time)*before.zoom;
+ assert.ok(distance>5&&Math.abs(distance-expected)<1,`meteor movement ${distance}, expected ${expected}`);
  await page.waitForTimeout(2200);await page.click('[data-stage="4"]');await page.waitForFunction(()=>window.preview.assetsReady);
  await page.waitForTimeout(1700);await page.screenshot({path:out+'/city-tall.png'});
  await page.evaluate(async()=>{
