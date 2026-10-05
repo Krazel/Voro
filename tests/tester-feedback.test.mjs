@@ -4,7 +4,7 @@ import {SPECIES_BY_ID as species,STAGES} from '../app/journey-data.mjs';
 import {journeyEntity,JourneyWorld} from '../app/journey-world.mjs';
 import {createLife,radiusForMass,canBeginAbsorb} from '../app/simulation.mjs';
 import {cityBarriers,constrainCityBarriers} from '../app/city-barriers.mjs';
-import {PlanetMeteors,sweptShotHit} from '../app/planet-meteors.mjs';
+import {PlanetMeteors,sweptShotHit,meteorEntry} from '../app/planet-meteors.mjs';
 import {makeEngine} from './engine-fixture.mjs';
 
 test('A body-sized protagonist can swallow a ray on contact, not by its empty tail corners',()=>{
@@ -39,9 +39,9 @@ test('City fences stop boosts, permit a detour at either end, and do not fence t
 test('Meteorites enter off screen with a warning, fixed velocities, varied sizes and bounded numbers',()=>{
   const field=new PlanetMeteors(41),p={x:0,y:0,vx:0,vy:0},view={left:-300,right:300,top:-500,bottom:500},shots=[];
   for(let i=0;i<200;i++)field.update(.1,p,view,shots);
-  assert.ok(shots.length>=1&&shots.length<=4);
+  assert.ok(shots.length>=1&&shots.length<=6);
   for(const s of shots){assert.ok(s.x<view.left||s.x>view.right||s.y<view.top||s.y>view.bottom);assert.ok(s.warning>=1);assert.ok(Math.hypot(s.vx,s.vy)>150);assert.equal(s.edibleAt,Infinity);}
-  for(let i=0;i<1000;i++)field.update(.1,p,view,shots);assert.equal(shots.length,4);
+  for(let i=0;i<1000;i++)field.update(.1,p,view,shots);assert.equal(shots.length,6);
   assert.ok(sweptShotHit({x:200,y:0,r:10},-200,0,{x:0,y:0,radius:30}));
 });
 
@@ -58,13 +58,38 @@ test('Meteor arrivals include close pairs and quiet spells without periodic timi
  const times=run(41),gaps=times.slice(1).map((t,i)=>t-times[i]);
  assert.deepEqual(times,run(41));assert.notDeepEqual(times,run(73));
  assert.ok(gaps.filter(t=>t<1.6).length>10,'occasional closely spaced arrivals');
- assert.ok(gaps.filter(t=>t>11).length>10,'quiet spells');
- assert.ok(gaps.every(t=>t>=.65-1e-8&&t<=19.05));
+ assert.ok(gaps.filter(t=>t>8).length>10,'quiet spells');
+ assert.ok(gaps.every(t=>t>=.65-1e-8&&t<=14.05));
+ assert.ok(times.length>220,'increased frequency over the previous 150–173 arrivals');
  assert.ok(!gaps.some((t,i)=>i>0&&t<1.6&&gaps[i-1]<1.6),'at most two in a close group');
- const full=Array.from({length:4},()=>({meteor:true,life:10})),field=new PlanetMeteors(4);
- field.clock=0;field.update(.1,p,view,full);assert.equal(full.length,4);
+ const full=Array.from({length:6},()=>({meteor:true,life:10})),field=new PlanetMeteors(4);
+ field.clock=0;field.update(.1,p,view,full);assert.equal(full.length,6);
  const empty=[];field.update(0,p,view,empty);assert.equal(empty.length,0,'no queued burst after a blocked spawn');
  field.update(60,p,view,empty);assert.equal(empty.length,1,'long frame cannot spawn a catch-up barrage');
+});
+
+test('Meteor warning follows its real entry point as the camera moves and persists until entry',()=>{
+ const b={x:-500,y:-150,vx:200,vy:60,life:10};
+ const view={left:-300,right:300,top:-200,bottom:200};
+ assert.deepEqual(meteorEntry(b,view),{x:-300,y:-90,seconds:1});
+ const shifted={...view,left:-200,right:400};
+ assert.deepEqual(meteorEntry(b,shifted),{x:-200,y:-60,seconds:1.5});
+ assert.equal(meteorEntry(b,{left:-300,right:300,top:500,bottom:900}),null,'do not announce a path that no longer crosses the screen');
+ assert.equal(meteorEntry({...b,x:0,y:0},view),null,'visible rock needs no edge arrow');
+ assert.equal(meteorEntry({...b,vx:-200},view),null,'outgoing rock needs no arrow');
+ const field=new PlanetMeteors(41),shots=[];field.clock=0;field.update(0,{x:0,y:0},view,shots);
+ const s=shots[0],speed=Math.hypot(s.vx,s.vy),entry=meteorEntry(s,view);
+ assert.ok(Math.abs(entry.seconds-s.warning-s.r/speed)<1e-8,'warning lead matches actual arrival');
+ const afterWarning={...s,x:s.x+s.vx*1.11,y:s.y+s.vy*1.11,warning:0};
+ assert.ok(meteorEntry(afterWarning,view),'arrow remains while centre is outside, even after warning timer');
+});
+
+test('In-engine meteor is already travelling during its warning',()=>{
+ const {game:g}=makeEngine();g.startTest(STAGES.findIndex(s=>s.id==='planets'),50,false,false,false);
+ g.world.entities=[];g.world.stream=()=>{};g.world.move=()=>{};
+ const p=g.life,s={meteor:true,x:p.x+2000,y:p.y,r:20,vx:-100,vy:0,warning:1.1,life:10,damage:.08/.6,edibleAt:Infinity};
+ g.world.projectiles=[s];const x=s.x;g.update(.016);
+ assert.ok(s.x<x);assert.ok(s.warning>0);assert.ok(s.life<10);g.destroy();
 });
 test('In-engine meteors damage, respect invulnerability, and do not exist in orbit',()=>{
   const {game:g}=makeEngine();g.startTest(STAGES.findIndex(s=>s.id==='planets'),50,false,false,false);

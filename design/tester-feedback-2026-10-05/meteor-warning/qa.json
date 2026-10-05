@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-05",
+  "results": [
+    {
+      "seed": 41,
+      "simulatedSeconds": 1200,
+      "arrivals": 266,
+      "minGap": 0.7000000000000455,
+      "maxGap": 14,
+      "closePairs": 75,
+      "quietGaps": 32
+    },
+    {
+      "seed": 73,
+      "simulatedSeconds": 1200,
+      "arrivals": 292,
+      "minGap": 0.6999999999998181,
+      "maxGap": 13.900000000000034,
+      "closePairs": 81,
+      "quietGaps": 26
+    },
+    {
+      "seed": 419,
+      "simulatedSeconds": 1200,
+      "arrivals": 278,
+      "minGap": 0.6999999999998181,
+      "maxGap": 13.850000000000023,
+      "closePairs": 74,
+      "quietGaps": 26
+    }
+  ],
+  "scope": "Arrival scheduling with an empty projectile list; live-projectile cap covered separately by regression tests.",
+  "regressionTests": 10,
+  "earth": "Visual radius unchanged at 1200 world units; previous goal increase 180 to 192 retained.",
+  "userApproval": "City fence, manta, planets and orbit approved in current conversation.",
+  "distribution": "Local candidate, no TestFlight upload.",
+  "fixes": [
+    "More frequent irregular arrivals; cap six active meteors",
+    "Meteor moves during warning; arrow follows actual ray/current viewport until entry",
+    "No homing added; warning removed if camera leaves the trajectory"
+  ]
+}

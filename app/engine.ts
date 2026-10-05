@@ -1684,7 +1684,7 @@ export class VoroEngine {
         top:this.camera.y-this.height*.48/this.zoom,bottom:this.camera.y+this.height*.52/this.zoom,
       },this.world.projectiles);
       for (const shot of this.world.projectiles) {
-        if(shot.warning>0){shot.warning=Math.max(0,shot.warning-dt);continue;}
+        if(shot.warning>0){shot.warning=Math.max(0,shot.warning-dt);if(!shot.meteor)continue;}
         const sx=shot.x,sy=shot.y;
         shot.x += shot.vx * dt;
         shot.y += shot.vy * dt;
@@ -2252,11 +2252,12 @@ export class VoroEngine {
     if (this.diagnosticsEnabled)
       this.frameMonitor.frameParts.inhabitants = performance.now() - inhabitantsStarted;
     const renderedShots = sweep ? sweep.shots.map((b: {x:number;y:number;r:number;vx:number;vy:number;plasma:boolean}) => sweepPosition(b, p, this.earthAbsorption)) : this.world.projectiles;
+    const meteorView={left:-ox,right:this.width/this.zoom-ox,top:-oy,bottom:this.height/this.zoom-oy,zoom:this.zoom};
     for (const b of renderedShots) {
       if(b.meteor){drawMeteor(c,b,this.time,(ctx:CanvasRenderingContext2D,rock:{r:number;seed:number})=>{
         const img=this.atlasImages.planetMeteor;
         if(img?.complete&&img.naturalWidth)ctx.drawImage(img,-rock.r*1.12,-rock.r*1.12,rock.r*2.24,rock.r*2.24);
-      });continue;}
+      },meteorView);continue;}
       if (!visible(b.x, b.y, 10)) continue;
       c.strokeStyle = b.plasma ? '#b9e6ff' : '#ffda9c';
       c.lineWidth = b.r;
