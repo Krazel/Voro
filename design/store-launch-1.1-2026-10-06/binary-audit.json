@@ -1,0 +1,63 @@
+{
+  "ipaSha256": "1a4d4bd768a2cbcf82eb50241813f346dd07cbb39231ab0941225846765c823f",
+  "bundleId": "com.dmkr.voro",
+  "version": "1.1",
+  "build": "2",
+  "deviceFamilies": [
+    1,
+    2
+  ],
+  "minimumIOS": "15.0",
+  "iPadOrientations": [
+    "UIInterfaceOrientationPortrait",
+    "UIInterfaceOrientationPortraitUpsideDown",
+    "UIInterfaceOrientationLandscapeLeft",
+    "UIInterfaceOrientationLandscapeRight"
+  ],
+  "privacyManifests": [
+    {
+      "path": "Payload/App.app/PrivacyInfo.xcprivacy",
+      "declaration": {
+        "NSPrivacyTracking": false,
+        "NSPrivacyTrackingDomains": [],
+        "NSPrivacyCollectedDataTypes": [],
+        "NSPrivacyAccessedAPITypes": [
+          {
+            "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryFileTimestamp",
+            "NSPrivacyAccessedAPITypeReasons": [
+              "C617.1"
+            ]
+          },
+          {
+            "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults",
+            "NSPrivacyAccessedAPITypeReasons": [
+              "CA92.1"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "path": "Payload/App.app/Frameworks/Capacitor.framework/PrivacyInfo.xcprivacy",
+      "declaration": {
+        "NSPrivacyAccessedAPITypes": [],
+        "NSPrivacyCollectedDataTypes": [],
+        "NSPrivacyTrackingDomains": [],
+        "NSPrivacyTracking": false
+      }
+    },
+    {
+      "path": "Payload/App.app/Frameworks/Cordova.framework/PrivacyInfo.xcprivacy",
+      "declaration": {
+        "NSPrivacyCollectedDataTypes": [],
+        "NSPrivacyAccessedAPITypes": [],
+        "NSPrivacyTrackingDomains": [],
+        "NSPrivacyTracking": false
+      }
+    }
+  ],
+  "permissionDescriptions": {},
+  "networkException": null,
+  "nonExemptEncryption": false,
+  "developmentTools": false
+}

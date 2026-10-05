@@ -1,0 +1,45 @@
+name: VORO submit authorized 1.1 build 2 to App Review
+on:
+  workflow_dispatch:
+    inputs:
+      authorization:
+        description: Explicit user authorization for VORO-1.1-build2-review
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: voro-store-readiness
+  cancel-in-progress: false
+jobs:
+  submit:
+    if: github.ref == 'refs/heads/main' && inputs.authorization == 'VORO-1.1-build2-review'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: app-store-production
+    env:
+      ASC_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+      ASC_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+      ASC_KEY_BASE64: ${{ secrets.APP_STORE_CONNECT_API_KEY_BASE64 }}
+      REVIEW_AUTHORIZATION: ${{ inputs.authorization }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Prepare protected API key
+        run: |
+          set -euo pipefail
+          mkdir -m 700 "$RUNNER_TEMP/asc-submit"
+          printf '%s' "$ASC_KEY_BASE64" | base64 --decode > "$RUNNER_TEMP/asc-submit/key.p8"
+          chmod 600 "$RUNNER_TEMP/asc-submit/key.p8"
+          echo "ASC_PRIVATE_KEY_PATH=$RUNNER_TEMP/asc-submit/key.p8" >> "$GITHUB_ENV"
+      - run: node scripts/app-store-submit-1.1.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: VORO-1.1-app-review-receipt
+          path: artifact/store-submission-1.1/
+          retention-days: 30
+      - name: Remove temporary key
+        if: always()
+        run: rm -f "$RUNNER_TEMP/asc-submit/key.p8"
