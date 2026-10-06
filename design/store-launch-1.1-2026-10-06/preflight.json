@@ -1,0 +1,64 @@
+{
+  "checkedDate": "2026-10-06",
+  "version": "1.1",
+  "build": 2,
+  "buildId": "5577fdc1-a3c3-476b-84fb-2942912dad4e",
+  "ipaSha256": "1a4d4bd768a2cbcf82eb50241813f346dd07cbb39231ab0941225846765c823f",
+  "sourceCommit": "56bed5b8d2a8c1bf66aa3ad45f1a5176082bfe42",
+  "developmentTools": false,
+  "automatedTests": {
+    "passed": 356,
+    "failed": 0
+  },
+  "nativeAudio": {
+    "simulatorVerified": true,
+    "physicalDeviceClaim": false
+  },
+  "dependenciesAndPrivacyUnchangedFromApproved1_0": true,
+  "tracking": false,
+  "ads": false,
+  "iapCount": 0,
+  "subscriptionGroups": 0,
+  "privacyAndSupport": {
+    "status": 200,
+    "checked": true
+  },
+  "metadata": {
+    "policy": "preserve-live-approved-text-screenshots-previews",
+    "screenshots": 8,
+    "locales": [
+      "en-US",
+      "es-ES"
+    ],
+    "noScreenshotUpload": true
+  },
+  "price": {
+    "amount": "5.99",
+    "currency": "EUR",
+    "baseTerritory": "ESP",
+    "otherTerritories": "Existing Apple automatic local prices preserved"
+  },
+  "availability": {
+    "enabled": 173,
+    "total": 175,
+    "excluded": [
+      "CHN",
+      "VNM"
+    ],
+    "reason": "Existing exclusions for missing local game licenses"
+  },
+  "releaseType": "MANUAL",
+  "submissionRun": "https://github.com/Krazel/Voro/actions/runs/37391290964",
+  "meteorBehavior": {
+    "edible": false,
+    "source": "app/planet-meteors.mjs edibleAt:Infinity",
+    "changed": false
+  },
+  "submission": {
+    "verified": true,
+    "state": "WAITING_FOR_REVIEW",
+    "submissionId": "7fdb0b0d-270c-4499-a133-c2f18738a9e1",
+    "checkedAt": "2026-10-05T23:57:28.231Z",
+    "published": false
+  }
+}

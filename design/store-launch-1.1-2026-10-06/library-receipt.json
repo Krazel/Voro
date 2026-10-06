@@ -1,0 +1,15 @@
+{
+  "id": "PR-009",
+  "revision": 364,
+  "verified": true,
+  "version": "1.1",
+  "build": 2,
+  "tracking": {
+    "testflight": "Interno",
+    "appStore": "En revisión",
+    "ads": "Por confirmar",
+    "testflightUrl": "https://appstoreconnect.apple.com/teams/7f069118-9712-49c8-a1f0-fda00b62a281/apps/6809193565/testflight/groups/05db8744-bcf3-4c2d-a465-2635012bfeeb",
+    "appStoreUrl": "https://appstoreconnect.apple.com/apps/6809193565/distribution"
+  },
+  "next": "VORO 1.1(2) enviada a App Review el 06/10 (Europe/Madrid): WAITING_FOR_REVIEW, run 37391290964. Precio base España 5,99 EUR; 173 territorios, China continental/Vietnam excluidos por licencias locales pendientes. Textos, ocho capturas, vídeos y notas conservados; publicación MANUAL tras aprobación. TestFlight interno 1.1(1) desarrollo y 1.1(2) normal. EXE normal y APK desarrollo entregados; QA nativa Android pendiente. Meteoritos nuevos: no comestibles, comportamiento confirmado sin cambios. Evidencia: Voro-camera/design/store-launch-1.1-2026-10-06/submission/receipt.json. Opción futura, sin implementar: demo de 1/2 entornos + desbloqueo único si falla el pago inicial; corte/precio pendientes. Plan: .studio/marketing/launch-strategy-20260923/OPCION-DEMO-DESBLOQUEO-20261005.md."
+}
